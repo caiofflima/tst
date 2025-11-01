@@ -1,0 +1,173 @@
+<!-- Page Header-->
+<div class="col-md-12 breadcrumb-header">
+  <ul class="breadcrumb">
+    <li>
+      <span routerLink="/" class="voltar"
+        ><i class="fa fa-arrow-left" aria-hidden="true"></i>Voltar</span
+      >
+    </li>
+    <a routerLink="/home">Início</a>
+    <em class="fa fa-chevron-right"></em>
+    Relatórios
+    <em class="fa fa-chevron-right"></em>
+    <a routerLink="/relatorios/procedimentos-solicitados-por-profissional"
+      >Procedimentos Solicitados por Profissional</a
+    >
+    <em class="fa fa-chevron-right"></em>
+    <a routerLink="/relatorios/procedimentos-solicitados-por-profissional/lista"
+      >Resultado da Consulta</a
+    >
+  </ul>
+</div>
+
+<header class="page-header">
+  <div class="container-fluid">
+    <h2 class="no-margin-bottom">Consulta de Processos</h2>
+  </div>
+</header>
+<!-- Page Header-->
+
+<section class="row container-fluid">
+  <div class="clearfix"></div>
+
+  <div class="row col-md-9">
+    <h4>Resultado da Consulta</h4>
+  </div>
+
+  <div
+    class="row col-xs-3 floatRight"
+    style="padding: 4px 10px; border-bottom: 0 none"
+    *ngIf="listaProcessos?.length"
+  >
+    <input
+      type="text"
+      class="form-control filtro"
+      size="50"
+      placeholder="Digite para filtrar resultado"
+    />
+  </div>
+
+  <div class="clearfix"></div>
+
+  <div class="row col-md-12">
+    <p-table
+      [value]="listaProcessos"
+      [paginator]="true"
+      [rows]="rowCounter"
+      [rowsPerPageOptions]="[5, 10, 20]"
+      [totalRecords]="listaProcessos?.length"
+      (onPage)="onPageChange($event)"
+      class="table table-striped table-sm table-hover"
+    >
+      <ng-template pTemplate="header">
+        <tr>
+          <th
+            id="competencia"
+            style="width: 120px"
+            pSortableColumn="competencia"
+          >
+            Competência
+          </th>
+          <th id="siglaFilial" pSortableColumn="siglaFilial">Agrupadora</th>
+          <th id="ufAtendimento" pSortableColumn="ufAtendimento">
+            UF Atendimento
+          </th>
+          <th id="cpfCnpjStr" pSortableColumn="cpfCnpjStr">CPF/CNPJ</th>
+          <th id="nomeRazaoSocial" pSortableColumn="nomeRazaoSocial">
+            Nome/Razão Social
+          </th>
+          <th id="procedimento" pSortableColumn="procedimento">Procedimento</th>
+          <th id="quantidadeProcessos" pSortableColumn="quantidadeProcessos">
+            Qtd. Processos
+          </th>
+          <th
+            id="quantidadeProcedimentos"
+            pSortableColumn="quantidadeProcedimentos"
+          >
+            Qtd. Procedimentos
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-rowData>
+        <tr>
+          <td>{{ rowData.competencia }}</td>
+          <td>{{ rowData.siglaFilial }}</td>
+          <td>{{ rowData.ufAtendimento }}</td>
+          <td>{{ rowData.cpfCnpjStr }}</td>
+          <td>{{ rowData.nomeRazaoSocial }}</td>
+          <td>{{ rowData.procedimento }}</td>
+          <td>{{ rowData.quantidadeProcessos }}</td>
+          <td>{{ rowData.quantidadeProcedimentos }}</td>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="emptymessage">
+        {{ bundle("MA003") }}
+      </ng-template>
+
+      <!-- <p-column field="competencia" header="Competência" [sortable]="true"
+                [style]="{width: '60px', 'text-align': 'center', color: '#555555'}">
+      </p-column>
+      <p-column field="siglaFilial" header="Agrupadora" [sortable]="true"
+                [style]="{width: '30px', 'text-align': 'center', color: '#555555'}">
+      </p-column>
+      <p-column field="ufAtendimento" header="UF Atendimento" [sortable]="true"
+                [style]="{width: '65px', 'text-align': 'center', color: '#555555'}">
+      </p-column>
+      <p-column field="cpfCnpjStr" header="CPF/CNPJ" [sortable]="true"
+                [style]="{width: '60px', 'text-align': 'center', color: '#555555'}">
+      </p-column>
+      <p-column field="nomeRazaoSocial" header="Nome/Razão Social" [sortable]="true"
+                [style]="{width: '98px', 'text-align': 'center', color: '#555555'}">
+      </p-column>
+      <p-column field="procedimento" header="Procedimento" [sortable]="true"
+                [style]="{width: '200px', 'text-align': 'center', color: '#555555'}">
+      </p-column>
+      <p-column field="quantidadeProcessos" header="Qtd. Processos" [sortable]="true"
+                [style]="{width: '60px', 'text-align': 'center', color: '#555555'}">
+      </p-column>
+      <p-column field="quantidadeProcedimentos" header="Qtd. Procedimentos" [sortable]="true"
+                [style]="{width: '72px', 'text-align': 'center', color: '#555555'}">
+      </p-column> -->
+      <p-footer>
+        {{ mensagemPaginacao }}
+      </p-footer>
+    </p-table>
+  </div>
+
+  <div class="col-xs-12 barra-botoes">
+    <span *ngIf="listaProcessos !== undefined && listaProcessos.length > 0">
+      <button
+        class="btn btn-info"
+        title="Relatório Analítico"
+        (click)="consultarRelatorioAnalitico()"
+      >
+        <span class="fa fa-list-alt fa-fw"></span>Analítico
+      </button>
+      <button
+        class="btn btn-info"
+        title="Download Relatório"
+        (click)="exportarPDFRelatorioProcedimentosSolicitadosPorProfissional()"
+      >
+        <span class="fa fa-download fa-fw"></span>Gerar PDF
+      </button>
+      <button
+        class="btn btn-info"
+        title="Download Relatório"
+        (click)="exportarXLSRelatorioProcedimentosSolicitadosPorProfissional()"
+      >
+        <span class="fa fa-download fa-fw"></span>Exportar XLS
+      </button>
+      <button
+        class="btn btn-info"
+        title="Download Relatório"
+        (click)="exportarCSVRelatorioProcedimentosSolicitadosPorProfissional()"
+      >
+        <span class="fa fa-download fa-fw"></span>Exportar CSV
+      </button>
+    </span>
+    <button class="btn btn-info" (click)="retornarConsulta()">
+      <span class="fa fa-reply fa-fw"></span>Voltar
+    </button>
+  </div>
+</section>
