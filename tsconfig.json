@@ -10,7 +10,6 @@
     "paths":{
       "app/*":["app/*"]
     },
-    "suppressImplicitAnyIndexErrors": true,
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "strict": false,
@@ -37,5 +36,10 @@
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
     "strictTemplates": true
-  }
+  },
+  "exclude": [
+    "**/*.spec.ts",
+    "src/test.ts"
+  ]
 }
+

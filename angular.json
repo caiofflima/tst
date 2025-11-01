@@ -45,6 +45,10 @@
             ],
             "allowedCommonJsDependencies": [
               "date-fns-tz",
+              "date-fns/_lib/cloneObject/index.js",
+              "date-fns/format/index.js",
+              "date-fns/_lib/getTimezoneOffsetInMilliseconds/index.js",
+              "date-fns/_lib/toInteger/index.js",
               "keycloak-js",
               "quill",
               "quill-delta",
