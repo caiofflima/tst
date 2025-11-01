@@ -41,7 +41,7 @@
 
             <div class="form-row">
                 <div class="col-md-6 mb-15 pl-0">
-                    <asc-dropdown required
+                    <asc-dropdown [required]="true"
                     [items]="listComboLaboratorios"
                     label="Laboratório"
                     [control]="idLaboratorio"
@@ -51,24 +51,24 @@
 
             <div class="form-row">
                 <div class="col-md-6 pl-0">
-                    <asc-input-text label="Código do medicamento" required id="coMedicamento" name="coMedicamento" 
+                    <asc-input-text label="Código do medicamento" [required]="true" id="coMedicamento" name="coMedicamento" 
                     [control]="coMedicamento" hint="Código do medicamento" [maxlength]="6"></asc-input-text>
                 </div>
 
                 <div class="col-md-12 pl-0">
-                    <asc-input-text label="Nome do medicamento" hint="Nome do medicamento" required id="nome" 
+                    <asc-input-text label="Nome do medicamento" hint="Nome do medicamento" [required]="true" id="nome" 
                     name="nome" [control]="nome"  [maxlength]="150"></asc-input-text>
                 </div>
             </div>
 
             <div class="form-row">
                 <div class="col-md-4 pl-0">
-                    <asc-input-text label="Código Apresentação"  hint="Código Apresentação" required 
+                    <asc-input-text label="Código Apresentação"  hint="Código Apresentação" [required]="true" 
                     id="codigoApresentacao" name="codigoApresentacao" [control]="codigoApresentacao" [maxlength]="4"></asc-input-text>
                 </div>
 
                 <div class="col-md-8 pl-0">
-                <asc-input-text label="Apresentação" required hint="Apresentação" [maxlength]="150"
+                <asc-input-text label="Apresentação" [required]="true" hint="Apresentação" [maxlength]="150"
                 id="descricaoApresentacao" name="descricaoApresentacao" [control]="descricaoApresentacao" ></asc-input-text>
                 </div>               
             </div>
@@ -76,24 +76,24 @@
             <div class="form-row">
                 <div class="col-md-3 pl-0">
                   <asc-input-money-type [control]="formulario.get('valor')" inputId="valor"
-                  required label="Valor">
+                  [required]="true" label="Valor">
                   </asc-input-money-type>
                 </div>
 
                 <div class="col-md-3">
-                    <asc-input-text label="Quantidade Fracionada" hint="Quantidade Fracionada"  required 
+                    <asc-input-text label="Quantidade Fracionada" hint="Quantidade Fracionada"  [required]="true" 
                     id="qtdFracionado" name="qtdFracionado" [somenteNumeros]="true" [control]="qtdFracionado" [maxlength]="5"></asc-input-text>
                 </div>
 
                 <div class="col-md-3">
                   <asc-input-money-type [control]="formulario.get('valorFracionado')" inputId="valorFracionado"
-                  required label="Valor Fracionado">
+                  [required]="true" label="Valor Fracionado">
                   </asc-input-money-type>
                 </div>
 
                 <div class="col-md-3">
                     <asc-input-text [control]="formulario.get('percentualAliquota')" inputId="percentualAliquota"
-                    required label="Alíquota"  ascOnlyNumber [maxlength]="6"
+                    [required]="true" label="Alíquota"  ascOnlyNumber [maxlength]="6"
                     (keydown)="onPercentChange()" (keyup)="onPercentChange()"  (focus)="onPercentChange()">
                     </asc-input-text>
                 </div>
@@ -110,7 +110,7 @@
             
                 <div class="col-md-9 pl-0">
                     <asc-input-text label="Número TISS"  hint="Número TISS" [somenteNumeros]="true"
-                    id="numeroTiss" name="numeroTiss" [control]="numeroTiss" [maxlength]="10" required></asc-input-text>
+                    id="numeroTiss" name="numeroTiss" [control]="numeroTiss" [maxlength]="10" [required]="true"></asc-input-text>
                 </div>
                      
                 <div class="col-md-9 pl-0">
@@ -127,7 +127,7 @@
             <div class="form-row">
                 <div class="col-md-2 d-flex al-ic pl-0">
                     <p-checkbox
-                            formControlName="generico" binary="true" inputId="binary"
+                            formControlName="generico" [binary]="true" inputId="binary"
                             (onChange)="onChangeInativo($event)"
                     ></p-checkbox>
                     <label class="control-label" style="margin: 0 0 0 5px!important" for="binary">Genérico</label>
@@ -135,7 +135,7 @@
 
                 <div class="col-md-2 d-flex al-ic">
                     <p-checkbox
-                            formControlName="inativo" binary="true" inputId="binary"
+                            formControlName="inativo" [binary]="true" inputId="binary"
                             (onChange)="onChangeInativo($event)"
                     ></p-checkbox>
                     <label class="control-label" style="margin: 0 0 0 5px!important" for="binary">Inativo</label>

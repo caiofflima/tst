@@ -43,7 +43,7 @@
             <em class="fas fa-search"></em>
           </div>
 
-          <p-table id="caixa-table" [value]="procedimentos" [(selection)]="registrosSelecionados" [paginator]="true" [rows]="5" [totalRecords]="listaTotal" [rowsPerPageOptions]="[5,10,20]" [globalFilter]="gb" reorderableColumns="true" sortField="id" [loading]="loading" sortOrder="-1" emptyMessage="{{(!loading) ? bundle('MA003') : 'Carregando ...'}}" class="table table-striped table-sm table-hover text-center">
+          <p-table id="caixa-table" [value]="procedimentos" [(selection)]="registrosSelecionados" [paginator]="true" [rows]="5" [totalRecords]="listaTotal" [rowsPerPageOptions]="[5,10,20]" [reorderableColumns]="true" sortField="id" [loading]="loading" [sortOrder]="-1" emptyMessage="{{(!loading) ? bundle('MA003') : 'Carregando ...'}}" class="table table-striped table-sm table-hover text-center">
 
             <ng-template pTemplate="header">
               <tr>

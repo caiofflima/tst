@@ -31,7 +31,7 @@
       <em class="fas fa-search"></em>
     </div>
 
-    <p-table id="caixa-table" [value]="listaMedicamentos" [(selection)]="registrosSelecionados" [paginator]="true" [rows]="10" [totalRecords]="listaMedicamentos?.length" [emptyMessage]="(!loading) ? bundle('MA142') : 'Carregando...'" [rowsPerPageOptions]="[5, 10, 20]" [globalFilter]="gb" reorderableColumns="true" [loading]="loading" sortField="id" sortOrder="-1" class="table table-striped table-sm table-hover text-center">
+    <p-table id="caixa-table" [value]="listaMedicamentos" [(selection)]="registrosSelecionados" [paginator]="true" [rows]="10" [totalRecords]="listaMedicamentos?.length" [rowsPerPageOptions]="[5, 10, 20]" [reorderableColumns]="true" [loading]="loading" sortField="id" [sortOrder]="-1" class="table table-striped table-sm table-hover text-center">
 
       <ng-template pTemplate="header">
         <tr>

@@ -68,6 +68,8 @@ import { TextMaskModule } from 'angular2-text-mask';
 import { AscSelectFinalidadeAdesaoComponent } from './asc-input/asc-select/asc-select-finalidade-adesao.component';
 import { BaseLayoutFormComponent } from './base-layout/base-layout-form/base-layout-form.component';
 import { PopoverModule } from 'ngx-bootstrap/popover';
+import { BaseLayoutHomeComponent } from './base-layout/base-layout-home/base-layout-home.component';
+import { AscListagemComponent } from './asc-listagem/asc-listagem.component';
 
 
 
@@ -133,7 +135,9 @@ import { PopoverModule } from 'ngx-bootstrap/popover';
         AscSelectTiposOcorenciaComponent,
         AscSelectSituacaoProcessoOcorrenciaComponent,
         AscSelectFinalidadeAdesaoComponent,
-        BaseLayoutFormComponent
+        BaseLayoutFormComponent,
+        BaseLayoutHomeComponent,
+        AscListagemComponent
 
     ],
     exports: [
@@ -182,7 +186,9 @@ import { PopoverModule } from 'ngx-bootstrap/popover';
         AscSelectTiposOcorenciaComponent,
         AscSelectSituacaoProcessoOcorrenciaComponent,
         AscSelectFinalidadeAdesaoComponent,
-        BaseLayoutFormComponent
+        BaseLayoutFormComponent,
+        BaseLayoutHomeComponent,
+        AscListagemComponent
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

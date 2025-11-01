@@ -38,7 +38,8 @@ import { AscMessageErrorModule } from "./components/message-error/asc-message-er
         PipeModule,
         TooltipModule,
         OverlayPanelModule,
-        ProgressSpinnerModule
+        ProgressSpinnerModule,
+        AscMessageErrorModule
     ],
   })
 export class BaseModule {}

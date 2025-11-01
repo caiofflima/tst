@@ -1,4 +1,4 @@
-import {debounceTime, take} from 'rxjs/operators';
+import {debounceTime, distinctUntilChanged, take} from 'rxjs/operators';
 import {SelectItem} from 'primeng/api';
 import {MedicamentoService} from '../../../shared/services/comum/pedido/medicamento.service';
 import {BaseComponent} from 'app/shared/components/base.component';
@@ -6,8 +6,6 @@ import {Component, OnInit} from '@angular/core';
 import {MessageService, PatologiaService} from 'app/shared/services/services';
 import {Router} from '@angular/router';
 import {Medicamento} from 'app/shared/models/comum/medicamento';
-import 'rxjs/add/operator/debounceTime';
-import 'rxjs/add/operator/distinctUntilChanged';
 import {Patologia} from "../../../shared/models/comum/patologia";
 import {FormControl} from "@angular/forms";
 import {Location} from "@angular/common";

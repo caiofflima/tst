@@ -45,7 +45,7 @@
       <em class="fas fa-search"></em>
     </div>
     
-    <p-table id="caixa-table" [value]="listaProcedimentos" [(selection)]="registrosSelecionados" [paginator]="true" [rows]="10" [totalRecords]="listaProcedimentos?.length" [emptyMessage]="bundle('MA142')" [rowsPerPageOptions]="[5,10,20]" [globalFilter]="gb" reorderableColumns="true" sortField="id" [loading]="loading" sortOrder="-1" class="table table-striped table-sm table-hover text-center" (onRowSelect)="selecionarPerfis($event)" (onRowUnselect)="deSelecionarPerfis($event)">
+    <p-table id="caixa-table" [value]="listaProcedimentos" [(selection)]="registrosSelecionados" [paginator]="true" [rows]="10" [totalRecords]="listaProcedimentos?.length" [rowsPerPageOptions]="[5,10,20]" [reorderableColumns]="true" sortField="id" [loading]="loading" [sortOrder]="-1" class="table table-striped table-sm table-hover text-center" (onRowSelect)="selecionarPerfis($event)" (onRowUnselect)="deSelecionarPerfis($event)">
 
       <ng-template pTemplate="header">
         <tr>

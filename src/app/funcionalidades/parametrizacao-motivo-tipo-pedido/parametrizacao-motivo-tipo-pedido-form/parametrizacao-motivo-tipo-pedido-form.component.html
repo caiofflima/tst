@@ -94,7 +94,7 @@
       <div *ngIf="isEdicao">
         <div class="form-row">
           <div class="col-md-2 d-flex al-ic pl-0">
-            <p-checkbox formControlName="inativo" name="inativo" binary="true" inputId="inativo"
+            <p-checkbox formControlName="inativo" name="inativo" [binary]="true" inputId="inativo"
                         (onChange)="onChangeInativo($event)"></p-checkbox>
             <label class="control-label" style="margin: 0 0 0 5px!important" for="inativo">Inativo</label>
           </div>

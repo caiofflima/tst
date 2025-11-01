@@ -67,35 +67,47 @@
                placeholder="Digite para filtrar resultado">
         <em class="fas fa-search"></em>
       </div>
-      <p-dataTable
-        id="caixa-table" [value]="dados" [rows]="10"
-        [paginator]="true" [pageLinks]="5" sortOrder="-1" 
-        emptyMessage="{{(!loading)?bundle('MA142'):'Carregando ...'}}"
-        [rowsPerPageOptions]="[5,10,20]" [globalFilter]="gb" reorderableColumns="true" sortField="id"
-        class="table table-striped table-sm table-hover text-center">
-
-        <p-column field="idPedido" header="Pedido" [sortable]="true" [style]="{'width':'100px'}"></p-column>
-        <p-column field="descTipoProcesso" header="Tipo de Pedido" [sortable]="true"></p-column>
-        <p-column field="matricula" header="Matrícula" [style]="{'width':'100px'}" [sortable]="true"></p-column>
-        <p-column field="uf" header="UF" [sortable]="true" [style]="{'width':'50px'}"></p-column>
-        <p-column field="dataAbertura" header="Data de Abertura" [sortable]="true" [style]="{'width':'110px'}">
-          <ng-template let-col let-row="rowData" pTemplate="body">
-            {{row[col.field] }}
-          </ng-template>
-        </p-column>
-        <p-column field="descSituacaoPedido" header="Situação" [sortable]="true" ></p-column>
-        <p-column field="dataInicio" header="Inicio" [sortable]="true" [style]="{'width':'90px'}">
-          <ng-template let-col let-row="rowData" pTemplate="body">
-            {{row[col.field] }}
-          </ng-template>
-        </p-column>
-        <p-column field="dataFim" header="Fim" [sortable]="true" [style]="{'width':'90px'}">
-          <ng-template let-col let-row="rowData" pTemplate="body">
-            {{row[col.field] | campoVazioHifen}}
-          </ng-template>
-        </p-column>
-
-      </p-dataTable>
+      <p-table
+        id="caixa-table"
+        [value]="dados"
+        [rows]="10"
+        [paginator]="true"
+        [pageLinks]="5"
+        [sortOrder]="-1"
+        [rowsPerPageOptions]="[5,10,20]"
+        [reorderableColumns]="true"
+        sortField="id"
+        styleClass="table table-striped table-sm table-hover text-center">
+        <ng-template pTemplate="emptymessage">
+          <tr>
+            <td colspan="8">{{(!loading)?bundle('MA142'):'Carregando ...'}}</td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="header">
+          <tr>
+            <th [pSortableColumn]="'idPedido'" style="width:100px">Pedido <p-sortIcon [field]="'idPedido'"></p-sortIcon></th>
+            <th [pSortableColumn]="'descTipoProcesso'">Tipo de Pedido <p-sortIcon [field]="'descTipoProcesso'"></p-sortIcon></th>
+            <th [pSortableColumn]="'matricula'" style="width:100px">Matrícula <p-sortIcon [field]="'matricula'"></p-sortIcon></th>
+            <th [pSortableColumn]="'uf'" style="width:50px">UF <p-sortIcon [field]="'uf'"></p-sortIcon></th>
+            <th [pSortableColumn]="'dataAbertura'" style="width:110px">Data de Abertura <p-sortIcon [field]="'dataAbertura'"></p-sortIcon></th>
+            <th [pSortableColumn]="'descSituacaoPedido'">Situação <p-sortIcon [field]="'descSituacaoPedido'"></p-sortIcon></th>
+            <th [pSortableColumn]="'dataInicio'" style="width:90px">Inicio <p-sortIcon [field]="'dataInicio'"></p-sortIcon></th>
+            <th [pSortableColumn]="'dataFim'" style="width:90px">Fim <p-sortIcon [field]="'dataFim'"></p-sortIcon></th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-row>
+          <tr>
+            <td>{{row.idPedido}}</td>
+            <td>{{row.descTipoProcesso}}</td>
+            <td>{{row.matricula}}</td>
+            <td>{{row.uf}}</td>
+            <td>{{row.dataAbertura}}</td>
+            <td>{{row.descSituacaoPedido}}</td>
+            <td>{{row.dataInicio}}</td>
+            <td>{{row.dataFim | campoVazioHifen}}</td>
+          </tr>
+        </ng-template>
+      </p-table>
     </div>
 
     <div class="col-xs-12 p-0 barra-botoes">

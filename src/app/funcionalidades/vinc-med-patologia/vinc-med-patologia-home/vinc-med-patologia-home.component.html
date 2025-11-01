@@ -23,10 +23,10 @@
         <div class="p-0 col-md-6">
           <label class="control-label" for="patologias">Patologia</label>
           <p-dropdown
-            [options]="patologias" 
-            filter="true" 
-            [(ngModel)]="patologia" 
-            name="patologias" 
+            [options]="patologias"
+            [filter]="true"
+            [(ngModel)]="patologia"
+            name="patologias"
             id="patologias">
           </p-dropdown>
         </div>
@@ -45,7 +45,7 @@
       </div>
   
       <div class="col-md-12 p-0">
-        <p-checkbox name="sAtivos" [(ngModel)]="ativos" binary="true" inputId="sAtivos" id="ativos"></p-checkbox>
+        <p-checkbox name="sAtivos" [(ngModel)]="ativos" [binary]="true" inputId="sAtivos" id="ativos"></p-checkbox>
         <label class="control-label" for="ativos">Somente ativos</label>
       </div>
   

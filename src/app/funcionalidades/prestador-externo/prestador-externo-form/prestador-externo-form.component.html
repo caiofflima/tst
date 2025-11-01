@@ -59,7 +59,7 @@
             [control]="cpf"
             [somenteCpf]="true"
             title="{{bundle('MH130')}}"
-            required
+            [required]="true"
           ></asc-cpf-cnpj>
         </div>
         <div class="row col-md-5">
@@ -70,7 +70,7 @@
             name="nome"
             title="{{bundle('MH131')}}"
             [control]="nome"
-            required
+            [required]="true"
           ></asc-input-text>
         </div>
         <div class="row pl-0 col-md-2">
@@ -87,7 +87,7 @@
             [yearNavigator]="true"
             yearRange="1900:2100"
             [showIcon]="true"
-            required
+            [required]="true"
             title="{{bundle('MH142')}}">
           </p-calendar>
 
@@ -105,7 +105,7 @@
             id="email"
             [maxlength]="150"
             name="email"
-            required
+            [required]="true"
           ></asc-input-email>
         </div>
       </div>
@@ -139,7 +139,7 @@
               </label>
 
               <p-dropdown
-                required
+                [required]="true"
                 [options]="empresas"
                 placeholder="{{bundle('MHSPH')}}"
                 name="empresaPrestadorExterno"
@@ -163,7 +163,7 @@
               </label>
 
               <p-dropdown
-                required
+                [required]="true"
                 [options]="perfis"
                 id="perfilPrestadorExterno"
                 placeholder="{{bundle('MHSPH')}}"
@@ -189,7 +189,7 @@
               </label>
 
               <p-dropdown
-                required
+                [required]="true"
                 [options]="tiposAuditores"
                 id="atuacaoPrestadorExterno"
                 placeholder="{{bundle('MHSPH')}}"
@@ -221,7 +221,7 @@
                 [yearNavigator]="true"
                 yearRange="1900:2100"
                 [showIcon]="true"
-                required
+                [required]="true"
                 title="{{bundle('MH143')}}">
               </p-calendar>
 

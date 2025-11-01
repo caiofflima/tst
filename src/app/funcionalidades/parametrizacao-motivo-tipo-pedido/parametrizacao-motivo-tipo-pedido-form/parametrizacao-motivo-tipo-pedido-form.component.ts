@@ -337,7 +337,7 @@ export class ParametrizacaoMotivoTipoPedidoFormComponent extends BaseComponent {
 
     public excluir(): void {
         this.messageService.addConfirmYesNo(this.bundle("MA021"), () => {
-            this.serviceMotivoSolicitacaoTipoPedido.delete(this.id).take(1).subscribe(async () => {
+            this.serviceMotivoSolicitacaoTipoPedido.delete(this.id).pipe(take(1)).subscribe(async () => {
                     this.showSuccessMsg(this.bundle("MA039"));
                     await this.router.navigate(['manutencao/parametros/motivo-tipo-pedido/buscar']);
                 }, err => this.showDangerMsg(err.error)
@@ -347,7 +347,7 @@ export class ParametrizacaoMotivoTipoPedidoFormComponent extends BaseComponent {
 
     public excluirLista(): void {
         this.messageService.addConfirmYesNo(this.bundle("MA021"), () => {
-            this.serviceMotivoSolicitacaoTipoPedido.excluirLista(this.motivoSolicitacaoTipoPedidoBeneficiariosDTO.idsMotivoTipoBeneficiario).take(1).subscribe(async () => {
+            this.serviceMotivoSolicitacaoTipoPedido.excluirLista(this.motivoSolicitacaoTipoPedidoBeneficiariosDTO.idsMotivoTipoBeneficiario).pipe(take(1)).subscribe(async () => {
                     this.showSuccessMsg(this.bundle("MA039"));
                     await this.router.navigate(['manutencao/parametros/motivo-tipo-pedido/buscar']);
                 }, err => this.showDangerMsg(err.error)

@@ -45,7 +45,7 @@
             id="cnpj"
             title="{{bundle('MH126')}}"
             [somenteCnpj]="true"
-            required
+            [required]="true"
           ></asc-cpf-cnpj>
         </div>
         <div class="pl-0 col-xs-8">
@@ -56,7 +56,7 @@
             id="razaoSocial"
             name="razaoSocial"
             [maxlength]="150"
-            required
+            [required]="true"
           ></asc-input-text>
         </div>
       </div>
@@ -91,7 +91,7 @@
           <div class="d-flex col-md-8 p-0" style="align-items: end; justify-content: start;">
             <div class="col-md-4 p-0">
               <label class="control-label obrigatorio" for="razaoSocial">Agrupadora</label>
-              <p-dropdown required [options]="filiais" filter="true" placeholder="{{bundle('MHSPH')}}"
+              <p-dropdown [required]="true" [options]="filiais" [filter]="true" placeholder="{{bundle('MHSPH')}}"
                           name="filial" formControlName="filial" optionLabel="nome"
                           (ngModelChange)="onChangeFilial()">
               </p-dropdown>
@@ -101,7 +101,7 @@
             &nbsp;&nbsp;&nbsp;
             <div class="col-md-4 p-0">
               <label class="control-label obrigatorio" for="razaoSocial">UF</label>
-              <p-dropdown required [options]="listComboUF" filter="true" placeholder="{{bundle('MHSPH')}}"
+              <p-dropdown [required]="true" [options]="listComboUF" [filter]="true" placeholder="{{bundle('MHSPH')}}"
                           name="UFEmpresa" formControlName="UFEmpresa" optionLabel="label"
                           (ngModelChange)="onChangeUFEmpresa()">
               </p-dropdown>
@@ -123,19 +123,39 @@
                      placeholder="Digite para filtrar resultado">
               <em class="fas fa-search"></em>
             </div>
-            <p-dataTable id="caixa-table" emptyMessage="{{bundle('MA003')}}" [value]="abrangenciaAdd" [rows]="10"
-                         [paginator]="true" [pageLinks]="5" [globalFilter]="gb" sortOrder="1"
-                         [rowsPerPageOptions]="[5,10,20]" reorderableColumns="true" sortField="nome"
-                         class="table table-striped table-sm table-hover">
-              <p-column field="nome" header="Abrangência" [sortable]="true"></p-column>
-              <p-column id="cl_Action" header="Ação">
-                <ng-template let-row="rowData" pTemplate="content">
-                  <span title="Remover" (click)="removerAbrangencia(row)">
-                    <span class="fas fa-trash red"></span>
-                  </span>
-                </ng-template>
-              </p-column>
-            </p-dataTable>
+            <p-table
+              id="caixa-table"
+              [value]="abrangenciaAdd"
+              [rows]="10"
+              [paginator]="true"
+              [pageLinks]="5"
+              [sortOrder]="1"
+              [rowsPerPageOptions]="[5,10,20]"
+              [reorderableColumns]="true"
+              sortField="nome"
+              styleClass="table table-striped table-sm table-hover">
+              <ng-template pTemplate="emptymessage">
+                <tr>
+                  <td colspan="2">{{bundle('MA003')}}</td>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="header">
+                <tr>
+                  <th [pSortableColumn]="'nome'">Abrangência <p-sortIcon [field]="'nome'"></p-sortIcon></th>
+                  <th id="cl_Action">Ação</th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-row>
+                <tr>
+                  <td>{{row.nome}}</td>
+                  <td>
+                    <span title="Remover" (click)="removerAbrangencia(row)">
+                      <span class="fas fa-trash red"></span>
+                    </span>
+                  </td>
+                </tr>
+              </ng-template>
+            </p-table>
           </div>
         </div>
       </div>

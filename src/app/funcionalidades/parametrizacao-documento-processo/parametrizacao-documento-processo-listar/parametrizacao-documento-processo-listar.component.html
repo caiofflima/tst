@@ -73,31 +73,54 @@
                placeholder="Digite para filtrar resultado">
         <em class="fas fa-search"></em>
       </div>
-      <p-dataTable
-        id="caixa-table" [rows]="5" [paginator]="true" [pageLinks]="5" [totalRecords]="listaTotal"
-        [rowsPerPageOptions]="[5,10,20]" [globalFilter]="gb"
-        [value]="listaDocumentoProcesso" reorderableColumns="true" sortField="id" sortOrder="-1"
-        emptyMessage="{{(!loading)?bundle('MA003'):'Carregando ...'}}" class="table table-striped table-sm table-hover text-center">
-
-        <p-column field="tipoProcesso" header="Tipo de Pedido" [sortable]="true"></p-column>
-        <p-column field="tipoBeneficiario" header="Tipo de Beneficiário" [sortable]="true"></p-column>
-        <p-column field="motivoDeSolicitacao" header="Motivo de Solicitação" [sortable]="true"></p-column>
-        <p-column field="documento.nome" header="Documento" [sortable]="true"></p-column>
-        <p-column field="sexo" header="Sexo" [sortable]="true" [style]="{'width':'100px'}"></p-column>
-        <p-column field="estadoCivil" header="Estado Civil" [sortable]="true"></p-column>
-        <p-column
-          field="descricaoObrigatorio" header="Obrigatório" [sortable]="true" [style]="{'width':'120px'}"
-        ></p-column>
-        <p-column field="descricaoInativo" header="Inativo" [sortable]="true" [style]="{'width':'90px'}"></p-column>
-
-        <p-column header="Ação">
-          <ng-template let-row="rowData" pTemplate="content">
-            <span title="Editar registro" (click)="editar(row)" id="editar" style="cursor: pointer">
-              <em class="fas fa-pen"></em>
-            </span>
-          </ng-template>
-        </p-column>
-      </p-dataTable>
+      <p-table
+        id="caixa-table"
+        [value]="listaDocumentoProcesso"
+        [rows]="5"
+        [paginator]="true"
+        [pageLinks]="5"
+        [totalRecords]="listaTotal"
+        [rowsPerPageOptions]="[5,10,20]"
+        [reorderableColumns]="true"
+        sortField="id"
+        [sortOrder]="-1"
+        styleClass="table table-striped table-sm table-hover text-center">
+        <ng-template pTemplate="emptymessage">
+          <tr>
+            <td colspan="9">{{(!loading)?bundle('MA003'):'Carregando ...'}}</td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="header">
+          <tr>
+            <th [pSortableColumn]="'tipoProcesso'">Tipo de Pedido <p-sortIcon [field]="'tipoProcesso'"></p-sortIcon></th>
+            <th [pSortableColumn]="'tipoBeneficiario'">Tipo de Beneficiário <p-sortIcon [field]="'tipoBeneficiario'"></p-sortIcon></th>
+            <th [pSortableColumn]="'motivoDeSolicitacao'">Motivo de Solicitação <p-sortIcon [field]="'motivoDeSolicitacao'"></p-sortIcon></th>
+            <th [pSortableColumn]="'documento.nome'">Documento <p-sortIcon [field]="'documento.nome'"></p-sortIcon></th>
+            <th [pSortableColumn]="'sexo'" style="width:100px">Sexo <p-sortIcon [field]="'sexo'"></p-sortIcon></th>
+            <th [pSortableColumn]="'estadoCivil'">Estado Civil <p-sortIcon [field]="'estadoCivil'"></p-sortIcon></th>
+            <th [pSortableColumn]="'descricaoObrigatorio'" style="width:120px">Obrigatório <p-sortIcon [field]="'descricaoObrigatorio'"></p-sortIcon></th>
+            <th [pSortableColumn]="'descricaoInativo'" style="width:90px">Inativo <p-sortIcon [field]="'descricaoInativo'"></p-sortIcon></th>
+            <th>Ação</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-row>
+          <tr>
+            <td>{{row.tipoProcesso}}</td>
+            <td>{{row.tipoBeneficiario}}</td>
+            <td>{{row.motivoDeSolicitacao}}</td>
+            <td>{{row.documento?.nome}}</td>
+            <td>{{row.sexo}}</td>
+            <td>{{row.estadoCivil}}</td>
+            <td>{{row.descricaoObrigatorio}}</td>
+            <td>{{row.descricaoInativo}}</td>
+            <td>
+              <span title="Editar registro" (click)="editar(row)" id="editar" style="cursor: pointer">
+                <em class="fas fa-pen"></em>
+              </span>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
     </div>
 
     <div class="col-xs-12 p-0 barra-botoes">

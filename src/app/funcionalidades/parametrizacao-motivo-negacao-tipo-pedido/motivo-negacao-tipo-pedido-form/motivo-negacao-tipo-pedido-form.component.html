@@ -52,7 +52,7 @@
         [items]="icNiveisNegacao"
         label="Nível de Negação"
         [control]="icNiveisNegacaoCombo"
-        required
+        [required]="true"
         [disabled]="atualizar != null"
         (selected)="prepararFiltroParaCarregarMotivoNegacao($event)"
         name="icNiveisNegacao"
@@ -65,7 +65,7 @@
         label="Situação do Pedido"
         [control]="campoSituacaoProcesso"
         (selected)="carregarMotivoNegacao()"
-        required
+        [required]="true"
         [disabled]="atualizar != null"
         ></asc-dropdown>
     </div>
@@ -103,7 +103,7 @@
 
   <div class="form-row inativo-form" *ngIf="atualizar">
     <div class="col-md-3 p-0">
-      <p-checkbox name="ativos" inputId="ativos" binary="true" formControlName="inativo"></p-checkbox>
+      <p-checkbox name="ativos" inputId="ativos" [binary]="true" formControlName="inativo"></p-checkbox>
       <label for="ativos" class="control-label">Inativo</label>
     </div>
     <div class="col-md-3 pl-0">

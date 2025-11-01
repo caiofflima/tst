@@ -152,7 +152,7 @@ export class ParametrizacaoMotivoTipoPedidoListarComponent extends BaseComponent
 
     public remover(motivoSolicitacaoTipoPedidoDTO: MotivoSolicitacaoTipoPedidoDTO): void {
         this.messageService.addConfirmYesNo(this.bundle("MA021"), () => {
-            this.serviceMotivo.delete(motivoSolicitacaoTipoPedidoDTO.id).take(1).subscribe(async () => {
+            this.serviceMotivo.delete(motivoSolicitacaoTipoPedidoDTO.id).pipe(take(1)).subscribe(async () => {
                     this.showSuccessMsg(this.bundle("MA039"));
                     await this.pesquisaInicial();
                 }, err => this.showDangerMsg(err.error)

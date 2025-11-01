@@ -44,7 +44,7 @@
       
         <div class="row col-xs-6">
           <asc-input-text
-            label="Descrição" required id="descricao" name="descricao" [control]="formulario.get('nome')"
+            label="Descrição" [required]="true" id="descricao" name="descricao" [control]="formulario.get('nome')"
             hint="Descrição do Motivo" [maxlength]="150"
           ></asc-input-text>
         </div>
@@ -54,7 +54,7 @@
         <div class="row col-xs-6">
           <br>
           <label class="control-label" for="prestadorExclusivo">
-            <p-checkbox name="prestadorExclusivo"  binary="true" formControlName="prestadorExclusivo" inputId="prestadorExclusivo"></p-checkbox>
+            <p-checkbox name="prestadorExclusivo"  [binary]="true" formControlName="prestadorExclusivo" inputId="prestadorExclusivo"></p-checkbox>
             Exclusivo para prestador
           </label>
   
@@ -66,7 +66,7 @@
         
             <div class="row col-xs-3">
               <p-checkbox
-                inputId="inativo" name="inativo" formControlName="inativo" binary="true"
+                inputId="inativo" name="inativo" formControlName="inativo" [binary]="true"
                 (onChange)="onChangeInativo($event)"
               ></p-checkbox>
               <label class="control-label" for="inativo">Inativo</label>

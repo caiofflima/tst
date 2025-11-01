@@ -44,7 +44,6 @@ import { CadastroTitularComponent } from './cadastro/cadastro-titular.component'
 import { EtapaContatoTitularComponent } from './etapa-contato-titular/etapa-contato-titular.component';
 import { EtapaComplementotitularComponent } from './etapa-complemento-titular/etapa-complemento-titular.component';
 import { EtapaResumoTitularComponent } from './etapa-resumo-titular/etapa-resumo-titular.component';
-import { AcompanhamentoAdesaoComponent } from './acompanhamento-adesao/acompanhamento-adesao/acompanhamento-adesao.component';
 import { AcompanhamentoModule } from '../acompanhamento/acompanhamento.module';
 import { AscCardAcompanhamentoConteudoModule } from 'app/shared/components/asc-acompanhamento-processo/asc-card-acompanhamento-conteudo/asc-card-acompanhamento-conteudo.module';
 import { AscDocumentosModule } from 'app/shared/components/asc-pedido/asc-documentos/asc-documentos.module';
@@ -88,9 +87,7 @@ import { AscModalModule } from 'app/shared/components/asc-modal/asc-modal.module
         CadastroTitularComponent,
         EtapaContatoTitularComponent,
         EtapaComplementotitularComponent,
-        EtapaResumoTitularComponent,
-        AcompanhamentoAdesaoComponent
-      
+        EtapaResumoTitularComponent
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

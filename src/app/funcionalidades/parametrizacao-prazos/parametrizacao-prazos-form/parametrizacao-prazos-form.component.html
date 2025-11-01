@@ -43,7 +43,7 @@
             [control]="idTipoProcesso"
             id="idTipoProcesso"
             label="Tipo de pedido"
-            required
+            [required]="true"
             [disabled]="id != null"
             (onChange)="carregarSituacaoProcesso()"
           ></asc-select-tipo-processo>
@@ -74,7 +74,7 @@
       <div class="form-row">
         <div class="col-md-6 mb-15 pl-0">
           <asc-select-situacao-processo
-            label="Situação do Pedido" required
+            label="Situação do Pedido" [required]="true"
             [control]="idSituacaoProcesso"
             (onChange)="carregarSituacaoProcesso()"
             [disabled]="id != null"
@@ -82,7 +82,7 @@
         </div>
         <div class="col-md-3 mb-15">
           <asc-input-text
-            label="Prazo para tratamento" required
+            label="Prazo para tratamento" [required]="true"
             [control]="prazo"
             [somenteNumeros]="true"
             [maxlength]="3"
@@ -95,7 +95,7 @@
           <p-checkbox
             id="diaUtil"
             formControlName="diaUtil"
-            binary="true"
+            [binary]="true"
             [value]="true">
           </p-checkbox>
           <label>Dias Úteis</label>
@@ -124,7 +124,7 @@
       <div *ngIf="id" style="padding-top: 10px" class="form-row">
         <div class="p-0 col-md-2">
           <p-checkbox
-            inputId="inativo" name="inativo" formControlName="inativo" binary="true"
+            inputId="inativo" name="inativo" formControlName="inativo" [binary]="true"
             (onChange)="onChangeInativo($event)"
           ></p-checkbox>
           <label class="control-label" for="inativo">Inativo</label>

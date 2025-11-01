@@ -49,7 +49,7 @@
 
     <div class="row col-xs-2">
       <label class="control-label" for="condicaoProcesso">Condição do Pedido</label>
-      <p-dropdown id="condicaoProcesso" [options]="listComboCondicaoProcesso" filter="filter"
+      <p-dropdown id="condicaoProcesso" [options]="listComboCondicaoProcesso" [filter]="true"
                   [placeholder]="this.bundle('MHSPH')" title="Condi&ccedil;&atilde;o do Pedido"
                   formControlName="condicaoProcesso" optionLabel="label">
       </p-dropdown>
@@ -76,7 +76,7 @@
     <div class="row col-xs-2">
       <label class="control-label" for="ufA">UF de Atendimento</label>
       <p-dropdown
-        id="ufA" [options]="listComboUF" filter="filter" [placeholder]="this.bundle('MHSPH')"
+        id="ufA" [options]="listComboUF" [filter]="true" [placeholder]="this.bundle('MHSPH')"
         title="Filtrar por UF de atendimento."
         formControlName="ufAtendimento" optionLabel="label" (onChange)="onChangeUFAtendimento()"
       ></p-dropdown>
@@ -85,7 +85,7 @@
     <div class="row col-xs-4">
       <label class="control-label" for="municipioAtendimento">Município de Atendimento</label>
       <p-dropdown
-        id="municipioAtendimento" [options]="listComboMunicipio" filter="filter"
+        id="municipioAtendimento" [options]="listComboMunicipio" [filter]="true"
         [placeholder]="this.bundle('MHSPH')" title="Filtrar por município de atendimento."
         formControlName="municipioAtendimento" optionLabel="label"
       ></p-dropdown>
@@ -131,7 +131,7 @@
     <div class="row col-xs-2">
       <label class="control-label" for="idCaraterSolicitacao">Caráter da Solicitação</label>
       <p-dropdown
-        id="idCaraterSolicitacao" [options]="listComboCaraterSolicitacao" filter="filter"
+        id="idCaraterSolicitacao" [options]="listComboCaraterSolicitacao" [filter]="true"
         [placeholder]="this.bundle('MHSPH')" title="Filtrar por caráter da solicitação."
         formControlName="caraterSolicitacao" optionLabel="label"
       ></p-dropdown>

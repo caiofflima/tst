@@ -41,7 +41,7 @@
             <div class="form-row">
                 <div class="pl-0 col-md-4 mb-15">
                     <asc-dropdown
-                            required label="Tipo de documento" [items]="tipoDocumentos" [control]="idTipoDocumento"
+                            [required]="true" label="Tipo de documento" [items]="tipoDocumentos" [control]="idTipoDocumento"
                             id="idTipoDocumento"
                     ></asc-dropdown>
                 </div>
@@ -53,7 +53,7 @@
             <div class="form-row">
                 <div class="pl-0 col-md-12">
                     <asc-input-text
-                            required label="Nome do documento" id="doc" name="doc" [control]="nome"
+                            [required]="true" label="Nome do documento" id="doc" name="doc" [control]="nome"
                     ></asc-input-text>
                 </div>
             </div>
@@ -70,7 +70,7 @@
 
             <div class="form-row">
                 <div class="col-md-1 p-0">
-                    <p-checkbox name="opme" inputId="op" binary="true" [formControl]="opme"></p-checkbox>
+                    <p-checkbox name="opme" inputId="op" [binary]="true" [formControl]="opme"></p-checkbox>
                     <label for="op">OPME</label>
                 </div>
             </div>
@@ -79,7 +79,7 @@
                 <div class="form-row">
                     <div class="col-md-2 d-flex al-ic pl-0">
                         <p-checkbox
-                                formControlName="inativo" binary="true" inputId="binary"
+                                formControlName="inativo" [binary]="true" inputId="binary"
                                 (onChange)="onChangeInativo($event)"
                         ></p-checkbox>
                         <label class="control-label" style="margin: 0 0 0 5px!important" for="binary">Inativo</label>

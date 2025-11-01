@@ -59,12 +59,12 @@
           <asc-input-date
           inputId="dataInicio"
           [control]="formulario.get('dataInicio')"
-          label="Início" required>
+          label="Início" [required]="true">
         </asc-input-date>
       </div>
 
       <div class="row col-xs-2">
-          <asc-input-date required
+          <asc-input-date [required]="true"
           inputId="dataFim"
           [control]="formulario.get('dataFim')"
           label="Fim">

@@ -14,7 +14,7 @@
                     <label class="control-label">Tipo de Pedido *</label>
                     <asc-multiSelect
                             id="tiposProcesso"
-                            required
+                            [required]="true"
                             [options]="listComboTipoProcesso"
                             [control]="formulario.get('tiposProcesso')"
                     ></asc-multiSelect>
@@ -26,7 +26,7 @@
                     <label class="control-label">Tipo de Beneficiário *</label>
                     <asc-multiSelect
                             id="tiposBeneficiarios"
-                            required
+                            [required]="true"
                             [options]="listComboTipoBeneficiario"
                             [control]="formulario.get('tiposBeneficiario')"
                     ></asc-multiSelect>

@@ -62,7 +62,7 @@
     <div class="row col-md-6 coluna-interna">
       <div class="row col-md-8">
         <label class="control-label obrigatorio" for="razaoSocial">Razão Social</label>
-        <input required type="text" [maxlength]="150" id="razaoSocial" name="razaoSocial" class="form-control"
+        <input [required]="true" type="text" [maxlength]="150" id="razaoSocial" name="razaoSocial" class="form-control"
                title="{{bundle('MH127')}}" formControlName="razaoSocial">
         <asc-message-error [control]="formulario.controls['razaoSocial']" type="required"
                            [errorMessage]="bundle('MA007')"></asc-message-error>
@@ -81,7 +81,7 @@
         <div class="row col-md-6 coluna-interna">
           <div class="row col-md-10">
             <label class="control-label obrigatorio" for="razaoSocial">GIPES/CEPES</label>
-            <p-dropdown required [options]="filiais" filter="true" placeholder="{{bundle('MHSPH')}}" name="filial"
+            <p-dropdown [required]="true" [options]="filiais" [filter]="true" placeholder="{{bundle('MHSPH')}}" name="filial"
                         formControlName="filial" optionLabel="nome"></p-dropdown>
             <asc-message-error [control]="formulario.controls['filial']" type="required"
                                [errorMessage]="bundle('MA007')"></asc-message-error>
