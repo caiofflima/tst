@@ -42,6 +42,15 @@
               "./node_modules/highcharts/highcharts.js",
               "./node_modules/keycloak-js/dist/keycloak.js",
               "./node_modules/quill/dist/quill.js"
+            ],
+            "allowedCommonJsDependencies": [
+              "date-fns-tz",
+              "keycloak-js",
+              "quill",
+              "quill-delta",
+              "angular2-text-mask",
+              "jquery",
+              "js-sha256"
             ]
           },
           "configurations": {

@@ -62,22 +62,48 @@
                  placeholder="Digite para filtrar resultado">
           <em class="fas fa-search"></em>
         </div>
-        <p-dataTable
-          id="caixa-table" [rows]="5" [paginator]="true" [pageLinks]="5" [totalRecords]="listaTotal"
-          [rowsPerPageOptions]="[5,10,20]" [globalFilter]="gb"
-          [value]="listaDocumentoProcesso" reorderableColumns="true" sortField="id" sortOrder="-1"
-          emptyMessage="{{(!loading)?bundle('MA003'):'Carregando ...'}}" class="table table-striped table-sm table-hover text-center">
-          
-          <p-column field="documento.nome" header="Nome do Documento" [sortable]="true" [style]="{'width':'120px'}"></p-column>
-          <p-column field="estadoCivil" header="ESTADO CIVIL" [sortable]="true" [style]="{'width':'100px'}"></p-column>
-          <p-column field="sexo" header="SEXO" [sortable]="true" [style]="{'width':'60px'}"></p-column>
-          <p-column field="idTipoDeficiencia" header="IDENT. DEFICIÊNCIA" [sortable]="true" [style]="{'width':'120px'}"></p-column>
-          <p-column field="idadeMinima" header="IDADE MINIMA" [sortable]="true" [style]="{'width':'100px'}"></p-column>
-          <p-column field="idadeMaxima" header="IDADE MÁXIMA" [sortable]="true" [style]="{'width':'100px'}"></p-column>
-          <p-column field="valorRendaMinima" header="VALOR RENDA MINIMA" [sortable]="true" [style]="{'width':'100px'}"></p-column>
-          <p-column field="valorRendaMaxima" header="VALOR RENDA MÁXIMA" [sortable]="true" [style]="{'width':'100px'}"></p-column>
-          
-        </p-dataTable>
+        <p-table
+          id="caixa-table"
+          [value]="listaDocumentoProcesso"
+          [rows]="5"
+          [paginator]="true"
+          [pageLinks]="5"
+          [totalRecords]="listaTotal"
+          [rowsPerPageOptions]="[5,10,20]"
+          [reorderableColumns]="true"
+          sortField="id"
+          [sortOrder]="-1"
+          styleClass="table table-striped table-sm table-hover text-center">
+          <ng-template pTemplate="emptymessage">
+            <tr>
+              <td colspan="8">{{(!loading)?bundle('MA003'):'Carregando ...'}}</td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="header">
+            <tr>
+              <th [pSortableColumn]="'documento.nome'" style="width:120px">Nome do Documento <p-sortIcon [field]="'documento.nome'"></p-sortIcon></th>
+              <th [pSortableColumn]="'estadoCivil'" style="width:100px">ESTADO CIVIL <p-sortIcon [field]="'estadoCivil'"></p-sortIcon></th>
+              <th [pSortableColumn]="'sexo'" style="width:60px">SEXO <p-sortIcon [field]="'sexo'"></p-sortIcon></th>
+              <th [pSortableColumn]="'idTipoDeficiencia'" style="width:120px">IDENT. DEFICIÊNCIA <p-sortIcon [field]="'idTipoDeficiencia'"></p-sortIcon></th>
+              <th [pSortableColumn]="'idadeMinima'" style="width:100px">IDADE MINIMA <p-sortIcon [field]="'idadeMinima'"></p-sortIcon></th>
+              <th [pSortableColumn]="'idadeMaxima'" style="width:100px">IDADE MÁXIMA <p-sortIcon [field]="'idadeMaxima'"></p-sortIcon></th>
+              <th [pSortableColumn]="'valorRendaMinima'" style="width:100px">VALOR RENDA MINIMA <p-sortIcon [field]="'valorRendaMinima'"></p-sortIcon></th>
+              <th [pSortableColumn]="'valorRendaMaxima'" style="width:100px">VALOR RENDA MÁXIMA <p-sortIcon [field]="'valorRendaMaxima'"></p-sortIcon></th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-row>
+            <tr>
+              <td>{{row.documento?.nome}}</td>
+              <td>{{row.estadoCivil}}</td>
+              <td>{{row.sexo}}</td>
+              <td>{{row.idTipoDeficiencia}}</td>
+              <td>{{row.idadeMinima}}</td>
+              <td>{{row.idadeMaxima}}</td>
+              <td>{{row.valorRendaMinima}}</td>
+              <td>{{row.valorRendaMaxima}}</td>
+            </tr>
+          </ng-template>
+        </p-table>
       </div>
   
       <div class="col-xs-12 p-0 barra-botoes">

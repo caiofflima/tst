@@ -47,11 +47,11 @@
         <div class="col-md-6 p-0">
           <label class="control-label obrigatorio" for="patologias">Patologia</label>
           <div *ngIf="!id">
-            <p-dropdown required 
-              [options]="patologias" 
-              filter="true" 
+            <p-dropdown [required]="true"
+              [options]="patologias"
+              [filter]="true"
               formControlName="patologia"
-              name="patologias" id="patologias" 
+              name="patologias" id="patologias"
               [placeholder]="this.bundle('MHSPH')">
             </p-dropdown>
             <asc-message-error
@@ -60,7 +60,7 @@
             </asc-message-error>
           </div>
           <div *ngIf="id">
-            <input type="text" class="form-control" readonly [value]="nomePatologia">
+            <input type="text" class="form-control" [readonly]="true" [value]="nomePatologia">
           </div>
         </div>
 
@@ -72,11 +72,11 @@
               (filter)="filtroMedicamento($event)" 
               [control]="medicamento"
               (selected)="updateValue($event)" 
-              id="Medicamentos" required>
+              id="Medicamentos" [required]="true">
             </asc-dropdown>
           </div>
           <div *ngIf="id">
-            <input type="text" class="form-control" readonly [value]="nomeMedicamento">
+            <input type="text" class="form-control" [readonly]="true" [value]="nomeMedicamento">
           </div>
         </div>
 
@@ -85,7 +85,7 @@
       <div *ngIf="id" style="padding-top: 10px">
         <div class="p-0 col-md-12 ">
           <p-checkbox
-            inputId="inativo" name="inativo" formControlName="inativo" binary="true"
+            inputId="inativo" name="inativo" formControlName="inativo" [binary]="true"
             (onChange)="onChangeInativo($event)"
           ></p-checkbox>
           <label class="control-label" for="inativo">Inativo</label>

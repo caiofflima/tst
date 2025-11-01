@@ -43,17 +43,17 @@
       <div class="form-row">
         <div class="col-md-2 mb-15 pl-0" *ngIf="!id">
           <asc-input-text
-            label="CID-10" required id="codigo" name="codigo" [control]="codigo"
+            label="CID-10" [required]="true" id="codigo" name="codigo" [control]="codigo"
             hint="Código da Patologia no CID-10" [maxlength]="5"
           ></asc-input-text>
         </div>
         <div class="col-md-2 mb-15 pl-0" *ngIf="id">
           <label class="control-label obrigatorio">CID-10</label>
-          <input type="text" class="form-control" required [value]="codigo.value" readonly>
+          <input type="text" class="form-control" [required]="true" [value]="codigo.value" readonly>
         </div>
         <div class="col-md-10 mb-15">
           <asc-input-text
-            label="Descrição" required id="descricao" name="descricao" [control]="nome"
+            label="Descrição" [required]="true" id="descricao" name="descricao" [control]="nome"
             hint="Descrição da Patologia" [maxlength]="150"
           ></asc-input-text>
         </div>
@@ -66,7 +66,7 @@
         </div>
         <div class="col-md-3 mb-15">
           <label class="control-label obrigatorio" for="perReembolso">Percentual Reembolso</label>
-          <input type="number" id="perReembolso" required [maxlength]="5" name="perReembolso" class="form-control"
+          <input type="number" id="perReembolso" [required]="true" [maxlength]="5" name="perReembolso" class="form-control"
                  title="Percentual de Reembolso" formControlName="reembolso" step="0.01">
           <asc-message-error
             [control]="formulario.controls['reembolso']" type="required"
@@ -123,7 +123,7 @@
         <div class="form-row">
           <div class="col-md-2 d-flex al-ic pl-0">
             <p-checkbox
-              formControlName="inativo" binary="true" inputId="binary"
+              formControlName="inativo" [binary]="true" inputId="binary"
               (onChange)="onChangeInativo($event)"
             ></p-checkbox>
             <label class="control-label" style="margin: 0 0 0 5px!important" for="binary">Inativo</label>

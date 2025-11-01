@@ -29,7 +29,7 @@
  </div>
 
  <div class="row col-md-12">
-   <p-table [value]="listaPerfisUsuarios" [(selection)]="registrosSelecionados" [paginator]="true" [rows]="10" [totalRecords]="totalSize" [rowsPerPageOptions]="[5,10,20]" [globalFilter]="gb" [emptyMessage]="bundle('MA003')" reorderableColumns="true" class="table table-striped table-sm table-hover" (onRowSelect)="selecionarPerfis($event)" (onRowUnselect)="deSelecionarPerfis($event)">
+   <p-table [value]="listaPerfisUsuarios" [(selection)]="registrosSelecionados" [paginator]="true" [rows]="10" [totalRecords]="totalSize" [rowsPerPageOptions]="[5,10,20]" [reorderableColumns]="true" class="table table-striped table-sm table-hover" (onRowSelect)="selecionarPerfis($event)" (onRowUnselect)="deSelecionarPerfis($event)">
 
      <ng-template pTemplate="header">
        <tr>

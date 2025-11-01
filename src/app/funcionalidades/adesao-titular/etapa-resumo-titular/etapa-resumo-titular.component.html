@@ -493,12 +493,11 @@
   </p-footer>
 </p-dialog>
 
-  <p-footer>
-    <div class="footer no-mg-bottom">
-      <asc-button-secondary buttonId="voltarModal" (click)="setModal(false)" title="Cancelar"></asc-button-secondary>
-      <asc-button-primary buttonId="continuar" [disabled]="showProgress" [showProgress]="showProgress"
-        [title]="'Continuar'" (onClick)="reiniciarForm()">
-      </asc-button-primary>
-    </div>
-  </p-footer>
-</p-dialog>
+<p-footer>
+  <div class="footer no-mg-bottom">
+    <asc-button-secondary buttonId="voltarModal" (click)="setModal(false)" title="Cancelar"></asc-button-secondary>
+    <asc-button-primary buttonId="continuar" [disabled]="showProgress" [showProgress]="showProgress"
+      [title]="'Continuar'" (onClick)="reiniciarForm()">
+    </asc-button-primary>
+  </div>
+</p-footer>

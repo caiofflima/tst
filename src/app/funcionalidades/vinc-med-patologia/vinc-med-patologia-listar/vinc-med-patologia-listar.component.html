@@ -50,24 +50,44 @@
                placeholder="Digite para filtrar resultado">
         <em class="fas fa-search"></em>
       </div>
-      <p-dataTable
-        id="caixa-table" emptyMessage="{{bundle('MA003')}}" [value]="lista" [rows]="5" [paginator]="true"
-        [pageLinks]="5" [rowsPerPageOptions]="[5,10,20]" [globalFilter]="gb" reorderableColumns="true"
-        sortField="idMedicamento" sortOrder="1" class="table table-striped table-sm table-hover text-center">
-
-        <p-column header="Patologia" [sortable]="true" field="nomePatologia"></p-column>
-        <p-column header="Medicamento" [sortable]="true" field="nomeMedicamento"></p-column>
-        <p-column header="Inativo" [sortable]="true" field="inativo" [style]="{'width': '90px'}"></p-column>
-
-        <p-column header="Ação">
-          <ng-template let-row="rowData" pTemplate="content">
-            <span title="Editar registro" style="cursor: pointer;"
-                  [routerLink]="['/manutencao/vinc-med-patologia/editar', row.id]">
-              <em class="fas fa-pen"></em>
-            </span>
-          </ng-template>
-        </p-column>
-      </p-dataTable>
+      <p-table
+        id="caixa-table"
+        [value]="lista"
+        [rows]="5"
+        [paginator]="true"
+        [pageLinks]="5"
+        [rowsPerPageOptions]="[5,10,20]"
+        [reorderableColumns]="true"
+        sortField="idMedicamento"
+        [sortOrder]="1"
+        styleClass="table table-striped table-sm table-hover text-center">
+        <ng-template pTemplate="emptymessage">
+          <tr>
+            <td colspan="4">{{bundle('MA003')}}</td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="header">
+          <tr>
+            <th [pSortableColumn]="'nomePatologia'">Patologia <p-sortIcon [field]="'nomePatologia'"></p-sortIcon></th>
+            <th [pSortableColumn]="'nomeMedicamento'">Medicamento <p-sortIcon [field]="'nomeMedicamento'"></p-sortIcon></th>
+            <th [pSortableColumn]="'inativo'" style="width: 90px">Inativo <p-sortIcon [field]="'inativo'"></p-sortIcon></th>
+            <th>Ação</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-row>
+          <tr>
+            <td>{{row.nomePatologia}}</td>
+            <td>{{row.nomeMedicamento}}</td>
+            <td>{{row.inativo}}</td>
+            <td>
+              <span title="Editar registro" style="cursor: pointer;"
+                    [routerLink]="['/manutencao/vinc-med-patologia/editar', row.id]">
+                <em class="fas fa-pen"></em>
+              </span>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
     </div>
 
     <div class="col-xs-12 p-0 barra-botoes">

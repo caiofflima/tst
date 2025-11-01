@@ -68,32 +68,39 @@
         <em class="fas fa-search"></em>
       </div> 
 
-      <p-dataTable
+      <p-table
         id="caixa-table" [value]="listaMedicamento" [rows]="10"
-        [paginator]="true" [pageLinks]="5" sortOrder="-1"
+        [paginator]="true" [pageLinks]="5" [sortOrder]="-1"
         emptyMessage="Nenhum resultado encontrado para os filtros informados." [loading]="loading"
-        [rowsPerPageOptions]="[5,10,20]" [globalFilter]="gb" reorderableColumns="true" sortField="id"
-        class="table table-striped table-sm table-hover text-center">
-        <p-column field="nomeLaboratorio" header="Laboratório" [sortable]="true"></p-column>
-        <p-column field="nomeMedicamento" header="Nome do medicamento" [sortable]="true"></p-column>
-        <p-column field="apresentacao" header="Apresentação" [sortable]="true"></p-column>
-        <p-column field="numeroTuss" header="Número TUSS" [sortable]="true"></p-column>
-
-        <p-column field="valor" header="Valor do Medicamento" [sortable]="true">
-          <ng-template let-col let-item="rowData" pTemplate="body">
-          {{ item[col.field] | currency:'BRL': true }}
-          </ng-template>
-        </p-column>
-        <p-column field="ativo" header="Ativo" [sortable]="true" [style]="{'width':'90px'}"></p-column>
-
-        <p-column header="Ação">
-          <ng-template let-row="rowData" pTemplate="content">
-            <span title="Editar registro" [routerLink]="['../editar', row.id]" id="editar">
-              <em class="fas fa-pen"></em>
-            </span>
-          </ng-template>
-        </p-column>
-      </p-dataTable>
+        [rowsPerPageOptions]="[5,10,20]" [reorderableColumns]="true" sortField="id"
+        styleClass="table table-striped table-sm table-hover text-center">
+        <ng-template pTemplate="header">
+          <tr>
+            <th [pSortableColumn]="'nomeLaboratorio'">Laboratório <p-sortIcon [field]="'nomeLaboratorio'"></p-sortIcon></th>
+            <th [pSortableColumn]="'nomeMedicamento'">Nome do medicamento <p-sortIcon [field]="'nomeMedicamento'"></p-sortIcon></th>
+            <th [pSortableColumn]="'apresentacao'">Apresentação <p-sortIcon [field]="'apresentacao'"></p-sortIcon></th>
+            <th [pSortableColumn]="'numeroTuss'">Número TUSS <p-sortIcon [field]="'numeroTuss'"></p-sortIcon></th>
+            <th [pSortableColumn]="'valor'">Valor do Medicamento <p-sortIcon [field]="'valor'"></p-sortIcon></th>
+            <th [pSortableColumn]="'ativo'" style="width:90px">Ativo <p-sortIcon [field]="'ativo'"></p-sortIcon></th>
+            <th>Ação</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-row>
+          <tr>
+            <td>{{row.nomeLaboratorio}}</td>
+            <td>{{row.nomeMedicamento}}</td>
+            <td>{{row.apresentacao}}</td>
+            <td>{{row.numeroTuss}}</td>
+            <td>{{row.valor | currency:'BRL': true}}</td>
+            <td>{{row.ativo}}</td>
+            <td>
+              <span title="Editar registro" [routerLink]="['../editar', row.id]" id="editar">
+                <em class="fas fa-pen"></em>
+              </span>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
     </div>
 
     <div class="p-0 col-xs-12 barra-botoes">

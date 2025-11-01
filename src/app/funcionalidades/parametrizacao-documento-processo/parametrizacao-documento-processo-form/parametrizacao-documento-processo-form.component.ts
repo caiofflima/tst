@@ -84,8 +84,8 @@ export class ParametrizacaoDocumentoProcessoFormComponent extends BaseComponent 
         private readonly serviceDocumentoProcesso: DocumentoTipoProcessoService
     ) {
         super(messageService);
-        this.id = this.route.snapshot.params.id;
-        this.idTipoProcesso = this.route.snapshot.params.idTipoProcesso;
+        this.id = this.route.snapshot.params['id'];
+        this.idTipoProcesso = this.route.snapshot.params['idTipoProcesso'];
 
         this.retornaListaDocumento();
         this.retornaListaTipoDeficiencia();
@@ -188,7 +188,7 @@ export class ParametrizacaoDocumentoProcessoFormComponent extends BaseComponent 
     }
 
     public retornaListaCaraterSolicitacao(): void {
-        this.serviceCaraterSolicitacao.consultarTodos().take(1).subscribe(result => {
+        this.serviceCaraterSolicitacao.consultarTodos().pipe(take(1)).subscribe(result => {
             this.caraterSolicitacao = result.map(item => ({
                 label: item.nome,
                 value: item.id
@@ -197,7 +197,7 @@ export class ParametrizacaoDocumentoProcessoFormComponent extends BaseComponent 
     }
 
     public retornaListaDocumento(): void {
-        this.serviceDocumento.get().take(1).subscribe((result: Documento[]) => {
+        this.serviceDocumento.get().pipe(take(1)).subscribe((result: Documento[]) => {
             this.itensDocumento = result.map(item => ({
                 label: item.id + ' - ' + item.nome,
                 value: item.id
@@ -258,7 +258,7 @@ export class ParametrizacaoDocumentoProcessoFormComponent extends BaseComponent 
 
     public excluir(): void {
         this.messageService.addConfirmYesNo(this.bundle("MA021"), () => {
-            this.serviceDocumentoProcesso.excluir(this.id).take(1).subscribe(async () => {
+            this.serviceDocumentoProcesso.excluir(this.id).pipe(take(1)).subscribe(async () => {
                     this.showSuccessMsg(this.bundle("MA039"));
                     await this.router.navigate(['manutencao/parametros/documento-pedido/buscar']);
                 }, err => this.showDangerMsg(err.error)

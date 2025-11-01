@@ -296,13 +296,13 @@ export class MotivoNegacaoTipoPedidoFormComponent extends BaseComponent {
     prepararObjeto.idMotivoNegacao = dados.idMotivoNegacao
     prepararObjeto.idTipoProcesso = dados.idTipoProcesso
     this.messageService.addConfirmYesNo(this.bundle("MA021"), () => {
-      this.service.excluir(prepararObjeto).take(1).subscribe(async () => {
+      this.service.excluir(prepararObjeto).pipe(take(1)).subscribe(async () => {
               this.showSuccessMsg(this.bundle("MA039"));
               await this.router.navigate([`${this.baseURL}/listar`]);
           }, err => this.showDangerMsg(err.error)
       );
     });
-    
+
   }
 
   restaurarCampos(){

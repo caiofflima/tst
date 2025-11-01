@@ -23,7 +23,7 @@
       <div class="row p-0 col-xs-6">
         <label class="control-label" for="situacaoProcesso">Ocorrência</label>
         <asc-multiSelect
-          id="situacaoProcesso" limit="2" [options]="listComboSituacaoProcesso"
+          id="situacaoProcesso" [limit]="2" [options]="listComboSituacaoProcesso"
           [control]="formulario.get('situacoesProcesso')"
         ></asc-multiSelect>
       </div>
@@ -31,7 +31,7 @@
       <div class="row col-xs-6">
         <label class="control-label" for="tipoProcesso">Tipo de Pedido</label>
         <asc-multiSelect
-          id="tipoProcesso" limit="6" [options]="listComboTipoProcesso"
+          id="tipoProcesso" [limit]="6" [options]="listComboTipoProcesso"
           [control]="formulario.get('tiposProcesso')"
           (onChange)="onChangeTipoProcesso()"
         ></asc-multiSelect>
@@ -40,7 +40,7 @@
       <div class="row p-0 col-xs-6">
         <label class="control-label" for="tipoBeneficiario">Tipo de Beneficiário</label>
         <asc-multiSelect
-          id="tipoBeneficiario" limit="3" [options]="listComboTipoBeneficiario"
+          id="tipoBeneficiario" [limit]="3" [options]="listComboTipoBeneficiario"
           [control]="formulario.get('tiposBeneficiario')"
         ></asc-multiSelect>
       </div>
@@ -57,7 +57,7 @@
       <div class="row p-0 col-xs-12">
         <p-checkbox
           id="somenteAtivos" name="somenteAtivos"
-          binary="true"
+          [binary]="true"
           class="control-label"
           label="Somente ativos" formControlName="somenteAtivos" title="Marque para retornar apenas registros ATIVOS."
         ></p-checkbox>

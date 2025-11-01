@@ -185,5 +185,3 @@ export class Util {
         return new Date(Number(ano.trim()), Number(mes.trim()) - 1, Number(dia.trim()));
     }
 }
-
-}

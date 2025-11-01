@@ -18,7 +18,7 @@
         [tipoProcessadorUpload]="'adesao'"
         (listAnexos)="getListAnexosObrigatorio($event)"
         (onUploadComplete)="atualizarProcesso()"
-        (atualizarPedido)="atualizarPedido();atualizarProcesso();carregarProcesso();"
+        (atualizarPedido)="atualizarProcesso();"
       ></asc-documentos-obrigatorios-card>
       <div *ngIf="permissoes?.editar && permissoes?.tipo === 'analise' && !apresentarDocumentoComplementar"
            class="footer-btns-card" style="padding-top: 1em !important; padding-bottom: 1em !important;" @fadeInOut>
@@ -80,7 +80,7 @@
         [permissoes]="permissoes"
         [processo]="processo"
         [tipoProcessadorUpload]="'adesao'"
-        (atualizarPedido)="atualizarPedido();atualizarProcesso();">
+        (atualizarPedido)="atualizarProcesso();">
       ></asc-documentos-obrigatorios-card>
       <div *ngIf="permissoes?.editar && permissoes?.tipo === 'analise' && !apresentarDocumentoComplementar"
            class="footer-btns-card" style="padding-top: 1em !important;" @fadeInOut>
@@ -100,7 +100,7 @@
         (onCancelar)="showDocumentoComplementar(false)"
         (hasDocumentos)="hasDocumentos($event)"
         (atualizarProcesso$)="atualizarProcesso()"
-        (atualizarPedido)="atualizarPedido()"
+        (atualizarPedido)="atualizarProcesso()"
       ></asc-documento-complementar-card>
       <button (click)="goToTop()" class="btn-to-top">
         Retornar ao topo

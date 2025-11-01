@@ -126,52 +126,56 @@
   <div class="clearfix"></div>
 
   <div class="row col-md-12">
-    <p-dataTable emptyMessage="{{bundle('MA003')}}" [value]="listaProcessos" [paginator]="true" [rows]="rowCounter"
-                 [globalFilter]="gb"
-                 [rowsPerPageOptions]="[5,10,20]" [totalRecords]="listaProcessos.length" (onPage)="onPageChange($event)"
-                 class="table table-striped table-sm table-hover" #dt>
-      <p-column field="idPedido" header="Pedido" [sortable]="true">
-        <ng-template let-col let-row="rowData" pTemplate="body">
-          {{row[col.field] | processo}}
-        </ng-template>
-      </p-column>
-      <p-column header="Tipo de Pedido">
-        <ng-template let-row="rowData" pTemplate="content">
-          <span title="{{row.descTipoProcesso}}">{{row.codTipoProcesso}}</span>
-        </ng-template>
-      </p-column>
-      <p-column header="Tipo de Beneficiário">
-        <ng-template let-row="rowData" pTemplate="body">
-          <span title="{{row.descTipoBeneficiario}}">{{row.abrevTipoBeneficiario}}</span>
-        </ng-template>
-      </p-column>
-
-      <p-column header="Agrupadora" field="idFilial">
-
-      </p-column>
-      <p-column field="descBeneficiario" header="Beneficiário"></p-column>
-      <p-column field="descSituacaoPedido" header="Situação Atual"></p-column>
-      <p-column field="dataUltimaAlteracao" header="Data e Hora">
-        <ng-template let-col let-row="rowData" pTemplate="body">
-          {{row[col.field] | date : 'dd/MM/yyyy HH:mm:ss'}}
-        </ng-template>
-      </p-column>
-      <p-column field="matriculaUltimoUsuario" header="Último Usuário">
-        <ng-template let-col let-row="rowData" pTemplate="body">
-          {{row[col.field]}}
-        </ng-template>
-      </p-column>
-      <p-column field="id" header="Ação">
-        <ng-template let-col let-row="rowData" pTemplate="content">
-          <button class="btn btn-info" title="Acessar Pedido" (click)="detalharProcesso(row)">
-            <span class="fa fa-archive fa-fw"></span>
-          </button>
-        </ng-template>
-      </p-column>
-      <p-footer>
-        {{mensagemPaginacao}}
-      </p-footer>
-    </p-dataTable>
+    <p-table
+      [value]="listaProcessos"
+      [paginator]="true"
+      [rows]="rowCounter"
+      [rowsPerPageOptions]="[5,10,20]"
+      [totalRecords]="listaProcessos.length"
+      (onPage)="onPageChange($event)"
+      styleClass="table table-striped table-sm table-hover"
+      #dt>
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="9">{{bundle('MA003')}}</td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th [pSortableColumn]="'idPedido'">Pedido <p-sortIcon [field]="'idPedido'"></p-sortIcon></th>
+          <th>Tipo de Pedido</th>
+          <th>Tipo de Beneficiário</th>
+          <th [pSortableColumn]="'idFilial'">Agrupadora <p-sortIcon [field]="'idFilial'"></p-sortIcon></th>
+          <th [pSortableColumn]="'descBeneficiario'">Beneficiário <p-sortIcon [field]="'descBeneficiario'"></p-sortIcon></th>
+          <th [pSortableColumn]="'descSituacaoPedido'">Situação Atual <p-sortIcon [field]="'descSituacaoPedido'"></p-sortIcon></th>
+          <th [pSortableColumn]="'dataUltimaAlteracao'">Data e Hora <p-sortIcon [field]="'dataUltimaAlteracao'"></p-sortIcon></th>
+          <th [pSortableColumn]="'matriculaUltimoUsuario'">Último Usuário <p-sortIcon [field]="'matriculaUltimoUsuario'"></p-sortIcon></th>
+          <th>Ação</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-row>
+        <tr>
+          <td>{{row.idPedido | processo}}</td>
+          <td><span title="{{row.descTipoProcesso}}">{{row.codTipoProcesso}}</span></td>
+          <td><span title="{{row.descTipoBeneficiario}}">{{row.abrevTipoBeneficiario}}</span></td>
+          <td>{{row.idFilial}}</td>
+          <td>{{row.descBeneficiario}}</td>
+          <td>{{row.descSituacaoPedido}}</td>
+          <td>{{row.dataUltimaAlteracao | date : 'dd/MM/yyyy HH:mm:ss'}}</td>
+          <td>{{row.matriculaUltimoUsuario}}</td>
+          <td>
+            <button class="btn btn-info" title="Acessar Pedido" (click)="detalharProcesso(row)">
+              <span class="fa fa-archive fa-fw"></span>
+            </button>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="footer">
+        <tr>
+          <td colspan="9">{{mensagemPaginacao}}</td>
+        </tr>
+      </ng-template>
+    </p-table>
   </div>
 
   <div class="col-xs-12 barra-botoes">
