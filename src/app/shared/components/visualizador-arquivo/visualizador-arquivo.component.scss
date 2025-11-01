@@ -1,0 +1,12 @@
+.visualizador object[type="application/pdf"] {
+	height: 300px;
+	width: 750px;
+	margin: 0 auto;
+}
+
+.visualizador object {
+	max-height: 300px;
+	max-width: 750px;
+	margin: 0 auto;
+	text-align: center !important;
+}

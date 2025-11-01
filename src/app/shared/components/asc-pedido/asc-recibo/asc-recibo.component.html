@@ -1,0 +1,125 @@
+<div class="bg-white-container">
+  <div class="resumo-container z-index-above">
+    <p-progressBar mode="indeterminate" *ngIf="showProgressBar" [style]="{'height': '4px' }"></p-progressBar>
+    <div class="custom-card">
+
+      <div class="bordered-bottom">
+        <p class="titulo ">Pedido enviado com sucesso!</p>
+      </div>
+
+      <div class="custom-line custom-grid">
+        <div class="numero">
+          <p>Número</p>
+          <span>
+						<i class="fa fa-file-text" aria-hidden="true"></i>
+						<span style="margin-left: 5px">{{processo?.id}}</span>
+					</span>
+        </div>
+
+        <div>
+          <p>Protocolo ANS</p>
+          <span>
+						<i class="fa fa-file-text" aria-hidden="true"></i>
+						<span style="margin-left: 5px">{{processo?.protocoloAns}}</span>
+					</span>
+        </div>
+      </div>
+
+      <div class="custom-line">
+        <p>Beneficiário</p>
+        <span>{{processo?.beneficiario?.nome || processo?.nomeBeneficiario}}</span>
+      </div>
+
+      <div class="custom-line">
+        <p>Tipo de Pedido</p>
+        <span>{{processo?.tipoProcesso?.nome}} - {{processo?.tipoProcesso?.codigo}}</span>
+      </div>
+
+      <div class="custom-line">
+        <p>Finalidade</p>
+        <span>{{processo?.finalidade?.nome}}</span>
+      </div>
+
+      <div class="custom-line">
+        <p>Situação do Pedido</p>
+        <span>{{processo?.ultimaSituacao?.situacaoProcesso?.nome}}</span>
+      </div>
+
+      <div class="footer ft-recibo" style="width: 100%; display: flex; flex-direction: column; align-items: center; gap: 15px;">
+        <small class="rodape">
+          Esta notificação foi encaminhada para o e-mail cadastrado/informado.
+        </small>
+        <p class="no-print">Acompanhe o andamento de seu pedido no menu:</p>
+        <div align="center" style="width: 100%">
+          <button class="no-print" (click)="navegarParaMeusProcessos()">
+            Meus Pedidos
+          </button>
+        </div>        
+        <div class="action-buttons-container no-print">
+          <i (click)="exportarPDF('recibo.pdf', '.to-export')"
+             class="fa fa-file-pdf-o" aria-hidden="true">
+          </i>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<div class="to-export">
+  <div class="resumo-container">
+    <p-progressBar mode="indeterminate" *ngIf="showProgressBar" [style]="{'height': '4px' }"></p-progressBar>
+    <div class="custom-card">
+
+      <div class="bordered-bottom">
+        <p class="titulo ">Pedido enviado com sucesso!</p>
+      </div>
+
+      <div class="custom-line custom-grid">
+        <div class="numero">
+          <p>Número</p>
+          <span>
+						<i class="fa fa-file-text" aria-hidden="true"></i>
+						<span style="margin-left: 15px">{{processo?.id}}</span>
+					</span>
+        </div>
+
+        <div>
+          <p>Protocolo ANS</p>
+          <span>
+						<i class="fa fa-file-text" aria-hidden="true"></i>
+						<span style="margin-left: 15px">{{processo?.protocoloAns}}</span>
+					</span>
+        </div>
+      </div>
+
+      <div class="custom-line">
+        <p>Beneficiário</p>
+        <span>{{processo?.beneficiario?.nome || processo?.nomeBeneficiario}}</span>
+      </div>
+
+      <div class="custom-line">
+        <p>Tipo de Pedido</p>
+        <span>{{processo?.tipoProcesso?.nome}} - {{processo?.tipoProcesso?.codigo}}</span>
+      </div>
+
+      <div class="custom-line">
+        <p>Finalidade</p>
+        <span>{{processo?.finalidade?.nome}}</span>
+      </div>
+
+      <div class="custom-line">
+        <p>Situação do Pedido</p>
+        <span>{{processo?.ultimaSituacao?.situacaoProcesso?.nome}}</span>
+      </div>
+
+      <div class="footer">
+        <small class="rodape">
+          Esta notificação foi encaminhada para o e-mail cadastrado/informado.
+        </small>
+      </div>
+
+    </div>
+  </div>
+</div>

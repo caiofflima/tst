@@ -1,0 +1,114 @@
+<section>
+  <div class="ui-g-10 ui-md-4 no-padding">
+    <div class="titulo-card">Dados do beneficiário</div>
+    <img
+      class="img-user"
+      *ngIf="beneficiario?.matricula?.sexo === 'M'"
+      src="{{ user?.foto || 'assets/images/user_icon.png' }}"
+      alt="Avatar beneficiário"
+    />
+    <img
+      class="img-user"
+      *ngIf="beneficiario?.matricula?.sexo === 'F'"
+      src="{{ user?.foto || 'assets/images/user_icon.png' }}"
+      alt="Avatar beneficiário"
+    />
+    <p class="beneficiario-user-idade">{{ idadeBeneficiario }} anos</p>
+    <span class="beneficiario-user-parentesco">
+      {{ beneficiario?.contratoTpdep?.tipoDependente?.descricao || "filho(a)" }}
+    </span>
+  </div>
+  <div class="ui-g-12 ui-md-8 card-posit">
+    <div class="ui-sm-2 card-flt-mr">
+      <button
+        class="btn-editar"
+        *ngIf="
+          (!permissoes || permissoes?.editar) &&
+          verificarEhTitularEPedidoEmAnalise()
+        "
+        (click)="clickAlterarDados(true)"
+        [disabled]="modoEdicao"
+      >
+        <i class="fa fa-pencil" aria-hidden="true"></i>
+      </button>
+    </div>
+    <p class="beneficiario-user-nome label-campo-card">
+      {{ beneficiario?.nome | campoVazioHifen }}
+    </p>
+    <div class="ui-g">
+      <div class="ui-g-6 ui-md-6 no-padding">
+        <label class="label-campo-card">Código do beneficiário</label>
+        <p>{{ beneficiario?.codigoBeneficiario | campoVazioHifen }}</p>
+      </div>
+      <div class="ui-g-6 ui-md-6 no-padding">
+        <label class="label-campo-card">Contato adicional</label>
+        <p *ngIf="!modoEdicao">
+          {{ processo?.telefoneContato | telefone | campoVazioHifen }}
+        </p>
+        <p
+          class="campo-card"
+          *ngIf="
+            modoEdicao &&
+            (!permissoes || permissoes?.editar || permissoes?.analisar)
+          "
+        >
+          <asc-input-telefone
+            id="contatoAdicional"
+            [control]="telefoneContato"
+          ></asc-input-telefone>
+        </p>
+      </div>
+      <div class="ui-g-6 ui-md-6 no-padding margin-16">
+        <label class="label-campo-card">CPF</label>
+        <p>{{ beneficiario?.matricula?.cpf | cpfMask | campoVazioHifen }}</p>
+      </div>
+
+      <div class="ui-g-6 ui-md-6 no-padding margin-16">
+        <label class="label-campo-card">E-mail</label>
+        <p *ngIf="!modoEdicao">{{ processo?.email | campoVazioHifen }}</p>
+        <p
+          class="campo-card"
+          *ngIf="
+            modoEdicao &&
+            (!permissoes || permissoes?.editar || permissoes?.analisar)
+          "
+        >
+          <asc-input-email
+            id="emailBeneficiario"
+            [control]="email"
+          ></asc-input-email>
+        </p>
+      </div>
+      <div class="ui-g-6 ui-md-6 no-padding margin-16">
+        <label class="label-campo-card">Data de nascimento</label>
+        <p>
+          {{
+            beneficiario?.matricula?.dataNascimento
+              | date : "dd/MM/yyyy"
+              | campoVazioHifen
+          }}
+        </p>
+      </div>
+    </div>
+  </div>
+  <div
+    *ngIf="
+      modoEdicao && (!permissoes || permissoes?.editar || permissoes?.analisar)
+    "
+    class="ui-md-12 to-footer no-padding"
+  >
+    <button (click)="clickAlterarDados(false)" class="back-btn">
+      Cancelar
+    </button>
+    <button (click)="onSubmit()" [disabled]="!form.valid" class="continue-btn">
+      Confirmar
+    </button>
+  </div>
+</section>
+
+<asc-modal-dados-titular
+  [matriculaFuncional]="beneficiario?.matriculaFuncional"
+  [showModal]="showInfoTitular"
+  (onCloseModal)="fecharInfoTitular()"
+>
+</asc-modal-dados-titular>

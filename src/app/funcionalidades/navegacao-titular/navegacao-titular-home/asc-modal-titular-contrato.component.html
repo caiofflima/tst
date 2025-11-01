@@ -1,0 +1,50 @@
+<div class="modal fade"
+      [id]="idModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="titularContratoModalLabel"
+      aria-hidden="true">
+
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close"button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title borderless" id="titularContratoModalLabel">Contratos cadastrados</h4>
+          </div>
+
+          <div class="modal-body">
+            <form [formGroup]="titularContratoForm">
+              <div class="form-group">
+                <div> 
+                  <p class="text-contrato"> A matrícula informada possui mais de um contrato/família. 
+                    Selecione o registro desejado:
+                  </p>
+                </div>
+
+                <asc-dropdown
+                  [items]="_listaContratos"
+                  [control]="titularContratoForm.get('contrato')">
+                </asc-dropdown>
+
+              </div>
+            </form>
+          </div>
+
+          <div class="modal-footer">
+
+          <button type="button" class="btn btn-secondary" (click)="fecharModal()">Cancelar</button>
+
+          <button
+            type="button"
+            class="btn btn-primary"
+            [disabled]="habilitarBtnConfirmar()"
+            (click)="confirmar()">
+            Confirmar
+          </button>
+
+          </div>
+        </div>
+      </div>
+    </div>

@@ -1,0 +1,134 @@
+<div class="custom-container">
+  <div class="bottom-bordered">
+    <div class="titulo">Confira o resumo do seu pedido e, se tudo estiver correto, clique em "Finalizar".</div>
+  </div>
+
+  <div class="resumo-body">
+    <asc-card-beneficiario
+      (beneficarioFormEmiter)="updateBeneficiario($event)"
+      [beneficiarioForm]="beneficiarioForm"
+      (onEditing)="setFlagEdicao($event)">
+    </asc-card-beneficiario>
+
+    <asc-card-dados-processo
+      [tipoProcesso]="tipoProcesso"
+      [finalidade]="finalidade"
+    ></asc-card-dados-processo>
+
+    <asc-card-procedimento
+      @fadeInOut
+      [pedido]="pedido"
+      [beneficiario]="beneficiarioModel"
+      [idMotivoSolicitacao]="finalidade?.idMotivoSolicitacao"
+      [idTipoProcesso]="tipoProcesso?.id"
+      [pedidoProcedimentosTabela]="pedidoProcedimentos"
+      (pedidoProcedimentos$)="pedidoProcedimentosAtualizados($event)"
+    ></asc-card-procedimento>
+
+    <div style="margin-bottom: 1em">
+      <asc-card-documento-fiscal
+        [processo]="pedido"
+        [pedidoProcedimentos]="pedidoProcedimentos"
+        [documentoFiscal]="documentoFiscal"
+        [idTipoProcesso]="tipoProcesso?.id"
+        (documentoFiscal$)="documentoFiscalAtualizado($event)"
+        (onEditing)="setFlagEdicao($event)"
+      ></asc-card-documento-fiscal>
+    </div>
+
+    <asc-profissional-executante-pedido
+      *ngIf="showProfissionalExecutante"
+      titulo="{{tituloSolicitante}}"
+      @fadeInOut
+      [processo]="pedido"
+      [conselho]="conselho"
+      [profissional]="profissional"
+      [ufConselho]="ufConselho"
+      [municipioProfissional]="municipioProfissional"
+      (onEditing)="setFlagEdicao($event)"
+    ></asc-profissional-executante-pedido>
+
+    <asc-card-component class="docs-obrig" *ngIf="documentos && documentos.length">
+      <asc-card-title>
+        <div class="space-btw custom-padding" style="margin-bottom: 1em">
+          <p class="titulo-card">Documentos obrigatórios</p>
+        </div>
+      </asc-card-title>
+      <asc-card-content>
+        <div class="resumo-card no-padding" @fadeInOut>
+          <asc-documento-card
+            *ngIf="documentos && documentos.length"
+            [loading]="loading"
+            [documentos]="documentos"
+            (arquivosSelecionados)="arquivosSelecionados($event)"
+            (possuiFaltaDeArquivos)="possuiFaltaDeArquivos($event)"
+            (documentosTipoProcessoSelecionados)="documentosTipoProcessoSelecionados($event)"
+            (documentoTipoProcessoSelecionado)="documentoTipoProcessoSelecionado($event)"
+            [isInResumo]="true"
+          ></asc-documento-card>
+        </div>
+      </asc-card-content>
+    </asc-card-component>
+    <div class="resumo-card c-card">
+      <div class="space-btw m-10">
+        <p class="card-titulo-main" style="margin-bottom: 10px!important;">Deseja adicionar alguma informação?</p>
+      </div>
+      <div class="resumo-info-box">
+        <asc-text-area
+          [control]="resumoForm.get('extra')"
+          placeholder="Preencha com informações adicionais que você considere relevantes para a análise do seu pedido."
+        ></asc-text-area>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="footer right">
+
+</div>
+
+<div class="footer">
+  <button (click)="setModal(true)" class="back-btn" id="reiniciar">
+    Reiniciar
+  </button>
+  <asc-button-primary
+    buttonId="finalizar"
+    (onClick)="onSubmit()" @fadeInOut
+    [disabled]="documentoNaoPossuiArquivos || loading || !possuiPedidoProcedimentos || editing || !isValorDocumentoFiscalOK"
+    [showProgress]="loading"
+    title="Finalizar">
+  </asc-button-primary>
+</div>
+
+<p-dialog [(visible)]="showModal" [responsive]="true" [width]="420" [draggable]="false" [resizable]="false"
+          [modal]="true">
+
+  <p-header>
+    <p style="margin: 0">Deseja reiniciar a inscrição do pedido?</p>
+  </p-header>
+
+  <div style="display: flex; justify-content: center;">
+    <p class="modal-info-body">ATENÇÃO! Voltar ao início implicará
+      na perda de todos os preenchimentos. Confirma a ação de reiniciar?</p>
+  </div>
+
+  <p-footer>
+    <div class="footer no-mg-bottom">
+      <button (click)="setModal(false)" class="back-btn" id="cancelar">
+        Cancelar
+      </button>
+      <asc-button-primary
+        buttonId="continuar"
+        [disabled]="isLoading"
+        [showProgress]="isLoading"
+        [title]="'Continuar'"
+        (onClick)="reiniciarForm()"
+      ></asc-button-primary>
+    </div>
+  </p-footer>
+</p-dialog>
+
+
+
+

@@ -1,0 +1,1314 @@
+.cartao-saude {
+    box-sizing: border-box;
+    // width: 328px;
+    height: 532px;
+    display: flex;
+    justify-content: space-evenly;
+    margin-left: 10%;
+
+}
+
+.form-group {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+
+
+.custom-form-group-input {
+    width: 50%;
+}
+
+
+.logo-card {
+    text-align: center;
+    width: 100%;
+    border-radius: 7.31774px 7.31774px 11.7084px 11.7084px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+
+}
+
+.logo-card-back {
+    text-align: center;
+    width: 100%;
+    border-radius: 7.31774px 7.31774px 11.7084px 11.7084px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+
+}
+
+.logo-card img {
+    border-radius: 10px;
+}
+
+.logo-card-back img {
+    border-radius: 10px;
+}
+
+
+
+.text-card {
+    position: relative;
+    float: left;
+    width: 300px;
+    top: -103%;
+    margin-left: 5%;
+    margin-top: 15%;
+}
+
+.text-card2 {
+    position: relative;
+    float: left;
+    width: 300px;
+    top: -98%;
+    margin-left: 5%;
+}
+
+
+.p-space {
+    color: transparent;
+}
+
+.p-space2 {
+    color: transparent;
+}
+
+.p1 {
+    text-align: center;
+    font-family: 'Caixa Std Bold';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 140%;
+    color: #005CA9;
+    margin-top: 8%;
+}
+
+.p1-2 {
+    height: 31px;
+    font-family: 'Caixa Std Bold';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 100%;
+    color: #005CA9;
+    text-align: center;
+}
+
+.p1-2-restrito {
+    font-family: 'Caixa Std Bold';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 100%;
+    color: #005CA9;
+    text-align: center;
+    margin-top: 0% !important;
+}
+
+.p2 {
+    text-align: center;
+    font-family: 'Caixa Std Bold';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 140%;
+    color: #005CA9;
+}
+
+.p2-2 {
+    height: 17px;
+    font-family: 'Caixa Std Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 110%;
+    text-align: center;
+    color: #005CA9;
+    width: 100%;
+}
+
+.p3 {
+    text-align: center;
+    height: 17px;
+    font-family: 'Caixa Std Bold';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 120%;
+    margin-top: 6%;
+    color: #005CA9;
+}
+
+.p3-2 {
+    height: 17px;
+    font-family: 'Caixa Std Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 0%;
+    text-align: center;
+    color: #005CA9;
+    margin-top: -1%;
+}
+
+.p4 {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Caixa Std Bold';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 125%;
+    color: #FFFFFF;
+    margin-right: 15px;
+    margin-left: 10px;
+    margin-top: 7%;
+}
+
+
+.p4-1-restrito {
+    text-align: center;
+    height: 17px;
+    font-family: 'Caixa Std Bold';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 120%;
+    margin-top: -5%;
+    color: #F39200;
+}
+
+
+.p4-restrito {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Caixa Std Bold';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 125%;
+    color: #005CA9;
+    margin-right: 15px;
+    margin-left: 10px;
+    margin-top: 7%;
+}
+
+.p4-9 {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Caixa Std Bold';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 120%;
+    color: #FFFFFF;
+    margin-right: 15px;
+    margin-left: 10px;
+    margin-top: 5%;
+}
+
+.p4-9-restrito {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Caixa Std Bold';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 120%;
+    color: #005CA9;
+    margin-right: 15px;
+    margin-left: 10px;
+    margin-top: 0%;
+}
+
+.p4-10 {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Caixa Std Regular';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 116%;
+    color: #FFFFFF;
+    margin-right: 15px;
+    margin-left: 10px;
+    width: 100%;
+    margin-top: -3%;
+}
+
+.p4-10-restrito {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Caixa Std Regular';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 116%;
+    color: #005CA9;
+    margin-right: 15px;
+    margin-left: 10px;
+    width: 100%;
+    margin-top: -3%;
+}
+
+.p4-11 {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Caixa Std Bold';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 140%;
+    color: #FFFFFF;
+    margin-right: 15px;
+    margin-left: 10px;
+    margin-top: 15%;
+}
+
+.p4-11-restrito {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Caixa Std Bold';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 140%;
+    color: #005CA9;
+    margin-top: 10%;
+    margin-right: 15px;
+    margin-left: 10px;
+}
+
+.p4-12 {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Caixa Std Regular';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 0%;
+    color: #FFFFFF;
+    margin-right: 15px;
+    margin-left: 10px;
+    margin-top: -1%;
+}
+
+.p4-12-restrito {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Caixa Std Regular';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 0%;
+    color: #005CA9;
+    margin-right: 15px;
+    margin-left: 10px;
+    margin-top: -1%;
+}
+
+.p4-2 {
+    font-family: 'Caixa Std Regular';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 50%;
+    color: #FFFFFF;
+    display: flex;
+    justify-content: space-between;
+    margin-right: 15px;
+    margin-left: 10px;
+    margin-top: -1%;
+}
+
+.p4-2-restrito {
+    font-family: 'Caixa Std Regular';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 50%;
+    color: #005CA9;
+    display: flex;
+    justify-content: space-between;
+    margin-right: 15px;
+    margin-left: 10px;
+    margin-top: -1%;
+}
+
+.p4-3 {
+    font-family: 'Caixa Std Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 90%;
+    color: #FFFFFF;
+    margin-right: 15px;
+    margin-left: 10px;
+    margin-top: -2%;
+}
+
+.p4-3-restrito {
+    font-family: 'Caixa Std Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 90%;
+    color: #005CA9;
+    margin-right: 15px;
+    margin-left: 10px;
+    margin-top: -2%;
+}
+
+.p4-4 {
+    font-family: 'Caixa Std Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 120%;
+    color: #FFFFFF;
+    margin-right: 15px;
+    margin-left: 10px;
+    text-align: justify;
+}
+
+.p4-4-restrito {
+    font-family: 'Caixa Std Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 120%;
+    color: #005CA9;
+    margin-right: 15px;
+    margin-left: 10px;
+    margin-top: -2%;
+    text-align: justify;
+}
+
+.card-costa-p1 {
+    font-family: 'Caixa Std Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 65%;
+    text-align: center;
+    color: #4E6178;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.card-costa-p1-restrito {
+    font-family: 'Caixa Std Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 65%;
+    text-align: center;
+    color: #005CA9;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.card-costa-p2 {
+    font-family: 'Caixa Std Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 120%;
+    text-align: center;
+    color: #4E6178;
+    margin-top: 7%;
+}
+
+.card-costa-p2-restrito {
+    font-family: 'Caixa Std Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 120%;
+    text-align: center;
+    color: #4E6178;
+    margin-top: 7%;
+}
+
+.card-costa-p3 {
+    font-family: 'Caixa Std Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 120%;
+    text-align: center;
+    color: #F39200;
+}
+
+.card-costa-p4 {
+    font-family: 'Caixa Std Bold';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 25%;
+    text-align: center;
+    color: #005CA9;
+}
+
+.card-costa-p4-restrito {
+    font-family: 'Caixa Std Bold';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 25%;
+    text-align: center;
+    color: #005CA9;
+}
+
+.card-costa-p5 {
+    font-family: 'Caixa Std Bold';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 100%;
+    text-align: center;
+    color: #005CA9;
+}
+
+.card-costa-p5-restrito {
+    font-family: 'Caixa Std Bold';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 100%;
+    text-align: center;
+    color: #005CA9;
+}
+
+.card-costa-p6 {
+    font-family: 'Caixa Std Bold';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 140%;
+    color: #FFFFFF;
+    margin-right: 15px;
+    margin-top: 40%;
+    margin-left: 10px;
+}
+
+.card-costa-p6-restrito {
+    font-family: 'Caixa Std Bold';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 140%;
+    color: #005CA9;
+    margin-right: 15px;
+    margin-top: 40%;
+    margin-left: 10px;
+}
+
+.card-costa-p7 {
+    font-family: 'Caixa Std Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 28%;
+    color: #FFFFFF;
+    margin-right: 15px;
+    width: 100%;
+    margin-top: -1%;
+    margin-left: 10px;
+}
+
+.card-costa-p7-restrito {
+    font-family: 'Caixa Std Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 28%;
+    color: #005CA9;
+    margin-right: 15px;
+    width: 100%;
+    margin-top: -1%;
+    margin-left: 10px;
+}
+
+.card-costa-p8 {
+    height: 17px;
+    font-family: 'Caixa Std Bold';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 140%;
+    color: #FFFFFF;
+    display: flex;
+    justify-content: space-between;
+    margin-right: 15px;
+    margin-top: 6%;
+    margin-left: 10px;
+}
+
+.card-costa-p8-restrito {
+    height: 17px;
+    font-family: 'Caixa Std Bold';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 140%;
+    color: #005CA9;
+    display: flex;
+    justify-content: space-between;
+    margin-right: 15px;
+    margin-top: 6%;
+    margin-left: 10px;
+}
+
+.card-costa-p10 {
+    height: 22px;
+    font-family: 'Caixa Std Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 14%;
+    color: #FFFFFF;
+    display: flex;
+    justify-content: space-between;
+    margin-right: 15px;
+    margin-top: -1%;
+    margin-left: 10px;
+}
+
+.card-costa-p10-restrito {
+    height: 22px;
+    font-family: 'Caixa Std Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 14%;
+    color: #005CA9;
+    display: flex;
+    justify-content: space-between;
+    margin-right: 15px;
+    margin-top: -1%;
+    margin-left: 10px;
+}
+
+.card-costa-p11 {
+    width: 54px;
+    height: 17px;
+    font-family: 'Caixa Std Bold';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 140%;
+    color: #FFFFFF;
+    margin-right: 15px;
+    display: flex;
+    margin-left: 10px;
+}
+
+.card-costa-p11-restrito {
+    width: 54px;
+    height: 17px;
+    font-family: 'Caixa Std Bold';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 140%;
+    color: #005CA9;
+    margin-right: 15px;
+    display: flex;
+    margin-left: 10px;
+}
+
+.card-costa-p12 {
+    width: 145px;
+    height: 22px;
+    font-family: 'Caixa Std Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 0%;
+    color: #FFFFFF;
+    margin-right: 15px;
+    margin-top: -1%;
+    margin-left: 10px;
+}
+
+.card-costa-p12-restrito {
+    width: 145px;
+    height: 22px;
+    font-family: 'Caixa Std Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 0%;
+    color: #005CA9;
+    margin-right: 15px;
+    margin-top: -1%;
+    margin-left: 10px;
+}
+
+.btn-imprimir {
+    align-items: center;
+    padding: 8px;
+    gap: 8px;
+    background: #F6F9F9;
+    border-radius: 18px;
+    width: 154px;
+    height: 48px;
+    border-color: transparent;
+}
+
+.btn-pdf {
+    align-items: center;
+    padding: 8px;
+    gap: 8px;
+    background: #F6F9F9;
+    border-radius: 18px;
+    width: 154px;
+    height: 48px;
+    border-color: transparent;
+}
+
+.col-xs-12 {
+    text-align: center;
+    margin-top: 5%;
+    display: inline-block;
+}
+
+.text-motivo {
+    font-family: 'Caixa Std Regular', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 22px;
+    display: flex;
+    align-items: center;
+    color: #333;
+}
+
+@media (max-width: 320px) {
+
+    .cartao-saude {
+        display: flex;
+        float: left;
+        margin-bottom: 10%;
+        margin-left: 0%;
+        margin-top: 10%;
+    }
+
+    .logo-card {
+        width: 100%;
+    }
+
+}
+
+@media (max-width: 480px) {
+
+    .cartao-saude {
+        height: 1180px;
+        display: flex;
+        float: left;
+        flex-direction: column;
+        margin-bottom: 20%;
+        margin-left: 0%;
+        margin-top: 10%;
+    }
+
+    .p4-10 {
+        width: 100%;
+    }
+
+    .text-card {
+        top: 5%;
+    }
+
+    .text-card2 {
+        top: 3%;
+    }
+
+    .card-costa-p6 {
+        margin-top: 40%;
+    }
+
+    .background-frente {
+        position: absolute;
+    }
+
+    .fundo-cartao-back {
+        position: absolute;
+    }
+
+    .logo-card {
+        width: 100%;
+    }
+
+    .logo-card-back {
+        width: 100%;
+    }
+
+    .custom-form-group-input {
+        width: 80%;
+    }
+
+    .card-back {
+        margin-top: 40%;
+    }
+}
+
+@media (min-width: 481px) and (max-width: 599px) {
+    .cartao-saude {
+        height: 1180px;
+        display: flex;
+        float: left;
+        margin-bottom: 20%;
+        flex-direction: column;
+        margin-top: 10%;
+    }
+
+    .logo-card {
+        width: 100%;
+        left: 65%;
+    }
+
+    .text-card {
+        top: 83px;
+    }
+
+    .text-card2 {
+        top: 0;
+    }
+
+    .logo-card-back {
+        width: 100%;
+    }
+
+    .background-frente {
+        position: absolute;
+    }
+
+    .fundo-cartao-back {
+        position: absolute;
+    }
+
+    .card-back {
+        margin-top: 45%;
+    }
+
+    .p4-10 {
+        width: 100%;
+    }
+
+    .p1 {
+        margin-top: 2%;
+    }
+}
+
+@media (min-width: 600px) and (max-width: 768px) {
+    .logo-card {
+        width: 100%;
+        left: 65%;
+    }
+
+    .text-card {
+        right: -3%;
+        top: -99%;
+
+    }
+
+    .logo-card-back {
+        width: 100%;
+    }
+
+    .cartao-saude {
+        margin-bottom: 5%;
+        margin-left: 0%;
+        margin-top: 10%;
+    }
+
+    .p1 {
+        margin-top: 2%;
+    }
+}
+
+@media (min-width: 220px) and (max-width: 400px) {
+
+    .custom-form-group-input {
+        width: 100%;
+    }
+
+    .p1 {
+        margin-top: 2%;
+    }
+}
+
+@media (min-width: 220px) and (max-width: 400px) {
+
+    .custom-form-group-input {
+        width: 100%;
+    }
+
+    .p1 {
+        margin-top: 2%;
+    }
+}
+
+@media (min-width: 401px) and (max-width: 767px) {
+
+
+    .p1 {
+        margin-top: 2%;
+    }
+}
+
+.print-card {
+    box-sizing: border-box;
+    height: 532px;
+    display: flex;
+    justify-content: space-evenly;
+    margin-left: 10%;
+}
+
+.logo-card-impressao {
+    text-align: center;
+    width: 100%;
+    border-radius: 7.31774px 7.31774px 11.7084px 11.7084px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+}
+
+.text-card-imp {
+    position: relative;
+    float: left;
+    width: 300px;
+    top: -103%;
+    margin-left: 10px;
+    margin-top: -71%;
+}
+
+.text-card-imp-restrito {
+    position: relative;
+    float: left;
+    width: 300px;
+    top: -30%;
+    margin-left: 5px;
+    margin-top: -71%;
+}
+
+.p1-print {
+    text-align: center;
+    font-family: 'Caixa Std Bold';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 140%;
+    color: #005CA9;
+}
+
+.p1-2-print {
+    height: 31px;
+    font-family: 'Caixa Std Bold';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 100%;
+    color: #005CA9;
+    text-align: center;
+}
+
+.p2-print {
+    text-align: center;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 140%;
+    color: #005CA9;
+}
+
+.p2-print-restrito {
+    text-align: center;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 140%;
+    color: #005CA9;
+}
+
+.p2-2-print {
+    height: 17px;
+    font-family: 'Caixa Std Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 110%;
+    text-align: center;
+    color: #005CA9;
+    width: 100%;
+}
+
+.p3-print {
+    text-align: center;
+    height: 17px;
+    font-family: 'Caixa Std Bold';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 120%;
+    margin-top: 10%;
+    color: #005CA9;
+}
+
+.p4-1-print-restrito {
+    text-align: center;
+    height: 17px;
+    font-family: 'Caixa Std Bold';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 120%;
+    color: #F39200;
+}
+
+.p3-2-print {
+    text-align: center;
+    height: 17px;
+    font-family: 'Caixa Std Bold';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 120%;
+    color: #005CA9;
+}
+
+.p4-11-print {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Caixa Std Bold';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 140%;
+    color: #FFFFFF;
+    margin-right: 15px;
+    margin-left: 10px;
+    margin-top: 5%;
+}
+
+.p4-11-print-restrito {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Caixa Std Bold';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 140%;
+    color: #FFFFFF;
+    margin-right: 15px;
+    margin-left: 10px;
+    margin-top: 15%;
+}
+
+.p4-12-print {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Caixa Std Bold';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 0%;
+    color: #FFFFFF;
+    margin-right: 15px;
+    margin-left: 10px;
+    margin-top: -1%;
+}
+
+.p4-print {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Caixa Std Bold';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 125%;
+    color: #FFFFFF;
+    margin-right: 15px;
+    margin-left: 10px;
+    margin-top: 7%;
+}
+
+.p4-print-restrito {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Caixa Std Bold';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 125%;
+    color: #FFFFFF;
+    margin-right: 15px;
+    margin-left: 10px;
+    margin-top: -2%;
+}
+
+.p4-10-print {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Caixa Std Regular';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 116%;
+    color: #FFFFFF;
+    margin-right: 15px;
+    margin-left: 10px;
+    width: 100%;
+    margin-top: -3%;
+}
+
+.p4-9-print {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Caixa Std Bold';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 120%;
+    color: #FFFFFF;
+    margin-right: 15px;
+    margin-left: 10px;
+    margin-top: 5%;
+}
+
+.p4-2-print {
+    font-family: 'Caixa Std Regular';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 50%;
+    color: #FFFFFF;
+    display: flex;
+    justify-content: space-between;
+    margin-right: 15px;
+    margin-left: 10px;
+    margin-top: -1%;
+}
+
+.p4-3-print {
+    font-family: 'Caixa Std Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 90%;
+    color: #FFFFFF;
+    margin-right: 15px;
+    margin-left: 10px;
+    margin-top: -2%;
+}
+
+.p4-4-print {
+    font-family: 'Caixa Std Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 120%;
+    color: #FFFFFF;
+    margin-right: 15px;
+    margin-left: 10px;
+    text-align: justify;
+}
+
+.p4-4-print-restrito {
+    font-family: 'Caixa Std Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 120%;
+    color: #FFFFFF;
+    margin-right: 15px;
+    margin-left: 10px;
+    margin-top: -4%;
+    text-align: justify;
+}
+
+.text-card2-imp {
+    position: relative;
+    float: right;
+    width: 280px;
+    margin-right: 12px;
+    margin-top: -81%;
+}
+
+.card-costa-p1-print {
+    font-family: 'Caixa Std Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 65%;
+    text-align: center;
+    color: #4E6178;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.card-costa-p1-print-restrito {
+    font-family: 'Caixa Std Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 65%;
+    text-align: center;
+    color: #005CA9;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.card-costa-p2-print {
+    font-family: 'Caixa Std Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 120%;
+    text-align: center;
+    color: #4E6178;
+    margin-top: 7%;
+}
+
+.card-costa-p2-print-restrito {
+    font-family: 'Caixa Std Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 120%;
+    text-align: center;
+    color: #4E6178;
+    margin-top: 7%;
+}
+
+.card-costa-p3-print {
+    font-family: 'Caixa Std Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 120%;
+    text-align: center;
+    color: #F39200;
+}
+
+.card-costa-p4-print {
+    font-family: 'Caixa Std Bold';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 25%;
+    text-align: center;
+    color: #005CA9;
+}
+
+.card-costa-p4-print-restrito {
+    font-family: 'Caixa Std Bold';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 25%;
+    text-align: center;
+    color: #005CA9;
+}
+
+.card-costa-p5-print- {
+    font-family: 'Caixa Std Bold';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 100%;
+    text-align: center;
+    color: #005CA9;
+}
+
+.card-costa-p6-print {
+    font-family: 'Caixa Std Bold';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 140%;
+    color: #FFFFFF;
+    margin-right: 15px;
+    margin-top: 40%;
+    margin-left: 10px;
+}
+
+.card-costa-p7-print {
+    font-family: 'Caixa Std Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 28%;
+    color: #FFFFFF;
+    margin-right: 15px;
+    width: 100%;
+    margin-top: -1%;
+    margin-left: 10px;
+}
+
+.card-costa-p8-print {
+    height: 17px;
+    font-family: 'Caixa Std Bold';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 140%;
+    color: #FFFFFF;
+    display: flex;
+    justify-content: space-between;
+    margin-right: 15px;
+    margin-top: 6%;
+    margin-left: 10px;
+}
+
+
+
+.card-costa-p10-print {
+    height: 22px;
+    font-family: 'Caixa Std Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 14%;
+    color: #FFFFFF;
+    display: flex;
+    justify-content: space-between;
+    margin-right: 15px;
+    margin-top: -1%;
+    margin-left: 10px;
+}
+
+.card-costa-p11-print {
+    width: 54px;
+    height: 17px;
+    font-family: 'Caixa Std Bold';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 140%;
+    color: #FFFFFF;
+    margin-right: 15px;
+    display: flex;
+    margin-left: 10px;
+}
+
+.card-costa-p12-print {
+    width: 145px;
+    height: 22px;
+    font-family: 'Caixa Std Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 0%;
+    color: #FFFFFF;
+    margin-right: 15px;
+    margin-top: -1%;
+    margin-left: 10px;
+}

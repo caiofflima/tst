@@ -1,0 +1,50 @@
+@import "/src/assets/sass/colors";
+@import "/src/assets/sass/mixins";
+
+%btn-action-abs {
+    padding: 0.5em;
+    width: 35px;
+    height: 35px;
+    i {
+        color: #fff;
+    }
+}
+
+.btn-excluir {
+    @include create-btn(normal_red);
+    @extend %btn-action-abs;
+}
+
+.btn-negar {
+    @include create-btn(normal_blue);
+}
+
+.btn-autorizar {
+    @include create-btn(normal_orange);
+}
+
+.procedimento-box-content {
+    &:not(:first-of-type) {
+        border-top: 1px solid #B3C7CB;
+        padding-top: 0.5em;
+    }
+}
+
+.group-content {
+    margin-bottom: 1em;
+}
+
+.align-right {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.container-negar-autorizar {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    margin-bottom: 0.75em;
+    button {
+        margin: 0.125em 0.5em;
+    }
+}

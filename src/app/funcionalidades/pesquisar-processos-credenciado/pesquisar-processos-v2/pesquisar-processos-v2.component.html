@@ -1,0 +1,80 @@
+<div class="main">
+  <p class="titulo-page big">Consultar pedidos</p>
+</div>
+
+<div class="custom-container">
+  <p class="titulo margin-top-32">Dados do pedido xxx</p>
+  <div class="ui-g">
+    <div class="ui-g-12 ui-md-6">
+      <div class="ui-g">
+        <div class="ui-g-12 ui-md-7">
+          <label class="label-campo-card">Pedido</label>
+          <asc-input-text [control]="form.get('processo')"></asc-input-text>
+        </div>
+        <div class="ui-g-12 ui-md-5">
+          <label class="label-campo-card">Condição do Pedido</label>
+          <asc-select-base-layout label="" [control]="form.get('codigoProcesso')"></asc-select-base-layout>
+        </div>
+        <div class="ui-g-12 ui-md-12">
+          <label class="label-campo-card">Tipo de pedido</label>
+          <asc-select-base-layout label="" [control]="form.get('tipoProcesso')"></asc-select-base-layout>
+        </div>
+        <div class="ui-g-12 ui-md-12">
+          <label class="label-campo-card">Situação do Pedido</label>
+          <asc-select-base-layout label="" [control]="form.get('statusProcesso')"></asc-select-base-layout>
+        </div>
+      </div>
+    </div>
+    <div class="ui-g-12 ui-md-6">
+      <div class="ui-g">
+        <div class="ui-g-12 ui-md-4">
+          <label class="label-campo-card">UF</label>
+          <asc-select-base-layout label="" [control]="form.get('uf')"></asc-select-base-layout>
+        </div>
+        <div class="ui-g-12 ui-md-8">
+          <label class="label-campo-card">filial</label>
+          <asc-select-base-layout label="" [control]="form.get('filial')"></asc-select-base-layout>
+        </div>
+        <div class="ui-g-12 ui-md-4">
+          <label class="label-campo-card">UF de atendimento</label>
+          <asc-select-base-layout label="" [control]="form.get('ufAtendimento')"></asc-select-base-layout>
+        </div>
+        <div class="ui-g-12 ui-md-8">
+          <label class="label-campo-card">Municipio de atendimento</label>
+          <asc-select-base-layout label="" [control]="form.get('municipioAtendimento')"></asc-select-base-layout>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p class="titulo margin-top-32">Dados do Titular/Beneficiários</p>
+  <div class="ui-g">
+    <div class="ui-g-12 ui-md-6">
+      <label class="label-campo-card">Nome beneficiário</label>
+      <asc-input-text [control]="form.get('nomeBen')"></asc-input-text>
+    </div>
+    <div class="ui-g-6 ui-md-3">
+      <label class="label-campo-card">Matrícula do Titular</label>
+      <asc-input-text [control]="form.get('matriculaBen')"></asc-input-text>
+    </div>
+    <div class="ui-g-6 ui-md-3">
+      <label class="label-campo-card">Código do Beneficiário</label>
+      <asc-input-text [control]="form.get('codigoBen')"></asc-input-text>
+    </div>
+    <div class="ui-g-6 ui-md-4">
+      <label class="label-campo-card">Tipo de Beneficiário</label>
+      <asc-select-base-layout label="" [control]="form.get('tipoBen')">
+      </asc-select-base-layout>
+    </div>
+    <div class="ui-g-6 ui-md-4">
+      <label class="label-campo-card">Caráter da Solicitação</label>
+      <asc-select-base-layout label="" [control]="form.get('caraterBen')"></asc-select-base-layout>
+    </div>
+  </div>
+
+  <div class="fl">
+    <button (click)="goTo()" class="next-btn"><span><i class="fa fa-search" aria-hidden="true"></i> pesquisar</span>
+    </button>
+    <button class="back-btn"><span><i class="fa fa-trash" aria-hidden="true"></i> limpar pesquisa</span></button>
+  </div>
+</div>

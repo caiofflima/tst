@@ -1,0 +1,45 @@
+.user-info {
+  display: flex;
+  align-items: center;
+
+  .icon-user {
+    width: 52px;
+    height: 52px;
+    border: 2px solid #0057AE;
+    border-radius: 50%;
+    margin-right: 0.75em;
+    display: table;
+
+    & > div {
+      display: table-cell;
+      vertical-align: middle;
+      text-align: center;
+      font-size: 14pt;
+      font-family: 'Caixa Std Bold', sans-serif !important;
+      color: #0057AE;
+    }
+  }
+
+  .user-info-conteudo {
+    p {
+      margin: 0;
+      font-family: 'Caixa Std Bold', sans-serif;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 16px;
+      line-height: 22px;
+      color: #4FADAC;
+    }
+
+    span {
+      font-family: 'Caixa Std Regular', sans-serif;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 19px;
+      display: flex;
+      align-items: center;
+      color: #3A4859;
+    }
+  }
+}

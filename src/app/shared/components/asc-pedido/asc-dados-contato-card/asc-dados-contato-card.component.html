@@ -1,0 +1,50 @@
+<section>
+    <div class="ui-sm-2 card-flt-mr">
+       <!-- <button
+                class="btn-editar"
+                *ngIf="permissoes?.editar"
+                (click)="clickAlerarDados(true)"
+                [disabled]="modoEdicao">
+            <i class="fa fa-pencil" aria-hidden="true"></i>
+        </button> -->
+    </div>
+    <label class="titulo-card">Dados de Contato</label>
+    <div class="ui-g marginBottom">
+        <div class="ui-g-4 no-padding-left">
+            <div *ngIf="!modoEdicao || !permissoes?.analisar">
+                <label class="label-campo-card">Telefone</label>
+                <p>{{dependente?.coTelefoneTitular ? (dependente?.coTelefoneTitular | telefone) : '-' }}</p>
+            </div>
+             <!--  <p *ngIf="modoEdicao && permissoes?.analisar">
+             <asc-input-telefone
+                    [control]="dadosPessoaisForm.get('telefone')"
+                    inputId="telefone"
+                    label=""
+              ></asc-input-telefone> 
+            </p>-->
+        </div>
+        
+        <div class="ui-g-8 padding">
+            <div *ngIf="!modoEdicao || !permissoes?.analisar">
+                <label class="label-campo-card">E-mail</label>
+                <p>{{dependente?.deEmailTitular | campoVazioHifen }}</p>
+            </div>
+           <!-- <p *ngIf="modoEdicao && permissoes?.analisar">
+                <asc-input-text
+                    [control]="dadosPessoaisForm.get('email')"
+                    inputId="email"
+                    label=""
+              ></asc-input-text> 
+            </p>-->
+        </div>
+    </div>
+    <!--<div *ngIf="modoEdicao && permissoes?.editar" class="ui-md-12 to-footer marginBottom no-padding">
+        <button (click)="clickAlerarDados(false)" class="back-btn">
+            Cancelar
+        </button>
+
+        <button (click)="onSubmit()" class="continue-btn" [disabled]="!dadosPessoaisForm.valid">
+            Confirmar
+        </button>
+    </div> -->
+</section>

@@ -1,0 +1,10 @@
+.hidden {
+    position: absolute; /* Remove it from the flow */
+    width: 1px; /* Set a small width */
+    height: 1px; /* Set a small height */
+    margin: -1px; /* Move it out of the viewport */
+    padding: 0; /* Remove padding */
+    overflow: hidden; /* Hide overflow */
+    clip: rect(0, 0, 0, 0); /* Clip the rectangle */
+    border: 0; /* Remove border */
+  }

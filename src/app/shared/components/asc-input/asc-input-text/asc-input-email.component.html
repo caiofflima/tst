@@ -1,0 +1,9 @@
+<label [ngStyle]="compStyle" class="control-label" for="{{inputId}}"
+       [class.obrigatorio]="required !== null && required !== false">{{label}}</label>
+<input [formControl]="control" [ngStyle]="compStyle" class="form-control" id="{{inputId}}" name="{{name}}"
+       title="{{hint}}" type="email" [required]="required"/>
+<div *ngIf="control.invalid && (control.dirty || control.touched)" class="error-form" [ngStyle]="compStyle">
+  <div *ngIf="control.errors.cpf">{{bundle('MA019')}}</div>
+  <div *ngIf="control.errors.required">{{bundle('MA005')}}</div>
+  <div *ngIf="control.errors.email">{{bundle("MA019")}}</div>
+</div>

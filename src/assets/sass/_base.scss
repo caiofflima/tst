@@ -1,0 +1,636 @@
+@import "/src/assets/sass/colors";
+@import "/src/assets/sass/mixins";
+
+.sub-titulo {
+  font-family: 'Caixa Std Book', sans-serif;
+  padding-left: 0 !important;
+  font-weight: 700;
+
+  small {
+    font-family: 'Caixa Std Regular', sans-serif;
+    font-style: normal;
+    font-size: 14px;
+    color: #5C9099;
+    font-weight: 200;
+  }
+
+  small::before {
+    content: '– ';
+  }
+
+  i, em {
+    color: #0065B7;
+    margin-left: 5px;
+    font-size: 2rem;
+  }
+
+  &.margin {
+    margin-top: 50px;
+  }
+}
+
+.ui-dropdown-panel .ui-dropdown-filter-container .fa {
+  top: 1.1em !important;
+}
+
+.c-card.c-card-pd {
+  padding: 1.5em 1.5em !important;
+}
+
+.c-card-valido {
+  border: 2px solid $color-back-valido !important;
+  padding: 18px !important;
+}
+
+.c-card-invalido {
+  border: 2px solid $color-back-invalido !important;
+  padding: 18px !important;
+}
+
+.card-flt-mr {
+  float: right !important;
+  margin: auto;
+}
+
+.card-posit {
+  padding: 0 !important;
+}
+
+.content-box.no-top {
+  position: relative;
+}
+
+.mks {
+  position: relative;
+}
+
+.mks .campo-card {
+  overflow: hidden;
+  position: relative;
+  min-height: 18px;
+  max-height: 98px;
+  max-width: 640px;
+  word-break: break-word;
+}
+
+.mks .campo-card:after {
+  display: inline-block;
+  content: '...';
+  background: #fff;
+  right: 0;
+}
+
+#parentdivs {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.child {
+  height: auto;
+  flex: 1;
+  min-width: 25%;
+  align-self: stretch;
+}
+
+.fl-sb .fa-user-circle-o {
+  font-size: 20px;
+  color: #005ca9;
+}
+
+.fl-sb.only-center > span {
+  font-family: 'Caixa Std Regular', sans-serif;
+}
+
+.fl-sb {
+  display: flex;
+  justify-content: space-between;
+
+  &.stretch {
+    align-items: stretch;
+  }
+
+  &.center {
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 0.5em;
+  }
+
+  &.only-center {
+    align-items: center;
+  }
+}
+
+.align-itens .ps-temp {
+  display: table-cell;
+  position: absolute;
+  text-align: center;
+  top: 90px;
+}
+
+.ps-temp p {
+  width: 80px;
+  line-height: 1em;
+}
+
+.ps-temp:nth-child(1) {
+  left: -0px;
+  color: #AACECC;
+}
+
+.ps-temp:nth-child(2) {
+  right: -0px;
+  color: #F5C07A;
+}
+
+.ps-temp span {
+  font-family: 'Caixa Std Bold', sans-serif;
+  font-size: 24px;
+}
+
+.no-padding {
+  padding: 0 !important;
+}
+
+.no-padding-top {
+  padding-top: 0 !important;
+}
+
+.no-padding-left {
+  padding-left: 0 !important;
+}
+
+.titulo-card {
+  font-family: 'Caixa Std Bold', sans-serif;
+  font-style: normal;
+  font-size: 18px;
+  line-height: 22px;
+  color: #0065B7;
+  margin: 0 0 1em 0;
+
+  &p, &div {
+    margin-bottom: 16px !important;
+  }
+}
+
+.c-card {
+  background: #FFFFFF;
+  border: 1px solid #B3C7CB;
+  box-sizing: border-box;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 3px;
+  padding: 1.5em 1.5em;
+  position: relative;
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+  overflow-wrap: break-word;
+  max-width: 788px;
+
+  &.conteudo-spacing {
+    margin-bottom: 0.75em;
+  }
+
+  &.gray-line {
+    &::after {
+      content: '';
+      position: absolute;
+      right: -22px;
+      top: -10px;
+      width: 1.5px;
+      height: calc(100% + 30%);
+      background-color: #dadada;
+    }
+  }
+
+  .orange-ball {
+    position: absolute;
+    right: calc(-22px - 8.5px);
+    top: calc(50% - 9px);
+    width: 18px;
+    height: 18px;
+    border-radius: 9px;
+    background-color: #F7941E;
+    z-index: 2;
+  }
+
+  .ui-g-6 {
+    max-width: 370px
+  }
+
+  p {
+    margin: 0;
+  }
+}
+
+.content-box {
+  flex-flow: column;
+  justify-content: center;
+
+  &.grafico {
+    width: 100%;
+    max-width: 270px;
+    margin-right: 1.5em;
+  }
+
+  &.grow {
+    flex-grow: 1;
+    display: flex;
+    flex-flow: column;
+  }
+
+  &.fl-start {
+    justify-content: flex-start;
+  }
+}
+
+.fl-row {
+  display: flex;
+  flex-wrap: wrap;
+  flex-flow: row;
+}
+
+.fl-row-reverse {
+  display: flex;
+  flex-wrap: wrap;
+  flex-flow: row-reverse;
+}
+
+.fl-column {
+  display: flex;
+  flex-flow: column;
+}
+
+.content-box-titulo {
+  font-family: 'Caixa Std Bold', sans-serif;
+  font-size: 18px;
+  line-height: 25px;
+  text-align: center;
+  color: #0057AE;
+  align-self: center;
+
+  &.f-end {
+    align-self: flex-end;
+  }
+
+  &.m-24 {
+    margin-top: 1.5em;
+  }
+
+  &.mb-c {
+    margin-bottom: 0;
+  }
+}
+
+.lista-processos {
+  @include create-btn(outlined_blue);
+  height: 44px;
+  font-size: 18px;
+  font-family: 'Caixa Std Bold', sans-serif;
+  font-weight: 700;
+}
+
+.btn-to-top {
+  @include create-btn(outlined_blue);
+  align-self: flex-end;
+  height: 28px;
+  font-family: 'Caixa Std SemiBold', sans-serif;
+  font-weight: bold;
+}
+
+.btn-editar {
+  @include create-btn(normal_blue);
+  width: 35px;
+  height: 35px;
+
+  i, em {
+    color: #fff;
+  }
+}
+
+.list-historico {
+  min-width: 238px;
+  margin-left: 5px;
+}
+
+.list-historico .card-hist-header {
+  font-family: 'Caixa Std Regular', sans-serif ;
+  font-size: 14px;
+  line-height: 16px;
+  display: flex;
+  align-items: center;
+  color: #3A4859;
+}
+
+.list-historico .card-hist-header.strong {
+  font-family: 'Caixa Std Bold', sans-serif !important;
+  font-weight: 700;
+}
+
+.list-historico .c-card-historico {
+  background: #fff;
+  box-sizing: border-box;
+  padding: 0.75em 0.75em;
+  position: relative;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
+  margin: 0.75em auto;
+}
+
+.list-historico .c-card-historico img {
+  width: 18px;
+  height: 18px;
+  position: relative;
+}
+
+.list-historico .c-card-historico::after {
+  content: '';
+  position: absolute;
+  right: -21px;
+  top: -40px;
+  width: 1.5px;
+  height: calc(100% + 40px);
+  background-color: #dadada;
+}
+
+.list-historico .c-card-historico:last-child::after {
+  content: '';
+  position: absolute;
+  right: -21px;
+  top: -40px;
+  width: 1.5px;
+  height: 60px;
+  background-color: #dadada;
+}
+
+.list-historico .c-card-historico .c-card-historico-footer {
+  align-items: center;
+}
+
+.list-historico .c-card-historico .c-card-historico-footer .detalhar {
+  @include create-btn(outlined_blue);
+  height: 25px;
+}
+
+.list-historico .c-card-historico .c-card-historico-footer .detalhar span {
+  padding: 0.1em 0.75em;
+}
+
+.list-historico .c-card-historico .c-card-historico-footer .detalhar:focus {
+  outline: none;
+}
+
+.list-historico .c-card-historico .c-card-historico-footer i {
+  color: #0158ae;
+  cursor: pointer;
+}
+
+.list-historico .c-card-historico .c-card-historico-footer span.date {
+  font-family: 'Caixa Std Book', sans-serif !important;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 21px;
+  color: #f7941e;
+}
+
+.label-campo-card {
+  font-family: 'Caixa Std Bold', sans-serif;
+  padding-left: 0 !important;
+
+  small {
+    font-family: 'Caixa Std Regular, sans-serif';
+    font-style: normal;
+    font-size: 14px;
+    color: #5C9099;
+    font-weight: 200;
+  }
+
+  small::before {
+    content: '– ';
+  }
+}
+
+.campo-card {
+  @extend .label-campo-card;
+  font-weight: normal;
+  display: block;
+
+  span {
+    color: #5C9099;
+    margin-left: 0.5em;
+  }
+}
+
+.progress-circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: column;
+
+  p.progress-title {
+    font-family: 'Caixa Std Bold', sans-serif;
+    font-size: 16px;
+    line-height: 22px;
+    text-align: center;
+  }
+
+  p.progress-info {
+    font-family: 'Caixa Std Regular', sans-serif;
+    font-size: 14px;
+    line-height: 16px;
+    text-align: center;
+    color: #000000;
+    margin: 8px 0 0 0;
+  }
+
+  .ellipse-container {
+    width: 150px;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+
+    span {
+      &.dias-corridos {
+        font-family: 'Caixa Std Bold', sans-serif;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 24px;
+        line-height: 29px;
+        text-align: center;
+        position: absolute;
+        z-index: 2;
+        top: 45px;
+      }
+
+      &.dias-totais {
+        font-family: 'Caixa Std Regular', sans-serif;
+        font-size: 14px;
+        line-height: 16px;
+        text-align: center;
+        color: #000000;
+        position: absolute;
+        z-index: 2;
+        top: 80px;
+      }
+
+    }
+
+    svg {
+      transform: rotate(-90deg);
+    }
+
+    .ellipse-wrapper {
+      width: 111px;
+      height: 111px;
+      position: absolute;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      clip-path: circle(50px at 100px);
+
+      .ellipse-border {
+        width: 91px;
+        height: 91px;
+        position: absolute;
+        border: 10px solid #F7941E;
+        border-radius: 100px;
+      }
+    }
+  }
+}
+
+.data-hora-card {
+  @extend .label-campo-card;
+  max-width: 180px;
+  text-align: right;
+  color: #f39200;
+}
+
+@media screen and (max-width: 900px) {
+
+  .acompanhamento-container {
+    padding: 0;
+  }
+
+
+  .card-posit {
+    width: 100% !important;
+  }
+
+  .processo-container {
+    border-top: 1px solid #B4B4B4;
+    padding: 1.5em 0.5em 0 0.5em;
+    margin: 0.5em 0;
+  }
+
+  .titulo {
+    margin: 0.25em;
+  }
+
+  .content-box-titulo {
+    margin-bottom: 0.75em;
+  }
+
+  .no-mobile {
+    display: none;
+  }
+
+  .no-desktop {
+    display: inherit;
+  }
+
+  .fl-sb {
+    &.mob-col {
+      flex-flow: column;
+      align-items: center;
+
+    }
+  }
+
+  .content-box {
+    width: 100%;
+
+    &.grafico {
+      margin-right: 0;
+      max-width: 490px;
+    }
+  }
+
+  .c-card {
+    &.gray-line {
+      &::after {
+        display: none;
+      }
+    }
+
+    .orange-ball {
+      &::after {
+        display: none;
+      }
+    }
+
+  }
+
+  .data-hora-card {
+    text-align: right;
+  }
+
+  .mks .campo-card:after {
+    display: inline-block;
+    content: '...';
+    background: #fff;
+    right: 0;
+  }
+
+  .orange-ball {
+    display: none;
+  }
+
+  .list-historico {
+    display: flex;
+    overflow-y: hidden;
+    overflow-x: auto;
+    width: 100%;
+    max-width: 100%;
+    align-items: flex-start;
+    margin-left: 0;
+    padding: 0.5em;
+
+    .c-card-historico {
+      min-width: 220px;
+      margin: 0 0.25em;
+
+      &::after {
+        display: none;
+      }
+
+      &:first-child {
+        margin-left: 0;
+      }
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+
+  .fl-sb {
+    &.mobile-rev {
+      flex-flow: column-reverse;
+    }
+  }
+
+  .list-card {
+    width: 100%;
+    margin-top: 0.75em;
+    padding: 0.75em 0.5em;
+  }
+
+  .historico-section {
+    padding: 0;
+  }
+}
+
+:host::ng-deep .mdl-custom .ui-dialog {
+  height: auto !important;
+}

@@ -1,0 +1,23 @@
+<div class="documentos-container">
+  <div>
+    <p class="titulo">{{title}}</p>
+  </div>
+  <p class="titulo">{{subtitle}}</p>
+  <asc-documento-card
+    (arquivosSelecionados)="arquivosSelecionados($event)"
+    (documentoTipoProcessoSelecionado)="selecionarTipoDocumento($event)"
+    (documentosTipoProcessoSelecionados)="watchDocumentos($event)"
+    (loadingDocument)="loadingDocument($event)"
+    (isLoading)="loadingDocument($event)"
+    [parametro]="parametro"
+    [processo]="pedido"
+  ></asc-documento-card>
+</div>
+<div class="footer">
+  <button class="back-btn" cdkStepperPrevious>
+    Voltar
+  </button>
+  <button class="continue-btn" cdkStepperNext (click)="onSubmit()" [disabled]="documentoNaoPossuiArquivos || loading">
+    Continuar
+  </button>
+</div>

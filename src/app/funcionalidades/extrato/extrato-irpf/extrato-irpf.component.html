@@ -1,0 +1,49 @@
+<form [formGroup]="formularioExtratoIRPF">
+
+  <div class="container">
+    <div class="col-md-12 breadcrumb-header">
+      <ul class="breadcrumb">
+        <li><span (click)="voltar()"  class="voltar"><i class="fa fa-arrow-left" aria-hidden="true"></i>Voltar</span></li>
+        <a routerLink="/home">Início</a>
+        <em class="fa fa-chevron-right"></em>
+        Meus dados
+        <em class="fa fa-chevron-right"></em>
+        Financeiro
+        <em class="fa fa-chevron-right"></em>
+        Extrato IRPF
+      </ul>
+    </div>
+
+    <div class="title-type">
+      <h1 class="titulo-pagina">Extrato IRPF</h1>
+
+      <br>
+      <hr class="separador">
+      <br>
+
+      <div class="card-extrato-irpf">
+        <p class="info-p texto-extrato-irpf">
+          Consulte seu comprovante das despesas m&eacute;dicas dedut&iacute;veis no Imposto de Renda Pessoa F&iacute;sica. 
+        </p>
+        <p>&nbsp;</p>
+        <div class="row pl-0 col-xs-2">
+          <p class="info-p texto-ano-base"><b>Ano Base</b></p>
+              <p-dropdown 
+                class="form-control2 selectAno" 
+                [options]="anos" 
+                [(ngModel)]="anoLancamento" 
+                [ngModelOptions]="{standalone: true}" 
+                optionLabel="label">
+              </p-dropdown>
+        </div>
+        <br><br><br><br>
+        <div class="pagina-inicial-botoes">
+          <button class="continue-btn" (click)="gerarExtrato()"><span>Avan&ccedil;ar</span></button>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+  
+</form>

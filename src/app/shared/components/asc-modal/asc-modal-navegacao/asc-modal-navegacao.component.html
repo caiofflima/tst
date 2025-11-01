@@ -1,0 +1,87 @@
+<asc-modal
+  (closeModal)="fecharModal()"
+  [openModal]="showModal"
+  [class]="'mdl-custom'"
+  [height]="height"
+>
+  <!-- [ngClass]="modalClasses" -->
+  <asc-modal-header>
+    <p style="margin: 0" *ngIf="itemAtual?.name">{{ itemAtual?.name }}</p>
+    <p style="margin: 0" *ngIf="tituloModal">{{ tituloModal }}</p>
+  </asc-modal-header>
+  <asc-modal-body class="mdl-body-custom">
+    <table aria-label="" style="width: 100%">
+      <caption class="captionTableNoView">
+        ascModalNavegacaoTable
+      </caption>
+      <tr>
+        <th scope="col">&nbsp;</th>
+        <th scope="col">&nbsp;</th>
+        <th scope="col">&nbsp;</th>
+      </tr>
+      <tbody>
+        <tr>
+          <td
+            *ngIf="mostraControle(withControls)"
+            style="width: 20px"
+            class="left-button"
+          >
+            <div class="icon-tag" style="width: 20px">
+              <svg
+                class="click"
+                [class.icon-arrow-lt]="modoRotacao || !isPrimeiro"
+                (click)="navToPreviousItem()"
+              ></svg>
+            </div>
+            &nbsp;
+          </td>
+          <td style="width: 99%">
+            <div class="core-file">
+              <ng-content select="asc-viewport"></ng-content>
+            </div>
+          </td>
+          <td *ngIf="mostraControle(withControls)" class="right-button">
+            <div
+              class="icon-tag align-middle"
+              (click)="navToNextItem()"
+              *ngIf="modoRotacao || !isUltimo"
+            >
+              <svg class="icon-arrow-rt click"></svg>
+            </div>
+            &nbsp;
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </asc-modal-body>
+  <asc-modal-footer [ngClass]="footerClasses" class="mdl-footer-custom">
+    <div class="footer-component-container footer-acoes-modal" id="fecharModal">
+      <div>
+        <button
+          (click)="fecharTela($event)"
+          class="btn-cts btn-outline-closed"
+          id="fecharModal"
+        >
+          <span>Fechar</span>
+        </button>
+        <button
+          *ngIf="mostrarBotaoDownload()"
+          (click)="downloadArquivo()"
+          class="btn-cts btn-outline-closed"
+          id="downloadArquivo"
+        >
+          <span>Download</span>
+        </button>
+        <button
+          *ngIf="mostrarBotaoNovaJanela()"
+          (click)="abrirNovaJanela()"
+          class="btn-cts btn-outline-closed"
+          id="abrirNovaJanela"
+        >
+          <span>Abrir Nova Janela</span>
+        </button>
+      </div>
+      <ng-content select="asc-modal-acoes"></ng-content>
+    </div>
+  </asc-modal-footer>
+</asc-modal>

@@ -1,0 +1,34 @@
+<div class="row listagem" id="{{idList}}">
+	<div class="col-md-4 control-label">
+		<label>{{titulo}}</label>
+		<ul id="listaItens">
+			<li *ngFor="let item of itens" (click)="adicionarSelecionado(item)">
+				<em class="glyphicon glyphicon-chevron-right seta"></em>
+				{{item.nome}}
+			</li>
+		</ul>
+	</div>
+
+	<div class="col-md-1 text-center botoes-acao-grid">
+		<button class="btn btn-info btn-sm" (click)="selecionarTodos()">
+			<span class="fa fa-fast-forward"></span>
+		</button>
+		<br /><br />
+		<button class="btn btn-info btn-sm" (click)="retirarTodos()">
+			<span class="fa fa-fast-backward"></span>
+		</button>
+	</div>
+
+	<div class="col-md-4">
+		<!-- [ngClass]="{'required' : required}" -->
+		<label >{{tituloSelecionados}}</label>
+		<ul id="listaSelecionados">
+			<li *ngFor="let item of itensSelecionados" (click)="retirarSelecionado(item)">
+				<em class="glyphicon glyphicon-chevron-left seta"></em>
+				{{item.nome}}
+			</li>
+		</ul>
+		<!-- Imprime mensagem de erro se validator válido -->
+		<div *ngIf="validator" style="color: red">{{mensagemErro}}</div>
+	</div>
+</div>

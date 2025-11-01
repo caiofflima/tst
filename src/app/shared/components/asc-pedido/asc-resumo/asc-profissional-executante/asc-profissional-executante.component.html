@@ -1,0 +1,191 @@
+<div
+  *ngIf="
+    exibirFormularioProfissionalExecutante;
+    then editarProfissionalExecutanteForm;
+    else visualizarProfissionalExecutante
+  "
+></div>
+<ng-template #editarProfissionalExecutanteForm>
+  <form [formGroup]="profissionalExecutanteForm">
+    <section class="c-card conteudo-spacing">
+      <div>
+        <button class="card-flt-mr btn-editar" title="Editar" disabled>
+          <i class="fa fa-pencil" aria-hidden="true"></i>
+        </button>
+        <p class="titulo-card">{{ titulo }}</p>
+        <div class="ui-g" style="width: 100%">
+          <div class="ui-g-12 ui-md-12 margin-16 no-padding">
+            <asc-select-conselho-profissional
+              [control]="
+                profissionalExecutanteForm.get('idConselhoProfissional')
+              "
+              (dadoSelecionado)="conselhoSelecionado($event)"
+              label="Conselho profissional"
+              [required]="true"
+            ></asc-select-conselho-profissional>
+          </div>
+          <div class="ui-g-12 ui-md-12 margin-16 no-padding">
+            <asc-input-text
+              [control]="profissionalExecutanteForm.get('numeroConselho')"
+              id="numeroConselho"
+              label="Número do conselho"
+              [required]="true"
+              [maxlength]="15"
+            ></asc-input-text>
+            <small class="custom-form-group-info"
+              >Exemplo: CRM-DF-<strong>65123</strong></small
+            >
+          </div>
+          <div class="ui-g-12 ui-md-12 margin-16 no-padding">
+            <asc-select-uf
+              label="UF do conselho"
+              [required]="true"
+              inputId="uf"
+              [control]="profissionalExecutanteForm.get('idEstadoConselho')"
+              (dadoSelecionado)="estadoConselhoSelecionado($event)"
+            ></asc-select-uf>
+          </div>
+        </div>
+        <div class="ui-g ui-md-12 no-padding-left margin-16">
+          <label class="sub-titulo"
+            >Dados do profissional ou estabelecimento</label
+          >
+        </div>
+        <div class="ui-g">
+          <div class="ui-g-12 ui-md-12 no-padding">
+            <asc-cpf-cnpj
+              [control]="profissionalExecutanteForm.get('cpfCnpj')"
+              [required]="true"
+              inputId="cpfCnpj"
+              label="CPF/CNPJ"
+            ></asc-cpf-cnpj>
+          </div>
+          <div class="ui-g-12 ui-md-12 margin-16 no-padding">
+            <asc-input-text
+              [control]="profissionalExecutanteForm.get('nomeProfissional')"
+              id="nomeProfissional"
+              label="Nome ou razão social"
+              [somenteLetrasMaiusculas]="'true'"
+              [required]="true"
+              [maxlength]="350"
+            ></asc-input-text>
+          </div>
+          <div class="ui-g-12 ui-md-12 margin-16 no-padding">
+            <asc-select-uf
+              label="UF"
+              [required]="true"
+              inputId="ufProfissional"
+              [control]="profissionalExecutanteForm.get('idEstadoProfissional')"
+              (dadoSelecionado)="estadoConselhoSelecionado($event)"
+            ></asc-select-uf>
+          </div>
+          <div class="ui-g-12 ui-md-12 margin-16 no-padding">
+            <asc-select-municipio
+              label="Município"
+              [parametro]="{
+                idMunicipio: profissionalExecutanteForm.get(
+                  'idEstadoProfissional'
+                ).value
+              }"
+              (dadoSelecionado)="selecionarMunicipio($event)"
+              [control]="
+                profissionalExecutanteForm.get('idMunicipioProfissional')
+              "
+              [required]="true"
+            ></asc-select-municipio>
+          </div>
+        </div>
+      </div>
+
+      <div class="to-footer margin-16">
+        <div>
+          <button
+            class="back-btn"
+            (click)="cancelarEdicaoProfissionalExecutante()"
+          >
+            Cancelar
+          </button>
+          <button
+            class="continue-btn"
+            [disabled]="profissionalExecutanteForm.invalid"
+            (click)="salvarEdicaoProfissionalExecutante()"
+          >
+            Confirmar
+          </button>
+        </div>
+      </div>
+
+      <div class="dados-options margin-16" *ngIf="toTop">
+        <button (click)="goToTop()" class="btn-to-top">Retornar ao topo</button>
+      </div>
+    </section>
+  </form>
+</ng-template>
+<ng-template #visualizarProfissionalExecutante>
+  <section class="c-card conteudo-spacing">
+    <div *ngIf="loading" style="margin-bottom: 1.5em">
+      <p-progressBar
+        mode="indeterminate"
+        *ngIf="loading"
+        [style]="{ height: '6px' }"
+      ></p-progressBar>
+    </div>
+
+    <div>
+      <button
+        class="card-flt-mr btn-editar"
+        title="Editar"
+        *ngIf="
+          (!permissoes || permissoes?.editar) &&
+          verificarEhTitularEPedidoEmAnalise()
+        "
+        [disabled]="loading"
+        (click)="editarProfissionalExecutante()"
+      >
+        <i class="fa fa-pencil" aria-hidden="true"></i>
+      </button>
+      <div class="titulo-card">{{ titulo }}</div>
+      <div class="ui-g">
+        <div class="ui-g-12 ui-md-12 no-padding">
+          <label class="label-campo-card">Conselho profissional </label>
+          <p>{{ conselho?.label | campoVazioHifen }}</p>
+        </div>
+        <div class="ui-g-12 ui-md-12 margin-16 no-padding">
+          <label class="label-campo-card">Número do conselho</label>
+          <p>{{ profissional?.numeroConselho | campoVazioHifen }}</p>
+        </div>
+        <div class="ui-g-12 ui-md-12 margin-16 no-padding">
+          <label class="label-campo-card">UF do conselho</label>
+          <p>{{ ufConselho?.label | campoVazioHifen }}</p>
+        </div>
+      </div>
+      <div class="ui-g no-padding-left margin-16">
+        <label class="sub-titulo"
+          >Dados do profissional ou estabelecimento</label
+        >
+      </div>
+      <div class="ui-g">
+        <div class="ui-g-12 ui-md-12 margin-16 no-padding">
+          <label class="label-campo-card">CPF/CNPJ</label>
+          <p>{{ profissional?.cpfCnpj | cpfCnpjMask | campoVazioHifen }}</p>
+        </div>
+        <div class="ui-g-12 ui-md-12 margin-16 no-padding">
+          <label class="label-campo-card">Nome ou razão social</label>
+          <p>{{ profissional?.nomeProfissional | campoVazioHifen }}</p>
+        </div>
+        <div class="ui-g-12 ui-md-12 margin-16 no-padding">
+          <label class="label-campo-card">UF</label>
+          <p>{{ municipioProfissional?.estado?.sigla | campoVazioHifen }}</p>
+        </div>
+        <div class="ui-g-12 ui-md-12 margin-16 no-padding">
+          <label class="label-campo-card">Municipio</label>
+          <p>{{ municipioProfissional?.nome | campoVazioHifen }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="dados-options margin-16" *ngIf="toTop">
+      <button (click)="goToTop()" class="btn-to-top">Retornar ao topo</button>
+    </div>
+  </section>
+</ng-template>

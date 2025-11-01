@@ -1,0 +1,152 @@
+@import "/src/assets/sass/colors";
+@import "/src/assets/sass/mixins";
+
+.arquivo-card {
+  border: 1px solid #5F758F;
+  padding: 8px;
+  margin: 6.5px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+}
+
+.arquivo-info {
+  display: flex;
+  justify-content: space-between;
+  padding-right: 8px;
+  width: 100%;
+  align-items: center;
+}
+
+.arquivo-data {
+  font-family: 'Caixa Std Bold', sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 16px;
+  display: flex;
+  align-items: center;
+  text-align: right;
+  color: #3A4859;
+  margin: 0;
+
+  i,
+  em {
+    margin-left: 10px;
+    font-size: 20px;
+    color: #0158AE;
+  }
+}
+
+.arquivo-nome {
+  font-family: 'Caixa Std Bold', sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  display: flex;
+  align-items: center;
+  color: #3A4859;
+  margin: 0;
+}
+
+.arquivo-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 78px;
+
+  button {
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 3px;
+
+    &:disabled {
+      background-color: #E5E5E5;
+      cursor: not-allowed;
+    }
+
+    em {
+      color: #FFF;
+    }
+
+    &:first-child {
+      background-color: #17A2B8;
+
+      &:hover,
+      &:active {
+        background-color: #0f91a5;
+      }
+    }
+
+    &:last-child {
+      background-color: #DC3545;
+
+      &:hover,
+      &:active {
+        background-color: #bb1c2c;
+      }
+    }
+  }
+}
+
+.btn-limpar-campo {
+  @include create-btn(outlined_blue);
+}
+
+.btn-alterar-situacao {
+  @include create-btn(normal_orange);
+}
+
+.btn-escolher-arquivo {
+  @include create-btn(normal_cyan);
+
+  i {
+    padding-right: .25em;
+  }
+
+  span {
+    padding-left: .25em;
+  }
+}
+
+%fl-sb {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-botoes-mudanca {
+  @extend %fl-sb;
+  margin: 1.5em 0 .5em 0;
+}
+
+.campo-card {
+  font-family: 'Caixa Std Regular', sans-serif;
+  font-size: 16px;
+  line-height: 19px;
+  color: #000000;
+
+}
+
+.modificate-custom-grid {
+  display: flex;
+  flex-flow: column;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.container-group-label-select {
+  width: 100%;
+  margin-bottom: .5em;
+  padding-right: 2em;
+}
+
+.text-area-container {
+
+}

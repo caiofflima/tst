@@ -1,0 +1,40 @@
+import {Entity} from "../../../arquitetura/shared/models/entity";
+
+export class PedidoDependenteDTO extends Entity {
+    public override id: number;
+    public idPedido: number;
+    public idEstadoNaturalidade: number;
+    public estadoNaturalidade: string;
+    public idMunicipioNaturalidade: number;
+    public municipioNaturalidade: string;
+    public idEstadoCivil: number;
+    public estadoCivil: string;
+    public idTipoDeficiencia: number;
+    public tipoDeficiencia: string;
+    public nomeDependente: string;
+    public cpfDependente: string;
+    public nomeMaeDependente: string;
+    public nomePaiDependente: string;
+    public dataNascimento: Date;
+    public sexoDependente: string;
+    public declaracaoNascidoVivo: number;
+    public rg: number;
+    public rgOrgaoEmissor: string;
+    public dataExpedicaoRg: Date;
+    public cartaoNacionalSaude: number;
+    public cartaoDependete: number;
+    public valorRenda: number;
+    public emailDependente?: string ;
+    public deEmailTitular?: string;
+    public coTelefoneTitular?: string;
+	public coCepTitular?: string;
+	public deLogradouroTitular?: string;
+    public deComplementoTitula?: string;
+    public noBairroTitular?: string;
+	public nuEnderecoTitular?: number;
+	public nuMunicipioEnderecoTitular?: number;
+	public nuEstadoEnderecoTitular?: number;
+	public estado?: string;
+    public noEstado?: string;
+    public noMunicipio?: string;
+}

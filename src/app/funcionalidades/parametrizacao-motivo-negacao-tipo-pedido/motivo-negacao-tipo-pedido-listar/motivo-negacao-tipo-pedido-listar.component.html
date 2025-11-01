@@ -1,0 +1,104 @@
+<!-- Page Header-->
+<div class="container">
+  <div class="col-md-12 breadcrumb-header">
+    <ul class="breadcrumb">
+      <li><span (click)="voltar()" class="voltar"><i class="fa fa-arrow-left" aria-hidden="true"></i>Voltar</span>
+      </li>
+      <a routerLink="/home">Início</a>
+      <em class="fa fa-chevron-right"></em>
+      Administração
+      <em class="fa fa-chevron-right"></em>
+      Parâmetros
+      <em class="fa fa-chevron-right"></em>
+      <a [routerLink]="[baseURL]">{{baseTitulo}}</a>
+      <em class="fa fa-chevron-right"></em>
+      {{baseTitulo}} – Resultado
+    </ul>
+  </div>
+
+  <div class="title-type">
+    <h1 class="titulo-pagina">{{baseTitulo}} – Resultado</h1>
+  </div>
+
+  <section class="row">
+    <div>
+      <div class="p-0 col-md-12">
+        <h4>Dados da Pesquisa</h4>
+      </div>
+
+      <div class="clearfix"></div>
+
+      <div class="p-0 col-xs-3" *ngIf="listaMotivoNegacao">
+        <label class="control-label" for="documento">Motivo de Negação</label>&nbsp;<br>
+        <p id="documento">{{ listaMotivoNegacao }}</p>
+      </div>
+      <div class="p-0 col-xs-3" *ngIf="listaTipoProcesso">
+        <label class="control-label" for="tipoProcesso">Tipo Pedido</label>&nbsp;<br>
+        <p id="tipoProcesso">{{ listaTipoProcesso }}</p>
+      </div>
+      <div class="p-0 col-xs-3" *ngIf="listaTipoBeneficiario">
+        <label class="control-label" for="tipoBeneficiario">Tipo de Beneficiário</label>&nbsp;<br>
+        <p id="tipoBeneficiario">{{ listaTipoBeneficiario }}</p>
+      </div>
+      <div class="p-0 col-xs-3" >
+        <label class="control-label" for="tipoBeneficiario">Somente Ativos</label>&nbsp;<br>
+        <p id="tipoBeneficiario">{{ somenteAtivos ? 'SIM' : 'NÃO' }}</p>
+      </div>
+      
+    </div>
+
+    <div class="clearfix"></div>
+    <div class="row p-0 col-md-9">
+      <h4>Resultado da Consulta</h4>
+    </div>
+
+    <div class="row p-0 col-md-12">
+      <div class="col-xs-3 search-inp p-0" 
+           style="margin: 5px 0 8px; border-bottom: 0 none">
+            <input 
+                #gb type="text" 
+                class="form-control filtro-caixa" 
+                size="50"
+                placeholder="Digite para filtrar resultado">
+            <em class="fas fa-search"></em>
+      </div>
+      <p-dataTable
+        id="caixa-table" 
+        [rows]="5" 
+        [paginator]="true" 
+        [pageLinks]="5" 
+        [totalRecords]="total"
+        [rowsPerPageOptions]="[5,10,20]" 
+        [globalFilter]="gb"
+        [value]="lista" 
+        reorderableColumns="true" 
+        sortField="id" 
+        sortOrder="-1"
+        emptyMessage="{{(!loading)?bundle('MA003'):'Carregando ...'}}" 
+        class="table table-striped table-sm table-hover text-center">
+
+        <p-column field="motivoNegacao.titulo" header="Motivo de Negação" [sortable]="true"></p-column>
+        <p-column field="tipoProcesso.nome" header="Tipo de Pedido" [sortable]="true"></p-column>
+        <p-column field="listaTipoBeneficiario" header="Tipo Beneficiário" [sortable]="true"></p-column>
+        <p-column field="_inativo" header="Inativo" [sortable]="true" [style]="{'width':'100px'}"></p-column>
+        
+        <p-column header="Ação">
+          <ng-template let-row="rowData" pTemplate="content">
+            <span title="Editar registro" (click)="editar(row)" id="editar" style="cursor: pointer">
+              <em class="fas fa-pen"></em>
+            </span>
+          </ng-template>
+        </p-column>
+      </p-dataTable>
+    </div>
+
+    <div class="col-xs-12 p-0 barra-botoes">
+      <button class="btn back-btn" (click)="voltar()" id="btnListarVoltar">
+        <span class="fa fa-reply fa-fw"></span>Voltar
+      </button>
+      <button class="btn clean-btn" (click)="novo()" id="btnListarNovoPrazoTratamento">
+        <span class="fa fa-plus fa-fw"></span>Incluir {{baseTitulo}}
+      </button>
+    </div>
+  </section>
+</div>

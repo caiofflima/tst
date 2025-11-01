@@ -1,0 +1,431 @@
+@mixin add-btn-hover($mainColor, $hoverColor, $borderColor, $spanColor, $spanHoverColor) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  background-color: $mainColor;
+  border-color: $borderColor;
+  transition: 250ms ease-in-out;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  padding: 10px 16px;
+  min-width: 125px;
+
+  span,
+  i {
+    color: $spanColor;
+    transition: 300ms ease-in-out;
+  }
+
+  &:hover,
+  &:active {
+    background-color: $hoverColor;
+    transition: 250ms ease-in-out;
+
+    span {
+      color: $spanHoverColor;
+      transition: 300ms ease-in-out;
+    }
+  }
+}
+
+div.custom-container {
+  width: 100%;
+  padding: 12px;
+  max-width: 794px;
+  margin: 0 auto;
+
+  div.titulo {
+    font-family: 'Caixa Std Bold', sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 25px;
+    color: #0065B7;
+    height: 44px;
+
+    &.margin-top-32 {
+      margin-top: 32px;
+    }
+
+    &.max-565 {
+      width: 100%;
+      max-width: 565px;
+    }
+  }
+}
+
+p.card-titulo-main {
+  font-family: 'Caixa Std Bold', sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 25px;
+  color: #0065B7;
+}
+
+.no-padding {
+  padding: 0;
+}
+
+div.bottom-bordered {
+  border-bottom: 1px solid #B4B4B4;
+  margin-bottom: 16px;
+}
+
+div.custom-card {
+  padding: 32px 8px 8px 8px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 3px;
+  position: relative;
+  margin-bottom: 16px;
+
+  div.success-icon-container {
+    display: none;
+    position: absolute;
+    top: 13px;
+    right: 11px;
+
+    em {
+      color: #53AA5C;
+    }
+  }
+
+  &.success {
+    border: 2px solid #53AA5C;
+
+    div.success-icon-container {
+      display: block;
+    }
+  }
+
+  p.card-titulo {
+    font-family: 'Caixa Std Bold', sans-serif;
+    font-size: 16px;
+    line-height: 19px;
+    color: #000000;
+    font-weight: bold;
+  }
+
+  span.card-info {
+    font-family: 'Caixa Std Regular', sans-serif;
+    font-size: 14px;
+    line-height: 16px;
+    color: #000000;
+  }
+
+  p.arquivos-label {
+    font-family: 'Caixa Std Bold', sans-serif;
+    font-size: 14px;
+    line-height: 16px;
+    display: flex;
+    align-items: center;
+    color: #000000;
+    margin-top: 12px;
+    font-weight: bold;
+  }
+
+  div.arquivo-card {
+    border: 1px solid #5F758F;
+    padding: 8px;
+    margin: 6.5px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    div.arquivo-info {
+      display: flex;
+      justify-content: space-between;
+      padding-right: 8px;
+      width: 100%;
+      align-items: center;
+    }
+
+    p.arquivo-data {
+      font-family: 'Caixa Std Bold', sans-serif;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 13px;
+      line-height: 16px;
+      display: flex;
+      align-items: center;
+      text-align: right;
+      color: #3A4859;
+      margin: 0;
+
+      i,
+      em {
+        margin-left: 10px;
+        font-size: 20px;
+        color: #0158AE;
+      }
+    }
+
+    p.arquivo-nome {
+      font-family: 'Caixa Std Regular', sans-serif;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 17px;
+      display: flex;
+      align-items: center;
+      color: #3A4859;
+      margin: 0;
+    }
+
+    div.arquivo-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 78px;
+
+      button {
+        width: 35px;
+        height: 35px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: none;
+        border-radius: 3px;
+
+        em {
+          color: #FFF;
+        }
+
+        &:first-child {
+          background-color: #17A2B8;
+
+          &:hover,
+          &:active {
+            background-color: #0f91a5;
+          }
+        }
+
+        &:last-child {
+          background-color: #DC3545;
+
+          &:hover,
+          &:active {
+            background-color: #bb1c2c;
+          }
+        }
+      }
+    }
+  }
+
+  div.custom-card-footer {
+    padding-top: 10px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    label {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #41A495;
+      border-radius: 3px;
+      border: 1px solid #36877B;
+      padding: 8px 12px;
+      cursor: pointer;
+      transition: 250ms ease-in-out;
+
+      &:hover,
+      &:active {
+        background-color: #36877B;
+        transition: 250ms ease-in-out;
+      }
+
+      em,
+      span {
+        color: #fff;
+
+      }
+
+      em,
+      i {
+        margin-right: 8px;
+      }
+    }
+
+    input {
+      visibility: hidden;
+      position: absolute;
+    }
+  }
+
+}
+
+div.arquivo-card {
+  border: 1px solid #5F758F;
+  padding: 8px;
+  margin: 6.5px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  div.arquivo-info {
+    display: flex;
+    justify-content: space-between;
+    padding-right: 8px;
+    width: 100%;
+    align-items: center;
+  }
+
+  p.arquivo-data {
+    font-family: 'Caixa Std Bold', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 13px;
+    line-height: 16px;
+    display: flex;
+    align-items: center;
+    text-align: right;
+    color: #3A4859;
+    margin: 0;
+
+    i,
+    em {
+      margin-left: 10px;
+      font-size: 20px;
+      color: #0158AE;
+    }
+  }
+
+  p.arquivo-nome {
+    font-family: 'Caixa Std Regular', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;
+    display: flex;
+    align-items: center;
+    color: #3A4859;
+    margin: 0;
+  }
+
+  div.arquivo-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 78px;
+
+    button {
+      width: 35px;
+      height: 35px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      border-radius: 3px;
+
+      em {
+        color: #FFF;
+      }
+
+      &:first-child {
+        background-color: #17A2B8;
+
+        &:hover,
+        &:active {
+          background-color: #0f91a5;
+        }
+      }
+
+      &:last-child {
+        background-color: #DC3545;
+
+        &:hover,
+        &:active {
+          background-color: #bb1c2c;
+        }
+      }
+    }
+  }
+}
+
+div.resumo-body {
+  background-color: #EFF5F6;
+  padding: 21px 26px 52px 26px;
+
+  p {
+    margin: 0;
+  }
+}
+
+.to-right {
+  display: flex;
+  justify-content: flex-end;
+}
+
+div.form-edit {
+  padding-top: 12px;
+
+  label.custom-input-label {
+    font-family: 'Caixa Std Bold', sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 100%;
+    display: flex;
+    align-items: center;
+    color: #2E484D;
+
+    &.absolute {
+      position: absolute;
+      background-color: #fff;
+    }
+
+    small {
+      font-family: 'Caixa Std Regular', sans-serif;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 16px;
+      line-height: 100%;
+      display: flex;
+      align-items: center;
+      color: #5C9099;
+      margin: 0 8px;
+    }
+  }
+
+  &.max-50 {
+    width: 50%;
+    max-width: 50%;
+  }
+
+}
+
+div.buttons-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 16px;
+  padding-bottom: 8px;
+
+  button {
+    &.back {
+      @include add-btn-hover(#fff, #fafafa, #01377F, #01377F, #01377F);
+      border: 1px solid #01377f;
+    }
+
+    &.next {
+      @include add-btn-hover(#F39200, #db6e00, none, #fff, #fff);
+      border: none;
+      color: #fff;
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+
+  div.resumo-body {
+    padding: 8px 12px 16px 12px;
+  }
+
+  div.form-edit {
+    &.max-50 {
+      width: 100%;
+      max-width: 100%;
+    }
+  }
+}

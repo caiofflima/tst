@@ -1,0 +1,58 @@
+<form [formGroup]="formularioSolicitacao">
+  <div class="solicitacao-container">
+    <p class="titulo">Vamos começar! Precisamos saber quem é o beneficiário.</p>
+    <div class="custom-form-group-select">
+      <asc-select-beneficiario
+        [uppercase]="true"
+        [matricula]="matricula"
+        label="Beneficiário"
+        [required]="true"
+        [control]="formularioSolicitacao.get('idBeneficiario')"
+        (dadoSelecionado)="beneficarioSelecionado($event)"
+      >
+      </asc-select-beneficiario>
+    </div>
+    <p class="titulo" *ngIf="formularioSolicitacao.get('idBeneficiario').valid">
+      Você gostaria de informar um contato adicional para recebimento das
+      notificações do seu pedido?
+    </p>
+    <div
+      class="custom-form-group-input"
+      *ngIf="formularioSolicitacao.get('idBeneficiario').valid"
+    >
+      <label class="control-label">E-mail <small>Opcional</small></label>
+      <div class="custom-size">
+        <asc-input-text
+          label=""
+          [control]="formularioSolicitacao.get('email')"
+        ></asc-input-text>
+      </div>
+    </div>
+    <div
+      class="custom-form-group-input"
+      *ngIf="formularioSolicitacao.get('idBeneficiario').valid"
+    >
+      <label class="control-label">Telefone <small>Opcional</small></label>
+      <div class="custom-size">
+        <asc-input-telefone
+          label=""
+          [control]="formularioSolicitacao.get('telefoneContato')"
+        ></asc-input-telefone>
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+    <button class="back-btn" routerLink="/pedidos/autorizacao-previa">
+      Voltar
+    </button>
+
+    <button
+      class="continue-btn"
+      cdkStepperNext
+      (click)="onSubmit()"
+      [disabled]="formularioSolicitacao.invalid"
+    >
+      Continuar
+    </button>
+  </div>
+</form>

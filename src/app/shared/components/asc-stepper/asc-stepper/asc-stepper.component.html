@@ -1,0 +1,69 @@
+<div class="stepper-container">
+  <div class="header">
+    <div class="bread-crumb-container">
+      <span [routerLink]="routerLinkTo" class="voltar"
+        ><i class="fa fa-arrow-left" aria-hidden="true"></i> Voltar</span
+      >
+      <ul class="bread-crumb">
+        <li>
+          <a routerLink="/home">Início</a>
+          <i class="fa fa-angle-right" aria-hidden="true"></i>
+        </li>
+        <li *ngFor="let links of breadcrumbOptions; let i = index">
+          {{ links }}
+          <i
+            *ngIf="i < breadcrumbOptions.length - 1"
+            class="fa fa-angle-right"
+            aria-hidden="true"
+          ></i>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="jumbotron-titulo">
+    <p class="titulo">
+      <ng-container
+        [ngTemplateOutlet]="selected?.stepLabel?.template"
+      ></ng-container>
+    </p>
+  </div>
+
+  <div class="container">
+    <div class="stepper-container">
+      <ul class="custom-stepper">
+        <li
+          *ngFor="let step of _steps; let i = index"
+          (click)="onClick(i)"
+          [class.active]="selectedIndex >= i"
+        >
+          <span>{{ i + 1 }}</span>
+          <small [class.last]="i == _steps.length - 1" [class.start]="i == 0">{{
+            step.label
+          }}</small>
+        </li>
+        <div class="barra"></div>
+        <div
+          class="barra-active"
+          ascIncrementerBar
+          [index]="selectedIndex"
+          [passos]="_steps"
+        ></div>
+      </ul>
+    </div>
+  </div>
+
+  <!-- <ng-container [ngTemplateOutlet]="selected.content"></ng-container> -->
+
+  <ng-container
+    *ngIf="selected"
+    [ngTemplateOutlet]="selected?.content"
+  ></ng-container>
+</div>
+
+<asc-modal-dados-titular
+  [matriculaFuncional]="matricula"
+  [showModal]="showInfoTitular"
+  (onCloseModal)="fecharInfoTitular()"
+>
+</asc-modal-dados-titular>

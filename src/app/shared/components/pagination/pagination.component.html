@@ -1,0 +1,31 @@
+<nav aria-label="Page navigation" class="text-center">
+	<pagination-template #p="paginationApi" [id]="config.id" (pageChange)="pageChange($event)">
+		<ul class="pagination" role="navigation" [attr.aria-label]="config.screenReaderPaginationLabel" *ngIf="!(p.pages.length <= 1)">
+			<!-- autoHide || -->
+			<li [class.disabled]="p.isFirstPage()" *ngIf="directionLinks">
+				<a *ngIf="1 < p.getCurrent()" (click)="p.previous()" [attr.aria-label]="previousLabel + ' ' + screenReaderPageLabel" aria-label="Previous">
+					<span aria-hidden="true">&laquo;</span>
+				</a>
+				<span *ngIf="p.isFirstPage()">
+					<span aria-hidden="true">&laquo;</span>
+				</span>
+			</li>
+			<li [class.active]="p.getCurrent() === page.value" *ngFor="let page of p.pages">
+				<a (click)="p.setCurrent(page.value)" *ngIf="p.getCurrent() !== page.value">
+					<span>{{ page.label }}</span>
+				</a>
+				<span *ngIf="p.getCurrent() === page.value">
+					<span>{{ page.label }}</span>
+				</span>
+			</li>
+			<li [class.disabled]="p.isLastPage()" *ngIf="directionLinks">
+				<a *ngIf="!p.isLastPage()" (click)="p.next()" [attr.aria-label]="nextLabel + ' ' + screenReaderPageLabel" aria-label="Next">
+					<span aria-hidden="true">&raquo;</span>
+				</a>
+				<span *ngIf="p.isLastPage()">
+					<span aria-hidden="true">&raquo;</span>
+				</span>
+			</li>
+		</ul>
+	</pagination-template>
+</nav>

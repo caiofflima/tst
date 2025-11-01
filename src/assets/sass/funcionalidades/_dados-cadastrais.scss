@@ -1,0 +1,908 @@
+@import "/src/assets/sass/colors";
+@import "/src/assets/sass/mixins";
+@import "/src/assets/sass/utils";
+
+:host ::ng-deep .loading-spinner .ui-progress-spinner-circle {
+  animation: ui-progress-spinner-dash 1.5s ease-in-out infinite,
+    loading-progress-spinner-color 6s ease-in-out infinite;
+}
+
+@keyframes loading-progress-spinner-color {
+  to {
+    stroke: rgba(0, 0, 0, 0.4);
+  }
+  from {
+    stroke: rgba(0, 0, 0, 0.4);
+  }
+}
+
+html {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+.container-view {
+  background-color: $color-bg-polar;
+  padding-bottom: 32px;
+}
+
+.register-header {
+  background-color: $color-bg-polar;
+  margin-bottom: 24px;
+  .register-breadcrumb {
+    &--wrapper {
+      margin: 0 0 24px 0;
+    }
+  }
+  .register-title > p {
+    margin: 0 0 16px;
+    color: $color-brand-blue;
+  }
+}
+
+.separador {
+  width: 100%;
+  align-self: center;
+  background: $color-text-gelo-standard;
+  margin: 0 !important;
+  border: 1px solid $color-text-gelo-standard;
+}
+
+.box-data {
+  transition: all 0.3s ease-out;
+  padding: 24px;
+  background: white;
+  @include center-flex;
+  flex-direction: column;
+  @include breakpoint(sm) {
+    margin: 0;
+    border-radius: 5px;
+    box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.08);
+
+    margin: 0px;
+    width: 100%;
+    margin-left: 0;
+  }
+  .box-sect,
+  .box-cards {
+    width: 100%;
+  }
+  .box-sect{
+    .dadosDoTitularTitle{
+      //styleName: Títulos / btx-title-sm | 25px;
+      font-family: 'Caixa Std SemiBold' !important;
+      font-size: 25px !important;
+      font-weight: 700;
+      line-height: 30px;
+      text-align: left;
+      margin: 0px 0px 40px 0px;
+
+      color: #005CA9;
+    }
+
+
+
+
+  }
+
+  .box-header {
+    margin: 0 0 40px 0;
+
+    &__title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      h4 {
+        color: $color-brand-blue;
+        margin: 0;
+        font-size: 25px !important;
+        font-weight: 700;
+      }
+      > span {
+        width: 2px;
+        height: 18px;
+        display: block;
+        background-color: $color-bg-gray;
+      }
+      > p {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        font-family: "Caixa Std Book";
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 100%;
+        color: $color-text-grafite;
+        margin: 0;
+        padding: 0;
+        span {
+          &.is--success {
+            color: $color-status-success;
+          }
+          &.is--danger {
+            color: $color-status-danger;
+          }
+          &.is--warning {
+            color: $color-status-warning;
+          }
+          &.is--info {
+            color: $color-status-info;
+          }
+        }
+      }
+    }
+
+    &__badge {
+      margin-top: 16px;
+    }
+  }
+}
+
+.box-infos {
+  margin-bottom: 40px;
+
+  &__header {
+    @include flex-between;
+
+    h5 {
+      font-family: "Caixa Std SemiBold" !important;
+      font-size: 21px !important;
+      font-style: normal;
+      font-weight: 400;
+      color: $color-brand-blue;
+    }
+    > button {
+      @include create-btn(outlined_blue);
+      padding: 5.5px 16px;
+      &:disabled {
+        background: $btn-bg-cyan-disabled;
+        color: white;
+        border: 1px solid $btn-bg-cyan-disabled;
+      }
+    }
+  }
+  &__main {
+    > div {
+      padding-top: 10px;
+    }
+    > .box-infos__wrapper {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 8px;
+      @include breakpoint(sm) {
+        gap: 24px;
+        grid-template-columns: repeat(2, 1fr);
+      }
+      @include breakpoint(md) {
+        gap: 24px;
+        grid-template-columns: repeat(4, 1fr);
+      }
+      h4,
+      p {
+        font-size: 16px !important;
+        font-family: 'Caixa Std Book' !important;
+        font-weight: 400 !important;
+        margin: 0;
+        color: $color-text-grafite;
+      }
+      h4 {
+        font-family: 'Caixa Std SemiBold' !important;
+        margin-bottom: 4px;
+      }
+      .is--2-cols {
+        @include breakpoint(md) {
+          grid-column: span 2 / span 2;
+        }
+      }
+      .is--3-cols {
+        @include breakpoint(md) {
+          grid-column: span 3 / span 3;
+        }
+      }
+      .is--4-cols {
+        @include breakpoint(md) {
+          grid-column: span 4 / span 4;
+        }
+      }
+    }
+  }
+  &__controls {
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    div {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 24px;
+      flex-wrap: wrap;
+      @include breakpoint(sm) {
+        justify-content: space-between;
+      }
+    }
+  }
+}
+.box-form {
+  &__groups {
+    padding-top: 8px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+    @include breakpoint(sm) {
+      gap: 24px;
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @include breakpoint(xl) {
+      gap: 24px;
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+  &__title {
+    margin: 0 0 8px 0;
+    padding: 0;
+    h5,
+    p {
+      font-size: 16px !important;
+      margin: 0;
+      padding: 0;
+    }
+    h5 {
+      margin-bottom: 4px;
+    }
+  }
+  &__group {
+    margin: 0 0 8px 0;
+    padding: 0 !important;
+    width: 100%;
+    &.is--cep,
+    &.is--number,
+    &.is--complemento,
+    &.is--municipio {
+      width: 60%;
+    }
+    &.is--bairro {
+      width: 70%;
+    }
+
+    &.is--file .custom-card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      > label {
+        background-color: $color-brand-blue !important;
+        &:hover {
+          background-color: $color-brand-blue-darker !important;
+        }
+      }
+    }
+
+    @include breakpoint(sm) {
+      width: 100% !important;
+    }
+    @include breakpoint(xl) {
+      &.is--logradouro {
+        grid-column: span 2 / span 2;
+      }
+    }
+
+    label {
+      font-size: 16px;
+      margin-bottom: 4px;
+    }
+
+    .form__input {
+      position: relative;
+      .reset-input {
+        position: absolute;
+        right: 3px;
+        top: 50%;
+        height: 83%;
+        padding: 2px;
+        transform: translateY(-50%);
+
+        button {
+          border-radius: 1px;
+          border: 1px solid $color-text-grafite;
+          color: $color-text-grafite;
+          background: white;
+          box-shadow: 0px 2px 1px 0px rgba(18, 22, 28, 0.16);
+          height: 100%;
+          padding: 5.5px 16px;
+          @include center-flex;
+        }
+      }
+    }
+  }
+  &__controls {
+    margin-top: 24px;
+    @include center-flex;
+    justify-content: end;
+    gap: 24px;
+  }
+}
+
+.box-cards {
+  &__title {
+    color: $color-brand-blue;
+    font-family: 'Caixa Std SemiBold' !important;
+    font-size: 25px !important;
+    font-weight: 700;
+    margin: 0 0 16px 0;
+  }
+
+  &__wrapper {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-bottom: 48px;
+    max-width: 100%;
+    @include breakpoint(md) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @include breakpoint(xl) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .card {
+      padding: 16px;
+      border: 1px solid $color-bg-gray;
+      border-radius: 8px;
+      box-shadow: 0px 4px 24px 10px rgba(0, 0, 0, 0.06);
+      max-width: 100%;
+      &__header {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        position: relative;
+      
+        h5 {
+          font-size: 16px;
+          color: $color-brand-blue;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          line-height: 1.2em;
+          max-height: 2.4em; 
+          height: 2.4em;
+          white-space: normal;
+          flex: 1;
+        }
+      
+        > span {
+          width: 2px;
+          height: 18px; 
+          display: block;
+          background-color: $color-bg-gray;
+          align-self: flex-start;
+          margin-top: 0.6em; 
+        }
+      
+        > p {
+          display: flex;
+          align-items: center;
+          gap: 4px;
+          font-family: "Caixa Std Book";
+          font-size: 13px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 100%;
+          margin: 0;
+          padding: 0;
+          align-self: flex-start;
+          margin-top: 0.8em;
+      
+          span {
+            &.is--success {
+              color: $color-status-success;
+            }
+            &.is--danger {
+              color: $color-status-danger;
+            }
+            &.is--warning {
+              color: $color-status-warning;
+            }
+            &.is--info {
+              color: $color-status-info;
+            }
+          }
+        }
+      }
+      &__main div {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        margin-top: 6px;
+        h5,
+        p {
+          margin: 0;
+          padding: 0;
+        }
+        h5 {
+          font-size: 13px !important;
+          font-family: 'Caixa Std SemiBold' !important;
+          color: $color-text-grafite;
+          font-weight: 400;
+        }
+        p {
+          font-size: 13px !important;
+          line-height: 100%;
+          color: $color-text-grafite-lighter;
+        }
+        span {
+          &.is--success {
+            color: $color-status-success;
+          }
+          &.is--danger {
+            color: $color-status-danger;
+          }
+          &.is--warning {
+            color: $color-status-warning;
+          }
+          &.is--info {
+            color: $color-status-info;
+          }
+        }
+      }
+      &__controls {
+        margin-top: 12px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        @include breakpoint(xs) {
+          flex-wrap: nowrap;
+        }
+        button {
+          width: 100%;
+        }
+      }
+    }
+  }
+  &__message {
+    margin-bottom: 48px;
+    padding: 16px;
+    background-color: $color-bg-polar;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    span {
+      @include center-flex;
+      color: white;
+      margin: 0;
+      padding: 0;
+      width: 18px;
+      height: 18px;
+      border-radius: 200px;
+      background-color: $btn-bg-orange-dark;
+    }
+    p {
+      margin: 0;
+      padding: 0;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 100%;
+      color: $color-text-grafite-lighter;
+
+      //Alinhamento óptico
+      margin-top: 2px;
+    }
+
+    &.is--danger span {
+      background-color: $color-alerta;
+    }
+    &.is--success span {
+      background-color: $color-primary-2;
+    }
+    &.is--warning span {
+      background-color: $btn-bg-orange-dark;
+    }
+    &.is--info span {
+      background-color: $color-brand-blue;
+    }
+  }
+  &__controls {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+  }
+}
+
+.resume {
+  width: 100%;
+  max-width: 558px;
+  height: auto;
+  padding: 24px;
+  border-radius: 4px;
+  border: 2px solid $btn-bg-green;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  .separador {
+    margin: 16px 0px !important;
+  }
+  &-header {
+    h4 {
+      font-family: "Caixa Std Regular";
+      font-size: 13px !important;
+      color: $color-brand-blue;
+      @include breakpoint(md) {
+        font-size: 18px !important;
+      }
+    }
+    &__details {
+      @include flex-between;
+      flex-wrap: wrap;
+      gap: 8px;
+
+      color: $color-brand-blue;
+      > div {
+        h5 {
+          font-size: 13px !important;
+          @include breakpoint(md) {
+            font-size: 18px !important;
+          }
+        }
+        > div {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          color: $color-brand-blue;
+          font-size: 16px;
+          p {
+            color: #000;
+            font-family: "Caixa Std Bold" !important;
+            font-size: 13px !important;
+            margin: 0;
+            padding: 0;
+            @include breakpoint(md) {
+              font-size: 22px !important;
+            }
+          }
+          @include breakpoint(md) {
+            font-size: 20px;
+          }
+        }
+      }
+    }
+  }
+  &-main {
+    h5 {
+      font-family: "Caixa Std Regular";
+      font-size: 13px !important;
+      color: $color-brand-blue;
+      @include breakpoint(md) {
+        font-size: 16px !important;
+      }
+    }
+    p {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      color: #000;
+      font-size: 18px;
+    }
+    .resume-info {
+      &__data {
+        > div {
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          color: $color-brand-blue;
+          font-size: 16px !important;
+          @include breakpoint(md) {
+            font-size: 20px !important;
+          }
+          p {
+            color: #000;
+            font-family: "Caixa Std Book";
+            font-size: 12px !important;
+            @include breakpoint(md) {
+              font-size: 18px !important;
+            }
+          }
+        }
+      }
+    }
+  }
+  &-footer {
+    @include center-flex;
+    flex-direction: column;
+    text-align: center;
+    p {
+      margin-bottom: 24px;
+      font-size: 12px !important;
+      @include breakpoint(md) {
+        font-size: 14px !important;
+      }
+    }
+    h6 {
+      margin: 0 0 32px 0;
+      color: #000;
+      font-size: 13px !important;
+      font-weight: 400;
+      font-family: "Caixa Std Book" !important;
+      @include breakpoint(md) {
+        font-size: 16px !important;
+      }
+    }
+  }
+}
+
+.btn {
+  border-radius: 4px;
+  padding: 9px 16px;
+  font-weight: 700;
+  font-size: 16px;
+  margin: 0;
+  line-height: 100%;
+  font-family: "Caixa Std Book";
+  @include center-flex;
+  gap: 8px;
+  p,
+  span,
+  li {
+    margin: 0;
+    padding: 0;
+  }
+  &.is--primary {
+    border: none;
+    outline: none;
+    background-color: $color-brand-blue;
+    color: white;
+    box-shadow: 0px 2px 1px 0px rgba(0, 36, 66, 0.16);
+
+    &:hover {
+      background-color: $btn-bg-blue-dark;
+      color: white;
+    }
+    &.is--yellow {
+      background-color: $btn-bg-orange-darker;
+      border: 1px solid $btn-bg-orange-darker;
+
+      &:hover {
+        background-color: $btn-bg-orange-dark;
+        color: white;
+      }
+    }
+  }
+  &.is--secundary {
+    border: 1px solid $color-brand-blue;
+    background-color: white;
+    box-shadow: 0px 2px 1px 0px rgba(0, 36, 66, 0.16);
+    color: $color-brand-blue;
+    &:hover {
+      background-color: $color-bg-polar;
+    }
+    &.is--red {
+      color: $color-status-danger;
+      border: 1px solid $color-status-danger;
+    }
+  }
+  &.is--auxiliary {
+    background-color: white;
+    color: $color-text-grafite;
+    border: 1px solid $color-text-grafite;
+    box-shadow: 0px 2px 1px 0px rgba(18, 22, 28, 0.16);
+    &:hover {
+      background-color: $color-bg-polar;
+    }
+    &.is--red {
+      color: $color-status-danger;
+      border: 1px solid $color-status-danger;
+    }
+  }
+  &.is--small {
+    padding: 8px 16px;
+    font-size: 13px;
+  }
+  &.is--big {
+    font-size: 16px;
+    padding: 10px 18px;
+  }
+  &.is--bold {
+    font-family: "Caixa Std SemiBold" !important;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+  &.with--spinner {
+    position: relative;
+    .loading-spinner {
+      display: none;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 20px;
+      height: 20px;
+      transform: translate(-50%, -50%);
+      .ui-progress-spinner
+        .ui-progress-spinner-svg
+        .ui-progress-spinner-circle {
+        animation: ui-progress-spinner-dash 1.5s ease-in-out infinite !important;
+        stroke: black !important;
+      }
+    }
+  }
+}
+
+.badge {
+  @include center-flex;
+  width: fit-content;
+  background: $color-badge;
+  border-radius: 200px;
+  padding: 10px 16px;
+  color: white;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 100%;
+  font-family: "Caixa Std Book";
+  &.is--small {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+}
+
+.message {
+  margin-bottom: 48px;
+  padding: 16px;
+  background-color: $color-bg-polar;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  span {
+    @include center-flex;
+    color: white;
+    margin: 0;
+    padding: 0;
+    width: 18px;
+    height: 18px;
+    border-radius: 200px;
+    background-color: $btn-bg-orange-dark;
+  }
+  p {
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 100%;
+    color: $color-text-grafite-lighter;
+
+    //Alinhamento óptico
+    margin-top: 2px;
+  }
+
+  &.is--danger span {
+    background-color: $color-alerta;
+  }
+  &.is--success span {
+    background-color: $color-primary-2;
+  }
+  &.is--warning span {
+    background-color: $btn-bg-orange-dark;
+  }
+  &.is--info span {
+    background-color: $color-brand-blue;
+  }
+}
+
+.buttonSelecionarArquivosEndereco{
+  background: rgba(0, 92, 169, 1);
+  box-shadow: 0px 2px 1px 0px rgba(0, 36, 66, 0.16);
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  border-radius: 4px;
+  color: white;
+
+  //styleName: Textos Bold (fw800) / btx-text-sm | 13px;
+  font-family: 'Caixa Std SemiBold';
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 18.2px;
+  text-align: left;
+  span{
+    font-size: 14px;
+  }
+
+
+}
+::ng-deep #container-asc-documento-card-dados-cadastrais-detail{
+  // background: pink !important;
+  
+ &>#asc-documento-card-dados-cadastrais-detail{
+  // background: green !important;
+    div{
+  // background: green !important;
+
+      div.custom-card{
+        border: none !important;
+        box-shadow: none !important;
+        .arquivos{
+          .arquivo-card{
+            border: none;
+            border-bottom: 1px solid rgba(239, 244, 245, 1);
+            .arquivo-info{
+              .arquivo-nome{
+                font-family: 'Caixa Std Book';
+                font-size: 14px;
+                font-weight: 400;
+                line-height: 16.78px;
+                text-decoration: underline;
+                text-align: left;
+                color: rgba(0, 92, 169, 1);
+
+
+              }
+              .arquivo-data{
+                display: none;
+              }
+            }
+            .arquivo-actions{
+              button.infoIconColor {
+                display: none ;
+              }
+              button{
+                em{
+                  color: rgba(194, 0, 0, 1);
+                  font-size: 16px;
+                }
+                max-width: 48px;
+                max-height: 42px;
+                display: flex;
+                align-items: center;
+                border-radius: 4px;
+                padding: 10px 16px;
+                justify-content: center;
+                background: rgba(255, 255, 255, 1);
+                box-shadow: 0px 2px 1px 0px rgba(18, 22, 28, 0.16);
+
+                border: 1px solid rgba(194, 0, 0, 1);
+              }
+            }
+          }
+        }
+      }
+    }
+    .custom-card-footer{
+      justify-content: flex-start;
+      label{
+        background: rgba(0, 92, 169, 1);
+        border-radius: 4px;
+        max-height: 36px;
+        padding: 9px 16px;
+        box-shadow: 0px 2px 1px 0px rgba(0, 36, 66, 0.16);
+        //styleName: Textos Bold (fw800) / btx-text-sm | 13px;
+        font-family: 'Caixa Std SemiBold';
+        font-size: 13px;
+        font-weight: 700;
+        line-height: 18.2px;
+        text-align: left;
+        svg.icon-clip{
+          transform: scale(0.7) rotate(45deg);
+          width: 14px;
+        }
+
+      }
+      }
+    }
+  }
+
+  ::ng-deep #asc-select-municipio-dados-cadastrais-details,
+  ::ng-deep #asc-select-uf-dados-cadastrais-details{
+    .ui-dropdown-trigger{
+      border: none !important;
+    }
+  }
+
+  .control-label{
+    font-family: 'Caixa Std SemiBold' !important;
+    font-weight: 500 !important;
+    span{
+      color: #8FB5BC;
+    }
+  }

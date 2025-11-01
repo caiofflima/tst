@@ -1,0 +1,51 @@
+.body {
+    background-color:#E5EEF0;
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	z-index: -1;
+}
+
+.externo {
+    min-height: 400px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 50px;
+}
+.interno {    
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    padding: 1em 6em;
+
+    background: #fff;    
+    border-radius: 8px;
+
+    .fa {
+        font-size: 40px;
+        color: #E82B11;
+    }
+
+    h1 {
+        font-size: 42px!important;
+        margin-bottom: 0px!important;
+        color: #E82B11 !important;
+        border: none!important;
+    }
+
+    p:first-of-type{
+        margin: 25px 0px 10px;
+        font-size: 32px;
+        color: #005DA8;
+    }
+
+    span {
+        font-family: 'Caixa Std Bold', Helvetica;
+        color: #e82b11;
+        margin-top: 20px;
+    }
+}

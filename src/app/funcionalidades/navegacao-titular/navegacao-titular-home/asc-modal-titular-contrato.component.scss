@@ -1,0 +1,32 @@
+.modal-content {
+    padding: 20px;
+}
+
+.modal-dialog .modal-header button.close {
+    box-shadow: none !important;
+    margin: 0 !important;
+    font-size: 24px;
+    color: #fff;
+    opacity: 1;
+    min-width: auto;
+}
+
+.close {
+    float: right;
+    font-size: 21px;
+    font-weight: 700;
+    line-height: 0.7;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+    filter: alpha(opacity = 20);
+    opacity: .2;
+}
+
+.text-contrato {
+    font-family: "Caixa Std Regular", sans-serif !important;
+    font-size: 1em;
+}
+
+.modal-content {
+    padding: 0px;
+}

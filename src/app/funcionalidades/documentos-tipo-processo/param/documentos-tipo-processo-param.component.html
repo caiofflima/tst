@@ -1,0 +1,48 @@
+<asc-base-layout-home
+    [baseTitulo]="docTpProcService.getTitle()"
+    >
+    <ng-template #breadcrumb>
+        <em class="fa fa-chevron-right"></em>
+        {{duvidasService.getTitle()}}
+        <em class="fa fa-chevron-right"></em>
+        {{docTpProcService.getTitle()}}
+  </ng-template>
+
+  <form novalidate slot="content">
+            <div class="form-row">
+                <div class="col-md-6 mb-15 pl-0">
+                    <label class="control-label">Tipo de Pedido *</label>
+                    <asc-multiSelect
+                            id="tiposProcesso"
+                            required
+                            [options]="listComboTipoProcesso"
+                            [control]="formulario.get('tiposProcesso')"
+                    ></asc-multiSelect>
+                    <div *ngIf="formulario.get('tiposProcesso').invalid && (formulario.get('tiposProcesso').dirty || formulario.get('tiposProcesso').touched)" class="error-form" [ngStyle]="compStyle">
+                        <div *ngIf="formulario.get('tiposProcesso').errors?.required">Selecione um item na lista.</div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-15 pl-0">
+                    <label class="control-label">Tipo de Beneficiário *</label>
+                    <asc-multiSelect
+                            id="tiposBeneficiarios"
+                            required
+                            [options]="listComboTipoBeneficiario"
+                            [control]="formulario.get('tiposBeneficiario')"
+                    ></asc-multiSelect>
+                    <div *ngIf="formulario.get('tiposBeneficiario').invalid && (formulario.get('tiposBeneficiario').dirty || formulario.get('tiposBeneficiario').touched)" class="error-form" [ngStyle]="compStyle">
+                        <div *ngIf="formulario.get('tiposBeneficiario').errors?.required">Selecione um item na lista.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 barra-botoes">
+                <button (click)="limparCampos()" type="button" id="btnLimparCampos" class="btn back-btn">
+                    <span class="fa fa-trash fa-fw"></span>Limpar Campos
+                </button>
+                <button [disabled]="!formulario.valid" (click)="pesquisar()" type="submit" id="btnPesquisar" class="btn continue-btn">
+                    <span class="fa fa-search fa-fw"></span>Pesquisar
+                </button>
+            </div>
+
+        </form>
+</asc-base-layout-home>

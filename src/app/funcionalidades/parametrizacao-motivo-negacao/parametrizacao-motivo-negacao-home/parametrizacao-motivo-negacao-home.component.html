@@ -1,0 +1,70 @@
+<div class="container">
+  <div class="col-md-12 breadcrumb-header">
+    <ul class="breadcrumb">
+      <li><span (click)="voltar()" class="voltar"><i class="fa fa-arrow-left" aria-hidden="true"></i>Voltar</span></li>
+      <a routerLink="/home">Início</a>
+      <em class="fa fa-chevron-right"></em> Administração
+      <em class="fa fa-chevron-right"></em> Parâmetros
+      <em class="fa fa-chevron-right"></em> Motivos de Negação
+    </ul>
+  </div>
+  <div class="title-type">
+    <h1 class="titulo-pagina">Motivos de Negação</h1>
+  </div>
+
+  <section class="row">
+    <form novalidate>
+      <div class="form-row">
+        <div class="col-md-2 mb-15 pl-0">
+          <asc-dropdown 
+              [items]="icNiveisNegacao"
+              label="Nível de Negação"
+              (selected)="nivelNegacaoSeleconado($event)"
+              [control]="icNiveisNegacaoCombo"
+            ></asc-dropdown>
+        </div>
+        <div class="col-md-7 mb-15 pl-0" *ngIf="mostrarComboSituacaoDoPedido()">
+          <asc-dropdown
+            label="Situação do Pedido" [items]="situacaoPedidos" [control]="idSituacaoPedidoCombo"
+            id="idSituacaoPedidoCombo" (selected)="tipoSelecionado($event)"
+          ></asc-dropdown>
+        </div>
+        <div class="col-md-3 mb-15 pl-0">
+          <label class="control-label" for="tituloNegacao">Título da Negação</label>&nbsp;<br>
+          <input type="text" id="tituloNegacao" name="tituloNegacao" [(ngModel)]="filtro.tituloNegacao"
+                 class="form-control" [maxlength]="150" title="Titulo da Negação.">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="col-md-12 pl-0">
+          <label class="control-label" for="motivoNegacao">Motivo da Negação</label>&nbsp;<br>
+          <input type="text" id="motivoNegacao" name="motivoNegacao" [(ngModel)]="filtro.motivoNegacao"
+                 class="form-control" [maxlength]="150" title="Motivo da Negação.">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-md-2 p-0">
+          <p-checkbox name="ativos" inputId="ativos" value="S" [(ngModel)]="filtro.somenteAtivo"></p-checkbox>
+          <label for="ativos">Somente ativos</label>
+        </div>
+      </div>
+
+      <div class="col-xs-12 p-0 barra-botoes">
+        <button type="button" id="btnLimparCampos" class="btn back-btn" (click)="limparCampos()">
+          <span class="fa fa-trash fa-fw"></span>
+          Limpar Campos
+        </button>
+        <button type="button" id="btnNovoDocumento" class="btn clean-btn" routerLink="novo">
+          <span class="fa fa-plus fa-fw"></span>
+          Incluir Motivo Negação
+        </button>
+        <button type="submit" id="btnPesquisar" class="btn continue-btn" (click)="pesquisar()">
+          <span class="fa fa-search fa-fw"></span>
+          Pesquisar
+        </button>
+      </div>
+    </form>
+  </section>
+
+</div>

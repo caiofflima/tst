@@ -1,0 +1,61 @@
+<div class="container">
+	<div class="header header-breadcumb">		
+		<div class="bread-crumb-container">
+			<span routerLink="/" class="voltar"><i class="fa fa-arrow-left" aria-hidden="true"></i> Voltar</span>
+			<ul class="bread-crumb">
+			  <li><a routerLink="/home">Início</a> <i class="fa fa-angle-right" aria-hidden="true"></i></li>
+			  <li>Novo Pedido <i class="fa fa-angle-right" aria-hidden="true"></i></li>
+			  <li>Beneficiário <i class="fa fa-angle-right" aria-hidden="true"></i></li>
+			  <li>Atualização de Beneficiário</li>
+			</ul>
+		</div>
+	</div>
+
+	<p class="titulo-pagina">Atualização de Beneficiário</p>
+
+	<div class="c-grid">
+		<div>
+			<p class="info-search-label">Quais passos?</p>
+			<div class="section">
+				<div (mouseover)="setIndex(i)" class="info-boxes" *ngFor="let descricao of options; let i = index">
+					<span>{{i + 1}}</span>
+					<p>{{descricao}}</p>
+				</div>
+			</div>
+		</div>
+		<div class="info-pagina">
+			<p class="info-p">
+        Para facilitar o preenchimento do formulário, nós o dividimos em passos. Antes de começar o
+        preenchimento, tenha em mãos as informações e documentação necessárias.
+			</p>
+			<p class="info-h1">O que é necessário?</p>
+			<small class="desktop">Clique ou passe o cursor sobre itens ao lado para obter detalhes</small>
+			<small class="mobile">Clique ou passe o cursor sobre itens abaixo para obter detalhes</small>
+			<div class="steps-info">
+				<p class="info-p bordered" *ngIf="index === 0">
+					Escolha o(a) beneficiário(a) para o(a) qual deseja solicitar a atualização de dados cadastrais.
+				</p>
+				<p class="info-p bordered" *ngIf="index === 1">
+					Atualize os dados cadastrais básicos do beneficiário, ou avance para o passo seguinte.
+				</p>
+				<p class="info-p bordered" *ngIf="index === 2">
+					Atualize os dados cadastrais complementares, ou avance para o passo seguinte.
+				</p>
+				<p class="info-p bordered" *ngIf="index === 3">
+					Envie pelo menos um arquivo para cada documento exigido.
+				</p>
+				<p class="info-p bordered" *ngIf="index === 4">
+					Confira o resumo de todos os campos preenchidos antes de finalizar o pedido.
+				</p>
+			</div>
+		</div>
+	</div>
+
+	<div class="pagina-inicial-botoes">
+		<button class="continue-btn" routerLink="../alterar-dependente">
+			<span>
+				Iniciar
+			</span>
+		</button>
+	</div>
+</div>

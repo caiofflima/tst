@@ -1,0 +1,141 @@
+<div class="table-responsive table-bottom" [id]="idTable()">
+  <table summary="mytable" class="table table-sm table-hover">
+    <thead>
+      <tr *ngIf="showTitle()">
+        <th [attr.colspan]="headers().length">
+          {{ title() }}
+        </th>
+      </tr>
+      <tr>
+        <ng-container *ngFor="let header of headers()">
+          <th [id]="header.id"
+              [class]="header.clazz" 
+              [ngStyle]="style(header)"
+              [style.width]="header.width + '%'">
+            {{ header.text }}
+          </th>
+        </ng-container>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let row of rows() | paginate: configPagination()">
+        <tr [id]="row.id"
+            [class]="rowClass(row)" 
+            [ngStyle]="style(row)">
+          <ng-container *ngFor="let col of row.coluns">
+            <td [id]="col.id"
+                (click)="callbackCol(col)"
+                [ngClass]="col.clazz" 
+                [ngStyle]="style(col)">
+              {{ col.text }}
+
+              <div *ngIf="showAlertIcon(col)"
+                    style="display: inline;">
+                <label [ngClass]="classAlertIcon(col)"
+                       [title]="titleAlertIcon(col)">
+                  <span *ngIf="textAlert(col)" class="msg-restrito bordaRedonda">{{ col.textAlert }}</span>
+                  <span *ngIf="!textAlert(col)" [ngClass]="classIcon(col)"></span>
+                </label>
+              </div>
+              
+            </td>
+          </ng-container>
+          <td [id]="fieldId('_col_' + row.id)"
+              *ngIf="showAction(row)"
+              class="text-center"
+              style="vertical-align: middle">
+            <button [id]="fieldId('_btnEditar_' + row.id)"
+                    *ngIf="showEdit(row)"
+                    class="btn btn-warning btn-sm" 
+                    [title]="hintEdit"
+                    alt="Alterar"
+                    (click)="edit(row.object)">
+              <span class="fa fa-pencil fa-fw"></span>
+            </button>
+
+            <button [id]="fieldId('_btnExcluir_' + row.id)"
+                    *ngIf="showDelete(row)"
+                    class="btn btn-danger btn-sm" 
+                    [title]="hintDelete"
+                    alt="Excluir"		
+                    (click)="delete(row.object)">
+              <span class="fa fa-trash fa-fw"></span>
+            </button>
+
+            <button [id]="fieldId('_btnDetalhar_' + row.id)"
+                    *ngIf="showDetail(row) && !showLinkModal(row)"
+                    class="btn btn-info btn-sm" 
+                    [title]="hintDetail"
+                    alt="Detalhar"		
+                    (click)="detail(row.object)">
+              <span class="fa fa-search fa-fw"></span>
+            </button>
+
+            <button [id]="fieldId('_btnDetalhar_modal_' + row.id)"
+                    *ngIf="showDetail(row) && showLinkModal(row)"
+                    data-toggle="modal"
+                    [attr.data-target]="getIdModal(row)"
+                    class="btn btn-info btn-sm" 
+                    [title]="hintDetail"
+                    alt="Detalhar"		
+                    (click)="detail(row.object)">
+              <span class="fa fa-search fa-fw"></span>
+            </button>
+
+            <button [id]="fieldId('_btnSelecionar_modal_' + row.id)"
+                    *ngIf="showSelect(row)"
+                    class="btn btn-success btn-sm" 
+                    [title]="hintSelect"
+                    alt="Selecionar"		
+                    (click)="select(row.object, row.idModal)">
+              <span class="fa fa-check fa-fw"></span>
+            </button>
+
+            <button [id]="fieldId('_btnEditar_' + row.id)"
+                    *ngIf="showPdf(row)"
+                    class="btn btn-success btn-sm" 
+                    [title]="hintPdf"
+                    alt="Enviar"
+                    (click)="pdf(row.object)">
+              <span class="fa fa-file-text-o"></span>
+            </button>
+
+            <button [id]="fieldId('_btnEmail_' + row.id)"
+                    *ngIf="showEmail(row)"
+                    class="btn btn-success btn-sm"
+                    data-toggle="modal"
+                    [attr.data-target]="getIdModalEmail(row)"
+                    [title]="hintEmail"
+                    [disabled]="disabledEmail(row)"
+                    alt="Enviar email"
+                    (click)="email(row.object)">
+              <span class="fa fa-credit-card"></span>
+            </button>
+          </td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+  <div *ngIf="!showPaginacao(listObject())" style="text-align: center">Nenhum registro encontrado</div>
+  <div *ngIf="showPagination()">
+    <div class="col-md-4">
+        <select #selectElem class="selectElem" (change)="handleSelectElemChange($event)">
+          <option class="selectElem" [value]="5">5</option>
+          <option class="selectElem" [value]="10">10</option>
+          <option class="selectElem" [value]="50">50</option>
+          <option class="selectElem" [value]="100">100</option>
+        </select>
+        <span style="margin-left: 2%">
+            Foram localizados {{ dataList.total }} registro(s)
+        </span>
+    </div>
+    <div>
+        <pagination-controls [id]="getIdPagination()"
+                             class="col-md-6.5 pull-right" 
+                             (pageChange)="dataList.numberPage = $event;"
+                             previousLabel="" 
+                             nextLabel="">
+        </pagination-controls>
+    </div>
+  </div>
+</div>

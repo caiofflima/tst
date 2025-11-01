@@ -1,0 +1,39 @@
+<div [id]="modalId" class="modal fade" role="dialog">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title borderless">{{ getTitulo() }}</h4>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-md-8">
+						<div class="form-group">
+							<label class="control-label">Tipo de beneficiário</label>
+							<label class="label-detalhar">{{ getTipoBeneficiario() }}</label>
+						</div>
+					</div>
+					<div class="col-md-4" *ngFor="let item of getDetalhes()">
+						<div class="form-group">
+							<label class="control-label">{{ item.titulo }}</label>
+							<label class="label-detalhar">{{ getText(item.value) }}</label>
+						</div>
+					</div>
+				</div>
+				<hr>
+				<div class="row">
+					<div class="col-md-4" *ngFor="let item of getDetalhesPessoais()">
+						<div class="form-group">
+							<label class="control-label">{{ item.titulo }}</label>
+							<label class="label-detalhar">{{ getText(item.value) }}</label>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-primary" data-dismiss="modal">
+					<span class="fa fa-close fa-fw"></span>Fechar
+				</button>
+			</div>
+		</div>
+	</div>
+</div>

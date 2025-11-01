@@ -1,0 +1,163 @@
+<form [formGroup]="formularioSolicitacao">
+  <div
+    class="bottom-bordered"
+    style="width: 778px; margin: 10px auto -10px; padding-bottom: 0 !important"
+  >
+    <p class="titulo-card">
+      Confira o resumo do seu pedido e, se tudo estiver correto, clique em
+      "Finalizar".
+    </p>
+  </div>
+  <div class="resumo-container">
+    <asc-card-component>
+      <asc-card-title>
+        <p class="card-header">Dados do beneficiário</p>
+      </asc-card-title>
+      <asc-card-content>
+        <div class="ui-g">
+          <div class="ui-g-6 no-padding margin-16">
+            <label class="control-label">Nome completo</label>
+            <p>{{ beneficiario?.nome }}</p>
+          </div>
+          <div class="ui-g-6 no-padding margin-16">
+            <label class="control-label">Código de beneficiário</label>
+            <p>{{ beneficiario?.codigoBeneficiario }}</p>
+          </div>
+          <div class="ui-g-6 no-padding margin-16">
+            <label class="control-label">Tipo de beneficiário</label>
+            <p>{{ beneficiario?.contratoTpdep.tipoDependente.descricao }}</p>
+          </div>
+          <div class="ui-g-6 no-padding margin-16">
+            <label class="control-label">Data Nascimento</label>
+            <p>
+              {{ beneficiario?.matricula.dataNascimento | date : "dd/MM/yyyy" }}
+            </p>
+          </div>
+          <div class="ui-g-6 no-padding margin-16">
+            <label class="control-label">Sexo</label>
+            <p>
+              {{
+                beneficiario?.matricula.sexo === "M"
+                  ? "MASCULINO"
+                  : beneficiario?.matricula.sexo === "F"
+                  ? "FEMININO"
+                  : ""
+              }}
+            </p>
+          </div>
+          <div class="ui-g-6 no-padding margin-16">
+            <label class="control-label">Nome da mãe</label>
+            <p>{{ beneficiario?.matricula.nomeMae }}</p>
+          </div>
+          <div class="ui-g-6 no-padding margin-16">
+            <label class="control-label">Motivo do cancelamento</label>
+            <p>{{ motivoCancelamento?.nome }}</p>
+          </div>
+          <div class="ui-g-6 no-padding margin-16">
+            <label class="control-label">Data de Ocorrência</label>
+            <p>{{ dataOcorrencia | date : "dd/MM/yyyy" | campoVazioHifen }}</p>
+          </div>
+          <div class="ui-g-12 no-padding margin-16">
+            <label class="control-label">E-mail</label>
+            <p>{{ beneficiario?.email | campoVazioHifen }}</p>
+          </div>
+          <div class="ui-g-12 no-padding margin-16">
+            <label class="control-label">Telefone</label>
+            <p>{{ beneficiario?.celular | telefone | campoVazioHifen }}</p>
+          </div>
+        </div>
+      </asc-card-content>
+    </asc-card-component>
+
+    <div
+      class="left-grid"
+      *ngIf="documentosCadastrados && documentosCadastrados.length"
+      @fadeInOut
+    >
+      <div class="custom-card docsMP" style="display: block">
+        <div class="titulo-card">Documentos obrigatórios</div>
+        <asc-documento-card
+          [documentos]="documentosCadastrados"
+          (arquivosSelecionados)="arquivosSelecionados($event)"
+          (documentosTipoProcessoSelecionados)="watchDocumentos($event)"
+          (documentoTipoProcessoSelecionado)="selecionarTipoDocumento($event)"
+          [isInResumo]="true"
+        ></asc-documento-card>
+      </div>
+    </div>
+
+    <div class="custom-card">
+      <div class="left-grid">
+        <p class="card-header">Informações adicionais</p>
+        <div class="box">
+          <textarea
+            formControlName="informacaoAdicional"
+            style="width: 100%"
+            pInputTextarea
+            placeholder="Preencha com informações adicionais que você considere relevantes para a análise do seu pedido"
+          ></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+    <asc-button-secondary
+      buttonId="voltar"
+      (click)="setModal(true)"
+      title="Reiniciar"
+    ></asc-button-secondary>
+
+    <asc-button-primary
+      buttonId="continuar"
+      title="Finalizar"
+      (click)="onSubmit()"
+      [disabled]="this.verificarFaltaDeDocumentos() || showProgress"
+      [showProgress]="showProgress"
+      (onClick)="onSubmit()"
+    ></asc-button-primary>
+  </div>
+</form>
+
+<p-dialog
+  [(visible)]="showModal"
+  [responsive]="true"
+  [draggable]="false"
+  [resizable]="false"
+  [modal]="true"
+  [width]="420"
+  [height]="200"
+>
+  <p-header>
+    <p style="margin: 0">Deseja reiniciar o cancelamento do dependente?</p>
+  </p-header>
+
+  <div>
+    <div style="display: flex; justify-content: center">
+      <p class="modal-info-body">
+        ATENÇÃO! Voltar ao início implicará na perda de todos os preenchimentos.
+        Confirma a ação de reiniciar?
+      </p>
+    </div>
+    <div>
+      <p>
+        <p-footer>
+          <div class="footer no-mg-bottom">
+            <asc-button-secondary
+              buttonId="voltarModal"
+              (click)="setModal(false)"
+              title="Cancelar"
+            ></asc-button-secondary>
+            <asc-button-primary
+              buttonId="continuar"
+              [disabled]="showProgress"
+              [showProgress]="showProgress"
+              [title]="'Continuar'"
+              (onClick)="reiniciarForm()"
+            >
+            </asc-button-primary>
+          </div>
+        </p-footer>
+      </p>
+    </div>
+  </div>
+</p-dialog>

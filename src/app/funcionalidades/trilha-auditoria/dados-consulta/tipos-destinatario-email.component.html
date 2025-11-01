@@ -1,0 +1,48 @@
+<div class="col-md-12">
+  <p-table
+    [value]="dadosConsulta"
+    [paginator]="true"
+    [rows]="10"
+    class="table table-striped table-sm table-hover"
+    #dt
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th id="idEmail" style="width: 5%">ID Email</th>
+        <th id="Destinatario" style="width: 15%">Destinatário</th>
+        <th id="Evento" style="width: 5%">Evento</th>
+        <th id="Data" style="width: 10%">Data</th>
+        <th id="Responsavel" style="width: 10%">Responsável</th>
+        <th id="ipResponsavel" style="width: 10%">IP do Responsável</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData>
+      <tr>
+        <td>{{ rowData.idEmail }}</td>
+        <td>{{ rowData.tipoDestinatario }}</td>
+        <td>{{ rowData.strEvento }}</td>
+        <td>{{ rowData.dataHoraEvento | date : "dd/MM/yyyy HH:mm:ss" }}</td>
+        <td>{{ rowData.responsavel | cpfMask }}</td>
+        <td>{{ rowData.ipResponsavel }}</td>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="emptymessage">
+      {{ bundle("MA003") }}
+    </ng-template>
+    <!-- <p-column [style]="{'width':'5%'}" field="idEmail" header="ID Email"></p-column>
+		<p-column [style]="{'width':'15%'}" field="tipoDestinatario" header="Destinatário"></p-column>
+		<p-column [style]="{'width':'5%'}" field="strEvento" header="Evento"></p-column>
+		<p-column [style]="{'width':'10%'}" header="Data">
+			<ng-template let-row="rowData" pTemplate="content">
+              {{row.dataHoraEvento | date:'dd/MM/yyyy HH:mm:ss'}}
+        	</ng-template>
+		</p-column>
+		<p-column [style]="{'width':'10%'}" header="Responsável">
+			<ng-template let-row="rowData" pTemplate="content">
+              {{row.responsavel | cpfMask}}
+        	</ng-template>
+		</p-column>
+		<p-column [style]="{'width':'10%'}" field="ipResponsavel" header="IP do Responsável"></p-column> -->
+  </p-table>
+</div>

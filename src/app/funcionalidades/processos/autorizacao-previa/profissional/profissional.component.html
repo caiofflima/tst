@@ -1,0 +1,125 @@
+<form [formGroup]="form">
+  <div class="solicitacao-container">
+    <p class="titulo">
+      Muito bem! Agora, precisamos dos dados do profissional que
+      executar&aacute; o procedimento.
+    </p>
+    <div class="custom-form-group-select">
+      <asc-select-conselho-profissional
+        [control]="form.get('idConselhoProfissional')"
+        (dadoSelecionado)="conselhoSelecionado($event)"
+        label="Conselho Profissional"
+        [required]="true"
+      >
+      </asc-select-conselho-profissional>
+      <small class="custom-form-group-info"
+        >Exemplo: <strong>CRM</strong>-DF-65123</small
+      >
+    </div>
+
+    <div
+      class="custom-form-group-input"
+      *ngIf="form.get('idConselhoProfissional').dirty"
+    >
+      <asc-input-text
+        label="Número do Conselho"
+        [required]="true"
+        [control]="form.get('numeroConselho')"
+        inputId="numeroConselho"
+        [somenteNumeros]="true"
+        [maxlength]="15"
+      >
+      </asc-input-text>
+      <small class="custom-form-group-info"
+        >Exemplo: CRM-DF-<strong>65123</strong></small
+      >
+    </div>
+
+    <div
+      class="custom-form-group-select"
+      *ngIf="form.get('numeroConselho').valid"
+    >
+      <asc-select-uf
+        label="UF"
+        [placeholder]="'Selecione'"
+        [control]="form.get('idEstadoConselho')"
+        (dadoSelecionado)="ufEstadoConselhoSelecionado($event)"
+        [required]="true"
+      ></asc-select-uf>
+      <small class="custom-form-group-info"
+        >Exemplo: CRM-<strong>DF</strong>-65123</small
+      >
+    </div>
+    <p class="titulo" *ngIf="form.get('idEstadoConselho').dirty">
+      O pedido é de uma clínica, por exemplo? Então informe abaixo os dados da
+      Pessoa Jurídica. Senão, os do próprio profissional de saúde.
+    </p>
+    <div
+      class="custom-form-group-input"
+      *ngIf="form.get('idEstadoConselho').dirty"
+    >
+      <div class="limited-width">
+        <asc-cpf-cnpj
+          style="border-left: none !important"
+          label="CPF ou CNPJ do solicitante"
+          [control]="form.get('cpfCnpj')"
+          [required]="true"
+        ></asc-cpf-cnpj>
+      </div>
+    </div>
+
+    <div class="custom-form-group-input" *ngIf="form.get('cpfCnpj').dirty">
+      <asc-input-text
+        [somenteLetrasMaiusculas]="'true'"
+        label="Nome ou Razão social"
+        [required]="true"
+        [control]="form.get('nomeProfissional')"
+        inputId="nomeProfissional"
+      >
+      </asc-input-text>
+    </div>
+
+    <div
+      class="custom-grid-form-group"
+      *ngIf="form.get('nomeProfissional').dirty"
+    >
+      <div class="custom-grid-1-left">
+        <div class="custom-form-group-select">
+          <asc-select-uf
+            label="UF"
+            [placeholder]="'Selecione'"
+            [control]="form.get('idEstadoProfissional')"
+            [required]="true"
+          ></asc-select-uf>
+        </div>
+      </div>
+      <div
+        class="custom-grid-1-right"
+        *ngIf="form.get('idEstadoProfissional').dirty"
+      >
+        <div class="custom-form-group-select">
+          <asc-select-municipio
+            label="Município"
+            [parametro]="{
+              idMunicipio: form.get('idEstadoProfissional').value
+            }"
+            (dadoSelecionado)="municipioProfissionalSelecionado($event)"
+            [control]="form.get('idMunicipioProfissional')"
+            [required]="true"
+          ></asc-select-municipio>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+    <button class="back-btn" cdkStepperPrevious type="text">Voltar</button>
+    <button
+      class="continue-btn"
+      cdkStepperNext
+      [disabled]="form.invalid"
+      (click)="onSubmit()"
+    >
+      Continuar
+    </button>
+  </div>
+</form>

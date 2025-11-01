@@ -1,0 +1,60 @@
+@import "../acompanhamento.component.scss";
+
+.beneficiario-card {
+  img {
+    border-radius: 50px;
+    width: 100px;
+    height: 100px;
+  }
+}
+
+.beneficiario-user-idade {
+  font-family: 'Caixa Std Regular', sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 14px;
+  color: #B4B4B4;
+  margin-top: 0.5em;
+  margin-bottom: 0;
+}
+
+.beneficiario-card-user-parentesco {
+  font-family: 'Caixa Std Regular', sans-serif;
+  font-size: 14px;
+  line-height: 17px;
+  color: #000000;
+  margin-top: 0.5em;
+  margin-bottom: 0;
+}
+
+.beneficiario-user-nome {
+  font-family: 'Caixa Std Regular', sans-serif;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 19px;
+  color: #17A2B8;
+}
+
+.beneficiario-user-label-campos {
+  font-style: normal;
+  font-size: 14px;
+  line-height: 17px;
+  color: #000000;
+  margin-bottom: 0.25em;
+  font-weight: bold;
+}
+
+.beneficiario-user-descricao-campos {
+  @extend .beneficiario-user-label-campos;
+  font-weight: normal;
+}
+
+
+.align-card-column-center {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+}
+

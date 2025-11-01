@@ -1,0 +1,55 @@
+<form #formDirective="ngForm" [formGroup]="form">
+  <div class="custom-left-grid">
+    <asc-select-procedimento
+      [id]="inResumo ? 'idProcedimentoResumo' : 'idProcedimento'"
+      (dadoSelecionado)="procedimentoSelecionando($event)"
+      [control]="idProcedimento"
+      [parametros]="parametroSelectProcedimento"
+      [tipoAcaoService]="CONSULTAR_PROCEDIMENTO_POR_TIPO_PROCESSO"
+      formControlName="idProcedimento"
+      label="Procedimento"
+      [required]="true"
+      style="border-left: none !important;">
+    </asc-select-procedimento>
+    <div class="margin-16">
+      <asc-graus-procedimento
+        *ngIf="idProcedimento.dirty"
+        [parametros]="parametrosSelectGrauProcedimento"
+        [control]="idGrauProcedimento"
+        (dadosBackend)="grauProcedimentoCarregado($event)"
+        (dadoSelecionado)="grauProcedimentoSelecionado($event)"
+        formControlName="idGrauProcedimento"
+        [required]="true"
+        label="{{ isTipoProcessoOdontologico() ? 'Região odontológica' : 'Grau'}}"
+        style="border-left: none !important;">
+      </asc-graus-procedimento>
+    </div>
+    <div *ngIf="idGrauProcedimento.dirty" class="margin-16">
+      <asc-input-text
+        label="Quantidade solicitada" [required]="true"
+        [control]="form.get('qtdSolicitada')"
+        inputId="qtdSolicitada"
+        [somenteNumeros]="true">
+        <asc-input-error nomeErro="min" [msgErro]="bundle('MA012')"></asc-input-error>
+        <asc-input-error nomeErro="max" [msgErro]="bundle('MA132')"></asc-input-error>
+      </asc-input-text>
+    </div>
+    <div class="footer-buttons" *ngIf="!inResumo">
+      <button class="custom-btn-confirm" [disabled]="form.invalid" type="button"
+              (click)="adicionarProcedimento(formDirective)">
+        <span>{{(isEditing) ? 'Concluir alteração' : 'Adicionar'}}</span>
+      </button>
+      <button class="continue-btn-procedimento" style="margin: 0 !important" (click)="clickButtonCancelarProcedimento(formDirective)" type="button">
+        <span class="span-btn">{{(isEditing) ? 'Cancelar' : 'Limpar'}}</span>
+      </button>
+    </div>
+    <div class="footer-buttons" *ngIf="inResumo">
+      <button class="back-btn" (click)="clickButtonCancelarProcedimento(formDirective)" type="button">
+        {{(isEditing) ? 'Cancelar' : 'Limpar'}}
+      </button>
+      <button class="continue-btn" [disabled]="form.invalid" (click)="adicionarProcedimento(formDirective)" type="button">
+        <span>{{(isEditing) ? 'Concluir alteração' : 'Adicionar'}}</span>
+      </button>
+    </div>
+  </div>
+</form>

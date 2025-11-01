@@ -1,0 +1,94 @@
+<div class="container">
+  <div class="col-md-12 breadcrumb-header">
+    <ul class="breadcrumb">
+      <li><span (click)="voltar()" class="voltar"><i class="fa fa-arrow-left" aria-hidden="true"></i>Voltar</span></li>
+      <a routerLink="/home">Início</a>
+      <em class="fa fa-chevron-right"></em> Administração
+      <em class="fa fa-chevron-right"></em> Parâmetros
+      <em class="fa fa-chevron-right"></em>
+      <a routerLink="/manutencao/parametros/documentos">Documentos</a>
+      <em class="fa fa-chevron-right"></em> Documentos – Resultado
+    </ul>
+  </div>
+  <div class="title-type">
+    <h1 class="titulo-pagina">Documentos – Resultado</h1>
+  </div>
+
+  <section class="row">
+    <div *ngIf="!isNaoPossuiFiltros()">
+      <div class="p-0 col-md-12">
+        <h4>Dados da Pesquisa</h4>
+      </div>
+
+      <div class="clearfix"></div>
+
+      <div class="p-0 col-xs-2" *ngIf="filtroDocumento.idTipoDocumento">
+        <label class="control-label" for="tipoDocumento">Tipo de documento</label>&nbsp;<br>
+        <p id="tipoDocumento">{{documento}}</p>
+      </div>
+      <div class="p-0 col-xs-2" *ngIf="filtroDocumento.nome">
+        <label class="control-label" for="nome">Nome</label>&nbsp;<br>
+        <p id="nome">{{filtroDocumento.nome}}</p>
+      </div>
+      <div class="p-0 col-xs-2" *ngIf="filtroDocumento.ativo">
+        <label class="control-label" for="ativos">Somente ativos</label>&nbsp;<br>
+        <p id="ativos">{{filtroDocumento.ativo == 'S' ? 'Sim' : 'Não'}}</p>
+      </div>
+      <div class="p-0 col-xs-2" *ngIf="filtroDocumento.opme">
+        <label class="control-label" for="opme">OPME</label>&nbsp;<br>
+        <p id="opme">{{filtroDocumento.opme == 'S' ? 'Sim' : 'Não'}}</p>
+      </div>
+      <div class="p-0 col-xs-2" *ngIf="filtroDocumento.link">
+        <label class="control-label" for="link">Com link informado</label>&nbsp;<br>
+        <p id="link">{{filtroDocumento.link == 'S' ? 'Sim' : 'Não'}}</p>
+      </div>
+
+      <div class="clearfix"></div>
+    </div>
+
+    <div class="row p-0 col-md-12">
+      <h4>Resultado da Consulta</h4>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div class="p-0 col-md-12">
+      <div class="col-xs-3 search-inp p-0" style="margin: 5px 0 8px; border-bottom: 0 none">
+        <input #gb type="text" class="form-control filtro-caixa" pInputText size="50"
+               placeholder="Digite para filtrar resultado">
+        <em class="fas fa-search"></em>
+      </div>
+      <p-dataTable
+        id="caixa-table" [value]="listaDocumento" [rows]="10"
+        [paginator]="true" [pageLinks]="5" sortOrder="-1"
+        emptyMessage="Nenhum resultado encontrado para os filtros informados." [loading]="loading"
+        [rowsPerPageOptions]="[5,10,20]" [globalFilter]="gb" reorderableColumns="true" sortField="id"
+        class="table table-striped table-sm table-hover text-center">
+        <p-column field="tipoDocumento.nome" header="Tipo de Documento" [sortable]="true"></p-column>
+        <p-column field="nome" header="Nome" [sortable]="true"></p-column>
+        <p-column field="descricao" header="Descrição" [sortable]="true"></p-column>
+        <p-column field="opme" header="OPME" [sortable]="true" [style]="{'width':'90px'}"></p-column>
+        <p-column field="inativo" header="Inativo" [sortable]="true" [style]="{'width':'90px'}"></p-column>
+
+        <p-column header="Ação">
+          <ng-template let-row="rowData" pTemplate="content">
+            <span title="Editar registro" [routerLink]="['../editar', row.id]" id="editar">
+              <em class="fas fa-pen"></em>
+            </span>
+          </ng-template>
+        </p-column>
+      </p-dataTable>
+    </div>
+
+    <div class="p-0 col-xs-12 barra-botoes">
+      <button
+        class="btn back-btn" routerLink="/manutencao/parametros/documentos" id="btnFormVoltar">
+        <span class="fa fa-reply fa-fw"></span>Voltar
+      </button>
+      <button type="button" id="btnNovoDocumento" class="btn clean-btn" routerLink="../novo">
+        <span class="fa fa-plus fa-fw"></span>Incluir Documento
+      </button>
+    </div>
+
+  </section>
+</div>

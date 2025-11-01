@@ -1,0 +1,17 @@
+<label *ngIf="label" [ngStyle]="compStyle" class="control-label label-class"
+       [class.obrigatorio]="required !== null && required !== false">
+  {{label}}
+</label>
+<input [attr.id]="inputId" [formControl]="control" [ngStyle]="compStyle" class="form-control remove-left-border"
+       type="text" [required]="required"
+       title="{{hint}}" size="18" maxlength="18"
+       (blur)="blurAction($event)"
+       (focus)="focusAction($event)"
+       (keyup)="keyUpAction($event)"
+       (keydown)="keyDownAction($event)"/>
+<div *ngIf="control.invalid && (control.dirty || control.touched)" class="error-form" [ngStyle]="compStyle">
+  <div *ngIf="control.errors['required']">{{requiredMsg}}</div>
+  <div *ngIf="control.errors['cpf']">{{bundle('MA009', 'CPF')}}</div>
+  <div *ngIf="control.errors['cnpj']">{{bundle('MA009', 'CNPJ')}}</div>
+  <div *ngIf="control.errors['cpfCnpjInvalido']">{{bundle('MA009', 'CPF ou CNPJ')}}</div>
+</div>

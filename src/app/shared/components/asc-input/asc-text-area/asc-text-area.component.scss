@@ -1,0 +1,29 @@
+textarea {
+    resize:vertical;
+    min-height: 50px;
+}
+
+
+.ng-valid[required],
+.ng-valid.required,
+.ng-valid.requiredfield {
+  border-left: 5px solid #42a948 !important;
+}
+
+.ng-valid[required]:hover,
+.ng-valid.required:hover,
+.ng-valid.requiredfield:hover {
+  border-left: 5px solid #42a948 !important;
+}
+
+.ng-invalid[required]:not(form):not(p-dropdown) {
+  border-left: 5px solid #a94442 !important;
+}
+
+.ng-dirty.ng-invalid {
+  border-bottom-color: #f44336 !important;
+}
+
+.ng-dirty.ng-invalid:hover {
+  border-bottom-color: #f44336 !important;
+}

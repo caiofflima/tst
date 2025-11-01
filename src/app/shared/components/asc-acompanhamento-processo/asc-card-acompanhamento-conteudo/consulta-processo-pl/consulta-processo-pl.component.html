@@ -1,0 +1,26 @@
+<section>
+  <div class="upper-container">
+    <p class="title-section">Consultar pedidos</p>
+
+    <div class="container-search-section">
+      <p class="info-search-label">Selecione o pedido que deseja acompanhar</p>
+      <asc-input-button></asc-input-button>
+    </div>
+  </div>
+
+  <div class="main-section">
+    <nav class="header-container">
+      <p class="s-1 label-header">Pedido</p>
+      <p class="s-2 label-header">Tipo de pedido</p>
+      <p class="s-3 label-header">Tipo de beneficiario</p>
+      <p class="s-4 label-header">Agrupadora</p>
+      <p class="s-5 label-header">Beneficiario</p>
+      <p class="s-6 label-header">Situação Atual</p>
+      <p class="s-7 label-header"></p>
+      <p class="s-8 label-header">Ultima atualização</p>
+    </nav>
+    <div *ngFor="let pro of processos">
+      <asc-card-listagem-processo-pl [processo]="pro"></asc-card-listagem-processo-pl>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,146 @@
+.bg-white-container {
+  display: flex;
+  background-color: #fff;
+}
+
+div.resumo-container {
+  max-width: 450px;
+  padding: 16px 8px;
+  background-color: #EFF5F6;
+  margin: 30px auto 0;
+  height: max-content;
+
+  div.custom-card {
+    padding: 27px 24px 24px 24px;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    background-color: white;
+    border: 1px solid #B3C7CB;
+    border-radius: 3px;
+    position: relative;
+    margin: 0 auto 16px;
+    max-width: 450px;
+    width: 100%;
+
+    p,
+    span,
+    small {
+      padding: 0;
+      margin: 0;
+    }
+
+    &.success {
+      border: 2px solid #53AA5C;
+    }
+
+    p.titulo {
+      font-family: 'Caixa Std Bold', sans-serif;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 18px;
+      line-height: 25px;
+      color: #0065B7;
+    }
+
+    div.custom-line {
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+
+      p {
+        font-family: 'Caixa Std Bold', sans-serif;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 16px;
+        line-height: 22px;
+        color: #0065B7;
+      }
+
+      span {
+        font-family: 'Caixa Std Regular', sans-serif;
+        text-transform: uppercase;
+        line-height: 21px;
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+        color: #000000;
+      }
+
+      i {
+        color: #0057AE;
+        margin-right: 4px;
+      }
+    }
+
+    div.custom-grid {
+      display: flex;
+
+      div.numero {
+        width: 132px;
+      }
+
+      span {
+        font-weight: bold;
+        font-family: 'Caixa Std Bold', sans-serif;
+        font-size: 16px;
+        line-height: 26px;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        color: #000000;
+      }
+    }
+  }
+}
+
+div.bordered-bottom {
+  width: 100%;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+div.space-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@media print {
+  .no-print, .no-print * {
+    display: none !important;
+  }
+}
+
+
+.action-buttons-container {
+
+  i {
+    color: #0057AE;
+    font-size: 3rem;
+    margin: 0 8px;
+    border-radius: 50px;
+    cursor: pointer;
+  }
+}
+
+@media (max-width: 500px) {
+  .action-buttons-container {
+    position: static;
+    padding: 8px 0 0 0;
+
+    i {
+      margin: 0 4px;
+    }
+  }
+}
+
+.z-index-above {
+  z-index: 99;
+}
+
+.to-export {
+  position: absolute;
+  top: 0;
+  z-index: -1;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}

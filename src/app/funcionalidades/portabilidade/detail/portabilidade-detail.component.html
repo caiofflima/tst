@@ -1,0 +1,52 @@
+<section>
+  <div class="container">
+    <div class="col-md-12 breadcrumb-header">
+      <ul class="breadcrumb">
+        <li><span (click)="voltar()"  class="voltar"><i class="fa fa-arrow-left" aria-hidden="true"></i>Voltar</span></li>
+        <a routerLink="/home">Início</a>
+        <em class="fa fa-chevron-right"></em>
+        Meus dados
+        <em class="fa fa-chevron-right"></em>
+        Declaração de Portabilidade
+      </ul>
+    </div>
+
+    <p class="title-section">Declaração de Portabilidade</p>
+
+    <div class="form-group col-md-6 noPaddingLeft">
+      <div class="custom-form-group-input">
+        <asc-select-beneficiario-ativo-cancelado
+          selectId="beneficiario" [matricula]="matricula"
+          [uppercase]="true"
+          label="Beneficiário" required
+          [control]="formularioSolicitacao.get('dependente')"
+          (dadoSelecionado)="beneficiarioSelecionado($event)"
+        ></asc-select-beneficiario-ativo-cancelado>
+      </div>
+    </div>
+
+    <div *ngIf="dadosPortabilidade" #print> 
+
+      <div _ngcontent-c8="" class="card-frente" >  
+        <div _ngcontent-c8="" class="background-frente">
+          <p _ngcontent-c8="" class="cabecalho-carta"><img _ngcontent-c8="" src="../assets/images/cabecalho-carta.png" alt="cabeçalho carta"></p>
+          <p _ngcontent-c8="" class="titulo-carta"><b _ngcontent-c8="">{{tituloCarta}}</b></p>
+          
+          <p _ngcontent-c8="" class="texto-carta"><b _ngcontent-c8="">{{textoCarta}}</b></p>
+          <p _ngcontent-c8="" class="data-carta"><b _ngcontent-c8="">{{dataPorExtenso}}</b></p>
+         
+          <p _ngcontent-c8="" class="assinatura"><img  src="../assets/images/assinatura.png" alt="assinatura"></p>
+          <p _ngcontent-c8="" class="rodape-carta"><img _ngcontent-c8="" src="../assets/images/rodape-carta.png" alt="rodapé carta"></p>
+        </div>
+      </div>
+
+    </div>
+ 
+    <div *ngIf="dadosPortabilidade" class="col-xs-12 barra-botoes">
+      <button class="btn-pdf" (click)="gerarPDF()"><i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+        Gerar PDF
+      </button>
+  </div>
+  
+  </div>
+</section>

@@ -1,0 +1,97 @@
+<div class="col-md-12">
+  <p-table
+    [value]="dadosConsulta"
+    [paginator]="true"
+    [rows]="10"
+    class="table table-striped table-sm table-hover"
+    #dt
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th id="numeroPedido" style="width: 5%">Número do Pedido</th>
+        <th id="Anexo" style="width: 45%">Anexo</th>
+        <th id="Evento" style="width: 10%">Evento</th>
+        <th id="Data" style="width: 10%">Data</th>
+        <th id="responsavel" style="width: 10%">Responsável</th>
+        <th id="IP_Responsavel" style="width: 10%">IP do Responsável</th>
+        <th id="acoes" style="width: 5%">Ação</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData>
+      <tr>
+        <td>{{ rowData.nroProcesso }}</td>
+        <td>{{ rowData.anexo }}</td>
+        <td>{{ rowData.strEvento }}</td>
+        <td>{{ rowData.dataHoraEvento | date : "dd/MM/yyyy HH:mm:ss" }}</td>
+        <td>{{ rowData.responsavel | cpfMask }}</td>
+        <td>{{ rowData.ipResponsavel }}</td>
+        <td>
+          <button
+            class="btn btn-info"
+            title="{{ bundle('MH154') }}"
+            (click)="abrirModalDetalhamento(rowData)"
+          >
+            <span class="fa fa-search fa-fw"></span>
+          </button>
+        </td>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="emptymessage">
+      {{ bundle("MA003") }}
+    </ng-template>
+    <!-- <p-column [style]="{'width':'5%'}" field="nroProcesso" header="Número do Pedido"></p-column>
+		<p-column [style]="{'width':'45%'}" field="anexo" header="Anexo"></p-column>
+		<p-column [style]="{'width':'10%'}" field="strEvento" header="Evento"></p-column>
+		<p-column [style]="{'width':'10%'}" header="Data">
+			<ng-template let-row="rowData" pTemplate="content">
+              {{row.dataHoraEvento | date:'dd/MM/yyyy HH:mm:ss'}}
+        	</ng-template>
+		</p-column>
+		<p-column [style]="{'width':'10%'}" header="Responsável">
+			<ng-template let-row="rowData" pTemplate="content">
+              {{row.responsavel | cpfMask}}
+        	</ng-template>
+		</p-column>
+		<p-column [style]="{'width':'10%'}" field="ipResponsavel" header="IP do Responsável"></p-column>
+		<p-column [style]="{'width':'5%'}" header="Ação">
+			<ng-template let-row="rowData" pTemplate="content">
+				<button class="btn btn-info" title="{{bundle('MH154')}}" (click)="abrirModalDetalhamento(row);">
+					<span class="fa fa-search fa-fw"></span>
+				</button>
+			</ng-template>
+		</p-column> -->
+  </p-table>
+
+  <p-dialog
+    header="Detalhes do Anexo do Documento"
+    [(visible)]="showModalDetalhamento"
+    [modal]="true"
+    width="800"
+    [responsive]="true"
+    #modalDetalhamento
+  >
+    <div class="col-md-12">
+      <div class="col-md-4">
+        <label for="relevancia">Relevância</label>
+        <span id="relevancia" class="output-text">{{
+          selectedRow?.relevancia
+        }}</span>
+      </div>
+      <div class="col-md-12">
+        <label for="documento">Documento</label>
+        <span id="documento" class="output-text">{{
+          selectedRow?.documento
+        }}</span>
+      </div>
+    </div>
+
+    <p-footer class="dmsg-footer">
+      <div style="display: flex; justify-content: flex-end">
+        <button class="btn btn-danger" (click)="fecharModalDetalhamento()">
+          <span class="fa fa-close fa-fw"></span>Fechar
+        </button>
+      </div>
+    </p-footer>
+  </p-dialog>
+</div>

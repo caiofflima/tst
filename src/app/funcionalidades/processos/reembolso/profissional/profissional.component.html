@@ -1,0 +1,40 @@
+<div class="custom-container">
+
+  <p class="titulo">Muito bem! Precisamos também dos dados do profissional que realizou o procedimento.</p>
+
+  <div class="ui-g">
+    <div class="ui-g-12 ui-md-6">
+      <div class="custom-form-grid">
+        <label class="custom-input-label">Conselho profissional</label>
+        <asc-select-base-layout [matricula]="matricula" label="" [control]="formularioProfissional.get('conselho')"
+          (dadoSelecionado)="beneficarioSelecionado($event)">
+        </asc-select-base-layout>
+      </div>
+      <div class=" custom-form-grid  margin-24">
+        <label class="custom-input-label">Número do conselho</label>
+        <asc-input-text label="" [control]="formularioProfissional.get('numero')"></asc-input-text>
+      </div>
+      <div class=" custom-form-grid margin-16">
+        <label class="custom-input-label">UF</label>
+        <asc-select-base-layout [matricula]="matricula" label="" [control]="formularioProfissional.get('uf')"
+          (dadoSelecionado)="beneficarioSelecionado($event)">
+        </asc-select-base-layout>
+      </div>
+    </div>
+    <div class="ui-g-12 ui-md-6">
+      <div class="custom-form-grid">
+       Lorem ipsum
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="footer">
+  <button class="back-btn" cdkStepperPrevious>
+      Voltar
+  </button>
+  <button class="next-btn" cdkStepperNext>
+      Continuar
+  </button>
+</div>

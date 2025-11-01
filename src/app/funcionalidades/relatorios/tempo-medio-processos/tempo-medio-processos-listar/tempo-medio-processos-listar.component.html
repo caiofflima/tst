@@ -1,0 +1,188 @@
+<!-- Page Header-->
+<div class="col-md-12 breadcrumb-header">
+  <ul class="breadcrumb">
+    <li>
+      <span routerLink="/" class="voltar"
+        ><i class="fa fa-arrow-left" aria-hidden="true"></i>Voltar</span
+      >
+    </li>
+    <a routerLink="/home">Início</a>
+    <i class="fa fa-chevron-right"></i>
+    Relatórios
+    <i class="fa fa-chevron-right"></i>
+    <a routerLink="/relatorios/tempo-medio-processos"
+      >Tempo Médio dos Pedidos</a
+    >
+    <i class="fa fa-chevron-right"></i>
+    <a routerLink="/relatorios/tempo-medio-processos/lista"
+      >Resultado da Consulta</a
+    >
+  </ul>
+</div>
+
+<header class="page-header">
+  <div class="container-fluid">
+    <h2 class="no-margin-bottom">Consulta de Pedidos</h2>
+  </div>
+</header>
+
+<section class="row container-fluid">
+  <div class="clearfix"></div>
+
+  <div class="row col-md-9">
+    <h4>Resultado da Consulta</h4>
+  </div>
+
+  <div
+    class="row col-xs-3 floatRight"
+    style="padding: 4px 10px; border-bottom: 0 none"
+    *ngIf="listaProcessos !== undefined && listaProcessos.length > 0"
+  >
+    <input
+      type="text"
+      class="form-control filtro"
+      size="50"
+      placeholder="Digite para filtrar resultado"
+    />
+  </div>
+
+  <div class="clearfix"></div>
+
+  <div class="row col-md-12">
+    <p-table
+      [value]="listaProcessos"
+      [paginator]="true"
+      [rows]="rowCounter"
+      [rowsPerPageOptions]="[5, 10, 20]"
+      [totalRecords]="listaProcessos.length"
+      (onPage)="onPageChange($event)"
+      class="table table-striped table-sm table-hover"
+      #dt
+    >
+      <ng-template pTemplate="header">
+        <tr>
+          <th
+            id="competencia"
+            style="width: 60px"
+            pSortableColumn="competencia"
+          >
+            Competência
+          </th>
+          <th
+            id="siglaFilial"
+            style="width: 30px"
+            pSortableColumn="siglaFilial"
+          >
+            Agrupadora
+          </th>
+          <th
+            id="ufAtendimento"
+            style="width: 65px"
+            pSortableColumn="ufAtendimento"
+          >
+            UF Atend.
+          </th>
+          <th
+            id="tipoProcesso"
+            style="width: 98px"
+            pSortableColumn="tipoProcesso"
+          >
+            Tipo de Peddo
+          </th>
+          <th id="tempoMedio" style="width: 60px" pSortableColumn="tempoMedio">
+            Tempo Médio
+          </th>
+          <th
+            id="quantidadeTotal"
+            style="width: 60px"
+            pSortableColumn="quantidadeTotal"
+          >
+            Qtd. Total
+          </th>
+          <th
+            id="quantidadeAtraso"
+            style="width: 60px"
+            pSortableColumn="quantidadeAtraso"
+          >
+            Qtd. Atraso
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-rowData>
+        <tr>
+          <td>{{ rowData.competencia }}</td>
+          <td>{{ rowData.siglaFilial }}</td>
+          <td>{{ rowData.ufAtendimento }}</td>
+          <td>{{ rowData.tipoProcesso }}</td>
+          <td>{{ rowData.tempoMedio }}</td>
+          <td>{{ rowData.quantidadeTotal }}</td>
+          <td>{{ rowData.quantidadeAtraso }}</td>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="emptymessage">
+        {{ bundle("MA003") }}
+      </ng-template>
+      <!-- <p-column field="competencia" header="Competência" [sortable]="true"
+                [style]="{width: '60px', 'text-align': 'center', color: '#555555'}">
+      </p-column>
+      <p-column field="siglaFilial" header="Agrupadora" [sortable]="true"
+                [style]="{width: '30px', 'text-align': 'center', color: '#555555'}">
+      </p-column>
+      <p-column field="ufAtendimento" header="UF Atend." [sortable]="true"
+                [style]="{width: '65px', 'text-align': 'center', color: '#555555'}">
+      </p-column>
+      <p-column field="tipoProcesso" header="Tipo de Peddo" [sortable]="true"
+                [style]="{width: '98px', 'text-align': 'center', color: '#555555'}">
+      </p-column>
+      <p-column field="tempoMedio" header="Tempo Médio" [sortable]="true"
+                [style]="{width: '60px', 'text-align': 'center', color: '#555555'}">
+      </p-column>
+      <p-column field="quantidadeTotal" header="Qtd. Total" [sortable]="true"
+                [style]="{width: '60px', 'text-align': 'center', color: '#555555'}">
+      </p-column>
+      <p-column field="quantidadeAtraso" header="Qtd. Atraso" [sortable]="true"
+                [style]="{width: '60px', 'text-align': 'center', color: '#555555'}">
+      </p-column> -->
+      <p-footer>
+        {{ mensagemPaginacao }}
+      </p-footer>
+    </p-table>
+  </div>
+
+  <div class="col-xs-12 barra-botoes">
+    <span *ngIf="listaProcessos !== undefined && listaProcessos.length > 0">
+      <button
+        class="btn btn-info"
+        title="Relatório Analítico"
+        (click)="consultarRelatorioAnalitico()"
+      >
+        <span class="fa fa-list-alt fa-fw"></span>Analítico
+      </button>
+      <button
+        class="btn btn-info"
+        title="Download Relatório"
+        (click)="exportarPDFRelatorioTempoMedioProcessos()"
+      >
+        <span class="fa fa-download fa-fw"></span>Gerar PDF
+      </button>
+      <button
+        class="btn btn-info"
+        title="Download Relatório"
+        (click)="exportarXLSRelatorioTempoMedioProcessos()"
+      >
+        <span class="fa fa-download fa-fw"></span>Exportar XLS
+      </button>
+      <button
+        class="btn btn-info"
+        title="Download Relatório"
+        (click)="exportarCSVRelatorioTempoMedioProcessos()"
+      >
+        <span class="fa fa-download fa-fw"></span>Exportar CSV
+      </button>
+    </span>
+    <button class="btn btn-info" (click)="retornarConsulta()">
+      <span class="fa fa-reply fa-fw"></span>Voltar
+    </button>
+  </div>
+</section>

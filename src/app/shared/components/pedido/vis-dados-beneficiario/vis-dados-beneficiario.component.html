@@ -1,0 +1,53 @@
+		<div class="row col-md-12">
+          <h4>Pedido</h4>
+        </div>
+  
+        <div class="row col-md-12 coluna-interna">
+				
+        		<div class="row col-md-4" *ngIf="tipoProcesso">
+					<label class="control-label" for="tipoProcesso">Tipo de Pedido</label>
+					<p id="tipoProcesso">
+						{{tipoProcesso?.nome}}<span class="detalhe-aprovacao">{{tipoProcesso?.codigo}}</span>
+					</p>
+				</div>
+				
+        		<div class="row col-md-4" *ngIf="motivoSolicitacao">
+					<label class="control-label" for="motivoSolicitacao">Finalidade</label>
+					<p id="motivoSolicitacao">
+						{{motivoSolicitacao?.nome}}
+					</p>
+				</div>
+				
+				<div class="clearfix"></div>
+				
+          		<div class="row col-md-4">
+					<label class="control-label" for="nome">Nome</label>
+					<p id="nome" title="Beneficiário ao qual o pedido se refere.">{{beneficiario?.nome}}</p>
+				</div>
+								
+				<div class="row col-md-4">
+					<label class="control-label" for="codigo">Código</label>
+					<p>{{beneficiario?.codigoBeneficiario}}</p>
+				</div>
+
+				<div class="row col-md-4">
+					<label class="control-label" for="tipo">Tipo</label>
+					<p>{{beneficiario?.contratoTpdep?.tipoDependente?.descricao}}</p>
+				</div>
+
+				<div class="clearfix"></div>
+								
+				<div class="row col-md-4">
+					<label class="control-label" for="dtNascimento">Data de Nascimento</label>
+					<p id="dtNascimento">
+						{{beneficiario?.matricula?.dataNascimento | date: 'dd/MM/yyyy'}} <span class="detalhe-idade">{{beneficiario?.matricula?.dataNascimento | idade}} anos </span>
+					</p>
+				</div>
+				
+				<div class="row col-md-4">
+					<label class="control-label" for="cpf">CPF</label>
+					<p id="cpf">{{beneficiario?.matricula?.cpf | cpfMask }}</p>
+				</div>
+				
+				<div class="clearfix"></div>
+        </div>

@@ -1,0 +1,86 @@
+$background: #fff;
+$backazul: #1ca4de;
+$backvermelho: #c92c2c;
+$background-menu: #dddfcf;
+$bgmodaldefault: #0065b7;
+
+// Main Primary color
+$color-primary-0: #27790d;
+$color-primary-1: #5db043;
+$color-primary-2: #3f9524;
+$color-primary-3: #155800;
+$color-primary-4: #005ca9;
+$color-back-menu: #70b855;
+$color-back-submenu: #e6f4e1;
+
+// Status
+$color-status-danger: #900000;
+$color-status-warning: #f39200;
+$color-status-success: #54bbab;
+$color-status-info: #005ca9;
+
+// badge
+$color-badge: #c27300;
+
+// Main Secondary color (1)
+$color-secondary-1-0: #8f410f;
+$color-secondary-1-1: #d0824f;
+$color-secondary-1-2: #af5f2b;
+$color-secondary-1-3: #682900;
+$color-secondary-1-4: #3f1900;
+
+// Main Secondary color (2)
+$color-secondary-2-0: #6c0c4f;
+$color-secondary-2-1: #9d3c80;
+$color-secondary-2-2: #852066;
+$color-secondary-2-3: #4f0037;
+$color-secondary-2-4: #300021;
+
+$color-alerta: #cc0000;
+
+//Brand
+$color-brand-blue: #005ca9;
+$color-brand-blue-dark: #004680;
+$color-brand-blue-darker: #003057;
+
+// Gray
+$color-text-gray-darker: #8fb5bc;
+$color-bg-gray: #d0e0e3;
+
+$color-text-grafite: #3a4859;
+$color-text-grafite-lighter: #4e6178;
+$color-text-gelo-standard: #d0e0e3;
+$color-bg-polar: #f6f9f9;
+
+/* Botões */
+$btn-bg-blue: #005ca9;
+$btn-bg-blue-dark: #004680;
+$btn-bg-blue-darker: #003057;
+
+$btn-bg-orange: #ffb647;
+$btn-bg-orange-dark: #ffa51f;
+$btn-bg-orange-darker: #f59300;
+$btn-bg-orange-darker: #f39200;
+
+$btn-bg-red: #e82b11;
+$btn-bg-red-dark: #c2240f;
+$btn-bg-red-darker: #9d1d0c;
+
+$btn-bg-green: #53aa5c;
+$btn-bg-green-dark: #408346;
+$btn-bg-green-darker: #205f27;
+
+$btn-bg-cyan: #17a2b8;
+$btn-bg-cyan-dark: #0c6977;
+$btn-bg-cyan-darker: #043841;
+$btn-bg-cyan-disabled: #afcacf;
+
+$btn-bg-light-cyan: #54bbab;
+
+$btn-bg-disabled: #d0e0e3;
+$btn-bg-white: #fff;
+
+$btn-transition: 250ms ease-in-out;
+
+$color-back-valido: $color-primary-1;
+$color-back-invalido: $color-alerta;

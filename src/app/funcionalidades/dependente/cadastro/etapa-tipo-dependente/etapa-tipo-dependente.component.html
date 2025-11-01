@@ -1,0 +1,82 @@
+<form [formGroup]="formularioSolicitacao">
+  <div class="solicitacao-container">
+    <div class="form-row">
+      <div class="col-md-12 no-padding">
+        <p class="titulo">
+          Vamos começar! Precisamos saber qual o beneficiário cujos dados deseja
+          atualizar.
+        </p>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-6 no-padding-left">
+        <asc-select-tipo-dependente
+          [uppercase]="true"
+          label="Tipo de beneficiário"
+          id="idTipoDependente"
+          [required]="true"
+          [titular]="false"
+          [inclusao]="true"
+          [control]="formularioSolicitacao.get('idTipoDependente')"
+          (dadoSelecionado)="tipoDependenteSelecionado($event)"
+          [idTipoProcesso]="idTipoProcesso"
+        >
+        </asc-select-tipo-dependente>
+      </div>
+
+      <div class="col-md-6 mb-15 no-padding-left" *ngIf="showMatricula">
+        <label class="control-label">Matrícula Titular</label>
+        <asc-input-text
+          [control]="formularioSolicitacao.get('matricula')"
+          inputId="matricula"
+          label=""
+          maskName="matriculaMask"
+          [required]="showMatricula"
+        ></asc-input-text>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12 no-padding-left">
+          <p class="titulo">
+            Você gostaria de informar um contato adicional para recebimento das
+            notificações do seu pedido?
+          </p>
+        </div>
+
+        <div class="col-md-6 mb-15 no-padding-left">
+          <label class="control-label">E-mail <small>Opcional</small></label>
+          <asc-input-text
+            [control]="formularioSolicitacao.get('email')"
+            inputId="email"
+            label=""
+          ></asc-input-text>
+        </div>
+
+        <div class="col-md-6 no-padding-left">
+          <label class="control-label">Telefone <small>Opcional</small></label>
+          <asc-input-telefone
+            [control]="formularioSolicitacao.get('telefoneContato')"
+            inputId="telefone"
+            label=""
+          ></asc-input-telefone>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+    <asc-button-secondary
+      buttonId="voltar"
+      [routerLink]="routerLinkToBack"
+      title="Voltar"
+    ></asc-button-secondary>
+
+    <asc-button-primary
+      buttonId="continuar"
+      title="Continuar"
+      [disabled]="formularioSolicitacao.invalid"
+      [showProgress]="showProgress"
+      (onClick)="onSubmit()"
+    ></asc-button-primary>
+  </div>
+</form>

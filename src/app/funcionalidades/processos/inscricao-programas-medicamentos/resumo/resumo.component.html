@@ -1,0 +1,82 @@
+<div class="custom-container">
+  <div class="bottom-bordered">
+    <div class="titulo">Confira o resumo do seu pedido e, se tudo estiver correto, clique em "Finalizar".</div>
+  </div>
+
+  <div class="resumo-body">
+    <asc-card-beneficiario
+      (beneficarioFormEmiter)="updateBeneficiario($event)"
+      [beneficiarioForm]="beneficiarioForm"
+    ></asc-card-beneficiario>
+
+    <div class="resumo-card">
+      <div class="space-btw m-10">
+        <p class="titulo-card">Patologia</p>
+      </div>
+      <div class="resumo-info-box">
+        <span>Patologia</span>
+        <p>{{patologia?.nome | campoVazioHifen}}</p>
+      </div>
+    </div>
+
+    <div class="resumo-card no-padding docs-obrig" *ngIf="documentos && documentos.length">
+      <div class="space-btw" style="padding: 26px 0 0 0;">
+        <p class="titulo-card">Documentos obrigatórios</p>
+      </div>
+      <asc-documento-card
+        [documentos]="documentos"
+        (arquivosSelecionados)="arquivosSelecionados($event)"
+        (documentoTipoProcessoSelecionado)="documentoTipoProcessoSelecionado($event)"
+        [isInResumo]="true" (possuiFaltaDeArquivos)="possuiFaltaDeArquivos($event)"
+      ></asc-documento-card>
+    </div>
+
+    <div class="resumo-card no-padding">
+      <div class="space-btw custom-padding">
+        <p class="titulo-card">Deseja adicionar alguma informação?</p>
+      </div>
+      <asc-card-info-adicional [infoAdicional]="infoAdicional"></asc-card-info-adicional>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <button (click)="setModal(true)" class="back-btn">
+    Reiniciar
+  </button>
+  <asc-button-primary
+    buttonId="finalizar"
+    [disabled]="documentoNaoPossuiArquivos || isLoading"
+    [showProgress]="isLoading"
+    title="Finalizar"
+    (onClick)="onSubmit()">
+  </asc-button-primary>
+</div>
+
+<p-dialog [(visible)]="showModal" [responsive]="true" [className]="'width-420'" [draggable]="false" [resizable]="false"
+          [modal]="true">
+
+  <p-header>
+    <p style="margin: 0">Deseja reiniciar a inscrição do pedido?</p>
+  </p-header>
+
+  <div style="display: flex; justify-content: center">
+    <p class="modal-info-body">ATENÇÃO! Voltar ao início implicará
+      na perda de todos os preenchimentos. Confirma a ação de reiniciar?</p>
+  </div>
+
+  <p-footer>
+    <div class="footer no-mg-bottom" style="justify-content: center;">
+      <button (click)="setModal(false)" class="back-btn">
+        Cancelar
+      </button>
+      <asc-button-primary
+        buttonId="continuar"
+        [disabled]="isLoading"
+        [showProgress]="isLoading"
+        title="Continuar"
+        (onClick)="reiniciarForm()">
+      </asc-button-primary>
+    </div>
+  </p-footer>
+</p-dialog>

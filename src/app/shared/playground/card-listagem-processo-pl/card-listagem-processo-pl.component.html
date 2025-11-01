@@ -1,0 +1,49 @@
+<div class="processo-card ">
+  <p class="s-1 processo-card-campo">{{processo.idPedido | campoVazioHifen}}</p>
+  <p class="s-2 processo-card-campo">{{processo.codTipoProcesso | campoVazioHifen}}</p>
+  <p class="s-3 processo-card-campo">{{processo.descTipoBeneficiario || '—'}}</p>
+  <p class="s-4 processo-card-campo">{{processo.filial || processo.idFilial | campoVazioHifen}}</p>
+  <p class="s-5 processo-card-campo">{{processo.descBeneficiario | campoVazioHifen | uppercase}}</p>
+  <p class="s-6 processo-card-campo">{{processo.descSituacaoPedido | campoVazioHifen}}</p>
+  <p class="s-7 processo-card-campo">
+    <asc-status-icon-manager [status]="processo.statusIcon"></asc-status-icon-manager>
+  </p>
+  <p class="s-8 processo-card-campo">{{(processo.dataUltimaAlteracao | date: 'dd/MM/yyyy HH:mm:ss') | campoVazioHifen}}</p>
+</div>
+
+<div class="mobile-processo-card ui-g">
+  <div class="ui-g-6 ui-md-6 ui-sm-12">
+    <p class="s-1 label-header">Processo</p>
+    <p class="s-1 processo-card-campo">{{processo.idPedido | campoVazioHifen}}</p>
+  </div>
+  <div class="ui-g-6 ui-md-6 ui-sm-12">
+    <p class="s-2 label-header">Tipo de pedido</p>
+    <p class="s-2 processo-card-campo">{{processo.codTipoProcesso | campoVazioHifen}}</p>
+  </div>
+  <div class="ui-g-6 ui-md-6 ui-sm-12">
+    <p class="s-3 label-header">Tipo de beneficiario</p>
+    <p class="s-3 processo-card-campo">{{processo.descTipoBeneficiario | campoVazioHifen}}</p>
+  </div>
+  <div class="ui-g-6 ui-md-6 ui-sm-12">
+    <p class="s-4 label-header">Agrupadora</p>
+    <p class="s-4 processo-card-campo">{{processo.filial || processo.idFilial | campoVazioHifen}}</p>
+  </div>
+  <div class="ui-g-6 ui-md-6 ui-sm-12">
+    <p class="s-5 label-header">Beneficiario</p>
+    <p class="s-5 processo-card-campo">{{processo.descBeneficiario | campoVazioHifen | uppercase}}</p>
+  </div>
+  <div class="ui-g-6 ui-md-6 ui-sm-12">
+    <p class="s-6 label-header">Situação Atual</p>
+    <p class="s-6 processo-card-campo">{{processo.descSituacaoPedido | campoVazioHifen}}</p>
+  </div>
+  <div class="ui-g-6 ui-md-6 ui-sm-12">
+    <p class="s-7 label-header">Situação</p>
+    <p class="s-7 processo-card-campo">
+      <asc-status-icon-manager [status]="processo.statusIcon"></asc-status-icon-manager>
+    </p>
+  </div>
+  <div class="ui-g-6 ui-md-6 ui-sm-12">
+    <p class="s-8 label-header">Ultima atualização</p>
+    <p class="s-8 processo-card-campo">{{(processo.dataUltimaAlteracao | date: 'dd/MM/yyyy HH:mm:ss') | campoVazioHifen}}</p>
+  </div>
+</div>

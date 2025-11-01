@@ -1,0 +1,252 @@
+<section class="mainSection">
+  <div class="container">
+    <div class="col-md-12 breadcrumb-header">
+      <ul class="breadcrumb">
+        <li><span (click)="voltar()" class="voltar"><i class="fa fa-arrow-left" aria-hidden="true"></i>Voltar</span>
+        </li>
+        <a routerLink="/home">Início</a>
+        <em class="fa fa-chevron-right"></em>
+        Meus dados
+        <em class="fa fa-chevron-right"></em>
+        Financeiro
+        <em class="fa fa-chevron-right"></em>
+        Extrato Financeiro
+      </ul>
+    </div>
+
+    <div class="row">
+      <h1 class="titulo-pagina">Extrato Financeiro</h1>
+    </div>
+    <!-------------------------------- ACCORDION ----------------------------------------------->
+    <div class="col-left">
+      <p-accordion>
+        <p-accordionTab class="menuremb" header="LANÇAMENTOS">
+          <div class="d-flex w-100 justify-content-space-between gap-25 mb-16">
+
+            <div class="containerLancamentoPorMes">
+              <div class="containericonCLPM">
+                <i class="fa fa-calendar lancamento-calendar" aria-hidden="true"></i>
+              </div>
+              <div class="labelCLPM">
+                Lançamentos por mês
+              </div>
+            </div>
+            <div class="flex-1 d-flex flex-column gap-6">
+              <label class="control-label">Ano</label>
+              <p-dropdown  class="noBorderDropdownTrigger form-control2 selectAno" [options]="anos" [(ngModel)]="anoLancamento"
+                [ngModelOptions]="{standalone: true}" optionLabel="label"
+                (onChange)="buscarLancamentosByAno($event.value.value)">
+              </p-dropdown>
+            </div>
+          </div>
+
+          <div *ngFor="let lancamento of lancamentos; let i = index" class="inline-resultado">
+            <div [style.background]="lancamento == lancamentoSelecionando ? '#F9FBFB' : 'white'" class="containerLancamentoItem">
+              <span *ngIf="lancamento == lancamentoSelecionando"  class="mr-10 leftHighlightStatus"></span>
+              <div class=" mr-auto d-flex flex-column">
+                <div class="strMesLI">{{lancamento?.strMes}}</div>
+                <div [style.color]="getClassByStatus(lancamento?.status)" class="statusLI">{{lancamento?.status}}</div>
+              </div>
+              <div (click)="detalharLancamento(lancamento)" class="ml-auto d-flex align-items-center ">
+                <p class="valor-accordion">{{lancamento?.valor | currency:'BRL': true}}</p>
+                <button (click)="detalharLancamento(lancamento)" class="btn-accordion">
+                  <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </p-accordionTab>
+        
+        <p-accordionTab class="menuremb2" header="REEMBOLSOS" (click)="prepararDadosReembolso()">
+
+          <div class="d-flex w-100 justify-content-space-between gap-25 mb-16">
+
+            <div class="containerLancamentoPorMes">
+              <div class="containericonCLPM-verde">
+                <i class="fa fa-calendar lancamento-calendar" aria-hidden="true"></i>
+              </div>
+              <div class="labelCLPM">
+                Reembolsos por mês
+              </div>
+            </div>
+            <div class="flex-1 d-flex flex-column gap-6">
+              <label class="control-label">Ano</label>
+              <p-dropdown class="noBorderDropdownTrigger form-control2 selectAno" [options]="anos" [(ngModel)]="anoReembolso"
+              [ngModelOptions]="{standalone: true}" optionLabel="label"
+              (onChange)="buscarReembolsosResumoPorAno($event.value.value)">
+            </p-dropdown>
+            </div>
+          </div>
+          <div *ngFor="let lancamento of lancamentosReembolso; let i = index" class="inline-resultado">
+            <div [style.background]="lancamento == lancamentoSelecionando ? '#F9FBFB' : 'white'" class="containerLancamentoItem">
+              <span *ngIf="lancamento == lancamentoSelecionando"  class="mr-10 leftHighlightStatus"></span>
+              <div class=" mr-auto d-flex flex-column">
+                <div class="strMesLI">{{lancamento?.strMes}}</div>
+              </div>
+              <div (click)="detalharLancamentoReembolso(lancamento)" class="ml-auto d-flex align-items-center ">
+                <p class="valor-accordion">{{lancamento?.valor | currency:'BRL': true}}</p>
+                <button (click)="detalharLancamentoReembolso(lancamento)" class="btn-accordion">
+                  <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </p-accordionTab>
+      </p-accordion>
+    </div>
+
+    <div class="col-right" *ngIf="APIindisponivel">
+      <div class="div-message">
+        <span><b>Serviço temporariamente indisponível. Tente mais tarde.</b></span>
+      </div>	
+    </div>  
+
+    <!-------------------------------- FIM ACCORDION ------------------------------------------->
+    <div class="col-right" *ngIf="!APIindisponivel">
+
+      <div *ngIf="!exibirReembolso && lancamentoSelecionando" class="container box-reembolso">
+        <div class="form-group  noPaddingLeft">
+          <h1 class=" title-blue  margin-title ">LANÇAMENTOS</h1>
+
+          <div class="w-100 d-flex justify-content-space-between">
+
+          <div class="d-flex flex-column">
+            <div class="fs-18 fw-7 ff-bold color3A4859 simple-border">{{lancamentoSelecionando.strMes}} {{anoLancamento.value}} 
+            </div>
+            <span class="fs-16 fw-4 ff-book" [style.color]="getClassByStatus(lancamentoSelecionando?.status)" 
+            style="font-size: 1.3rem">{{lancamentoSelecionando?.status}}</span>
+          </div>
+          <div class="d-flex flex-column gap-2">
+            <div style="text-align: end;" class="ff-bold fw-7 valor-resultado">{{lancamentoSelecionando.valor | currency:'BRL': true}}</div>
+
+            <div class="mensal-copar" style="text-align: end;">Mensalidade: <span>{{lancamentoSelecionando.valorMensalidade | currency:'BRL': true}}</span></div>
+            <div class="mensal-copar" style="text-align: end;">Coparticipação: <span>{{lancamentoSelecionando.valorCoparticipacao | currency:'BRL': true}}</span></div>
+
+          </div>
+        </div>
+
+
+          <div class="msg-erro simple-border erro-um"><i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+            Identificamos que alguns lançamentos desta folha não foram debitados. Confira o extrato para mais
+            informações.</div>
+
+          <div class="custom-form-group-input padding-top">
+            <asc-select-beneficiario-extrato id="selectBeneficiarioLancamentos" class="noBorderDropdownTrigger" 
+              selectId="beneficiario" [handle]="handle" label="Beneficiário" required
+              [uppercase]="true"
+              [control]="formularioSolicitacao.get('dependente')"
+              (dadoSelecionado)="beneficiarioSelecionadoLancamento($event, lancamentoSelecionando.mes, anoLancamento.value)">
+            </asc-select-beneficiario-extrato>      
+          </div>
+
+          <br>
+          <div *ngIf="mensalidadeExtrato || coparticipacaoExtrato"> 
+            
+            <h1 class="title-blue padding-top">
+              <i class="fa fa-usd" aria-hidden="true"></i>Detalhes do Lançamento
+            </h1>
+            <div class="info-financ">Mensalidade: 
+              <p class="float-right">{{ tratamentoValor(mensalidadeExtrato?.totalApresentado) | currency:'BRL': true}}</p>
+            </div>
+            <div class="info-financ">Coparticipação: 
+              <p class="float-right">{{ tratamentoValor(coparticipacaoExtrato?.totalApresentado) | currency:'BRL': true}}</p>
+            </div>
+            <div class="info-financ"><b>Total:
+              <p class="float-right">{{ tratamentoValor(mensalidadeExtrato?.totalApresentado) + tratamentoValor(coparticipacaoExtrato?.totalApresentado ) | currency:'BRL': true}}</p>
+            </b></div>
+            <br>
+            <div *ngIf="coparticipacaoExtrato"> 
+              <div *ngFor="let coparticipacaoAux of coparticipacaoExtrato?.coparticipacoes">
+                      <div class="nome-fantasia">{{coparticipacaoAux?.nomePrestador | uppercase}} 
+                        <p class="valor-pgto">
+                            {{ coparticipacaoAux?.totalCoparticipacao | currency:'BRL': true}}
+                            <i *ngIf="hasEventos(coparticipacaoAux)" class="fa fa-chevron-right" aria-hidden="true" 
+                            style="cursor:pointer" (click)="clickDetalharCoparticipacao(modalCoparticipacaoComponent, coparticipacaoAux)"></i> 
+
+                             <i *ngIf="!hasEventos(coparticipacaoAux)" class="fa fa-chevron-right" aria-hidden="true"></i> 
+                        </p> 
+                        <asc-modal-coparticipacao
+                        id="asc-modal-coparticipacao-reembolso-detail"
+                          [customStyleProperties]="stylePropsModal"
+                          [coparticipacao]="coparticipacaoAux"
+                          #modalCoparticipacaoComponent>
+                        </asc-modal-coparticipacao>
+                      </div>
+                      <p class="remb-cpfcnpj">{{coparticipacaoAux?.cpfCnpjPrestador | cpfCnpjMask}}</p>
+                      <div class="comp-data">Data do atendimento: 
+                        <p class="float-right">{{coparticipacaoAux?.dataAtendimento | date: 'dd/MM/yyyy'}}</p>
+                      </div>
+                    <div class="msg-erro">Este lançamento não foi debitado. Favor entrar em contato com a Central de
+                      Atendimento.</div>
+                    <br />
+                  </div> 
+              </div> 
+            </div>
+
+          <div class="box-info">
+            <i class="fa fa-exclamation-circle" aria-hidden="true"></i> 
+            Não reconhece algum lançamento? Ligue 0800 095 6094 ou acesse a <a href="#">Central Saúde Caixa</a>
+          </div>
+        </div>
+      </div>
+
+      <!------------------------------------------------REEMBOLSO---------------------------------------------->
+
+      <div *ngIf="exibirReembolso && lancamentoSelecionando" class="container box-reembolso">
+        <div class="form-group noPaddingLeft">
+          <h1 class="title-blue margin-title">REEMBOLSOS</h1>
+
+          <div class="w-100 d-flex justify-content-space-between">
+
+            <div class="d-flex flex-column">
+              <div class="fs-18 fw-7 ff-bold color3A4859 simple-border">{{lancamentoSelecionando.strMes}} {{anoLancamento.value}} 
+              </div>
+              <span class="fs-16 fw-4 ff-book" [style.color]="getClassByStatus(lancamentoSelecionando?.status)" 
+              style="font-size: 1.3rem">{{lancamentoSelecionando?.status}}</span>
+            </div>
+            <div class="d-flex flex-column gap-2">
+              <div style="text-align: end;" class="ff-bold fw-7 valor-resultado">{{lancamentoSelecionando.valor | currency:'BRL': true}}</div>
+            </div>
+          </div>
+
+          <div class="custom-form-group-input padding-top">
+            <asc-select-beneficiario-extrato selectId="beneficiario" class="noBorderDropdownTrigger" [handle]="handle" label="Beneficiário" required
+              [control]="formularioSolicitacao.get('dependente')"
+              [uppercase]="true"
+              (dadoSelecionado)="beneficiarioSelecionadoReembolso($event, lancamentoSelecionando.mes, anoLancamento.value)"></asc-select-beneficiario-extrato>  
+          </div>
+
+          <h1 class="title-blue padding-top">
+            <i class="fa fa-circle-dollar-to-slot" aria-hidden="true"></i>Detalhes do Reembolso
+          </h1>
+
+          <div *ngFor="let reembolso of reembolsosAGS; let i = index" class="simple-border">
+            <p class="comp-data">{{reembolso?.competencia | date: 'dd MMM yyyy'}}</p>
+            <div class="nome-prestador">{{reembolso?.nomePrestador | uppercase}} <p class="valor-pgto">{{reembolso?.valorReembolso |
+                currency:'BRL': true}}</p>
+            </div> <br>
+            <p class="remb-cpfcnpj">{{reembolso?.cpfCnpj | cpfCnpjMask}}</p>
+            <div class="info-remb">Valor apresentado: <p class="float-right">{{reembolso?.valorApresentado |
+                currency:'BRL': true}}</p>
+            </div>
+            <div class="info-remb">Valor não reembolsado: <p class="float-right">{{reembolso?.valorNaoReembolsado |
+                currency:'BRL': true}}</p>
+            </div>
+            <div class="info-remb">Valor reembolsado: <p class="float-right">{{reembolso?.valorReembolso |
+                currency:'BRL': true}}</p>
+            </div>
+            <div class="info-remb">Data do atendimento: <p class="float-right">{{reembolso?.dataAtendimento | date:
+                'dd/MM/yyyy'}}</p>
+            </div>
+
+            <br />
+          </div>
+          <div class="box-info"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> Não reconhece algum
+            lançamento? Ligue 0800 095 6094 ou acesse a <a href="#">Central Saúde Caixa</a></div>
+
+        </div>
+      </div>
+    </div>
+    
+  </div>
+</section>

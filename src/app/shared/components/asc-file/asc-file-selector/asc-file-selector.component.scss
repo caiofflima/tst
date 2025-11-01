@@ -1,0 +1,43 @@
+@import "/src/assets/sass/colors";
+@import "/src/assets/sass/mixins";
+
+div.custom-card-footer {
+  padding-top: 10px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+  label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #41a495;
+    border-radius: 3px;
+    border: 1px solid #36877b;
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: 250ms ease-in-out;
+
+    &:hover,
+    &:active {
+      background-color: #36877b;
+      transition: 250ms ease-in-out;
+    }
+
+    em,
+    span {
+      color: #fff;
+      font-family: "Caixa Std Bold", sans-serif;
+    }
+
+    em,
+    i {
+      margin-right: 8px;
+    }
+  }
+
+  input {
+    visibility: hidden;
+    position: absolute;
+  }
+}

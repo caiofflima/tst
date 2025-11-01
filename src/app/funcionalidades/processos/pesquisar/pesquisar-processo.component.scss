@@ -1,0 +1,145 @@
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.8);
+  z-index: 9999;
+}
+
+.spinner {
+  border: 8px solid #f3f3f3; /* Light grey */
+  border-top: 8px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading-text {
+  margin-top: 20px;
+  font-size: 18px;
+  color: #333;
+}
+
+.container-search-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2em;
+  margin-top: 2em;
+}
+
+.form-row {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.info-search-label {
+  font-family: 'Caixa Std Bold', sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 21px;
+  line-height: 140%;
+  color: #005DA8;
+}
+.header-container {
+  display: flex;
+  align-items: center;
+}
+
+.upper-container {
+  max-width: 1340px;
+  margin: 4em auto 2em auto;
+}
+
+.s-1,
+.s-2,
+.s-3,
+.s-4,
+.s-5,
+.s-6,
+.s-7,
+.s-8 {
+  margin: 0 .125em;
+  text-align: center;
+}
+
+.s-1 {
+  min-width: 10%;
+}
+
+.s-2 {
+  width: 10%;
+}
+
+.s-3 {
+  width: 15%;
+}
+
+.s-4 {
+  width: 5%;
+}
+
+.s-5 {
+  width: 20%;
+}
+
+.s-6 {
+  width: 20%;
+}
+
+.s-7 {
+  width: 5%;
+}
+
+.s-8 {
+  width: 10%;
+}
+
+@media (max-width: 800px) {
+  .header-container {
+    display: none;
+  }
+}
+
+.noPaddingLeft {
+  padding-left: 0 !important;
+}
+
+// .btn-success {
+//     color: #fff;
+//     background-color: #36867b;
+//     border-color: #36867b;
+//     padding: 10px;
+//     margin-right: 20px;
+// }
+
+// .btn-success:hover {
+//     color: #fff;
+//     background-color: #22675d;
+//     border-color: #22675d;
+// }
+
+.btn-outline-primary {
+  color: #004680;
+  background-color: transparent;
+  background-image: none;
+  border-color: #004680;
+  padding: 10px;
+}
+
+.btn-outline-primary:hover {
+  color: #fff;
+  background-color: #004680;
+}

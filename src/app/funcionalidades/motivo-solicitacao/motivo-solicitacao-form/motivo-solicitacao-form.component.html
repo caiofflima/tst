@@ -1,0 +1,150 @@
+<!-- Page Header-->
+<div class="container">
+  <div class="col-md-12 breadcrumb-header">
+    <ul class="breadcrumb">
+      <li><span (click)="voltar()" class="voltar"><i class="fa fa-arrow-left" aria-hidden="true"></i>Voltar</span></li>
+      <a routerLink="/home">Início</a>
+      <em class="fa fa-chevron-right"></em>
+      Administração
+      <em class="fa fa-chevron-right"></em>
+      Parâmetros
+      <em class="fa fa-chevron-right"></em>
+      <a [routerLink]="baseURL">{{ titulo }}</a>
+      <em class="fa fa-chevron-right"></em>
+      {{ titulo }} – <span *ngIf="!id">Inclusão</span><span *ngIf="id">Edição</span>
+    </ul>
+  </div>
+
+  <div class="title-type">
+    <h1 class="titulo-pagina">
+      {{ titulo }} – <span *ngIf="!id">Inclusão</span><span *ngIf="id">Edição</span>
+    </h1>
+  </div>
+  
+  <section class="row">
+    <form [formGroup]="formulario" >
+      <div class=" padding-top" *ngIf="id">
+        <div class="row col-xs-4">
+          <label>ID</label>
+          <p>{{motivoSolicitacao.id}}</p>
+        </div>
+        
+        <div class="row col-xs-4">
+          <label>Data de cadastramento</label>
+          <p>{{motivoSolicitacao.dataCadastramento | date: 'dd/MM/yyyy'}}</p>
+        </div>
+
+        <div class="row col-xs-4">
+          <label>Usuário</label>
+          <p>{{motivoSolicitacao.codigoUsuarioCadastramento}}</p>
+        </div>
+
+      </div>
+      
+      
+        <div class="row col-xs-6">
+          <asc-input-text
+            label="Descrição" required id="descricao" name="descricao" [control]="formulario.get('nome')"
+            hint="Descrição do Motivo" [maxlength]="150"
+          ></asc-input-text>
+        </div>
+  
+        
+  
+        <div class="row col-xs-6">
+          <br>
+          <label class="control-label" for="prestadorExclusivo">
+            <p-checkbox name="prestadorExclusivo"  binary="true" formControlName="prestadorExclusivo" inputId="prestadorExclusivo"></p-checkbox>
+            Exclusivo para prestador
+          </label>
+  
+        </div>
+
+      <div class="col-xs-12"></div>
+
+      <div *ngIf="id;" style="padding-top: 10px" class="form-row mb-15 ">
+        
+            <div class="row col-xs-3">
+              <p-checkbox
+                inputId="inativo" name="inativo" formControlName="inativo" binary="true"
+                (onChange)="onChangeInativo($event)"
+              ></p-checkbox>
+              <label class="control-label" for="inativo">Inativo</label>
+            </div>
+
+            
+              
+              <div class="col-xs-3 pl-0">
+                <asc-input-date
+                        [control]="dataInativacao" [required]="inativo.value"
+                        [disabled]="!inativo.value" inputId="dataInativacao" label="Data da Inativação"
+                ></asc-input-date>
+                <asc-message-error
+                        [control]="dataInativacao" type="dataIgualAtualMaior"
+                        errorMessage="Data de Inativação deve ser igual ou superior a data atual!"
+                ></asc-message-error>
+            </div>
+            
+            
+
+
+      </div>
+      
+    
+      
+      <div class="col-xs-12 barra-botoes">
+        <button
+          class="btn back-btn" (click)="voltar()" id="btnFormVoltar2">
+          <span class="fa fa-reply fa-fw"></span>Voltar
+        </button>
+        <button
+          *ngIf="id" class="btn clean-btn" (click)="excluir()" id="btnFormExcluir">
+          <span *ngIf="!loadingRM">
+            <span class="fa fa-remove fa-fw"></span>Excluir
+          </span>
+          <span
+          *ngIf="loadingRM"
+            [ngStyle]="{ display: showProgress && 'block' }"
+            class="loading-spinner"
+          >
+            <p-progressSpinner
+              animationDuration=".5s"
+              strokeWidth="4"
+              [style]="{ width: '100%', height: '100%' }"
+            >
+            </p-progressSpinner>
+          </span>
+        </button>
+        <button
+          *ngIf="id" class="btn clean-btn" (click)="restaurarCampos()" id="btnFormRestaurar">
+          Restaurar Campos
+        </button>
+        <button
+          class="btn back-btn" (click)="limparCampos()"
+          id="btnFormLimparCampos" *ngIf="!id">
+          <span class="fa fa-trash fa-fw"></span>Limpar Campos
+        </button>
+        <button
+          class="btn continue-btn" (click)="salvar()"
+          [disabled]="!formulario.valid || loading"
+          id="btnFormSalvar">
+          <span *ngIf="!loading" >
+            <span class="fa fa-save fa-fw"></span>Salvar
+          </span>
+          <span
+            *ngIf="loading"
+            [ngStyle]="{ display: showProgress && 'block' }"
+            class="loading-spinner"
+          >
+            <p-progressSpinner
+              animationDuration=".5s"
+              strokeWidth="4"
+              [style]="{ width: '100%', height: '100%' }"
+            >
+            </p-progressSpinner>
+          </span>
+        </button>
+      </div>
+    </form>
+  </section>
+</div>

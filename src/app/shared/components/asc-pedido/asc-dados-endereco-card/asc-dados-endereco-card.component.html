@@ -1,0 +1,127 @@
+<section>
+    <div class="ui-sm-2 card-flt-mr">
+       <!-- <button
+                class="btn-editar"
+                *ngIf="permissoes?.editar"
+                (click)="clickAlerarDados(true)"
+                [disabled]="modoEdicao">
+            <i class="fa fa-pencil" aria-hidden="true"></i>
+        </button> -->
+    </div>
+    <label class="titulo-card">Dados de Endereço</label>
+    <div class="ui-g marginBottom">
+        <div class="ui-g-8 no-padding-left">
+            <div *ngIf="!modoEdicao || !permissoes?.analisar">
+                <label class="label-campo-card">CEP</label>
+                <p>{{dependente?.coCepTitular | cepMaskPipe }}</p>
+            </div>
+             <!--  <p *ngIf="modoEdicao && permissoes?.analisar">
+             <asc-input-telefone
+                    [control]="dadosPessoaisForm.get('telefone')"
+                    inputId="telefone"
+                    label=""
+              ></asc-input-telefone> 
+            </p>-->
+        </div>
+        
+        <div class="ui-g-4 padding">
+            <div *ngIf="!modoEdicao || !permissoes?.analisar">
+                <label class="label-campo-card">Logradouro</label>
+                <p>{{dependente?.deLogradouroTitular | campoVazioHifen }}</p>
+            </div>
+           <!-- <p *ngIf="modoEdicao && permissoes?.analisar">
+                <asc-input-text
+                    [control]="dadosPessoaisForm.get('email')"
+                    inputId="email"
+                    label=""
+              ></asc-input-text> 
+            </p>-->
+        </div>
+    </div>
+
+    <div class="ui-g marginBottom">
+        <div class="ui-g-8 no-padding-left">
+            <div *ngIf="!modoEdicao || !permissoes?.analisar">
+                <label class="label-campo-card">Número</label>
+                <p>{{tratarZeroHifem(dependente?.nuEnderecoTitular)}}</p>
+            </div>
+             <!--  <p *ngIf="modoEdicao && permissoes?.analisar">
+             <asc-input-telefone
+                    [control]="dadosPessoaisForm.get('telefone')"
+                    inputId="telefone"
+                    label=""
+              ></asc-input-telefone> 
+            </p>-->
+        </div>
+        
+        <div class="ui-g-4 padding">
+            <div *ngIf="!modoEdicao || !permissoes?.analisar">
+                <label class="label-campo-card">Complemento</label>
+                <p>{{dependente?.deComplementoTitula | campoVazioHifen }}</p>
+            </div>
+           <!-- <p *ngIf="modoEdicao && permissoes?.analisar">
+                <asc-input-text
+                    [control]="dadosPessoaisForm.get('email')"
+                    inputId="email"
+                    label=""
+              ></asc-input-text> 
+            </p>-->
+        </div>
+    </div>
+
+        <div class="ui-g marginBottom">
+            <div class="ui-g-8 no-padding-left">
+                <div *ngIf="!modoEdicao || !permissoes?.analisar">
+                    <label class="label-campo-card">Bairro</label>
+                    <p>{{dependente?.noBairroTitular | campoVazioHifen }}</p>
+                </div>
+                 <!--  <p *ngIf="modoEdicao && permissoes?.analisar">
+                 <asc-input-telefone
+                        [control]="dadosPessoaisForm.get('telefone')"
+                        inputId="telefone"
+                        label=""
+                  ></asc-input-telefone> 
+                </p>-->
+            </div>
+            
+            <div class="ui-g-4 padding">
+                <div *ngIf="!modoEdicao || !permissoes?.analisar">
+                    <label class="label-campo-card">Estado</label>
+                    <p>{{dependente?.noEstado | campoVazioHifen }}</p>
+                </div>
+               <!-- <p *ngIf="modoEdicao && permissoes?.analisar">
+                    <asc-input-text
+                        [control]="dadosPessoaisForm.get('email')"
+                        inputId="email"
+                        label=""
+                  ></asc-input-text> 
+                </p>-->
+            </div>
+        </div>
+
+        <div class="ui-g marginBottom">
+            <div class="ui-g-8 no-padding-left">
+                <div *ngIf="!modoEdicao || !permissoes?.analisar">
+                    <label class="label-campo-card">Município</label>
+                    <p>{{dependente?.noMunicipio | campoVazioHifen }}</p>
+                </div>
+                 <!--  <p *ngIf="modoEdicao && permissoes?.analisar">
+                 <asc-input-telefone
+                        [control]="dadosPessoaisForm.get('telefone')"
+                        inputId="telefone"
+                        label=""
+                  ></asc-input-telefone> 
+                </p>-->
+            </div>
+        </div>
+    
+    <!--<div *ngIf="modoEdicao && permissoes?.editar" class="ui-md-12 to-footer marginBottom no-padding">
+        <button (click)="clickAlerarDados(false)" class="back-btn">
+            Cancelar
+        </button>
+
+        <button (click)="onSubmit()" class="continue-btn" [disabled]="!dadosEnderecoForm.valid">
+            Confirmar
+        </button>
+    </div> -->
+</section>

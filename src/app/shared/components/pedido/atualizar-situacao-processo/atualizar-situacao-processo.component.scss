@@ -1,0 +1,81 @@
+h1 {
+    border-bottom: none;
+ }
+ 
+ .text-align-center {
+    text-align: center;
+ }
+ 
+ .text-align-right {
+    text-align: right;
+ }
+ 
+ .margin-left-25 {
+    margin-left: 25px;
+ }
+ 
+ .margin-top-15 {
+    margin-top: 15px;
+ }
+ 
+ .color-darkorange {
+    color: darkorange;
+ }
+ 
+ .ans-box {
+    color: white;
+    background-color: darkblue;
+    padding: 4px 8px 4px 8px;
+    border-radius: 4px;
+ }
+ 
+ .card-box {
+    background-color: #f1f6f7;
+    border-radius: 25px;
+    padding: 40px 40px 20px 40px;
+ }
+ 
+ .input-box {
+    background-color:#f1f6f7;
+    border-radius: 4px;
+    padding: 15px 20px;
+ }
+ 
+ h3 {
+    border: none;
+    padding-bottom: 0px;
+  }
+ 
+  .no-padding-left {
+    padding-left: 0px;
+  }
+ 
+  .det-option {
+    color:#999999 !important;
+  }
+  
+.custom-badge { 
+	display: inline-block; 
+	padding: 3px 7px; 
+	font-size: 12px; 
+	font-weight: 700; 
+	line-height: 1; 
+	color: #fff; 
+	text-align: left; 
+	white-space: nowrap; 
+	vertical-align: middle; 
+	background-color: #777; 
+	border-radius: 10px;
+	margin: 0 0.2em 0.3em;
+    width: 49%!important;
+}
+
+.custom-badge-text {
+    float: left;
+}
+
+.custom-badge-icon {
+    float: right;
+    cursor: pointer;
+    padding-right: 2px;
+}

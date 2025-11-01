@@ -1,0 +1,8 @@
+export enum AcaoRequeridaAgenteEnum {
+  SOLICITANTE = 1,
+  ANALISTA = 2,
+  AUDITORIA_DE_SAUDE = 3,
+  SISTEMA = 4,
+  CENTRALIZADORA_NACIONAL = 5,
+  GERENCIA_NACIONAL = 6,
+}

@@ -1,0 +1,91 @@
+// Cor dos Alerts
+$color-success: #3c763d;
+$color-danger: #a94442;
+$color-info: #31708f;
+$color-warning: #8a6d3b;
+
+// Cor dos backgrounds
+$background-success: #dff0d8;
+$background-danger: #FFB2B2;
+$background-info: #d9edf7;
+$background-warning: #fcf8e3;
+
+// Cor das borders
+$border-success: #d6e9c6;
+$border-danger: #ebccd1;
+$border-info: #bce8f1;
+$border-warning: #faebcc;
+
+.alert {
+  margin-bottom: 3px;
+  width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: $background-warning; //!important
+  color: $color-warning;
+  border-color: $border-warning;
+  border-radius: 5px;
+  padding-left: 20px;
+
+  &.alert-warning {
+    background-color: $background-warning;
+    color: $color-warning;
+    border-color: $border-warning;
+
+    .close {
+      color: $color-warning;
+    }
+  }
+
+  &.alert-danger {
+    background-color: $background-danger;
+    color: $color-danger;
+    border-color: $color-danger;
+
+    .close {
+      color: $color-danger;
+    }
+  }
+
+  &.alert-info {
+    background-color: $background-info;
+    color: $color-info;
+    border-color: $border-info;
+
+    .close {
+      color: $color-info;
+    }
+  }
+
+  &.alert-success {
+    background-color: $background-success;
+    color: $color-success;
+    border-color: $border-success;
+
+    .close {
+      color: $color-success;
+    }
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  .close {
+    color: #fff;
+    opacity: 1;
+    border: none;
+  }
+}
+
+.alert-message {
+  top: 10px;
+  right: 0;
+  width: 100%;
+  z-index: 1050;
+  position: fixed;
+
+  .item-msg {
+    font-size: 12px;
+  }
+}

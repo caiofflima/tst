@@ -1,0 +1,140 @@
+<asc-apresentador
+  #apresentador
+  [apresentaveis]="mensagens"
+  (onNavigate)="apresentar($event)"
+>
+  <div conteudo style="height: 400px">
+    <div class="container-fluid info-box" id="infoEmail">
+      <table summary="mytable">
+        <caption class="captionTableNoView">
+          Mensagens enviadas detalhar table
+        </caption>
+        <tr>
+          <th scope="col"></th>
+          <th scope="col"></th>
+          <th scope="col"></th>
+        </tr>
+        <tbody>
+          <tr>
+            <td><label class="control-label">Assunto: &nbsp;</label></td>
+            <td>
+              <span>{{ mensagemEnviada?.email?.assunto }}</span>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label class="control-label">Situação Associada: &nbsp;</label>
+            </td>
+            <td>
+              <span>{{ mensagemEnviada?.email?.nomeSituacaoProcesso }}</span>
+            </td>
+          </tr>
+          <tr>
+            <td><label class="control-label">Enviada em: &nbsp;</label></td>
+            <td>
+              <span>{{
+                mensagemEnviada?.dataHoraEnvio | date : "dd/MM/yyyy HH:mm:ss"
+              }}</span>
+            </td>
+          </tr>
+          <tr>
+            <td><label class="control-label">De: &nbsp;</label></td>
+            <td>
+              <span
+                >"{{ mensagemEnviada?.email.nomeRemetente }}" &lt;{{
+                  mensagemEnviada?.email.emailRemetente
+                }}&gt;</span
+              >
+            </td>
+          </tr>
+          <tr>
+            <td><label class="control-label">Para: &nbsp;</label></td>
+            <td>
+              <span class="form-control-static">{{
+                mensagemEnviada?.emailDestinatario
+              }}</span>
+            </td>
+          </tr>
+          <tr>
+            <td><label class="control-label">Cc: &nbsp;</label></td>
+            <td>
+              <span class="form-control-static">{{
+                mensagemEnviada?.email?.copiaPara
+              }}</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <br />
+
+    <div class="mensagem-body">
+      <div
+        innerHTML="{{ mensagemEnviada?.textoEmailEnviado }}"
+        style="overflow: auto"
+      ></div>
+    </div>
+  </div>
+  <div acoes style="padding-left: 0.35em; padding-right: 0.35em">
+    <span class="btn-apresentador">
+      <button
+        pButton
+        type="button"
+        icon="fa-check"
+        label="Reenviar"
+        (click)="reenviarConfirmar()"
+      ></button>
+      <button
+        (click)="op.toggle($event)"
+        icon="fa-caret-down"
+        pButton
+        style="margin-left: -8px"
+        title="bundle('MH155')"
+        type="button"
+      ></button>
+    </span>
+  </div>
+</asc-apresentador>
+
+<p-overlayPanel #op>
+  <form [formGroup]="formulario" name="form">
+    <div class="row col-md-12">
+      <label class="control-label obrigatorio" for="emailDistinto"
+        >Para e-mail distinto</label
+      >
+
+      <input
+        type="text"
+        id="emailDistinto"
+        formControlName="emailDistinto"
+        name="emailDistinto"
+        class="form-control"
+        style="width: 297px"
+        title="E-mail distinto para reenvio da mensagem."
+      />
+
+      <asc-message-error
+        [control]="formulario.controls['emailDistinto']"
+        [errorMessage]="bundle('MA007')"
+        type="required"
+      ></asc-message-error>
+      <asc-message-error
+        [control]="formulario.controls['emailDistinto']"
+        [errorMessage]="bundle('MA019')"
+        type="email"
+      ></asc-message-error>
+    </div>
+  </form>
+
+  <div class="row col-md-12" style="text-align: right">
+    <button
+      (click)="reenviarConfirmar(this.formulario.get('emailDistinto').value)"
+      [disabled]="!formulario.valid"
+      label="Encaminhar"
+      pButton
+      type="button"
+    ></button>
+    <button (click)="op.hide()" label="Desistir" pButton type="button"></button>
+  </div>
+</p-overlayPanel>

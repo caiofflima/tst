@@ -1,0 +1,40 @@
+<asc-card-component>
+  <asc-card-title>
+    <div class="ui-sm-2 card-flt-mr">
+      <button (click)="setEdicao(true)" [disabled]="modoEdicao" class="btn-editar">
+        <i class="fa fa-pencil" aria-hidden="true"></i>
+      </button>
+    </div>
+    <div class="titulo-card">{{titleCardBeneficiario}}</div>
+  </asc-card-title>
+  <asc-card-content>
+    <div class="ui-g">
+      <div class="ui-g-12 no-padding">
+        <label class="control-label">{{titleBeneficiario}}</label>
+        <p>{{beneficiarioForm?.nome}}</p>
+      </div>
+
+      <div class="ui-g fl-bt">
+        <div class="ui-g-12 ui-md-12 custom-form-grid margin-16">
+          <label class="control-label">{{infoAdicionaisBeneficiario}}</label>
+        </div>
+        <div class="ui-g-12 ui-md-12 no-padding">
+          <label class="control-label block relative">Email</label>
+          <p *ngIf="!modoEdicao">{{beneficiarioForm?.email | campoVazioHifen}}</p>
+          <asc-input-text *ngIf="modoEdicao" [control]="form.get('email')"></asc-input-text>
+        </div>
+        <div class="ui-g-12 ui-md-12 no-padding margin-16">
+          <label class="control-label block">Telefone</label>
+          <p *ngIf="!modoEdicao">{{beneficiarioForm?.telefoneContato | campoVazioHifen}}</p>
+          <asc-input-telefone *ngIf="modoEdicao" [control]="form.get('telefoneContato')"></asc-input-telefone>
+        </div>
+      </div>
+    </div>
+  </asc-card-content>
+  <asc-card-footer>
+    <div class="fl-row-reverse" *ngIf="modoEdicao">
+      <button (click)="onSubmit()" [disabled]="form.invalid" class="continue-btn">Confirmar</button>
+      <button (click)="setEdicao(false)" class="back-btn">Cancelar</button>
+    </div>
+  </asc-card-footer>
+</asc-card-component>

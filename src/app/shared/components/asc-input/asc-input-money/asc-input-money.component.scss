@@ -1,0 +1,78 @@
+.form-control {
+  box-sizing: border-box;
+  border-radius: 5px !important;
+
+
+  &.padding-button {
+    padding-right: 45px;
+  }
+
+  &.padding-button-left {
+    padding-left: 45px!important;
+    border: 1px solid #c0c0c0 !important;
+  }
+}
+
+.relative {
+  position: relative;
+
+  button.custom-input-btn {
+    background: #F2F7F8;
+    position: absolute;
+    right: 1px;
+    border: none;
+    color: #4C556C;
+    width: 32px;
+    height: calc(100% - 2px);
+    top: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    span {
+      color: red;
+    }
+
+    &.left {
+      left: 1px;
+    }
+
+    &.left-required {
+      left: 5px;
+    }
+
+    &:hover {
+      border: none !important;
+      background-color: #F2F7F8;
+    }
+  }
+}
+
+.custom-input-btn {
+  margin: 0;
+}
+
+.ui-button-text-only .ui-button-text {
+  padding: 0 !important;
+  color: red;
+}
+
+.ng-valid[required], .ng-valid.required, .ng-valid.requiredfield {
+  border-left: 5px solid #42A948 !important;
+}
+
+.ng-valid[required]:hover, .ng-valid.required:hover, .ng-valid.requiredfield:hover {
+  border-left: 5px solid #42A948 !important;
+}
+
+.ng-invalid[required]:not(form):not(p-dropdown) {
+  border-left: 5px solid #a94442 !important;
+}
+
+.ng-dirty.ng-invalid {
+  border-bottom-color: #f44336 !important;
+}
+
+.ng-dirty.ng-invalid:hover {
+  border-bottom-color: #f44336 !important;
+}

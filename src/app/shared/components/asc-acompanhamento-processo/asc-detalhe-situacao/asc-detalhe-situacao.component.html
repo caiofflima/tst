@@ -1,0 +1,94 @@
+<asc-modal
+  class="classeAnexo()"
+  [openModal]="show"
+  (closeModal)="fecharModal()"
+>
+  <asc-modal-header> Detalhe da ocorrência </asc-modal-header>
+  <asc-modal-body
+    class="mdl-body-custom"
+    style="padding-bottom: 16px !important; max-height: 70vh; overflow-y: auto"
+  >
+    <section>
+      <div>
+        <div class="col-md-6 no-padding" style="float: left !important">
+          <p class="titulo-card">{{ situacaoPedido?.tipoOcorrencia?.nome }}</p>
+        </div>
+        <div
+          class="col-md-6 no-padding text-right"
+          style="float: right !important"
+        >
+          <div *ngIf="!tituloAcompanhamento">
+            <em class="fa fa-user-circle-o fa-fw"></em>
+            {{
+              getNomeUsuario(situacaoPedido, processoPedido?.idTipoProcesso)
+                | campoVazioHifen
+            }}<br />
+          </div>
+          <span style="font-size: 15px; color: #f7941e; font-weight: 600">
+            {{
+              situacaoPedido?.dataCadastramento | date : "dd/MM/yyyy HH:mm:ss"
+            }}
+          </span>
+        </div>
+      </div>
+      <div *ngIf="situacaoPedido?.situacaoProcesso">
+        <div class="col-md-12 no-padding">
+          <label>Situação</label>
+          <p>{{ situacaoPedido?.situacaoProcesso.nome }}</p>
+        </div>
+      </div>
+      <div class="col-md-12 no-padding" style="padding-bottom: 16px !important">
+        <label>Histórico</label>
+        <br />
+        <div class="text-area-container txt-area2" style="width: 100%">
+          <asc-text-area
+            [rows]="20"
+            aria-readonly="true"
+            readonly
+            [innerHTML]="situacaoPedido?.descricaoHistorico | campoVazioHifen"
+          ></asc-text-area>
+        </div>
+      </div>
+      <div *ngIf="documentos" class="subtitulo">Anexos</div>
+      <div *ngIf="documentos" style="margin-bottom: 20px">
+        <asc-documento-card
+          [documentos]="documentos"
+          [habilitarValidacao]="false"
+          [isInResumo]="true"
+          [apresentarDadosDocumento]="false"
+          [disableRemoveButton]="true"
+          [processo]="processoPedido"
+          *ngIf="situacaoPedido?.countAnexos"
+          [controls]="false"
+        >
+        </asc-documento-card>
+      </div>
+    </section>
+  </asc-modal-body>
+
+  <asc-modal-footer class="mdl-footer-custom">
+    <div class="fl-sb-btn">
+      <div *ngIf="situacaoPedido?.countMensagens == 0"></div>
+      <button (click)="fecharModal()" class="btn-cts btn-outline-closed">
+        <span>Fechar</span>
+      </button>
+      <button
+        class="btn-cts btn-send"
+        (click)="clickVerMensagem($event, modalMensagemPedidoComponent)"
+        *ngIf="situacaoPedido?.countMensagens > 0"
+      >
+        <svg class="icon-re-send"></svg>
+        <span>Ver mensagens</span>
+      </button>
+    </div>
+  </asc-modal-footer>
+</asc-modal>
+
+<asc-modal-visualizar-documento
+  #modalVisualizarDocumentoComponent
+></asc-modal-visualizar-documento>
+
+<asc-modal-mensagem-pedido
+  [mostrarBotoes]="permissoes?.analisar"
+  #modalMensagemPedidoComponent
+></asc-modal-mensagem-pedido>

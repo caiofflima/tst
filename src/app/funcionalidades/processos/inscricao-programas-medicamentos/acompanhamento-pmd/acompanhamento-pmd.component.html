@@ -1,0 +1,191 @@
+<asc-acompanhamento-processo-base
+  (onPermissoes)="updatePermissoes($event)"
+  [processo]="processo"
+>
+  <div asc-conteudo>
+    <div
+      class="c-card conteudo-spacing docsMP"
+      @fadeInOut
+      [class.c-card-invalido]="mostrarBordaVermelhaObrigatorios"
+      [class.c-card-valido]="mostrarBordaVerdeObrigatorios"
+      [hidden]="
+        !(mostrarBordaVerdeObrigatorios || mostrarBordaVermelhaObrigatorios) ||
+        (isAguardandoDocumentoComplementar && mostrarBordaVerdeObrigatorios)
+      "
+    >
+      <!--  (atualizarPedido$)="
+          atualizarPedido(); atualizarProcesso(); carregarProcesso()
+        " -->
+      <asc-documentos-obrigatorios-card
+        (hasDocumentos)="hasDocumentosObrigatorio($event)"
+        (onUploadComplete)="uploadConcluido()"
+        (atualizarPedido$)="atualizarProcesso()"
+        (hasDocumentosInvalidos)="hasDocumentosinvalido($event)"
+        [permissoes]="permissoes"
+        [processo]="processo"
+        tipoProcessadorUpload="processadorUploadComumPedido"
+        tipoUpload="documentoPedidoBeneficiario"
+        (listAnexos)="getListAnexosObrigatorio($event)"
+      ></asc-documentos-obrigatorios-card>
+      <div
+        *ngIf="
+          permissoes?.editar &&
+          permissoes?.tipo === 'analise' &&
+          !apresentarDocumentoComplementar
+        "
+        class="footer-btns-card"
+        style="padding-top: 1em !important; padding-bottom: 1em !important"
+        @fadeInOut
+      >
+        <button
+          (click)="showDocumentoComplementar(true)"
+          class="btn-small btn-card-novo"
+        >
+          <span class="fa fa-plus fa-fw"></span
+          ><span> Adicionar documento complementar</span>
+        </button>
+      </div>
+    </div>
+
+    <div
+      [hidden]="
+        !(possuiDocumentosComplementares && recebendoDocumentacaoTitular)
+      "
+      @fadeInOut
+      class="docsMP c-card conteudo-spacing"
+      [class.c-card-invalido]="mostrarBordaVermelhaCondicionais"
+      [class.c-card-valido]="mostrarBordaVerdeCondicionais"
+    >
+      <asc-documentos-condicionados
+        *ngIf="possuiDocumentosCondicionados && recebendoDocumentacaoTitular"
+        (atualizarPedido$)="atualizarProcesso()"
+        (hasDocumentos)="hasDocumentoCondicionados($event)"
+        (onUploadComplete)="uploadConcluido()"
+        (hasAnexos)="hasAnexos($event)"
+        [permissoes]="permissoes"
+        [processo]="processo"
+        (listAnexos)="getListAnexosObrigatorio($event)"
+      ></asc-documentos-condicionados>
+    </div>
+
+    <div @fadeInOut class="c-card conteudo-spacing">
+      <asc-beneficiario-card
+        [permissoes]="permissoes"
+        [processo]="processo"
+      ></asc-beneficiario-card>
+
+      <button
+        (click)="goToTop()"
+        class="btn-to-top"
+        *ngIf="possuiDocumentosCondicionados && recebendoDocumentacaoTitular"
+      >
+        Retornar ao topo
+      </button>
+    </div>
+
+    <div @fadeInOut class="c-card conteudo-spacing">
+      <!-- [permissoes]="permissoes" -->
+      <asc-dados-processo-card [processo]="processo"></asc-dados-processo-card>
+
+      <div class="dados-options">
+        <button
+          (click)="cancelarProcesso()"
+          *ngIf="permiteCancelamento()"
+          class="btn-cancel"
+        >
+          Cancelar processo
+        </button>
+        <button (click)="goToTop()" class="btn-to-top">Retornar ao topo</button>
+      </div>
+    </div>
+
+    <div
+      @fadeInOut
+      *ngIf="
+        possuiDocumentos &&
+        (!recebendoDocumentacaoTitular ||
+          (isAguardandoDocumentoComplementar && mostrarBordaVerdeObrigatorios))
+      "
+      class="docsMP c-card conteudo-spacing"
+    >
+      <asc-documentos-obrigatorios-card
+        (hasDocumentos)="hasDocumentosObrigatorio($event)"
+        (onUploadComplete)="uploadConcluido()"
+        (atualizarPedido$)="atualizarProcesso(); atualizarProcesso()"
+        [permissoes]="permissoes"
+        [processo]="processo"
+        tipoProcessadorUpload="processadorUploadComumPedido"
+        tipoUpload="documentoPedidoBeneficiario"
+      ></asc-documentos-obrigatorios-card>
+
+      <div
+        *ngIf="
+          permissoes?.editar &&
+          permissoes?.tipo === 'analise' &&
+          !this.apresentarDocumentoComplementar
+        "
+        class="footer-btns-card"
+        style="padding-top: 1em !important"
+      >
+        <button
+          (click)="showDocumentoComplementar(true)"
+          @fadeInOut
+          class="btn-small btn-card-novo"
+        >
+          <span class="fa fa-plus fa-fw"></span
+          ><span> Adicionar documento complementar</span>
+        </button>
+      </div>
+      <button (click)="goToTop()" class="btn-to-top">Retornar ao topo</button>
+    </div>
+
+    <div
+      *ngIf="
+        apresentarDocumentoComplementar &&
+        permissoes?.analisar &&
+        permissoes?.editar
+      "
+      @fadeInOut
+      class="c-card conteudo-spacing docsMP"
+    >
+      <!-- [permissoes]="permissoes" -->
+      <asc-documento-complementar-card
+        (onCancelar)="showDocumentoComplementar(false)"
+        (atualizarProcesso$)="atualizarProcesso()"
+        [possuiDocumentosObrigatorios]="possuiDocumentosObrigatorios"
+        [processo]="processo"
+      ></asc-documento-complementar-card>
+      <button (click)="goToTop()" class="btn-to-top">Retornar ao topo</button>
+    </div>
+
+    <div
+      *ngIf="possuiDocumentosCondicionados && !recebendoDocumentacaoTitular"
+      @fadeInOut
+      class="docsMP c-card conteudo-spacing"
+    >
+      <asc-documentos-condicionados
+        (hasDocumentos)="hasDocumentoCondicionados($event)"
+        (onUploadComplete)="uploadConcluido()"
+        (atualizarPedido$)="atualizarProcesso()"
+        (hasAnexos)="hasAnexos($event)"
+        [permissoes]="permissoes"
+        [processo]="processo"
+      ></asc-documentos-condicionados>
+      <button (click)="goToTop()" class="btn-to-top">Retornar ao topo</button>
+    </div>
+
+    <div
+      *ngIf="permissoes?.analisar && apresentarSituacao"
+      @fadeInOut
+      class="mg-card conteudo-spacing"
+    >
+      <!-- [permissoes]="permissoes" -->
+      <asc-mudanca-situacao-card-pl
+        (onMudancaConcluida)="mudancaSituacaoConcluida()"
+        (onSituacoesInvalidas)="onSituacaoInvalida()"
+        [processo]="processo"
+      ></asc-mudanca-situacao-card-pl>
+      <button (click)="goToTop()" class="btn-to-top">Retornar ao topo</button>
+    </div>
+  </div>
+</asc-acompanhamento-processo-base>

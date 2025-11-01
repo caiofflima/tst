@@ -1,0 +1,14 @@
+<asc-dropdown
+  [id]="id"
+  [selectId]="selectId"
+  [label]="label"
+  [required]="required"
+  (selected)="updateValue($event)"
+  (filter)="filter($event, params.idTipoProcesso)"
+  [items]="data"
+  filterBy="filtering"
+  [control]="control"
+  [value]="innerValue"
+  [showProgressBar]="showProgressBar"
+  [placeholder]="isProcessoLazy(params.idTipoProcesso) ? 'Selecione uma opção. Informe o nome ou parte do nome do procedimento para carregar a lista...' : null"
+></asc-dropdown>

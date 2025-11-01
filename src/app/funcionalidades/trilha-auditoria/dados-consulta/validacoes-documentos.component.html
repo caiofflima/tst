@@ -1,0 +1,92 @@
+<div class="col-md-12">
+  <p-table
+    [value]="dadosConsulta"
+    [paginator]="true"
+    [rows]="10"
+    class="table table-striped table-sm table-hover"
+    #dt
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th id="numeroPedido" style="width: 5%">Número do Pedido</th>
+        <th id="Documento">Documento</th>
+        <th id="Relevancia" style="width: 10%">Relevância</th>
+        <th id="Validacao" style="width: 10%">Validação</th>
+        <th id="Evento" style="width: 5%">Evento</th>
+        <th id="Data" style="width: 10%">Data</th>
+        <th id="Responsavel" style="width: 10%">Responsável</th>
+        <th id="ipResponsavel" style="width: 10%">IP do Responsável</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData>
+      <tr>
+        <td>{{ rowData.nroProcesso }}</td>
+        <td>
+          {{ rowData.documento | slice : 0 : 50 }}
+          <a
+            *ngIf="rowData?.documento?.length > 50"
+            (click)="abrirModalDetalhamento(rowData)"
+            >...Ver mais</a
+          >
+        </td>
+        <td>{{ rowData.relevancia }}</td>
+        <td>{{ rowData.validacao }}</td>
+        <td>{{ rowData.strEvento }}</td>
+        <td>{{ rowData.dataHoraEvento | date : "dd/MM/yyyy HH:mm:ss" }}</td>
+        <td>{{ rowData.responsavel | cpfMask }}</td>
+        <td>{{ rowData.ipResponsavel }}</td>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="emptymessage">
+      {{ bundle("MA003") }}
+    </ng-template>
+    <!-- <p-column [style]="{'width':'5%'}" field="nroProcesso" header="Número do Pedido"></p-column>
+		<p-column header="Documento">
+			<ng-template let-row="rowData" pTemplate="content">
+				{{row.documento | slice:0:50 }}
+				<a *ngIf="row?.documento?.length > 50" (click)="abrirModalDetalhamento(row)">...Ver mais</a>
+			</ng-template>
+		</p-column>
+		<p-column [style]="{'width':'10%'}" field="relevancia" header="Relevância"></p-column>
+		<p-column [style]="{'width':'10%'}" field="validacao" header="Validação"></p-column>
+		<p-column [style]="{'width':'5%'}" field="strEvento" header="Evento"></p-column>
+		<p-column [style]="{'width':'10%'}" header="Data">
+			<ng-template let-row="rowData" pTemplate="content">
+              {{row.dataHoraEvento | date:'dd/MM/yyyy HH:mm:ss'}}
+        	</ng-template>
+		</p-column>
+		<p-column [style]="{'width':'10%'}" header="Responsável">
+			<ng-template let-row="rowData" pTemplate="content">
+              {{row.responsavel | cpfMask}}
+        	</ng-template>
+		</p-column>
+		<p-column [style]="{'width':'10%'}" field="ipResponsavel" header="IP do Responsável"></p-column> -->
+  </p-table>
+
+  <p-dialog
+    header="Detalhe do Documento"
+    [(visible)]="showModalDetalhamento"
+    [modal]="true"
+    width="800"
+    [responsive]="true"
+    #modalDetalhamento
+  >
+    <div class="col-md-12">
+      <div class="col-md-12">
+        <label for="documento">Documento</label>
+        <div id="documento" class="output-text">
+          {{ selectedRow?.documento }}
+        </div>
+      </div>
+    </div>
+
+    <p-footer class="dmsg-footer">
+      <div style="display: flex; justify-content: flex-end">
+        <button class="btn btn-danger" (click)="fecharModalDetalhamento()">
+          <span class="fa fa-close fa-fw"></span>Fechar
+        </button>
+      </div>
+    </p-footer>
+  </p-dialog>
+</div>

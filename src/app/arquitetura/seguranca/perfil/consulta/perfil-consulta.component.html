@@ -1,0 +1,96 @@
+<!-- Page Header-->
+<div class="col-md-12 breadcrumb-header">
+	 <ul class="breadcrumb"><li> <span routerLink="/" class="voltar"><i class="fa fa-arrow-left" aria-hidden="true"></i>Voltar</span></li>
+		<a routerLink="/home">
+			Início</a>
+		<i class="fa fa-chevron-right"></i>
+		Administração
+		<i class="fa fa-chevron-right"></i>
+		<a routerLink="/seguranca/perfil">
+			Pesquisar Perfil
+		</a>
+	</ul>
+</div>
+
+<header class="page-header">
+	<div class="container-fluid">
+		<h2 class="no-margin-bottom">Pesquisar Perfil</h2>
+	</div>
+</header>
+<!-- Page Header-->
+
+<section class="row container-fluid">
+	<form [formGroup]="formulario" name="form">
+		<fieldset>
+			<div class="row col-xs-5">
+				<label class="control-label">Nome</label>
+				<input formControlName="nome" [(ngModel)]="nome" type="text" [maxlength]="255"
+					id="nome" name="nome" class="form-control">
+			</div>
+
+			<div class="col-xs-12 barra-botoes">
+				<button class="btn btn-primary" (click)="consultar()">
+					<span class="fa fa-search fa-fw"></span>Pesquisar Perfis
+				</button>
+				<button class="btn btn-warning" (click)="incluir()">
+					<span class="fa fa-plus fa-fw"></span>Incluir Novo Perfil
+				</button>
+			</div>
+		</fieldset>
+	</form>
+
+	<div *ngIf="perfis" class="resultado">
+		<div class="row container-fluid">
+			<h2 class="no-margin-bottom">Listar Perfis</h2>
+		</div>
+
+		<div class="row container-fluid">
+			<table class="table table-striped table-sm table-hover" aria-describedby="mytable">
+				<thead>
+					<tr>
+						<th id="id" rowspan="2" class="text-center" style="vertical-align: middle">ID</th>
+						<th id="nome" rowspan="2" class="text-center" style="vertical-align: middle">Nome</th>
+						<th id="descricao" rowspan="2" style="vertical-align: middle">Descrição</th>
+						<th id="ultimaarualizacao" colspan="3" class="text-center">Última Atualização</th>
+						<th id="acoes" rowspan="2" class="text-center" style="vertical-align: middle">Ações</th>
+					</tr>
+					<tr>
+						<th id="usr" class="text-center">Usuário Responsável</th>
+						<th id="terminal" class="text-center">Terminal</th>
+						<th id="data" class="text-center">Data e Hora</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let perfil of perfis | paginate: { itemsPerPage: itens, currentPage: pagina }">
+						<td class="text-center">{{perfil.id}}</td>
+						<td class="text-center">{{perfil.nome}}</td>
+						<td>{{perfil.descricao}}</td>
+						<td class="text-center">{{perfil.usuarioUltimaAtualizacao}}</td>
+						<td class="text-center">{{perfil.terminalUltimaAtualizacao}}</td>
+						<td class="text-center">{{perfil.dataHoraUltimaAtualizacao | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+						<td class="text-center">
+							<button class="btn btn-info" (click)="alterar(perfil)" title="Alterar">
+								<span class="fa fa-pencil fa-fw"></span>
+							</button>&nbsp;
+							<button class="btn btn-danger" (click)="excluir(perfil)" title="Excluir">
+								<span class="fa fa-trash fa-fw"></span>
+							</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="col-md-4">
+				<select *ngIf="perfis" #selectElem class="selectElem" (change)="handleSelectElemChange($event)">
+					<option class="selectElem" [value]="5">5</option>
+					<option class="selectElem" [value]="10">10</option>
+					<option class="selectElem" [value]="50">50</option>
+					<option class="selectElem" [value]="100">100</option>
+				</select>
+			</div>
+			<div>
+				<pagination-controls *ngIf="perfis" class="col-md-6.5 pull-right" (pageChange)="pagina = $event;"
+					previousLabel="" nextLabel=""></pagination-controls>
+			</div>
+		</div>
+	</div>
+</section>

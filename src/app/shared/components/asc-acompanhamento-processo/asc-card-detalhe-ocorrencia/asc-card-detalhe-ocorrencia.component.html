@@ -1,0 +1,124 @@
+<asc-card-component [hasAfterContent]="true" style="height:100%">
+  <asc-card-title>
+    <div class="fl-sb">
+      <div class="titulo-card">
+        {{ultimaSituacao?.tipoOcorrencia?.id == 1 ? "Mudança de situação" : ultimaSituacao?.tipoOcorrencia?.nome | campoVazioHifen}}
+      </div>
+      <div style="text-align: right;margin-left: auto;">
+        <div *ngIf="!tituloAcompanhamento">
+          <em class="fa fa-user-circle-o fa-fw"></em>
+          <span class="id-historico">
+            {{getNomeUsuario(ultimaSituacao, processoPedido?.idTipoProcesso) | campoVazioHifen}}
+          </span>
+        </div>
+        <p class="data-hora-card">
+          {{ultimaSituacao?.dataCadastramento | date : 'dd/MM/yyyy HH:mm:ss'}}
+        </p>
+      </div>
+    </div>
+  </asc-card-title>
+  <asc-card-content>
+    <div class="fl-sb margin-campos">
+      <div>
+        <label class="label-campo-card" *ngIf="ultimaSituacao?.tipoOcorrencia?.id == 1">Situação</label>
+        <p *ngIf="ultimaSituacao?.tipoOcorrencia?.id == 1">
+          {{ultimaSituacao?.situacaoProcesso?.nome | campoVazioHifen}}
+        </p>
+      </div>
+    </div>
+ 
+    <div class="fl-sb">
+      <div class="mks">
+        <span class="label-campo-card">Histórico</span>
+        <p>
+          {{ultimaSituacao?.descricaoHistorico | campoVazioHifen | slice: 0: 210}}<span
+          *ngIf="ultimaSituacao?.descricaoHistorico?.length > 210">...
+            <a data-toggle="modal" data-target="#modalJustificativa">ver mais</a>
+          </span>
+        </p>
+      </div>
+    </div>
+ 
+    <asc-documento-card
+      [documentos]="documentos"
+      [habilitarValidacao]="false"
+      [isInResumo]="true"
+      [apresentarDadosDocumento]="false"
+      [permissoes]="permissoes"
+      [disableRemoveButton]="true"
+      [processo]="processoPedido"
+      *ngIf="ultimaSituacao?.countAnexos"
+    ></asc-documento-card>
+    <div *ngIf="ultimaSituacao?.countAnexos > 1" class="fl-sb count-arquivo">
+      Arquivo 1 de {{ultimaSituacao?.countAnexos}}
+    </div>
+  </asc-card-content>
+  <asc-card-footer style="width: 100%;">
+    <div class="footer-card">
+      <button
+        *ngIf="!permissoes?.analisar && processoPedido?.ultimaSituacao?.situacaoProcesso?.statusEnum == 'PEDIDO_INDEFERIDO'"
+        (click)="clickSolicitacaoRevisao(processoPedido)" class="btn-small nova-ocorrencia">
+        <span>Solicitar Revisão</span>
+      </button>
+ 
+      <button
+        *ngIf="(permissoes?.tipo === 'analise') && ((permissoes?.analisar || processoPedido?.ultimaSituacao?.situacaoProcesso?.conclusivo !== 'SIM') || isPermiteNovaOcorrencia)"
+        (click)="clickNovaOcorrencia(processoPedido, modalOcorrencia)" class="btn-small nova-ocorrencia">
+        <span>Nova Ocorrência</span>
+      </button>
+ 
+      <button
+        *ngIf="mostraOuOcultaBotao"
+        (click)="liberarProcessoParaAnalise(processoPedido.id)" class="btn-small nova-ocorrencia">
+        <span>Liberar pedido para análise</span>
+      </button>
+ 
+      <button class="btn-small detalhar" *ngIf="ultimaSituacao?.countAnexos > 1" (click)="clickShowDetalhe()">
+        <span>Detalhar</span>
+      </button>
+ 
+      <button
+        *ngIf="ultimaSituacao?.countMensagens > 0" class="btn-small ver-mensagem"
+        (click)="clickVerMensagemSituacao(processoPedido, ultimaSituacao.id, modalMensagemPedidoComponent)">
+        <svg class="icon-msg-nao-lida"></svg>
+        <span>Ver mensagens</span>
+      </button>
+    </div>
+  </asc-card-footer>
+</asc-card-component>
+ 
+<asc-detalhe-situacao
+  [show]="showDetalhe"
+  (hide)="clickCloseDetalhe()"
+  [processoPedido]="processoPedido"
+  [situacaoPedido]="ultimaSituacao">
+</asc-detalhe-situacao>
+ 
+<asc-modal-mensagem-pedido
+  [customStyleProperties]="stylePropsModal"
+  [mostrarBotoes]="(permissoes?.analisar || processoPedido?.ultimaSituacao?.situacaoProcesso?.conclusivo !== 'SIM')"
+  #modalMensagemPedidoComponent>
+</asc-modal-mensagem-pedido>
+ 
+<asc-modal-ocorrencia
+  #modalOcorrencia
+  (onUpdate)="atualizarSituacao($event)">
+</asc-modal-ocorrencia>
+ 
+<!-- Modal Logout -->
+<div class="modal fade" id="modalJustificativa" tabindex="-1" role="dialog" >
+  <div class="modal-dialog modal-dialog-size" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" *ngIf="ultimaSituacao?.tipoOcorrencia?.id != 1">Justificativa</h4>
+        <h4 class="modal-title" *ngIf="ultimaSituacao?.tipoOcorrencia?.id == 1">Histórico</h4>
+      </div>
+      <div class="modal-body mdl-overf-body2">
+        <p>{{ultimaSituacao?.descricaoHistorico}}</p>
+      </div>
+    </div>
+  </div>
+</div>

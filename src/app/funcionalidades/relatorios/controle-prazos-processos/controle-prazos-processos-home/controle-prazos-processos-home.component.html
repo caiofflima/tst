@@ -1,0 +1,333 @@
+<!-- Page Header-->
+<div class="container">
+  <div class="col-md-12 breadcrumb-header">
+    <div class="breadcrumb">
+      <li>
+        <span (click)="voltar()" class="voltar"
+          ><i class="fa fa-arrow-left" aria-hidden="true"></i>Voltar</span
+        >
+      </li>
+      <a routerLink="/home">Início</a>
+      <em class="fa fa-chevron-right"></em>
+      Relatórios
+      <em class="fa fa-chevron-right"></em>
+      Controle de Prazos de Autorização Prévia
+    </div>
+  </div>
+
+  <div class="title-type">
+    <h1 class="titulo-pagina">Controle de Prazos de Autorização Prévia</h1>
+  </div>
+
+  <section class="row">
+    <form [formGroup]="formulario" name="form">
+      <div class="row pl-0 col-md-12">
+        <h4>Dados dos Pedidos</h4>
+      </div>
+
+      <div class="row pl-0 col-xs-4">
+        <label class="control-label" for="filial">Agrupadora</label>
+        <asc-multiSelect
+          id="filial"
+          [options]="listComboFilial"
+          [control]="formulario.get('filiaisProcesso')"
+        ></asc-multiSelect>
+      </div>
+
+      <div class="row col-xs-2">
+        <label class="control-label" for="ufA">UF Atendimento</label>
+        <p-dropdown
+          class="form-control2"
+          id="ufA"
+          [options]="listComboUF"
+          [filter]="true"
+          [placeholder]="this.bundle('MHSPH')"
+          title="Filtrar por UF de atendimento."
+          formControlName="ufAtendimento"
+          optionLabel="label"
+        ></p-dropdown>
+      </div>
+
+      <div class="row col-xs-6">
+        <label class="control-label" for="tipoProcesso">Tipo de Pedido</label>
+        <asc-multiSelect
+          id="tipoProcesso"
+          [options]="listComboTipoProcesso"
+          [control]="formulario.get('tiposProcesso')"
+        ></asc-multiSelect>
+      </div>
+
+      <div class="row pl-0 col-xs-6">
+        <label class="control-label" for="idMotivoSolicitacao"
+          >Finalidade</label
+        >
+        <p-dropdown
+          class="form-control2"
+          id="idMotivoSolicitacao"
+          [options]="listComboFinalidade"
+          formControlName="idMotivoSolicitacao"
+          [filter]="true"
+          [placeholder]="this.bundle('MHSPH')"
+          title="{{ bundle('MHSPH') }}"
+        ></p-dropdown>
+      </div>
+
+      <div class="row col-xs-6">
+        <label class="control-label" for="situacaoProcesso"
+          >Situação do Pedido</label
+        >
+        <asc-multiSelect
+          id="situacaoProcesso"
+          [options]="listComboSituacaoProcesso"
+          [control]="formulario.get('situacoesProcesso')"
+        ></asc-multiSelect>
+      </div>
+      <div class="row pl-0 col-xs-6">
+        <label class="control-label" for="diasTempoProcesso"
+          >Tempo Pedido</label
+        >
+        <input
+          type="text"
+          id="diasTempoProcesso"
+          class="form-control"
+          formControlName="diasTempoProcesso"
+          title="Buscar um processo específico."
+          maxlength="3"
+          placeholder="Dias"
+          (keyup)="constantes.control.somenteNumeros(diasTempoProcesso)"
+          (keydown)="constantes.control.somenteNumeros(diasTempoProcesso)"
+        />
+      </div>
+      <div class="row col-xs-3">
+        <asc-input-date
+          [required]="true"
+          [control]="formulario.get('dataInicio')"
+          label="Data Início"
+        ></asc-input-date>
+      </div>
+      <div class="row col-xs-3">
+        <asc-input-date
+          [required]="true"
+          [control]="formulario.get('dataFim')"
+          label="Data Fim"
+        ></asc-input-date>
+      </div>
+    </form>
+
+    <div class="col-xs-12 barra-botoes">
+      <button
+        *ngIf="exibirResultado"
+        class="btn clean-btn"
+        title="Relatório Analítico"
+        (click)="consultarRelatorioAnalitico()"
+        [disabled]="loadingAnalitico"
+        @fadeInOut
+      >
+        <span *ngIf="loadingAnalitico">
+          <p-progressSpinner
+            [style]="{ width: '23px', height: '23px' }"
+            animationDuration=".5s"
+            fill="#EEEEEE"
+            strokeWidth="4"
+          >
+          </p-progressSpinner>
+        </span>
+        <span *ngIf="!loadingAnalitico">
+          <span class="fa fa-list-alt fa-fw"></span>Analítico
+        </span>
+      </button>
+      <button
+        id="btnLimparCampos"
+        class="btn back-btn"
+        (click)="limparCampos()"
+      >
+        <span class="fa fa-trash fa-fw"></span>Limpar Campos
+      </button>
+      <button
+        class="btn continue-btn"
+        (click)="consultarProcesso()"
+        [disabled]="!formulario.valid"
+      >
+        <span class="fa fa-search fa-fw"></span>Pesquisar
+      </button>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div class="row col-md-12 p-0" *ngIf="exibirResultado">
+      <p-table
+        [value]="listaProcessos"
+        [paginator]="true"
+        [rows]="rowCounter"
+        [rowsPerPageOptions]="[5, 10, 20]"
+        [totalRecords]="listaProcessos.length"
+        [reorderableColumns]="true"
+        sortField="idPedido"
+        [sortOrder]="-1"
+        class="table table-striped table-sm table-hover"
+      >
+        <ng-template pTemplate="header">
+          <tr>
+            <th
+              id="competencia"
+              style="width: 98px"
+              pSortableColumn="competencia"
+            >
+              Competência
+            </th>
+            <th
+              id="siglaFilial"
+              style="width: 84px"
+              pSortableColumn="siglaFilial"
+            >
+              Agrupadora
+            </th>
+            <th
+              id="ufAtendimento"
+              style="width: 105px"
+              pSortableColumn="ufAtendimento"
+            >
+              Atendimento
+            </th>
+            <th
+              id="tipoProcesso"
+              style="width: 125px"
+              pSortableColumn="tipoProcesso"
+            >
+              Tipo Pedido
+            </th>
+            <th
+              id="finalidade"
+              style="width: 180px"
+              pSortableColumn="finalidade"
+            >
+              Finalidade
+            </th>
+            <th
+              id="situacaoProcesso"
+              style="width: 133px"
+              pSortableColumn="situacaoProcesso"
+            >
+              Situação do Pedido
+            </th>
+            <th
+              id="maximoTempoSituacao"
+              style="width: 80px"
+              pSortableColumn="maximoTempoSituacao"
+            >
+              Máx. Tempo Situação
+            </th>
+            <th
+              id="maximoAtrasoSituacao"
+              style="width: 84px"
+              pSortableColumn="maximoAtrasoSituacao"
+            >
+              Máx. Atraso Situação
+            </th>
+            <th
+              id="maximoTempoProcesso"
+              style="width: 84px"
+              pSortableColumn="maximoTempoProcesso"
+            >
+              Máx. Tempo Pedido
+            </th>
+            <th
+              id="maximoAtrasoProcesso"
+              style="width: 84px"
+              pSortableColumn="maximoAtrasoProcesso"
+            >
+              Máx. Atraso Pedido
+            </th>
+            <th
+              id="quantidade"
+              style="width: 84px"
+              pSortableColumn="quantidade"
+            >
+              Quantidade
+            </th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData>
+          <tr>
+            <td>{{ rowData.competencia }}</td>
+            <td>{{ rowData.siglaFilial }}</td>
+            <td>{{ rowData.ufAtendimento }}</td>
+            <td>{{ rowData.tipoProcesso }}</td>
+            <td>{{ rowData.finalidade }}</td>
+            <td>{{ rowData.situacaoProcesso }}</td>
+            <td>{{ rowData.maximoTempoSituacao }}</td>
+            <td>{{ rowData.maximoAtrasoSituacao }}</td>
+            <td>{{ rowData.maximoTempoProcesso }}</td>
+            <td>{{ rowData.maximoAtrasoProcesso }}</td>
+            <td>{{ rowData.quantidade }}</td>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="emptymessage">
+          {{ bundle("MA003") }}
+        </ng-template>
+
+        <p-footer>
+          {{ mensagemPaginacao }}
+        </p-footer>
+
+        <!-- <p-column field="competencia" header="Competência" [sortable]="true"
+                  [style]="{width: '98px', 'text-align': 'center', color: '#555555'}">
+        </p-column>
+        <p-column field="siglaFilial" header="Agrupadora" [sortable]="true"
+                  [style]="{width: '84px', 'text-align': 'center', color: '#555555'}">
+        </p-column>
+        <p-column field="ufAtendimento" header="UF Atendimento" [sortable]="true"
+                  [style]="{width: '105px', 'text-align': 'center', color: '#555555'}">
+        </p-column>
+        <p-column field="tipoProcesso" header="Tipo Pedido" [sortable]="true"
+                  [style]="{width: '125px', 'text-align': 'center', color: '#555555'}">
+        </p-column>
+        <p-column field="finalidade" header="Finalidade" [sortable]="true"
+                  [style]="{width: '180px', 'text-align': 'center', color: '#555555'}">
+        </p-column>
+        <p-column field="situacaoProcesso" header="Situação do Pedido" [sortable]="true"
+                  [style]="{width: '133px', 'text-align': 'center', color: '#555555'}">
+        </p-column>
+        <p-column field="maximoTempoSituacao" header="Máx. Tempo Situação" [sortable]="true"
+                  [style]="{width: '80px', 'text-align': 'center', color: '#555555'}">
+        </p-column>
+        <p-column field="maximoAtrasoSituacao" header="Máx. Atraso Situação" [sortable]="true"
+                  [style]="{width: '84px', 'text-align': 'center', color: '#555555'}">
+        </p-column>
+        <p-column field="maximoTempoProcesso" header="Máx. Tempo Pedido" [sortable]="true"
+                  [style]="{width: '84px', 'text-align': 'center', color: '#555555'}">
+        </p-column>
+        <p-column field="maximoAtrasoProcesso" header="Máx. Atraso Pedido" [sortable]="true"
+                  [style]="{width: '84px', 'text-align': 'center', color: '#555555'}">
+        </p-column>
+        <p-column field="quantidade" header="Quantidade" [sortable]="true"
+                  [style]="{width: '84px', 'text-align': 'center', color: '#555555'}">
+        </p-column> -->
+      </p-table>
+      <div class="row">
+        <div class="col-md-12">
+          <small>
+            <p><strong>Legenda</strong></p>
+            <p>
+              <strong>Máx. Tempo Situação</strong> - Quantidade máxima de dias
+              decorridos na situação do pedido
+            </p>
+            <p>
+              <strong>Máx. Atraso Situação</strong> - Quantidade máxima de dias
+              de atraso na situação do pedido
+            </p>
+            <p>
+              <strong>Máx. Tempo Pedido</strong> - Quantidade máxima de dias
+              decorridos desde a criação do pedido
+            </p>
+            <p>
+              <strong>Máx. Atraso Pedido</strong> - Quantidade máxima de dias
+              além do prazo máximo legal (21 dias)
+            </p>
+          </small>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

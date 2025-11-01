@@ -1,0 +1,29 @@
+<div class="custom-container">
+
+  <p class="titulo">Certo. Qual o motivo da solicitação?</p>
+
+  <div class="custom-form-grid size-365">
+    <label class="custom-input-label absolute">Tipo de pedido</label>
+    <asc-input-button [control]="formularioFinalidade.get('tipoProcesso')">
+
+    </asc-input-button>
+  </div>
+
+  <div class="custom-form-grid size-365 margin-24" >
+    <label class="custom-input-label absolute">Finalidade</label>
+    <asc-select-base-layout  [matricula]="matricula" label="" [control]="formularioFinalidade.get('finalidade')">
+    </asc-select-base-layout>
+  </div>
+
+</div>
+
+
+<div class="footer">
+  <button class="back-btn" cdkStepperPrevious>
+      Voltar
+  </button>
+
+  <button class="next-btn" cdkStepperNext>
+      Continuar
+  </button>
+</div>

@@ -1,0 +1,132 @@
+<!-- Page Header-->
+<div class="col-md-12 breadcrumb-header">
+  <ul class="breadcrumb">
+    <li><span routerLink="/" class="voltar"><i class="fa fa-arrow-left" aria-hidden="true"></i>Voltar</span></li>
+    <a routerLink="/home">
+      <i class="fa fa-home"></i> Home
+    </a>
+    <i class="fa fa-chevron-right"></i> Manutenção
+    <i class="fa fa-chevron-right"></i> Administração
+    <i class="fa fa-chevron-right"></i>
+    <a routerLink="/manutencao/empresa-prestador-externo">
+      Cadastro de Empresa
+    </a>
+    <i class="fa fa-chevron-right"></i>
+    <a routerLink="/manutencao/empresa-prestador-externo/novo">
+      <span *ngIf="empresaPrestadora.id == null">Nova</span>
+      <span *ngIf="empresaPrestadora.id != null">Editar</span> Empresa
+    </a>
+  </ul>
+</div>
+
+<header class="page-header">
+  <div class="container-fluid">
+    <h2 class="no-margin-bottom">
+      <span *ngIf="empresaPrestadora.id == null">Nova</span>
+      <span *ngIf="empresaPrestadora.id != null">Editar</span> Empresa
+    </h2>
+  </div>
+</header>
+
+<section class="row container-fluid">
+  <form [formGroup]="formulario" name="form">
+    <div class="clearfix"></div>
+
+    <div *ngIf="empresaPrestadora.id" class="row col-md-4">
+      <label class="control-label" for="cnpj">ID</label>
+      <p class="marginBottom">{{empresaPrestadora.id}}</p>
+    </div>
+
+    <div *ngIf="empresaPrestadora.dataCadastramento" class="row col-md-4">
+      <label class="control-label">Cadastramento</label>
+      <p class="marginBottom">{{empresaPrestadora.dataCadastramento |date:'dd/MM/yyyy HH:mm:ss'}}</p>
+    </div>
+
+    <div *ngIf="empresaPrestadora.matriculaCadastramento" class="row col-xs-4">
+      <label class="control-label" for="contrato">Usuário</label>
+      <p class="marginBottom">{{empresaPrestadora.usuarioCadastramento}}</p>
+    </div>
+
+    <div class="clearfix"></div>
+    <div class="row col-md-6 coluna-interna">
+      <div class="row col-md-8">
+        <label class="control-label obrigatorio" for="cnpj">CNPJ</label>
+        <input type="text" id="cnpj" name="cnpj" [textMask]="{mask: maskCnpj}" class="form-control"
+               title="CNPJ da empresa conveniada." formControlName="cnpj">
+        <asc-message-error [control]="formulario.controls['cnpj']" type="required"
+                           [errorMessage]="bundle('MA007')"></asc-message-error>
+        <asc-message-error [control]="formulario.controls['cnpj']" type="cnpj"
+                           [errorMessage]="bundle('MA009','CNPJ')"></asc-message-error>
+      </div>
+    </div>
+    <div class="row col-md-6 coluna-interna">
+      <div class="row col-md-8">
+        <label class="control-label obrigatorio" for="razaoSocial">Razão Social</label>
+        <input required type="text" [maxlength]="150" id="razaoSocial" name="razaoSocial" class="form-control"
+               title="{{bundle('MH127')}}" formControlName="razaoSocial">
+        <asc-message-error [control]="formulario.controls['razaoSocial']" type="required"
+                           [errorMessage]="bundle('MA007')"></asc-message-error>
+      </div>
+    </div>
+    <div class="row col-md-12 coluna-interna">
+      <div class="row col-md-4">
+        <label class="control-label" for="contrato">Contrato</label>
+        <input type="text" [maxlength]="20" id="contrato" name="contrato" formControlName="contrato" class="form-control"
+               title="{{bundle('MH128')}}">
+      </div>
+    </div>
+    <p-fieldset>
+      <p-header>Unidades</p-header>
+      <div id="panelUnidades" class="col-md-12">
+        <div class="row col-md-6 coluna-interna">
+          <div class="row col-md-10">
+            <label class="control-label obrigatorio" for="razaoSocial">GIPES/CEPES</label>
+            <p-dropdown required [options]="filiais" filter="true" placeholder="{{bundle('MHSPH')}}" name="filial"
+                        formControlName="filial" optionLabel="nome"></p-dropdown>
+            <asc-message-error [control]="formulario.controls['filial']" type="required"
+                               [errorMessage]="bundle('MA007')"></asc-message-error>
+          </div>
+        </div>
+        <div class="col-xs-8">
+          <button class="btn btn-primary" (click)="adicionarFilial(formulario.controls['filial'].value);">
+            <span class="fa fa-plus fa-fw"></span>Adicionar
+          </button>
+        </div>
+        <div *ngIf="filiaisAdd.length > 0" class="row col-md-8" style="margin-top: 25px">
+          <table class="table table-hover table-borderless">
+            <thead>
+            <tr>
+              <th>GIPES/CEPES</th>
+              <th>Ação</th>
+            </tr>
+            </thead>
+            <tbody *ngFor="let filial of filiaisAdd; let i = index">
+            <tr>
+              <td>{{filial.nome}}</td>
+              <td>
+                <button class="btn btn-danger" title="Remover Empresa" (click)="removerFilial(i)">
+                  <span class="fa fa-trash fa-fw"></span>
+                </button>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </p-fieldset>
+    <div class="col-xs-12 barra-botoes">
+      <button class="btn btn-info" (click)="retornarListaEmpresas()">
+        <span class="fa fa-reply fa-fw"></span>Voltar
+      </button>
+      <button *ngIf="empresaPrestadora.id != null" class="btn btn-danger" (click)="excluirEmpresa(empresaPrestadora);">
+        <span>Excluir</span>
+      </button>
+      <button id="btnLimparCampos" class="btn back-btn" (click)="limparCampos()">
+        <span class="fa fa-trash fa-fw"></span>Limpar Campos
+      </button>
+      <button class="btn btn-primary" (click)="salvar();">
+        <span>Salvar</span>
+      </button>
+    </div>
+  </form>
+</section>

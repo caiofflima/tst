@@ -1,0 +1,4 @@
+<div *ngIf="hasError()" class="error-form">
+  <div *ngIf="hasInvalidateType()">{{errorMessage}}</div>
+  <ng-content></ng-content>
+</div>

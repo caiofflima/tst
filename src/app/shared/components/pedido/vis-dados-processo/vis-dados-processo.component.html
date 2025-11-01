@@ -1,0 +1,38 @@
+	<div class="row col-md-12">
+      <h4>Dados do Pedido</h4>
+    </div>
+
+    <div class="row col-md-4">
+      <label class="control-label" for="processoNumero">Número</label>
+      <p id="processoNumero">{{pedido?.id}}</p>
+    </div>
+
+    <div class="row col-md-4">
+      <label class="control-label" for="protocoloAns">Protocolo ANS</label>
+      <p id="protocoloAns">{{pedido?.protocoloAns}}</p>
+    </div>
+
+    <div class="row col-md-4">
+      <label class="control-label" for="processoTipo">Tipo de Pedido</label>
+      <p id="processoTipo">{{tipoProcesso?.nome}}<span class="detalhe-aprovacao">{{tipoProcesso?.codigo}}</span></p>
+    </div>
+  
+    <div class="clearfix"></div>
+
+    <div class="row col-md-4">
+      <label class="control-label" for="finalidade">Finalidade</label>
+      <p id="finalidade">{{motivoSolicitacao?.nome}}</p>
+    </div>
+
+    <div class="row col-md-4">
+      <label class="control-label" for="processoSituacao">Situação do Pedido</label>
+      <p  *ngIf="hasAcaoAcesso()">{{situacaoPedido?.situacaoProcesso?.nome}}</p>
+    </div>
+    
+    <asc-progresso-prazo #progressoPrazo [pedido]="pedido" *ngIf="hasAcaoAcesso()"></asc-progresso-prazo>
+
+    <div class="clearfix"></div>
+  
+    <div class="row col-md-12">
+      <h3>{{tipoProcesso?.nome}}<span class="detalhe-aprovacao">{{tipoProcesso?.codigo}}</span></h3>
+    </div>

@@ -1,0 +1,16 @@
+.ui-datatable-emptymessage {
+  display: none;
+}
+
+::ng-deep {
+  app-trilha-auditoria, app-pesquisar-processos-listar, asc-patologia-home, app-empresa-prestador-externo-home, app-prestador-externo-home, asc-vinc-med-patologia-home {
+    flex: auto;
+  }
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+}

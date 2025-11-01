@@ -1,0 +1,50 @@
+<!-- Page Header-->
+<div class="col-md-12 breadcrumb-header">
+   <ul class="breadcrumb"><li> <span routerLink="/" class="voltar"><i class="fa fa-arrow-left" aria-hidden="true"></i>Voltar</span></li>
+    <a routerLink="/home">
+            Início</a>
+    <i class="fa fa-chevron-right"></i>
+      Administração
+    <i class="fa fa-chevron-right"></i>
+    <a routerLink="">
+      Empresa
+    </a>
+  </ul>
+</div>
+
+<header class="page-header">
+  <div class="container-fluid">
+    <h2 class="no-margin-bottom">Empresa</h2>
+  </div>
+</header>
+
+<section class="row container-fluid">
+  <form>
+    <div class="row col-xs-2">
+      <label class="control-label" for="cnpj">CNPJ</label>&nbsp;<br>
+      <input type="text" id="cnpj" name="cnpj" [(ngModel)]="filtro.cnpj" [textMask]="{mask: maskCnpj}"
+        class="form-control" title="CNPJ da empresa conveniada.">
+    </div>
+    <div class="row col-xs-6">
+      <label class="control-label" for="cnpj">Razão Social</label>&nbsp;<br>
+      <input type="text" id="razaoSocial" name="razaoSocial" [(ngModel)]="filtro.razaoSocial"
+        class="form-control" [maxlength]="150" title="Razão Social da empresa conveniada.">
+    </div>
+    <div class="row col-xs-2">
+      <label class="control-label" for="cnpj">Contrato</label>&nbsp;<br>
+      <input type="text" id="contrato" name="contrato" [(ngModel)]="filtro.contrato"
+        class="form-control" [maxlength]="20" title="Número do contrato do convênio entre a empresa e a CAIXA.">
+    </div>
+    <div class="col-xs-12 barra-botoes">
+      <button id="btnLimparCampos" class="btn back-btn" (click)="limparCampos()">
+        <span class="fa fa-trash fa-fw"></span>Limpar Campos
+      </button>
+      <button class="btn btn-info" (click)="novaEmpresa()">
+        <span class="fa fa-plus fa-fw"></span>Incluir Nova Empresa
+      </button>
+      <button class="btn btn-primary" (click)="pesquisarEmpresas()">
+        <span class="fa fa-search fa-fw"></span>Pesquisar
+      </button>
+    </div>
+  </form>
+</section>

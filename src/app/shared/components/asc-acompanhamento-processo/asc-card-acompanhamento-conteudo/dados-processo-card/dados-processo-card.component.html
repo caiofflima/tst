@@ -1,0 +1,100 @@
+<section>
+  <div class="ui-sm-2 card-flt-mr">
+    <button class="btn-editar" *ngIf="permissoes?.editar && verificarEhTitularEPedidoEmAnalise()" (click)="clickAlerarDados(true)" [disabled]="modoEdicao">
+      <i class="fa fa-pencil" aria-hidden="true"></i>
+    </button>
+  </div>
+
+  <label class="titulo-card">Dados do pedido</label>
+
+  <div class="ui-g marginBottom">
+    <div class="ui-g-8 ui-lg-8 ui-md-12 ui-sm-12 no-padding">
+      <label class="label-campo-card">Número</label>
+      <p>{{processo?.id | campoVazioHifen }}</p>
+    </div>
+
+    <div class="ui-g-4 ui-lg-4 ui-md-12 ui-sm-12 no-padding">
+      <label class="label-campo-card">Protocolo ANS</label>
+      <p>{{processo?.protocoloAns | campoVazioHifen }}</p>
+    </div>
+
+    <div class="ui-g-8 ui-lg-8 ui-md-12 ui-sm-12 no-padding margin-16">
+      <label class="label-campo-card">Data de abertura</label>
+      <p>{{dataCadastramento | date: 'dd/MM/yyyy HH:mm:ss' | campoVazioHifen }}</p>
+    </div>
+
+    <div class="ui-g-4 ui-lg-4 ui-md-12 ui-sm-12 no-padding margin-16">
+      <label class="label-campo-card">Data de encerramento</label>
+      <p>{{dataEncerramento | date: 'dd/MM/yyyy HH:mm:ss' | campoVazioHifen }}</p>
+    </div>
+
+    <div class="ui-g-8 ui-lg-8 ui-md-12 ui-sm-12 no-padding margin-16">
+      <label class="label-campo-card">Tipo de pedido</label>
+      <p>
+        {{processo?.tipoProcesso?.nome | campoVazioHifen }}
+        <span>{{processo?.tipoProcesso?.codigo}}</span>
+      </p>
+    </div>
+
+    <div class="ui-g-4 ui-lg-4 ui-md-12 ui-sm-12 no-padding margin-16">
+      <label class="label-campo-card">Caráter da solicitação</label>
+      <p *ngIf="!modoEdicao || !permissoes?.analisar">{{nomeCaraterSolicitacao | campoVazioHifen}}</p>
+      <p *ngIf="modoEdicao && permissoes?.analisar">
+        <asc-select-carater-solicitacao id="caraterSolcitacaoProg" [control]="idCaraterSolicitacaoSelecionadaControl">
+        </asc-select-carater-solicitacao>
+      </p>
+    </div>
+
+    <div class="ui-g-8 ui-md-8 ui-sm-8 no-padding margin-16" *ngIf="processo?.idMotivoSolicitacao">
+      <label class="label-campo-card">{{tituloFinalidade}}</label>
+      <p>{{motivoSolicitacao?.nome | campoVazioHifen }}</p>
+    </div>
+
+    <div class="ui-g-4 ui-md-4 ui-sm-4 no-padding margin-16" *ngIf="numeroPeg">
+      <label class="label-campo-card">{{tituloPeg}}</label>
+      <p>{{numeroPeg}}</p>
+    </div>
+
+    <div class="ui-g-4 ui-md-4 ui-sm-4 no-padding margin-16" *ngIf="deveApresentarDataOcorrencia()">
+      <label class="label-campo-card">Data de Ocorrência</label>
+      <p>{{processo.dataOcorrencia | date: 'dd/MM/yyyy' | campoVazioHifen }}</p>
+    </div>
+
+    <div class="ui-g-12 ui-md-12 ui-sm-12 no-padding margin-16" *ngIf="processo?.idTipoProcesso === 5">
+      <label class="label-campo-card">Patologia</label>
+      <p *ngIf="!modoEdicao">{{nomePatologia}}</p>
+      <p *ngIf="modoEdicao">
+        <asc-select-patologia id="patologiaPrgMed" [control]="idPatologiaSelecionadaControl"></asc-select-patologia>
+      </p>
+    </div>
+
+    <div class="ui-g-4 ui-md-8 ui-sm-4 no-padding margin-16" >
+      <label class="label-campo-card">Observação</label>
+      <p *ngIf="!modoEdicao || !permissoes?.analisar">{{observacao}}</p>
+      <p *ngIf="modoEdicao && permissoes?.analisar">
+        <textarea name="observacao" 
+                  id="observacao" 
+                  class="form-control" 
+                  [(ngModel)]="observacao"
+                  maxlength="4000">
+      </textarea>
+      </p>
+    </div>
+
+    <div class="ui-g-4 ui-md-4 ui-sm-4 no-padding margin-16" *ngIf="dataValidade != null">
+      <label class="label-campo-card">Data de Validade</label>
+      <p>{{dataValidade | date: 'dd/MM/yyyy' | campoVazioHifen }}</p>
+    </div>
+
+  </div>
+
+  <div *ngIf="modoEdicao && permissoes?.editar" class="ui-md-12 to-footer marginBottom no-padding">
+    <button (click)="clickAlerarDados(false)" class="back-btn">
+      Cancelar
+    </button>
+
+    <button (click)="onSubmit()" class="continue-btn">
+      Confirmar
+    </button>
+  </div>
+</section>

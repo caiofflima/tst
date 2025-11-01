@@ -1,0 +1,172 @@
+@import "/src/assets/sass/colors";
+@import "/src/assets/sass/mixins";
+@import "/src/assets/sass/base";
+
+.acompanhamento-container {
+  padding: 0 4em;
+  max-width: 1280px;
+  margin: 15px auto 0;
+}
+
+.titulo {
+  font-family: 'Caixa Std Bold', sans-serif;
+  font-weight: bold;
+  font-size: 32px;
+  height: 34px;
+  line-height: 34px;
+  color: $btn-bg-blue;
+  padding-left: 0.75em;
+  border-left: 6px solid $btn-bg-orange-darker;
+  margin: 0;
+}
+
+.tooltip-mensagem {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltiptext.is--small {
+  text-align: center !important;
+  min-width: 200px !important;
+  visibility: hidden;
+  white-space: nowrap;
+  background-color: #333; /* Fundo escuro */
+  color: #fff; /* Texto branco */
+  text-align: left;
+  border-radius: 4px;
+  padding: 7px;
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  transform: translateY(-50%);
+  left: -210px; /* Ajuste conforme necessário */
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+  border: 1px solid #444; /* Borda leve para destacar */
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.tooltiptext.is--small::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: -5px; /* Ajusta a seta para o lado esquerdo do botão */
+  transform: translateY(-50%);
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent #333 transparent transparent; /* Cor da seta combinando com o fundo */
+}
+
+.tooltip-mensagem:hover .tooltiptext {
+  visibility: visible;
+}
+
+.processo-container {
+  border-top: 1px solid #B4B4B4;
+  padding-top: .5em;
+  margin: 1.5em 4.5em 0 4.5em;
+}
+
+.left-border {
+  padding-left: 0.75em !important;
+  border-left: 7px solid #54BBAB;
+}
+
+.margin-campos {
+  margin-bottom: 1em;
+}
+
+.no-padding {
+  padding: 0;
+}
+
+.footer-card {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.margin-conteudo {
+  margin-top: 1em;
+  align-items: flex-start;
+}
+
+.list-card {
+  flex-grow: 1;
+  padding: 0.5em 0.75em 0.5em 0;
+}
+
+.no-desktop {
+  display: none;
+}
+
+.id-historico {
+  font-family: 'Caixa Std Regular', sans-serif;
+  font-size: 16px;
+  line-height: 19px;
+  color: #000000;
+  margin-left: 10px;
+}
+
+.orange-ball {
+  position: absolute;
+  right: calc(-22px - 8px);
+  top: 8px;
+  width: 18px;
+  height: 18px;
+  border-radius: 9px;
+  background-color: #F7941E;
+  z-index: 2;
+}
+
+.campo-card {
+  font-family: 'Caixa Std Regular', sans-serif;
+  font-size: 16px;
+  line-height: 19px;
+  color: #000000;
+
+}
+
+.historico-section {
+  padding: 0 4.5em;
+}
+
+@media screen and (max-width: 900px) {
+
+  .acompanhamento-container {
+    padding: 0;
+  }
+
+  .processo-container {
+    border-top: 1px solid #B4B4B4;
+    padding: 1.5em 0.5em 0 0.5em;
+    margin: 0.5em 0;
+  }
+
+  .titulo {
+    margin: 0.25em;
+  }
+
+  .no-mobile {
+    display: none;
+  }
+
+  .no-desktop {
+    display: inherit;
+  }
+
+  .orange-ball {
+    display: none;
+  }
+
+  .list-card {
+    width: 100%;
+    margin-top: 0.75em;
+    padding: 0.75em 0.5em;
+  }
+
+  .historico-section {
+    padding: 0;
+  }
+}

@@ -1,0 +1,19 @@
+<div class="custom-container">
+  <div class="titulo-card">{{title}}</div>
+  <p class="sub-titulo"></p>
+  <asc-documento-card
+    (arquivosSelecionados)="arquivosSelecionados($event)"
+    (documentoTipoProcessoSelecionado)="selecionarTipoDocumento($event)"
+    (documentosTipoProcessoSelecionados)="watchDocumentos($event)"
+    (isLoading)="isLoading($event)"
+    [loading]="loading"
+    [documentos]="documentos"
+    [parametro]="parametro"
+  ></asc-documento-card>
+</div>
+<div class="footer">
+  <asc-button-secondary (onClick)="previousStep($event)" title="Voltar"></asc-button-secondary>
+  <asc-button-primary (onClick)="onSubmit()" [disabled]="documentoNaoPossuiArquivos || loading"
+                      title="Continuar">
+  </asc-button-primary>
+</div>

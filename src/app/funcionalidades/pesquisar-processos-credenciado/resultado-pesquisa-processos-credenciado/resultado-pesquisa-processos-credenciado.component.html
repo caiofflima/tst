@@ -1,0 +1,40 @@
+<div class="row col-xs-3 floatRight" style="padding:4px 10px; border-bottom: 0 none" [hidden]="hideGF">
+  <input #gb type="text" class="form-control filtro" pInputText size="50" placeholder="Digite para filtrar resultado">
+</div>
+
+<div class="clearfix"></div>
+
+<p-table class="table table-striped table-sm table-hover" [value]="resultado" [paginator]="paginatorEnabled" [rows]="rowCounter" [totalRecords]="totalSize" [rowsPerPageOptions]="[5,10,20]" [globalFilter]="gb" [emptyMessage]="bundle('MA003')">
+
+  <ng-template pTemplate="header">
+    <tr>
+      <th pSortableColumn="idPedido">Pedido <p-sortIcon [field]="'idPedido'"></p-sortIcon></th>
+      <th pSortableColumn="codTipoProcesso">Tipo de Pedido <p-sortIcon [field]="'codTipoProcesso'"></p-sortIcon></th>
+      <th pSortableColumn="descBeneficiario">Beneficiário <p-sortIcon [field]="'descBeneficiario'"></p-sortIcon></th>
+      <th pSortableColumn="descSituacaoPedido">Situação Atual <p-sortIcon [field]="'descSituacaoPedido'"></p-sortIcon></th>
+      <th pSortableColumn="dataUltimaAlteracao">Data e Hora <p-sortIcon [field]="'dataUltimaAlteracao'"></p-sortIcon></th>
+      <th pSortableColumn="nomeColaborador">Colaborador <p-sortIcon [field]="'nomeColaborador'"></p-sortIcon></th>
+      <th>Ação</th>
+    </tr>
+  </ng-template>
+
+  <ng-template pTemplate="body" let-rowData>
+    <tr>
+      <td>{{rowData.idPedido}}</td>
+      <td title="{{rowData.descTipoProcesso}}">{{rowData.codTipoProcesso}}</td>
+      <td>{{rowData.descBeneficiario}}</td>
+      <td>{{rowData.descSituacaoPedido}}</td>
+      <td>{{rowData.dataUltimaAlteracao | date : 'dd/MM/yyyy HH:mm:ss'}}</td>
+      <td>{{rowData.nomeColaborador}}</td>
+      <td>
+        <button class="btn btn-info" title="{{bundle('MH160')}}" (click)="detalharProcesso(rowData)">
+          <span class="fa fa-archive fa-fw"></span>
+        </button>
+      </td>
+    </tr>
+  </ng-template>
+
+  <ng-template pTemplate="footer">
+    {{mensagemPaginacao}}
+  </ng-template>
+</p-table>

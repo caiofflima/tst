@@ -1,0 +1,171 @@
+<!-- Page Header-->
+<div class="container">
+  <div class="col-md-12 breadcrumb-header">
+    <ul class="breadcrumb">
+      <li><span (click)="voltar()" class="voltar"><i class="fa fa-arrow-left" aria-hidden="true"></i>Voltar</span></li>
+      <a routerLink="/home">Início</a>
+      <em class="fa fa-chevron-right"></em>
+      Administração
+      <em class="fa fa-chevron-right"></em>
+      Parâmetros
+      <em class="fa fa-chevron-right"></em>
+      <a routerLink="/manutencao/parametrizacao-prazo">Prazos para Tratamento de Situação</a>
+      <em class="fa fa-chevron-right"></em>
+      Prazos para Tratamento de Situação – <span *ngIf="!id">Inclusão</span><span *ngIf="id">Edição</span>
+    </ul>
+  </div>
+
+  <div class="title-type">
+    <h1 class="titulo-pagina">
+      Prazos para Tratamento de Situação – <span *ngIf="!id">Inclusão</span><span *ngIf="id">Edição</span>
+    </h1>
+  </div>
+
+  <section class="row">
+    <form [formGroup]="formulario" name="form">
+      <div class="form-row padding-top" *ngIf="id">
+        <div class="col-md-4 pl-0">
+          <label>ID</label>
+          <p>{{id}}</p>
+        </div>
+        <div class="col-md-4">
+          <label>Data de cadastramento</label>
+          <p>{{prazoTratamento.dataCadastramento | date: 'short'}}</p>
+        </div>
+        <div class="col-md-4">
+          <label>Usuário</label>
+          <p>{{prazoTratamento.codigoUsuarioCadastramento}}</p>
+        </div>
+      </div>
+      <div class="form-row padding-top">
+        <div class="col-md-6 mb-15 pl-0">
+          <asc-select-tipo-processo
+            [control]="idTipoProcesso"
+            id="idTipoProcesso"
+            label="Tipo de pedido"
+            required
+            [disabled]="id != null"
+            (onChange)="carregarSituacaoProcesso()"
+          ></asc-select-tipo-processo>
+        </div>
+        <div>
+          <p-overlayPanel #op1 [dismissable]="true">
+            <div [innerHTML]="hintBeneficiarios"></div>
+          </p-overlayPanel>
+        </div>
+        <div class="col-md-6 mb-15">
+          <label class="control-label obrigatorio" for="idTipoBeneficiario">Tipo Beneficiário</label>
+          <asc-listagem *ngIf="id" [lista]="listComboTipoBeneficiarioSelecionados"></asc-listagem>  
+          <p-multiSelect
+            id="tiposBeneficiario"
+            [options]="listComboTipoBeneficiario"
+            [formControl]="tiposBeneficiario"
+            [required]="!id"
+            class="form-control2 custom-border"
+            defaultLabel="Selecione as opções"
+            selectedItemsLabel="{0} itens selecionados"
+            [disabled]="id != null"
+          ></p-multiSelect>
+          <div>
+            <asc-input-error [control]="tiposBeneficiario" [requiredMsg]="requiredMsg"></asc-input-error>
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-md-6 mb-15 pl-0">
+          <asc-select-situacao-processo
+            label="Situação do Pedido" required
+            [control]="idSituacaoProcesso"
+            (onChange)="carregarSituacaoProcesso()"
+            [disabled]="id != null"
+          ></asc-select-situacao-processo>
+        </div>
+        <div class="col-md-3 mb-15">
+          <asc-input-text
+            label="Prazo para tratamento" required
+            [control]="prazo"
+            [somenteNumeros]="true"
+            [maxlength]="3"
+            (keyup)="constantes.control.numeroMaiorQueZero(this.prazo)"
+             (keydown)="constantes.control.numeroMaiorQueZero(this.prazo)"
+          ></asc-input-text>
+        </div>
+        <div class="row col-xs-2">
+          <br>
+          <p-checkbox
+            id="diaUtil"
+            formControlName="diaUtil"
+            binary="true"
+            [value]="true">
+          </p-checkbox>
+          <label>Dias Úteis</label>
+        </div>
+
+      </div>
+      <div class="form-row">
+        <div class="col-md-6 mb-15 pl-0">
+          <label class="control-label">Mudança Automática</label>
+          <asc-dropdown
+            [items]="itensSituacoesProcesso"
+            [control]="idMudancaAutomatica"
+            class="form-control2">
+          </asc-dropdown>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-md-12 pl-0">
+          <label class="control-label">Histórico Automático</label>
+          <textarea
+            rows="5" cols="103" class="form-control" id="historicoAutomatico"
+            formControlName="historicoAutomatico"
+          ></textarea>
+        </div>
+      </div>
+      <div *ngIf="id" style="padding-top: 10px" class="form-row">
+        <div class="p-0 col-md-2">
+          <p-checkbox
+            inputId="inativo" name="inativo" formControlName="inativo" binary="true"
+            (onChange)="onChangeInativo($event)"
+          ></p-checkbox>
+          <label class="control-label" for="inativo">Inativo</label>
+        </div>
+        <div class="col-md-2 coluna-interna" *ngIf="inativo.value">
+          <label class="control-label" for="dataInativacao">Data da Inativação</label>
+          <asc-input-date
+            [control]="dataInativacao" inputId="dataInativacao"
+            label="" id="dataInativacao"
+          ></asc-input-date>
+          <div *ngIf="formulario.hasError('inativoMatch')" class="error-form">
+            <div>Campo obrigatório não informado.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xs-12 barra-botoes">
+        <button
+          class="btn back-btn" (click)="voltar()" id="btnFormVoltar2">
+          <span class="fa fa-reply fa-fw"></span>Voltar
+        </button>
+        <button
+          *ngIf="id" class="btn clean-btn" (click)="excluir()" id="btnFormExcluir">
+          <span class="fa fa-remove fa-fw"></span>Excluir
+        </button>
+        <button
+          *ngIf="id" class="btn clean-btn" (click)="restaurarCampos()" id="btnFormRestaurar">
+          Restaurar Campos
+        </button>
+        <button
+          class="btn back-btn" (click)="limparCampos()"
+          id="btnFormLimparCampos" *ngIf="!id">
+          <span class="fa fa-trash fa-fw"></span>Limpar Campos
+        </button>
+        <button
+          class="btn continue-btn" (click)="salvar()"
+          [disabled]="!formulario.valid || !tiposBeneficiario.value"
+          id="btnFormSalvar">
+          Salvar
+        </button>
+      </div>
+    </form>
+  </section>
+</div>

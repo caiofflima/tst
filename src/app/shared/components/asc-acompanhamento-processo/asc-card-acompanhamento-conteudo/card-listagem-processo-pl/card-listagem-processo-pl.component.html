@@ -1,0 +1,55 @@
+<div class="processo-card">
+  <p class="s-1 processo-card-campo">{{ processo.processo }}</p>
+  <p class="s-2 processo-card-campo">{{ processo.tipoProcesso }}</p>
+  <p class="s-3 processo-card-campo">{{ processo.tipoBeneficiario }}</p>
+  <p class="s-4 processo-card-campo">{{ processo.filial }}</p>
+  <p class="s-5 processo-card-campo">{{ processo.beneficiario | uppercase }}</p>
+  <p class="s-6 processo-card-campo">{{ processo.situacaoAtual }}</p>
+  <p class="s-7 processo-card-campo">
+    <asc-status-icon-manager
+      [status]="processo.statusIcon"
+    ></asc-status-icon-manager>
+  </p>
+  <p class="s-8 processo-card-campo">{{ processo.ultimaAtualizacao }}</p>
+</div>
+
+<div class="mobile-processo-card ui-g">
+  <div class="ui-g-6 ui-md-6 ui-sm-12">
+    <p class="s-1 label-header">Pedido</p>
+    <p class="s-1 processo-card-campo">{{ processo.processo }}</p>
+  </div>
+  <div class="ui-g-6 ui-md-6 ui-sm-12">
+    <p class="s-2 label-header">Tipo de pedido</p>
+    <p class="s-2 processo-card-campo">{{ processo.tipoProcesso }}</p>
+  </div>
+  <div class="ui-g-6 ui-md-6 ui-sm-12">
+    <p class="s-3 label-header">Tipo de beneficiario</p>
+    <p class="s-3 processo-card-campo">{{ processo.tipoBeneficiario }}</p>
+  </div>
+  <div class="ui-g-6 ui-md-6 ui-sm-12">
+    <p class="s-4 label-header">Agrupadora</p>
+    <p class="s-4 processo-card-campo">{{ processo.filial }}</p>
+  </div>
+  <div class="ui-g-6 ui-md-6 ui-sm-12">
+    <p class="s-5 label-header">Beneficiario</p>
+    <p class="s-5 processo-card-campo">
+      {{ processo.beneficiario | uppercase }}
+    </p>
+  </div>
+  <div class="ui-g-6 ui-md-6 ui-sm-12">
+    <p class="s-6 label-header">Situação Atual</p>
+    <p class="s-6 processo-card-campo">{{ processo.situacaoAtual }}</p>
+  </div>
+  <div class="ui-g-6 ui-md-6 ui-sm-12">
+    <p class="s-7 label-header">Situação</p>
+    <p class="s-7 processo-card-campo">
+      <asc-status-icon-manager
+        [status]="processo.statusIcon"
+      ></asc-status-icon-manager>
+    </p>
+  </div>
+  <div class="ui-g-6 ui-md-6 ui-sm-12">
+    <p class="s-8 label-header">Ultima atualização</p>
+    <p class="s-8 processo-card-campo">{{ processo.ultimaAtualizacao }}</p>
+  </div>
+</div>

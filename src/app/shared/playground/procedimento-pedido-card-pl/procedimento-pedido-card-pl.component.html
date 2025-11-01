@@ -1,0 +1,115 @@
+<section class="docsMP">
+  <div style="margin: 1.5em 1.5em 0;" *ngIf="loading">
+    <p-progressBar
+      @fadeInOut mode="indeterminate"
+      *ngIf="loading" [style]="{'height': '6px'}">
+    </p-progressBar>
+  </div>
+
+  <div class="titulo-card" style="padding-bottom: 0.75em">Procedimentos de pedido</div>
+
+  <div *ngIf="showProcedimento">
+    <div *ngFor="let pedidoProcedimento of pedidosProcedimentos" class="botoes-edicao">
+      <div class="ui-g fl-sb margin-campos">
+        <div style="margin-right: auto" >
+          <span class="label-campo-card" >Procedimento</span>
+          <p style="max-width: 500px;">{{pedidoProcedimento?.procedimento?.estruturaNumerica}}
+            - {{pedidoProcedimento?.procedimento?.descricaoProcedimento}}</p>
+        </div>
+        <div class="fl-sb">
+          <button
+            [disabled]="loading"
+            *ngIf="(!pedidoProcedimento.emAnalise && permissoes?.analisar && isPermiteEditarProcedimento) && verificarEhTitularEPedidoEmAnalise()"
+            (click)="editarProcedimento(pedidoProcedimento)" class="btn-editar">
+            <i class="fa fa-pencil" aria-hidden="true"></i>
+          </button>
+          <button
+            [disabled]="loading"
+            *ngIf="(!pedidoProcedimento.emAnalise && permissoes?.editar && isPermiteEditarProcedimento) && verificarEhTitularEPedidoEmAnalise()"
+            (click)="removerProcedimento(pedidoProcedimento)"
+            class="btn-excluir">
+            <i class="fa fa-trash" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+      <div class="ui-g">
+        <div class="col-md-6 margin-16 no-padding">
+          <span class="label-campo-card">Grau</span>
+          <p *ngIf="!pedidoProcedimento?.grauProcedimento?.nome">-</p>
+          <p *ngIf="pedidoProcedimento?.grauProcedimento?.nome">{{pedidoProcedimento?.grauProcedimento?.nome}}</p>
+        </div>
+        <div class="col-md-6 margin-16">
+          <span class="label-campo-card">Quantidade solicitada</span>
+          <p>{{pedidoProcedimento?.qtdSolicitada}}</p>
+        </div>
+      </div>
+      <div class="ui-g" *ngIf="permissoes?.analisar && ((!pedidoProcedimento.emAnalise && pedidoProcedimento?.ultimaValidacao) || pedidoProcedimento.emAnalise)">
+        <div class="col-md-12 margin-16 no-padding">
+          <div style="position: relative;" *ngIf="!pedidoProcedimento.emAnalise && pedidoProcedimento?.ultimaValidacao">
+            <span class="label-campo-card">Quantidade autorizada</span>
+            <p class="aceito">{{pedidoProcedimento?.ultimaValidacao.qtdAutorizada}}</p>
+          </div>
+          <asc-input-text
+            (change)="ativarDesativarMotivo($event, pedidoProcedimento)"
+            (keyup)="ativarDesativarMotivo($event, pedidoProcedimento)"
+            *ngIf="pedidoProcedimento.emAnalise"
+            label="Qtde autorizada"
+            [somenteNumeros]="true"
+            [control]="getControlQtdAutorizada(pedidoProcedimento)"
+            style="position: relative; top: 5px">
+            <asc-input-error
+              nomeErro="max"
+              [msgErro]="bundle('MA094', pedidoProcedimento.qtdSolicitada)"
+            ></asc-input-error>
+            <asc-input-error nomeErro="inteiroPositivo" msgErro="Número inválido"></asc-input-error>
+          </asc-input-text>
+        </div>
+        <div class="col-md-12 margin-16 no-padding">
+          <div *ngIf="!pedidoProcedimento.emAnalise && pedidoProcedimento?.ultimaValidacao
+                    && pedidoProcedimento?.ultimaValidacao?.motivoNegacao?.titulo" style="position: relative;">
+            <span class="label-campo-card">Motivo da negação</span>
+            <p class="negado">{{pedidoProcedimento?.ultimaValidacao?.motivoNegacao?.titulo}}</p>
+          </div>
+          <asc-select-motivo-negacao
+            [control]="getControlMotivoNegacao(pedidoProcedimento)"
+            label="Motivo da negação"
+            [carregamentoProcedimentosPorPedido]="pedidoProcedimento?.idPedido"
+            *ngIf="pedidoProcedimento.emAnalise"
+            [disabled]="isHabilitaDisabilita === 'disabled'"
+            (dadoSelecionado)="motivoNegacaoSelecionadoEmissor($event)"
+          ></asc-select-motivo-negacao>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="!showProcedimento">
+    <div style="padding: 1em">
+      <asc-procedimento-autorizacao-previa-form
+        [pedidoProcedimentoFormInput]="pedidoProcedimentoForm"
+        [showButtonResumo]="true"
+        [parametroSelectProcedimento]="{ idTipoProcesso: processo?.idTipoProcesso }"
+        (procedimento)="procedimentoSelecionado($event)"
+        (grauSelecionado)="grauSelecionado($event)"
+        (pedidoProcedimentoForm)="adicionarNovoProcedimento($event)"
+        (qtdAutorizadaEmitida)="qtdAutorizada = $event"
+        (motivoNegacaoEmitido)="motivoNegacao = $event"
+        (cancelarProcedimento)="cancelarAdicaoProcedimento($event)"
+        (isEditingForm)="isEditingProcedimentoForm($event)"
+        [processo]="processo"
+      ></asc-procedimento-autorizacao-previa-form>
+    </div>
+  </div>
+  <div class="btn-footer-procedimento">
+    <button
+      class="btn-small btn-card-novo"
+      style="margin-right: 0"
+      *ngIf="permissoes?.analisar && isPermiteAdicionarProcedimento"
+      (click)="exibirFormularioProcedimento($event)">
+      <i class="fa fa-plus" aria-hidden="true"></i>
+      <span>Adicionar procedimento</span>
+    </button>
+  </div>
+  <div style="text-align: right">
+    <button [disabled]="loading" (click)="goToTop()" class="btn-to-top">Retornar ao topo</button>
+  </div>
+</section>

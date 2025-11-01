@@ -1,0 +1,145 @@
+
+p-progressspinner > div {
+    vertical-align: middle;
+}
+
+.grid-info {
+    font-family: 'Caixa Std SemiBold', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    color: #3A4859;
+}
+
+.grid-info > ul {
+    list-style: none;
+    padding-left: 15px;
+}
+
+.grid-info > ul > li {
+    font-family: 'Caixa Std Regular', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 18px;
+    color: #3A4859;
+    margin: 8px 0;
+    position: relative;
+}
+
+.grid-info > ul > li:before {
+    content: '';
+    background-color: #40A797;
+    width: 8px;
+    height: 8px;
+    left: -16px;
+    border-radius: 8px;
+    position: absolute;
+    top: 5px;
+}
+
+.p-menuitem-text {
+    font-size: 16px;
+    color: #000;
+}
+
+div.ajusteCheckboxPrime15{
+    display: flex;
+    align-items: center;
+
+  }
+
+  .ajusteCheckboxPrime15 p-checkbox div.p-checkbox-box.p-highlight{
+    border-color: #186ba0;
+    background: #186ba0;
+  }
+
+  .ajusteCheckboxPrime15 label{
+    margin-top: 2px;
+    margin-bottom: 0px ;
+    margin-left: 7.5px;
+  }
+  
+  .p-datatable .p-datatable-thead > tr > th {
+    text-align: center !important;
+    font-size: 12px;
+    font-weight: 400 !important;
+    color: #222 !important;
+    font-family: 'Caixa Std Regular','sans-serif';
+
+}
+
+.tableFullviewGBAjustes{
+    width: 100%;
+ 
+  
+  }
+.tableFullviewGBAjustes    .p-datatable-wrapper{
+   
+    width: 100%;
+ 
+  
+  }
+  
+  .p-datatable .p-datatable-tbody > tr > td {
+    
+        color: #000;
+        font-size: 12px;
+        font-family: 'Caixa Std Regular','sans-serif';
+    
+}
+
+  .p-radiobutton-box.p-highlight{
+    border-color: #186ba0 !important;
+    background: #186ba0 !important;
+  }
+
+ .p-menubar .p-submenu-list {
+    z-index: 99 !important;
+}
+
+.captionTableNoView{
+    position: absolute;
+    opacity: 0;
+    z-index: -5;
+}
+@font-face {
+    font-family: "Caixa Std SemiBold";
+    src: local("Caixa Std SemiBold"),
+    url("../fonts/CaixaStdSemiBold.woff2") format("woff2"),
+    url("../fonts/CaixaStdSemiBold.ttf") format("truetype"),
+    url("../fonts/CaixaStdSemiBold.woff") format("woff"),
+    url("../fonts/CaixaStdSemiBold.svg#Caixa Std SemiBold") format("svg");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Caixa Std Bold";
+    src: local("Caixa Std Bold"),
+    url("../fonts/CAIXAStd-Bold.woff2") format("woff2"),
+    url("../fonts/CAIXAStd-Bold.ttf") format("truetype"),
+    url("../fonts/CAIXAStd-Bold.woff") format("woff"),
+    url("../fonts/CaixaStdBold.svg#Caixa Std Bold") format("svg");
+    font-weight: bold;
+    font-style: normal;
+}
+
+/*Caixa Std Regular*/
+@font-face{
+    font-family: "Caixa Std Regular";
+    src: local("Caixa Std Regular"),
+    url("../fonts/CAIXAStd-Regular.ttf") format("truetype");
+    font-weight: bold;
+    font-style: normal;
+}
+
+/*Inter*/
+@font-face{
+    font-family: "Inter";
+    src: local("Inter-Bold"),
+    url("../fonts/Inter-Bold.ttf") format("truetype");
+    font-weight: bold;
+    font-style: normal;
+}

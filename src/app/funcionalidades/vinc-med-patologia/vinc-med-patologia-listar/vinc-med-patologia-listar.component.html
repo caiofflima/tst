@@ -1,0 +1,85 @@
+<div class="container">
+  <div class="col-md-12 breadcrumb-header">
+    <ul class="breadcrumb">
+      <li><span (click)="voltar()" class="voltar"><i class="fa fa-arrow-left" aria-hidden="true"></i>Voltar</span></li>
+      <a routerLink="/home">Início</a>
+      <em class="fa fa-chevron-right"></em>
+      Administração
+      <em class="fa fa-chevron-right"></em>
+      Parâmetros
+      <em class="fa fa-chevron-right"></em>
+      <a routerLink="/manutencao/vinc-med-patologia">Medicamento por Patologia</a>
+      <em class="fa fa-chevron-right"></em>
+      Medicamento por Patologia – Resultado
+    </ul>
+  </div>
+
+  <div class="title-type">
+    <h1 class="titulo-pagina">Medicamento por Patologia – Resultado</h1>
+  </div>
+
+  <section class="row">
+    <div class="row p-0 col-md-12">
+      <h4>Dados da Pesquisa</h4>
+    </div>
+
+    <div class="row p-0 col-xs-5" *ngIf="patologiaDesc">
+      <label class="control-label" for="patDesc">Patologia</label>&nbsp;<br>
+      <p id="patDesc">{{patologiaDesc}}</p>
+    </div>
+
+    <div class="row p-0 col-xs-5" *ngIf="medicamentoDesc">
+      <label class="control-label" for="medDesc">Medicamento</label>&nbsp;<br>
+      <p id="medDesc">{{medicamentoDesc}}</p>
+    </div>
+
+    <div class="row p-0 col-xs-2">
+      <label class="control-label" for="ativoDesc">Somente ativos</label>&nbsp;<br>
+      <p id="ativoDesc">{{ativoDesc}}</p>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div class="row p-0 col-md-9">
+      <h4>Resultado da Consulta</h4>
+    </div>
+
+    <div class="row p-0 col-md-12">
+      <div class="col-xs-3 search-inp p-0" style="margin: 5px 0 8px; border-bottom: 0 none">
+        <input #gb type="text" class="form-control filtro-caixa" pInputText size="50"
+               placeholder="Digite para filtrar resultado">
+        <em class="fas fa-search"></em>
+      </div>
+      <p-dataTable
+        id="caixa-table" emptyMessage="{{bundle('MA003')}}" [value]="lista" [rows]="5" [paginator]="true"
+        [pageLinks]="5" [rowsPerPageOptions]="[5,10,20]" [globalFilter]="gb" reorderableColumns="true"
+        sortField="idMedicamento" sortOrder="1" class="table table-striped table-sm table-hover text-center">
+
+        <p-column header="Patologia" [sortable]="true" field="nomePatologia"></p-column>
+        <p-column header="Medicamento" [sortable]="true" field="nomeMedicamento"></p-column>
+        <p-column header="Inativo" [sortable]="true" field="inativo" [style]="{'width': '90px'}"></p-column>
+
+        <p-column header="Ação">
+          <ng-template let-row="rowData" pTemplate="content">
+            <span title="Editar registro" style="cursor: pointer;"
+                  [routerLink]="['/manutencao/vinc-med-patologia/editar', row.id]">
+              <em class="fas fa-pen"></em>
+            </span>
+          </ng-template>
+        </p-column>
+      </p-dataTable>
+    </div>
+
+    <div class="col-xs-12 p-0 barra-botoes">
+      <button class="btn back-btn" (click)="voltar()">
+        <span class="fa fa-reply fa-fw"></span>
+        Voltar
+      </button>
+      <button class="btn clean-btn" routerLink="/manutencao/vinc-med-patologia/novo">
+        <span class="fa fa-plus fa-fw"></span>
+        Incluir Medicamento por Patologia
+      </button>
+    </div>
+  </section>
+
+</div>

@@ -1,0 +1,165 @@
+// Barra Brasil
+.marca-brasil-flag {
+  float: right;
+  width: 105px;
+  height: 37px;
+  padding-top: 10px
+}
+
+#barra-brasil,
+.topo {
+  width: 100%;
+  position: fixed;
+  z-index: 99
+}
+
+#barra-brasil {
+  position: fixed;
+  top: 0;
+}
+
+span.ministerio {
+  color: #3a3a3a;
+  font-weight: 700
+}
+
+abbr.dti {
+  color: #829811
+}
+
+//TOPO
+.nome-sistema h1 a,
+.topo {
+  color: #eaeaea;
+}
+
+.topo {
+  background: #19882c;
+  height: 48px;
+  top: 32px;
+  box-shadow: 0 0 4px rgba(0, 0, 0, .14), 0 4px 8px rgba(0, 0, 0, .19);
+  border-top: 2px solid #11611E;
+}
+
+.nome-sistema {
+  display: block;
+  float: left;
+
+  h1 {
+    display: block;
+    margin: 13px 0 0;
+    font-size: 1.3em;
+    float: left;
+    font-weight: 600;
+  }
+}
+
+.caixa-topo {
+  display: table;
+  float: left;
+  padding: 0 10px;
+  height: 45px;
+  transition: background .3s;
+  font-size: 11px;
+}
+
+.caixa-topo a {
+  color: #fff;
+  font-size: 11px;
+}
+
+.caixa-topo:hover {
+  cursor: pointer;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, .03), 0 3px 10px rgba(0, 0, 0, .08);
+  background: #137123;
+}
+
+.label-topo {
+  display: block;
+  float: right;
+  line-height: 45px
+}
+
+em.menu-icone {
+  font-size: 1.2em !important;
+  color: #666 !important
+}
+
+.botao-menu {
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  background: #137123;
+  border-radius: 30px;
+  margin: 8px;
+  float: left;
+  transition: box-shadow .3s;
+
+  &:active {
+    background: #208632;
+  }
+
+  &:hover {
+    box-shadow: 0 3px 10px rgba(0, 0, 0, .23), 0 3px 10px rgba(0, 0, 0, .16);
+  }
+
+  em {
+    font-size: 1.25em;
+    padding-top: 6px;
+    padding-left: 7px
+  }
+}
+
+// Rodape
+footer {
+  width: 100%;
+
+  #rodapePadrao {
+    padding-top: 20px;
+  }
+
+  #versao {
+    font-size: 11px;
+  }
+
+  .rodape-info {
+    font-size: 11px;
+    color: #707070;
+    display: block;
+    text-align: center;
+  }
+
+  .marcas {
+    background: #fff;
+    text-align: center;
+    padding: 15px 0 10px;
+    margin-top: 15px;
+    width: 100%;
+    font-size: 1.4em;
+    font-weight: 600;
+    border-bottom: 1px solid #e0e0e0;
+  }
+
+  .marcas img {
+    height: 80px;
+    margin: 0 10px;
+  }
+
+  .navegador {
+    background: #19882C;
+    padding: 15px 0;
+    margin-top: 0;
+    width: 100%
+  }
+
+  .navegador, footer p {
+    color: #fff;
+  }
+
+  .marca-brasil-flag {
+    float: right;
+    width: 105px;
+    height: 37px;
+    padding-top: 10px
+  }
+}

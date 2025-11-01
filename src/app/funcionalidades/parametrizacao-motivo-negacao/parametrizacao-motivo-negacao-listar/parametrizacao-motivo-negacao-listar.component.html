@@ -1,0 +1,94 @@
+<div class="container">
+  <div class="col-md-12 breadcrumb-header">
+    <ul class="breadcrumb">
+      <li><span (click)="voltar()" class="voltar"><i class="fa fa-arrow-left" aria-hidden="true"></i>Voltar</span></li>
+      <a routerLink="/home">Início</a>
+      <em class="fa fa-chevron-right"></em> Administração
+      <em class="fa fa-chevron-right"></em> Parâmetros
+      <em class="fa fa-chevron-right"></em>
+      <a routerLink="/manutencao/parametros/motivo-negacao">Motivos de Negação</a>
+      <em class="fa fa-chevron-right"></em> Motivo de Negação – Resultado
+    </ul>
+  </div>
+  <div class="title-type">
+    <h1 class="titulo-pagina">Motivos de Negação – Resultado</h1>
+  </div>
+
+  <section class="row">
+    <div *ngIf="!isNaoPossuiFiltros()">
+      <div class="p-0 col-md-12">
+        <h4>Dados da Pesquisa</h4>
+      </div>
+
+      <div class="clearfix"></div>
+
+      <div class="p-0 col-xs-2" *ngIf="filtroMotivoNegacao.idSituacaoPedido">
+        <label class="control-label" for="situacaoPedido">Situacao do Pedido</label>&nbsp;<br>
+        <p id="situacaoPedido">{{situacaoPedido}}</p>
+      </div>
+      <div class="p-0 col-xs-2" *ngIf="filtroMotivoNegacao.tituloNegacao">
+        <label class="control-label" for="nome">Título da Negação</label>&nbsp;<br>
+        <p id="nome">{{filtroMotivoNegacao.tituloNegacao}}</p>
+      </div>
+      <div class="p-0 col-xs-2" *ngIf="filtroMotivoNegacao.motivoNegacao">
+        <label class="control-label" for="opme">Motivo da Negação</label>&nbsp;<br>
+        <p id="opme">{{filtroMotivoNegacao.motivoNegacao}}</p>
+      </div>
+      <div class="p-0 col-xs-2" *ngIf="filtroMotivoNegacao.somenteAtivo">
+        <label class="control-label" for="ativos">Somente ativos</label>&nbsp;<br>
+        <p id="ativos">{{filtroMotivoNegacao.somenteAtivo === 'S' ? 'Sim' : 'Não'}}</p>
+      </div>
+      <div class="p-0 col-xs-2" *ngIf="filtroMotivoNegacao.icNivelNegacao">
+        <label class="control-label" for="nivelNegacao">Nível de Negação</label>&nbsp;<br>
+        <p id="nivelNegacao">{{filtroMotivoNegacao.icNivelNegacao === 'S' ? 'PEDIDO' : 'PROCEDIMENTO'}}</p>
+      </div>
+
+      <div class="clearfix"></div>
+    </div>
+
+    <div class="row p-0 col-md-12">
+      <h4>Resultado da Consulta</h4>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div class="p-0 col-md-12">
+      <div class="col-xs-3 search-inp p-0" style="margin: 5px 0 8px; border-bottom: 0 none">
+        <input #gb type="text" class="form-control filtro-caixa" pInputText size="50"
+               placeholder="Digite para filtrar resultado">
+        <em class="fas fa-search"></em>
+      </div>
+      <p-dataTable
+        id="caixa-table" [value]="listaMotivosNegacao" [rows]="10"
+        [paginator]="true" [pageLinks]="5" sortOrder="-1"
+        emptyMessage="Nenhum resultado encontrado para os filtros informados." [loading]="loading"
+        [rowsPerPageOptions]="[5,10,20]" [globalFilter]="gb" reorderableColumns="true" sortField="id"
+        class="table table-striped table-sm table-hover text-center">
+        <p-column field="nivelNegacao" header="Nível de Negação" [sortable]="true"></p-column>
+        <p-column field="situacaoPedido.nome" header="Situação do Pedido" [sortable]="true"></p-column>
+        <p-column field="tituloNegacao" header="Título de Negação" [sortable]="true"></p-column>
+        <p-column field="motivoNegacao" header="Motivo de Negação" [sortable]="true"></p-column>
+        <p-column field="inativo" header="Inativo" [sortable]="true" [style]="{'width':'90px'}"></p-column>
+
+        <p-column header="Ação">
+          <ng-template let-row="rowData" pTemplate="content">
+            <span title="Editar registro" [routerLink]="['../editar', row.id]" id="editar">
+              <em class="fas fa-pen"></em>
+            </span>
+          </ng-template>
+        </p-column>
+      </p-dataTable>
+    </div>
+
+    <div class="p-0 col-xs-12 barra-botoes">
+      <button
+        class="btn back-btn" routerLink="/manutencao/parametros/motivo-negacao" id="btnFormVoltar">
+        <span class="fa fa-reply fa-fw"></span>Voltar
+      </button>
+      <button type="button" id="btnNovoMotivoNegacao" class="btn clean-btn" routerLink="../novo">
+        <span class="fa fa-plus fa-fw"></span>Incluir Motivo de Negação
+      </button>
+    </div>
+
+  </section>
+</div>

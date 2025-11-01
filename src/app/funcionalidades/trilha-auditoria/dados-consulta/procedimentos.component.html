@@ -1,0 +1,111 @@
+<div class="col-md-12">
+  <p-table
+    [value]="dadosConsulta"
+    [paginator]="true"
+    [rows]="10"
+    class="table table-striped table-sm table-hover"
+    #dt
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th id="numeroPedido" style="width: 5%">Número Pedido</th>
+        <th id="idProcedimento" style="width: 10%">ID Procedimento</th>
+        <th id="Procedimento">Procedimento</th>
+        <th id="grauRegiaoOdontologica" style="width: 10%">
+          Grau/Região Odontológica
+        </th>
+        <th id="quantidadeSolicitada" style="width: 5%">
+          Quantidade Solicitada
+        </th>
+        <th id="Evento" style="width: 5%">Evento</th>
+        <th id="Data" style="width: 10%">Data</th>
+        <th id="Responsavel" style="width: 10%">Responsável</th>
+        <th id="ipResponsavel" style="width: 10%">IP do Responsável</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData>
+      <tr>
+        <td>{{ rowData.nroProcesso }}</td>
+        <td>{{ rowData.idProcedimento }}</td>
+        <td>
+          <ng-container *ngIf="rowData.procedimento?.length > 60">
+            {{ rowData.procedimento | slice : 0 : 60
+            }}<a (click)="abrirModalDetalhamento(rowData)">...Ver mais</a>
+          </ng-container>
+          <ng-container *ngIf="rowData.procedimento?.length <= 60">
+            {{ rowData.procedimento | slice : 0 : 60
+            }}<a (click)="abrirModalDetalhamento(rowData)"> Ver mais</a>
+          </ng-container>
+        </td>
+        <td>{{ rowData.grauRegiaoOdontologica }}</td>
+        <td>{{ rowData.qtdSolicitada }}</td>
+        <td>{{ rowData.strEvento }}</td>
+        <td>{{ rowData.dataHoraEvento | date : "dd/MM/yyyy HH:mm:ss" }}</td>
+        <td>{{ rowData.responsavel | cpfMask }}</td>
+        <td>{{ rowData.ipResponsavel }}</td>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="emptymessage">
+      {{ bundle("MA003") }}
+    </ng-template>
+    <!-- <p-column [style]="{'width':'5%'}" field="nroProcesso" header="Número Pedido"></p-column>
+    <p-column [style]="{'width':'10%'}" field="idProcedimento" header="ID Procedimento"></p-column>
+    <p-column header="Procedimento">
+      <ng-template let-row="rowData" pTemplate="content">
+        <ng-container *ngIf="row.procedimento?.length > 60">
+          {{row.procedimento | slice:0:60 }}<a (click)="abrirModalDetalhamento(row)">...Ver mais</a>
+        </ng-container>
+        <ng-container *ngIf="row.procedimento?.length <= 60">
+          {{row.procedimento | slice:0:60 }}<a (click)="abrirModalDetalhamento(row)"> Ver mais</a>
+        </ng-container>
+      </ng-template>
+    </p-column>
+    <p-column [style]="{'width':'10%'}" field="grauRegiaoOdontologica" header="Grau/Região Odontológica"></p-column>
+    <p-column [style]="{'width':'5%'}" field="qtdSolicitada" header="Quantidade Solicitada"></p-column>
+    <p-column [style]="{'width':'5%'}" field="strEvento" header="Evento"></p-column>
+    <p-column [style]="{'width':'10%'}" header="Data">
+      <ng-template let-row="rowData" pTemplate="content">
+        {{row.dataHoraEvento | date:'dd/MM/yyyy HH:mm:ss'}}
+      </ng-template>
+    </p-column>
+    <p-column [style]="{'width':'10%'}" header="Responsável">
+      <ng-template let-row="rowData" pTemplate="content">
+        {{row.responsavel | cpfMask}}
+      </ng-template>
+    </p-column>
+    <p-column [style]="{'width':'10%'}" field="ipResponsavel" header="IP do Responsável"></p-column> -->
+  </p-table>
+
+  <p-dialog
+    header="Detalhes do Procedimento"
+    [(visible)]="showModalDetalhamento"
+    [modal]="true"
+    width="800"
+    [responsive]="true"
+    #modalDetalhamento
+  >
+    <div class="col-md-12">
+      <div class="col-md-12">
+        <label for="procedimento">Procedimento</label>
+        <div id="procedimento" class="output-text">
+          {{ selectedRow?.procedimento }}
+        </div>
+      </div>
+      <div class="col-md-12">
+        <label for="descricao">Descrição do Procedimento</label>
+        <div id="descricao" class="output-text">
+          {{ selectedRow?.descricao }}
+        </div>
+      </div>
+    </div>
+
+    <p-footer class="dmsg-footer">
+      <div style="display: flex; justify-content: flex-end">
+        <button class="btn btn-danger" (click)="fecharModalDetalhamento()">
+          <span class="fa fa-close fa-fw"></span>Fechar
+        </button>
+      </div>
+    </p-footer>
+  </p-dialog>
+</div>

@@ -1,0 +1,42 @@
+<form [formGroup]="finalidadeForm">
+  <div class="finalidade-autorizacao">
+    <div class="space-between sb-to-mobile">
+      <div class="custom-left-grid">
+        <p class="titulo">Certo. Qual o motivo da solicitação?</p>
+        <div class="custom-form-group-input">
+          <asc-select-tipo-processo
+            label="Tipo de pedido" [required]="true"
+            [control]="finalidadeForm.get('idTipoProcesso')"
+            [tipoBusca]="CONSULTAR_TIPO_PROCESSO_AUTORIZACAO_PREVIA_NOVO_PEDIDO"
+            (dadoSelecionado)="tipoProcessoSelecionado($event)"
+            (onChange)="onChangeTipo()"
+          ></asc-select-tipo-processo>
+        </div>
+
+        <div class="custom-form-group-input" *ngIf="finalidadeForm.get('idTipoProcesso').valid">
+          <asc-select-finalidade
+            label="Finalidade" [required]="true" id="inputFinalidade"
+            [idTipoProcessoAndIdBeneficiario]="{ idTipoProcesso: this.finalidadeForm.get('idTipoProcesso').value }"
+            [tipoAcao]="CARREGAR_POR_TIPO_PROCESSO"
+            [control]="finalidadeForm.get('idMotivoSolicitacao')"
+            (dadoSelecionado)="motivoSolicitacaoSelecionado($event)"
+          ></asc-select-finalidade>
+        </div>
+
+      </div>
+
+      <div class="custom-right-grid" *ngIf="finalidadeForm.get('idTipoProcesso').valid">
+        <p class="grid-titulo">{{tipoProcessoEntidade?.nome}}</p>
+        <p class="grid-info" [innerHtml]="tipoProcessoEntidade?.descricao | safeHtml"></p>
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+    <button class="back-btn" cdkStepperPrevious>
+      Voltar
+    </button>
+    <button class="continue-btn" cdkStepperNext [disabled]="finalidadeForm.invalid" (click)="onSubmit()">
+        Continuar
+    </button>
+  </div>
+</form>

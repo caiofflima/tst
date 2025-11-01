@@ -1,0 +1,78 @@
+@import "/src/assets/sass/colors";
+@import "/src/assets/sass/mixins";
+
+p {
+  margin: 0;
+}
+
+.cabecalho-card-processo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-btn-card {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.alinharDireita {
+  float: right;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.to-footer {
+  button {
+    justify-content: center;
+    align-items: center;
+    padding: 6.5px 12px;
+    border-radius: 3px;
+    transition: 250ms ease-in-out;
+    margin: 8px 0 8px 8px;
+
+    &.cancel {
+      background-color: #01377F;
+      border: none;
+
+      span {
+        color: #fff;
+      }
+
+      &:hover,
+      &:active,
+      &:focus {
+        background-color: #01377F;
+        transition: 250ms ease-in-out;
+
+        span {
+          color: #fff;
+          transition: 250ms ease-in-out;
+        }
+      }
+    }
+
+    &.save {
+      background-color: #f39200;
+      border: none;
+
+      span {
+        color: #fff;
+      }
+
+      &:not(:disabled) {
+        &:hover,
+        &:focus,
+        &:active {
+          background-color: #db6e00;
+          transition: 250ms ease-in-out;
+        }
+      }
+
+      &:disabled {
+        background-color: #dadada;
+      }
+    }
+  }
+}

@@ -1,0 +1,160 @@
+.cabecalho-carta {
+    margin-top: 5%;
+    text-align: center;
+    width: 100%;
+    border-radius: 7.31774px 7.31774px 11.7084px 11.7084px;
+}
+
+.titulo-carta { 
+    font-family: 'Caixa Std Bold', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 19px;
+    margin-top: 2%; 
+    text-align: center;
+    color: #3A4859;
+}
+
+.texto-carta {
+    font-family: 'Caixa Std Regular', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 19px;
+    margin-top: 3%;
+    text-align: justify;
+    color: #3A4859;
+    margin-left: 15%;
+    margin-right: 15%;
+    white-space: pre-line;
+    line-height: 1.5;
+}
+
+.data-carta {
+    font-family: 'Caixa Std Regular', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 140%;
+    margin-top: 2%;
+    text-align: justify;
+    color: #3A4859;
+    margin-left: 15%;
+    margin-right: 15%;
+}
+
+.assinatura {
+    margin-left: 45%;
+    height: 110px;
+}
+
+.rodape-carta {
+    margin-top: 5%;
+    text-align: center;
+    width: 100%;
+    border-radius: 7.31774px 7.31774px 11.7084px 11.7084px;
+}
+
+.form-group{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+ }
+
+.ng-tns-c11-13{
+    width: 668px;
+}
+ 
+.custom-form-group-input{
+    width: 50%;
+ }
+
+.logo-card img {
+    border-radius: 10px;
+}
+
+.logo-card-back img {
+    border-radius: 10px;
+}
+
+.btn-pdf {
+    align-items: center;
+    padding: 8px;
+    gap: 8px;
+    background: #F6F9F9;
+    border-radius: 18px;    
+    width: 154px;
+    height: 48px;
+    border-color: transparent;
+}
+
+.col-xs-12 {
+    text-align: center;
+    margin-top: 5%;
+    display: inline-block;
+}
+
+ @media (max-width: 320px){
+
+   .logo-card{
+     width: 100%;
+    }
+
+}
+
+ @media (max-width: 480px){
+
+    .logo-card{
+        width: 100%;
+    }
+
+    .logo-card-back{
+        width: 100%;
+    }
+
+    .custom-form-group-input{
+        width: 80%;
+   }
+
+}
+
+@media (min-width: 481px) and (max-width: 599px){
+
+    .logo-card{
+        width: 100%;
+        left: 65%;
+    }
+
+    .logo-card-back{
+        width: 100%;
+    }
+
+}
+
+@media (min-width: 600px) and (max-width: 768px){
+    .logo-card{
+        width: 100%;
+        left: 65%;
+    }
+
+    .logo-card-back{
+        width: 100%;
+    }
+
+}
+
+@media (min-width: 220px) and (max-width: 400px){
+
+    .custom-form-group-input{
+         width: 100%;
+    }
+}
+
+@media (min-width: 220px) and (max-width: 400px){
+
+    .custom-form-group-input{
+         width: 100%;
+    }
+}
+

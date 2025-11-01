@@ -1,0 +1,54 @@
+<form [formGroup]="formularioSolicitacao">
+  <div class="custom-container">
+    <p class="titulo">Vamos começar! Precisamos saber quem é o beneficiário.</p>
+
+    <div class="custom-form-grid size-365">
+      <label class="custom-input-label absolute">Beneficiário</label>
+      <asc-select-beneficiario
+        [uppercase]="true"
+        [matricula]="matricula"
+        label=""
+        [control]="formularioSolicitacao.get('idBeneficiario')"
+        (dadoSelecionado)="beneficarioSelecionado($event)"
+      >
+      </asc-select-beneficiario>
+    </div>
+
+    <p class="titulo margin-top-32 max-565">
+      Você gostaria de informar um contato adicional para recebimento das
+      notificações do seu pedido?
+    </p>
+
+    <div class="custom-form-grid size-365 margin-24">
+      <label class="custom-input-label">E-mail <small>- Opcional</small></label>
+      <asc-input-text label="" [control]="formularioSolicitacao.get('email')">
+      </asc-input-text>
+    </div>
+
+    <div class="custom-form-grid size-365 margin-16">
+      <label class="custom-input-label"
+        >Telefone <small>- Opcional</small></label
+      >
+      <asc-input-text
+        placeholder="(DD) 00000-0000"
+        label=""
+        [control]="formularioSolicitacao.get('telefoneContato')"
+        maskName="celularMask"
+      >
+      </asc-input-text>
+    </div>
+  </div>
+
+  <div class="footer">
+    <button class="back-btn" cdkStepperPrevious>Voltar</button>
+
+    <button
+      class="continue-btn"
+      (click)="onSubmit()"
+      [disabled]="formularioSolicitacao.invalid"
+      cdkStepperNext
+    >
+      Continuar
+    </button>
+  </div>
+</form>

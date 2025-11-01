@@ -1,0 +1,15 @@
+<label class="control-label label-class" for="{{inputId}}"
+       [class.obrigatorio]="required !== null && required !== false">{{label}}</label>
+<p-autoComplete [(ngModel)]="selecionado" [suggestions]="selectItems" class="asc-autocomplete" id="{{inputId}}"
+                (completeMethod)="search($event)" (onSelect)="onSelectAction($event)"
+                [placeholder]="placeHolder" [required]="required"
+                [multiple]="multiple" [minLength]="minlength">
+  <ng-template let-item pTemplate="item" class="asc-autocomplete">
+    <div class="ui-helper-clearfix">
+      <div>{{item.label}}</div>
+    </div>
+  </ng-template>
+</p-autoComplete>
+<div *ngIf="control.invalid && (control.dirty || control.touched)" class="error-form">
+  <div *ngIf="control.errors['required']">{{requiredMsg}}</div>
+</div>

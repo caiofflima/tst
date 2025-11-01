@@ -1,0 +1,54 @@
+
+button {
+  justify-content: center;
+  align-items: center;
+  padding: 6.5px 12px;
+  border-radius: 3px;
+  transition: 250ms ease-in-out;
+  margin: 8px 4px;
+  flex-grow: 1;
+
+  &.cancel {
+    background-color: #fff;
+    border: 1px solid #01377F;
+
+    span {
+      color: #01377F;
+    }
+
+    &:hover,
+    &:active,
+    &:focus {
+      background-color: #01377F;
+      transition: 250ms ease-in-out;
+
+      span {
+        color: #fff;
+        transition: 250ms ease-in-out;
+      }
+    }
+  }
+
+  &.save {
+    background-color: #01377F;
+    border: none;
+
+    span {
+      color: #fff;
+    }
+
+    &:not(:disabled) {
+      &:hover,
+      &:focus,
+      &:active {
+        background-color: #02285a;
+        transition: 250ms ease-in-out;
+      }
+    }
+
+    &:disabled {
+      background-color: #dadada;
+    }
+
+  }
+}

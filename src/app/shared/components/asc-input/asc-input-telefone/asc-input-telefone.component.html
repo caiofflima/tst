@@ -1,0 +1,16 @@
+<label *ngIf="label" [ngStyle]="compStyle" class="control-label" [class.obrigatorio]="required !== null && required !== false"
+       for="{{inputId}}">{{label}}</label>
+<input [attr.id]="inputId" [formControl]="control" [ngStyle]="compStyle" class="form-control remove-left-border"
+       id="{{inputId}}" type="text"
+       title="{{hint}}" size="15" maxlength="15"
+       [required]="required"
+       placeholder="(XX) XXXXX-XXXX"
+       (blur)="blurAction($event)"
+       (focus)="focusAction($event)"
+       (keyup)="keyUpAction($event)"
+       (change)="changeAction($event)"
+       (keydown)="keyDownAction($event)"/>
+<div *ngIf="control.invalid && (control.dirty || control.touched)" class="error-form" [ngStyle]="compStyle">
+  <div *ngIf="control.errors.required">{{requiredMsg}}</div>
+  <div *ngIf="control.errors.telefoneInvalid">{{bundle('MA009', 'Telefone')}}</div>
+</div>

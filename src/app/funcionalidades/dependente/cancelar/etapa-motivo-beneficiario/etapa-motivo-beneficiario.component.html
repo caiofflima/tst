@@ -1,0 +1,172 @@
+<form [formGroup]="formularioSolicitacao">
+  <div class="solicitacao-container">
+    <div class="form-row">
+      <div class="col-md-12 no-padding-left">
+        <p class="titulo">
+          Vamos começar! Precisamos saber para qual dependente deseja o
+          cancelamento.
+        </p>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="row">
+        <div class="col-md-6 no-padding-left" @fadeInOut>
+          <asc-select-beneficiario
+            [uppercase]="true"
+            selectId="beneficiario"
+            [matricula]="matricula"
+            label="Beneficiário"
+            [required]="true"
+            [control]="formularioSolicitacao.get('dependente')"
+            [titular]="false"
+            (dadoSelecionado)="beneficiarioSelecionado($event)"
+          ></asc-select-beneficiario>
+        </div>
+      </div>
+
+      <div *ngIf="formularioSolicitacao.get('dependente').value">
+        <div class="form-group col-md-12 no-padding-left">
+          <div class="ui-g-6 no-padding">
+            <div class="custom-form-group-input">
+              <label class="control-label">Nome Completo</label><br />
+              <p class="uppercase">{{ beneficiario?.nome }}</p>
+            </div>
+          </div>
+          <div class="ui-g-6 no-padding">
+            <div class="custom-form-group-input">
+              <label class="control-label">Código de beneficiário</label><br />
+              <p>{{ beneficiario?.codigoBeneficiario }}</p>
+            </div>
+          </div>
+          <div class="ui-g-6 no-padding">
+            <div class="custom-form-group-input">
+              <label class="control-label">Tipo de beneficiário</label><br />
+              <p class="uppercase">
+                {{ beneficiario?.contratoTpdep.tipoDependente.descricao }}
+              </p>
+            </div>
+          </div>
+          <div class="ui-g-6 no-padding">
+            <div class="custom-form-group-input">
+              <label class="control-label">Data Nascimento</label><br />
+              <p>
+                {{
+                  beneficiario?.matricula.dataNascimento | date : "dd/MM/yyyy"
+                }}
+              </p>
+            </div>
+          </div>
+          <div class="ui-g-6 no-padding">
+            <div class="custom-form-group-input">
+              <label class="control-label">Sexo</label><br />
+              <p class="uppercase">
+                {{
+                  beneficiario?.matricula.sexo === "M"
+                    ? "Masculino"
+                    : beneficiario?.matricula.sexo === "F"
+                    ? "Feminino"
+                    : ""
+                }}
+              </p>
+            </div>
+          </div>
+          <div class="ui-g-6 no-padding">
+            <div class="custom-form-group-input">
+              <label class="control-label">Nome da mãe</label><br />
+              <p class="uppercase">{{ beneficiario?.matricula.nomeMae }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6 no-padding-left" @fadeInOut>
+          <div
+            class="custom-form-group-input"
+            *ngIf="formularioSolicitacao.get('dependente').valid"
+            @fadeInOut
+          >
+            <asc-select-finalidade
+              [uppercase]="true"
+              selectId="motivoCancelamento"
+              label="Motivo do cancelamento"
+              [required]="true"
+              [idTipoProcessoAndIdBeneficiario]="{
+                idTipoProcesso: TIPO_PROCESSO,
+                idBeneficiario: idBeneficiario
+              }"
+              [tipoAcao]="CARREGAR_POR_TIPO_PROCESSO"
+              [control]="formularioSolicitacao.get('motivoCancelamento')"
+              (dadoSelecionado)="motivoCancelamentoSelecionado($event)"
+            ></asc-select-finalidade>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6 no-padding-left" @fadeInOut>
+          <div
+            class="custom-form-group-input"
+            *ngIf="apresentarCampoDataOcorrencia"
+            @fadeInOut
+          >
+            <!--  [required]="rgRequired" -->
+            <asc-input-date
+              [control]="formularioSolicitacao.get('dataOcorrencia')"
+              inputId="dataOcorrencia"
+              label="Data de Ocorrência"
+              [index]="3"
+            >
+              <asc-input-error
+                nomeErro="dataMenorIgualAtual"
+                msgErro="Data de Ocorrência deve ser menor ou igual à data atual."
+              ></asc-input-error>
+            </asc-input-date>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-12 no-padding-left">
+        <p class="titulo">
+          Você gostaria de informar um contato adicional para recebimento das
+          notificações do seu pedido?
+        </p>
+      </div>
+
+      <div class="col-md-6 no-padding-left mb-15">
+        <label class="control-label">E-mail <small>Opcional</small></label>
+        <asc-input-text
+          [control]="formularioSolicitacao.get('email')"
+          inputId="email"
+          label=""
+        ></asc-input-text>
+      </div>
+
+      <div class="col-md-6 no-padding-left">
+        <label class="control-label">Telefone <small>Opcional</small></label>
+        <asc-input-telefone
+          [control]="formularioSolicitacao.get('celular')"
+          inputId="telefone"
+          label=""
+        ></asc-input-telefone>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <asc-button-secondary
+      buttonId="voltar"
+      [routerLink]="routerLinkToBack"
+      title="Voltar"
+    ></asc-button-secondary>
+
+    <asc-button-primary
+      buttonId="continuar"
+      title="Continuar"
+      [disabled]="formularioSolicitacao.invalid"
+      [showProgress]="showProgress"
+      (onClick)="onSubmit()"
+    ></asc-button-primary>
+  </div>
+</form>

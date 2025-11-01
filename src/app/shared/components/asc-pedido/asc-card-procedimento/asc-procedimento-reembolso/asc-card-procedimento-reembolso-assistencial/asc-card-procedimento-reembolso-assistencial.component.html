@@ -1,0 +1,50 @@
+<div class="relative">
+  <div class="relative">
+    <label class="padding-x label-campo-card">Procedimento</label>
+    <p>
+      {{
+        pedidoProcedimento?.procedimento?.estruturaNumerica
+          | estruturaProcedimento
+      }}
+      –
+      {{ pedidoProcedimento?.procedimento?.descricaoProcedimento }}
+    </p>
+  </div>
+  <div class="ui-g">
+    <div class="ui-g-6 ui-md-6 no-padding margin-16">
+      <label class="label-campo-card">Grau</label>
+      <p>{{ pedidoProcedimento?.grauProcedimento?.nome | campoVazioHifen }}</p>
+    </div>
+
+    <div class="ui-g-6 ui-md-6 no-padding margin-16">
+      <label class="label-campo-card">Valor unitário pago</label>
+      <p *ngIf="!pedidoProcedimento?.valorUnitarioPago">R$ 0,00</p>
+      <p *ngIf="pedidoProcedimento?.valorUnitarioPago">
+        {{ pedidoProcedimento?.valorUnitarioPago | currency : "BRL" : true }}
+      </p>
+    </div>
+
+    <div class="ui-g-6 ui-md-6 no-padding margin-16">
+      <label class="label-campo-card">Autorização Prévia</label>
+      <p>
+        {{ pedidoProcedimento?.autorizacaoPrevia | autorizacaoPreviaPedido }}
+      </p>
+    </div>
+
+    <div class="ui-g-6 ui-md-6 no-padding margin-16">
+      <label class="label-campo-card">Data do atendimento</label>
+      <p>
+        {{
+          pedidoProcedimento?.dataAtendimento
+            | date : "dd/MM/yyyy"
+            | campoVazioHifen
+        }}
+      </p>
+    </div>
+
+    <div class="ui-g-6 ui-md-6 no-padding margin-16">
+      <label class="label-campo-card">Quantidade</label>
+      <p>{{ pedidoProcedimento?.qtdSolicitada | campoVazioHifen }}</p>
+    </div>
+  </div>
+</div>

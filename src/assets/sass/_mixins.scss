@@ -1,0 +1,155 @@
+@import "./colors";
+
+@mixin center-flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin aply-btn-effects($bg, $col) {
+  &:not(:disabled) {
+    &:hover,
+    &:focus,
+    &:active {
+      background-color: $bg;
+      transition: $btn-transition;
+
+      span,
+      i {
+        color: $col;
+        transition: $btn-transition;
+      }
+    }
+  }
+  &:disabled {
+    background-color: $btn-bg-disabled;
+  }
+}
+
+@mixin create-btn($btn-type) {
+  border: none;
+  border-radius: 3px;
+  transition: $btn-transition;
+  box-sizing: border-box;
+  padding: 0 0.75em;
+
+  span,
+  i {
+    transition: $btn-transition;
+  }
+
+  @if $btn-type==normal_blue {
+    background-color: $btn-bg-blue;
+
+    span,
+    i {
+      color: $btn-bg-white;
+    }
+
+    @include aply-btn-effects($btn-bg-blue-dark, $btn-bg-white);
+  } @else if $btn-type==normal_orange {
+    background-color: $btn-bg-orange-dark;
+
+    span,
+    i {
+      color: $btn-bg-white;
+    }
+
+    @include aply-btn-effects($btn-bg-orange-darker, $btn-bg-white);
+  } @else if $btn-type==normal_red {
+    background-color: $btn-bg-red;
+
+    span,
+    i {
+      color: $btn-bg-white;
+    }
+
+    @include aply-btn-effects($btn-bg-red-dark, $btn-bg-white);
+  } @else if $btn-type==normal_green {
+    background-color: $btn-bg-green;
+
+    span,
+    i {
+      color: $btn-bg-white;
+    }
+
+    @include aply-btn-effects($btn-bg-green-dark, $btn-bg-white);
+  } @else if $btn-type==outlined_red {
+    background-color: $btn-bg-white;
+    border: 1px solid $btn-bg-red;
+
+    span,
+    i {
+      color: $btn-bg-red;
+    }
+
+    @include aply-btn-effects($btn-bg-red-dark, $btn-bg-white);
+  } @else if $btn-type==outlined_blue {
+    background-color: $btn-bg-white;
+    border: 1px solid $btn-bg-blue;
+
+    span,
+    i {
+      color: $btn-bg-blue;
+    }
+
+    @include aply-btn-effects($btn-bg-blue-dark, $btn-bg-white);
+  } @else if $btn-type==normal_cyan {
+    background-color: $btn-bg-light-cyan;
+
+    span,
+    i {
+      color: $btn-bg-white;
+    }
+
+    @include aply-btn-effects($btn-bg-cyan-dark, $btn-bg-white);
+  } @else {
+    @error "Erro ao fornecer estilo de botão , classe #{$btn-type} não é conhecido";
+  }
+
+  &:disabled {
+    background-color: $btn-bg-disabled;
+
+    span,
+    i {
+      color: $btn-bg-white;
+    }
+  }
+}
+
+@mixin breakpoint($breakpoint) {
+  @if $breakpoint == xs {
+    @media only screen and (min-width: 420px) {
+      @content;
+    }
+  }
+  @if $breakpoint == sm {
+    @media only screen and (min-width: 640px) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == md {
+    @media only screen and (min-width: 768px) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == lg {
+    @media only screen and (min-width: 1024px) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == xl {
+    @media only screen and (min-width: 1280px) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == xxl {
+    @media only screen and (min-width: 1536px) {
+      @content;
+    }
+  }
+}

@@ -1,0 +1,70 @@
+<!-- Page Header-->
+<div class="col-md-12 breadcrumb-header">
+  <ul class="breadcrumb">
+    <li>
+      <span routerLink="/" class="voltar">
+        <i class="fa fa-arrow-left" aria-hidden="true"></i>Voltar
+      </span>
+    </li>
+    <a routerLink="/home">Início</a>
+    <em class="fa fa-chevron-right"></em>
+    Segurança
+    <em class="fa fa-chevron-right"></em>
+    Perfil de Usuário Externo
+  </ul>
+</div>
+
+<header class="page-header">
+  <div class="container-fluid">
+    <h2 class="no-margin-bottom">Perfil usuário externo</h2>
+  </div>
+</header>
+
+<section class="row container-fluid">
+  <form [formGroup]="form">
+    <div class="row col-xs-3">
+      <label class="control-label" for="cpf">CPF</label>&nbsp;<br>
+      <input type="text" id="cpf" class="form-control" [textMask]="{mask: maskCpf}" formControlName="cpf"
+             title="{{bundle('MH130')}}">
+    </div>
+    <div class="row col-xs-6">
+      <label class="control-label" for="empresa">Empresa</label>&nbsp;<br>
+      <p-dropdown id="empresa" [options]="empresas" name="empresa" placeholder="{{bundle('MHSPH')}}" optionField="id"
+                  optionLabel="razaoSocial"
+                  formControlName="empresa" title="{{bundle('MH134')}}"></p-dropdown>
+    </div>
+    <div class="row col-xs-4">
+      <label class="control-label" for="perfil">Perfil</label>&nbsp;<br>
+      <p-dropdown id="perfil" [options]="perfis" placeholder="{{bundle('MHSPH')}}" formControlName="codigoPerfil"
+                  title="{{bundle('MH135')}}"></p-dropdown>
+    </div>
+    <div class="row col-xs-4">
+      <label class="control-label" for="atuacaoProfissional">Atuação Profissional</label>&nbsp;<br>
+      <p-dropdown id="atuacaoProfissional" [options]="tiposAuditores" placeholder="{{bundle('MHSPH')}}"
+                  formControlName="idTipoAuditor" title="{{bundle('MH136')}}">
+      </p-dropdown>
+    </div>
+    <div class="row col-xs-6 input-group">
+      <div class="col-xs-6">
+        <label class="control-label" for="dataInicio">Data Limite inícial</label>&nbsp;<br>
+        <p-calendar id="dataInicio" formControlName="dataLimiteInicial" [locale]="pt" dateFormat="dd/mm/yy"
+                    [monthNavigator]="true" [yearNavigator]="true"
+                    yearRange="1900:2100" [showIcon]="true" title="{{bundle('MH143')}}"></p-calendar>
+      </div>
+      <div class="col-xs-6">
+        <label class="control-label" for="dataFim">Data Limite final</label>&nbsp;<br>
+        <p-calendar id="dataFim" formControlName="dataLimiteFinal" [locale]="pt" dateFormat="dd/mm/yy"
+                    [monthNavigator]="true" [yearNavigator]="true"
+                    yearRange="1900:2100" [showIcon]="true" title="{{bundle('MH143')}}"></p-calendar>
+      </div>
+    </div>
+    <div class="col-xs-12 barra-botoes">
+      <button id="btnLimparCampos" class="btn back-btn" (click)="limparCampos()">
+        <span class="fa fa-trash fa-fw"></span>Limpar Campos
+      </button>
+      <button class="btn btn-primary" (click)="pesquisarPerfisUsuarios()">
+        <span class="fa fa-search fa-fw"></span>Pesquisar
+      </button>
+    </div>
+  </form>
+</section>

@@ -1,0 +1,107 @@
+<div class="col-md-12">
+  <p-table
+    [value]="dadosConsulta"
+    [paginator]="true"
+    [rows]="10"
+    class="table table-striped table-sm table-hover"
+    #dt
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th id="numeroPedido" style="width: 5%">Número do Pedido</th>
+        <th id="situacaoPedido">Situação do Pedido</th>
+        <th id="tipoOcorrencia">Tipo Ocorrência</th>
+        <th id="historicoJustificativa">Histórico/Justificativa</th>
+        <th id="Evento" style="width: 5%">Evento</th>
+        <th id="Data">Data</th>
+        <th id="Responsavel">Responsável</th>
+        <th id="ipResponsavel">IP do Responsável</th>
+        <th id="Acoes" style="width: 5%">Ação</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData>
+      <tr>
+        <td>{{ rowData.nroProcesso }}</td>
+        <td>{{ rowData.situacaoProcesso }}</td>
+        <td>{{ rowData.tipoOcorrencia }}</td>
+        <td>{{ rowData.descricaoHistorico }}</td>
+        <td>{{ rowData.strEvento }}</td>
+        <td>{{ rowData.dataHoraEvento | date : "dd/MM/yyyy HH:mm:ss" }}</td>
+        <td>{{ rowData.responsavel | cpfMask }}</td>
+        <td>{{ rowData.ipResponsavel }}</td>
+        <td>
+          <button
+            class="btn btn-info"
+            title="{{ bundle('MH154') }}"
+            (click)="abrirModalDetalhamento(rowData)"
+          >
+            <span class="fa fa-search fa-fw"></span>
+          </button>
+        </td>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="emptymessage">
+      {{ bundle("MA003") }}
+    </ng-template>
+    <!-- <p-column [style]="{'width':'5%'}" field="nroProcesso" header="Número do Pedido"></p-column>
+    <p-column field="situacaoProcesso" header="Situação do Pedido"></p-column>
+    <p-column field="tipoOcorrencia" header="Tipo Ocorrência"></p-column>
+    <p-column field="descricaoHistorico" header="Histórico/Justificativa">
+      <ng-template let-row="rowData" pTemplate="content">
+        {{row.descricaoHistorico | slice:0:50 }} <span *ngIf="(row?.descricaoHistorico?.length > 50)">...</span>
+      </ng-template>
+    </p-column>
+    <p-column [style]="{'width':'5%'}" field="strEvento" header="Evento"></p-column>
+    <p-column header="Data">
+      <ng-template let-row="rowData" pTemplate="content">
+        {{row.dataHoraEvento | date:'dd/MM/yyyy HH:mm:ss'}}
+      </ng-template>
+    </p-column>
+    <p-column header="Responsável">
+      <ng-template let-row="rowData" pTemplate="content">
+        {{row.responsavel | cpfMask}}
+      </ng-template>
+    </p-column>
+    <p-column field="ipResponsavel" header="IP do Responsável"></p-column>
+    <p-column [style]="{'width':'5%'}" header="Ação">
+      <ng-template let-row="rowData" pTemplate="content">
+        <button class="btn btn-info" title="{{bundle('MH154')}}" (click)="abrirModalDetalhamento(row);">
+          <span class="fa fa-search fa-fw"></span>
+        </button>
+      </ng-template>
+    </p-column> -->
+  </p-table>
+
+  <p-dialog
+    header="Detalhes da Ocorrência"
+    [(visible)]="showModalDetalhamento"
+    [modal]="true"
+    width="800"
+    [responsive]="true"
+    #modalDetalhamento
+  >
+    <div class="col-md-12">
+      <div class="col-md-12">
+        <label for="descricaoHistorico">Histórico/Justificativa</label>
+        <span id="descricaoHistorico" class="output-text">{{
+          selectedRow?.descricaoHistorico
+        }}</span>
+      </div>
+      <div class="col-md-12">
+        <label for="anexo">Anexo</label>
+        <span id="anexo" class="output-text">{{
+          selectedRow?.anexo | campoVazioHifen
+        }}</span>
+      </div>
+    </div>
+
+    <p-footer class="dmsg-footer">
+      <div style="display: flex; justify-content: flex-end">
+        <button class="btn btn-danger" (click)="fecharModalDetalhamento()">
+          <span class="fa fa-close fa-fw"></span> Fechar
+        </button>
+      </div>
+    </p-footer>
+  </p-dialog>
+</div>

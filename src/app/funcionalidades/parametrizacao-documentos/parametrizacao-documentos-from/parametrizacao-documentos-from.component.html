@@ -1,0 +1,127 @@
+<div class="container">
+    <div class="col-md-12 breadcrumb-header">
+        <ul class="breadcrumb">
+            <li><span (click)="voltar()" class="voltar"><i class="fa fa-arrow-left" aria-hidden="true"></i>Voltar</span>
+            </li>
+            <a routerLink="/home">Início</a>
+            <em class="fa fa-chevron-right"></em> Administração
+            <em class="fa fa-chevron-right"></em> Parâmetros
+            <em class="fa fa-chevron-right"></em>
+            <a routerLink="..">Documentos</a>
+            <em class="fa fa-chevron-right"></em>
+            Documentos – <span *ngIf="!id">Inclusão</span><span *ngIf="id">Edição</span>
+        </ul>
+    </div>
+
+    <div class="title-type">
+        <h1 class="titulo-pagina">
+            Documentos – <span *ngIf="!id">Inclusão</span><span *ngIf="id">Edição</span>
+        </h1>
+    </div>
+
+    <section class="row">
+        <form [formGroup]="formulario" name="form">
+            <div class="form-row">
+                <div *ngIf="id" class="col-md-4 pl-0">
+                    <label class="control-label" for="id">ID</label>
+                    <p class="marginBottom" id="id">{{id}}</p>
+                </div>
+
+                <div *ngIf="id" class="col-md-4">
+                    <label class="control-label" for="dataCadastramento">Cadastramento</label>
+                    <p class="marginBottom"
+                       id="dataCadastramento">{{documento.dataCadastramento |date:'dd/MM/yyyy HH:mm:ss'}}</p>
+                </div>
+
+                <div *ngIf="id" class="col-md-4">
+                    <label class="control-label" for="codigoUsuarioCadastramento">Usuário</label>
+                    <p class="marginBottom" id="codigoUsuarioCadastramento">{{documento.codigoUsuarioCadastramento}}</p>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="pl-0 col-md-4 mb-15">
+                    <asc-dropdown
+                            required label="Tipo de documento" [items]="tipoDocumentos" [control]="idTipoDocumento"
+                            id="idTipoDocumento"
+                    ></asc-dropdown>
+                </div>
+                <div class="pl-0 col-md-8 mb-15">
+                    <asc-input-text label="Link do documento" [control]="enderecoDocumento"
+                    ></asc-input-text>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="pl-0 col-md-12">
+                    <asc-input-text
+                            required label="Nome do documento" id="doc" name="doc" [control]="nome"
+                    ></asc-input-text>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col-md-12 pl-0">
+                    <label class="control-label" for="descricao">Descrição</label>
+                    <textarea
+                            rows="5" cols="103" pInputTextarea name="descricao"
+                            id="descricao" class="form-control" [formControl]="descricao"
+                    ></textarea>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col-md-1 p-0">
+                    <p-checkbox name="opme" inputId="op" binary="true" [formControl]="opme"></p-checkbox>
+                    <label for="op">OPME</label>
+                </div>
+            </div>
+
+            <div *ngIf="id">
+                <div class="form-row">
+                    <div class="col-md-2 d-flex al-ic pl-0">
+                        <p-checkbox
+                                formControlName="inativo" binary="true" inputId="binary"
+                                (onChange)="onChangeInativo($event)"
+                        ></p-checkbox>
+                        <label class="control-label" style="margin: 0 0 0 5px!important" for="binary">Inativo</label>
+                    </div>
+                    <div class="col-md-2 pl-0">
+                        <asc-input-date
+                                [control]="dataInativacao" [required]="inativo.value"
+                                [disabled]="!inativo.value" inputId="dataInativacao" label="Data da Inativação"
+                        ></asc-input-date>
+                        <asc-message-error
+                                [control]="dataInativacao" type="dataIgualAtualMaior"
+                                errorMessage="Data de Inativação deve ser igual ou superior a data atual!"
+                        ></asc-message-error>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xs-12 barra-botoes">
+                <button class="btn back-btn" (click)="voltar()" id="btnFormVoltar">
+                    <span class="fa fa-reply fa-fw"></span>
+                    Voltar
+                </button>
+
+                <button class="btn clean-btn" (click)="excluir()" id="btnFormExcluir" *ngIf="id">
+                    <span class="fa fa-remove fa-fw"></span>
+                    Excluir
+                </button>
+
+                <button (click)="limparCampos()" class="btn back-btn" id="btnFormLimparCampos" *ngIf="!id">
+                    <span class="fa fa-trash fa-fw"></span>
+                    Limpar Campos
+                </button>
+
+                <button class="btn clean-btn" (click)="restaurarCampos()" id="btnFormRestaurar" *ngIf="id">
+                    Restaurar Campos
+                </button>
+
+                <button class="btn continue-btn" (click)="salvar()" id="btnFormSalvar" [disabled]="formulario.invalid">
+                    Salvar
+                </button>
+            </div>
+
+        </form>
+    </section>
+</div>

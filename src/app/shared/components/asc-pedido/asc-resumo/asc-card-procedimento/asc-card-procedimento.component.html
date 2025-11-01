@@ -1,0 +1,84 @@
+<p-progressBar
+  mode="indeterminate"
+  *ngIf="loading"
+  [style]="{ height: '4px' }"
+></p-progressBar>
+<div
+  class="card conteudo-spacing"
+  [class.c-card-invalido]="pedidoProcedimentosTabela?.length == 0"
+>
+  <div class="card-title titulo-card">{{ labelPedidoProcedimento }}</div>
+
+  <div
+    *ngFor="let pedidoProcedimento of pedidoProcedimentosTabela; let i = index"
+    class="list-items"
+  >
+    <asc-card-procedimento-reembolso
+      [permissoes]="permissoes"
+      [idBeneficiario]="pedido?.idBeneficiario"
+      [beneficiario]="beneficiario"
+      [idTipoProcesso]="idTipoProcesso"
+      [pedido]="pedido"
+      [pedidoProcedimento]="pedidoProcedimento"
+      [index]="i"
+      [isDisabled]="isEditing || isDisabled"
+      (isDisabled$)="isToDisable($event)"
+      (criarOuAtualizar$)="adicionarProcedimento($event)"
+      (loading$)="catchLoading($event)"
+      (cancel$)="cancelarProcedimento($event)"
+      (deletePedidoProcedimento$)="remove($event)"
+      [isUnico]="pedidoProcedimentosTabela.length == 1"
+      [class.marginBottom]="i != pedidoProcedimentosTabela.length - 1"
+      [idMotivoSolicitacao]="idMotivoSolicitacao"
+      class="botao-100"
+    ></asc-card-procedimento-reembolso>
+  </div>
+
+  <asc-procedimento-form
+    *ngIf="enableFormProcedimento && !isEditing"
+    @fadeInOut
+    [enableAllAction]="enableAllAction"
+    [parametroSelectProcedimento]="parametroSelectProcedimento"
+    [pedidoProcedimentoFormInput]="pedidoProcedimentoForm"
+    [profile]="profile"
+    [pedido]="pedido"
+    [beneficiario]="beneficiario"
+    [idBeneficiario]="beneficiario?.id"
+    [idTipoProcesso]="idTipoProcesso"
+    (grauSelecionado)="grauProcedimentoSelecionado($event)"
+    (regiaoOdontologica)="regiaoOdontologicaSelecionada($event)"
+    (pedidoProcedimentoForm)="adicionarProcedimento($event)"
+    (pedidoProcedimentos)="adicionarProcedimentos($event)"
+    (cancelarProcedimento)="cancelarProcedimento($event)"
+    (isToShowPanel)="isToShowFormPanel($event)"
+    (procedimento)="adicionarProcedimentoPanel($event)"
+    (loading$)="catchLoading($event)"
+    [idMotivoSolicitacao]="idMotivoSolicitacao"
+  ></asc-procedimento-form>
+
+  <div class="card-footer">
+    <div
+      *ngIf="
+        enableAllAction &&
+        isNotReembolsoConsulta &&
+        (!permissoes || permissoes?.analisar) &&
+        showBotaoAddProcedimento
+      "
+      class="margin-16"
+    >
+      <button
+        (click)="abrirFormulario()"
+        *ngIf="!isEditing"
+        [disabled]="enableFormProcedimento || isEditing || isDisabled"
+        class="btn-small btn-card-novo"
+      >
+        <i aria-hidden="true" class="fa fa-plus"></i>
+        <span>{{ labelBotaoPedido }}</span>
+      </button>
+    </div>
+
+    <div class="dados-options margin-16" *ngIf="toTop">
+      <button (click)="goToTop()" class="btn-to-top">Retornar ao topo</button>
+    </div>
+  </div>
+</div>

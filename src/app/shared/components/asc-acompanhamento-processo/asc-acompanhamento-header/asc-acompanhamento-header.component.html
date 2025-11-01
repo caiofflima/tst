@@ -1,0 +1,22 @@
+<div id="parentdivs" class="fl-sb stretch mob-col">
+  <div class="child content-box grafico no-top">
+    <p class="content-box-titulo no-desktop">Situação do pedido</p>
+    <asc-card-situacao-processo
+      *ngIf="!!processoPedido"
+      @fadeInOut
+      [permissoes]="permissoes"
+      [processoPedido]="processoPedido"
+    ></asc-card-situacao-processo>
+  </div>
+  <div class="child content-box full-width">
+    <p class="content-box-titulo no-desktop m-24">Histórico do pedido</p>
+    <asc-card-detalhe-ocorrencia
+      (atualizarOcorrencia)="atualizarPedido($event)"
+      *ngIf="!!processoPedido"
+      @fadeInOut
+      [permissoes]="permissoes"
+      [processoPedido]="processoPedido"
+      style="height:100%"
+    ></asc-card-detalhe-ocorrencia>
+  </div>
+</div>

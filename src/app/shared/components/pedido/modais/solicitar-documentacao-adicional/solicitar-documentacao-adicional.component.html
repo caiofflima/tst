@@ -1,0 +1,33 @@
+<p-dialog header="Solicitar Novos Documentos" [(visible)]="display" [modal]="true" width="800"
+  [responsive]="true">
+
+  <div id="infoPanel" class="container-fluid" style="height: 320px">
+		<form [formGroup]="form" >
+			<div class="row col-md-12">
+				<label class="control-label obrigatorio" for="dcmntCmplmntr">Documento complementar</label>
+				<p-dropdown id="dcmntCmplmntr" formControlName="idDocumento" [options]="itensDocumento" [filter]="true"
+					[placeholder]="this.bundle('MHSPH')" class="form-control2 select-especial">
+					<ng-template let-item pTemplate="item">
+						<div class="ui-helper-clearfix" (click)="showItem(item)">
+							<div title="{{item.label}}">{{ item.label | slice:0:128 }}</div>
+						</div>
+					</ng-template>
+				</p-dropdown>
+				<div *ngIf="idDocumento.invalid && (idDocumento.dirty || idDocumento.touched)" class="error-form">
+							<div *ngIf="idDocumento.errors['required']">{{bundle('MA005')}}</div>
+				</div>
+			</div>
+			<div class="row col-md-12">
+				<h4>Descrição do Documento</h4>
+				<p>{{selected?.label}}</p>
+			</div>
+		</form>
+  </div>
+  <br/>
+  <p-footer>
+    <button type="button" pButton icon="fa-plus" label="Adicionar" (click)="adicionarDocumento()" ></button>
+    <button type="button" pButton icon="fa-trash" label="Limpar Campo" (click)="limparCampo()"></button>
+    <button type="button" pButton icon="fa-close" label="Fechar" (click)="display=false"></button>
+  </p-footer>
+
+</p-dialog>

@@ -1,0 +1,115 @@
+<form [formGroup]="form" #formDirective="ngForm">
+
+  <div class="ui-g">
+    <div class="ui-g-12 no-padding-left no-padding-right relative">
+      <asc-select-procedimento
+        selectId="procedimento"
+        [parametros]="parametroSelectProcedimento"
+        [tipoAcaoService]="CONSULTAR_PROCEDIMENTO_POR_TIPO_PROCESSO"
+        [control]="form.get('idProcedimento')"
+        (dadoSelecionado)="procedimentoSelecionado($event)"
+        formControlName="idProcedimento"
+        [label]="'Procedimento'"
+        [required]="true" style="border-left: none !important"
+      ></asc-select-procedimento>
+    </div>
+  </div>
+
+  <div class="ui-g">
+    <!-- Início da Colunas da esquerda  -->
+    <div class="ui-g-12 ui-md-6 no-padding-left">
+
+      <!-- Grau -->
+      <div class="ui-g-12 ui-md-12 custom-form-grid no-padding-left"
+           *ngIf="mostrarCampo('idGrauProcedimento')">
+        <asc-graus-procedimento
+          selectId="grau"
+          *ngIf="mostrarCampo('idGrauProcedimento')"
+          [parametros]="parametrosSelectGrauProcedimento"
+          [control]="form.get('idGrauProcedimento')"
+          (dadosBackend)="grauProcedimentoCarregado($event)"
+          (dadoSelecionado)="grauProcedimentoSelecionado($event)"
+          formControlName="idGrauProcedimento"
+          [required]="true"
+          label="Grau"
+          style="border-left: none !important;"
+        ></asc-graus-procedimento>
+      </div>
+      <!-- Grau -->
+
+      <div class="ui-g-12 ui-md-12 custom-form-grid no-padding-left"
+           *ngIf="mostrarCampo('idAutorizacaoPrevia') && hasGrauProcedimento()">
+        <label class="control-label" [class.obrigatorio]="autorizacaoPreviaObrigatorio"
+        >Autorização Prévia <small *ngIf="!autorizacaoPreviaObrigatorio">Opcional</small></label>
+        <asc-select-autorizacao-previa
+          selectId="autorizacaoPrevia"
+          [parametros]="autorizacaoPreviaParams"
+          [control]="form.get('idAutorizacaoPrevia')"
+          (dadoSelecionado)="autorizacaoPreviaSelecionado($event)"
+          (dadosBackend)="autorizacoesPreviasSelecionados($event)"
+          formControlName="idAutorizacaoPrevia"
+          label=""
+          style="border-left: none !important;">
+        </asc-select-autorizacao-previa>
+      </div>
+
+      <div class="ui-g-12 ui-md-12 custom-form-grid no-padding-left"
+           *ngIf="mostrarCampo('idGrauProcedimento')">
+        <asc-input-text
+          label="Quantidade solicitada" [required]="true"
+          [control]="form.get('qtdSolicitada')"
+          inputId="qtdSolicitada"
+          [somenteNumeros]="true"
+          [maxlength]="3">
+          <asc-input-error nomeErro="min" [msgErro]="bundle('MA012')"></asc-input-error>
+          <asc-input-error nomeErro="max" [msgErro]="bundle('MA132')"></asc-input-error>
+        </asc-input-text>
+      </div>
+    </div>
+    <!-- Fim da Colunas da esquerda  -->
+    <!-- Início da Colunas da direita  -->
+    <div class="ui-g-12 ui-md-6">
+      <div class="ui-g-12 ui-md-12 custom-form-grid no-padding-right"
+           *ngIf="mostrarCampo('valorUnitarioPago')">
+        <asc-input-money-type [control]="form.get('valorUnitarioPago')" inputId="valorUnitarioPago"
+                              label="Valor unitário pago" [required]="true">
+          <asc-input-error nomeErro="min"
+                           [msgErro]="'O Valor Unitário Pago deve ser maior do que 0 (zero).'"></asc-input-error>
+        </asc-input-money-type>
+        <div class="error-form" *ngIf="erroValorDocumentoFiscal">{{ bundle('MA083') }}</div> 
+      </div>
+
+      <div class="ui-g-12 ui-md-12 custom-form-grid no-padding-right"
+           *ngIf="mostrarCampo('dataAtendimento')">
+        <asc-input-date [control]="form.get('dataAtendimento')" inputId="dataAtendimento" label="Data do atendimento"
+                        [required]="true">
+          <asc-input-error nomeErro="dataAtualMenor"
+                           [msgErro]="'Data do atendimento deve ser menor ou igual à Data atual.'"></asc-input-error>
+        </asc-input-date>
+      </div>
+    </div>
+    <!-- Fim da Colunas da direita  -->
+  </div>
+
+  <div *ngIf="isToShowForm && enableAllAction" class=" flex-end">
+    <button (click)="adicionarProcedimento(formDirective, $event)" [disabled]="form?.invalid || loading"
+            class="custom-btn-confirm" id="adicionarProcedimento">
+       <span *ngIf="loading" style="height: 1.6em; width: 4em;">
+          <p-progressSpinner
+            [style]="{width: '25px', height: '25px'}"
+            animationDuration=".5s"
+            fill="#EEEEEE"
+            strokeWidth="4">
+          </p-progressSpinner>
+        </span>
+      <span *ngIf="!loading" class="span-btn">{{(isEditing) ? 'Concluir alteração' : 'Adicionar'}}</span>
+    </button>
+
+    <asc-button-primary
+      buttonId="limpar"
+      [title]="isEditing ? 'Cancelar' : 'Limpar'"
+      (onClick)="clickButtonCancelarProcedimento(formDirective, $event)"
+    ></asc-button-primary>
+  </div>
+
+</form>

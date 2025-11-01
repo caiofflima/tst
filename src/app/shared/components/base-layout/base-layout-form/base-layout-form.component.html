@@ -1,0 +1,74 @@
+<!-- Page Header-->
+<div class="container">
+  <div class="col-md-12 breadcrumb-header">
+    <ul class="breadcrumb">
+      <li>
+        <span (click)="voltar()" class="voltar"
+          ><i class="fa fa-arrow-left" aria-hidden="true"></i>Voltar</span
+        >
+      </li>
+      <a routerLink="/home">Início</a>
+
+      <ng-container *ngIf="breadcrumbContent">
+        <ng-container *ngTemplateOutlet="breadcrumbContent"></ng-container>
+      </ng-container>
+
+      <em class="fa fa-chevron-right"></em>
+      <span *ngIf="tipo == 'form'">
+        {{ baseTitulo }} – <span *ngIf="!id">Inclusão</span
+        ><span *ngIf="id">Edição</span>
+      </span>
+    </ul>
+  </div>
+
+  <div class="title-type">
+    <h1 class="titulo-pagina">
+      {{ baseTitulo }} – <span *ngIf="!id">Inclusão</span
+      ><span *ngIf="id">Edição</span>
+    </h1>
+  </div>
+
+  <section class="row">
+    <ng-content select="[slot='form']"></ng-content>
+
+    <div class="form-row">
+      <div class="col-xs-12 barra-botoes" *ngIf="tipo == 'form'">
+        <button class="btn back-btn" (click)="voltar()" id="btnFormVoltar">
+          <span class="fa fa-reply fa-fw"></span>Voltar
+        </button>
+        <button
+          *ngIf="id"
+          class="btn clean-btn"
+          (click)="acaoExcluir()"
+          id="btnFormExcluir"
+        >
+          <span class="fa fa-remove fa-fw"></span>Excluir
+        </button>
+        <button
+          *ngIf="id"
+          class="btn clean-btn"
+          (click)="acaoRestaurarCampos()"
+          id="btnFormRestaurar"
+        >
+          Restaurar Campos
+        </button>
+        <button
+          (click)="acaoLimparCampos()"
+          class="btn back-btn"
+          id="btnFormLimparCampos"
+          *ngIf="!id"
+        >
+          <span class="fa fa-trash fa-fw"></span>Limpar Campos
+        </button>
+        <button
+          [disabled]="disabled"
+          class="btn continue-btn"
+          id="btnFormSalvar"
+          (click)="acaoSalvar()"
+        >
+          Salvar
+        </button>
+      </div>
+    </div>
+  </section>
+</div>

@@ -1,0 +1,68 @@
+<!-- Page Header-->
+<div class="container">
+  <div class="col-md-12 breadcrumb-header">
+    <div class="breadcrumb">
+      <span (click)="voltar()" onKeyPress="" class="voltar">
+        <em class="fa fa-arrow-left" aria-hidden="true"></em> Voltar
+      </span>
+      <a routerLink="/home">Início</a>
+      <em class="fa fa-chevron-right"></em>
+      Atendimento
+      <em class="fa fa-chevron-right"></em>
+      Iniciar Atendimento
+    </div>
+  </div>
+
+  <div class="title-type">
+    <h1 class="titulo-pagina">Iniciar Atendimento</h1>
+  </div>
+
+  <section class="row">
+    <form [formGroup]="formulario" name="form">
+      <div class="row">
+        <p>
+          Ao informar uma matrícula, você passará a navegar no sistema em nome do titular correspondente, ou seja,
+          criará
+          pedidos para tal titular, visualizará sua família além de outras ações que seu perfil permita.
+        </p>
+        <div class="pl-0 col-md-6">
+          <asc-input-text
+            [control]="matricula" inputId="matricula"
+            label="Matrícula Titular" required
+            maskName="matriculaMaskDisk"
+            placeholder="Ex. 123456-7"
+          ></asc-input-text>
+        </div>
+      </div>
+
+      <br/>
+
+      <div class="col-xs-12 p-0 barra-botoes">
+        <button id="btnLimparCampos" class="btn back-btn" (click)="limparCampos()" type="button">
+          <span class="fa fa-trash fa-fw"></span> Limpar Campos
+        </button>
+        <button class="btn continue-btn" (click)="encerrarAtendimento()" *ngIf="atendimento" type="submit">
+          <span class="fa fa-check fa-fw"></span> Encerrar Atendimento
+        </button>
+        <button class="btn continue-btn" (click)="iniciarAtendimentoContrato(formulario.get('matricula').value)" [disabled]="formulario.invalid" type="submit">
+          <span class="fa fa-check fa-fw"></span> Iniciar
+        </button>
+       
+        <!-- Modal Titular Contrato -->  
+        <asc-modal-titular-contrato
+          #modalTitularContrato
+          [idBase]="'navegacaoTitular'"
+          (onConfirmar)="confirmarContrato($event)"
+          (onFechar)="fecharModalContrato()" 
+          [contratoSelecionado]="contratoSelecionado"
+          [contratos]="contratos"
+        ></asc-modal-titular-contrato>    
+
+      </div>
+
+    </form>
+
+  </section>
+
+</div>
+

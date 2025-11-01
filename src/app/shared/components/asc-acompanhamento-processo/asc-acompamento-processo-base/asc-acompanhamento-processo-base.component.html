@@ -1,0 +1,88 @@
+<section class="acompanhamento-container">
+  <div class="bread-crumb-container">
+    <span (click)="voltar()" class="voltar"
+      ><i class="fa fa-arrow-left" aria-hidden="true"></i> Voltar</span
+    >
+    <ul class="bread-crumb">
+      <li>
+        <a routerLink="/home">Início</a>
+        <i class="fa fa-angle-right" aria-hidden="true"></i>
+      </li>
+      <li *ngIf="!tituloAnalise">
+        Meus dados <i class="fa fa-angle-right" aria-hidden="true"></i>
+      </li>
+      <li *ngIf="!tituloAnalise">Meus pedidos</li>
+      <li *ngIf="tituloAnalise">
+        Administração <i class="fa fa-angle-right" aria-hidden="true"></i>
+      </li>
+      <li *ngIf="tituloAnalise">
+        <a routerLink="/pedidos/pesquisar">Consultar pedidos </a>
+      </li>
+    </ul>
+  </div>
+  <div class="fl-row fl-sb" style="margin-top: 30px">
+    <p *ngIf="!tituloAnalise" class="titulo-pagina">Meus pedidos</p>
+    <p *ngIf="tituloAnalise" class="titulo-pagina">Consultar pedidos</p>
+
+    <asc-user-info [usuario]="usuario" *ngIf="tituloAnalise"></asc-user-info>
+  </div>
+
+  <div class="processo-container">
+    <div
+      class="fl-sb center"
+      style="align-items: baseline; margin-bottom: 1.5em"
+    >
+      <p class="sub-titulo left-border">
+        {{ processoPedido?.id }} -
+        {{
+          processoPedido?.tipoProcesso?.nome | ascNormalizeFirstCharacterUpper
+        }}
+      </p>
+      <span class="tooltip-mensagem">
+        <button
+          (click)="handleListaPedidosNavigation()"
+          class="lista-processos"
+        >
+          <span>Lista de pedidos</span>
+        </button>
+        <p class="tooltiptext is--small">
+          Listar todos os pedidos da<br />família do titular.
+        </p>
+      </span>
+    </div>
+
+    <div class="fl-sb stretch no-mobile">
+      <div class="content-box grafico">
+        <p class="content-box-titulo">Situação do pedido</p>
+      </div>
+      <div class="content-box grow">
+        <p class="content-box-titulo f-end">Histórico do pedido</p>
+      </div>
+    </div>
+    <asc-acompamento-header
+      (atualizarOcorrencia)="atualizarPedido($event)"
+      [permissoes]="permissoes"
+      [processoPedido]="processoPedido"
+    >
+    </asc-acompamento-header>
+  </div>
+
+  <div class="fl-sb margin-conteudo mobile-rev historico-section">
+    <div class="list-card">
+      <ng-content select="[asc-conteudo]"></ng-content>
+    </div>
+    <div *ngIf="canRenderWhenHasPedido$" class="list-historico">
+      <asc-card-acompanhamento-historico
+        #acompanhamentoHistoricoComponent
+        *ngFor="
+          let situacaoPedido of situacoesPedido$ | slice : 1;
+          let i = index
+        "
+        [isUltimoElementoNaLista]="i === situacoesPedido$.length - 1"
+        [permissoes]="permissoes"
+        [situacaoPedido]="situacaoPedido"
+        [processoPedido]="processoPedido"
+      ></asc-card-acompanhamento-historico>
+    </div>
+  </div>
+</section>

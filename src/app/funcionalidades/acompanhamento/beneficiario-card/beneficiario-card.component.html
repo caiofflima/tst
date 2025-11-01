@@ -1,0 +1,33 @@
+<section class="ui-g beneficiario-card">
+  <div class="ui-g-12 ui-md-4 no-padding">
+    <p class="titulo-card">Dados do beneficiário </p>
+    <img width="100" height="100" alt="Avatar" src="{{user?.foto || 'assets/images/avatar-formal-masculino.png'}}">
+    <p class="beneficiario-user-idade">{{idadeBeneficiario}} anos</p>
+    <span class="beneficiario-user-parentesco">{{user?.parentesco || 'filho(a)'}}</span>
+  </div>
+  <div class="ui-g-12 ui-md-8 no-padding">
+    <p class="beneficiario-user-nome">{{ beneficiario?.nome | campoVazioHifen }}</p>
+    <div class="ui-g">
+      <div class="ui-g-6 ui-md-6">
+        <label class="beneficiario-user-label-campos">Código do beneficiário</label>
+        <p class="beneficiario-user-descricao-campos">{{beneficiario?.codBeneficiario | campoVazioHifen }} </p>
+      </div>
+      <div class="ui-g-6 ui-md-6">
+        <label class="beneficiario-user-label-campos">Contato adicional</label>
+        <p class="beneficiario-user-descricao-campos">
+          {{beneficiario?.contato?.telefone | campoVazioHifen }}
+        </p>
+      </div>
+      <div class="ui-g-6 ui-md-6">
+        <label class="beneficiario-user-label-campos">CPF</label>
+        <p class="beneficiario-user-descricao-campos">{{beneficiario?.cpf | campoVazioHifen }} </p>
+      </div>
+      <div class="ui-g-6 ui-md-6">
+        <label class="beneficiario-user-label-campos">Data de nascimento</label>
+        <p class="beneficiario-user-descricao-campos">
+          {{ beneficiario?.matricula?.dataNascimento  | date: 'dd/MM/yyyy' | campoVazioHifen }}
+        </p>
+      </div>
+    </div>
+  </div>
+</section>

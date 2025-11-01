@@ -1,0 +1,113 @@
+<form [formGroup]="formularioDadosDependente">
+  <div class="solicitacao-container">
+    <div class="form-row">
+      <div class="col-md-12 no-padding-left">
+        <p class="titulo">
+          Agora, informe os dados cadastrais do proposto dependente.
+        </p>
+      </div>
+    </div>
+
+    <div class="d-flex">
+      <div class="col-md-6 p-0">
+        <div class="row mb-0">
+          <div class="col-md-12 mb-15 no-padding-left">
+            <asc-input-text
+              [control]="formularioDadosDependente.get('nomeCompleto')" inputId="nomeCompleto"
+              label="Nome completo" [required]="true" [index]="1"
+            ></asc-input-text>
+          </div>
+          <div class="col-md-12 mb-15 no-padding-left" @fadeInOut
+               *ngIf="formularioDadosDependente.get('nomeCompleto').dirty">
+            <asc-input-date
+              [control]="formularioDadosDependente.get('dataNascimento')" inputId="dataNascimento"
+              label="Data de nascimento" [required]="true" [index]="2"
+              (change)="validDataNascimento()">
+              <asc-input-error
+                nomeErro="dataMenorIgualAtual"
+                msgErro="O valor de data de nascimento não pode ser superior a data atual."
+              ></asc-input-error>
+            </asc-input-date>
+          </div>
+          <div class="col-md-12 mb-15 no-padding-left" @fadeInOut
+               *ngIf="formularioDadosDependente.get('dataNascimento').dirty">
+            <asc-dropdown
+              [items]="sexos"
+              label="Sexo" [required]="true"
+              [control]="formularioDadosDependente.get('sexo')"
+              [index]="3"
+            ></asc-dropdown>
+          </div>
+          <div class="col-md-12 pl-0 mb-15" @fadeInOut *ngIf="formularioDadosDependente.get('sexo').dirty">
+            <asc-select-estado-civil
+              label="Estado Civil" id="idEstadoCivil" [required]="true"
+              [control]="formularioDadosDependente.get('idEstadoCivil')"
+              (dadoSelecionado)="estadoCivilSelecionado($event)" [index]="4"
+            ></asc-select-estado-civil>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="row">
+          
+          <div class="col-md-12 mb-15 no-padding-left" @fadeInOut
+               *ngIf="formularioDadosDependente.get('idEstadoCivil').dirty">
+            <asc-cpf-cnpj
+              [control]="formularioDadosDependente.get('cpf')" label="CPF" [required]="true" [index]="5">
+            </asc-cpf-cnpj>
+          </div>
+
+          <div class="col-md-12 mb-15 no-padding-left" @fadeInOut *ngIf="(formularioDadosDependente.get('cpf').dirty && cpfRequired)
+            || (!cpfRequired && formularioDadosDependente.get('idEstadoCivil').dirty) ">
+            <asc-input-text
+              [control]="formularioDadosDependente.get('nomeMae')"
+              inputId="nomeMae" label="Nome da mãe" [required]="true" [index]="6">
+            </asc-input-text>
+          </div>
+
+          <div class="col-md-12 mb-15 no-padding-left" [hidden]="!formularioDadosDependente.get('nomeMae').dirty"
+               @fadeInOut>
+            <asc-input-text
+              [control]="formularioDadosDependente.get('nomePai')" inputId="nomePai" label="Nome do pai" [index]="7">
+            </asc-input-text>
+          </div>
+
+          <div class="col-md-12 no-padding-left" [hidden]="!formularioDadosDependente.get('nomeMae').dirty"
+               @fadeInOut>
+               <div >
+                 <label class="control-label" [class.obrigatorio]="apresentaDeclaracaoNascidoVivo">Declaração de Nascido Vivo</label>
+                  <a href="#">
+                    <span class="tooltip-mensagem">
+                      <i class="fa fa-info-circle"></i>
+                      <p class="tooltiptext is--small">
+                        Número presente na Certidão de Nascimento. Obrigatório para nascidos a partir de 01/01/2010, conforme ANS IN n.º 46, de 25/03/2011.
+                      </p>
+                    </span>
+                  </a>
+                  <asc-input-text
+                    [control]="formularioDadosDependente.get('declaracaoNascidoVivo')" [maxlength]="11"
+                    inputId="declaracaoNascidoVivo"  [index]="8"
+                    [required]="apresentaDeclaracaoNascidoVivo"
+                    [somenteNumeros]="true">
+                  </asc-input-text>
+              </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+
+  </div>
+
+  <div class="footer">
+    <asc-button-secondary buttonId="voltar" (onClick)="previousStep($event)" title="Voltar"></asc-button-secondary>
+
+    <asc-button-primary
+      buttonId="continuar" title="Continuar" [disabled]="formularioDadosDependente.invalid"
+      [showProgress]="showProgress" (onClick)="onSubmit()"
+    ></asc-button-primary>
+  </div>
+
+</form>

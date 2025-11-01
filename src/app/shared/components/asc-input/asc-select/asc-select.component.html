@@ -1,0 +1,58 @@
+<label
+  [attr.for]="id"
+  [ngStyle]="compStyle"
+  class="control-label label-class"
+  *ngIf="label"
+  [class.obrigatorio]="required !== null && required !== false"
+>
+  {{ label }}
+</label>
+<p-dropdown
+  *ngIf="!multiple"
+  [attr.title]="hint"
+  emptyMessage="Nenhum resultado encontrado"
+  [formControl]="control"
+  [id]="id"
+  [inputId]="selectId"
+  [tabindex]="index"
+  [disabled]="disabled"
+  [options]="selectItems"
+  [required]="required"
+  class="form-control2 custom-border"
+  [style]="compStyle"
+  [filter]="true"
+  [placeholder]="this.placeholder || this.bundle('MHSPH')"
+  (onChange)="changeAction($event)"
+>
+  <ng-template let-item pTemplate="item">
+    <div class="ui-helper-clearfix {{ itemClass }}" style="max-width: 100%">
+      {{ item.label }}
+    </div>
+  </ng-template>
+</p-dropdown>
+<p-multiSelect
+  *ngIf="multiple"
+  [options]="selectItems"
+  [formControl]="control"
+  optionLabel="label"
+  class="form-control2"
+  defaultLabel="Selecione as opções"
+  [required]="required"
+  [attr.title]="hint"
+  [maxSelectedLabels]="maxSelectedLabels"
+  selectedItemsLabel="{0} itens selecionados"
+  [style]="compStyle"
+  (onChange)="changeAction($event)"
+  [tabindex]="index"
+  [disabled]="disabled"
+></p-multiSelect>
+<p-progressBar
+  mode="indeterminate"
+  *ngIf="showProgressBar"
+  [style]="{ height: '6px' }"
+></p-progressBar>
+<asc-input-error
+  [control]="control"
+  [requiredMsg]="requiredMsg"
+  [style]="compStyle"
+></asc-input-error>

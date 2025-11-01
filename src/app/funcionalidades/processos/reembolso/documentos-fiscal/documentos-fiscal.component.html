@@ -1,0 +1,148 @@
+<div class="custom-container">
+  <p class="titulo">
+    Aqui necessitamos dos dados do documento fiscal emitido pelo estabelecimento
+    ou profissional de saúde.
+  </p>
+
+  <div class="ui-g no-padding">
+    <div class="ui-g-12 ui-md-8">
+      <div class="ui-g no-padding">
+        <div class="ui-g-12 ui-md-12 custom-form-grid">
+          <asc-cpf-cnpj
+            inputId="cpfCnpj"
+            [required]="true"
+            [label]="
+              isTipoMedicamento ? 'CNPJ do Emissor' : 'CPF ou CNPJ do Emissor'
+            "
+            [somenteCnpj]="isTipoMedicamento"
+            [control]="formularioDocumentoFiscal.get('cpfCnpj')"
+          >
+            <asc-input-error
+              nomeErro="cpfEmpregadoFuncionario"
+              [msgErro]="'CPF informado pertence a empregado CAIXA.'"
+              [hide]="hide"
+            ></asc-input-error>
+          </asc-cpf-cnpj>
+        </div>
+        <div
+          class="ui-g-12 ui-md-12 custom-form-grid"
+          *ngIf="displayAfter('cpfCnpj')"
+        >
+          <asc-input-text
+            [label]="
+              isTipoMedicamento ? 'Razão Social' : 'Nome ou Razão Social'
+            "
+            [control]="formularioDocumentoFiscal.get('nome')"
+            [maxlength]="200"
+            [somenteLetrasMaiusculas]="'true'"
+            [required]="true"
+          ></asc-input-text>
+        </div>
+        <div
+          *ngIf="displayAfter('nome')"
+          class="ui-g-12 ui-md-4 relative no-padding-left"
+        >
+          <asc-select-uf
+            [control]="idEstado"
+            label="UF"
+            selectId="uf"
+            [required]="true"
+            (dadoSelecionado)="ufSelecionado($event)"
+          ></asc-select-uf>
+        </div>
+        <div class="ui-g-12 ui-md-8 relative" *ngIf="displayAfter('idEstado')">
+          <asc-select-municipio
+            label="Município"
+            selectId="municipio"
+            [required]="true"
+            [parametro]="{ idMunicipio: idEstado.value }"
+            [control]="idMunicipio"
+            (dadoSelecionado)="municipioSelecionado($event)"
+          ></asc-select-municipio>
+        </div>
+        <div
+          class="ui-g-12 ui-md-12 custom-form-grid"
+          *ngIf="displayAfter('idMunicipio')"
+        >
+          <asc-input-text
+            inputId="numeroDoc"
+            label="Número do documento fiscal"
+            [maxlength]="10"
+            [required]="true"
+            [control]="formularioDocumentoFiscal.get('numeroDoc')"
+            [somenteNumeros]="true"
+          ></asc-input-text>
+        </div>
+        <div
+          class="ui-g-12 ui-md-12 custom-form-grid"
+          *ngIf="displayAfter('numeroDoc')"
+        >
+          <asc-input-date
+            [control]="formularioDocumentoFiscal.get('data')"
+            inputId="dataEmissao"
+            label="Data de emissão"
+            [required]="true"
+          >
+            <asc-input-error
+              nomeErro="diasDecorridos"
+              [msgErro]="'Documento fiscal emitido há mais de 180 dias.'"
+            ></asc-input-error>
+            <asc-input-error
+              nomeErro="dataAtualMenor"
+              [msgErro]="bundle('MA058')"
+            ></asc-input-error>
+            <asc-input-error
+              nomeErro="dataMenor"
+              [msgErro]="bundle('MA151')"
+            ></asc-input-error>
+          </asc-input-date>
+        </div>
+        <div
+          class="ui-g-12 ui-md-12 custom-form-grid"
+          *ngIf="displayAfter('data')"
+        >
+          <asc-input-money-type
+            [control]="formularioDocumentoFiscal.get('valor')"
+            inputId="valor"
+            label="Valor total do documento fiscal"
+            [required]="true"
+            [maxlength]="10"
+          >
+            <asc-input-error
+              nomeErro="min"
+              [msgErro]="bundle('MA083')"
+            ></asc-input-error>
+            <asc-input-error
+              nomeErro="max"
+              [msgErro]="bundle('MA083')"
+            ></asc-input-error>
+          </asc-input-money-type>
+        </div>
+      </div>
+    </div>
+    <div class="ui-g-12 ui-md-6" *ngIf="displayAfter('data')">
+      <div class="custom-form-grid">
+        <strong
+          ><em
+            >Valor total do documento fiscal incluindo outros procedimentos</em
+          ></strong
+        >
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <asc-button-secondary
+    buttonId="voltar"
+    (onClick)="buttonToPrevious()"
+    title="Voltar"
+  ></asc-button-secondary>
+
+  <asc-button-primary
+    buttonId="continuar"
+    (onClick)="buttonToNext()"
+    [disabled]="formularioDocumentoFiscal.invalid"
+    title="Continuar"
+  ></asc-button-primary>
+</div>

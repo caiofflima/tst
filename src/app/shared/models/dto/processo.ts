@@ -1,0 +1,31 @@
+export interface ProcessoDTO {
+  idPedido: number;
+  descPedido: string;
+  idTipoProcesso: number;
+  idTipoBeneficiario: number;
+  idBeneficiario: number;
+  idFilial: number;
+  filial: string;
+  idSituacaoPedido: number;
+  descSituacaoPedido: string;
+  idMunicipioAtendimento: number;
+  idSituacaoProcesso: string;
+  descTipoProcesso: string;
+  descTipoBeneficiario: string;
+  abrevTipoBeneficiario: string;
+  descBeneficiario: string;
+  matriculaUltimoUsuario: string;
+  codTipoProcesso: string;
+  dataUltimaAlteracao: Date;
+  nomeColaborador: string;
+  protocoloAns: string;
+  maximoValorUnitarioPago: number;
+  dataOcorrencia: Date;
+  matriculaFuncional: string;
+	codigoBeneficiario: string;
+  codMotivosolicitacao: string;
+	motivoSolicitacao: string;
+	dataAberturaPedido: Date;
+  cpf: string;
+  dataNascimento: Date;
+}

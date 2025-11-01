@@ -1,0 +1,22 @@
+<label *ngIf="label" [for]="inputId" class="control-label label-class"
+       [class.obrigatorio]="required !== null && required !== false">
+  {{label}}
+</label>
+<div class="ui-inputgroup relative">
+  <button pButton label="R$" type="button" class="custom-input-btn"
+          [class.left]="required === null || required === false"
+          [class.left-required]="required !== null && required !== false"></button>
+  <input [formControl]="control" [id]="inputId" type="text" [required]="required" pInputText
+         class="form-control remove-left-border padding-button-left topMargin-5" [ngStyle]="compStyle"
+         title="{{hint}}" size="{{maxlength}}" [attr.maxlength]="maxlength" [tabIndex]="index"
+         placeholder="XXXXXX,XX"
+         (blur)="blurAction($event)"
+         (focus)="focusAction($event)"
+         (keyup)="keyUpAction($event)"
+         (change)="changeAction($event)"
+         (keydown)="keyDownAction($event)"/>
+</div>
+<div *ngIf="control?.invalid && (control?.dirty || control?.touched)" [ngStyle]="compStyle" class="error-form">
+  <div *ngIf="control?.errors.required">{{requiredMsg}}</div>
+  <div *ngFor="let e of errors">{{e.msgErro}}</div>
+</div>

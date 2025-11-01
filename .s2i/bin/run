@@ -1,0 +1,33 @@
+#!/bin/bash
+
+source /opt/app-root/etc/generate_container_user
+
+set -e
+
+source ${NGINX_CONTAINER_SCRIPTS_PATH}/common.sh
+
+process_extending_files ${NGINX_APP_ROOT}/src/nginx-start ${NGINX_CONTAINER_SCRIPTS_PATH}/nginx-start
+
+#replace static values with environment variables
+# The example below:
+#if [ -n "$VAR" ]; then
+#    sed -i "s#__VAR__#$VAR#g" /opt/app-root/src/main*.js
+#fi
+
+if [ -n "$URL_API" ]; then
+    sed -i "s#__URL_API__#$URL_API#g" /opt/app-root/src/main*.js
+fi
+
+if [ -n "$URL_SSO" ]; then
+    sed -i "s#__URL_SSO__#$URL_SSO#g" /opt/app-root/src/main*.js
+fi
+
+if [ -n "$CLIENTE_ID" ]; then
+    sed -i "s#__CLIENTE_ID__#$CLIENTE_ID#g" /opt/app-root/src/main*.js
+fi
+
+if [ -n "$URL_SSOLOGOUT" ]; then
+    sed -i "s#__URL_SSOLOGOUT__#$URL_SSOLOGOUT#g" /opt/app-root/src/main*.js
+fi
+
+exec nginx -g "daemon off;"

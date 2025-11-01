@@ -1,0 +1,23 @@
+<!-- Page Header-->
+<div class="container">
+    <div class="col-md-12 breadcrumb-header">
+        <ul class="breadcrumb">
+            <li><span (click)="voltar()" class="voltar"><i class="fa fa-arrow-left" aria-hidden="true"></i>Voltar</span>
+            </li>
+            <a routerLink="/home">Início</a>
+
+            <ng-container *ngIf="breadcrumbContent">
+              <ng-container *ngTemplateOutlet="breadcrumbContent"></ng-container>
+            </ng-container>
+        </ul>
+    </div>
+
+    <div class="title-type">
+        <h1 class="titulo-pagina">{{baseTitulo}}</h1>
+        <ng-content select="[slot='info']"></ng-content>
+    </div>
+
+    <section class="row">
+        <ng-content select="[slot='content']"></ng-content>
+    </section>
+</div>

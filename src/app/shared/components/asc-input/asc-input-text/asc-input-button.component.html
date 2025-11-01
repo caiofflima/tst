@@ -1,0 +1,56 @@
+<label
+  [ngStyle]="compStyle"
+  class="control-label label-class"
+  for="{{ inputId }}"
+>
+  {{ label }}
+</label>
+<div class="ui-inputgroup relative">
+  <!--  [textMask]="{mask: mask}" -->
+  <input
+    *ngIf="maskName"
+    [formControl]="control"
+    [ngStyle]="compStyle"
+    id="m_{{ inputId }}"
+    pInputText
+    type="text"
+    name="{{ name }}"
+    class="form-control padding-button"
+    title="{{ hint }}"
+    maxlength="{{ maxlength }}"
+    placeholder="{{ placeholder }}"
+    (keyup)="keyUpAction($event)"
+  />
+  <input
+    *ngIf="!maskName"
+    [formControl]="control"
+    [ngStyle]="compStyle"
+    id="{{ inputId }}"
+    pInputText
+    type="text"
+    name="{{ name }}"
+    class="form-control padding-button"
+    title="{{ hint }}"
+    placeholder="{{ placeholder }}"
+    (keyup)="keyUpAction($event)"
+    (keydown)="keyDownAction($event)"
+    (drop)="dropAction($event)"
+  />
+  <button
+    pButton
+    type="button"
+    icon="fa fa-search"
+    class="custom-input-btn"
+    (click)="doClick($event)"
+    style="margin: 0"
+  ></button>
+</div>
+<div
+  *ngIf="control.invalid && (control.dirty || control.touched)"
+  [ngStyle]="compStyle"
+  class="error-form"
+>
+  <div *ngIf="control.errors.cpf">{{ bundle("MA009", "CPF") }}</div>
+  <div *ngIf="control.errors.email">{{ bundle("MA019") }}</div>
+  <div *ngIf="control.errors.required">{{ requiredMsg }}</div>
+</div>

@@ -1,0 +1,154 @@
+<div class="container">
+  <div class="col-md-12 breadcrumb-header">
+    <ul class="breadcrumb">
+      <li><span (click)="voltar()" class="voltar"><i class="fa fa-arrow-left" aria-hidden="true"></i>Voltar</span></li>
+      <a routerLink="/home">Início</a>
+      <em class="fa fa-chevron-right"></em>
+      Meus dados
+      <em class="fa fa-chevron-right"></em>
+      Financeiro
+      <em class="fa fa-chevron-right"></em>
+      Extrato IRPF
+    </ul>
+  </div>
+
+  <div class="title-type" id="print-section" #print>
+    <h1 class="titulo-pagina">Extrato IRPF</h1>
+
+    <br><br>
+
+    <div class="col-left" *ngIf="APIindisponivel">
+      <div class="div-message">
+        <span><b>Serviço temporariamente indisponível. Tente mais tarde.</b></span>
+      </div>	
+    </div>
+
+    <div class="card-extrato-irpf" *ngIf="!APIindisponivel">
+      <p class="sub-titulo"> Ano Base: {{anoBase}} </p>
+
+      <div class="pagina-inicial-botoes-mini">
+        <button class="back-btn-mini" (click)="gerarPDF(true)"><i class="fa fa-print" aria-hidden="true"></i></button>
+        <button class="continue-btn-mini" (click)="gerarPDF(false)"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></button>
+      </div>
+
+      <p class="info-p2"><b>
+          Comprovantes das despesas m&eacute;dicas dedut&iacute;veis no Imposto de Renda Pessoa F&iacute;sica.</b>
+      </p>
+
+      <p>
+        <p-tabView (onChange)="onTabChange($event)">
+          <p-tabPanel class="tab-accordion" header="Pagamentos Efetuados">
+
+            <div *ngIf="dados">
+              <div *ngFor="let itemPagamento of dados?.mensalidade">
+                <p-accordion>
+                  <p-accordionTab #abaTitular class="menu-accordion" 
+                                              [selected]="isExpanded" 
+                                              (click)="isExpanded = !isExpanded">
+                    <p-header>
+                        <p class="texto-header" >
+                          {{(itemPagamento.cpfBeneficiario===dados.cpf)?"Titular":"Dependente"}}<br>
+                          {{itemPagamento.noBeneficiario | uppercase}} &nbsp;&nbsp;{{itemPagamento.cpfBeneficiario | cpfMask}}
+                        </p>
+                      </p-header> 
+                      <table>
+                        <thead>
+                          <tr>
+                           <th scope="col"></th>
+                           <th scope="col"></th>
+                           <th scope="col"></th>
+                         </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td id="mensal">Mensalidade</td>
+                            <td>{{getMensalidade(itemPagamento?.nuBeneficiario, itemPagamento?.cpfBeneficiario) | currency:'BRL': true}}</td>
+                          </tr>
+                          <tr>
+                            <td id="mensal">Coparticipação</td>
+                            <td>{{getCoparticipacao(itemPagamento?.nuBeneficiario, itemPagamento?.cpfBeneficiario) | currency:'BRL': true}}</td>
+                          </tr>
+                          <tr style="font-weight: bold;">
+                            <td id="mensal">Total</td>
+                            <td>{{( getMensalidade(itemPagamento?.nuBeneficiario, itemPagamento?.cpfBeneficiario) + getCoparticipacao(itemPagamento?.nuBeneficiario, itemPagamento?.cpfBeneficiario) ) | currency:'BRL': true}}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                  </p-accordionTab>
+                </p-accordion>
+              </div>
+            </div>
+
+          </p-tabPanel>
+
+          <p-tabPanel header="Reembolsos">
+
+            <div *ngIf="mostrarReembolsos" >
+              <p-accordion *ngFor="let itemBenef of dados?.livreEscolha">
+                <p-accordionTab class="menu-accordion" 
+                                [selected]="isExpanded" 
+                                (click)="isExpanded = !isExpanded">
+                  <p-header>
+                    <p class="texto-header"> {{(itemBenef.cpfBeneficiario===dados.cpf)?"Titular":"Dependente"}}<br>
+                    {{itemBenef?.noBeneficiario | uppercase}} &nbsp;&nbsp;{{itemBenef?.cpfBeneficiario | cpfMask}}</p>
+                  </p-header>
+
+                  <table>
+                    <thead>
+                      <tr>
+                       <th scope="col"></th>
+                       <th scope="col"></th>
+                       <th scope="col"></th>
+                     </tr>
+                    </thead>
+                    <tbody>
+                      <tr class="titulos-rembolso">
+                        <td>Profissional<br>CPF/CNPJ</td>
+                        <td>Valor <br>Apresentado</td>
+                        <td>Valor<br>Reembolsado </td>
+                        <td>Valor Não <br>Reembolsado </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <p class="reembolso-tabela"> {{itemBenef?.noBeneficiario | uppercase}}</p>
+                          <p class="reembolso-tabela2">{{itemBenef?.cpfBeneficiario | cpfMask}}</p>
+                        </td>
+                        <td>{{itemBenef?.totLivreEscolha | currency:'BRL': true}}</td>
+                        <td>{{itemBenef?.totReembolsado | currency:'BRL': true}}</td>
+                        <td>{{itemBenef?.totDeducao | currency:'BRL': true}}</td>
+                      </tr>
+                      <tr style="font-weight: bold;">
+                        <td>Total</td>
+                        <td>{{itemBenef?.totLivreEscolha | currency:'BRL': true}}</td>
+                        <td>{{itemBenef?.totReembolsado | currency:'BRL': true}}</td>
+                        <td>{{itemBenef?.totDeducao | currency:'BRL': true}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                </p-accordionTab>
+              </p-accordion>
+            </div>
+
+          </p-tabPanel>
+
+        </p-tabView>
+      </p>
+
+      <p>Operadora do Plano: CAIXA ECONOMICA FEDERAL</p>
+      <p>CNPJ: 00.360.305/0001-04</p>
+
+      <div class="info-boxes card-alerta">
+        &nbsp;&nbsp;<span><b>!</b></span> Para visualização completa do extrato baixe o arquivo em PDF.
+      </div>
+
+
+      <div class="pagina-inicial-botoes-mini">
+        <button class="back-btn" (click)="gerarPDF(true)"><i class="fa fa-print" aria-hidden="true"></i>&nbsp; Imprimir</button>
+        <button class="continue-btn" (click)="gerarPDF(false)"><i class="fa fa-file-pdf-o" aria-hidden="true"></i>&nbsp; Baixar PDF</button>
+      </div>
+
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,327 @@
+<!-- Page Header-->
+<div class="container">
+  <div class="col-md-12 breadcrumb-header">
+    <ul class="breadcrumb">
+      <li><span (click)="voltar()" class="voltar"><i class="fa fa-arrow-left" aria-hidden="true"></i>Voltar</span>
+      </li>
+      <a routerLink="/home">Início</a>
+      <em class="fa fa-chevron-right"></em>
+      Segurança
+      <em class="fa fa-chevron-right"></em>
+      <a routerLink="/seguranca/prestador-externo">Usuário Externo</a>
+      <em class="fa fa-chevron-right"></em>
+      Usuário Externo – <span *ngIf="!id">Inclusão</span><span *ngIf="id">Edição</span>
+    </ul>
+  </div>
+
+  <div class="title-type">
+    <h1 class="titulo-pagina no-margin-bottom">
+      Usuário Externo – <span *ngIf="!id">Inclusão</span><span *ngIf="id">Edição</span>
+    </h1>
+  </div>
+
+  <section class="row p-0">
+    <form [formGroup]="form" name="form">
+      <div class="col-md-12 p-0 d-flex">
+        <div *ngIf="prestadorExterno.id" class="row p-0 col-md-4">
+          <label class="control-label">
+            ID
+          </label>
+          <p class="marginBottom">
+            {{prestadorExterno.id}}
+          </p>
+        </div>
+
+        <div *ngIf="prestadorExterno.dataCadastramento" class="row col-md-4">
+          <label class="control-label">
+            Cadastramento
+          </label>
+          <p class="marginBottom">
+            {{prestadorExterno.dataCadastramento | date: 'dd/MM/yyyy HH:mm:ss'}}
+          </p>
+        </div>
+
+        <div *ngIf="prestadorExterno.usuarioCadastramento" class="row col-md-4">
+          <label class="control-label">
+            Usuário
+          </label>
+          <p class="marginBottom">
+            {{prestadorExterno.usuarioCadastramento}}
+          </p>
+        </div>
+      </div>
+
+      <div class="col-md-12 p-0 d-flex">
+        <div class="row p-0 col-md-2">
+          <asc-cpf-cnpj
+            label="CPF"
+            id="cpf"
+            [control]="cpf"
+            [somenteCpf]="true"
+            title="{{bundle('MH130')}}"
+            required
+          ></asc-cpf-cnpj>
+        </div>
+        <div class="row col-md-5">
+          <asc-input-text
+            label="Nome"
+            [somenteLetrasMaiusculas]="true"
+            id="nome"
+            name="nome"
+            title="{{bundle('MH131')}}"
+            [control]="nome"
+            required
+          ></asc-input-text>
+        </div>
+        <div class="row pl-0 col-md-2">
+          <label class="control-label obrigatorio">
+            Data de Nascimento
+          </label>
+
+          <p-calendar
+            #dtNascimento
+            formControlName="dataNascimento"
+            [locale]="pt"
+            dateFormat="dd/mm/yy"
+            [monthNavigator]="true"
+            [yearNavigator]="true"
+            yearRange="1900:2100"
+            [showIcon]="true"
+            required
+            title="{{bundle('MH142')}}">
+          </p-calendar>
+
+          <asc-message-error
+            [control]="form.controls['dataNascimento']"
+            type="required"
+            [errorMessage]="bundle('MA007')">
+          </asc-message-error>
+        </div>
+        <div class="row pr-0 col-md-3">
+          <asc-input-email
+            [control]="email"
+            label="E-mail"
+            type="email"
+            id="email"
+            [maxlength]="150"
+            name="email"
+            required
+          ></asc-input-email>
+        </div>
+      </div>
+
+      <div class="row p-0 mt-10 mb-15 col-md-12 coluna-interna">
+        <label class="control-label" for="codigoUsuario">
+          Código do Usuário
+        </label>
+
+        <input
+          type="text"
+          class="form-control"
+          id="codigoUsuario"
+          formControlName="codigoUsuario"
+          readonly="readonly"
+          title="{{bundle('MH163')}}">
+      </div>
+    </form>
+    <form [formGroup]="formEmpresaPerfil" name="form">
+      <div class="card-caixa">
+        <div class="row col-md-12 p-0">
+          <h4 id="idCard">Empresa/Perfil</h4>
+        </div>
+        <div id="panelUnidades" class="p-0 col-md-12">
+          <div class="row d-flex col-md-10 p-0 coluna-interna">
+            <div class="row col-md-6 p-0">
+              <label
+                class="control-label obrigatorio"
+                for="empresaPrestadorExterno">
+                Empresa
+              </label>
+
+              <p-dropdown
+                required
+                [options]="empresas"
+                placeholder="{{bundle('MHSPH')}}"
+                name="empresaPrestadorExterno"
+                id="empresaPrestadorExterno"
+                formControlName="empresaPrestadorExterno"
+                optionLabel="razaoSocial"
+                title="{{bundle('MH134')}}">
+              </p-dropdown>
+
+              <asc-message-error
+                [control]="formEmpresaPerfil.controls['empresaPrestadorExterno']"
+                type="required"
+                [errorMessage]="bundle('MA007')">
+              </asc-message-error>
+            </div>
+            <div class="row col-md-6">
+              <label
+                class="control-label obrigatorio"
+                for="perfilPrestadorExterno">
+                Perfil
+              </label>
+
+              <p-dropdown
+                required
+                [options]="perfis"
+                id="perfilPrestadorExterno"
+                placeholder="{{bundle('MHSPH')}}"
+                name="perfilPrestadorExterno"
+                formControlName="perfilPrestadorExterno"
+                title="{{bundle('MH135')}}">
+              </p-dropdown>
+
+              <asc-message-error
+                [control]="formEmpresaPerfil.controls['perfilPrestadorExterno']"
+                type="required"
+                [errorMessage]="bundle('MA007')">
+              </asc-message-error>
+            </div>
+          </div>
+
+          <div class="row d-flex col-md-10 coluna-interna">
+            <div class="row p-0 col-md-6">
+              <label
+                class="control-label"
+                for="atuacaoPrestadorExterno">
+                Atuação Profissional
+              </label>
+
+              <p-dropdown
+                required
+                [options]="tiposAuditores"
+                id="atuacaoPrestadorExterno"
+                placeholder="{{bundle('MHSPH')}}"
+                name="atuacaoPrestadorExterno"
+                formControlName="atuacaoPrestadorExterno"
+                title="{{bundle('MH136')}}">
+              </p-dropdown>
+
+              <asc-message-error
+                [control]="formEmpresaPerfil.controls['atuacaoPrestadorExterno']"
+                type="required"
+                [errorMessage]="bundle('MA007')">
+              </asc-message-error>
+            </div>
+            <div class="row d-flex fx-cl pr-0 col-md-5">
+              <label
+                class="control-label obrigatorio"
+                for="dataLimitePrestadorExterno">
+                Data Limite
+              </label>
+
+              <p-calendar
+                #dtLimitePrestadorExterno
+                id="dataLimitePrestadorExterno"
+                formControlName="dataLimitePrestadorExterno"
+                [locale]="pt"
+                dateFormat="dd/mm/yy"
+                [monthNavigator]="true"
+                [yearNavigator]="true"
+                yearRange="1900:2100"
+                [showIcon]="true"
+                required
+                title="{{bundle('MH143')}}">
+              </p-calendar>
+
+              <asc-message-error
+                [control]="formEmpresaPerfil.controls['dataLimitePrestadorExterno']"
+                type="required"
+                [errorMessage]="bundle('MA007')">
+              </asc-message-error>
+            </div>
+            <div class="col-md-8 d-flex al-ic p-0">
+              <button
+                class="btn custom-btn-confirm" style="height: 34px; margin-top: 12px!important;"
+                (click)="adicionarPerfilEmpresa();">
+                <span class="fa fa-plus fa-fw"></span>
+                Adicionar
+              </button>
+            </div>
+          </div>
+
+          <div id="caixa-table" *ngIf="perfisEmpresas != undefined && perfisEmpresas.length > 0"
+               class="row col-md-12 p-0">
+            <table class="table table-hover table-borderless" aria-labelledby="idCard">
+              <thead>
+              <tr>
+                <th>Empresa</th>
+                <th>Perfil</th>
+                <th>Atuação Profissional</th>
+                <th>Data Limite</th>
+                <th>Ação</th>
+              </tr>
+              </thead>
+              <tbody *ngFor="let perfilEmpresa of perfisEmpresas; let i = index">
+              <tr *ngIf="perfilEmpresa.perfilPrestadorExterno != null">
+                <td>{{perfilEmpresa.empresaPrestadorExterno.razaoSocial}}</td>
+                <td>{{perfilEmpresa.perfilPrestadorExterno | perfilMask: perfis}}</td>
+                <td>{{perfilEmpresa.atuacaoPrestadorExterno | atuacaoProfissionalMask: tiposAuditores}}</td>
+                <td>{{perfilEmpresa.dataLimitePrestadorExterno | date:'dd/MM/yyyy'}}</td>
+                <td>
+                  <span
+                    title="{{bundle('MH165')}}"
+                    (click)="removerPerfilEmpresa(i)">
+                    <em class="fas fa-trash fa-fw red"></em>
+                  </span>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xs-12 mt-15 p-0 barra-botoes">
+
+        <button
+          class="btn back-btn"
+          (click)="voltar()">
+          <span class="fa fa-reply fa-fw"></span>
+          Voltar
+        </button>
+
+        <button
+          *ngIf="prestadorExterno.id != null && prestadorExterno.ativo == 'N'"
+          class="btn clean-btn"
+          (click)="alterarStatus()">
+          <span class="fa fa-eye fa-fw"></span>
+          Ativar
+        </button>
+
+        <button
+          *ngIf="prestadorExterno.id != null && prestadorExterno.ativo == 'S'"
+          class="btn clean-btn"
+          (click)="alterarStatus()">
+          <span class="fa fa-eye-slash fa-fw"></span>
+          Inativar
+        </button>
+
+        <button
+          *ngIf="prestadorExterno.id"
+          class="btn clean-btn"
+          (click)="restaurarCampos()"
+          id="btnFormRestaurar">
+          Restaurar Campos
+        </button>
+
+        <button
+          id="btnLimparCampos"
+          class="btn back-btn"
+          *ngIf="!prestadorExterno.id"
+          (click)="limparCampos()">
+          <span class="fa fa-trash fa-fw"></span>
+          Limpar Campos
+        </button>
+
+        <button [disabled]="form.invalid || perfisEmpresas.length == 0" class="btn continue-btn" (click)="salvar();">
+          <span class="fa fa-check fa-fw"></span>
+          Salvar
+        </button>
+
+      </div>
+    </form>
+  </section>
+
+</div>

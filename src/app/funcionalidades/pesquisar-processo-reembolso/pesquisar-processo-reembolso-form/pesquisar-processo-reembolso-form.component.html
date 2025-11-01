@@ -1,0 +1,173 @@
+<!-- Page Header-->
+<div class="container">
+  <div class="col-md-12 breadcrumb-header">
+    <ul class="breadcrumb">
+      <li><span (click)="voltar()" class="voltar"><i class="fa fa-arrow-left" aria-hidden="true"></i>Voltar</span></li>
+      <a routerLink="/home">Início</a>
+      <em class="fa fa-chevron-right"></em>
+      Administração
+      <em class="fa fa-chevron-right"></em>
+      Parâmetros
+      <em class="fa fa-chevron-right"></em>
+      <a routerLink="/manutencao/patologia">Patologias</a>
+      <em class="fa fa-chevron-right"></em>
+      Patologias – <span *ngIf="!id">Inclusão</span><span *ngIf="id">Edição</span>
+    </ul>
+  </div>
+
+  <div class="title-type">
+    <h1 class="titulo-pagina">
+      Patologias – <span *ngIf="!id">Inclusão</span><span *ngIf="id">Edição</span>
+    </h1>
+  </div>
+
+  <section class="row">
+    <form [formGroup]="formulario" name="form">
+      <div class="form-row">
+        <div *ngIf="patologia.id" class="col-md-1 pl-0">
+          <label class="control-label" for="id">ID</label>
+          <p class="marginBottom" id="id">{{patologia.id}}</p>
+        </div>
+
+        <div *ngIf="patologia.dataCadastramento" class="col-md-2">
+          <label class="control-label" for="dataCadastramento">Cadastramento</label>
+          <p class="marginBottom" id="dataCadastramento">{{patologia.dataCadastramento |date:'dd/MM/yyyy HH:mm:ss'}}</p>
+        </div>
+
+        <div *ngIf="patologia.codigoUsuarioCadastro" class="col-md-3">
+          <label class="control-label" for="contrato">Usuário</label>
+          <p class="marginBottom" id="contrato">{{patologia.codigoUsuarioCadastro}}</p>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="col-md-2 mb-15 pl-0" *ngIf="!id">
+          <asc-input-text
+            label="CID-10" required id="codigo" name="codigo" [control]="codigo"
+            hint="Código da Patologia no CID-10" [maxlength]="5"
+          ></asc-input-text>
+        </div>
+        <div class="col-md-2 mb-15 pl-0" *ngIf="id">
+          <label class="control-label obrigatorio">CID-10</label>
+          <input type="text" class="form-control" required [value]="codigo.value" readonly>
+        </div>
+        <div class="col-md-10 mb-15">
+          <asc-input-text
+            label="Descrição" required id="descricao" name="descricao" [control]="nome"
+            hint="Descrição da Patologia" [maxlength]="150"
+          ></asc-input-text>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="col-md-2 mb-15 pl-0">
+          <asc-input-text label="Código Evento" id="evento" name="evento" [control]="evento"
+                          hint="Código do Evento" [maxlength]="8" [somenteNumeros]="true"></asc-input-text>
+        </div>
+        <div class="col-md-3 mb-15">
+          <label class="control-label obrigatorio" for="perReembolso">Percentual Reembolso</label>
+          <input type="number" id="perReembolso" required [maxlength]="5" name="perReembolso" class="form-control"
+                 title="Percentual de Reembolso" formControlName="reembolso" step="0.01">
+          <asc-message-error
+            [control]="formulario.controls['reembolso']" type="required"
+            [errorMessage]="bundle('MA007')">
+          </asc-message-error>
+          <asc-message-error
+            [control]="formulario.controls['reembolso']" type="max"
+            [errorMessage]="bundle('MA009','Percentual')">
+          </asc-message-error>
+          <asc-message-error
+            [control]="formulario.controls['reembolso']" type="min"
+            [errorMessage]="bundle('MA009','Percentual')">
+          </asc-message-error>
+        </div>
+        <div class="col-md-2 mb-15 pl-0">
+          <label class="control-label" for="sexo">Exclusivo para o Sexo</label>
+          <p-dropdown [options]="sexos" id="sexo" name="sexo" formControlName="sexo"></p-dropdown>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-md-2 mb-15 pl-0">
+          <label class="control-label obrigatorio">Compõe Teto?</label>&nbsp;<br>
+          <p-radioButton name="teto" value="S" formControlName="compoeTeto" inputId="tetoS"></p-radioButton>
+          <label for="tetoS">Sim</label>
+          <p-radioButton name="teto" value="N" formControlName="compoeTeto" inputId="tetoN"></p-radioButton>
+          <label for="tetoN">Não</label>
+        </div>
+        <div class="col-md-2 mb-15 pl-0">
+          <label class="control-label obrigatorio">Calcula PF?</label>&nbsp;<br>
+
+          <p-radioButton
+            name="calcula" value="S" formControlName="calculoPartipacao"
+            inputId="calculaS"
+          ></p-radioButton>
+          <label for="calculaS">Sim</label>
+
+          <p-radioButton
+            name="calcula" value="N" formControlName="calculoPartipacao"
+            inputId="calculaN"
+          ></p-radioButton>
+          <label for="calculaN">Não</label>
+        </div>
+        <div class="col-md-2 mb-15 pl-0">
+          <label class="control-label">Causa Óbito?</label>&nbsp;<br>
+
+          <p-radioButton name="obito" value="S" formControlName="causaObito" inputId="obitoS"></p-radioButton>
+          <label for="obitoS">Sim</label>
+
+          <p-radioButton name="obito" value="N" formControlName="causaObito" inputId="obitoN"></p-radioButton>
+          <label for="obitoN">Não</label>
+        </div>
+      </div>
+      <div *ngIf="id">
+        <div class="form-row">
+          <div class="col-md-2 d-flex al-ic pl-0">
+            <p-checkbox
+              formControlName="inativo" binary="true" inputId="binary"
+              (onChange)="onChangeInativo($event)"
+            ></p-checkbox>
+            <label class="control-label" style="margin: 0 0 0 5px!important" for="binary">Inativo</label>
+          </div>
+          <div class="col-md-2 pl-0">
+            <asc-input-date
+              [control]="dataInativacao" [required]="inativo.value"
+              [disabled]="!inativo.value" inputId="dataInativacao" label="Data da Inativação"
+            ></asc-input-date>
+            <asc-message-error
+              [control]="dataInativacao" type="dataIgualAtualMaior"
+              errorMessage="Data de Inativação deve ser igual ou superior a data atual!">
+            </asc-message-error>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xs-12 barra-botoes">
+        <button
+          class="btn back-btn" (click)="voltar()" id="btnFormVoltar">
+          <span class="fa fa-reply fa-fw"></span>Voltar
+        </button>
+        <button
+          class="btn clean-btn" (click)="excluir()" id="btnFormExcluir" *ngIf="id">
+          <span class="fa fa-remove fa-fw"></span>Excluir
+        </button>
+        <button
+          class="btn clean-btn" (click)="restaurarCampos()" id="btnFormRestaurar" *ngIf="id">
+          Restaurar Campos
+        </button>
+        <button
+          class="btn back-btn" (click)="limparCampos()" id="btnFormLimparCampos" *ngIf="!id">
+          <span class="fa fa-trash fa-fw"></span>
+          Limpar Campos
+        </button>
+        <button
+          class="btn continue-btn" (click)="salvar()"
+          [disabled]="!formulario.valid"
+          id="btnFormSalvar">
+          Salvar
+        </button>
+      </div>
+
+    </form>
+  </section>
+</div>

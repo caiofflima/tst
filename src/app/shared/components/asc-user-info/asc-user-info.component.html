@@ -1,0 +1,14 @@
+<div (click)="exibirInfoTitular()" *ngIf="usuario && usuario?.idTitular" class="user-info" style="cursor: pointer">
+  <div class="icon-user" *ngIf="titular?.nome">
+    <div>{{sessaoService.getSiglaNomeUsuario(titular.nome)}}</div>
+  </div>
+  <div class="user-info-conteudo">
+    <p>{{titular?.nome}}</p>
+    <span>{{usuario?.email}}</span>
+  </div>
+</div>
+
+<asc-modal-dados-titular
+  [matriculaFuncional]="usuario?.matriculaFuncional"
+  [(showModal)]="showInfoTitular">
+</asc-modal-dados-titular>

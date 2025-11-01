@@ -1,0 +1,110 @@
+<div class="container">
+  <div class="col-md-12 breadcrumb-header">
+    <ul class="breadcrumb">
+      <li><span (click)="voltar()" class="voltar"><i class="fa fa-arrow-left" aria-hidden="true"></i>Voltar</span></li>
+      <a routerLink="/home">Início</a>
+      <em class="fa fa-chevron-right"></em> Administração
+      <em class="fa fa-chevron-right"></em> Parâmetros
+      <em class="fa fa-chevron-right"></em>
+      <a routerLink="/manutencao/parametros/gerenciar-medicamentos">Medicamento</a>
+      <em class="fa fa-chevron-right"></em> Medicamento – Resultado
+    </ul>
+  </div>
+  <div class="title-type">
+    <h1 class="titulo-pagina">Medicamento – Resultado</h1>
+  </div>
+
+  <section class="row">
+    <div *ngIf="!isNaoPossuiFiltros()">
+      <div class="p-0 col-md-12">
+        <h4>Dados da Pesquisa</h4>
+      </div>
+
+      <div class="clearfix"></div>
+
+      <div class="p-0 col-xs-2" *ngIf="filtroConsultaMedicamento.listaLaboratorios">
+        <label class="control-label" for="listaLaboratorios">Laboratório</label>&nbsp;<br>
+        <p id="listaLaboratorios">{{listaLaboratoriosNome}}</p>
+      </div>
+
+      <div class="p-0 col-xs-2" *ngIf="filtroConsultaMedicamento.listaMedicamentos">
+        <label class="control-label" for="listaMedicamentos">Nome do medicamento</label>&nbsp;<br>
+        <p id="listaMedicamentos">{{listaMedicamentosNome}}</p>
+      </div>
+
+      <div class="p-0 col-xs-2" *ngIf="filtroConsultaMedicamento.apresentacao">
+        <label class="control-label" for="apresentacao">Apresentação</label>&nbsp;<br>
+        <p id="apresentacao">{{filtroConsultaMedicamento.apresentacao}}</p>
+      </div>
+
+      <div class="p-0 col-xs-2" *ngIf="filtroConsultaMedicamento.numeroTuss">
+        <label class="control-label" for="tuss">Número TUSS</label>&nbsp;<br>
+        <p id="numeroTuss">{{filtroConsultaMedicamento.numeroTuss}}</p>
+      </div>
+     
+      <div class="p-0 col-xs-2" *ngIf="filtroConsultaMedicamento.ativos">
+        <label class="control-label" for="ativos">Somente ativos</label>&nbsp;<br>
+        <p id="ativos">{{filtroConsultaMedicamento.ativos === true ? 'Sim' : 'Não'}}</p>
+      </div>
+
+      <div class="p-0 col-xs-2" *ngIf="filtroConsultaMedicamento.generico">
+        <label class="control-label" for="generico">Genérico</label>&nbsp;<br>
+        <p id="generico">{{filtroConsultaMedicamento.generico === true ? 'Sim' : 'Não'}}</p>
+      </div>
+
+      <div class="clearfix"></div>
+    </div>
+
+    <div class="row p-0 col-md-12">
+      <h4>Resultado da Consulta</h4>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div class="p-0 col-md-12">
+      <div class="col-xs-3 search-inp p-0" style="margin: 5px 0 8px; border-bottom: 0 none">
+        <input #gb type="text" class="form-control filtro-caixa" pInputText size="50"
+               placeholder="Digite para filtrar resultado">
+        <em class="fas fa-search"></em>
+      </div> 
+
+      <p-dataTable
+        id="caixa-table" [value]="listaMedicamento" [rows]="10"
+        [paginator]="true" [pageLinks]="5" sortOrder="-1"
+        emptyMessage="Nenhum resultado encontrado para os filtros informados." [loading]="loading"
+        [rowsPerPageOptions]="[5,10,20]" [globalFilter]="gb" reorderableColumns="true" sortField="id"
+        class="table table-striped table-sm table-hover text-center">
+        <p-column field="nomeLaboratorio" header="Laboratório" [sortable]="true"></p-column>
+        <p-column field="nomeMedicamento" header="Nome do medicamento" [sortable]="true"></p-column>
+        <p-column field="apresentacao" header="Apresentação" [sortable]="true"></p-column>
+        <p-column field="numeroTuss" header="Número TUSS" [sortable]="true"></p-column>
+
+        <p-column field="valor" header="Valor do Medicamento" [sortable]="true">
+          <ng-template let-col let-item="rowData" pTemplate="body">
+          {{ item[col.field] | currency:'BRL': true }}
+          </ng-template>
+        </p-column>
+        <p-column field="ativo" header="Ativo" [sortable]="true" [style]="{'width':'90px'}"></p-column>
+
+        <p-column header="Ação">
+          <ng-template let-row="rowData" pTemplate="content">
+            <span title="Editar registro" [routerLink]="['../editar', row.id]" id="editar">
+              <em class="fas fa-pen"></em>
+            </span>
+          </ng-template>
+        </p-column>
+      </p-dataTable>
+    </div>
+
+    <div class="p-0 col-xs-12 barra-botoes">
+      <button
+        class="btn back-btn" routerLink="/manutencao/parametros/gerenciar-medicamentos" id="btnFormVoltar">
+        <span class="fa fa-reply fa-fw"></span>Voltar
+      </button>
+      <button type="button" id="btnNovoMotivoNegacao" class="btn clean-btn" routerLink="../novo">
+        <span class="fa fa-plus fa-fw"></span>Incluir Medicamento
+      </button>
+    </div>
+
+  </section>
+</div>

@@ -1,0 +1,89 @@
+<div class="container" *ngIf="!processoEnviado">
+  <asc-stepper [fitScreen]="true" [breadcrumbOptions]="breadcrumb" [disableClickOnLabel]="true" #cdkStepper>
+    <cdk-step label="Tipo dependente">
+      <ng-template cdkStepLabel>
+        Atualização de Beneficiário
+      </ng-template>
+      <asc-etapa-selecao-dependente
+        [checkRestart]="reiniciarSubject"
+        (beneficiarioDependenteModel)="beneficiarioDependenteModelSelecionado($event)"
+        (beneficiarioModel)="beneficiarioModelSelecionado($event)"
+        [idTipoProcesso]="idTipoProcesso"
+        (motivoSolicitacaoModel)="motivoSolicitacaoModelSelecionado($event)"
+        (tipoDependenteModel)="tipoDependenteModelSelecionado($event)"
+        [idBeneficiarioModel]="idBeneficiarioModel"
+        routerLinkToBack="/dependente/alterar"
+        [stepper]="cdkStepper"
+      ></asc-etapa-selecao-dependente>
+    </cdk-step>
+    <cdk-step label="Cadastro">
+      <ng-template cdkStepLabel>
+        Atualização de Beneficiário
+      </ng-template>
+      <asc-etapa-dados-dependente
+        *ngIf="cdkStepper._getFocusIndex() === 1" 
+        [checkRestart]="reiniciarSubject"
+        [stepper]="cdkStepper" 
+        [idTipoProcesso]="idTipoProcesso"
+        [beneficiarioDependente]="beneficiarioDependenteModel"
+        (estadoCivilModel)="estadoCivilModelSelecionado($event)"
+        (dadoDependenteModel)="dadoDependenteModelSelecionado($event)"
+        [tipoDependente]="tipoDependenteModel " 
+      ></asc-etapa-dados-dependente>
+    </cdk-step>
+    <cdk-step [label]="'Complemento'">
+      <ng-template cdkStepLabel>
+        Atualização de Beneficiário
+      </ng-template>
+      <asc-etapa-complemento-dependente
+        *ngIf="cdkStepper._getFocusIndex() === 2"
+        [checkRestart]="reiniciarSubject"
+        [stepper]="cdkStepper"
+        [dadoDependente]="dadoDependenteModel"
+        (municipioSelecionado)="municipioSelecionado($event)"
+        (tipoDeficienciaModel)="tipoDeficienciaModelSelecionado($event)"
+        (complementoDependenteModel)="complementoDependenteModelSelecionado($event)"
+        [complementoDependente]="complementoDependenteModel"
+        [tipoDeficiencia]="tipoDeficienciaModel"
+        [tipoDependente]="tipoDependenteModel"
+      ></asc-etapa-complemento-dependente>
+    </cdk-step>
+    <cdk-step label="Documentos">
+      <ng-template cdkStepLabel>
+        Atualização de Beneficiário
+      </ng-template>
+      <asc-documentos-requeridos-pedido
+        [parametro]="parametroDocumento"
+        [stepper]="cdkStepper"
+        (documentosSelecionados)="documentosSelecionados($event)"
+      ></asc-documentos-requeridos-pedido>
+    </cdk-step>
+    <cdk-step [label]="'Resumo'">
+      <ng-template cdkStepLabel>
+        Atualização de Beneficiário
+      </ng-template>
+      <asc-etapa-resumo-alterar
+        [beneficiarioDependente]="beneficiarioDependenteModel"
+        [documentos]="documentos"
+        [municipio]="municipioModel"
+        [tipoDependente]="tipoDependenteModel"
+        [dadoDependente]="dadoDependenteModel"
+        [complementoDependente]="complementoDependenteModel"
+        [tipoDeficiencia]="tipoDeficienciaModel"
+        [idTipoProcessoResumo]="idTipoProcesso"
+        [estadoCivil]="estadoCivilModel"
+        [motivoSolicitacao]="motivoSolicitacaoModel"
+        [beneficiario]="beneficiarioModel"
+        [stepper]="cdkStepper"
+        (processoEnviadoEvent)="setProcessoEnviado($event)"
+        (reiniciarEvent)="reiniciarSubject.next()"
+      ></asc-etapa-resumo-alterar>
+    </cdk-step>
+  </asc-stepper>
+</div>
+
+<asc-recibo-dependente
+  [pedido]="recibo"
+  [motivo]="motivoSolicitacaoModel.nome"
+  *ngIf="processoEnviado"
+></asc-recibo-dependente>

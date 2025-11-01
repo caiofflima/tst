@@ -1,0 +1,64 @@
+<div
+  [ngClass]="{ 'c-card-historico': true, last: isUltimoElementoNaLista }"
+  @fadeInOut
+>
+  <div class="fl-sb">
+    <p class="card-hist-header strong">
+      {{ situacaoPedido?.tipoOcorrencia?.nome }}
+    </p>
+    <span>
+      <svg
+        *ngIf="situacaoPedido?.countAnexos"
+        aria-hidden="true"
+        class="icon-clip-black"
+      ></svg>
+      <i
+        *ngIf="!tituloAcompanhamento"
+        aria-hidden="true"
+        class="fa fa-user-circle-o fa-fw"
+        style="cursor: pointer"
+        title="{{
+          getNomeUsuario(situacaoPedido, processoPedido?.idTipoProcesso)
+            | campoVazioHifen
+        }}"
+      ></i>
+    </span>
+    <span class="orange-ball"></span>
+  </div>
+  <!-- Só exibe a situação se for mudança de status (id = 1)  -->
+  <div class="fl-sb" *ngIf="situacaoPedido?.tipoOcorrencia?.id === 1">
+    <p class="card-hist-header">{{ situacaoPedido?.situacaoProcesso?.nome }}</p>
+  </div>
+  <div class="fl-sb c-card-historico-footer">
+    <button
+      class="detalhar"
+      *ngIf="permissoes?.acessar"
+      (click)="clickShowDetalhe()"
+    >
+      <span>detalhar</span>
+    </button>
+    <svg
+      class="icon-msg-action"
+      style="cursor: pointer"
+      *ngIf="situacaoPedido?.countMensagens > 0"
+      (click)="clickVerMensagem(modalMensagemPedidoComponent)"
+      aria-hidden="true"
+    ></svg>
+    <span class="date">{{
+      situacaoPedido?.dataCadastramento | date : "dd/MM/yyyy"
+    }}</span>
+  </div>
+</div>
+
+<asc-modal-mensagem-pedido
+  [mostrarBotoes]="permissoes?.analisar"
+  #modalMensagemPedidoComponent
+></asc-modal-mensagem-pedido>
+
+<asc-detalhe-situacao
+  [show]="showDetalhe"
+  (hide)="clickCloseDetalhe()"
+  [processoPedido]="processoPedido"
+  [situacaoPedido]="situacaoPedido"
+  [permissoes]="permissoes"
+></asc-detalhe-situacao>

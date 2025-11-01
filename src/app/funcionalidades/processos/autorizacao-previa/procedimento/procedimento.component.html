@@ -1,0 +1,89 @@
+<div class="finalidade-container">
+  <p class="titulo">OK. Agora, precisamos dos dados dos procedimentos.</p>
+  <div class="space-between sb-to-mobile">
+    <div class="custom-left-grid">
+      <asc-procedimento-form
+        [pedidoProcedimentoFormInput]="pedidoProcedimentoForm"
+        [parametroSelectProcedimento]="parametroSelectProcedimento"
+        (pedidoProcedimentoForm)="adicionarProcedimento($event)"
+        (pedidoProcedimentos)="adicionarProcedimentos($event)"
+        (cancelarProcedimento)="cancelarProcedimento()"
+        (procedimento)="adicionarProcedimentoPanel($event)"
+        [pedido]="pedido"
+        [beneficiario]="beneficiario"
+      ></asc-procedimento-form>
+    </div>
+    <div class="custom-right-grid" style="padding-top: 0">
+      <p class="grid-titulo">{{procedimento?.estruturaNumerica}}  {{procedimento?.descricaoProcedimento}}</p>
+      <p class="grid-info">
+        {{procedimento?.observacaoProcedimento | slice: 0: 400}}<span
+              *ngIf="procedimento?.observacaoProcedimento?.length > 400">...
+            <a data-toggle="modal" data-target="#modalProcediento">ver mais</a>
+            </span>
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="procedimentos-adicionados" *ngIf="pedidoProcedimentosTabela && pedidoProcedimentosTabela.length && isShowTable">
+  <div class="pa-header">
+    <p class="pa-titulo">Procedimentos adicionados</p>
+    <div class="listagem-procedimentos">
+      <div class="listagem-header">
+        <p class="pa-lh-1">Procedimento</p>
+        <p class="pa-lh-2">{{ isTipoProcessoOdontologico() ? 'Região odontológica' : 'Grau'}}</p>
+        <p class="pa-lh-3"><span>Quantidade</span></p>
+        <p class="pa-lh-4"><span>Ação</span></p>
+      </div>
+      <div class="listagem-body" *ngFor="let pedidoProcedimento of pedidoProcedimentosTabela; let i = index">
+        <p class="pa-lb-1"><span>{{pedidoProcedimento?.procedimento?.estruturaNumerica}} -</span> {{pedidoProcedimento?.procedimento?.descricaoProcedimento}}</p>
+        <p class="pa-lb-2"><span>{{pedidoProcedimento?.grauProcedimento?.nome}}</span></p>
+        <p class="pa-lb-3"><span>{{pedidoProcedimento?.qtdSolicitada}}</span></p>
+        <div class="pa-lb-4">
+          <button [disabled]="isEditing" class="btn-editar" (click)="editar(pedidoProcedimento, i)">
+            <i class="fa fa-pencil" aria-hidden="true"></i>
+          </button>
+          <button [disabled]="isEditing" class="btn-excluir" (click)="remove(pedidoProcedimento)">
+            <i class="fa fa-trash" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="footer">
+  <button class="back-btn" cdkStepperPrevious [disabled]="isEditing">
+      Voltar
+  </button>
+  <button class="continue-btn" (click)="onSubmit()"
+          [disabled]="!pedidoProcedimentosTabela.length || showProgress || isEditing">
+    <span *ngIf="showProgress">
+      <p-progressSpinner
+        [style]="{width: '25px', height: '25px'}" strokeWidth="4" fill="#EEEEEE"
+        animationDuration=".5s"></p-progressSpinner>
+    </span>
+    <div *ngIf="!showProgress">
+      Continuar
+    </div>
+  </button>
+</div>
+
+<!-- Modal Logout -->
+<div class="modal fade" id="modalProcediento" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mdl-overf-body-procedimento">
+        <p class="title-text-modal">
+         {{procedimento?.estruturaNumerica}} - {{procedimento?.descricaoProcedimento}}
+        </p>
+        <p class="text-modal">{{procedimento?.observacaoProcedimento}}</p>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,61 @@
+.no-padding-left {
+  padding: 16px 0 0 7px;
+}
+
+.padding {
+  padding: 16px 7px 0 7px;
+}
+
+.to-footer {
+  button {
+    justify-content: center;
+    align-items: center;
+    padding: 6.5px 12px;
+    border-radius: 3px;
+    transition: 250ms ease-in-out;
+    margin: 8px 4px;
+
+    &.cancel {
+      background-color: #01377F;
+      border: none;
+
+      span {
+        color: #fff;
+      }
+
+      &:hover,
+      &:active,
+      &:focus {
+        background-color: #01377F;
+        transition: 250ms ease-in-out;
+
+        span {
+          color: #fff;
+          transition: 250ms ease-in-out;
+        }
+      }
+    }
+
+    &.save {
+      background-color: #f39200;
+      border: none;
+
+      span {
+        color: #fff;
+      }
+
+      &:not(:disabled) {
+        &:hover,
+        &:focus,
+        &:active {
+          background-color: #db6e00;
+          transition: 250ms ease-in-out;
+        }
+      }
+
+      &:disabled {
+        background-color: #dadada;
+      }
+    }
+  }
+}

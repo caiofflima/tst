@@ -1,0 +1,215 @@
+<form [formGroup]="form">
+  <div class="row col-md-12">
+    <h4>Profissional executante</h4>
+  </div>
+
+  <div class="row col-md-12 coluna-interna">
+    <div class="row col-md-4">
+      <label class="control-label obrigatorio" for="idConselhoProfissional"
+        >Conselho Profissional</label
+      >
+      <p-dropdown
+        class="form-control2"
+        [required]="true"
+        id="idConselhoProfissional"
+        [options]="itensConselhoProfissional"
+        [filter]="true"
+        formControlName="idConselhoProfissional"
+        title="Conselho profissional do executante."
+        [placeholder]="this.bundle('MHSPH')"
+      >
+      </p-dropdown>
+      <div
+        *ngIf="
+          idConselhoProfissional.invalid &&
+          (idConselhoProfissional.dirty || idConselhoProfissional.touched)
+        "
+        class="error-form"
+      >
+        <div *ngIf="idConselhoProfissional.errors['required']">
+          {{ bundle("MA005") }}
+        </div>
+      </div>
+    </div>
+
+    <div class="row col-md-4">
+      <label class="control-label obrigatorio" for="numeroConselho"
+        >Número do Conselho</label
+      >
+      <input
+        required
+        type="text"
+        id="numeroConselho"
+        class="form-control"
+        formControlName="numeroConselho"
+        title="Número do registro no conselho profissional do executante."
+        maxlength="11"
+        (keyup)="constantes.control.numeroMaiorQueZero(this.numeroConselho)"
+        (keydown)="constantes.control.numeroMaiorQueZero(this.numeroConselho)"
+      />
+      <div
+        *ngIf="
+          numeroConselho.invalid &&
+          (numeroConselho.dirty || numeroConselho.touched)
+        "
+        class="error-form"
+      >
+        <div *ngIf="numeroConselho.errors['required']">
+          {{ bundle("MA007") }}
+        </div>
+      </div>
+    </div>
+
+    <div class="row col-md-4">
+      <label class="control-label obrigatorio" for="ufConselho"
+        >UF do Conselho</label
+      >
+      <p-dropdown
+        class="form-control2"
+        [required]="true"
+        id="ufConselho"
+        [options]="itensUF"
+        formControlName="idEstadoConselho"
+        [filter]="true"
+        [placeholder]="this.bundle('MHSPH')"
+        title="UF do conselho profissional do executante."
+      >
+      </p-dropdown>
+      <div
+        *ngIf="
+          idEstadoConselho.invalid &&
+          (idEstadoConselho.dirty || idEstadoConselho.touched)
+        "
+        class="error-form"
+      >
+        <div *ngIf="idEstadoConselho.errors['required']">
+          {{ bundle("MA005") }}
+        </div>
+      </div>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div class="row col-md-4">
+      <label class="control-label obrigatorio" for="cpfCnpj">CPF/CNPJ</label>
+      <input
+        required
+        type="text"
+        id="cpfCnpj"
+        formControlName="cpfCnpj"
+        class="form-control"
+        title="CPF/CNPJ do profissional executante."
+        size="18"
+        maxlength="18"
+        (blur)="cpfCnpjUtil.control.configurarMascara(this.cpfCnpj)"
+        (focus)="cpfCnpjUtil.control.limparFormatacao(this.cpfCnpj)"
+        (keyup)="cpfCnpjUtil.control.limitarTamanho(this.cpfCnpj)"
+        (keydown)="cpfCnpjUtil.control.limitarTamanho(this.cpfCnpj)"
+      />
+      <div
+        *ngIf="cpfCnpj.invalid && (cpfCnpj.dirty || cpfCnpj.touched)"
+        class="error-form"
+      >
+        <div *ngIf="cpfCnpj.errors['required']">{{ bundle("MA007") }}</div>
+        <div *ngIf="cpfCnpj.errors['cpfCnpjInvalido']">
+          {{ bundle("MA009", "CPF ou CNPJ") }}
+        </div>
+      </div>
+    </div>
+
+    <div class="row col-md-8">
+      <label class="control-label obrigatorio" for="nomeProfissional"
+        >Nome/Razão Social</label
+      >
+      <input
+        required
+        id="nomeProfissional"
+        type="text"
+        formControlName="nomeProfissional"
+        maxlength="350"
+        name="nomeProfissional"
+        class="form-control"
+        title="Nome ou Razão Social do profissional executante."
+      />
+      <div
+        *ngIf="
+          nomeProfissional.invalid &&
+          (nomeProfissional.dirty || nomeProfissional.touched)
+        "
+        class="error-form"
+      >
+        <div *ngIf="nomeProfissional.errors['required']">
+          {{ bundle("MA007") }}
+        </div>
+      </div>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div class="row col-md-4">
+      <label class="control-label obrigatorio" for="uf">UF</label>
+      <p-dropdown
+        class="form-control2"
+        [required]="true"
+        id="uf"
+        formControlName="ufAtendimento"
+        [options]="itensUF"
+        [filter]="true"
+        [placeholder]="this.bundle('MHSPH')"
+        (onChange)="consultarMunicipiosAtendimento()"
+        title="UF do profissional executante."
+      >
+        <ng-template let-uf pTemplate="item">
+          <div class="ui-helper-clearfix select-relacao">
+            {{ uf.label }}
+          </div>
+        </ng-template>
+      </p-dropdown>
+      <div
+        *ngIf="
+          ufAtendimento.invalid &&
+          (ufAtendimento.dirty || ufAtendimento.touched)
+        "
+        class="error-form"
+      >
+        <div *ngIf="ufAtendimento.errors['required']">
+          {{ bundle("MA005") }}
+        </div>
+      </div>
+    </div>
+
+    <div class="row col-md-8">
+      <label class="control-label obrigatorio" for="municipio">Município</label>
+      <p-dropdown
+        class="form-control2"
+        [required]="true"
+        id="municipio"
+        formControlName="idMunicipioProfissional"
+        [options]="itensLocalidade"
+        [filter]="true"
+        [placeholder]="this.bundle('MHSPH')"
+        title="Município do profissional executante."
+      >
+        <ng-template let-item pTemplate="item">
+          <div
+            class="ui-helper-clearfix"
+            style="position: relative; height: 25px"
+          >
+            <div>{{ item.label }}</div>
+          </div>
+        </ng-template>
+      </p-dropdown>
+      <div
+        *ngIf="
+          idMunicipioProfissional.invalid &&
+          (idMunicipioProfissional.dirty || idMunicipioProfissional.touched)
+        "
+        class="error-form"
+      >
+        <div *ngIf="idMunicipioProfissional.errors['required']">
+          {{ bundle("MA005") }}
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

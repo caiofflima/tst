@@ -1,0 +1,100 @@
+@import "/src/assets/sass/colors";
+@import "/src/assets/sass/mixins";
+@import "/src/assets/sass/base";
+@import "/src/assets/sass/funcionalidades/processos-reembolso";
+
+.max-52-em {
+  min-width: 52em;
+}
+
+@mixin add-btn-hover(
+  $mainColor,
+  $hoverColor,
+  $borderColor,
+  $spanColor,
+  $spanHoverColor
+) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  background-color: $mainColor;
+  border-color: $borderColor;
+  transition: 250ms ease-in-out;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  padding: 10px 16px;
+  min-width: 125px;
+
+  span,
+  i {
+    color: $spanColor;
+    transition: 300ms ease-in-out;
+  }
+
+  &:hover,
+  &:active {
+    background-color: $hoverColor;
+    transition: 250ms ease-in-out;
+
+    span {
+      color: $spanHoverColor;
+      transition: 300ms ease-in-out;
+    }
+  }
+}
+
+.no-padding {
+  padding: 0;
+}
+
+.to-right {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.max-100 {
+  max-width: 100%;
+}
+
+@media screen and (max-width: 500px) {
+  div.footer {
+    flex-direction: column-reverse;
+  }
+
+  div.resumo-body {
+    padding: 8px 12px 16px 12px;
+
+    .space-btw {
+      &.custom-padding {
+        padding: 8px 12px;
+      }
+    }
+
+    .resumo-arquivos {
+      padding: 8px 12px;
+    }
+  }
+}
+
+.botoes-edicao {
+  padding: 0.75em 0 1.5em 0;
+}
+
+.botoes-edicao:nth-of-type(even) {
+  background-color: #eff5f6;
+  border-top: 2px solid #b3c7cb;
+  border-bottom: 2px solid #b3c7cb;
+}
+
+.botoes-edicao:nth-of-type(odd) {
+  background-color: #fff;
+  border-top: none;
+  border-bottom: none;
+}
+
+.custom-card {
+  background-color: #eff5f6;
+  padding: 1.5em;
+  border: solid #b3c7cb;
+  border-width: 0 0 1px 0;
+}

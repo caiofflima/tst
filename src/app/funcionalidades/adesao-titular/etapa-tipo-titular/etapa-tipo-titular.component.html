@@ -1,0 +1,145 @@
+<form [formGroup]="formularioSolicitacao">
+  <div class="solicitacao-container">
+    <div class="form-row">
+      <div class="col-md-12 no-padding">
+        <p class="titulo">Vamos começar! Confira seus dados:</p>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="d-flex">
+        <div class="col-md-6 p-0">
+          <div class="row mb-0">
+            <div class="col-md-12 mb-15 no-padding-left">
+              <h4>Nome Completo</h4>
+              <p>
+                {{
+                  (beneficiarioTitular?.nome
+                    ? beneficiarioTitular?.nome
+                    : "-"
+                  ).toUpperCase()
+                }}
+              </p>
+            </div>
+            <div class="col-md-12 mb-15 no-padding-left">
+              <h4>Tipo do Beneficiário</h4>
+              <p>
+                {{
+                  (beneficiarioTitular?.contratoTpdep.tipoDependente.descricao
+                    ? beneficiarioTitular?.contratoTpdep.tipoDependente
+                        .descricao
+                    : "-"
+                  ).toUpperCase()
+                }}
+              </p>
+            </div>
+            <div class="col-md-12 mb-15 no-padding-left">
+              <h4>Sexo</h4>
+              <p>
+                {{
+                  (beneficiarioTitular?.matricula.sexo
+                    ? obterDescricaoSexo()
+                    : "-"
+                  ).toUpperCase()
+                }}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-md-12 mb-15 no-padding-left">
+              <h4>Código do Beneficiário</h4>
+              <p>
+                {{
+                  beneficiarioTitular?.codigoBeneficiario
+                    ? beneficiarioTitular?.codigoBeneficiario
+                    : "-"
+                }}
+              </p>
+            </div>
+
+            <div class="col-md-12 mb-15 no-padding-left">
+              <h4>Data de Nascimento</h4>
+              <p []>
+                {{
+                  beneficiarioTitular?.matricula.dataNascimento
+                    | dateStringFormat : "dd/MM/yyyy"
+                }}
+              </p>
+            </div>
+
+            <div class="col-md-12 mb-15 no-padding-left">
+              <h4>Nome da Mãe</h4>
+              <p>
+                {{
+                  (beneficiarioTitular?.matricula.nomeMae
+                    ? beneficiarioTitular?.matricula.nomeMae
+                    : "-"
+                  ).toUpperCase()
+                }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group col-md-6 no-padding-left">
+          <asc-select-finalidade-adesao
+            selectId="idMotivoSolicitacao"
+            label="Motivo da Atualização"
+            [required]="true"
+            [control]="formularioSolicitacao.get('idMotivoSolicitacao')"
+          >
+          </asc-select-finalidade-adesao>
+        </div>
+        <div class="col-md-12 no-padding-left">
+          <p class="titulo">
+            Você gostaria de informar um contato adicional para recebimento das
+            notificações do seu pedido?
+          </p>
+        </div>
+
+        <div class="col-md-6 mb-15 no-padding-left">
+          <label class="control-label">E-mail <small>Opcional</small></label>
+          <asc-input-text
+            [control]="formularioSolicitacao.get('email')"
+            inputId="email"
+            label=""
+          ></asc-input-text>
+        </div>
+
+        <div class="col-md-6 no-padding-left">
+          <label class="control-label">Telefone <small>Opcional</small></label>
+          <asc-input-telefone
+            [control]="formularioSolicitacao.get('telefoneContato')"
+            inputId="telefone"
+            label=""
+          ></asc-input-telefone>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+    <asc-button-secondary
+      buttonId="voltar"
+      [routerLink]="routerLinkToBack"
+      title="Voltar"
+    ></asc-button-secondary>
+
+    <asc-button-primary
+      buttonId="continuar"
+      title="Continuar"
+      [showProgress]="showProgress"
+      [disabled]="beneficiarioTitular === null"
+      (onClick)="onSubmit()"
+    ></asc-button-primary>
+  </div>
+</form>
+
+    <asc-button-primary buttonId="continuar" title="Continuar" [showProgress]="showProgress" [disabled]="beneficiarioTitular === null"
+      (onClick)="onSubmit()"></asc-button-primary>
+  </div>
+</form>

@@ -1,0 +1,175 @@
+<div id="cx-bar">
+
+  <div class="container barra-sistema">
+
+    <div class="caixax" routerLink="/home">
+      <img alt="Caixa" src="assets/images/caixa-mb.svg" title="Caixa"/>
+      <img alt="Caixa" src="assets/images/logo.png" title="Caixa"/>
+      <span></span>
+      <strong id="sistema">SIASC </strong>
+      <p style="margin: 0"> - Saúde CAIXA</p>
+    </div>
+
+    <div class="buttons-header">
+      <nav class="menu-usuario" aria-labelledby="sistema">
+        <nav class="menu-icone" aria-labelledby="sistema">
+          <ul>
+            <li>
+              <div class="tooltip-mensagem">
+                <a data-target=".modal-logout" data-toggle="modal" onclick="return false;">
+                  <em class="fa fa-sign-out"></em>
+                  <span>Sair</span>
+                </a>
+              </div>
+            </li>
+          </ul>
+        </nav>
+      </nav>
+    </div>
+  </div>
+  <div *ngIf= "isExibirBarraConfidencial()" class="confidencial" >
+    <div *ngIf= "isIntranet()" class="container sub-container">
+        <b>Conteúdo</b> #INTERNO.CONFIDENCIAL</div>
+    <div *ngIf= "!isIntranet()" class="container sub-container" [innerHTML]="textoExternoConfidencial()"></div>
+</div>
+  
+
+<div id="menu-caixa">
+  <div id="cx-mn" class="container">
+    <div id="menu-horizontal" >
+      <p-menubar [autoDisplay]="true" styleClass="menucx" [model]="items"></p-menubar>
+    </div>
+
+    <div class="user-info">
+      <div class="img-user">
+        <div>{{sessaoService.getSiglaNomeUsuario()}}</div>
+      </div>
+      <div class="about-user">
+        <h5 class="user-name">
+          Olá
+          <span id="fword" title="{{sessaoService.getUsuario()?.nome }}">{{sessaoService.getUsuario()?.nome}}</span>
+        </h5>
+
+        <div class="dropdown">
+
+          <a #popup class="drop-user dropdown-toggle" id="dropUser" data-toggle="dropdown" aria-haspopup="true"
+             aria-expanded="false">
+            <div *ngIf="!matricula">Dados</div>
+            <div *ngIf="matricula" class="atend"><strong>Atend.:</strong> {{nome}}</div>
+            <em class="fas fa-times-circle ac" (click)="encerrarAtendimento(); popup.click()" *ngIf="matricula"></em>
+            <em class="fas fa-chevron-down"></em>
+          </a>
+
+          <div class="dropdown-menu" aria-labelledby="dropUser">
+            <div class="options">
+              <div>
+                <div *ngIf="matricula" style="color: #337ab7;">
+                  <strong>Atendendo:</strong>
+                  <strong>Matrícula:</strong>
+                  <div class="encerrar">&nbsp;</div>
+                  <div style="height: 10px; display: block;"></div>
+                </div>
+                <strong>Nome:</strong>
+                <strong>Usuário:</strong>
+                <strong>Perfil:</strong>
+                <strong>Versão:</strong>
+              </div>
+              <div>
+                <div *ngIf="matricula" style="color: #337ab7;">
+                  <p title="{{nome}}">{{nome}}</p>
+                  <p title="{{matricula}}">{{matricula}}</p>
+                  <div class="encerrar">
+                    <button class="encerrar" (click)="encerrarAtendimento()">
+                      <em class="fas fa-times-circle"></em> Encerrar atendimento
+                    </button>
+                  </div>
+                </div>
+                <p title="{{sessaoService.getUsuario()?.nome}}">{{sessaoService.getUsuario()?.nome}}</p>
+                <p
+                  title="{{sessaoService.getUsuario()?.matriculaFuncional }}">{{sessaoService.getUsuario()?.matriculaFuncional}}</p>
+                <p
+                  title="{{sessaoService.getUsuario()?.getDescricaoPerfis()}}">{{sessaoService.getUsuario()?.getDescricaoPerfis()}}</p>
+                <p title="{{versaoSistema}}">{{versaoSistema}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div id="menu-vertical" style="display:none;">
+    <p-panelMenu styleClass="menucx"  [model]="items"></p-panelMenu>
+  </div>
+</div>
+
+<!-- Modal Idle -->
+<div class="modal fade modal-idle" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Término de Utilização</h4>
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>{{ mensagemContinuidadeUso }}</p>
+      </div>
+      <div class="modal-footer">
+        <button (click)="logout()" class="btn btn-default" data-dismiss="modal">Não</button>
+        <button class="btn btn-success" data-dismiss="modal" id="btnIdleSim">Sim</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Logout -->
+<div class="modal fade modal-logout" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 style="display: inline-block;" class="modal-title">Logout</h4>
+        <button style="display: inline-block;" aria-label="Close" class="close" data-dismiss="modal" type="button">
+          &times;
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Tem certeza que deseja sair?</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn back-btn" data-dismiss="modal" id="btnLogoutNao">Cancelar</button>
+        <button (click)="logout()" class="btn continue-btn" data-dismiss="modal">Confirmar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Logout -->
+<div class="modal fade modal-selecao-credenciado" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Em nome de qual credenciado você deseja atuar?</h4>
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="ui-g">
+          <div *ngFor="let c of empresasOperador" class="row">
+            <div class="col-lg-1">
+              <p-radioButton [(ngModel)]="idCredenciadoSelecionado" data-dismiss="modal" value="{{c.id}}">
+              </p-radioButton>
+            </div>
+            <div class="col-lg-11">
+              <h4>{{c.nome}}</h4>
+              <h6>{{c.cpfCnpj | cpfCnpjMask}}</h6>
+            </div>
+            <hr/>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

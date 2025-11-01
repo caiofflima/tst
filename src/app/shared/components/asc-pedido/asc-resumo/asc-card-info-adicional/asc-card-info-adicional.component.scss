@@ -1,0 +1,26 @@
+.resumo-info-box {
+
+  padding: 8px 24px 24px 24px;
+
+  &:not(:last-child) {
+    margin-bottom: 8px;
+  }
+
+  span {
+    font-family: 'Caixa Std Bold', sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 17px;
+    color: #3A4859;
+  }
+
+  p {
+    font-family: 'Caixa Std Regular', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 22px;
+    color: #3A4859;
+  }
+}

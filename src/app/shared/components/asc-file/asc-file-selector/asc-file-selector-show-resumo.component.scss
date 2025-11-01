@@ -1,0 +1,32 @@
+label.file-selector {
+  background-color: #40a797;
+  border: none;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  transition: 250ms ease-in-out;
+  margin: 0 8px 0 4px;
+  min-width: 35px;
+
+  &:hover {
+    background-color: #36877b;
+    transition: 250ms ease-in-out;
+  }
+
+  i {
+    color: #fff;
+  }
+
+  input[type="file"] {
+    display: none;
+  }
+}
+
+label.disabled,
+label.disabled:hover {
+  background-color: #e5e5e5;
+  cursor: not-allowed;
+}

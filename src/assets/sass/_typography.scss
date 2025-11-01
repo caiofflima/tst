@@ -1,0 +1,84 @@
+/*Font Print - DejaVu*/
+@font-face {
+	font-family: "DejaVu Sans";
+	src: url("../fonts/DejaVuSans.ttf") format("truetype");
+}
+@font-face {
+	font-family: "DejaVu Sans";
+	font-weight: bold;
+	src: url("../fonts/DejaVuSans-Bold.ttf") format("truetype");
+}
+@font-face {
+	font-family: "DejaVu Sans";
+	font-style: italic;
+	src: url("../fonts/DejaVuSans-Oblique.ttf") format("truetype");
+}
+@font-face {
+	font-family: "DejaVu Sans";
+	font-weight: bold;
+	font-style: italic;
+	src: url("../fonts/DejaVuSans-Oblique.ttf") format("truetype");
+}
+
+@font-face {
+	font-family: "Caixa Std Regular";
+	font-style: normal;
+	font-weight: normal;
+	src: local("Caixa Std Regular"), url("../fonts/CAIXAStd-Regular.ttf") format("truetype");
+}
+
+@font-face {
+	font-family: "Caixa Std Book";
+	font-style: normal;
+	font-weight: normal;
+	src: local("Caixa Std Book"), url("../fonts/CAIXAStd-Book.ttf") format("truetype");
+}
+
+@font-face {
+	font-family: "Caixa Std Italic";
+	font-style: normal;
+	font-weight: normal;
+	src: local("Caixa Std Italic"), url("../fonts/CAIXAStd-Italic.ttf") format("truetype");
+}
+
+@font-face {
+	font-family: "Caixa Std Extra Bold";
+	font-style: normal;
+	font-weight: normal;
+	src: local("Caixa Std Extra Bold"), url("../fonts/CAIXAStd-ExtraBold.ttf") format("truetype");
+}
+
+@font-face {
+	font-family: "Caixa Std Bold";
+	font-style: normal;
+	font-weight: normal;
+	src: local("Caixa Std Bold"), url("../fonts/CAIXAStd-Bold.ttf") format("truetype");
+}
+
+@font-face {
+	font-family: "Caixa Std Extra Bold Italic";
+	font-style: normal;
+	font-weight: normal;
+	src: local("Caixa Std Extra Bold Italic"), url("../fonts/CAIXAStd-ExtraBoldItalic.ttf") format("truetype");
+}
+
+@font-face {
+	font-family: "Caixa Std Bold Italic";
+	font-style: normal;
+	font-weight: normal;
+	src: local("Caixa Std Bold Italic"), url("../fonts/CAIXAStd-BoldItalic.ttf") format("truetype");
+}
+
+@font-face {
+	font-family: "Caixa Std SemiBold";
+	font-style: normal;
+	font-weight: normal;
+	src: local("Caixa Std SemiBold"), url("../fonts/CAIXAStd-SemiBold.ttf") format("truetype");
+}
+
+@font-face {
+	font-family: "Caixa Std SemiBold Italic";
+	font-style: normal;
+	font-weight: normal;
+	src: local("Caixa Std SemiBold Italic"), url("../fonts/CAIXAStd-SemiBoldItalic.ttf") format("truetype");
+}

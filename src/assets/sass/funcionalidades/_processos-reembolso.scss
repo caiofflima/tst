@@ -1,0 +1,55 @@
+$spancing: 1.5rem;
+
+.card {
+  background: #ffffff;
+  border: 1px solid #b3c7cb;
+  box-sizing: border-box;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 3px;
+  position: relative;
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+  overflow-wrap: break-word;
+  max-width: 788px;
+  margin-bottom: 0.75em;
+}
+
+.card-title {
+  padding: $spancing;
+  padding-bottom: 0;
+}
+
+.list-items {
+  padding: $spancing;
+  &:nth-of-type(odd) {
+    background-color: #eff5f6;
+    border-top: 2px solid #b3c7cb;
+    border-bottom: 2px solid #b3c7cb;
+  }
+}
+
+.card-footer {
+  padding: $spancing;
+  padding-top: 0;
+}
+
+.padding-x {
+  padding: 0px $spancing;
+}
+
+.margin-y {
+  margin: $spancing 0px;
+}
+
+.margin-x {
+  margin: 0px $spancing;
+}
+
+.margin-b {
+  margin-bottom: $spancing;
+}
+
+.margin-t {
+  margin-top: $spancing;
+}

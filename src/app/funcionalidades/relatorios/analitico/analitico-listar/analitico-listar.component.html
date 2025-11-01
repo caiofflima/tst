@@ -1,0 +1,211 @@
+<div class="container">
+  <div class="col-md-12 breadcrumb-header">
+    <ul class="breadcrumb">
+      <li>
+        <span (click)="voltar()" class="voltar"
+          ><i class="fa fa-arrow-left" aria-hidden="true"></i>Voltar</span
+        >
+      </li>
+      <a routerLink="/home">Início</a>
+      <em class="fa fa-chevron-right"></em>
+      Relatórios
+      <em class="fa fa-chevron-right"></em>
+      <a (click)="voltar()">{{
+        tituloRelatorio || "Nenhum relatório selecionado"
+      }}</a>
+      <em class="fa fa-chevron-right"></em>
+      Relatório Analítico
+    </ul>
+  </div>
+
+  <div class="title-type">
+    <h1 class="titulo-pagina">
+      Relatório Analítico –
+      {{ tituloRelatorio || "Nenhum relatório selecionado" }}
+    </h1>
+  </div>
+</div>
+
+<section class="row container-fluid" *ngIf="listaProcessos?.length">
+  <div class="clearfix"></div>
+  <div class="row p-0 col-md-9">
+    <h4>Resultado da Consulta</h4>
+  </div>
+
+  <div class="clearfix"></div>
+
+  <div class="row p-0 col-md-12">
+    <div
+      class="row col-xs-3 floatRight"
+      style="padding: 4px 10px; border-bottom: 0 none"
+    >
+      <input
+        #gb
+        (input)="applyGlobalFilter($event)"
+        type="text"
+        class="form-control filtro"
+        size="50"
+        placeholder="Digite para filtrar resultado"
+      />
+    </div>
+
+    <div class="clearfix"></div>
+    <p-table
+      #caixaTableAnaliticoListar
+      [value]="listaProcessos"
+      [paginator]="true"
+      [rows]="rowCounter"
+      [rowsPerPageOptions]="[5, 10, 20, 50, 100]"
+      [totalRecords]="listaProcessos?.length"
+      (onPage)="onPageChange($event)"
+      class="table table-striped table-sm table-hover"
+    >
+      <ng-template pTemplate="header">
+        <tr>
+          <th
+            id="numeroProcesso"
+            style="width: 130px"
+            pSortableColumn="numeroProcesso"
+          >
+            Pedido
+          </th>
+          <th
+            id="dataAbertura"
+            style="width: 130px"
+            pSortableColumn="dataAbertura"
+          >
+            "Data Abertura
+          </th>
+          <th
+            id="dataEncerramento"
+            style="width: 130px"
+            pSortableColumn="dataEncerramento"
+          >
+            Data Encerramento
+          </th>
+          <th
+            id="tipoProcesso"
+            style="width: 200px"
+            pSortableColumn="tipoProcesso"
+          >
+            Tipo de Pedido
+          </th>
+          <th
+            id="situacaoProcesso"
+            style="width: 170px"
+            pSortableColumn="situacaoProcesso"
+          >
+            Situação do Pedido
+          </th>
+          <th
+            id="nomeBeneficiario"
+            style="width: 140px"
+            pSortableColumn="nomeBeneficiario"
+          >
+            Nome Beneficiário
+          </th>
+          <th
+            id="cartaoBeneficiario"
+            style="width: 120px"
+            pSortableColumn="cartaoBeneficiario"
+          >
+            Cartão Beneficiário
+          </th>
+          <th
+            id="matriculaTitular"
+            style="width: 180px"
+            pSortableColumn="matriculaTitular"
+          >
+            Matrícula Titular
+          </th>
+          <th id="cpfCnpjStr" style="width: 117px" pSortableColumn="cpfCnpjStr">
+            CPF/CNPJ
+          </th>
+          <th
+            id="nomeRazaoSocial"
+            style="width: 150px"
+            pSortableColumn="nomeRazaoSocial"
+          >
+            Nome/Razão Social
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-rowData>
+        <tr>
+          <td>{{ rowData.numeroProcesso }}</td>
+          <td>{{ rowData.dataAbertura }}</td>
+          <td>{{ rowData.dataEncerramento }}</td>
+          <td>{{ rowData.tipoProcesso }}</td>
+          <td>{{ rowData.situacaoProcesso }}</td>
+          <td>{{ rowData.nomeBeneficiario }}</td>
+          <td>{{ rowData.cartaoBeneficiario }}</td>
+          <td>{{ rowData.matriculaTitular }}</td>
+          <td>{{ rowData.cpfCnpjStr }}</td>
+          <td>{{ rowData.nomeRazaoSocial }}</td>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="emptymessage">
+        {{ bundle("MA003") }}
+      </ng-template>
+      <p-footer>
+        {{ mensagemPaginacao }}
+      </p-footer>
+      <!-- <p-column field="numeroProcesso" header="Pedido" [style]="{width: '130px', 'text-align': 'center'}">
+      </p-column>
+      <p-column field="dataAbertura" header="Data Abertura" [style]="{width: '130px', 'text-align': 'center'}">
+      </p-column>
+      <p-column field="dataEncerramento" header="Data Encerramento" [style]="{width: '130px', 'text-align': 'center'}">
+      </p-column>
+      <p-column field="tipoProcesso" header="Tipo de Pedido" [style]="{width: '200px', 'text-align': 'center'}">
+      </p-column>
+      <p-column field="situacaoProcesso" header="Situação do Pedido"
+                [style]="{width: '170px', 'text-align': 'center'}">
+      </p-column>
+      <p-column field="nomeBeneficiario" header="Nome Beneficiário" [style]="{width: '140px', 'text-align': 'center'}">
+      </p-column>
+      <p-column field="cartaoBeneficiario" header="Cartão Beneficiário"
+                [style]="{width: '120px', 'text-align': 'center'}">
+      </p-column>
+      <p-column field="matriculaTitular" header="Matrícula Titular" [style]="{width: '180px', 'text-align': 'center'}">
+      </p-column>
+      <p-column field="cpfCnpjStr" header="CPF/CNPJ" [style]="{width: '117px', 'text-align': 'center'}">
+      </p-column>
+      <p-column field="nomeRazaoSocial" header="Nome/Razão Social" [style]="{width: '150px', 'text-align': 'center'}">
+      </p-column>
+      <p-footer>
+        {{mensagemPaginacao}}
+      </p-footer> -->
+    </p-table>
+  </div>
+</section>
+<div class="container">
+  <div class="col-xs-12 barra-botoes">
+    <span *ngIf="listaProcessos?.length">
+      <button
+        class="btn clean-btn"
+        title="Download Relatório"
+        (click)="exportarPDFRelatorioAnalitico()"
+      >
+        <span class="fa fa-download fa-fw"></span>Gerar PDF
+      </button>
+      <button
+        class="btn clean-btn"
+        title="Download Relatório"
+        (click)="exportarXLSRelatorioAnalitico()"
+      >
+        <span class="fa fa-download fa-fw"></span>Exportar XLS
+      </button>
+      <button
+        class="btn clean-btn"
+        title="Download Relatório"
+        (click)="exportarCSVRelatorioAnalitico()"
+      >
+        <span class="fa fa-download fa-fw"></span>Exportar CSV
+      </button>
+    </span>
+    <button class="btn back-btn" (click)="retornarConsulta()">
+      <span class="fa fa-reply fa-fw"></span>Voltar
+    </button>
+  </div>
+</div>

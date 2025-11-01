@@ -1,0 +1,705 @@
+@import "/src/assets/sass/colors";
+@import "/src/assets/sass/mixins";
+@import "/src/assets/sass/base";
+
+.ng-tns-c15-12{
+  line-height: unset !important;
+}
+p.uppercase {
+  text-transform: uppercase;
+}
+
+p.titulo {
+  font-family: 'Caixa Std Bold', sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 33px;
+  color: #0065B7;
+  margin: 0 0 16px 0;
+  box-sizing: border-box;
+}
+
+div.resumo-container {
+  max-width: 778px;
+  padding: 16px 8px;
+  background-color: #EFF5F6;
+  margin: 30px auto 0;
+  height: max-content;
+
+  p.titulo {
+    font-family: 'Caixa Std Bold', sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 33px;
+    color: #0065B7;
+    margin: 0 0 16px 0;
+    box-sizing: border-box;
+  }
+
+  p.titulo.margin {
+    margin-top: 40px;
+  }
+
+  div.custom-form-group-input {
+    margin-bottom: 16px;
+    position: relative;
+
+    small.custom-form-group-info {
+      font-family: 'Caixa Std Regular', sans-serif;
+      font-size: 14px;
+      line-height: 16px;
+      color: #969696;
+      position: absolute;
+      left: 0;
+      top: calc(100% + 8px);
+
+      strong {
+        color: #000;
+      }
+    }
+  }
+
+  div.custom-form-group-select {
+    position: relative;
+    width: 100%;
+    max-width: 373px;
+    margin-bottom: 32px;
+
+    span.button-split {
+      width: 1px;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      right: 20px;
+      background-color: #C3C3C3;
+    }
+
+    small.custom-form-group-info {
+      font-family: 'Caixa Std Regular', sans-serif;
+      font-size: 14px;
+      line-height: 16px;
+      color: #969696;
+      position: absolute;
+      left: 0;
+      top: calc(100% + 8px);
+
+      strong {
+        color: #000;
+      }
+    }
+  }
+
+  select,
+  input {
+    border: 1px solid #C3C3C3;
+    box-sizing: border-box;
+    border-radius: 3px;
+    padding: 12px 8px;
+    width: 100%;
+    max-width: 373px;
+  }
+
+  asc-select-uf {
+    width: 98%;
+  }
+
+  asc-select-municipio {
+    width: 98%;
+  }
+
+  p-dropdown {
+    width: 98%;
+  }
+
+  asc-select-estado-civil {
+    width: 98%;
+  }
+
+  div.custom-card {
+    padding: 27px 24px 24px 24px;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    background-color: #fff;
+    border-radius: 3px;
+    position: relative;
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #B3C7CB;
+
+    div.right-grid {
+      width: 100px;
+      margin-left: 36px;
+
+      button.edit-btn {
+        background: #036EC4;
+        border-radius: 3px;
+        border: none;
+        width: 35px;
+        height: 35px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 50%;
+        right: 0;
+
+        &:hover,
+        &:active {
+          background-color: #04589c;
+          transition: 250ms ease-in-out;
+        }
+
+        &:disabled {
+          background-color: #E5E5E5;
+          cursor: not-allowed;
+        }
+
+        em {
+          color: #fff;
+        }
+      }
+    }
+
+    div.left-grid {
+      flex-grow: 1;
+      position: relative;
+
+      button.edit-btn {
+        background: #036EC4;
+        border-radius: 3px;
+        border: none;
+        width: 35px;
+        height: 35px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 50%;
+        right: 0;
+
+        &:hover,
+        &:active {
+          background-color: #04589c;
+          transition: 250ms ease-in-out;
+        }
+
+        em {
+          color: #fff;
+        }
+
+        &.to-bottom {
+          bottom: 0;
+          top: auto;
+        }
+
+        &:disabled {
+          background-color: #E5E5E5;
+          cursor: not-allowed;
+        }
+      }
+
+      button.add-btn {
+        background: #53AA5C;
+        border-radius: 3px;
+        width: 35px;
+        height: 35px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+        border: none;
+
+        &:hover,
+        &:active {
+          background-color: #3c9145;
+          transition: 250ms ease-in-out;
+        }
+
+        &:disabled {
+          background-color: #E5E5E5;
+          cursor: not-allowed;
+        }
+
+        em {
+          color: #fff;
+        }
+      }
+
+      div.procedimento-box {
+        position: relative;
+
+        div.box {
+          width: 100%;
+        }
+
+        div.box-novo-procedimento {
+          margin-top: 14px;
+          padding-top: 14px;
+          max-width: 50em;
+
+        }
+      }
+
+      p.card-header {
+        font-family: 'Caixa Std Bold', sans-serif;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 18px;
+        line-height: 25px;
+        color: #0065B7;
+      }
+
+      p.card-info {
+        font-family: 'Caixa Std Regular', sans-serif;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 18px;
+        line-height: 25px;
+        display: flex;
+        align-items: center;
+        color: #000000;
+        padding: 0;
+        max-width: 90%;
+      }
+
+      div.box:not(:last-child) {
+        margin-bottom: 12px;
+      }
+
+      div.box.box-grid {
+        display: flex;
+        align-items: center;
+
+        div:first-child {
+          width: 45%;
+          padding-right: 8px;
+        }
+
+        &.split-box {
+          padding-bottom: 20px;
+          margin-bottom: 17px;
+          border-bottom: 1px solid #C3C3C3;
+        }
+
+        &.small-box {
+          div:first-child {
+            padding-right: 28px;
+            width: auto;
+          }
+
+        }
+      }
+    }
+
+    p.card-header {
+      font-family: 'Caixa Std Bold', sans-serif;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 18px;
+      line-height: 25px;
+      color: #0065B7;
+    }
+
+    p.card-titulo {
+      font-family: 'Caixa Std Bold', sans-serif;
+      font-size: 16px;
+      line-height: 19px;
+      color: #000000;
+      font-weight: bold;
+    }
+
+    span.card-info {
+      font-family: 'Caixa Std Regular', sans-serif;
+      font-size: 14px;
+      line-height: 16px;
+      color: #000000;
+    }
+
+    p.arquivos-label {
+      font-family: 'Caixa Std Regular', sans-serif;
+      font-size: 14px;
+      line-height: 16px;
+      display: flex;
+      align-items: center;
+      color: #000000;
+      margin-top: 12px;
+      font-weight: bold;
+    }
+
+    div.arquivo-card {
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      padding: 8px;
+      margin: 6.5px 6.5px 6.5px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      p.arquivo-nome {
+        font-family: 'Caixa Std Regular', sans-serif;
+        font-size: 16px;
+        line-height: 19px;
+        display: flex;
+        align-items: center;
+        color: #000000;
+        padding: 0;
+        margin: 0;
+      }
+
+      div.arquivo-actions {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 78px;
+        margin-left: 8px;
+
+        button {
+          width: 35px;
+          height: 35px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border: none;
+          border-radius: 3px;
+
+          em {
+            color: #FFF;
+          }
+
+          &:first-child {
+            background-color: #17A2B8;
+
+            &:hover,
+            &:active {
+              background-color: #0f91a5;
+            }
+          }
+
+          &:last-child {
+            background-color: #DC3545;
+
+            &:hover,
+            &:active {
+              background-color: #bb1c2c;
+            }
+          }
+        }
+      }
+    }
+
+    div.custom-card-footer {
+      padding-top: 10px;
+      border-top: 1px solid rgba(0, 0, 0, 0.12);
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+
+      label {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #53AA5C;
+        border-radius: 3px;
+        padding: 8px 12px;
+        cursor: pointer;
+        transition: 250ms ease-in-out;
+
+        &:hover,
+        &:active {
+          background-color: #368a3f;
+          transition: 250ms ease-in-out;
+        }
+
+        em,
+        span {
+          color: #fff;
+        }
+
+        em {
+          margin-right: 4px;
+        }
+      }
+
+      input {
+        visibility: hidden;
+        position: absolute;
+      }
+    }
+
+    div.right-grid.static {
+      align-self: flex-start;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+  }
+}
+
+div.space-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+div.bottom-bordered {
+  border-bottom: 1px solid #B4B4B4;
+  margin-bottom: 16px;
+}
+
+button.add-btn-plus {
+  background: #53AA5C;
+  border-radius: 3px;
+  width: 35px;
+  height: 35px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+
+  &:hover,
+  &:active {
+    background-color: #3c9145;
+    transition: 250ms ease-in-out;
+  }
+
+  em {
+    color: #fff;
+  }
+
+  &:disabled {
+    background-color: #E5E5E5;
+    cursor: not-allowed;
+  }
+}
+
+div.documentos-box {
+  width: 100%;
+
+  div.documentos-card {
+    padding: 32px 8px 8px 8px;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 3px;
+    position: relative;
+    margin-bottom: 16px;
+
+    div.success-icon-container {
+      display: none;
+      position: absolute;
+      top: 13px;
+      right: 11px;
+
+      em {
+        color: #53AA5C;
+      }
+    }
+
+    &.success {
+      border: 2px solid #53AA5C;
+
+      div.success-icon-container {
+        display: block;
+      }
+    }
+
+    p.card-titulo {
+      font-family: 'Caixa Std Bold', sans-serif;
+      font-size: 16px;
+      line-height: 19px;
+      color: #000000;
+      font-weight: bold;
+    }
+
+    span.card-info {
+      font-family: 'Caixa Std Regular', sans-serif;
+      font-size: 14px;
+      line-height: 16px;
+      color: #000000;
+    }
+
+    p.arquivos-label {
+      font-family: 'Caixa Std Bold', sans-serif;
+      font-size: 14px;
+      line-height: 16px;
+      display: flex;
+      align-items: center;
+      color: #000000;
+      margin-top: 12px;
+      font-weight: bold;
+    }
+
+    div.arquivo-card {
+      border: 1px solid rgba(78, 65, 65, 0.12);
+      padding: 8px;
+      margin: 6.5px 6.5px 6.5px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      p.arquivo-nome {
+        font-family: 'Caixa Std Regular', sans-serif;
+        font-size: 16px;
+        line-height: 19px;
+        display: flex;
+        align-items: center;
+        color: #0000ff;
+        padding: 0 8px 0 0;
+        margin: 0;
+      }
+
+      div.arquivo-actions {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 78px;
+
+        button {
+          width: 35px;
+          height: 35px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border: none;
+          border-radius: 3px;
+
+          em {
+            color: #FFF;
+          }
+
+          &:first-child {
+            background-color: #17A2B8;
+
+            &:hover,
+            &:active {
+              background-color: #0f91a5;
+            }
+          }
+
+          &:last-child {
+            background-color: #DC3545;
+
+            &:hover,
+            &:active {
+              background-color: #bb1c2c;
+            }
+          }
+        }
+      }
+    }
+
+    div.custom-card-footer {
+      padding-top: 10px;
+      border-top: 1px solid rgba(0, 0, 0, 0.12);
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+
+      label {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #53AA5C;
+        border-radius: 3px;
+        padding: 8px 12px;
+        cursor: pointer;
+        transition: 250ms ease-in-out;
+
+        &:hover,
+        &:active {
+          background-color: #368a3f;
+          transition: 250ms ease-in-out;
+        }
+
+        em,
+        span {
+          color: #fff;
+        }
+
+        em {
+          margin-right: 4px;
+        }
+      }
+
+      input {
+        visibility: hidden;
+        position: absolute;
+      }
+    }
+
+  }
+}
+
+div.custom-form-group-select {
+  position: relative;
+  width: 100%;
+  margin-bottom: 32px;
+
+  span.button-split {
+    width: 1px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 20px;
+    background-color: #C3C3C3;
+  }
+}
+
+.box {
+  width: 50%;
+  float: left;
+}
+
+button {
+  justify-content: center;
+  align-items: center;
+  padding: 6.5px 12px;
+  border-radius: 3px;
+  transition: 250ms ease-in-out;
+
+  &.cancel {
+    background-color: #01377F;
+    border: none;
+    margin: 8px 4px;
+
+    span {
+      color: #fff;
+    }
+
+    &:hover,
+    &:active,
+    &:focus {
+      background-color: #01377F;
+      transition: 250ms ease-in-out;
+
+      span {
+        color: #fff;
+        transition: 250ms ease-in-out;
+      }
+    }
+  }
+
+  &.save {
+    background-color: #f39200;
+    border: none;
+    margin: 8px 4px;
+
+    span {
+      color: #fff;
+    }
+
+    &:not(:disabled) {
+      &:hover,
+      &:focus,
+      &:active {
+        background-color: #db6e00;
+        transition: 250ms ease-in-out;
+      }
+    }
+
+    &:disabled {
+      background-color: #dadada;
+    }
+  }
+}

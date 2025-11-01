@@ -1,0 +1,18 @@
+@import "/src/assets/sass/colors";
+@import "/src/assets/sass/mixins";
+
+.procedimento-box-content {
+    &:not(:first-of-type) {
+        border-top: 1px solid #B3C7CB;
+        padding-top: 0.5em;
+    }
+}
+
+.group-content {
+    margin-bottom: 1em;
+}
+
+.align-right {
+    display: flex;
+    justify-content: flex-end;
+}

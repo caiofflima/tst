@@ -1,0 +1,77 @@
+<section class="row container-fluid">
+
+  <p-tabView>
+
+    <!-- ----- PROCEDIMENTOS ----- -->
+    <p-tabPanel header="Painel Reembolso 1">
+      <div class="row col-md-12">
+        <h4>Painel Reembolso 1</h4>
+      </div>
+
+    </p-tabPanel>
+
+    <!-- ----- PROFISSIONAL ----- -->
+    <p-tabPanel header="Painel Reembolso 2">
+      <div class="row col-md-12">
+        <h4>Painel Reembolso 2</h4>
+      </div>
+    </p-tabPanel>
+
+    <!-- ----- DOCUMENTOS ----- -->
+    <p-tabPanel header="Painel Reembolso 3">
+      <div class="row col-md-12">
+        <h4>Painel Reembolso 3</h4>
+      </div>
+    </p-tabPanel>
+
+    <!-- ----- REEMBOLSO ----- -->
+    <p-tabPanel header="Reembolso">
+      <div class="row col-md-12">
+        <h4>Reembolso Consulta</h4>
+      </div>
+
+      <div class="row col-md-12">
+        <h4>Reembolso Medicamentos</h4>
+      </div>
+
+      <div class="row col-md-12">
+        <h4>Reembolso Assistencial e Odontológico</h4>
+      </div>
+
+      <div class="row col-md-12">
+        <h4>Reembolso Vacinas</h4>
+      </div>
+    </p-tabPanel>
+
+    <!-- ----- HISTORICO ----- -->
+    <p-tabPanel header="Histórico">
+      <div class="row col-md-9">
+        <h4>Histórico do Pedido</h4>
+      </div>
+
+    </p-tabPanel>
+
+  </p-tabView>
+
+  <div class="row col-xs-12">
+    <div class="clearfix fim-tab"></div>
+  </div>
+
+  <div class="col-xs-12 barra-botoes">
+    <button class="btn btn-primary">
+      <span class="fa fa-save fa-fw"></span> Salvar Pedido
+    </button>
+    <button class="btn btn-primary">
+      <span class="fa fa-keyboard-o fa-fw"></span> Restaurar Campos
+    </button>
+    <button class="btn btn-primary" (click)="analisarProcessos()">
+      <span class="fa fa-check fa-fw"></span> Analisar Pedido
+    </button>
+    <button class="btn btn-info" (click)="novoProcedimento()">
+      <span class="fa fa-plus fa-fw"></span> Novo Procedimento
+    </button>
+    <button class="btn btn-info" (click)="voltarProcessos()">
+      <span class="fa fa-reply fa-fw"></span> Voltar
+    </button>
+  </div>
+</section>

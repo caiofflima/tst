@@ -1,0 +1,10 @@
+<div [ngClass]="{'gray-line':hasAfterContent, 'no-spacing':noSpacing, 'c-card':true}" class="c-card conteudo-spacing">
+  <span *ngIf="hasAfterContent" class="orange-ball"></span>
+  <ng-content select="asc-card-title"></ng-content>
+  <div class="content-box no-top">
+    <ng-content select="asc-card-content"></ng-content>
+  </div>
+  <div class="footer-card">
+    <ng-content select="asc-card-footer"></ng-content>
+  </div>
+</div>

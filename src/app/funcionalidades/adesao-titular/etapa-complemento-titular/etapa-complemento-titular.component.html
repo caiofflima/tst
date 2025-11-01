@@ -1,0 +1,152 @@
+<form [formGroup]="formularioComplemento">
+  <div class="solicitacao-container">
+    <div class="form-row">
+      <div class="col-md-12 no-padding-left">
+        <p class="titulo">Cadastro de dados Complementares</p>
+      </div>
+    </div>
+
+    <div class="d-flex">
+      <div class="col-md-6 p-0">
+        <div class="col-md-12 mb-15 no-padding-left">
+          <asc-input-text
+            [control]="formularioComplemento.get('rg')"
+            inputId="rg"
+            label="Número Documento de Identidade"
+            [required]="rgRequired"
+            [somenteLetrasMaiusculas]="'true'"
+            [somenteAlfaNumericos]="true"
+            autocomplete="off"
+            [index]="1"
+            [maxlength]="12"
+          ></asc-input-text>
+        </div>
+
+        <div class="col-md-12 mb-15 no-padding-left">
+          <div class="col-md-12 mb-15 p-0">
+            <asc-input-text
+              [somenteLetrasMaiusculas]="'true'"
+              [control]="formularioComplemento.get('orgaoEmissor')"
+              inputId="orgaoEmissor"
+              label="Órgão emissor"
+              [required]="rgRequired"
+              [[index]]="2"
+              [maxlength]="6"
+            ></asc-input-text>
+          </div>
+
+          <div class="col-md-12 mb-15 p-0">
+            <asc-input-date
+              [control]="formularioComplemento.get('dataExpedicaoRg')"
+              inputId="dataExpedicaoRg"
+              label="Data de expedição"
+              [required]="rgRequired"
+              [index]="3"
+            >
+              <asc-input-error
+                nomeErro="dataMenorIgualAtual"
+                msgErro="Data de expedição deve ser menor ou igual à data atual."
+              ></asc-input-error>
+            </asc-input-date>
+          </div>
+
+          <div class="col-md-12 mb-15 p-0">
+            <asc-select-uf
+              (dadoSelecionado)="ufSelecionado($event)"
+              label="UF Naturalidade"
+              [control]="formularioComplemento.get('estado')"
+              [index]="4"
+            >
+            </asc-select-uf>
+          </div>
+
+          <div class="col-md-12 mb-15 p-0">
+            <asc-select-municipio
+              label="Município Naturalidade"
+              [parametro]="{
+                idMunicipio: formularioComplemento.get('estado').value
+              }"
+              [index]="5"
+              [control]="formularioComplemento.get('municipio')"
+              (dadoSelecionado)="selectMunicipio($event)"
+              [required]="formularioComplemento.get('estado').value"
+            >
+            </asc-select-municipio>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 p-0">
+        <asc-dropdown
+          [control]="formularioComplemento.get('idTipoDeficiencia')"
+          [items]="tipoDeficiencias"
+          label="Pessoa com deficiência?"
+          (selected)="tipoDeficienciaSelecionado($event)"
+          [index]="6"
+          class="mb-15"
+          [required]="complementoRequired"
+        >
+        </asc-dropdown>
+
+        <div class="col-md-12 mb-15 p-0">
+          <asc-input-text
+            [control]="formularioComplemento.get('cartaoNacionalSaude')"
+            inputId="cartaoNacionalSaude"
+            [maxlength]="20"
+            [somenteNumeros]="true"
+            label="Cartão Nacional de Saúde"
+            [index]="7"
+          >
+          </asc-input-text>
+        </div>
+
+        <div class="col-md-12 mb-15 p-0">
+          <label class="control-label"></label>
+          <asc-input-text
+            [control]="formularioComplemento.get('cartaoUnimed')"
+            inputId="cartaoUnimed"
+            [maxlength]="30"
+            [somenteNumeros]="true"
+            label="Número Cartão UNIMED (caso haja convênio local)"
+            [index]="8"
+          >
+          </asc-input-text>
+        </div>
+
+        <div class="col-md-12 mb-15 p-0">
+          <asc-input-money-type
+            [control]="formularioComplemento.get('renda')"
+            inputId="renda"
+            label="Valor renda"
+            [index]="9"
+          >
+          </asc-input-money-type>
+        </div>
+
+        <div class="col-md-12 mb-15 p-0">
+          <asc-input-text
+            [control]="formularioComplemento.get('emailDependente')"
+            inputId="emailDependente"
+            label="E-mail"
+          ></asc-input-text>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <asc-button-secondary
+      buttonId="voltar"
+      (onClick)="previousStep($event)"
+      title="Voltar"
+    ></asc-button-secondary>
+
+    <asc-button-primary
+      buttonId="continuar"
+      title="Continuar"
+      [disabled]="formularioComplemento.invalid"
+      [showProgress]="showProgress"
+      (onClick)="onSubmit()"
+    ></asc-button-primary>
+  </div>
+</form>

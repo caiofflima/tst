@@ -1,0 +1,60 @@
+$cor-dias: #337ab7;
+$cor-dias-atraso: #d61010c2;
+
+
+%prazo {
+   margin: 0; 
+   padding: 0;
+   border: 0px;
+   float: left;
+   font-family: Helvetica,Arial,sans-serif;
+   font-size: 1em;   
+}
+
+%prazo-dias {
+   @extend %prazo;      
+   color: #ffffff;
+   text-align: center;   
+}
+
+.progress-container {
+   margin: 0; 
+   padding: 0;
+   border: 1px solid #D5D5D5;
+   border-radius: 3px;
+   overflow: hidden;
+   min-width: 286px;
+}
+
+.progress-container-texto {
+   margin: 0; 
+   padding: 0;
+   overflow: hidden;
+   min-width: 286px;
+}
+
+.prazo-dias {
+   @extend %prazo-dias;
+   background-color: $cor-dias;
+}
+
+.prazo-dias-atraso {
+   @extend %prazo-dias;
+   background-color: $cor-dias-atraso;
+}
+
+.prazo-texto {
+   @extend %prazo;
+   color : $cor-dias;
+}
+.prazo-texto-atraso {
+   @extend %prazo;
+   color : $cor-dias-atraso;
+   text-align: right;
+}
+
+label {
+   font-weight: unset;
+}
+
+//style="width:100%;  "

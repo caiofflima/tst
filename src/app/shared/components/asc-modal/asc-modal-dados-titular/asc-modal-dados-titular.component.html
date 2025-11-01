@@ -1,0 +1,31 @@
+<asc-modal [width]="370" [openModal]="showModal" (closeModal)="fecharModal()">
+  <asc-modal-header>
+    Dados do titular
+  </asc-modal-header>
+  <asc-modal-body style="width:100%">
+    <div class="content-box-titulo">{{beneficiario?.nome}}</div>
+    <section>
+      <div>
+        <span class="label-campo-card">Matricula</span>
+        <p>{{beneficiario?.matriculaFuncional}}</p>
+      </div>
+      <div>
+        <span class="label-campo-card">Cartão</span>
+        <p>{{beneficiario?.codigoAntigo}}</p>
+      </div>
+      <div>
+        <span class="label-campo-card">E-mail</span>
+        <p>{{beneficiario?.email}}</p>
+      </div>
+    </section>
+    <section>
+      <div class="titulo-card">Dependentes ativos:</div>
+      <div *ngFor="let b of beneficiario?.dependentes">
+        <p>
+          <span class="label-campo-card">{{b.nome}}</span><br/>
+          {{b.contratoTpdep?.tipoDependente?.descricao}} - {{b.codigoAntigo}}
+        </p>
+      </div>
+    </section>
+  </asc-modal-body>
+</asc-modal>

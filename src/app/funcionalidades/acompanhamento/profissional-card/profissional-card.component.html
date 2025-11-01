@@ -1,0 +1,44 @@
+<section class="ui-g">
+  <div class="ui-g-11 ui-md-11 ui-sm-10 no-padding">
+    <p class="titulo-card">Profissional solicitante</p>
+
+    <div class="ui-g">
+      <div class="ui-g-6 ui-md-6 ui-sm-6">
+        <p class="label-campo-card">Conselho Profissional</p>
+        <p class="campo-card">{{profissional?.conselho}}</p>
+      </div>
+      <div class="ui-g-6 ui-md-6 ui-sm-6">
+        <p class="label-campo-card">CPF/CNPJ</p>
+        <p class="campo-card">{{profissional?.cpfCnpj}}</p>
+      </div>
+      <div class="ui-g-6 ui-md-6 ui-sm-6">
+        <p class="label-campo-card">Número do conselho</p>
+        <p class="campo-card">{{profissional?.conselhoNum}}</p>
+      </div>
+      <div class="ui-g-6 ui-md-6 ui-sm-6">
+        <p class="label-campo-card">Nome ou razão social</p>
+        <p class="campo-card">{{profissional?.nome}}</p>
+      </div>
+      <div class="ui-g-6 ui-md-6 ui-sm-6">
+        <p class="label-campo-card">UF do conselho</p>
+        <p class="campo-card">{{profissional?.conselhoUf}}</p>
+      </div>
+      <div class="ui-g-6 ui-md-6 ui-sm-6">
+        <div class="ui-g">
+          <div class="ui-g-4 ui-md-4 ui-sm-4 no-padding">
+            <p class="label-campo-card">UF</p>
+            <p class="campo-card">{{profissional?.uf}}</p>
+          </div>
+          <div class="ui-g-8 ui-md-8 ui-sm-8 no-padding">
+            <p class="label-campo-card">Municipio</p>
+            <p class="campo-card">{{profissional?.municipio}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ui-sm-2 align-right">
+    <button class="btn-editar"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+  </div>
+</section>

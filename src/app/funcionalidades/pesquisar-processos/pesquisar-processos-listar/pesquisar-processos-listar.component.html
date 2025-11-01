@@ -1,0 +1,182 @@
+<!-- Page Header-->
+<div class="col-md-12 breadcrumb-header">
+  <ul class="breadcrumb">
+    <li><span routerLink="/" class="voltar"><i class="fa fa-arrow-left" aria-hidden="true"></i>Voltar</span></li>
+    <a routerLink="/home">Início</a>
+    <i class="fa fa-chevron-right"></i>
+    Administra&ccedil;&atilde;o
+    <i class="fa fa-chevron-right"></i>
+    <a routerLink="/manutencao/consulta/pedidos">Consultar Pedidos b</a>
+    <i class="fa fa-chevron-right"></i>
+    <a routerLink="/manutencao/consulta/pedidos/lista">Resultado da Consulta</a>
+  </ul>
+</div>
+
+<header class="page-header">
+  <div class="container-fluid">
+    <h2 class="no-margin-bottom">Consulta de Pedidos</h2>
+  </div>
+</header>
+<!-- Page Header-->
+
+<section class="row container-fluid">
+  <div class="row col-md-6 coluna-interna">
+    <div class="row col-md-12">
+      <h4>Dados dos Pedidos</h4>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div class="row col-md-6" *ngIf="filtro && filtro.idPedido">
+      <label class="control-label" for="numeroProcesso">Pedido</label>
+      <p class="marginBottom">{{filtro?.idPedido}}</p>
+    </div>
+
+    <div class="row col-md-6" *ngIf="filtro.condicaoProcesso && filtro.condicaoProcesso.value">
+      <label class="control-label" for="condicaoProcesso">Condição do Pedido</label>
+      <p *ngIf="filtro.condicaoProcesso && filtro.condicaoProcesso.value">{{filtro.condicaoProcesso.label}}</p>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div class="row col-xs-6" *ngIf="filtro.tiposProcesso && !(filtro.tiposProcesso.length == 0)">
+      <label class="control-label" for="tipoProcesso">Tipo de Pedido</label>
+      <p *ngFor="let tipoProcesso of filtro.tiposProcesso">{{tipoProcesso.label}}</p>
+    </div>
+
+    <div class="row col-xs-6" *ngIf="filtro.situacoesProcesso && !(filtro.situacoesProcesso.length == 0)">
+      <label class="control-label" for="situacaoProcesso">Situação do Pedido</label>
+      <p *ngFor="let situacaoProcesso of filtro.situacoesProcesso">{{situacaoProcesso.label}}</p>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div class="row col-xs-2" *ngIf="filtro.ufsProcesso && !(filtro.ufsProcesso.length == 0)">
+      <label class="control-label" for="uf">UF</label>
+      <p *ngFor="let uf of filtro.ufsProcesso">{{uf.value}}</p>
+    </div>
+
+    <div class="row col-xs-4" *ngIf="filtro.filiaisProcesso && !(filtro.filiaisProcesso.length == 0)">
+      <label class="control-label" for="filial">Agrupadora</label>
+      <p *ngFor="let filial of filtro.filiaisProcesso">{{filial.label}}</p>
+    </div>
+
+    <div class="row col-xs-2" *ngIf="filtro.ufAtendimento && filtro.ufAtendimento.value">
+      <label class="control-label" for="uf">UF do Atendimento</label>
+      <p *ngIf="filtro.ufAtendimento && filtro.ufAtendimento.value">{{filtro.ufAtendimento.label}}</p>
+    </div>
+
+    <div class="row col-xs-4" *ngIf="filtro.municipioAtendimento && filtro.municipioAtendimento.value">
+      <label class="control-label" for="municipioA">Município do Atendimento</label>
+      <p id="municipioA"
+         *ngIf="filtro.municipioAtendimento && filtro.municipioAtendimento.value">{{filtro.municipioAtendimento.label}}</p>
+    </div>
+  </div>
+
+  <div class="row col-md-6 coluna-interna">
+    <div class="row col-md-12">
+      <h4>Dados do Titular/Beneficiários</h4>
+    </div>
+
+    <div class="row col-xs-8" *ngIf="filtro.tiposBeneficiario && !(filtro.tiposBeneficiario.length == 0)">
+      <label class="control-label" for="tipoBeneficiario">Tipo de Beneficiário</label>
+      <p *ngFor="let tipoBeneficiario of filtro.tiposBeneficiario">{{tipoBeneficiario.label}}</p>
+    </div>
+
+    <div class="row col-md-4" *ngIf="filtro.matriculaTitular">
+      <label class="control-label" for="matriculaTitular">Matrícula do Titular</label>
+      <p>{{filtro.matriculaTitular}}</p>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div class="row col-md-4" *ngIf="filtro.numeroCartao">
+      <label class="control-label" for="codigoBeneficiario">Código do Beneficiário</label>
+      <p id="codigoBeneficiario">{{filtro.numeroCartao}}</p>
+    </div>
+
+    <div class="row col-md-8" *ngIf="filtro.nomeBeneficiario">
+      <label class="control-label" for="nomeBeneficiario">Nome do Beneficiário</label>
+      <p>{{filtro.nomeBeneficiario}}</p>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div class="row col-xs-4" *ngIf="filtro.caraterSolicitacao && filtro.caraterSolicitacao.label">
+      <label class="control-label" for="caraterSolicitacao">Caráter da Solicitação</label>
+      <p *ngIf="filtro.caraterSolicitacao && filtro.caraterSolicitacao.label">{{filtro.caraterSolicitacao.label}}</p>
+    </div>
+
+    <div class="row col-md-4" *ngIf="filtro.matriculaUltimoUsuario">
+      <label class="control-label" for="codigoUsuario">Último Usuário</label>
+      <p>{{filtro.matriculaUltimoUsuario}}</p>
+    </div>
+  </div>
+
+  <div class="clearfix"></div>
+
+  <div class="row col-md-9">
+    <h4>Resultado da Consulta</h4>
+  </div>
+
+  <div class="row col-xs-3 floatRight" style="padding:4px 10px; border-bottom: 0 none">
+    <input #gb type="text" class="form-control filtro" size="50" placeholder="Digite para filtrar resultado">
+  </div>
+
+  <div class="clearfix"></div>
+
+  <div class="row col-md-12">
+    <p-dataTable emptyMessage="{{bundle('MA003')}}" [value]="listaProcessos" [paginator]="true" [rows]="rowCounter"
+                 [globalFilter]="gb"
+                 [rowsPerPageOptions]="[5,10,20]" [totalRecords]="listaProcessos.length" (onPage)="onPageChange($event)"
+                 class="table table-striped table-sm table-hover" #dt>
+      <p-column field="idPedido" header="Pedido" [sortable]="true">
+        <ng-template let-col let-row="rowData" pTemplate="body">
+          {{row[col.field] | processo}}
+        </ng-template>
+      </p-column>
+      <p-column header="Tipo de Pedido">
+        <ng-template let-row="rowData" pTemplate="content">
+          <span title="{{row.descTipoProcesso}}">{{row.codTipoProcesso}}</span>
+        </ng-template>
+      </p-column>
+      <p-column header="Tipo de Beneficiário">
+        <ng-template let-row="rowData" pTemplate="body">
+          <span title="{{row.descTipoBeneficiario}}">{{row.abrevTipoBeneficiario}}</span>
+        </ng-template>
+      </p-column>
+
+      <p-column header="Agrupadora" field="idFilial">
+
+      </p-column>
+      <p-column field="descBeneficiario" header="Beneficiário"></p-column>
+      <p-column field="descSituacaoPedido" header="Situação Atual"></p-column>
+      <p-column field="dataUltimaAlteracao" header="Data e Hora">
+        <ng-template let-col let-row="rowData" pTemplate="body">
+          {{row[col.field] | date : 'dd/MM/yyyy HH:mm:ss'}}
+        </ng-template>
+      </p-column>
+      <p-column field="matriculaUltimoUsuario" header="Último Usuário">
+        <ng-template let-col let-row="rowData" pTemplate="body">
+          {{row[col.field]}}
+        </ng-template>
+      </p-column>
+      <p-column field="id" header="Ação">
+        <ng-template let-col let-row="rowData" pTemplate="content">
+          <button class="btn btn-info" title="Acessar Pedido" (click)="detalharProcesso(row)">
+            <span class="fa fa-archive fa-fw"></span>
+          </button>
+        </ng-template>
+      </p-column>
+      <p-footer>
+        {{mensagemPaginacao}}
+      </p-footer>
+    </p-dataTable>
+  </div>
+
+  <div class="col-xs-12 barra-botoes">
+    <button class="btn btn-info" (click)="retornarConsulta()">
+      <span class="fa fa-reply fa-fw"></span>Voltar
+    </button>
+  </div>
+</section>

@@ -1,0 +1,175 @@
+<section>
+  <div class="container">
+    <div class="col-md-12 breadcrumb-header">
+      <ul class="breadcrumb">
+        <li>
+          <span (click)="voltar()" class="voltar"
+            ><i class="fa fa-arrow-left" aria-hidden="true"></i>Voltar</span
+          >
+        </li>
+        <a routerLink="/home">Início</a>
+        <em class="fa fa-chevron-right"></em>
+        Meus dados
+        <em class="fa fa-chevron-right"></em>
+        Meus pedidos
+      </ul>
+    </div>
+
+    <p class="title-section">Meus pedidos</p>
+
+    <div class="container-search-section" style="padding: 0 0 0 2em">
+      <p class="info-search-label">Selecione o pedido que deseja acompanhar</p>
+      <asc-input-button
+        [control]="filtroRapido"
+        (keyup)="filtroEvent()"
+      ></asc-input-button>
+    </div>
+    <div *ngIf="isLoading">
+      <div
+        class="modal-list"
+        id="loading-modal-list"
+        role="dialog"
+        data-backdrop="false"
+        data-keyboard="false"
+        style="z-index: 999999"
+      >
+        <div class="backdrop"></div>
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-body">
+              <div class="text-center">
+                <em class="fa fa-spinner fa-spin fa-3x"></em>
+                <span class="loadingText"></span>
+                <h4>Carregando...</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="div-message" *ngIf="mensagemResultadoConsultaPedidos !== null">
+      <span
+        ><b>{{ mensagemResultadoConsultaPedidos }}</b></span
+      >
+    </div>
+
+    <div *ngIf="mensagemResultadoConsultaPedidos === null" class="main-section">
+      <nav class="header-container">
+        <p class="s-1 label-header" (click)="ordenarListaPorCampo('idPedido')">
+          Pedido
+          <i
+            class="fa"
+            [ngClass]="{
+              'fa-sort': !isSorted('idPedido'),
+              'fa-sort-asc': isSorted('idPedido', 'asc'),
+              'fa-sort-desc': isSorted('idPedido', 'desc')
+            }"
+          ></i>
+        </p>
+        <p
+          class="s-2 label-header"
+          (click)="ordenarListaPorCampo('codTipoProcesso')"
+        >
+          Tipo de<br />pedido
+          <i
+            class="fa"
+            [ngClass]="{
+              'fa-sort': !isSorted('codTipoProcesso'),
+              'fa-sort-asc': isSorted('codTipoProcesso', 'asc'),
+              'fa-sort-desc': isSorted('codTipoProcesso', 'desc')
+            }"
+          ></i>
+        </p>
+        <p
+          class="s-3 label-header"
+          (click)="ordenarListaPorCampo('descTipoBeneficiario')"
+        >
+          Tipo de beneficiário
+          <i
+            class="fa"
+            [ngClass]="{
+              'fa-sort': !isSorted('descTipoBeneficiario'),
+              'fa-sort-asc': isSorted('descTipoBeneficiario', 'asc'),
+              'fa-sort-desc': isSorted('descTipoBeneficiario', 'desc')
+            }"
+          ></i>
+        </p>
+        <p class="s-4 label-header" (click)="ordenarListaPorCampo('filial')">
+          Agrupadora
+          <i
+            class="fa"
+            [ngClass]="{
+              'fa-sort': !isSorted('filial'),
+              'fa-sort-asc': isSorted('filial', 'asc'),
+              'fa-sort-desc': isSorted('filial', 'desc')
+            }"
+          ></i>
+        </p>
+        <p
+          class="s-5 label-header"
+          (click)="ordenarListaPorCampo('descBeneficiario')"
+        >
+          Beneficiário
+          <i
+            class="fa"
+            [ngClass]="{
+              'fa-sort': !isSorted('descBeneficiario'),
+              'fa-sort-asc': isSorted('descBeneficiario', 'asc'),
+              'fa-sort-desc': isSorted('descBeneficiario', 'desc')
+            }"
+          ></i>
+        </p>
+        <p
+          class="s-6 label-header"
+          (click)="ordenarListaPorCampo('descSituacaoPedido')"
+        >
+          Situação Atual
+          <i
+            class="fa"
+            [ngClass]="{
+              'fa-sort': !isSorted('descSituacaoPedido'),
+              'fa-sort-asc': isSorted('descSituacaoPedido', 'asc'),
+              'fa-sort-desc': isSorted('descSituacaoPedido', 'desc')
+            }"
+          ></i>
+        </p>
+        <p class="s-7 label-header"></p>
+        <p
+          class="s-8 label-header"
+          (click)="ordenarListaPorCampo('dataUltimaAlteracao')"
+        >
+          Última atualização
+          <i
+            class="fa"
+            [ngClass]="{
+              'fa-sort': !isSorted('dataUltimaAlteracao'),
+              'fa-sort-asc': isSorted('dataUltimaAlteracao', 'asc'),
+              'fa-sort-desc': isSorted('dataUltimaAlteracao', 'desc')
+            }"
+          ></i>
+        </p>
+      </nav>
+
+      <div
+        (click)="detalharProcesso(processo)"
+        *ngFor="let processo of processosBeneficiario"
+      >
+        <asc-card-listagem-processo-pl
+          [processo]="processo"
+        ></asc-card-listagem-processo-pl>
+      </div>
+    </div>
+    <div class="footer-pagination-desktop">
+      <p-paginator
+        #paginator
+        styleClass="custom-paginator"
+        (onPageChange)="onChangePaginator($event)"
+        [rows]="rows"
+        [totalRecords]="total"
+        [pageLinkSize]="3"
+      >
+      </p-paginator>
+    </div>
+  </div>
+</section>

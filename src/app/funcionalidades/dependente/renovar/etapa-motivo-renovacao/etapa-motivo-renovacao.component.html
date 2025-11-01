@@ -1,0 +1,186 @@
+<form [formGroup]="formularioSolicitacao">
+  <div class="solicitacao-container">
+    <div class="form-row">
+      <div class="col-md-12 no-padding">
+        <p class="titulo">
+          Vamos começar! Precisamos saber qual dependente deseja renovar.
+        </p>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="row">
+        <div class="col-md-6 no-padding-left">
+          <asc-select-beneficiario-renovacao
+            [uppercase]="true"
+            selectId="beneficiario"
+            id="dependente"
+            [matricula]="matricula"
+            label="Beneficiário"
+            [required]="true"
+            [titular]="false"
+            [control]="formularioSolicitacao.get('dependente')"
+            [idBeneficiarioModel]="idBeneficiarioModel"
+            (dadoSelecionado)="beneficiarioSelecionado($event)"
+          >
+          </asc-select-beneficiario-renovacao>
+        </div>
+      </div>
+      <div *ngIf="formularioSolicitacao.get('dependente').value">
+        <div class="form-group col-md-12 no-padding-left">
+          <div class="ui-g-6 no-padding">
+            <div class="custom-form-group-input">
+              <label class="control-label">Nome completo</label>
+              <p class="uppercase">{{ beneficiario?.nome }}</p>
+            </div>
+          </div>
+          <div class="ui-g-6 no-padding">
+            <div class="custom-form-group-input">
+              <label class="control-label">Código do beneficiário</label><br />
+              <p>{{ beneficiario?.codigoBeneficiario }}</p>
+            </div>
+          </div>
+          <div class="ui-g-6 no-padding">
+            <div class="custom-form-group-input">
+              <label class="control-label">Tipo do beneficiário</label><br />
+              <p class="uppercase">
+                {{ beneficiario?.contratoTpdep.tipoDependente.descricao }}
+              </p>
+            </div>
+          </div>
+          <div class="ui-g-6 no-padding">
+            <div class="custom-form-group-input">
+              <label class="control-label">Data de Nascimento</label><br />
+              <p>
+                {{
+                  beneficiario?.matricula.dataNascimento | date : "dd/MM/yyyy"
+                }}
+              </p>
+            </div>
+          </div>
+          <div class="ui-g-6 no-padding">
+            <div class="custom-form-group-input">
+              <label class="control-label">Sexo</label><br />
+              <p>
+                {{
+                  beneficiario?.matricula.sexo === "M"
+                    ? "MASCULINO"
+                    : beneficiario?.matricula.sexo === "F"
+                    ? "FEMININO"
+                    : ""
+                }}
+              </p>
+            </div>
+          </div>
+          <div class="ui-g-6 no-padding">
+            <div class="custom-form-group-input">
+              <label class="control-label">Nome da mãe</label><br />
+              <p class="uppercase">{{ beneficiario?.matricula.nomeMae }}</p>
+            </div>
+          </div>
+          <div class="ui-g-6 no-padding">
+            <div class="custom-form-group-input">
+              <label class="control-label">Término da vigência do plano</label
+              ><br />
+              <p>
+                {{
+                  beneficiario?.cartaoIdentificacaoAtual?.dataFinalValidade
+                    | date : "dd/MM/yyyy"
+                    | campoVazioHifen
+                }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 no-padding-left" @fadeInOut>
+          <asc-select-finalidade
+            [uppercase]="true"
+            selectId="idMotivoSolicitacao"
+            label="Motivo da renovação"
+            [required]="true"
+            [idTipoProcessoAndIdBeneficiario]="{
+              idTipoProcesso: TIPO_PROCESSO,
+              idBeneficiario: idBeneficiario
+            }"
+            [tipoAcao]="CARREGAR_POR_TIPO_PROCESSO"
+            [control]="formularioSolicitacao.get('idMotivoSolicitacao')"
+            (dadoSelecionado)="motivoSolicitacaoSelecionado($event)"
+          ></asc-select-finalidade>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 no-padding-left" @fadeInOut>
+          <asc-select-tipo-dependente
+            [uppercase]="true"
+            id="idTipoDependente"
+            [inclusao]="false"
+            [parametro]="{ id: formularioSolicitacao.get('dependente').value }"
+            [control]="formularioSolicitacao.get('idTipoDependente')"
+            [required]="true"
+            label="Tipo de Beneficiário"
+            (dadoSelecionado)="tipoDependenteSelecionado($event)"
+          >
+          </asc-select-tipo-dependente>
+        </div>
+      </div>
+      <div class="custom-size">
+        <div class="col-md-6 no-padding-left">
+          <label class="control-label" [hidden]="!showMatricula"
+            >Matrícula Titular</label
+          >
+          <asc-input-text
+            [control]="formularioSolicitacao.get('matricula')"
+            inputId="matricula"
+            label=""
+            [hidden]="!showMatricula"
+            maskName="matriculaMask"
+            [required]="showMatricula"
+          ></asc-input-text>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-12 no-padding-left">
+      <p class="titulo">
+        Você gostaria de informar um contato adicional para recebimento das
+        notificações do seu pedido?
+      </p>
+    </div>
+
+    <div class="col-md-6 no-padding-left mb-15">
+      <label class="control-label">E-mail <small>Opcional</small></label>
+      <asc-input-text
+        [control]="formularioSolicitacao.get('email')"
+        inputId="email"
+        label=""
+      ></asc-input-text>
+    </div>
+
+    <div class="col-md-6 no-padding-left">
+      <label class="control-label">Telefone <small>Opcional</small></label>
+      <asc-input-telefone
+        [control]="formularioSolicitacao.get('celular')"
+        inputId="telefone"
+        label=""
+      ></asc-input-telefone>
+    </div>
+  </div>
+
+  <div class="footer">
+    <asc-button-secondary
+      buttonId="voltar"
+      [routerLink]="routerLinkToBack"
+      title="Voltar"
+    ></asc-button-secondary>
+
+    <asc-button-primary
+      buttonId="continuar"
+      title="Continuar"
+      [disabled]="formularioValido()"
+      [showProgress]="showProgress"
+      (onClick)="onSubmit()"
+    ></asc-button-primary>
+  </div>
+</form>

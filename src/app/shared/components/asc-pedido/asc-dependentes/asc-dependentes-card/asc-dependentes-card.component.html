@@ -1,0 +1,288 @@
+<section>
+    <div class="ui-sm-2 card-flt-mr">
+        <button
+                class="btn-editar"
+                *ngIf="permissoes?.editar"
+                (click)="clickAlerarDados(true)"
+                [disabled]="modoEdicao">
+            <i class="fa fa-pencil" aria-hidden="true"></i>
+        </button>
+    </div>
+    <label class="titulo-card">Dados do dependente</label>
+    <div class="ui-g marginBottom">
+        <div class="ui-g-12 no-padding">
+            <label class="sub-titulo">Dados básicos</label>
+        </div>
+        <div class="ui-g-4 no-padding-left">
+            <div *ngIf="!modoEdicao || !permissoes?.analisar">
+                <label class="label-campo-card">Nome completo</label>
+                <p>{{dependente?.nomeDependente | campoVazioHifen }}</p>
+            </div>
+            <p *ngIf="modoEdicao && permissoes?.analisar">
+                <asc-input-text
+                        [required]="true"
+                        label="Nome completo"
+                        [maxlength]="150"
+                        id="nomeDependente"
+                        [control]="nomeDependente"
+                ></asc-input-text>
+            </p>
+        </div>
+        <div class="ui-g-8 padding">
+            <label class="label-campo-card">Tipo de beneficiário</label>
+            <p>{{tipoBeneficiario | campoVazioHifen }}</p>
+        </div>
+        <div class="ui-g-4 no-padding-left">
+            <div *ngIf="!modoEdicao || !permissoes?.analisar">
+                <label class="label-campo-card">Data de nascimento</label>
+                <p>{{dependente?.dataNascimento | date: 'dd/MM/yyyy' | campoVazioHifen }}</p>
+            </div>
+            <p *ngIf="modoEdicao && permissoes?.analisar">
+                <asc-input-date
+                        [required]="true"
+                        label="Data de nascimento"
+                        id="dataNascimento"
+                        (change)="validDataNascimento()"
+                        [control]="dataNascimento">
+                    <asc-input-error
+                            nomeErro="dataMenorIgualAtual"
+                            msgErro="O valor da data de nascimento não pode ser superior a data de hoje."
+                    ></asc-input-error>
+                </asc-input-date>
+            </p>
+        </div>
+        <div class="ui-g-8 padding">
+            <div *ngIf="!modoEdicao || !permissoes?.analisar">
+                <label class="label-campo-card">Nome da mãe</label>
+                <p>{{dependente?.nomeMaeDependente | campoVazioHifen }}</p>
+            </div>
+            <p *ngIf="modoEdicao && permissoes?.analisar">
+                <asc-input-text
+                        [required]="true"
+                        label="Nome da mãe"
+                        [maxlength]="150"
+                        id="nomeMaeDependente"
+                        [control]="nomeMaeDependente"
+                ></asc-input-text>
+            </p>
+        </div>
+        <div class="ui-g-4 no-padding-left">
+            <div *ngIf="!modoEdicao || !permissoes?.analisar">
+                <label class="label-campo-card">Sexo</label>
+                <p>{{getDescricaoSexo(dependente?.sexoDependente) | campoVazioHifen }}</p>
+            </div>
+            <p *ngIf="modoEdicao && permissoes?.analisar">
+                <asc-dropdown
+                        [items]="sexos"
+                        label="Sexo" [required]="true"
+                        [control]="sexoDependente"
+                ></asc-dropdown>
+            </p>
+        </div>
+        <div class="ui-g-8 padding">
+            <div *ngIf="!modoEdicao || !permissoes?.analisar">
+                <label class="label-campo-card">Nome da pai</label>
+                <p>{{dependente?.nomePaiDependente | campoVazioHifen }}</p>
+            </div>
+            <p *ngIf="modoEdicao && permissoes?.analisar">
+                <asc-input-text
+                        label="Nome da pai"
+                        [maxlength]="150"
+                        id="nomePaiDependente"
+                        [control]="nomePaiDependente"
+                ></asc-input-text>
+            </p>
+        </div>
+        <div class="ui-g-4 no-padding-left">
+            <div *ngIf="!modoEdicao || !permissoes?.analisar">
+                <label class="label-campo-card">Estado civil</label>
+                <p>{{dependente?.estadoCivil | campoVazioHifen }}</p>
+            </div>
+            <p *ngIf="modoEdicao && permissoes?.analisar">
+                <asc-select-estado-civil
+                        label="Estado Civil" id="idEstadoCivil" [required]="true"
+                        [control]="idEstadoCivil"
+                ></asc-select-estado-civil>
+            </p>
+        </div>
+        <div class="ui-g-4 padding">
+            <div *ngIf="!modoEdicao || !permissoes?.analisar">
+                <label class="label-campo-card">CPF</label>
+                <p>{{dependente?.cpfDependente | cpfMask | campoVazioHifen }}</p>
+            </div>
+            <p *ngIf="modoEdicao && permissoes?.analisar">
+                <asc-cpf-cnpj
+                        label="CPF"
+                        id="cpfDependente"
+                        [required]="cpfRequired"
+                        [somenteCpf]="true"
+                        [control]="cpfDependente">
+                </asc-cpf-cnpj>
+            </p>
+        </div>
+        <div class="ui-g-4 padding" *ngIf="apresentaDeclaracaoNascidoVivo">
+            <div *ngIf="!modoEdicao || !permissoes?.analisar">
+                <label class="label-campo-card">Declaração de Nascido Vivo</label>
+                <p>{{dependente?.declaracaoNascidoVivo | campoVazioHifen }}</p>
+            </div>
+            <p *ngIf="modoEdicao && permissoes?.analisar">
+                <asc-input-text
+                        [control]="declaracaoNascidoVivo"
+                        inputId="declaracaoNascidoVivo" label="Declaração de Nascido Vivo" [maxlength]="11">
+                </asc-input-text>
+            </p>
+        </div>
+        <div *ngIf="_processo?.idTipoProcesso != 14">
+            <div class="ui-g-12 no-padding margin-16">
+                <label class="sub-titulo">Dados complementares</label>
+            </div>
+            <div class="ui-g-4 no-padding-left">
+                <div *ngIf="!modoEdicao || !permissoes?.analisar">
+                    <label class="label-campo-card">Documento de identidade</label>
+                    <p>{{dependente?.rg | campoVazioHifen }}</p>
+                </div>
+                <p *ngIf="modoEdicao && permissoes?.analisar">
+                    <asc-input-text
+                            [control]="rg" autocomplete="off" [somenteNumeros]="false"
+                            inputId="rg" label="Documento de identidade" [maxlength]="12"
+                            [required]="rgRequired">
+                    </asc-input-text>
+                </p>
+            </div>
+            <div class="ui-g-8 padding">
+                <div *ngIf="!modoEdicao || !permissoes?.analisar">
+                    <label class="label-campo-card">Tipo de deficiência</label>
+                    <p>{{dependente?.tipoDeficiencia | campoVazioHifen }}</p>
+                </div>
+                <p *ngIf="modoEdicao && permissoes?.analisar">
+                    <asc-dropdown
+                            [control]="idTipoDeficiencia"
+                            [items]="tipoDeficiencias"
+                            label="Tipo de deficiência">
+                    </asc-dropdown>
+                </p>
+            </div>
+            <div class="ui-g-4 no-padding-left">
+                <div *ngIf="!modoEdicao || !permissoes?.analisar">
+                    <label class="label-campo-card">Órgão emissor</label>
+                    <p>{{dependente?.rgOrgaoEmissor | campoVazioHifen }}</p>
+                </div>
+                <p *ngIf="modoEdicao && permissoes?.analisar">
+                    <asc-input-text
+                            [control]="rgOrgaoEmissor"
+                            inputId="rgOrgaoEmissor" label="Órgão emissor" [maxlength]="6"
+                            [required]="rgRequired">
+                    </asc-input-text>
+                </p>
+            </div>
+            <div class="ui-g-8 padding">
+                <div *ngIf="!modoEdicao || !permissoes?.analisar">
+                    <label class="label-campo-card">Cartão nacional de saúde</label>
+                    <p>{{dependente?.cartaoNacionalSaude  | campoVazioHifen }}</p>
+                </div>
+                <p *ngIf="modoEdicao && permissoes?.analisar">
+                    <asc-input-text
+                            [control]="cartaoNacionalSaude" [maxlength]="20" [somenteNumeros]="true"
+                            inputId="cartaoNacionalSaude" label="Cartão nacional de saúde">
+                    </asc-input-text>
+                </p>
+            </div>
+            <div class="ui-g-4 no-padding-left">
+                <div *ngIf="!modoEdicao || !permissoes?.analisar">
+                    <label class="label-campo-card">Data de expedição</label>
+                    <p>{{dependente?.dataExpedicaoRg | date: 'dd/MM/yyyy' | campoVazioHifen }}</p>
+                </div>
+                <p *ngIf="modoEdicao && permissoes?.analisar">
+                    <asc-input-date
+                            label="Data de expedição"
+                            id="dataExpedicaoRg"
+                            [required]="rgRequired"
+                            [control]="dataExpedicaoRg">
+                        <asc-input-error
+                                nomeErro="dataMenorIgualAtual"
+                                msgErro="O valor da data de expedição não pode ser superior a data de hoje.">
+                        </asc-input-error>
+                    </asc-input-date>
+                </p>
+            </div>
+            <div class="ui-g-8 padding">
+                <div *ngIf="!modoEdicao || !permissoes?.analisar">
+                    <label class="label-campo-card">Número do cartão UNIMED</label>
+                    <p>{{dependente?.cartaoDependete | campoVazioHifen }}</p>
+                </div>
+                <p *ngIf="modoEdicao && permissoes?.analisar">
+                    <asc-input-text
+                            [control]="cartaoDependete" inputId="cartaoDependete"
+                            [maxlength]="30" [somenteNumeros]="true" label="Número Cartão UNIMED">
+                    </asc-input-text>
+                </p>
+            </div>
+
+            <div class="ui-g-4 no-padding-left">
+                <div *ngIf="!modoEdicao || !permissoes?.analisar">
+                    <label class="label-campo-card">UF Naturalidade</label>
+                    <p>{{dependente?.estadoNaturalidade | campoVazioHifen }}</p>
+                </div>
+                <p *ngIf="modoEdicao && permissoes?.analisar">
+                    <asc-select-uf
+                            label="UF Naturalidade"
+                            [control]="idEstadoNaturalidade"
+                            (dadoSelecionado)="ufSelecionada($event)"
+                    ></asc-select-uf>
+                </p>
+            </div>
+
+            <div class="ui-g-8 padding">
+                <div *ngIf="!modoEdicao || !permissoes?.analisar">
+                    <label class="label-campo-card">Valor da Renda</label>
+                    <p>{{dependente?.valorRenda | currencyFormat | campoVazioHifen }}</p>
+                </div>
+                <p *ngIf="modoEdicao && permissoes?.analisar">
+                    <asc-input-money-type
+                            [control]="valorRenda" inputId="renda" label="Valor da renda">
+                    </asc-input-money-type>
+                </p>
+            </div>
+
+            <div class="ui-g-4 no-padding-left">
+                <div *ngIf="!modoEdicao || !permissoes?.analisar">
+                    <label class="label-campo-card">Município de Naturalidade</label>
+                    <p>{{dependente?.municipioNaturalidade | campoVazioHifen }} </p>
+                </div>
+                <p *ngIf="modoEdicao && permissoes?.analisar">
+                    <asc-select-municipio
+                            label="Município Naturalidade" [parametro]="{idMunicipio: idEstadoNaturalidade?.value}"
+                            [index]="5" [control]="idMunicipioNaturalidade"
+                            [required]="idEstadoNaturalidade?.value != null"
+                            (dados)="municipios($event)">
+                    </asc-select-municipio>
+                </p>
+                
+            </div>
+            
+            <div class="ui-g-8 padding">
+                <div *ngIf="!modoEdicao || !permissoes?.analisar">
+                    <label class="label-campo-card">E-mail</label>
+                    <p>{{dependente?.emailDependente | campoVazioHifen }}</p>
+                </div>
+                <p *ngIf="modoEdicao && permissoes?.analisar">
+                        <asc-input-text 
+                          [control]="emailDependente" 
+                          inputId="emailDependente" 
+                          label="E-mail"> 
+                        </asc-input-text>
+                </p>
+            </div>
+
+        </div>
+    </div>
+    <div *ngIf="modoEdicao && permissoes?.editar" class="ui-md-12 to-footer marginBottom no-padding">
+        <button (click)="clickAlerarDados(false)" class="back-btn">
+            Cancelar
+        </button>
+
+        <button (click)="onSubmit()" class="continue-btn" [disabled]="!form.valid">
+            Confirmar
+        </button>
+    </div>
+</section>

@@ -1,0 +1,31 @@
+<form [formGroup]="formularioPatologia">
+  <div class="solicitacao-container">
+    <div class="fl">
+      <div class="custom-form-group-select">
+        <p class="titulo">Certo. Qual a patologia?</p>
+        <asc-select-patologia
+          id="patologiaPrgMed"
+          label="Patologia"
+          [required]="true"
+          [control]="formularioPatologia.get('coPatologia')"
+          (dadoSelecionado)="patologiaSelecionado($event)">
+        </asc-select-patologia>
+      </div>
+      <div class="container-patologia-info">
+        <p class="titulo-patologia-info">Medicamentos Reembolsados pelo saúde caixa</p>
+        <div *ngFor="let med of medicamentosLista; let i = index">
+          <p class="descricao-patologia-info">{{med.codigoApresentacao}} - {{med.nome}}</p>
+        </div>
+        <p class="descricao-patologia-info" *ngIf="!medicamentosLista || !medicamentosLista?.length">
+          Nenhum medicamento encontrado.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <asc-button-secondary (onClick)="previousStep($event)" title="Voltar"></asc-button-secondary>
+    <asc-button-primary title="Continuar" [disabled]="formularioPatologia.invalid" (onClick)="onSubmit()">
+    </asc-button-primary>
+  </div>
+</form>

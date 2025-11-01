@@ -1,0 +1,56 @@
+<div class="container" *ngIf="!processoEnviado">
+  <asc-stepper
+    [fitScreen]="true"
+    [breadcrumbOptions]="breadcrumb"
+    [disableClickOnLabel]="true"
+    #cdkStepper
+  >
+    <cdk-step label="Beneficiário">
+      <ng-template cdkStepLabel>
+        Inscrição no Programa de Medicamentos
+      </ng-template>
+      <asc-beneficiario-pedido
+        [checkRestart]="reiniciarSubject"
+        (beneficarioForm)="beneficiarioFormSelecionado($event)"
+        [routerLinkToBack]="'/pedidos/inscricao/programas-medicamentos'"
+        [stepper]="cdkStepper"
+      ></asc-beneficiario-pedido>
+    </cdk-step>
+    <cdk-step label="Patologia">
+      <ng-template cdkStepLabel>
+        Inscrição no Programa de Medicamentos
+      </ng-template>
+      <app-patologia
+        [checkRestart]="reiniciarSubject"
+        [stepper]="cdkStepper"
+        (patologia)="patologiaSelecionada($event)"
+      ></app-patologia>
+    </cdk-step>
+    <cdk-step label="Documentos">
+      <ng-template cdkStepLabel>
+        Inscrição no Programa de Medicamentos
+      </ng-template>
+      <asc-documentos-requeridos-pedido
+        [parametro]="parametrosDocumento"
+        [stepper]="cdkStepper"
+        (documentosSelecionados)="documentosSelecionados($event)"
+      ></asc-documentos-requeridos-pedido>
+    </cdk-step>
+    <cdk-step label="Resumo">
+      <ng-template cdkStepLabel>
+        Inscrição no Programa de Medicamentos
+      </ng-template>
+      <app-resumo-pmd
+        (reiniciarEvent)="reiniciarSubject.next()"
+        (beneficiarioCardForm)="beneficiarioFormSelecionadoEdit($event)"
+        [stepper]="cdkStepper"
+        [beneficiarioForm]="beneficiarioForm"
+        [patologia]="patologia"
+        [documentos]="documentos"
+        (processoEnviadoEvent)="setProcessoEnviado($event)"
+      ></app-resumo-pmd>
+    </cdk-step>
+  </asc-stepper>
+</div>
+
+<asc-recibo [pedido]="recibo" *ngIf="processoEnviado"></asc-recibo>

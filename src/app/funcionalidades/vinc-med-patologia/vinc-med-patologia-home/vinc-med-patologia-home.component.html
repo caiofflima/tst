@@ -1,0 +1,70 @@
+<!-- Page Header-->
+<div class="container">
+  <div class="col-md-12 breadcrumb-header">
+    <ul class="breadcrumb">
+      <li><span (click)="voltar()" class="voltar"><i class="fa fa-arrow-left" aria-hidden="true"></i>Voltar</span></li>
+      <a routerLink="/home">Início</a>
+      <em class="fa fa-chevron-right"></em>
+      Administração
+      <em class="fa fa-chevron-right"></em>
+      Parâmetros
+      <em class="fa fa-chevron-right"></em>
+       Medicamento por Patologia
+    </ul>
+  </div>
+
+  <div class="title-type">
+    <h1 class="titulo-pagina">Medicamento por Patologia</h1>
+  </div>
+  
+  <section>
+    <form novalidate class="col-md-12 p-0">
+      <div class="form-row">
+        <div class="p-0 col-md-6">
+          <label class="control-label" for="patologias">Patologia</label>
+          <p-dropdown
+            [options]="patologias" 
+            filter="true" 
+            [(ngModel)]="patologia" 
+            name="patologias" 
+            id="patologias">
+          </p-dropdown>
+        </div>
+
+        <div class="col-md-6">
+          <label class="control-label" for="Medicamento">Medicamento</label>
+          <asc-dropdown
+            [items]="medicamentos" 
+            [control]="medicamento" 
+            (filter)="filtroMedicamento($event)"
+            (select)="medicamentos"
+            id="Medicamento" 
+            filterBy="filtering">
+          </asc-dropdown>
+        </div>
+      </div>
+  
+      <div class="col-md-12 p-0">
+        <p-checkbox name="sAtivos" [(ngModel)]="ativos" binary="true" inputId="sAtivos" id="ativos"></p-checkbox>
+        <label class="control-label" for="ativos">Somente ativos</label>
+      </div>
+  
+      <div class="col-xs-12 barra-botoes">
+        <button id="btnLimparCampos" class="btn back-btn" (click)="limparCampos()">
+          <span class="fa fa-trash fa-fw"></span>Limpar Campos
+        </button>
+        <button class="btn clean-btn" (click)="nova()">
+          <span class="fa fa-plus fa-fw"></span>Incluir Medicamento por Patologia
+        </button>
+        <button class="btn continue-btn" routerLink="listar" [queryParams]="{
+          patologia: patologia || '',
+          medicamento: medicamento.value || '',
+          ativos: ativos
+        }">
+        <span class="fa fa-search fa-fw"></span>Pesquisar
+      </button>
+      </div>
+    </form>
+  </section>
+
+</div>

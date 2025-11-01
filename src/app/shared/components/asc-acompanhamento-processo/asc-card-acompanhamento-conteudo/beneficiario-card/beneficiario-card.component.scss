@@ -1,0 +1,110 @@
+@import "src/app/funcionalidades/acompanhamento/acompanhamento.component";
+
+.beneficiario-card {
+  img {
+    border-radius: 50px;
+    width: 100px;
+    height: 100px;
+  }
+}
+
+.img-user {
+  margin: auto;
+  display: flex;
+  width: 100px;
+  height: 100px;
+}
+
+.beneficiario-user-idade {
+  font-family: 'Caixa Std Regular', sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 14px;
+  color: #B4B4B4;
+  margin-top: 0.5em;
+  margin-bottom: 0;
+}
+
+.beneficiario-card-user-parentesco {
+  font-family: 'Caixa Std Regular', sans-serif;
+  font-size: 14px;
+  line-height: 17px;
+  color: #000000;
+  margin-top: 0.5em;
+  margin-bottom: 0;
+}
+
+.beneficiario-user-nome {
+  font-size: 16px;
+  line-height: 22px;
+  color: #17A2B8;
+  margin: 0 0 1em 0;
+}
+
+.align-card-column-center {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.alinharDireita {
+  float: right;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.to-footer {
+  button {
+    justify-content: center;
+    align-items: center;
+    padding: 6.5px 12px;
+    border-radius: 3px;
+    transition: 250ms ease-in-out;
+    margin: 8px 4px;
+
+    &.cancel {
+      background-color: #01377F;
+      border: none;
+
+      span {
+        color: #fff;
+      }
+
+      &:hover,
+      &:active,
+      &:focus {
+        background-color: #01377F;
+        transition: 250ms ease-in-out;
+
+        span {
+          color: #fff;
+          transition: 250ms ease-in-out;
+        }
+      }
+    }
+
+    &.save {
+      background-color: #f39200;
+      border: none;
+
+      span {
+        color: #fff;
+      }
+
+      &:not(:disabled) {
+        &:hover,
+        &:focus,
+        &:active {
+          background-color: #db6e00;
+          transition: 250ms ease-in-out;
+        }
+      }
+
+      &:disabled {
+        background-color: #dadada;
+      }
+    }
+  }
+}

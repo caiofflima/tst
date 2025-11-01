@@ -1,0 +1,89 @@
+<!-- Page Header-->
+<div class="container">
+  <div class="col-md-12 breadcrumb-header">
+    <ul class="breadcrumb">
+      <li><span (click)="voltar()" class="voltar"><i class="fa fa-arrow-left" aria-hidden="true"></i>Voltar</span></li>
+      <a routerLink="/home">Início</a>
+      <em class="fa fa-chevron-right"></em>
+      Administração
+      <em class="fa fa-chevron-right"></em>
+      Parâmetros
+      <em class="fa fa-chevron-right"></em>
+      E-mail por Ocorrência
+    </ul>
+  </div>
+
+  <div class="title-type">
+    <h1 class="titulo-pagina">E-mail por Ocorrência</h1>
+  </div>
+
+  <section class="row">
+    <form [formGroup]="formulario" name="form">
+
+      <div class="row p-0 col-xs-6">
+        <label class="control-label" for="situacaoProcesso">Ocorrência</label>
+        <asc-multiSelect
+          id="situacaoProcesso" limit="2" [options]="listComboSituacaoProcesso"
+          [control]="formulario.get('situacoesProcesso')"
+        ></asc-multiSelect>
+      </div>
+
+      <div class="row col-xs-6">
+        <label class="control-label" for="tipoProcesso">Tipo de Pedido</label>
+        <asc-multiSelect
+          id="tipoProcesso" limit="6" [options]="listComboTipoProcesso"
+          [control]="formulario.get('tiposProcesso')"
+          (onChange)="onChangeTipoProcesso()"
+        ></asc-multiSelect>
+      </div>
+
+      <div class="row p-0 col-xs-6">
+        <label class="control-label" for="tipoBeneficiario">Tipo de Beneficiário</label>
+        <asc-multiSelect
+          id="tipoBeneficiario" limit="3" [options]="listComboTipoBeneficiario"
+          [control]="formulario.get('tiposBeneficiario')"
+        ></asc-multiSelect>
+      </div>
+
+      <div class="row col-xs-6">
+        <label class="control-label" for="palavraChave">Palavra-chave</label>
+        <input
+          type="text" id="palavraChave" name="palavraChave"
+          class="form-control"
+          title="Filtrar por palavra-chave."
+          formControlName="palavraChave">
+      </div>
+
+      <div class="row p-0 col-xs-12">
+        <p-checkbox
+          id="somenteAtivos" name="somenteAtivos"
+          binary="true"
+          class="control-label"
+          label="Somente ativos" formControlName="somenteAtivos" title="Marque para retornar apenas registros ATIVOS."
+        ></p-checkbox>
+      </div>
+
+      <div class="col-xs-12 barra-botoes">
+        <button
+          id="btnLimparCampos" type="button"
+          class="btn back-btn"
+          (click)="limparCampos()">
+          <span class="fa fa-trash fa-fw"></span>
+          Limpar Campos
+        </button>
+        <button
+          class="btn clean-btn" type="button"
+          routerLink="novo">
+          <span class="fa fa-plus fa-fw"></span>
+          Incluir E-mail por Ocorrência
+        </button>
+        <button
+          class="btn continue-btn" type="submit"
+          (click)="pesquisarEmails()">
+          <span class="fa fa-search fa-fw"></span>
+          Pesquisar
+        </button>
+      </div>
+    </form>
+  </section>
+</div>

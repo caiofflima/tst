@@ -1,0 +1,119 @@
+<div class="col-md-12">
+  <p-table
+    emptyMessage=""
+    [value]="dadosConsulta"
+    [paginator]="true"
+    [rows]="10"
+    class="table table-striped table-sm table-hover"
+    #dt
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th id="CPF">CPF</th>
+        <th id="Nome">Nome</th>
+        <th id="Matricula">Matrícula</th>
+        <th id="idEmpresa">ID Empresa</th>
+        <th id="Perfil">Perfil</th>
+        <th id="atuacaoProfissional">Atuação Profissional</th>
+        <th id="dataLimite">Data Limite</th>
+        <th id="Evento" style="width: 5em">Evento</th>
+        <th id="Data">Data</th>
+        <th id="acoes" style="width: 5em">Ação</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData>
+      <tr>
+        <td>{{ rowData.cpf | cpfMask }}</td>
+        <td>{{ rowData.nome }}</td>
+        <td>{{ rowData.matricula }}</td>
+        <td>{{ rowData.idEmpresa }}</td>
+        <td>{{ rowData.perfil }}</td>
+        <td>{{ rowData.atuacaoProfissional }}</td>
+        <td>{{ rowData.dataLimite | date : "dd/MM/yyyy" }}</td>
+        <td>{{ rowData.strEvento }}</td>
+        <td>{{ rowData.dataHoraEvento | date : "dd/MM/yyyy HH:mm:ss" }}</td>
+        <td>
+          <button
+            class="btn btn-info"
+            title="{{ bundle('MH154') }}"
+            (click)="abrirModalDetalhamento(rowData)"
+          >
+            <span class="fa fa-search fa-fw"></span>
+          </button>
+        </td>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="emptymessage">
+      {{ bundle("MA003") }}
+    </ng-template>
+    <!-- <p-column header="CPF">
+			<ng-template let-row="rowData" pTemplate="content">
+              {{row.cpf | cpfMask}}
+        	</ng-template>
+		</p-column>
+		<p-column field="nome" header="Nome"></p-column>
+		<p-column field="matricula" header="Matrícula"></p-column>
+		<p-column field="idEmpresa" header="ID Empresa"></p-column>
+		<p-column field="perfil" header="Perfil"></p-column>
+		<p-column field="atuacaoProfissional" header="Atuação Profissional"></p-column>
+		<p-column field="dataLimite" header="Data Limite">
+			<ng-template let-row="rowData" pTemplate="content">
+              {{row.dataLimite | date:'dd/MM/yyyy'}}
+        	</ng-template>
+		</p-column>
+		<p-column [style]="{'width':'5em'}" field="strEvento" header="Evento"></p-column>
+		<p-column header="Data">
+			<ng-template let-row="rowData" pTemplate="content">
+              {{row.dataHoraEvento | date:'dd/MM/yyyy HH:mm:ss'}}
+        	</ng-template>
+		</p-column>
+		<p-column [style]="{'width':'5em'}" header="Ação">
+			<ng-template let-row="rowData" pTemplate="content">
+				<button class="btn btn-info" title="{{bundle('MH154')}}" (click)="abrirModalDetalhamento(row);">
+					<span class="fa fa-search fa-fw"></span>
+				</button>
+			</ng-template>
+		</p-column> -->
+  </p-table>
+
+  <p-dialog
+    header="Detalhes do Perfil do Usuário"
+    [(visible)]="showModalDetalhamento"
+    [modal]="true"
+    width="800"
+    [responsive]="true"
+    #modalDetalhamento
+  >
+    <div class="col-md-12">
+      <div class="col-md-6">
+        <label for="email">Email</label>
+        <span id="email" class="output-text">{{ selectedRow?.email }}</span>
+      </div>
+      <div class="col-md-6">
+        <label for="empresa">Empresa</label>
+        <span id="empresa" class="output-text">{{ selectedRow?.empresa }}</span>
+      </div>
+      <div class="col-md-6">
+        <label for="responsavel">Responsável</label>
+        <span id="responsavel" class="output-text">{{
+          selectedRow?.responsavel | cpfMask
+        }}</span>
+      </div>
+      <div class="col-md-6">
+        <label for="ipResponsavel">IP Responsável</label>
+        <span id="ipResponsavel" class="output-text">{{
+          selectedRow?.ipResponsavel
+        }}</span>
+      </div>
+    </div>
+
+    <p-footer class="dmsg-footer">
+      <div style="display: flex; justify-content: flex-end">
+        <button class="btn btn-danger" (click)="fecharModalDetalhamento()">
+          <span class="fa fa-close fa-fw"></span>Fechar
+        </button>
+      </div>
+    </p-footer>
+  </p-dialog>
+</div>

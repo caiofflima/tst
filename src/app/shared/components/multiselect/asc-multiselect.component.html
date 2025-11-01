@@ -1,0 +1,13 @@
+<p-multiSelect
+  [options]="options"
+  [formControl]="control"
+  optionLabel="label"
+  class="form-control2 custom-border"
+  defaultLabel="Selecione as opções"
+  [maxSelectedLabels]="limit"
+  selectedItemsLabel="{0} itens selecionados"
+  (onChange)="onChangeCallback($event)"
+  [required]="required"
+  [disabled]="disabled"
+  [(ngModel)]="selected"
+></p-multiSelect>

@@ -1,0 +1,135 @@
+<!-- recibo inscrição de dependentes -->
+
+<div class="bg-white-container">
+  <div class="resumo-container z-index-above">
+    <p-progressBar *ngIf="showProgressBar" [style]="{'height': '4px' }" mode="indeterminate"></p-progressBar>
+    <div class="custom-card">
+
+      <div class="bordered-bottom">
+        <p class="titulo ">Pedido enviado com sucesso!</p>
+      </div>
+
+      <div class="custom-line custom-grid">
+        <div class="numero">
+          <p>Número</p>
+          <span>
+						<i class="fa fa-file-text" aria-hidden="true"></i>
+						<span style="margin-left: 5px">{{pedido?.id}}</span>
+					</span>
+        </div>
+
+        <div>
+          <p>Protocolo ANS</p>
+          <span>
+						<i class="fa fa-file-text" aria-hidden="true"></i>
+						<span style="margin-left: 5px">{{pedido?.protocoloAns}}</span>
+					</span>
+        </div>
+      </div>
+
+      <div class="custom-line">
+        <p>Beneficiário</p>
+        <span>{{pedido?.beneficiario.nome}}</span>
+      </div>
+
+      <div class="custom-line">
+        <p>Tipo de Pedido</p>
+        <span>{{nomeTipoProcesso}}</span>
+      </div>
+
+      <div class="custom-line" *ngIf="motivo">
+        <p>{{tituloMotivo}}</p>
+        <span>{{motivo}}</span>
+      </div>
+
+      <div class="custom-line">
+        <p>Situação do Pedido</p>
+        <span>Sob análise - Equipe técnica/administrativa</span>
+      </div>
+
+      <div class="footer ft-recibo">
+        <small class="rodape">
+          Esta notificação foi encaminhada para o e-mail cadastrado/informado.
+        </small>
+        <p class="no-print">Acompanhe o andamento de seu pedido no menu:</p>
+        <div style="width: 100%; display: flex; flex-direction: column; align-items: center; gap: 15px;">
+          <div align="center" style="width: 100%">
+            <button class="no-print" (click)="navegarParaMeusProcessos()">
+              Meus pedidos
+            </button>
+          </div>
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 15px;">
+            <div class="action-buttons-container no-print">
+              <i (click)="exportarPDF('recibo-cancelamento-dependente.pdf', '.to-export')"
+                 aria-hidden="true" class="fa fa-file-pdf-o" *ngIf="pedido?.idTipoProcesso===12">
+              </i>
+              <i (click)="exportarPDF('recibo-inscricao-dependente.pdf', '.to-export')"
+                 aria-hidden="true" class="fa fa-file-pdf-o" *ngIf="pedido?.idTipoProcesso===11">
+              </i>
+              <i (click)="exportarPDF('recibo-alteracao-dependente.pdf', '.to-export')"
+                 aria-hidden="true" class="fa fa-file-pdf-o" *ngIf="pedido?.idTipoProcesso===13">
+              </i>
+              <i (click)="exportarPDF('recibo-renovacao-dependente.pdf', '.to-export')"
+                 aria-hidden="true" class="fa fa-file-pdf-o" *ngIf="pedido?.idTipoProcesso===14">
+              </i>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<div class="to-export">
+  <div class="resumo-container">
+    <p-progressBar *ngIf="showProgressBar" [style]="{'height': '4px' }" mode="indeterminate"></p-progressBar>
+    <div class="custom-card">
+
+      <div class="bordered-bottom">
+        <p class="titulo ">Pedido enviado com sucesso!</p>
+      </div>
+
+      <div class="custom-line custom-grid">
+        <div class="numero">
+          <p>Número</p>
+          <span>
+						<i class="fa fa-file-text" aria-hidden="true"></i>
+						<span style="margin-left: 15px">{{pedido?.id}}</span>
+					</span>
+        </div>
+
+        <div>
+          <p>Protocolo ANS</p>
+          <span>
+						<i class="fa fa-file-text" aria-hidden="true"></i>
+						<span style="margin-left: 15px">{{pedido?.protocoloAns}}</span>
+					</span>
+        </div>
+      </div>
+
+      <div class="custom-line">
+        <p>Beneficiário</p>
+        <span>{{pedido?.beneficiario?.nome || pedido?.nomeBeneficiario}}</span>
+      </div>
+
+      <div class="custom-line">
+        <p>Tipo de Pedido</p>
+        <span>{{nomeTipoProcesso}}</span>
+      </div>
+
+      <div class="custom-line">
+        <p>Situação do Pedido</p>
+        <span>Sob análise - Equipe técnica/administrativa</span>
+      </div>
+
+      <div class="footer">
+        <small class="rodape">
+          Esta notificação foi encaminhada para o e-mail cadastrado/informado.
+        </small>
+      </div>
+
+    </div>
+  </div>
+</div>

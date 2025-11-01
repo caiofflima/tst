@@ -1,0 +1,91 @@
+<div class="container">
+  <asc-stepper [disableClickOnLabel]="true" #cdkStpper [breadcrumbOptions]="breadcrumb" [beneficiario]="beneficiarioModel">
+    <cdk-step [label]="'Solicitação'">
+      <ng-template cdkStepLabel>Autorização Prévia</ng-template>
+      <app-solicitacao
+        [checkRestart]="reiniciarSubject"
+        (solicitacao)="solicitacaoStep($event)"
+        (beneficiarioModel)="beneficiarioModelSelecionado($event)">
+      </app-solicitacao>
+    </cdk-step>
+    <cdk-step [label]="'Finalidade'">
+      <ng-template cdkStepLabel>Autorização Prévia</ng-template>
+      <app-finalidade-beneficiario
+        [checkRestart]="reiniciarSubject"
+        [idBeneficiario]="solicitacao?.idBeneficiario"
+        (beneficiario)="beneficiarioSelecionado($event)"
+        (pedido)="pedidoModoRascunho($event)"
+        (motivoSolicitacao)="motivoSolicitacaoSelecionado($event)"
+        (tipoProcesso)="tipoProcessoSelecionado($event)">
+      </app-finalidade-beneficiario>
+    </cdk-step>
+    <!-- Só apresenta essa aba se tipo processo for diferente de domiciliar (4)-->
+    <div *ngIf="!tipoProcesso || tipoProcesso.id !== 4">
+      <cdk-step [label]="'Procedimento'" completed="false">
+        <ng-template cdkStepLabel>
+          {{tipoProcesso?.nome | ascNormalizeFirstCharacterUpper}}
+        </ng-template>
+        <app-procedimento
+          [checkRestart]="reiniciarSubject"
+          [stepper]="cdkStpper"
+          [beneficiario]="beneficiarioModel"
+          [idMotivoSolicitacao]="motivoSolicitacao?.id"
+          [idTipoProcesso]="tipoProcesso?.id"
+          (pedido)="pedidoModoRascunho($event)"
+          (pedidoProcedimentos)="pedidoProcedimentos($event)"
+          (grauSelecionado)="grauProcedimentoSelecionado($event)"
+          (pedidoProcedimentosChanged)="pedidoProcedimentoChanged()"
+        ></app-procedimento>
+      </cdk-step>
+    </div>
+    <cdk-step [label]="'Profissional'">
+      <ng-template cdkStepLabel>
+        {{tipoProcesso?.nome | ascNormalizeFirstCharacterUpper}}
+      </ng-template>
+      <app-profissional
+        (profissional)="profissional($event)"
+        [pedidoProcedimentoVersao]="pedidoProcedimentoVersao"
+        (ufEstadoConselho)="ufEstadoConselhoSelecionado($event)"
+        (municipioProfissional)="municipioProfissionalSelecionado($event)"
+        (conselhoProfissionalSelecionado)="conselhoSelecionado($event)"
+      ></app-profissional>
+  
+    </cdk-step>
+    <cdk-step [label]="'Documentos'">
+      <div>
+        <ng-template cdkStepLabel>
+          {{tipoProcesso?.nome | ascNormalizeFirstCharacterUpper}}
+        </ng-template>
+        <app-documentos
+          [parametro]="parametroDocumento"
+          [pedidoProcedimentoVersao]="pedidoProcedimentoVersao"
+          (documentosObrigatorios)="documentosCadastrado($event)">
+        </app-documentos>
+      </div>
+    </cdk-step>
+    <cdk-step [label]="'Resumo'">
+      <div *ngIf="cdkStpper._getFocusIndex() === 5 || cdkStpper._getFocusIndex() === 4">
+        <ng-template cdkStepLabel>
+          {{tipoProcesso?.nome | ascNormalizeFirstCharacterUpper}}
+        </ng-template>
+        <app-resumo
+          [stepper]="cdkStpper"
+          [beneficiario]="beneficiarioModel"
+          [solicitacao]="solicitacao"
+          [finalidade]="finalidade"
+          [procedimentos]="procedimentos"
+          [profissional]="profissionalFormModel"
+          [documentos]="documentos"
+          [tipoProcesso]="tipoProcesso"
+          [motivoSolicitacao]="motivoSolicitacao"
+          [municipioProfissional]="municipioProfissional"
+          [ufEstadoConselho]="ufEstadoConselho"
+          [conselhoProfissionalSelecionado]="conselhoProfissionalSelecionado"
+          [grauProcedimento]="grauProcedimento"
+          [pedido]="pedido"
+          (reiniciarEvent)="reiniciarSubject.next()"
+        ></app-resumo>
+      </div>
+    </cdk-step>
+  </asc-stepper>
+</div>

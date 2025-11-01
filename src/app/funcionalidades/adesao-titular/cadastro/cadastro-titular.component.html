@@ -1,0 +1,84 @@
+<div class="container">
+  <asc-stepper
+    [fitScreen]="true"
+    [breadcrumbOptions]="breadcrumb"
+    [disableClickOnLabel]="true"
+    #cdkStepper
+  >
+    <cdk-step label="Titular">
+      <ng-template cdkStepLabel> Inscrição de Adesão </ng-template>
+      <asc-etapa-tipo-titular
+        [checkRestart]="reinicarSubject"
+        (beneficiarioDependenteModel)="
+          beneficiarioDependenteModelSelecionado($event)
+        "
+        (tipoDependenteModel)="tipoDependenteModelSelecionado($event)"
+        (beneficiarioModel)="beneficiarioModelSelecionado($event)"
+        (contatoEnderecoModel)="contatoEnderecoModelSelecionado($event)"
+        (estadoCivilModel)="estadoCivilModelSelecionado($event)"
+        routerLinkToBack="/adesao-titular/inicio"
+        [stepper]="cdkStepper"
+        [idTipoProcesso]="idTipoProcesso"
+      ></asc-etapa-tipo-titular>
+    </cdk-step>
+    <cdk-step label="Complemento">
+      <ng-template cdkStepLabel> Inscrição de Adesão </ng-template>
+      <asc-etapa-complemento-titular
+        [checkRestart]="reinicarSubject"
+        [stepper]="cdkStepper"
+        (ufSelecionada)="selectUf($event)"
+        (municipioSelecionado)="selectMunicipio($event)"
+        (tipoDeficienciaModel)="tipoDeficienciaModelSelecionado($event)"
+        (complementoDependenteModel)="
+          complementoDependenteModelSelecionado($event)
+        "
+        [complementoDependente]="complementoDependenteModel"
+        [tipoDeficiencia]="tipoDeficienciaModel"
+        [tipoDependente]="tipoDependenteModel"
+      ></asc-etapa-complemento-titular>
+    </cdk-step>
+
+    <cdk-step label="Contato">
+      <ng-template cdkStepLabel> Inscrição de Adesão </ng-template>
+      <asc-etapa-contato-titular
+        [checkRestart]="reinicarSubject"
+        [stepper]="cdkStepper"
+        (contatoEnderecoModel)="contatoEnderecoModelSelecionado($event)"
+      >
+      </asc-etapa-contato-titular>
+    </cdk-step>
+
+    <cdk-step label="Documentos">
+      <ng-template cdkStepLabel> Inscrição de Adesão </ng-template>
+      <asc-documentos-requeridos-pedido
+        [parametro]="parametroDocumento"
+        [stepper]="cdkStepper"
+        (documentosSelecionados)="documentosSelecionados($event)"
+      ></asc-documentos-requeridos-pedido>
+    </cdk-step>
+    <cdk-step label="Resumo">
+      <ng-template cdkStepLabel> Inscrição de Adesão </ng-template>
+      <asc-etapa-resumo-titular
+        [beneficiarioDependente]="beneficiarioDependenteModel"
+        [documentos]="documentos"
+        [tipoDependente]="tipoDependenteModel"
+        [municipio]="municipio"
+        [estado]="uf"
+        [dadoDependente]="dadoDependenteModel"
+        [complementoDependente]="complementoDependenteModel"
+        [beneficiario]="beneficiarioModel"
+        [tipoDeficiencia]="tipoDeficienciaModel"
+        [stepper]="cdkStepper"
+        [contatoEndereco]="contatoEnderecoModel"
+        [idTipoProcessoResumo]="idTipoProcesso"
+        (processoEnviadoEvent)="setProcessoEnviado($event)"
+        (reiniciarEvent)="reinicarSubject.next()"
+      ></asc-etapa-resumo-titular>
+    </cdk-step>
+  </asc-stepper>
+</div>
+
+<asc-recibo-dependente
+  [pedido]="recibo"
+  *ngIf="processoEnviado"
+></asc-recibo-dependente>

@@ -1,0 +1,209 @@
+<div class="custom-container" *ngIf="isToShowComponent">
+  <p class="titulo">{{ tituloStepProcedimento }}</p>
+  <div class="ui-g">
+    <div class="ui-g-12">
+      <asc-procedimento-form
+        #procedimentoFormComponent
+        (cancelarProcedimento)="cancelarProcedimento($event)"
+        (grauSelecionado)="grauProcedimentoSelecionado($event)"
+        (isToShowPanel)="isToShowFormPanel($event)"
+        (pedidoProcedimentoForm)="adicionarProcedimento($event)"
+        (pedidoProcedimentos)="adicionarProcedimentos($event)"
+        (procedimento)="adicionarProcedimentoPanel($event)"
+        (regiaoOdontologica)="regiaoOdontologicaSelecionada($event)"
+        (formValid)="formValido = $event"
+        [pedido]="pedido"
+        [beneficiario]="beneficiario"
+        [idBeneficiario]="beneficiario?.id"
+        [idTipoProcesso]="idTipoProcesso"
+        [limparForm]="true"
+        [isEditing]="isEditing"
+        [isToClean]="isToCleanForm"
+        [parametroSelectProcedimento]="parametroSelectProcedimento"
+        [pedidoProcedimentoFormInput]="pedidoProcedimentoForm"
+        [profile]="profile"
+        [idMotivoSolicitacao]="idMotivoSolicitacao"
+      >
+      </asc-procedimento-form>
+    </div>
+    <div
+      *ngIf="isToShowForm && configurations?.isShowInfo"
+      @fadeInOut
+      class="custom-right-grid"
+    >
+      <p class="grid-titulo">
+        {{ procedimento?.estruturaNumerica }}
+        {{ procedimento?.descricaoProcedimento }}
+      </p>
+      <p class="grid-info">{{ procedimento?.observacaoProcedimento }}</p>
+    </div>
+  </div>
+</div>
+
+<div
+  class="custom-container-larger"
+  *ngIf="
+    pedidoProcedimentosTabela &&
+    pedidoProcedimentosTabela.length &&
+    configurations?.isShowTable &&
+    showTable
+  "
+>
+  <p class="list-title">Procedimentos adicionados</p>
+  <div [ngClass]="_tipoProcesso" class="list">
+    <div class="header">
+      <p *ngIf="profile?.idVacina?.display" class="h-procedimento">Vacina</p>
+      <p
+        *ngIf="profile?.idProcedimento?.display && !profile?.idVacina?.display"
+        class="h-procedimento"
+      >
+        Procedimento
+      </p>
+      <p *ngIf="profile?.idPatologia?.display" class="h-procedimento">
+        Patologia
+      </p>
+      <p *ngIf="profile?.idGrauProcedimento?.display" class="h-2">Grau</p>
+      <p *ngIf="profile?.idLaboratorio?.display" class="h-2">Laboratorio</p>
+      <p *ngIf="profile?.idMedicamento?.display" class="h-2">Medicamento</p>
+      <p *ngIf="profile?.idMedicamento?.display" class="h-2">Apresentação</p>
+      <p *ngIf="profile?.idRegiaoOdontologica?.display" class="h-2">
+        Região odontológica
+      </p>
+      <p *ngIf="profile?.idAutorizacaoPrevia?.display" class="h-2">
+        <span>Autorização Prévia</span>
+      </p>
+      <p
+        *ngIf="profile?.qtdSolicitada?.display"
+        [class.h-2]="!profile?.idVacina?.display"
+        [class.h-4]="profile?.idVacina?.display"
+      >
+        <span>Quantidade</span>
+      </p>
+      <p
+        *ngIf="profile?.diasAtendidosPelaQuantidade?.display"
+        [class.h-2]="!profile?.idVacina?.display"
+        [class.h-4]="profile?.idVacina?.display"
+      >
+        <span>Dias atendimento</span>
+      </p>
+      <p *ngIf="profile?.dataAtendimento?.display" class="h-4">
+        <span>Data do procedimento</span>
+      </p>
+      <p *ngIf="profile?.valorUnitarioPago?.display" class="h-2">
+        <span>Valor unitário pago</span>
+      </p>
+      <p class="h-6"><span>Ação</span></p>
+    </div>
+    <div
+      *ngFor="
+        let pedidoProcedimento of pedidoProcedimentosTabela;
+        let i = index
+      "
+      style="position: relative"
+    >
+      <div class="card">
+        <p *ngIf="profile?.idProcedimento?.display" class="h-procedimento">
+          <span
+            >{{ pedidoProcedimento?.procedimento?.estruturaNumerica }} - </span
+          >{{ pedidoProcedimento?.procedimento?.descricaoProcedimento }}
+        </p>
+        <p *ngIf="profile?.idPatologia?.display" class="h-procedimento">
+          {{ pedidoProcedimento?.patologia?.codigo }} -
+          {{ pedidoProcedimento?.patologia?.nome }}
+        </p>
+        <p *ngIf="profile?.idGrauProcedimento?.display" class="h-2">
+          <span>{{ pedidoProcedimento?.grauProcedimento?.nome }}</span>
+        </p>
+        <p *ngIf="profile?.idLaboratorio?.display" class="h-2">
+          <span>{{
+            pedidoProcedimento?.laboratorio?.nome ||
+              pedidoProcedimento?.medicamento?.laboratorio?.nome
+          }}</span>
+        </p>
+        <p *ngIf="profile?.idMedicamento?.display" class="h-2">
+          <span>{{ pedidoProcedimento?.medicamento?.nome }}</span>
+        </p>
+        <p *ngIf="profile?.idMedicamento?.display" class="h-2">
+          <span>{{
+            pedidoProcedimento?.medicamento?.descricaoApresentacao
+          }}</span>
+        </p>
+        <p *ngIf="profile?.idRegiaoOdontologica?.display" class="h-2">
+          <span>{{ pedidoProcedimento?.regiaoOdontologica?.nome }}</span>
+        </p>
+        <p *ngIf="profile?.idAutorizacaoPrevia?.display" class="h-2">
+          <span
+            [innerHTML]="textoFormatadoAutorizacaoPrevia(pedidoProcedimento)"
+          ></span>
+        </p>
+        <p
+          *ngIf="profile.qtdSolicitada?.display"
+          [class.h-2]="!profile?.idVacina?.display"
+          [class.h-4]="profile?.idVacina?.display"
+        >
+          <span>{{
+            pedidoProcedimento?.qtdSolicitada ||
+              pedidoProcedimento?.qtdMedicamento
+          }}</span>
+        </p>
+        <p
+          *ngIf="profile.diasAtendidosPelaQuantidade?.display"
+          [class.h-2]="!profile?.idVacina?.display"
+          [class.h-4]="profile?.idVacina?.display"
+        >
+          <span>{{
+            pedidoProcedimento?.diasAtendidosPelaQuantidade ||
+              pedidoProcedimento?.qtdDiasAtendidosPeloMedicamento
+          }}</span>
+        </p>
+        <p *ngIf="profile.dataAtendimento?.display" class="h-4">
+          {{ pedidoProcedimento?.dataAtendimento | date : "dd/MM/yyyy" }}
+        </p>
+        <p
+          *ngIf="
+            profile.valorUnitarioPago?.display &&
+            pedidoProcedimento?.valorUnitarioPago
+          "
+          class="h-2"
+        >
+          {{ pedidoProcedimento?.valorUnitarioPago | currency : "BRL" : true }}
+        </p>
+        <div class="h-6">
+          <button
+            (click)="editar(pedidoProcedimento, i)"
+            [disabled]="isEditing"
+            class="edit-proc"
+            id="editarProcedimento{{ i }}"
+            name="editarProcedimento"
+          >
+            <i aria-hidden="true" class="fa fa-pencil"></i>
+          </button>
+          <button
+            (click)="remove(pedidoProcedimento)"
+            [disabled]="isEditing"
+            class="remove-proc"
+            id="removerProcedimento{{ i }}"
+            name="removerProcedimento"
+          >
+            <i aria-hidden="true" class="fa fa-trash"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="footer">
+  <asc-button-secondary
+    buttonId="voltar"
+    (onClick)="previousStep()"
+    title="Voltar"
+  ></asc-button-secondary>
+
+  <asc-button-primary
+    buttonId="continuar"
+    (onClick)="onSubmit()"
+    [disabled]="disableContinuar"
+    [showProgress]="showProgress"
+    title="Continuar"
+  ></asc-button-primary>
+</div>

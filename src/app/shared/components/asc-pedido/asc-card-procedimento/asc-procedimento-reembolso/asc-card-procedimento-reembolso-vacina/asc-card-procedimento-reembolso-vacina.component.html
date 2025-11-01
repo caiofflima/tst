@@ -1,0 +1,35 @@
+<div class="relative">
+  <div class="relative">
+    <span class="padding-x label-campo-card">Vacina</span>
+    <p>
+      <strong
+        >{{
+          pedidoProcedimento?.procedimento?.estruturaNumerica
+            | estruturaProcedimento
+        }}
+      </strong>
+      {{ pedidoProcedimento?.procedimento?.descricaoProcedimento }}
+    </p>
+  </div>
+  <div class="ui-g">
+    <div class="ui-g-6 ui-md-6 no-padding margin-16">
+      <span class="label-campo-card">Quantidade </span>
+      <p>{{ pedidoProcedimento?.qtdSolicitada }}</p>
+    </div>
+
+    <div class="ui-g-6 ui-md-6 no-padding margin-16">
+      <span class="label-campo-card">Valor unitário pago</span>
+      <p *ngIf="!pedidoProcedimento?.valorUnitarioPago">
+        {{ pedidoProcedimento?.valorUnitarioPago }}
+      </p>
+      <p *ngIf="pedidoProcedimento?.valorUnitarioPago">
+        {{ pedidoProcedimento?.valorUnitarioPago | currency : "BRL" : true }}
+      </p>
+    </div>
+
+    <div class="ui-g-6 ui-md-6 no-padding margin-16">
+      <span class="label-campo-card">Data do atendimento</span>
+      <p>{{ pedidoProcedimento?.dataAtendimento | date : "dd/MM/yyyy" }}</p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,44 @@
+<div class="c-card">
+  <div class="progress-circle">
+    <p [ngStyle]="{'color': defineColorBD()}"
+       class="progress-title">{{_processoPedido?.ultimaSituacao?.situacaoProcesso?.nome | campoVazioHifen}}</p>
+    <div class="ellipse-container">
+      
+      <i id="iconExclamation" [ngStyle]="{'color': defineColor()}" class="fas fa-exclamation-circle"></i>
+      <i id="iconCheck" [ngStyle]="{'color': defineColor()}" class="fa fa-check"></i>
+      <i id="iconCircle" [ngStyle]="{'color': defineColor()}" class="fa fa-clock-o"></i>
+      <i id="iconTimes" [ngStyle]="{'color': defineColor()}" class="fa fa-times-circle"></i>
+      <i id="iconHourglass" [ngStyle]="{'color': defineColor()}" class="fa fa-hourglass-half"></i>
+      <i id="iconSearch" [ngStyle]="{'color': defineColor()}" class="fa fa-search"></i>
+
+      <svg class="donut" height="100%" viewBox="0 0 42 42" width="100%">
+        <circle class="donut-hole" cx="21" cy="21" fill="#fff" r="15.91549430918954"></circle>
+        <circle class="donut-ring" cx="21" cy="21" fill="transparent" r="15.91549430918954"
+        [attr.stroke]="defineColorProgresso()" stroke-width="4"></circle>
+
+        <circle
+          @fadeInOut [attr.stroke-dasharray]="porcentagem + ' ' + '100'" [attr.stroke]="defineColor()"
+          class="donut-segment" cx="21" cy="21"
+          fill="transparent" r="15.91549430918954"
+          stroke-dashoffset="0" stroke-width="4"
+        >{{_processoPedido?.ultimaSituacao?.situacaoProcesso?.coCor}}</circle>
+      </svg>
+      <div *ngIf="!isConclusivo" class="info">
+        <p class="titlePrazo" >Prazo:</p>
+        <div  class="infDays">
+          <p @fadeInOut [ngStyle]="{'color': defineColorBD()}" class="dias-totais">
+            <span class="boldee">{{ progresso?.diasPrazo != null && progresso?.diasPrazo !== 99 ? (progresso?.diasPrazo | campoVazioHifen) : '—' }}</span> previsto
+          </p>          
+          <p class="dias-corridos"><span
+            class="boldee">{{progresso?.diasDecorridos | campoVazioHifen}}</span> decorrido{{progresso?.diasDecorridos > 1 ? 's' : ''}}</p>
+          <span [ngStyle]="{'display': defineVisibility()}">
+            <p [ngStyle]="{'color': '#FF0000'}" class="dias-atrasos">
+              <span class="boldee">{{progresso?.diasAtraso | campoVazioHifen}}</span> atraso
+            </p>
+          </span>
+        </div>
+      </div>
+    </div>
+    <p @fadeInOut class="progress-info">{{mensagemProcesso}}</p>
+  </div>
+</div>

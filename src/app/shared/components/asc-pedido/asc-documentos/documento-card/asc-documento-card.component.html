@@ -1,0 +1,269 @@
+<div *ngIf="existeDocumentoParaProcedimentosSelecionados">
+  <div
+    *ngFor="let documento of documentos; let i = index"
+    [ngClass]="{ 'custom-card': !isInResumo, 'resumo-arquivos': isInResumo }"
+  >
+    <div
+      class="resumo-arquivos-header"
+      *ngIf="isInResumo && apresentarDadosDocumento"
+    >
+      <p>
+        {{ documento?.documento?.nome }}
+        <span class="codigo"
+          >(tipo {{ documento?.documento?.idTipoDocumento }})</span
+        >
+      </p>
+
+      <div class="actionDoc">
+        <asc-file-selector
+          (arquivos)="arquivos($event)"
+          *ngIf="isPermiteUpload(documento.id)"
+          [disabled]="loading"
+          [documento]="documento"
+          [extensions]="'.jpg,.png,.gif,.pdf'"
+          [index]="i"
+          [inputId]="'arquivo' + i + documento?.id"
+          [isInResumo]="isInResumo"
+          [limitLengthFile]="4096000"
+          style="margin-left: auto"
+        ></asc-file-selector>
+
+        <div
+          style="width: 8px"
+          *ngIf="
+            isComplementar &&
+            documento.arquivos.length == 0 &&
+            validacaoDocPedido(documento.id) &&
+            (processoNovo || permissoes?.analisar)
+          "
+        ></div>
+        <button
+          *ngIf="
+            isComplementar &&
+            documento.arquivos.length == 0 &&
+            validacaoDocPedido(documento.id) &&
+            (processoNovo || permissoes?.analisar)
+          "
+          (click)="removerDocumento(documento)"
+          [disabled]="loading"
+          class="dangerIcon btn-small"
+          id="removerDocumento{{ i + documento?.id }}"
+        >
+          <em class="fa fa-trash"></em>
+        </button>
+      </div>
+    </div>
+
+    <label
+      *ngIf="!isInResumo && apresentarDadosDocumento"
+      class="label-campo-card"
+    >
+      {{ documento?.documento?.nome }}
+      <span class="codigo">(tipo {{ documento?.documento?.id }})</span>
+    </label>
+
+    <div
+      class="card-info"
+      *ngIf="
+        !isInResumo &&
+        documento?.documento?.descricao &&
+        apresentarDadosDocumento
+      "
+    >
+      <span style="font-weight: bold">Descrição:</span>
+      {{ documento?.documento?.descricao }}
+    </div>
+
+    <div
+      [ngClass]="{ 'resumo-arquivos-lista': isInResumo, arquivos: !isInResumo }"
+    >
+      <div class="arquivo-card" *ngFor="let arquivo of documento.arquivos">
+        <div
+          [ngClass]="{
+            'arquivo-info': isInResumo
+              ? 'arquivo-info-without-action'
+              : !isInResumo
+          }"
+        >
+          <p class="arquivo-nome">{{ arquivo?.name }}</p>
+          <p class="arquivo-data">
+            <strong>{{ arquivo?.data | date : "dd/MM/yyyy HH:mm:ss" }}</strong>
+            <i
+              *ngIf="!tituloAcompanhamento"
+              class="fa fa-user-circle-o"
+              aria-hidden="true"
+              [title]="arquivo.usuario || ''"
+            ></i>
+          </p>
+        </div>
+        <div class="arquivo-actions">
+          <button
+            id="visualizarArquivo{{ i + documento?.id }}"
+            (click)="
+              abrirModalVisualizarDocumentos(
+                $event,
+                arquivo,
+                modalVisualizarDocumentoComponent,
+                todosArquivos
+              )
+            "
+            [disabled]="loading"
+            [title]="bundle('MH147')"
+            class="infoIconColor btn-small"
+          >
+            <em class="fa fa-eye"></em>
+          </button>
+          <div style="width: 8px"></div>
+          <button
+            class="btn-small"
+            id="removerArquivo{{ i + documento?.id }}"
+            (click)="removerArquivo(arquivo, i)"
+            *ngIf="isPermiteRemover(arquivo, documento)"
+            [disabled]="loading"
+            [title]="bundle('MH148')"
+          >
+            <em class="fa fa-trash"></em>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="custom-card-footer"
+      (click)="click(documento)"
+      @fadeInOut
+      *ngIf="!isInResumo && isPermiteUpload(documento.id)"
+    >
+      <asc-file-selector
+        [extensions]="'.jpg,.png,.gif,.pdf'"
+        [limitLengthFile]="4096000"
+        [documento]="documento"
+        [disabled]="loading"
+        (arquivos)="arquivos($event)"
+        [inputId]="'arquivo2' + i + documento?.id"
+        [isInResumo]="isInResumo"
+      ></asc-file-selector>
+    </div>
+
+    <div *ngIf="habilitarValidacao">
+      <hr
+        *ngIf="!processoNovo && documento?.arquivos?.length > 0"
+        class="separador"
+      />
+
+      <div *ngIf="verificaSituacaoParaExibirOuNao(documento.id)">
+        <div
+          *ngIf="
+            (!processoNovo &&
+              permissoes?.analisar &&
+              documento?.arquivos?.length > 0) ||
+            tituloAcompanhamento
+          "
+          style="display: flex; justify-content: space-between"
+        >
+          <p class="sub-titulo">Validação do documento</p>
+          <!--
+            Comentado à pedido da Lidiane        
+          <p *ngIf="mapaValidacoesEncontradas.get(documento.id)" class="arquivo-data">
+            <i aria-hidden="true" class="fa fa-user-circle-o"></i>
+            {{mapaValidacoesEncontradas.get(documento.id).codigoUsuarioValidacao | uppercase}}
+          </p> -->
+        </div>
+        <div
+          *ngIf="
+            (!processoNovo &&
+              permissoes?.analisar &&
+              documento?.arquivos?.length > 0) ||
+            tituloAcompanhamento
+          "
+        >
+          <div
+            *ngIf="
+              (!mapaValidacoesEncontradas.get(documento.id) ||
+                mapaValidacoesEncontradas.get(documento.id)?.edicao) &&
+              permissoes?.editar &&
+              permissoes?.analisar
+            "
+            class="row ui-g no-padding"
+          >
+            <span class="label-campo-card ui-g-12 no-padding-left"
+              >Situação</span
+            >
+            <div class="ui-g-4 no-padding-left">
+              <p-dropdown
+                [(ngModel)]="validacoes[documento.id]"
+                [options]="itensTipoValidacao"
+                class="form-control2"
+                inputId="tipoValidacao-{{ documento.id }}"
+                [placeholder]="this.bundle('MHSPH')"
+              >
+              </p-dropdown>
+            </div>
+            <div class="ui-g-8">
+              <asc-button-third
+                (onClick)="atualizarSituacaoDocumentoProcesso(documento)"
+                @fadeInOut
+                [buttonId]="'arquivo' + i + documento?.id"
+                [disabled]="loading || !validacoes[documento.id]"
+                [showProgress]="loading"
+                title="Confirmar"
+              >
+              </asc-button-third>
+            </div>
+          </div>
+
+          <div
+            *ngIf="
+              (mapaValidacoesEncontradas.get(documento.id) &&
+                !mapaValidacoesEncontradas.get(documento.id)?.edicao &&
+                permissoes?.editar &&
+                permissoes?.analisar) ||
+              tituloAcompanhamento
+            "
+            class="ui-g no-padding"
+          >
+            <span class="label-campo-card ui-g-12 no-padding-left"
+              >Situação</span
+            >
+            <div class="ui-g-10 no-padding-left">
+              {{ mostraSituacao(documento.id) }}
+            </div>
+            <div
+              class="ui-sm-2"
+              style="margin-left: auto"
+              *ngIf="!tituloAcompanhamento"
+            >
+              <button
+                (click)="
+                  clickAlerarDados(
+                    mapaValidacoesEncontradas.get(documento.id),
+                    true
+                  )
+                "
+                *ngIf="permissoes?.editar"
+                [disabled]="isEditing || loading"
+                [id]="'alterarDados' + i + documento?.id"
+                class="btn-editar"
+              >
+                <i aria-hidden="true" class="fa fa-pencil"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p-message
+  severity="warn"
+  *ngIf="!existeDocumentoParaProcedimentosSelecionados && !isInResumo"
+  text="Nenhum documento esperado para este pedido, até o momento."
+>
+</p-message>
+
+<asc-modal-visualizar-documento
+  #modalVisualizarDocumentoComponent
+  [controls]="controls"
+>
+</asc-modal-visualizar-documento>

@@ -1,0 +1,89 @@
+<div class="row col-md-12">
+  <h4>Geral</h4>
+</div>
+<form [formGroup]="form">
+  <div class="row col-md-12 coluna-interna">
+    <div class="row col-md-4" *ngIf="!rascunhoPedido && hasAcaoAnalise()">
+      <label class="control-label obrigatorio" for="caracterSolicitacao"
+        >Caráter da Solicitação</label
+      >
+      <p-dropdown
+        class="form-control2"
+        formControlName="idCaraterSolicitacao"
+        [options]="itensCaracteresSolicitacao"
+        [filter]="true"
+        [placeholder]="this.bundle('MHSPH')"
+        title="Caráter da solicitação."
+        id="caracterSolicitacao"
+      >
+        <ng-template let-cs pTemplate="item">
+          <div class="ui-helper-clearfix select-relacao">{{ cs.label }}</div>
+        </ng-template>
+      </p-dropdown>
+      <div
+        *ngIf="
+          idCaraterSolicitacao.invalid &&
+          (idCaraterSolicitacao.dirty || idCaraterSolicitacao.touched)
+        "
+        class="error-form"
+      >
+        <div *ngIf="idCaraterSolicitacao.errors['required']">
+          {{ bundle("MA005") }}
+        </div>
+      </div>
+    </div>
+
+    <div class="row col-md-4">
+      <label class="control-label" for="email">E-mail</label>
+      <input
+        formControlName="email"
+        type="text"
+        id="email"
+        name="email"
+        class="form-control"
+        title="E-mail adicional, diferente do cadastrado para o(a) titular."
+      />
+      <div
+        *ngIf="email.invalid && (email.dirty || email.touched)"
+        class="error-form"
+      >
+        <div *ngIf="email.errors['emailInvalido']">{{ bundle("MA019") }}</div>
+      </div>
+    </div>
+
+    <div class="row col-md-4">
+      <label class="control-label" for="telefoneContato"
+        >Telefone de Contato</label
+      >
+      <input
+        id="telefoneContato"
+        class="form-control"
+        formControlName="telefoneContato"
+        type="text"
+        title="Telefone para contato com DDD."
+        (blur)="constantes.control.formatarTelefone(this.telefoneContato)"
+        (focus)="constantes.control.formatarTelefone(this.telefoneContato)"
+        (keyup)="constantes.control.formatarTelefone(this.telefoneContato)"
+        (keydown)="constantes.control.formatarTelefone(this.telefoneContato)"
+        size="15"
+        maxlength="15"
+      />
+    </div>
+
+    <div class="row col-md-12">
+      <label class="control-label" for="observacao">Observações</label>
+      <textarea
+        pInputTextarea
+        id="observacao"
+        class="form-control"
+        formControlName="observacao"
+        [rows]="5"
+        [cols]="30"
+        [autoResize]="true"
+        title="Informações que o(a) titular considerar relevantes para a análise do pedido."
+      >
+Observações informadas</textarea
+      >
+    </div>
+  </div>
+</form>

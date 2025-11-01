@@ -1,0 +1,209 @@
+<!-- Page Header-->
+<div class="container">
+  <div class="col-md-12 breadcrumb-header">
+    <ul class="breadcrumb">
+      <li><span (click)="voltar()" class="voltar"><i class="fa fa-arrow-left" aria-hidden="true"></i>Voltar</span></li>
+      <a routerLink="/home">Início</a>
+      <em class="fa fa-chevron-right"></em>
+      Manutenção
+      <em class="fa fa-chevron-right"></em>
+      Parâmetros
+      <em class="fa fa-chevron-right"></em>
+      <a routerLink="/manutencao/parametros/email">E-mail por Ocorrência</a>
+      <em class="fa fa-chevron-right"></em>
+      E-mail por Ocorrência – <span *ngIf="!id">Inclusão</span><span *ngIf="id">Edição</span>
+    </ul>
+  </div>
+
+  <div class="title-type">
+    <h1 class="titulo-pagina">
+      E-mail por Ocorrência – <span *ngIf="!id">Inclusão</span><span *ngIf="id">Edição</span>
+    </h1>
+  </div>
+
+  <section class="row">
+    <form [formGroup]="formulario" name="form">
+      <div class="form-row" style="display: flex; margin-bottom: 10px">
+        <div *ngIf="email.id" class="pl-0 col-md-4">
+          <label class="control-label" for="id">ID</label>
+          <p class="marginBottom" id="id">{{email.id}}</p>
+        </div>
+        <div *ngIf="email.dataCadastramento" class="col-md-4">
+          <label class="control-label" for="dataCadastramento">Cadastramento</label>
+          <p class="marginBottom" id="dataCadastramento">{{email.dataCadastramento |date:'dd/MM/yyyy HH:mm:ss'}}</p>
+        </div>
+        <div *ngIf="email.codigoUsuarioCadastramento" class="pr-0 col-md-4">
+          <label class="control-label" for="contrato">Usuário</label>
+          <p class="marginBottom" id="contrato">{{email.codigoUsuarioCadastramento}}</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="pl-0 col-xs-6">
+          <asc-select-situacao-processo-ocorrencia
+            label="Ocorrência" 
+            [control]="idSituacaoProcesso"
+            [placeholder]="this.bundle('MHSPH')" 
+            title="Situação do pedido." 
+            required
+            [disabled]="!isNaNOrNull(id)">
+          </asc-select-situacao-processo-ocorrencia>
+        </div>
+        <div class="p-0 col-xs-6">
+          <label class="control-label obrigatorio" for="tipoProcesso">Tipo de pedido</label>
+          <asc-multiSelect
+            [options]="listComboTipoProcesso"
+            [control]="tiposProcesso"
+            (onChange)="onChangeTipoProcesso()"
+            id="tipoProcesso" required
+            [disabled]="!isNaNOrNull(id)">
+          </asc-multiSelect>
+          <asc-message-error
+            [control]="tiposProcesso" type="required"
+            [errorMessage]="bundle('MA005')"
+          ></asc-message-error>
+        </div>
+      </div>
+      <div class="row">
+        <div class="pl-0 col-xs-6">
+          <label class="control-label obrigatorio" for="tiposBeneficiario">Tipo Beneficiário</label>
+          <asc-listagem *ngIf="id" [lista]="listComboTipoBeneficiarioSelecionado"></asc-listagem>
+          <asc-multiSelect
+            [options]="listComboTipoBeneficiario"
+            [control]="formulario.get('tiposBeneficiario')"
+            id="tiposBeneficiario" required
+            [disabled]="!isNaNOrNull(id)">
+          </asc-multiSelect>
+          <asc-message-error
+            [control]="formulario.controls['tiposBeneficiario']" type="required"
+            [errorMessage]="bundle('MA005')"
+          ></asc-message-error>
+        </div>
+        <div class="p-0 col-xs-6">
+          <label class="control-label obrigatorio" for="tipoDestinatario">Destinatário(s)</label>
+          <asc-multiSelect
+            [options]="listComboTipoDestinatario"
+            [control]="formulario.get('tiposDestinatario')" _value=""
+            id="tipoDestinatario" required
+          ></asc-multiSelect>
+          <asc-message-error
+            [control]="formulario.controls['tiposDestinatario']" type="required"
+            [errorMessage]="bundle('MA005')"
+          ></asc-message-error>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="pl-0 col-xs-6">
+          <asc-input-text
+            [control]="nomeRemetente" label="Nome do Remetente"
+            id="nomeRemetente" name="nomeRemetente" required
+          ></asc-input-text>
+        </div>
+        <div class="p-0 col-xs-6">
+          <asc-input-email
+            [control]="emailRemetente" label="E-mail do Remetente"
+            id="emailRemetente" name="emailRemetente" required
+          ></asc-input-email>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="pl-0 col-xs-6">
+          <asc-input-email
+            [control]="copiaPara" label="Cópia Para E-mail"
+            id="copiaRemetente" name="copiaRemetente"
+          ></asc-input-email>
+        </div>
+        <div class="p-0 col-xs-6">
+          <asc-input-text
+            [control]="assunto" label="Assunto" id="assunto"
+            name="assunto" required
+          ></asc-input-text>
+        </div>
+      </div>
+
+      <div class="row col-md-12 mb-15 p-0">
+        <label class="control-label obrigatorio" for="texto">Texto do E-mail
+          <a href="#" title="Como preencher este campo." (click)="$event.preventDefault(); textoAjuda.show();"
+          ><em class="fa fa-question-circle"></em></a>
+        </label>
+        <p-editor id="texto" formControlName="texto" [style]="{'height':'210px'}">
+          <p-header>
+            <span class="ql-formats">
+              <button title="Negrito" class="ql-bold"></button>
+              <button title="Itálico" class="ql-italic"></button>
+              <button title="Sublinhado" class="ql-underline"></button>
+            </span>
+            <span class="ql-formats">
+              <select title="Alinhamento" class="ql-align">
+                <option selected></option>
+                <option value="center"></option>
+                <option value="right"></option>
+                <option value="justify"></option>
+              </select>
+              <button title="Lista Ordenada" class="ql-list" value="ordered"></button>
+              <button title="Lista com Marcadores" class="ql-list" value="bullet"></button>
+            </span>
+            <span class="ql-formats">
+              <button title="Inserir Link" class="ql-link"></button>
+              <button title="Inserir Imagem" class="ql-image"></button>
+              <button title="Inserir Código" class="ql-code-block"></button>
+            </span>
+            <span class="ql-formats">
+              <button title="Limpar Formatação" class="ql-clean"></button>
+            </span>
+          </p-header>
+        </p-editor>
+        <asc-message-error
+          [control]="formulario.controls['texto']" type="required"
+          [errorMessage]="bundle('MA007')"
+        ></asc-message-error>
+      </div>
+
+      <div class="row" *ngIf="!isNaNOrNull(id)">
+        <div class="pl-0 col-xs-2">
+            <p-checkbox
+                    formControlName="inativo" binary="true" inputId="binary"
+                    (onChange)="onChangeInativo($event)">
+            </p-checkbox>
+            <label class="control-label" style="margin: 0 0 0 5px!important" for="binary">Inativo</label>
+        </div>
+        <div class="pl-0 col-xs-2">
+            <asc-input-date
+                    [control]="dataInativacao" [required]="inativo.value"
+                    [disabled]="!inativo.value" inputId="dataInativacao" label="Data da Inativação">
+            </asc-input-date>
+            <asc-message-error
+                    [control]="dataInativacao" type="dataIgualAtualMaior"
+                    errorMessage="Data de Inativação deve ser igual ou superior a data atual!">
+            </asc-message-error>
+        </div>
+    </div>
+
+      <div class="clearfix"></div>
+
+      <div class="col-xs-12 p-0 barra-botoes">
+        <button class="btn back-btn" (click)="voltar()">
+          <span class="fa fa-reply fa-fw"></span> Voltar
+        </button>
+        <button class="btn clean-btn" (click)="excluir()" id="btnFormExcluir" *ngIf="id">
+          <span class="fa fa-remove fa-fw"></span>
+          Excluir
+        </button>
+        <button
+          *ngIf="id" class="btn clean-btn" (click)="restaurarCampos()" id="btnFormRestaurar">
+          Restaurar Campos
+        </button>
+        <button id="btnLimparCampos" class="btn back-btn" (click)="limparCampos()" *ngIf="!id">
+          <span class="fa fa-trash fa-fw"></span> Limpar Campos
+        </button>
+        <button class="btn continue-btn" (click)="salvar()" [disabled]="formulario.invalid">
+          <span class="fa fa-check fa-fw"></span> Salvar
+        </button>
+      </div>
+    </form>
+
+    <app-texto-ajuda-email #textoAjuda></app-texto-ajuda-email>
+
+  </section>
+</div>

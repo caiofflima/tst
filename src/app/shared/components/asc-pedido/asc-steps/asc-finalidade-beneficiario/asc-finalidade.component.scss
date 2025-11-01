@@ -1,0 +1,243 @@
+div.finalidade-container {
+  max-width: 782px;
+  padding: 16px 8px;
+  margin: 0 auto;
+
+  div.custom-left-grid {
+    padding-right: 12px;
+    width: 420px;
+    max-width: 420px;
+    min-width: 420px;
+  }
+
+  div.custom-right-grid {
+    padding-top: 50px;
+    padding-left: 12px;
+    max-width: 28em;
+
+    p.grid-titulo {
+      font-family: 'Caixa Std Bold', sans-serif;
+      font-style: normal;
+      font-size: 18px;
+      line-height: 22px;
+      color: #40A797;
+    }
+
+    span.grid-footer {
+      font-family: 'Caixa Std Regular', sans-serif;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 16px;
+      color: #000000;
+
+      a,
+      a:link {
+        color: #F7941E;
+        text-decoration: underline;
+      }
+    }
+  }
+
+  p.titulo {
+    font-family: 'Caixa Std Bold', sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 33px;
+    color: #0065B7;
+    margin: 0 0 16px 0;
+    max-width: 570px;
+    box-sizing: border-box;
+  }
+
+  div.custom-form-group-input {
+    margin-bottom: 16px;
+    position: relative;
+
+    div.custom-input-container {
+      position: relative;
+
+      input {
+        padding-right: 30px;
+      }
+    }
+
+    button.input-btn {
+      position: absolute;
+      height: 100%;
+      top: 0;
+      right: 0;
+      width: 27px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: inherit;
+      border: 1px solid #C3C3C3;
+      box-sizing: border-box;
+      border-radius: 0 3px 3px 0;
+
+      i {
+        color: #0E0E0E;
+      }
+    }
+  }
+
+  div.custom-form-group-select {
+    position: relative;
+    width: 100%;
+    margin-bottom: 32px;
+
+    span.button-split {
+      width: 1px;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      right: 20px;
+      background-color: #C3C3C3;
+    }
+  }
+
+  select,
+  input {
+    border: 1px solid #C3C3C3;
+    box-sizing: border-box;
+    border-radius: 3px;
+    padding: 12px 8px;
+    width: 100%;
+  }
+}
+
+div.stepper-container {
+  width: 100%;
+  height: 50px;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+div.finalidade-footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 60px;
+  margin-bottom: 50px;
+
+  button.continue-btn {
+    background: #F7941E;
+    border: none;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 246px;
+    width: 100%;
+
+    span {
+      font-family: 'Caixa Std Regular', sans-serif;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 18px;
+      line-height: 25px;
+      color: #FFFFFF;
+      margin: 12px 8px;
+    }
+
+    &:hover,
+    &:active {
+      background: #db6e00;
+      transition: 250ms ease-in-out;
+    }
+
+    &:disabled {
+      background-color: #E5E5E5;
+      cursor: not-allowed;
+    }
+  }
+
+  button.back-btn {
+    background: #fff;
+    border: 1px solid #F7941E;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 246px;
+    width: 100%;
+
+    span {
+      font-family: 'Caixa Std Regular', sans-serif;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 18px;
+      line-height: 25px;
+      color: #F7941E;
+      margin: 12px 8px;
+    }
+
+    &:hover,
+    &:active {
+      background: #db6e00;
+      transition: 250ms ease-in-out;
+
+      span {
+        color: #fff;
+      }
+    }
+  }
+}
+
+div.space-between {
+  display: flex;
+  justify-content: space-between;
+
+  p.avatar {
+    font-family: 'Caixa Std Regular', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 16px;
+    display: flex;
+    align-items: center;
+    color: #000000;
+
+    i,
+    em {
+      color: #0065B7;
+      margin-right: 5px;
+      font-size: 2rem;
+    }
+  }
+}
+
+@media screen and (max-width: 810px) {
+  ul.custom-stepper {
+    width: 90%
+  }
+
+  div.solicitacao-container {
+    padding-top: 32px;
+  }
+
+  div.finalidade-container {
+    div.custom-left-grid {
+      margin: 0 auto;
+    }
+
+    div.custom-right-grid {
+      padding-top: 8px;
+    }
+  }
+
+  div.finalidade-footer {
+    justify-content: center;
+    flex-flow: column;
+    padding: 0;
+
+    button {
+      margin: 8px auto;
+    }
+  }
+
+  div.sb-to-mobile {
+    flex-flow: column;
+  }
+}

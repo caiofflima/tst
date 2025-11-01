@@ -1,0 +1,36 @@
+<section>
+
+  <p class="titulo-card">Dados do pedido zzz</p>
+
+  <div class="ui-g">
+    <div class="ui-g-8 ui-lg-8 ui-md-12 ui-sm-12 no-padding">
+      <label class="label-campo-card">Número</label>
+      <p class="campo-card">{{processo?.numero | campoVazioHifen }}</p>
+    </div>
+    <div class="ui-g-4 ui-lg-4 ui-md-12 ui-sm-12 no-padding">
+      <label class="label-campo-card">Protocolo ANS</label>
+      <p class="campo-card">{{processo?.protocoloAns | campoVazioHifen }}</p>
+    </div>
+    <div class="ui-g-8 ui-lg-8 ui-md-12 ui-sm-12 no-padding margin-16">
+      <label class="label-campo-card">Data de abertura</label>
+      <p class="campo-card">{{processo?.dataAbertura | campoVazioHifen }}</p>
+    </div>
+    <div class="ui-g-4 ui-lg-4 ui-md-12 ui-sm-12 no-padding margin-16">
+      <label class="label-campo-card">Data de encerramento</label>
+      <p class="campo-card">{{processo?.dataEncerramento | campoVazioHifen }}</p>
+    </div>
+    <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12 no-padding margin-16">
+      <label class="label-campo-card">Tipo de pedido</label>
+      <p class="campo-card">{{processo?.tipo | campoVazioHifen }} – {{processo?.tipoSigla | campoVazioHifen }}</p>
+    </div>
+    <div class="ui-g-12 ui-md-12 ui-sm-12 no-padding margin-16">
+      <label class="label-campo-card">Finalidade</label>
+      <p class="campo-card">{{processo?.finalidade | campoVazioHifen }}</p>
+    </div>
+    <div class="ui-g-12 ui-md-12 ui-sm-12 no-padding margin-16">
+      <label class="label-campo-card">Observação</label>
+      <p class="campo-card">{{observacao}}</p>
+    </div>
+  </div>
+
+</section>

@@ -1,0 +1,59 @@
+section {
+    background: #F2F7F8;
+    padding: 2em 0;
+
+    .ft-title {
+        width: max-content;
+        padding: 0!important;
+        border-bottom: 5px solid #54bbab!important;
+        border-left: 0!important;
+    }
+
+    .ft-list {
+        margin-top: 10px;
+        list-style: none;
+
+        li {
+            padding-bottom: 0.75em;
+        }
+    }
+
+}
+
+.btn-whatsapp {
+
+    text-decoration: none;
+
+    i {
+        color: #48985D;
+    }
+
+    &:hover {
+        color: #48985D;
+    }
+}
+
+.notas {
+    color: #23527c;
+    text-align: center;
+}
+
+.rodape-principal {
+    background-color: #f9f9f9;
+}
+
+@media (max-width: 960px) {
+    .list-ft {
+        div {
+            padding: 0!important;
+            margin-bottom: 20px;
+        }
+    }
+    .d-flex {
+      display: block!important;
+    }
+}
+
+.n-br {
+    border: 0!important;
+}

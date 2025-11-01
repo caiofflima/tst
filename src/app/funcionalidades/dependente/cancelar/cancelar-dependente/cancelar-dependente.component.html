@@ -1,0 +1,47 @@
+<div class="container" *ngIf="!processoEnviado">
+  <asc-stepper [fitScreen]="true" [breadcrumbOptions]="breadcrumb" [disableClickOnLabel]="true" #cdkStepper>
+    <cdk-step label="Beneficiário">
+      <ng-template cdkStepLabel>
+        Cancelamento de Dependente
+      </ng-template>
+      <asc-etapa-motivo-beneficiario
+        [checkRestart]="reinicarSubject"
+        (beneficiarioModel)="beneficiarioModelSelecionado($event)"
+        (motivoCancelamentoModel)="motivoCancelamentoModelSelecionado($event)"
+        (dataOcorrenciaModel)="dataOcorrenciaModelSelecionada($event)"
+        [routerLinkToBack]="'/cancelar-dependente'"
+        [stepper]="cdkStepper"
+        [idTipoProcesso]="idTipoProcesso"
+        [idBeneficiarioModel]="idBeneficiarioModel"
+      ></asc-etapa-motivo-beneficiario>
+    </cdk-step>
+    <cdk-step label="Documentos">
+      <ng-template cdkStepLabel>
+        Cancelamento de Dependente
+      </ng-template>
+      <asc-documentos-requeridos-pedido
+        [parametro]="parametro"
+        [stepper]="cdkStepper" (documentosSelecionados)="documentosSelecionados($event)"
+      ></asc-documentos-requeridos-pedido>
+    </cdk-step>
+    <cdk-step label="Resumo">
+      <ng-template cdkStepLabel>
+        Cancelamento de Dependente
+      </ng-template>
+      <asc-etapa-resumo-cancelar
+        [beneficiario]="beneficiarioModel"
+        [documentos]="documentos"
+        [motivoCancelamento]="motivoCancelamentoModel"
+        [dataOcorrencia]="dataOcorrenciaModel"
+        [stepper]="cdkStepper"
+        (processoEnviadoEvent)="setProcessoEnviado($event)"
+        (reiniciarEvent)="reinicarSubject.next()"
+      ></asc-etapa-resumo-cancelar>
+    </cdk-step>
+  </asc-stepper>
+</div>
+<asc-recibo-dependente
+  [pedido]="recibo"
+  [motivo]="motivoCancelamentoModel.nome"
+  *ngIf="processoEnviado"
+></asc-recibo-dependente>

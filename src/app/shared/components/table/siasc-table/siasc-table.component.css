@@ -1,0 +1,15 @@
+.bg-row:hover {
+    background-color: #d9edf7;
+}
+
+.table-bottom {
+    margin-bottom: 5px;
+}
+
+.bordaRedonda {
+    border-radius: 10px;
+    background-color: #da8911;
+    font-size: 10px;
+    color: white;
+    padding: 3px 5px;
+}

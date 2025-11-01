@@ -1,0 +1,80 @@
+<div class="custom-container">
+
+  <p class="titulo">OK. Agora, precisamos dos dados do procedimento.</p>
+
+  <div class="ui-g">
+    <div class="ui-g-12">
+      <div class="custom-form-grid">
+        <label style="width: 100%;" class="custom-input-label absolute">Vacina</label>
+        <asc-select-base-layout [control]="formularioProcedimento.get('procedimento')">
+        </asc-select-base-layout>
+      </div>
+    </div>
+  </div>
+  <div class="ui-g">
+    <div class="ui-g-12 ui-md-6">
+      <div class="ui-g-12 ui-md-12 custom-form-grid no-padding-left">
+        <label class="custom-input-label absolute">Quantidade </label>
+        <asc-input-text label="" [control]="formularioProcedimento.get('grau')">
+        </asc-input-text>
+      </div>
+    </div>
+    <div class="ui-g-12 ui-md-6">
+      <div class="ui-g-12 ui-md-12 custom-form-grid no-padding-right">
+        <label class="custom-input-label absolute">Valor unitário pago </label>
+        <asc-input-money label="" [control]="formularioProcedimento.get('valorUnitarioPago')">
+        </asc-input-money>
+      </div>
+      <div class="ui-g-12 ui-md-12 custom-form-grid no-padding-right">
+        <label class="custom-input-label absolute">Data do atendimento</label>
+        <asc-input-date label="" [control]="formularioProcedimento.get('data')">
+        </asc-input-date>
+      </div>
+    </div>
+    <div class=" flex-end">
+      <button class="custom-btn-confirm">
+        <span>
+          <i class="fa fa-plus" aria-hidden="true"></i> Adicionar vacina
+        </span>
+      </button>
+    </div>
+  </div>
+
+
+</div>
+<div class="custom-container-larger">
+  <div class="list">
+    <p class="list-title">Procedimentos adicionados</p>
+    <div class="header">
+      <p class="h-1">Vacina</p>
+      <p class="h-2">Quantidade </p>
+      <p class="h-3">Valor</p>
+      <p class="h-4">Data</p>
+    </div>
+    <div style="position: relative;">
+      <div class="card">
+        <p class="h-1"><strong>85058637</strong> 85058637 Vacina anti rotavírus - pentav...
+        </p>
+        <p class="h-2">1
+        </p>
+        <p class="h-3">R$ 250,00</p>
+        <p class="h-4">23/06/2020</p>
+        <div class="h-6">
+          <button class="edit-proc"><span><i class="fa fa-pencil" aria-hidden="true"></i></span></button>
+          <button class="remove-proc"><span><i class="fa fa-trash" aria-hidden="true"></i></span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="footer">
+  <button class="back-btn" cdkStepperPrevious>
+    Voltar
+  </button>
+
+  <button class="next-btn" cdkStepperNext>
+    Continuar
+  </button>
+</div>

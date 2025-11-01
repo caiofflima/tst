@@ -1,0 +1,139 @@
+<asc-acompanhamento-processo-base
+  (onPermissoes)="updatePermissoes($event)"
+  [processo]="processo">
+
+  <div asc-conteudo>
+    <div
+    class="c-card conteudo-spacing docsMP"
+    @fadeInOut
+    [class.c-card-invalido]="mostrarBordaVermelhaObrigatorios"
+    [class.c-card-valido]="mostrarBordaVerdeObrigatorios"
+    *ngIf="(mostrarBordaVerdeObrigatorios || mostrarBordaVermelhaObrigatorios) && !(isAguardandoDocumentoComplementar && mostrarBordaVerdeObrigatorios)">
+    <asc-documentos-obrigatorios-card
+        (hasDocumentos)="possuiDocumentosObrigatorios($event)"
+        (hasDocumentosInvalidos)="hasDocumentosinvalido($event)"
+        (hasAnexos)="hasAnexosDocumentosObrigatorio($event)"
+        [permissoes]="permissoes"
+        [processo]="processo"
+        [tipoProcessadorUpload]="'adesao'"
+        (listAnexos)="getListAnexosObrigatorio($event)"
+        (onUploadComplete)="atualizarProcesso()"
+        (atualizarPedido)="atualizarPedido();atualizarProcesso();carregarProcesso();"
+      ></asc-documentos-obrigatorios-card>
+      <div *ngIf="permissoes?.editar && permissoes?.tipo === 'analise' && !apresentarDocumentoComplementar"
+           class="footer-btns-card" style="padding-top: 1em !important; padding-bottom: 1em !important;" @fadeInOut>
+        <button (click)="showDocumentoComplementar(true)" class="btn-small btn-card-novo">
+          <span class="fa fa-plus fa-fw"></span><span> Adicionar documento complementar</span>
+        </button>
+      </div>
+    </div>
+
+    <div *ngIf="possuiDocumentosComplementares && recebendoDocumentacaoTitular"
+         @fadeInOut class="c-card conteudo-spacing docsMP"
+         [class.c-card-invalido]="mostrarBordaVermelhaCondicionais"
+         [class.c-card-valido]="mostrarBordaVerdeCondicionais">
+      <asc-documentos-condicionados
+        (hasDocumentos)="hasDocumentos($event)"
+        (atualizarPedido$)="atualizarProcesso()"
+        [permissoes]="permissoes"
+        [processo]="processo"
+        [atualizarProcesso]="subjectAtualizarProcesso"
+        (listAnexos)="getListAnexosObrigatorio($event)"
+        (onUploadComplete)="atualizarProcesso()"
+      ></asc-documentos-condicionados>
+    </div>
+
+    <div @fadeInOut class="c-card conteudo-spacing">
+      <asc-beneficiario-card [permissoes]="permissoes" [processo]="processo"></asc-beneficiario-card>
+    </div>
+
+    <div class="c-card conteudo-spacing">
+      <asc-dados-processo-card [processo]="processo" [permissoes]="permissoes"></asc-dados-processo-card>
+      <div class="dados-options">
+        <button (click)="cancelarProcesso()" *ngIf="permiteCancelamento()" class="btn-cancel">
+          Cancelar pedido
+        </button>
+        <button (click)="goToTop()" class="btn-to-top">Retornar ao topo</button>
+      </div>
+    </div>
+
+    <div class="c-card conteudo-spacing docsMP" *ngIf="processo?.pedidosProcedimento">
+      <asc-procedimento-pedido-card-pl
+        [pedidosProcedimentos]="processo?.pedidosProcedimento"
+        [permissoes]="permissoes"
+        [processo]="processo"
+      ></asc-procedimento-pedido-card-pl>
+    </div>
+
+    <asc-profissional-executante-pedido
+      [permissoes]="permissoes"
+      [processo]="processo"
+      titulo="Profissional solicitante"
+    ></asc-profissional-executante-pedido>
+
+    <div class="c-card conteudo-spacing docsMP" @fadeInOut
+    *ngIf="possuiDocumentos && (!recebendoDocumentacaoTitular || (isAguardandoDocumentoComplementar && mostrarBordaVerdeObrigatorios))" >
+    <asc-documentos-obrigatorios-card
+        (hasDocumentos)="possuiDocumentosObrigatorios($event)"
+        (hasDocumentosInvalidos)="hasDocumentosinvalido($event)"
+        (hasAnexos)="hasAnexosDocumentosObrigatorio($event)"
+        [permissoes]="permissoes"
+        [processo]="processo"
+        [tipoProcessadorUpload]="'adesao'"
+        (atualizarPedido)="atualizarPedido();atualizarProcesso();">
+      ></asc-documentos-obrigatorios-card>
+      <div *ngIf="permissoes?.editar && permissoes?.tipo === 'analise' && !apresentarDocumentoComplementar"
+           class="footer-btns-card" style="padding-top: 1em !important;" @fadeInOut>
+        <button (click)="showDocumentoComplementar(true)" class="btn-small btn-card-novo">
+          <span class="fa fa-plus fa-fw"></span><span> Adicionar documento complementar</span>
+        </button>
+      </div>
+      <button (click)="goToTop()" class="btn-to-top">Retornar ao topo</button>
+    </div>
+
+    <div *ngIf="apresentarDocumentoComplementar && permissoes?.analisar && permissoes?.editar" @fadeInOut
+         class="c-card conteudo-spacing docsMP">
+      <asc-documento-complementar-card
+        [permissoes]="permissoes"
+        [processo]="processo"
+        [possuiDocumentosObrigatorios]="possuiDocumentos"
+        (onCancelar)="showDocumentoComplementar(false)"
+        (hasDocumentos)="hasDocumentos($event)"
+        (atualizarProcesso$)="atualizarProcesso()"
+        (atualizarPedido)="atualizarPedido()"
+      ></asc-documento-complementar-card>
+      <button (click)="goToTop()" class="btn-to-top">
+        Retornar ao topo
+      </button>
+    </div>
+
+    <div class="c-card conteudo-spacing docsMP" @fadeInOut
+         *ngIf="possuiDocumentosComplementares && !recebendoDocumentacaoTitular">
+      <asc-documentos-condicionados
+        [permissoes]="permissoes"
+        [tipoProcessadorUpload]="'adesao'"
+        [processo]="processo"
+        [atualizarProcesso]="subjectAtualizarProcesso"
+        (hasDocumentos)="hasDocumentos($event)"
+        (atualizarPedido$)="atualizarProcesso()"
+      ></asc-documentos-condicionados>
+      <div class="dados-options">
+        <button (click)="goToTop()" class="btn-to-top">
+          Retornar ao topo
+        </button>
+      </div>
+    </div>
+
+    <div *ngIf="permissoes?.analisar && apresentarSituacao" @fadeInOut class="c-card conteudo-spacing">
+      <asc-mudanca-situacao-card-pl
+        (onMudancaConcluida)="mudancaSituacaoConcluida()"
+        (onSituacoesInvalidas)="onSituacaoInvalida()"
+        [permissoes]="permissoes"
+        [processo]="processo"
+      ></asc-mudanca-situacao-card-pl>
+      <button (click)="goToTop()" class="btn-to-top">Retornar ao topo</button>
+    </div>
+
+  </div>
+
+</asc-acompanhamento-processo-base>

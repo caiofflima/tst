@@ -1,0 +1,186 @@
+<form [formGroup]="formularioContatoTitular">
+  <div class="solicitacao-container">
+    <div class="form-row">
+      <div class="col-md-12 no-padding">
+        <p class="titulo">Contato</p>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="d-flex">
+        <div class="col-md-6 p-0">
+          <div class="row mb-0">
+            <div class="col-md-12 mb-15 no-padding-left">
+              <asc-input-telefone
+                [control]="formularioContatoTitular.get('telefone')"
+                inputId="telefone"
+                label="Telefone"
+              ></asc-input-telefone>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-md-12 mb-15 no-padding-left">
+              <asc-input-text
+                [control]="formularioContatoTitular.get('email')"
+                label="Email"
+                inpudId="email"
+              >
+              </asc-input-text>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="box-infos__header">
+        <h5>
+          <i class="fa fa-map-marker"></i>
+          <span>Endereço</span>
+        </h5>
+      </div>
+
+      <hr class="separador" />
+
+      <div class="form-row">
+        <div class="d-flex">
+          <div class="col-md-5 p-0">
+            <div class="row mb-0">
+              <div class="col-md-12 mb-15 no-padding-left">
+                <div class="custom-form-group-input">
+                  <div class="custom-form-group-input">
+                    <label class="control-label">CEP</label>
+                    <div class="custom-size form__input">
+                      <asc-input-text
+                        [control]="enderecoTitularForm.get('cep')"
+                        maskName="cepMask"
+                        inputId="cep"
+                        label=""
+                      >
+                      </asc-input-text>
+                      <span class="span.button reset-input">
+                        <button type="button" (click)="getEnderecoByCEP()">
+                          <i class="fa fa-sync"></i>
+                        </button>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="row">
+              <div class="col-md-12 mb-15 no-padding-left">
+                <asc-input-text
+                  [control]="enderecoTitularForm.get('logradouro')"
+                  label="Logradouro"
+                  inpudId="logradouro"
+                >
+                </asc-input-text>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="row">
+              <div class="col-md-12 mb-15 no-padding-left">
+                <asc-input-text
+                  [control]="enderecoTitularForm.get('numero')"
+                  label="Número"
+                  inpudId="numero"
+                >
+                </asc-input-text>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="d-flex">
+          <div class="col-md-7 p-0">
+            <div class="row mb-0">
+              <div class="col-md-12 mb-15 no-padding-left">
+                <div class="col-md-12 mb-15 no-padding-left">
+                  <asc-input-text
+                    [control]="enderecoTitularForm.get('bairro')"
+                    label="Bairro"
+                    inpudId="bairro"
+                  >
+                  </asc-input-text>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="row">
+              <div class="col-md-12 mb-15 no-padding-left">
+                <div class="custom-form-group-input">
+                  <div class="col-md-12 mb-15 p-0">
+                    <asc-select-uf
+                      id="asc-select-uf-dados-cadastrais-details"
+                      label="Estado"
+                      [control]="enderecoTitularForm.get('estado')"
+                    >
+                    </asc-select-uf>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="row">
+              <div class="col-md-12 mb-15 no-padding-left">
+                <asc-select-municipio
+                  id="asc-select-municipio-dados-cadastrais-details"
+                  label="Município"
+                  [parametro]="{
+                    idMunicipio: enderecoTitularForm.get('estado').value
+                  }"
+                  [control]="enderecoTitularForm.get('municipio')"
+                  [required]="enderecoTitularForm.get('estado').value"
+                >
+                </asc-select-municipio>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="d-flex">
+          <div class="col-md-7 p-0">
+            <div class="row mb-0">
+              <div class="col-md-12 mb-15 no-padding-left">
+                <div class="col-md-12 mb-15 no-padding-left">
+                  <asc-input-text
+                    [control]="enderecoTitularForm.get('complemento')"
+                    label="Complemento - Opcional"
+                    inpudId="complemento"
+                  >
+                  </asc-input-text>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <asc-button-secondary
+      buttonId="voltar"
+      (onClick)="previousStep($event)"
+      title="Voltar"
+    ></asc-button-secondary>
+    <asc-button-primary
+      buttonId="continuar"
+      title="Continuar"
+      [showProgress]="showProgress"
+      (onClick)="onSubmit()"
+    ></asc-button-primary>
+  </div>
+</form>
+
+</form>

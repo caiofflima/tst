@@ -1,0 +1,9 @@
+<label *ngIf="label" class="control-label" [class.obrigatorio]="required !== null && required !== false"
+       for="{{inputId}}">{{label}}</label>
+<textarea class="form-control" cols="{{cols}}" id="{{inputId}}" maxlength="1500" rows="{{rows}}"
+          [formControl]="control" [placeholder]="placeholder || ''"></textarea>
+<div *ngIf="control?.invalid && (control?.dirty || control?.touched)" [ngStyle]="compStyle" class="error-form">
+  <div *ngIf="control.errors?.cpf">{{bundle("MA009", "CPF")}}</div>
+  <div *ngIf="control.errors?.email">{{bundle("MA019")}}</div>
+  <div *ngIf="control.errors?.required">{{requiredMsg}}</div>
+</div>

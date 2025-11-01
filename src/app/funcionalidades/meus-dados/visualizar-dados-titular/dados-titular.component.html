@@ -1,0 +1,185 @@
+<!-- Page Header-->
+<div class="col-md-12 breadcrumb-header">
+	 <ul class="breadcrumb"><li> <span routerLink="/" class="voltar"><i class="fa fa-arrow-left" aria-hidden="true"></i>Voltar</span></li>
+		<a routerLink="/home">
+		<i class="fa fa-home"></i>
+		Home</a>
+		<i class="fa fa-chevron-right"></i>
+		Meus Dados
+		<i class="fa fa-chevron-right"></i>
+		<a routerLink="/meus-dados">
+			Minha Família
+		</a>
+	</ul>
+</div>
+
+<header class="page-header">
+	<div class="container-fluid">
+		<h2>Minha Família</h2>
+	</div>
+</header>
+<!-- Page Header-->
+
+<section class="row container-fluid">
+	<div class="row col-md-12">
+		<h3>Dados do Titular</h3>
+	</div>
+
+	<section>
+		<div class="row col-md-4">
+			<label class="control-label">Nome</label>
+			<label class="label-detalhar">{{ titular.nome }}</label>
+		</div>
+
+		<div class="row col-md-4">
+			<label class="control-label">Matrícula</label>
+			<label class="label-detalhar">{{ titular.matricula }}</label>
+		</div>
+
+		<div class="row col-md-4">
+			<label class="control-label">Agrupadora</label>
+			<label class="label-detalhar">
+				<span *ngIf="titular.filial">{{ titular.filial }}</span>
+				<span *ngIf="!titular.filial">-</span>
+			</label>
+		</div>
+
+		<div class="clearfix"></div>
+
+		<div class="row col-md-4">
+			<label class="control-label">Contrato</label>
+			<label class="label-detalhar">
+				<span *ngIf="titular.contrato.codigo">{{ titular.contrato.codigo }} - {{ titular.contrato.tipo }}</span>
+				<span *ngIf="!titular.contrato.codigo">-</span>
+				<span class="span-detalhar">{{ titular.contrato.descricao }}</span>
+			</label>
+		</div>
+
+		<div class="row col-md-3">
+			<label class="control-label">Vínculo Funcional</label>
+			<label class="label-detalhar">
+				{{ titular.vinculoFuncional.codigo | number: '3.0' }} - {{ titular.vinculoFuncional.tipo }}
+			</label>
+		</div>
+
+		<div class="clearfix"></div>
+
+		<div class="row col-md-4">
+			<label class="control-label">Endereço Residencial</label>
+			<label class="label-detalhar">
+				{{ titular.endereco.logradouro  }}, {{ titular.endereco.bairro }}<br />
+				{{ titular.endereco.cep }}, {{ titular.endereco.cidade }}-{{ titular.endereco.uf }}
+			</label>
+		</div>
+
+		<div class="row col-md-4">
+			<label class="control-label">Contato</label>
+			<label class="label-detalhar">
+				{{ titular.contato.telefone ? titular.contato.telefone : 'Não existem telefones cadastrados' }}<br />
+				<a style="text-decoration: none;" href="mailto:{{ titular.contato.email }}">{{ titular.contato.email }}</a>
+			</label>
+		</div>
+
+		<div class="row col-md-4">
+			<label class="control-label">Financeiro</label>
+			<div class="dados-lista">
+				<div>Conta:</div>
+				<span *ngIf="!titular.nuConta">-</span>
+				<span *ngIf="titular.nuConta">{{ titular.nuConta }}</span>
+			</div>
+			<div class="dados-lista">
+				<div>Descontos em:</div>
+				<span *ngIf="!titular.tipoDesconto">-</span>
+				<span *ngIf="titular.tipoDesconto">{{ titular.tipoDesconto }}</span>
+			</div>
+			<div class="dados-lista">
+				<div>Remuneração Base:</div>
+				<span *ngIf="!titular.remuneracaoBase">-</span>
+				<span *ngIf="titular.remuneracaoBase">R$ {{ titular.remuneracaoBase }}</span>
+			</div>
+		</div>
+	</section>
+
+	<div class="clearfix"></div>
+
+	<section>
+		<div class="row col-md-12">
+			<h3>Dados da Família</h3>
+		</div>
+		<div class="row col-md-12">
+			<app-siasc-table [dataList]="dataListPrincipal"
+							(emitDetail)="detalhar($event)"
+							(emitEmail)="openCloseEmailModal($event)"
+							(emitPdf)="emitirDeclaracao($event)">
+			</app-siasc-table>
+		</div>
+	</section>
+
+	<section *ngIf="dataListCasalCaixa != null">
+		<div class="row col-md-12">
+			<h3>Dados do Casal CAIXA</h3>
+		</div>
+		<div class="row col-md-12">
+			<app-siasc-table [dataList]="dataListCasalCaixa"></app-siasc-table>
+		</div>
+	</section>
+
+	<section *ngIf="dataListPensaoGerada != null">
+		<div class="row col-md-12">
+			<h3>Pensão Gerada</h3>
+		</div>
+		<div class="row col-md-12">
+			<app-siasc-table [dataList]="dataListPensaoGerada"></app-siasc-table>
+		</div>
+	</section>
+
+	<section *ngIf="dataListMatriculaOriginaria != null">
+		<div class="row col-md-12">
+			<h3>Matrícula Originária</h3>
+		</div>
+		<div class="row col-md-12">
+			<app-siasc-table [dataList]="dataListMatriculaOriginaria"></app-siasc-table>
+		</div>
+	</section>
+	
+	<div class="modal" id="emailModal" tabindex="-1" role="dialog" style="padding-top: 150px;">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Para qual e-mail o cartão deverá ser enviado como anexo?</h5>
+				</div>
+				<div class="modal-body">
+						<label class="control-label obrigatorio" for="email">E-mail</label>&nbsp;<br>
+						<input [(ngModel)]="selecionadoEmail.contato.email"
+										type="email"
+										id="email"
+										name="email"
+										class="form-control"
+										data-toggle="tooltip" 
+										required>
+				</div>
+				<div *ngIf="emailInvalido || emailVazio" class="error-form">
+					<div *ngIf="emailInvalido">
+						Insira um e-mail válido!
+					</div>
+					<div *ngIf="emailVazio">
+						Preencha o campo E-mail!
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-secondary"
+									data-dismiss="modal">
+						Fechar
+					</button>
+					<button class="btn btn-primary"
+									(click)="enviarCartaoPorEmail()">
+						Enviar
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<app-beneficiario-detalhe [selecionado]="selecionado"></app-beneficiario-detalhe>
+
+</section>

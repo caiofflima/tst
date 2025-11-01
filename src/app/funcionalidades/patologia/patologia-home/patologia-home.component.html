@@ -1,0 +1,87 @@
+<!-- Page Header-->
+<div class="container">
+  <div class="col-md-12 breadcrumb-header">
+    <ul class="breadcrumb">
+      <li><span (click)="voltar()" class="voltar"><i class="fa fa-arrow-left" aria-hidden="true"></i>Voltar</span></li>
+      <a routerLink="/home">Início</a>
+      <em class="fa fa-chevron-right"></em>
+      Administração
+      <em class="fa fa-chevron-right"></em>
+      Parâmetros
+      <em class="fa fa-chevron-right"></em>
+      Patologias
+    </ul>
+  </div>
+
+  <div class="title-type">
+    <h1 class="titulo-pagina">Patologias</h1>
+  </div>
+
+  <section class="row">
+    <form novalidate>
+
+      <div class="row p-0 col-xs-2">
+        <label class="control-label" for="codigo">CID-10</label>&nbsp;<br>
+        <input type="text" id="codigo" name="codigo" [(ngModel)]="filtro.codigo" [maxlength]="5"
+               class="form-control" title="Código da Patologia no CID-10">
+      </div>
+
+      <div class="row col-xs-8">
+        <label class="control-label" for="descricao">Descrição</label>&nbsp;<br>
+        <input type="text" id="descricao" name="descricao" [(ngModel)]="filtro.nome"
+               class="form-control" [maxlength]="150" title="Nome da Patologia.">
+      </div>
+
+      <div class="row p-0 col-xs-2">
+        <asc-input-text
+          label="Código Evento" id="codigoEvento" name="codigoEvento" [control]="evento"
+          [somenteNumeros]="true" [maxlength]="8" hint="Código do Evento">
+        </asc-input-text>
+      </div>
+
+      <div class="row p-0 col-xs-2">
+        <label class="control-label" for="perReembolso">Percentual Reembolso</label>&nbsp;<br>
+        <input type="number" id="perReembolso" name="perReembolso" [(ngModel)]="filtro.percReembolso"
+               class="form-control" [maxlength]="5" title="Percentual Reembolso" step="0.01">
+      </div>
+
+      <div class="row col-xs-2">
+        <label class="control-label">Compõe Teto?</label>&nbsp;<br>
+        <p-radioButton name="testoS" value="S" [(ngModel)]="filtro.teto" inputId="textoS"></p-radioButton>
+        <label for="textoS">Sim</label>
+
+        <p-radioButton name="textoN" value="N" [(ngModel)]="filtro.teto" inputId="textoN"></p-radioButton>
+        <label for="textoN">Não</label>
+      </div>
+
+      <div class="row p-0 col-xs-2">
+        <label class="control-label">Calcula PF?</label>&nbsp;<br>
+        <p-radioButton name="pfS" value="S" [(ngModel)]="filtro.pf" inputId="pfS"></p-radioButton>
+        <label for="pfS">Sim</label>
+
+        <p-radioButton name="pfS" value="N" [(ngModel)]="filtro.pf" inputId="pfN"></p-radioButton>
+        <label for="pfN">Não</label>
+      </div>
+
+      <div class="row col-xs-2">
+        <br>
+        <p-checkbox name="testoS" value="S" [(ngModel)]="filtro.ativos" inputId="ativoS"></p-checkbox>
+        <label class="control-label" for="ativoS">Somente Ativos</label>
+
+      </div>
+
+      <div class="col-xs-12 p-0 barra-botoes">
+        <button type="button" id="btnLimparCampos" class="btn back-btn" (click)="limparCampos()">
+          <span class="fa fa-trash fa-fw"></span>Limpar Campos
+        </button>
+        <button type="button" id="btnNovaPatologia" class="btn clean-btn" (click)="nova()">
+          <span class="fa fa-plus fa-fw"></span>Incluir Patologia
+        </button>
+        <button type="submit" id="btnPesquisar" class="btn continue-btn" (click)="pesquisar()">
+          <span class="fa fa-search fa-fw"></span>Pesquisar
+        </button>
+      </div>
+    </form>
+  </section>
+
+</div>

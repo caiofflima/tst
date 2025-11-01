@@ -1,0 +1,29 @@
+<section>
+  <p class="titulo-card">Procedimentos de  e</p>
+
+  <div class="ui-g procedimento-box-content" *ngFor="let proc of procedimentos;">
+    <div class="ui-g-11 ui-md-11 ui-sm-10">
+      <div class="group-content">
+        <p class="label-campo-card">Procedimento</p>
+        <p class="campo-card">{{proc?.procedimento}}</p>
+
+      </div>
+      <div class="group-content">
+        <p class="label-campo-card">Grau</p>
+        <p class="campo-card">{{proc?.grau}}</p>
+      </div>
+      <div class="group-content">
+        <p class="label-campo-card">Qtde solicitada</p>
+        <p class="campo-card">{{proc?.quantidade}}</p>
+      </div>
+    </div>
+    <div class="ui-sm-2 align-right">
+      <button (click)="editarProcedimento(proc)" class="btn-editar"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+      <button (click)="excluirProcedimento(proc)" class="btn-excluir"><i class="fa fa-trash" aria-hidden="true"></i></button>
+    </div>
+    <div class="container-negar-autorizar">
+      <button class="btn-negar"><span>Negar</span></button>
+      <button class="btn-autorizar"><span>Autorizar</span></button>
+    </div>
+  </div>
+</section>

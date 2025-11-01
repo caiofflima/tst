@@ -1,0 +1,16 @@
+<div *ngIf=exibir>
+  <div class="row col-md-4">
+    <label [ngStyle]="styleMensagem">{{progresso?.mensagem}}</label>
+    <div class="progress-container">
+      <div class="prazo-dias" [ngStyle]="stylePrazo"
+           title="Dias previstos para mudança de situação">{{progresso?.dias}}</div>
+      <div class="prazo-dias-atraso" [ngStyle]="stylePrazoAtraso"
+           title="Dias de expiração da situação atual">{{progresso?.diasAtraso}}</div>
+    </div>
+    <div class="progress-container-texto">
+      <div *ngIf="progresso.dias > 0" class="prazo-texto" [ngStyle]="stylePrazo">{{descricaoDias()}}</div>
+      <div *ngIf="progresso.diasAtraso > 0" class="prazo-texto-atraso" [ngStyle]="stylePrazoAtraso">
+        {{descricaoDiasAtraso()}}</div>
+    </div>
+  </div>
+</div>

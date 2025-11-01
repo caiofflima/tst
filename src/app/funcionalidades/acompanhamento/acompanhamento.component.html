@@ -1,0 +1,36 @@
+<asc-acompanhamento-processo-base [processo]="processo">
+  <div asc-conteudo>
+    <div @fadeInOut class="c-card conteudo-spacing">
+      <asc-documentos-condicionados></asc-documentos-condicionados>
+    </div>
+    <div class="c-card conteudo-spacing">
+      <asc-beneficiario-card [processo]="processo"></asc-beneficiario-card>
+    </div>
+    <div class="c-card conteudo-spacing">
+      <asc-dados-processo-card [processo]="processo"></asc-dados-processo-card>
+      <button (click)="goToTop()" class="btn-to-top">Retornar ao topo</button>
+    </div>
+    <div class="conteudo-spacing">
+      <asc-card-procedimento
+        (pedidoProcedimentos$)="pedidoProcedimentosAtualizados($event)"
+        [beneficiario]="processo?.beneficiario"
+        [idMotivoSolicitacao]="processo?.idMotivoSolicitacao"
+        [idTipoProcesso]="processo.idTipoProcesso"
+        [pedidoProcedimentosTabela]="processo?.pedidosProcedimento"
+        [pedido]="processo"
+      ></asc-card-procedimento>
+    </div>
+    <div class="c-card conteudo-spacing">
+      <asc-profissional-card [processo]="processo"></asc-profissional-card>
+      <button (click)="goToTop()" class="btn-to-top">Retornar ao topo</button>
+    </div>
+    <div class="c-card conteudo-spacing">
+      <asc-documentos-obrigatorios-card> </asc-documentos-obrigatorios-card>
+      <button (click)="goToTop()" class="btn-to-top">Retornar ao topo</button>
+    </div>
+    <div class="c-card conteudo-spacing">
+      <asc-mudanca-situacao-card-pl></asc-mudanca-situacao-card-pl>
+      <button (click)="goToTop()" class="btn-to-top">Retornar ao topo</button>
+    </div>
+  </div>
+</asc-acompanhamento-processo-base>

@@ -1,0 +1,59 @@
+<!-- Page Header-->
+<div class="col-md-12 breadcrumb-header">
+  <ul class="breadcrumb" *ngIf="isMeusProcessos()">
+    <a routerLink="/home"><i class="fa fa-home"></i> Home</a>
+    <i class="fa fa-chevron-right"></i>
+    Meus Dados
+    <i class="fa fa-chevron-right"></i>
+    <a routerLink="/meus-dados/pedidos">Meus Pedidos</a>
+    <i class="fa fa-chevron-right"></i>
+    Detalhar
+  </ul>
+
+  <ul class="breadcrumb" *ngIf="!isMeusProcessos()">
+    <a routerLink="/home"><i class="fa fa-home"></i>Home</a>
+    <i class="fa fa-chevron-right"></i>
+    Administração
+    <i class="fa fa-chevron-right"></i>
+    <a routerLink="/manutencao/consulta/pedidos">Consultar Pedidos</a>
+    <i class="fa fa-chevron-right"></i>
+    Detalhar
+  </ul>
+</div>
+
+<header class="page-header">
+  <div class="container-fluid">
+    <h2 class="no-margin-bottom">Detalhar Pedido</h2>
+  </div>
+</header>
+<!-- Page Header-->
+
+<section class="row container-fluid">
+  <asc-vis-dados-titular [titular]="titular" [mostrarMeusProcessos]="false">
+  </asc-vis-dados-titular>
+  <div class="clearfix"></div>
+  <asc-vis-dados-processo
+    #visDadosProcesso [pedido]="pedido"
+    [motivoSolicitacao]="motivoSolicitacao"
+    [tipoProcesso]="tipoProcesso"
+    [situacaoPedido]="situacaoPedido"
+    [permissoesProcesso]="permissoesProcesso"
+  ></asc-vis-dados-processo>
+
+  <asc-vis-dados-beneficiario
+    [beneficiario]="beneficiario" *ngIf="!isAutorizacaoPrevia()"
+  ></asc-vis-dados-beneficiario>
+
+  <app-detalhar-autorizacao-previa
+    [titular]="titular" [pedido]="pedido"
+    [permissoesProcesso]="permissoesProcesso"
+    *ngIf="isAutorizacaoPrevia()"
+    (onUpdate)="atualizarSituacaoProcesso($event)"
+  ></app-detalhar-autorizacao-previa>
+  <hr/>
+
+  <app-detalhar-reembolso
+    [pedido]="pedido" *ngIf="isReembolso()"
+  ></app-detalhar-reembolso>
+
+</section>

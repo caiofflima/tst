@@ -1,0 +1,106 @@
+<!-- Page Header-->
+<div class="col-md-12 breadcrumb-header">
+	 <ul class="breadcrumb"><li> <span routerLink="/" class="voltar"><i class="fa fa-arrow-left" aria-hidden="true"></i>Voltar</span></li>
+		<a routerLink="/home">
+			Início</a>
+		<i class="fa fa-chevron-right"></i>
+		Administração
+		<i class="fa fa-chevron-right"></i>
+		<a routerLink="/seguranca/perfil">
+			Pesquisa de Perfil
+		</a>
+		<i class="fa fa-chevron-right"></i>
+		<a routerLink="/seguranca/perfil/novo">
+			<span *ngIf="!isAlteracao">Incluir Perfil</span>
+			<span *ngIf="isAlteracao">Alterar Perfil</span>
+		</a>
+	</ul>
+</div>
+
+<header class="page-header">
+	<div class="container-fluid">
+		<h2 class="no-margin-bottom">
+			<span *ngIf="!isAlteracao">Incluir Perfil</span>
+			<span *ngIf="isAlteracao">Alterar Perfil</span>
+		</h2>
+	</div>
+</header>
+<!-- Page Header-->
+
+<section class="row container-fluid">
+	<form [formGroup]="formulario" name="form">
+		<fieldset>
+				<div class="row col-xs-2">
+					<label class="control-label">ID</label>
+					<input formControlName="id" [ngModel]="perfil.id" type="text" id="id" name="id"
+						class="form-control">
+				</div>
+
+				<div class="row col-xs-5" [ngClass]="aplicaClasseDeErro(formulario, 'nome')">
+					<label class="control-label obrigatorio">Nome</label>
+					<input formControlName="nome" [(ngModel)]="perfil.nome" type="text" [maxlength]="255"
+						id="nome" name="nome" class="form-control">
+					<div *ngIf="validaSeCampoValido(formulario, 'nome')" class="alert alert-danger">Campo obrigatório.</div>
+				</div>
+
+				<div class="clearfix"></div>
+
+				<div class="row col-xs-7" [ngClass]="aplicaClasseDeErro(formulario, 'descricao')">
+					<label class="control-label obrigatorio">Descrição</label>
+					<textarea formControlName="descricao" [(ngModel)]="perfil.descricao" [maxlength]="255"
+						id="descricao" name="descricao" class="form-control"></textarea>
+					<div *ngIf="validaSeCampoValido(formulario, 'descricao')" class="alert alert-danger">Campo obrigatório.</div>
+				</div>
+
+				<div class="clearfix"></div>
+
+				<div class="container-fluid margin-titulo-bot">
+					<h2>Última Atualização</h2>
+				</div>
+
+				<fieldset>
+					<div class="row col-xs-3">
+						<label class="control-label">Usuário Responsável</label>
+						<input formControlName="usuarioUltimaAtualizacao" [ngModel]="perfil.usuarioUltimaAtualizacao"
+							type="text" id="usuarioUltimaAtualizacao" name="usuarioUltimaAtualizacao" class="form-control">
+					</div>
+
+					<div class="row col-xs-2">
+						<label class="control-label" style="font-weight: bold">Terminal</label>
+						<input formControlName="terminalUltimaAtualizacao" [ngModel]="perfil.terminalUltimaAtualizacao"
+							type="text" id="terminalUltimaAtualizacao" name="terminalUltimaAtualizacao" class="form-control">
+					</div>
+
+					<div class="row col-xs-2">
+						<label class="control-label" style="font-weight: bold">Data e Hora</label>
+						<input formControlName="dataHoraUltimaAtualizacao"
+							[ngModel]="perfil.dataHoraUltimaAtualizacao | date:'yyyy-MM-dd HH:mm:ss'"
+							type="text" id="dataHoraUltimaAtualizacao" name="dataHoraUltimaAtualizacao"
+							class="form-control">
+					</div>
+				</fieldset>
+
+				<div class="clearfix"></div>
+			
+				<div class="row col-xs-12 barra-botoes">
+					<!--<button class="btn btn-primary" (click)="criarNovo()">
+						<span class="fa fa-check fa-fw"></span>Confirmar Inclusão
+					</button>-->
+					<button class="btn btn-primary" (click)="gravar()">
+						<span *ngIf="!isAlteracao">
+							<span class="fa fa-check fa-fw"></span>Confirmar Inclusão
+						</span>
+						<span *ngIf="isAlteracao">
+							<span class="fa fa-check fa-fw"></span>Confirmar Alteração
+						</span>
+					</button>
+					<button class="btn btn-primary" (click)="excluir()" *ngIf="!isNew()">
+						<span class="fa fa-trash fa-fw"></span>Excluir Perfil
+					</button>
+					<button id="btnGravar" type="submit" class="btn btn-warning ng-scope" (click)="consultar()">
+						<span class="fa fa-reply"></span>Voltar
+					</button>
+				</div>
+		</fieldset>
+	</form>
+</section>

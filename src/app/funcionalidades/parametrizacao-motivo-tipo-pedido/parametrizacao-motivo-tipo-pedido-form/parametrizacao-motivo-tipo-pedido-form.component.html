@@ -1,0 +1,135 @@
+<!-- Page Header-->
+<div class="container">
+  <div class="col-md-12 breadcrumb-header">
+    <ul class="breadcrumb">
+      <li><span (click)="voltar()" class="voltar"><i class="fa fa-arrow-left" aria-hidden="true"></i>Voltar</span>
+      </li>
+      <a routerLink="/home">Início</a>
+      <em class="fa fa-chevron-right"></em> Administração
+      <em class="fa fa-chevron-right"></em> Parâmetros
+      <em class="fa fa-chevron-right"></em>
+      <a routerLink="/manutencao/parametros/motivo-tipo-pedido">Motivo de Solicitação por Tipo de Pedido</a>
+      <em class="fa fa-chevron-right"></em>
+      <span>
+        Motivo de Solicitação por Tipo de Pedido – <span *ngIf="!isEdicao">Inclusão</span><span *ngIf="isEdicao">Edição</span>
+      </span>
+    </ul>
+  </div>
+
+  <div class="title-type">
+    <h1 class="titulo-pagina">
+      Motivo de Solicitação por Tipo de Pedido – <span *ngIf="!isEdicao">Inclusão</span><span *ngIf="isEdicao">Edição</span>
+    </h1>
+  </div>
+
+  <section class="row">
+    <form [formGroup]="formulario" name="form">
+
+      <div class="form-row">
+        <div class="col-md-6 mb-15 pl-0">
+          <asc-select-tipo-processo
+            label="Tipo de pedido"
+            (onChange)="onChangeProcesso()"
+            (dados)="carregaBeneficiarios()"
+            [control]="tiposProcesso"
+            [required]="!isEdicao"
+            [disabled]="isEdicao"
+          ></asc-select-tipo-processo>
+        </div>
+
+        <div class="col-md-6 mb-15 pl-0">
+          <label class="control-label obrigatorio" for="tiposBeneficiario">Tipo de Beneficiário</label>
+          <asc-listagem *ngIf="motivoSolicitacaoTipoPedidoBeneficiariosDTO" [lista]="montarLista()"></asc-listagem>
+          <p-multiSelect
+            id="tiposBeneficiario"
+            [options]="listComboTipoBeneficiario"
+            [formControl]="tiposBeneficiario"
+            [required]="!isEdicao"
+            class="form-control2 custom-border"
+            defaultLabel="Selecione as opções"
+            selectedItemsLabel="{0} itens selecionados"
+          ></p-multiSelect>
+          <asc-input-error [control]="tiposBeneficiario" [requiredMsg]="requiredMsg"></asc-input-error>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="col-md-6 mb-15 pl-0">
+          <asc-select-finalidade
+            label="Motivo solicitação"
+            [control]="idMotivoSolicitacao"
+            [required]="!isEdicao"
+            [disabled]="isEdicao"
+          ></asc-select-finalidade>
+        </div>
+
+        <div class="col-md-4 mb-15 pl-0">
+          <label class="control-label" for="sexo">Sexo</label>
+          <p-dropdown [options]="sexos" id="sexo" name="sexo" [formControl]="sexo"></p-dropdown>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="col-md-6 mb-15 pl-0">
+          <asc-dropdown
+            [items]="tipoDeficiencias"
+            label="Tipo deficiência"
+            [control]="idTipoDeficiencia"
+          ></asc-dropdown>
+        </div>
+
+        <div class="col-md-2 mb-15 pl-0">
+          <asc-input-text
+            label="Idade mínima" [somenteNumeros]="true" [maxlength]="3" [control]="idadeMinima">
+          </asc-input-text>
+        </div>
+
+        <div class="col-md-2 mb-15 pl-0">
+          <asc-input-text
+            label="Idade máxima" [somenteNumeros]="true" [maxlength]="3" [control]="idadeMaxima">
+          </asc-input-text>
+        </div>
+      </div>
+
+      <div *ngIf="isEdicao">
+        <div class="form-row">
+          <div class="col-md-2 d-flex al-ic pl-0">
+            <p-checkbox formControlName="inativo" name="inativo" binary="true" inputId="inativo"
+                        (onChange)="onChangeInativo($event)"></p-checkbox>
+            <label class="control-label" style="margin: 0 0 0 5px!important" for="inativo">Inativo</label>
+          </div>
+          <div class="col-md-2 pl-0" [style.display]="inativo.value? 'block' : 'none'">
+            <asc-input-date [control]="dataInativacao" [required]="inativo.value"
+                            [disabled]="!inativo.value" inputId="dataInativacao" label="Data da Inativação"
+            ></asc-input-date>
+            <asc-message-error [control]="dataInativacao" type="dataIgualAtualMaior"
+                               errorMessage="Data de Inativação deve ser igual ou superior a data atual!">
+            </asc-message-error>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xs-12 barra-botoes">
+        <button class="btn back-btn" (click)="voltar()" id="btnFormVoltar">
+          <span class="fa fa-reply fa-fw"></span>Voltar
+        </button>
+        <button *ngIf="isEdicao" class="btn clean-btn" (click)="excluirLista()" id="btnFormExcluir">
+          <span class="fa fa-remove fa-fw"></span>Excluir
+        </button>
+        <button *ngIf="isEdicao" class="btn clean-btn" (click)="restaurarCampos()" id="btnFormRestaurar">
+          Restaurar Campos
+        </button>
+        <button (click)="limparCampos()" class="btn back-btn"
+                id="btnFormLimparCampos" *ngIf="!isEdicao">
+          <span class="fa fa-trash fa-fw"></span>Limpar Campos
+        </button>
+        <button [disabled]="!validaForm()"
+                class="btn continue-btn"
+                id="btnFormSalvar" (click)="salvar()">
+          Salvar
+        </button>
+      </div>
+
+    </form>
+  </section>
+</div>

@@ -1,0 +1,533 @@
+<!-- resumo inscrição dependente -->
+
+<form [formGroup]="formularioSolicitacao">
+  <div
+    class="bottom-bordered"
+    style="width: 778px; margin: 10px auto -10px; padding-bottom: 0 !important"
+  >
+    <p class="titulo-card">
+      Confira o resumo do seu pedido e, se tudo estiver correto, clique em
+      "Finalizar".
+    </p>
+  </div>
+  <div class="resumo-container">
+    <asc-card-component>
+      <asc-card-title>
+        <div class="ui-sm-2 card-flt-mr">
+          <button
+            (click)="alterarBeneficiarios()"
+            class="btn-editar"
+            [disabled]="isEditingBeneficiario"
+          >
+            <i aria-hidden="true" class="fa fa-pencil"></i>
+          </button>
+        </div>
+        <div class="titulo-card">Tipo de Beneficiário</div>
+      </asc-card-title>
+      <asc-card-content>
+        <div class="ui-g">
+          <div class="ui-g-12 no-padding">
+            <label class="control-label">Tipo Beneficiário</label>
+            <p class="uppercase">{{ tipoDependente?.descricao }}</p>
+          </div>
+          <div class="ui-g-12 no-padding margin-16" *ngIf="showMatricula">
+            <label class="control-label">Matrícula Titular</label>
+            <p class="uppercase">{{ beneficiarioDependente?.matricula }}</p>
+          </div>
+        </div>
+        <div class="ui-g" *ngIf="!isEditingBeneficiario">
+          <div class="ui-g-12 no-padding margin-16">
+            <label class="control-label">Telefone</label>
+            <p>
+              {{
+                beneficiarioDependente?.telefoneContato
+                  | telefone
+                  | campoVazioHifen
+              }}
+            </p>
+          </div>
+          <div class="ui-g-12 no-padding margin-16">
+            <label class="control-label">E-mail</label>
+            <p>{{ beneficiarioDependente?.email | campoVazioHifen }}</p>
+          </div>
+        </div>
+        <div class="ui-g" *ngIf="isEditingBeneficiario">
+          <div class="ui-g-12 no-padding margin-16">
+            <asc-input-telefone
+              [control]="formularioBeneficiario.get('telefoneContato')"
+              inputId="telefoneContato"
+              label="Telefone"
+            ></asc-input-telefone>
+          </div>
+          <div class="ui-g-12 no-padding margin-16">
+            <asc-input-text
+              [control]="formularioBeneficiario.get('email')"
+              inputId="email"
+              label="E-mail"
+            ></asc-input-text>
+          </div>
+          <div class="footer-buttons">
+            <button class="clean-btn" (click)="cancelarAlterarBeneficiarios()">
+              Cancelar
+            </button>
+            <button
+              class="continue-btn"
+              [disabled]="formularioBeneficiario.invalid"
+              (click)="salvarBeneficiarios()"
+            >
+              Confirmar
+            </button>
+          </div>
+        </div>
+      </asc-card-content>
+    </asc-card-component>
+
+    <asc-card-component>
+      <asc-card-title>
+        <div class="ui-sm-2 card-flt-mr">
+          <button (click)="alterarDadosBasicos()" class="btn-editar">
+            <i aria-hidden="true" class="fa fa-pencil"></i>
+          </button>
+        </div>
+        <div class="titulo-card">Dados Básicos</div>
+      </asc-card-title>
+      <asc-card-content>
+        <div class="ui-g" *ngIf="!isEditingDadosBasicos">
+          <div class="ui-g-6 no-padding">
+            <label class="control-label">Nome completo</label>
+            <p class="uppercase">
+              {{ dadoDependente?.nomeCompleto | campoVazioHifen }}
+            </p>
+          </div>
+          <div class="ui-g-6 no-padding">
+            <label class="control-label">CPF</label>
+            <p>{{ dadoDependente?.cpf | campoVazioHifen }}</p>
+          </div>
+          <div class="ui-g-6 no-padding margin-16">
+            <label class="control-label">Data de nascimento</label>
+            <p>{{ dadoDependente?.dataNascimento | date : "dd/MM/yyyy" }}</p>
+          </div>
+          <div class="ui-g-6 no-padding margin-16">
+            <label class="control-label">Nome da mãe</label>
+            <p class="uppercase">
+              {{ dadoDependente?.nomeMae | campoVazioHifen }}
+            </p>
+          </div>
+          <div class="ui-g-6 no-padding margin-16">
+            <label class="control-label">Sexo</label>
+            <p class="uppercase">{{ nomeSexo | campoVazioHifen }}</p>
+          </div>
+          <div class="ui-g-6 no-padding margin-16">
+            <label class="control-label">Nome do pai</label>
+            <p class="uppercase">
+              {{ dadoDependente?.nomePai | campoVazioHifen }}
+            </p>
+          </div>
+          <div class="ui-g-6 no-padding margin-16">
+            <label class="control-label">Estado Civil</label>
+            <p class="uppercase">
+              {{ estadoCivil?.descricao | campoVazioHifen }}
+            </p>
+          </div>
+
+          <div class="ui-g-6 no-padding margin-16">
+            <label class="control-label">Declaração de Nascido Vivo</label>
+            <p>{{ dadoDependente?.declaracaoNascidoVivo | campoVazioHifen }}</p>
+          </div>
+        </div>
+        <div class="ui-g" *ngIf="isEditingDadosBasicos">
+          <div class="ui-g-6 no-padding-left">
+            <asc-input-text
+              [somenteLetrasMaiusculas]="'true'"
+              [control]="formularioDadosBasicos.get('nomeCompleto')"
+              inputId="nomeCompleto"
+              label="Nome completo"
+              [required]="true"
+            ></asc-input-text>
+          </div>
+          <div class="ui-g-6">
+            <asc-input-text
+              [somenteLetrasMaiusculas]="'true'"
+              [control]="formularioDadosBasicos.get('cpf')"
+              inputId="cpf"
+              label="CPF"
+              maskName="cpfMask"
+              [required]="cpfRequired"
+            ></asc-input-text>
+          </div>
+          <div class="ui-g-6 no-padding-left">
+            <asc-input-date
+              [control]="formularioDadosBasicos.get('dataNascimento')"
+              inputId="dataNascimento"
+              label="Data de nascimento"
+              (change)="validDataNascimento()"
+              [required]="true"
+            >
+              <asc-input-error
+                nomeErro="dataMenorIgualAtual"
+                msgErro="O valor de Data de nascimento não pode ser superior a data de hoje."
+              ></asc-input-error>
+            </asc-input-date>
+          </div>
+
+          <div class="ui-g-6">
+            <asc-input-text
+              [somenteLetrasMaiusculas]="'true'"
+              [control]="formularioDadosBasicos.get('nomeMae')"
+              inputId="nomeMae"
+              label="Nome da mãe"
+              [required]="true"
+            >
+            </asc-input-text>
+          </div>
+          <div class="ui-g-6 no-padding-left">
+            <asc-dropdown
+              [control]="formularioDadosBasicos.get('sexo')"
+              [items]="sexos"
+              label="Sexo"
+              [required]="true"
+            >
+            </asc-dropdown>
+          </div>
+
+          <div class="ui-g-6">
+            <asc-input-text
+              [control]="formularioDadosBasicos.get('nomePai')"
+              [somenteLetrasMaiusculas]="'true'"
+              inputId="nomePai"
+              label="Nome do pai"
+            >
+            </asc-input-text>
+          </div>
+
+          <div class="ui-g-6 no-padding-left">
+            <asc-select-estado-civil
+              label="Estado Civil"
+              id="idEstadoCivil"
+              [required]="true"
+              [control]="formularioDadosBasicos.get('idEstadoCivil')"
+              (dadoSelecionado)="estadoCivilSelecionado($event)"
+            >
+            </asc-select-estado-civil>
+          </div>
+
+          <div class="ui-g-6">
+            <asc-input-text
+              [control]="formularioDadosBasicos.get('declaracaoNascidoVivo')"
+              inputId="declaracaoNascidoVivo"
+              label="Declaração de Nascido Vivo"
+              [somenteNumeros]="true"
+              [required]="declaracaoNascidoVivoRequired"
+            >
+            </asc-input-text>
+          </div>
+
+          <div class="footer-buttons">
+            <button class="clean-btn" (click)="cancelarAlterarDadosBasicos()">
+              Cancelar
+            </button>
+            <button
+              class="continue-btn"
+              [disabled]="formularioDadosBasicos.invalid"
+              (click)="salvarDadosBasicos()"
+            >
+              Confirmar
+            </button>
+          </div>
+        </div>
+      </asc-card-content>
+    </asc-card-component>
+
+    <asc-card-component>
+      <asc-card-title>
+        <div class="ui-sm-2 card-flt-mr">
+          <button (click)="alterDadosComplementos()" class="btn-editar">
+            <i aria-hidden="true" class="fa fa-pencil"></i>
+          </button>
+        </div>
+        <div class="titulo-card">Dados Complementares</div>
+      </asc-card-title>
+
+      <asc-card-content>
+        <div class="ui-g" *ngIf="!isEditingDadosComplementos">
+          <div class="ui-g-6 no-padding">
+            <label class="control-label">Documento de Identidade</label>
+            <p class="uppercase">
+              {{ complementoDependente?.rg | campoVazioHifen }}
+            </p>
+          </div>
+          <div class="ui-g-6 no-padding">
+            <label class="control-label">Tipo deficiência</label>
+            <p>{{ tipoDeficiencia?.descricao | campoVazioHifen }}</p>
+          </div>
+          <div class="ui-g-6 no-padding margin-16">
+            <label class="control-label">Órgão emissor</label>
+            <p class="uppercase">
+              {{ complementoDependente?.orgaoEmissor | campoVazioHifen }}
+            </p>
+          </div>
+          <div class="ui-g-6 no-padding margin-16">
+            <label class="control-label">Cartão Nacional de Saúde</label>
+            <p>
+              {{ complementoDependente?.cartaoNacionalSaude | campoVazioHifen }}
+            </p>
+          </div>
+          <div class="ui-g-6 no-padding margin-16">
+            <label class="control-label">Data de expedição</label>
+            <p>
+              {{ complementoDependente?.dataExpedicaoRg | date : "dd/MM/yyyy" }}
+            </p>
+          </div>
+          <div class="ui-g-6 no-padding margin-16">
+            <label class="control-label">Número Cartão UNIMED</label>
+            <p>{{ complementoDependente?.cartaoUnimed | campoVazioHifen }}</p>
+          </div>
+          <div class="ui-g-6 no-padding margin-16">
+            <label class="control-label">UF Naturalidade</label>
+            <p>{{ estado?.label | campoVazioHifen }}</p>
+          </div>
+
+          <div class="ui-g-6 no-padding margin-16">
+            <label class="control-label">Valor renda</label>
+            <p>{{ complementoDependente?.renda | campoVazioHifen }}</p>
+          </div>
+
+          <div class="ui-g-6 no-padding margin-16">
+            <label class="control-label">Município Naturalidade</label>
+            <p>{{ municipio?.nome | campoVazioHifen }}</p>
+          </div>
+
+          <div class="ui-g-6 no-padding margin-16">
+            <label class="control-label">E-mail</label>
+            <p>
+              {{ complementoDependente?.emailDependente | campoVazioHifen }}
+            </p>
+          </div>
+        </div>
+        <div *ngIf="isEditingDadosComplementos">
+          <form [formGroup]="formularioDadosComplementares">
+            <div class="ui-g">
+              <div class="ui-g-6 no-padding-left">
+                <asc-input-text
+                  [somenteLetrasMaiusculas]="'true'"
+                  [control]="formularioDadosComplementares.get('rg')"
+                  inputId="rg"
+                  label="Documento de Identidade"
+                  [somenteNumeros]="true"
+                  [required]="rgRequired"
+                  [maxlength]="12"
+                ></asc-input-text>
+              </div>
+              <div class="ui-g-6">
+                <label class="control-label">Tipo deficiência</label>
+                <p-dropdown
+                  class="form-control2"
+                  [options]="tipoDeficiencias"
+                  [placeholder]="this.bundle('MHSPH')"
+                  name="idTipoDeficiencia"
+                  formControlName="idTipoDeficiencia"
+                  optionLabel="descricao"
+                  (onChange)="tipoDeficienciaSelecionado($event)"
+                ></p-dropdown>
+              </div>
+            </div>
+            <div class="ui-g">
+              <div class="ui-g-6 no-padding-left">
+                <asc-input-text
+                  [somenteLetrasMaiusculas]="'true'"
+                  [control]="formularioDadosComplementares.get('orgaoEmissor')"
+                  inputId="orgaoEmissor"
+                  label="Órgão emissor"
+                  [required]="rgRequired"
+                  [maxlength]="6"
+                ></asc-input-text>
+              </div>
+              <div class="ui-g-6">
+                <asc-input-text
+                  [control]="
+                    formularioDadosComplementares.get('cartaoNacionalSaude')
+                  "
+                  inputId="cartaoNacionalSaude"
+                  [somenteNumeros]="true"
+                  label="Cartão Nacional de Saúde"
+                ></asc-input-text>
+              </div>
+            </div>
+            <div class="ui-g">
+              <div class="ui-g-6 no-padding-left">
+                <asc-input-date
+                  [control]="
+                    formularioDadosComplementares.get('dataExpedicaoRg')
+                  "
+                  [required]="rgRequired"
+                  inputId="dataExpedicaoRg"
+                  label="Data de expedição"
+                >
+                  <asc-input-error
+                    nomeErro="dataMenorIgualAtual"
+                    msgErro="O valor de Data de expedição não pode ser superior a data de hoje."
+                  ></asc-input-error>
+                </asc-input-date>
+              </div>
+              <div class="ui-g-6">
+                <asc-input-text
+                  [control]="formularioDadosComplementares.get('cartaoUnimed')"
+                  inputId="cartaoUnimed"
+                  [somenteNumeros]="true"
+                  label="Número Cartão UNIMED"
+                ></asc-input-text>
+              </div>
+            </div>
+            <div class="ui-g">
+              <div class="ui-g-6 no-padding-left">
+                <asc-select-uf
+                  label="UF Naturalidade"
+                  (dadoSelecionado)="selectUf($event)"
+                  [control]="formularioDadosComplementares.get('estado')"
+                >
+                </asc-select-uf>
+              </div>
+
+              <div class="ui-g-6">
+                <asc-input-money-type
+                  [control]="formularioDadosComplementares.get('renda')"
+                  inputId="renda"
+                  label="Valor renda"
+                >
+                </asc-input-money-type>
+              </div>
+            </div>
+
+            <div class="ui-g">
+              <div class="ui-g-6 no-padding-left">
+                <asc-select-municipio
+                  [required]="formularioDadosComplementares.get('estado').value"
+                  label="Município Naturalidade"
+                  [parametro]="{
+                    idMunicipio:
+                      formularioDadosComplementares.get('estado').value
+                  }"
+                  [control]="campoMunicipio"
+                  (dadoSelecionado)="selectMunicipio($event)"
+                  (dados)="setMunicipio($event)"
+                >
+                </asc-select-municipio>
+              </div>
+
+              <div class="ui-g-6">
+                <asc-input-text
+                  [control]="
+                    formularioDadosComplementares.get('emailDependente')
+                  "
+                  inputId="emailDependente"
+                  label="E-mail"
+                ></asc-input-text>
+              </div>
+            </div>
+
+            <div class="footer-buttons">
+              <button
+                class="clean-btn"
+                (click)="cancelarAlterarDadosComplementares()"
+              >
+                Cancelar
+              </button>
+              <button
+                class="continue-btn"
+                [disabled]="formularioDadosComplementares.invalid"
+                (click)="salvarDadosComplementos()"
+              >
+                Confirmar
+              </button>
+            </div>
+          </form>
+        </div>
+      </asc-card-content>
+    </asc-card-component>
+
+    <div
+      class="left-grid"
+      *ngIf="documentosCadastrados && documentosCadastrados.length"
+      @fadeInOut
+    >
+      <div style="display: block" class="custom-card docsMP">
+        <div class="titulo-card">Documentos obrigatórios</div>
+        <asc-documento-card
+          [documentos]="documentosCadastrados"
+          (arquivosSelecionados)="arquivosSelecionados($event)"
+          (documentosTipoProcessoSelecionados)="watchDocumentos($event)"
+          (documentoTipoProcessoSelecionado)="selecionarTipoDocumento($event)"
+          [isInResumo]="true"
+        ></asc-documento-card>
+      </div>
+    </div>
+
+    <div class="custom-card">
+      <div class="left-grid">
+        <p class="card-header">Informações adicionais</p>
+        <div class="box" style="width: 100% !important">
+          <textarea
+            formControlName="informacaoAdicional"
+            style="width: 100%"
+            pInputTextarea
+            placeholder="Preencha com informações adicionais que você considere relevantes para a análise do seu pedido."
+          ></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+    <asc-button-secondary
+      buttonId="voltar"
+      (click)="setModal(true)"
+      title="Reiniciar"
+    ></asc-button-secondary>
+
+    <asc-button-primary
+      buttonId="continuar"
+      title="Finalizar"
+      (click)="onSubmit()"
+      [disabled]="this.verificarFaltaDeDocumentos() || showProgress"
+      [showProgress]="showProgress"
+      (onClick)="onSubmit()"
+    ></asc-button-primary>
+  </div>
+</form>
+
+<p-dialog
+  [(visible)]="showModal"
+  [responsive]="true"
+  [width]="420"
+  [draggable]="false"
+  [resizable]="false"
+  [modal]="true"
+>
+  <p-header>
+    <p style="margin: 0">Deseja reiniciar a inscrição do dependente?</p>
+  </p-header>
+
+  <div style="display: flex; justify-content: center">
+    <p class="modal-info-body">
+      ATENÇÃO! Voltar ao início implicará na perda de todos os preenchimentos.
+      Confirma a ação de reiniciar?
+    </p>
+  </div>
+
+  <p-footer>
+    <div class="footer no-mg-bottom">
+      <asc-button-secondary
+        buttonId="voltarModal"
+        (click)="setModal(false)"
+        title="Cancelar"
+      ></asc-button-secondary>
+      <asc-button-primary
+        buttonId="continuar"
+        [disabled]="showProgress"
+        [showProgress]="showProgress"
+        [title]="'Continuar'"
+        (onClick)="reiniciarForm()"
+      >
+      </asc-button-primary>
+    </div>
+  </p-footer>
+</p-dialog>

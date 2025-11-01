@@ -1,0 +1,122 @@
+<!-- Page Header-->
+<div class="col-md-12 breadcrumb-header">
+		 <ul class="breadcrumb"><li> <span routerLink="/" class="voltar"><i class="fa fa-arrow-left" aria-hidden="true"></i>Voltar</span></li>
+			<a routerLink="/home">
+				<i class="fa fa-home"></i>
+				Home</a>
+			<i class="fa fa-chevron-right"></i>
+			<a>
+				Pesquisar Pedidos
+			</a>
+		</ul>
+	</div>
+
+	<header class="page-header">
+		<div class="container-fluid">
+			<h2 class="no-margin-bottom">Pesquisar Pedidos</h2>
+		</div>
+	</header>
+	<!-- Page Header-->
+
+	<section class="row container-fluid">
+  <div class="row col-md-6 coluna-interna">
+    <div class="row col-md-12">
+      <h4>Dados de Pedido</h4>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div class="row col-md-6" *ngIf="colaborador?.value">
+      <label class="control-label" for="nomeColaborador">Colaborador</label>
+      <p id="nomeColaborador" class="marginBottom">{{colaborador.label}}</p>
+    </div>
+
+    <div class="row col-md-6" *ngIf="filtro?.idPedido">
+      <label class="control-label" for="numeroProcesso">Pedido</label>
+      <p id="numeroProcesso" class="marginBottom">{{filtro?.idPedido}}</p>
+    </div>
+
+    <div class="row col-md-6" *ngIf="filtro?.dataInicio">
+      <label class="control-label" for="dataInicio">Data Início</label>
+      <p id="dataInicio" *ngIf="filtro.dataInicio">{{filtro.dataInicio | date: 'dd/MM/yyyy'}}</p>
+    </div>
+
+    <div class="row col-md-6" *ngIf="filtro?.dataFim">
+      <label class="control-label" for="dataFim">Data Fim</label>
+      <p id="dataFim" *ngIf="filtro.dataFim">{{filtro.dataFim | date: 'dd/MM/yyyy'}}</p>
+    </div>
+    <div class="clearfix"></div>
+
+    <div class="row col-xs-6" *ngIf="filtro?.tiposProcesso && !(filtro.tiposProcesso.length == 0)">
+      <label class="control-label" for="tipoProcesso">Tipo de Pedido</label>
+      <p id="tipoProcesso" *ngFor="let tipoProcesso of filtro.tiposProcesso">{{tipoProcesso.label}}</p>
+    </div>
+
+    <div class="row col-xs-6" *ngIf="filtro?.situacoesProcesso && !(filtro.situacoesProcesso.length == 0)">
+      <label class="control-label" for="situacaoProcesso">Situação do Pedido</label>
+      <p id="situacaoProcesso" *ngFor="let situacaoProcesso of filtro.situacoesProcesso">{{situacaoProcesso.label}}</p>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div class="row col-xs-2" *ngIf="filtro?.ufsProcesso && !(filtro.ufsProcesso.length == 0)">
+      <label class="control-label" for="uf">UF</label>
+      <p id="uf" *ngFor="let uf of filtro.ufsProcesso">{{uf.value}}</p>
+    </div>
+
+    <div class="row col-xs-4" *ngIf="filtro?.filiaisProcesso && !(filtro.filiaisProcesso.length == 0)">
+      <label class="control-label" for="filial">Agrupadora</label>
+      <p id="filial" *ngFor="let filial of filtro.filiaisProcesso">{{filial.label}}</p>
+    </div>
+
+    <div class="row col-xs-2" *ngIf="filtro?.ufAtendimento && filtro.ufAtendimento.value">
+      <label class="control-label" for="uf">UF do Atendimento</label>
+      <p *ngIf="filtro.ufAtendimento && filtro.ufAtendimento.value">{{filtro.ufAtendimento.label}}</p>
+    </div>
+
+    <div class="row col-xs-4" *ngIf="filtro?.municipioAtendimento && filtro.municipioAtendimento.value">
+      <label class="control-label" for="filial">Município do Atendimento</label>
+      <p *ngIf="filtro.municipioAtendimento && filtro.municipioAtendimento.value">{{filtro.municipioAtendimento.label}}</p>
+    </div>
+  </div>
+
+  <div class="row col-md-6 coluna-interna">
+    <div class="row col-md-12">
+      <h4>Dados de Beneficiário</h4>
+    </div>
+
+    <div class="row col-md-4" *ngIf="filtro?.numeroCartao">
+      <label class="control-label" for="codigoBeneficiario">Cartão de Identificação</label>
+      <p id="codigoBeneficiario">{{filtro.numeroCartao}}</p>
+    </div>
+
+    <div class="row col-md-8" *ngIf="filtro?.nomeBeneficiario">
+      <label class="control-label" for="nomeBeneficiario">Nome</label>
+      <p id="nomeBeneficiario">{{filtro.nomeBeneficiario}}</p>
+    </div>
+
+    <div class="row col-md-8" *ngIf="filtro?.cpfBeneficiario">
+      <label class="control-label" for="cpfBeneficiario">CPF</label>
+      <p id="cpfBeneficiario">{{filtro.cpfBeneficiario}}</p>
+    </div>
+
+    <div class="clearfix"></div>
+
+  </div>
+
+  <div class="clearfix"></div>
+
+  <div class="row col-md-9">
+    <h4>Resultado da Consulta</h4>
+  </div>
+
+  <div class="row col-md-12">
+    <app-resultado-pesquisa-processos-credenciado [resultado]="listaProcessos"></app-resultado-pesquisa-processos-credenciado>
+  </div>
+
+  <div class="col-xs-12 barra-botoes">
+    <button class="btn btn-info" (click)="retornarParaConsultar()">
+        <span class="fa fa-reply fa-fw"></span>Voltar
+    </button>
+  </div>
+</section>

@@ -1,0 +1,301 @@
+div.solicitacao-container {
+  max-width: 778px;
+  padding: 16px 8px;
+  margin: 0 auto;
+
+  p.titulo {
+    font-family: 'Caixa Std Bold', sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 33px;
+    color: #0065B7;
+    margin: 0 0 16px 0;
+    max-width: 540px;
+    box-sizing: border-box;
+  }
+
+  p.titulo.margin {
+    margin-top: 40px;
+  }
+
+  div.custom-form-group-input {
+    small.custom-form-group-info {
+      font-family: 'Caixa Std Regular', sans-serif;
+      font-size: 14px;
+      line-height: 16px;
+      color: #969696;
+      left: 0;
+      top: calc(100% + 8px);
+
+      strong {
+        color: #000;
+      }
+    }
+
+    div.limited-width {
+      max-width: 373px;
+    }
+  }
+
+  div.custom-form-group-select {
+    position: relative;
+    width: 100%;
+    margin-bottom: 16px;
+
+    span.button-split {
+      width: 1px;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      right: 20px;
+      background-color: #C3C3C3;
+    }
+
+    small.custom-form-group-info {
+      font-family: 'Caixa Std Regular', sans-serif;
+      font-size: 14px;
+      line-height: 16px;
+      color: #969696;
+      left: 0;
+      top: calc(100% + 8px);
+
+      strong {
+        color: #000;
+      }
+    }
+  }
+
+  div.custom-form-group-select.margin {
+    margin-top: 36px;
+  }
+
+  select,
+  input {
+    box-sizing: border-box;
+    border-radius: 3px;
+    padding: 6px 6px 6px 12px;
+  }
+}
+
+.no-padding {
+  padding: 0;
+}
+
+.info-container {
+  padding: 0 0 0 2.5em;
+
+  .info-title {
+    font-family: 'Caixa Std Regular', sans-serif;
+    font-size: 16px;
+    line-height: 19px;
+    color: #3A4859;
+    position: relative;
+
+    &.first-line-border {
+      &::before {
+        content: '';
+        width: 4px;
+        height: 16px;
+        background-color: #66CFBF;
+        top: 0;
+        left: -6px;
+        position: absolute;
+      }
+    }
+
+    strong {
+      color: #005CA9;
+    }
+
+    &.strong {
+      font-weight: bold;
+    }
+
+  }
+
+  .info-secondary {
+    @extend .info-title;
+    font-size: 14px;
+    margin-bottom: 4px;
+  }
+
+  .info-secondary-bold {
+    @extend .info-secondary;
+    font-weight: bold;
+    color: #0071FC;
+    cursor: pointer;
+  }
+
+}
+
+div.stepper-container {
+  width: 100%;
+  height: 50px;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+div.solicitacao-footer {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 50px;
+
+  button.continue-btn {
+    background: #F7941E;
+    border: none;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 246px;
+    width: 100%;
+
+    span {
+      font-family: 'Caixa Std Regular', sans-serif;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 18px;
+      line-height: 25px;
+      color: #FFFFFF;
+      margin: 12px 8px;
+    }
+
+    &:hover,
+    &:active {
+      background: #db6e00;
+      transition: 250ms ease-in-out;
+    }
+
+    &:disabled {
+      background-color: #E5E5E5;
+      cursor: not-allowed;
+    }
+  }
+
+  button.back-btn {
+    background: #fff;
+    border: 1px solid #F7941E;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 246px;
+    width: 100%;
+
+    span {
+      font-family: 'Caixa Std Regular', sans-serif;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 18px;
+      line-height: 25px;
+      color: #F7941E;
+      margin: 12px 8px;
+    }
+
+    &:hover,
+    &:active {
+      background: #db6e00;
+      transition: 250ms ease-in-out;
+
+      span {
+        color: #fff;
+      }
+    }
+  }
+}
+
+div.custom-grid-form-group {
+  display: flex;
+  max-width: 100%;
+
+  div.custom-grid-1-left {
+    width: 15em;
+
+  }
+
+  div.custom-grid-1-right {
+    flex-grow: 1;
+    padding-left: 16px;
+  }
+}
+
+.info-regional-container {
+  position: relative;
+
+  .tolltip-info-regional {
+    display: none;
+    border: 1px solid #B3C7CB;
+    box-sizing: border-box;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 2px;
+    position: absolute;
+    padding: 0.75em 1.5em;
+    width: 100vw;
+    max-width: 390px;
+    z-index: 5;
+    bottom: 100%;
+    background-color: #fff;
+    left: -100%;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  li {
+    font-family: 'Caixa Std Bold', sans-serif;
+    font-style: normal;
+    font-size: 14px;
+    line-height: 17px;
+    color: #3A4859;
+
+    span {
+      font-weight: bold;
+    }
+  }
+
+  &:hover {
+    .tolltip-info-regional {
+      display: block;
+      animation: fade-in 250ms ease-in-out;
+    }
+  }
+}
+
+@media screen and (max-width: 810px) {
+  ul.custom-stepper {
+    width: 90%
+  }
+
+  div.solicitacao-container {
+    padding-top: 32px;
+  }
+
+  div.solicitacao-footer {
+    justify-content: center;
+    padding-right: 0;
+  }
+
+  div.sb-to-mobile {
+    flex-flow: column;
+  }
+}
+
+.custom-input-style {
+  box-sizing: border-box;
+  border-radius: 3px;
+  padding: 6px 6px 6px 12px;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}

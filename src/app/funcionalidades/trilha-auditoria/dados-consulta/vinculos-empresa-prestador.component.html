@@ -1,0 +1,116 @@
+<div class="col-md-12">
+  <p-table
+    [value]="dadosConsulta"
+    [paginator]="true"
+    [rows]="10"
+    class="table table-striped table-sm table-hover"
+    #dt
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th id="CPF" style="width: 10%">CPF</th>
+        <th id="idUsuario" style="width: 5%">ID Usuário</th>
+        <th id="Nome">Nome</th>
+        <th id="CNPJ" style="width: 10%">CNPJ</th>
+        <th id="idEmpresa" style="width: 5%">ID Empresa</th>
+        <th id="Evento" style="width: 5%">Evento</th>
+        <th id="Data" style="width: 10%">Data</th>
+        <th id="Acoes" style="width: 5%">Ação</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData>
+      <tr>
+        <td>{{ rowData.cpf | cpfMask }}</td>
+        <td>{{ rowData.idPrestadorExterno }}</td>
+        <td>{{ rowData.nome }}</td>
+        <td>{{ rowData.cnpj | cnpjMask }}</td>
+        <td>{{ rowData.idEmpresa }}</td>
+        <td>{{ rowData.strEvento }}</td>
+        <td>{{ rowData.dataHoraEvento | date : "dd/MM/yyyy HH:mm:ss" }}</td>
+        <td>
+          <button
+            class="btn btn-info"
+            title="{{ bundle('MH154') }}"
+            (click)="abrirModalDetalhamento(rowData)"
+          >
+            <span class="fa fa-search fa-fw"></span>
+          </button>
+        </td>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="emptymessage">
+      {{ bundle("MA003") }}
+    </ng-template>
+    <!-- <p-column [style]="{'width':'10%'}" header="CPF">
+			<ng-template let-row="rowData" pTemplate="content">
+              {{row.cpf | cpfMask}}
+        	</ng-template>
+		</p-column>
+		<p-column [style]="{'width':'5%'}" field="idPrestadorExterno" header="ID Usuário"></p-column>
+		<p-column [style]="{'text-align':'left'}" field="nome" header="Nome"></p-column>
+
+		<p-column [style]="{'width':'10%'}" header="CNPJ">
+			<ng-template let-row="rowData" pTemplate="content">
+              {{row.cnpj | cnpjMask}}
+        	</ng-template>
+		</p-column>
+		<p-column [style]="{'width':'5%'}" field="idEmpresa" header="ID Empresa"></p-column>
+
+		<p-column [style]="{'width':'5%'}" field="strEvento" header="Evento"></p-column>
+		<p-column [style]="{'width':'10%'}" header="Data">
+			<ng-template let-row="rowData" pTemplate="content">
+              {{row.dataHoraEvento | date:'dd/MM/yyyy HH:mm:ss'}}
+        	</ng-template>
+		</p-column>
+		<p-column [style]="{'width':'5%'}" header="Ação">
+			<ng-template let-row="rowData" pTemplate="content">
+				<button class="btn btn-info" title="{{bundle('MH154')}}" (click)="abrirModalDetalhamento(row);">
+					<span class="fa fa-search fa-fw"></span>
+				</button>
+			</ng-template>
+		</p-column> -->
+  </p-table>
+
+  <p-dialog
+    header="Detalhes do Vínculo"
+    [(visible)]="showModalDetalhamento"
+    [modal]="true"
+    width="800"
+    [responsive]="true"
+    #modalDetalhamento
+  >
+    <div class="col-md-12">
+      <div class="col-md-6">
+        <label for="matricula">Matrícula do Usuário</label>
+        <span id="matricula" class="output-text">{{
+          selectedRow?.matricula
+        }}</span>
+      </div>
+      <div class="col-md-6">
+        <label for="empresa">Nome da Empresa</label>
+        <span id="empresa" class="output-text">{{ selectedRow?.empresa }}</span>
+      </div>
+      <div class="col-md-6">
+        <label for="responsavel">Responsável</label>
+        <span id="responsavel" class="output-text">{{
+          selectedRow?.responsavel | cpfMask
+        }}</span>
+      </div>
+      <div class="col-md-6">
+        <label for="ipResponsavel">IP Responsável</label>
+        <span id="ipResponsavel" class="output-text">{{
+          selectedRow?.ipResponsavel
+        }}</span>
+      </div>
+    </div>
+
+    <p-footer class="dmsg-footer">
+      <div style="display: flex; justify-content: flex-end">
+        <button class="btn btn-danger" (click)="fecharModalDetalhamento()">
+          <span class="fa fa-close fa-fw"></span>Fechar
+        </button>
+      </div>
+    </p-footer>
+  </p-dialog>
+</div>

@@ -1,0 +1,28 @@
+@import "/src/assets/sass/colors";
+@import "/src/assets/sass/mixins";
+
+.orange-ball {
+  display: block;
+  position: absolute;
+  right: calc(-22px - 8px);
+  top: 8px;
+  width: 18px;
+  height: 18px;
+  border-radius: 9px;
+  background-color: #F7941E;
+  z-index: 2;
+}
+
+@media (max-width: 900px) {
+  .orange-ball {
+    display: none;
+  }
+}
+
+.fl-sb-btn {
+  display: inline-flex;
+  -ms-flex-pack: justify;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+}

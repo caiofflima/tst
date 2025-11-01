@@ -1,0 +1,139 @@
+<!-- Page Header-->
+<div class="container">
+  <div class="col-md-12 breadcrumb-header">
+    <ul class="breadcrumb">
+      <li><span (click)="voltar()" class="voltar"><i class="fa fa-arrow-left" aria-hidden="true"></i>Voltar</span></li>
+      <a routerLink="/home">Início</a>
+      <em class="fa fa-chevron-right"></em>
+      Administração
+      <em class="fa fa-chevron-right"></em>
+      Parâmetros
+      <em class="fa fa-chevron-right"></em>
+      <a routerLink="/manutencao/vinc-med-patologia">Medicamento por Patologia</a>
+      <em class="fa fa-chevron-right"></em>
+      Medicamento por Patologia – <span *ngIf="!id">Inclusão</span><span *ngIf="id">Edição</span>
+    </ul>
+  </div>
+
+  <div class="title-type">
+    <h1 class="titulo-pagina">
+      Medicamento por Patologia – <span *ngIf="!id">Inclusão</span><span *ngIf="id">Edição</span>
+    </h1>
+  </div>
+
+  <section class="row p-0">
+    <form [formGroup]="formulario" name="form">
+
+      <div class="p-0 form-row col-md-12">
+        <div *ngIf="medicamentoPatologia.dataCadastramento" class="pl-0 col-md-4">
+          <label class="control-label" for="id">ID</label>
+          <p class="marginBottom"
+             id="id">{{medicamentoPatologia.idMedicamento}}{{medicamentoPatologia.idPatologia}}</p>
+        </div>
+
+        <div *ngIf="medicamentoPatologia.dataCadastramento" class="col-md-4">
+          <label class="control-label" for="dataCadastramento">Cadastramento</label>
+          <p class="marginBottom"
+             id="dataCadastramento">{{medicamentoPatologia.dataCadastramento |date:'dd/MM/yyyy HH:mm:ss'}}</p>
+        </div>
+        <div *ngIf="id" class="pr-0 col-md-4">
+          <label class="control-label" for="usuario">Usuário</label>
+          <p class="marginBottom" id="usuario">{{medicamentoPatologia.codigoUsuarioCadastramento}}</p>
+        </div>
+      </div>
+      
+      <div class="p-0 form-row col-md-12">
+
+        <div class="col-md-6 p-0">
+          <label class="control-label obrigatorio" for="patologias">Patologia</label>
+          <div *ngIf="!id">
+            <p-dropdown required 
+              [options]="patologias" 
+              filter="true" 
+              formControlName="patologia"
+              name="patologias" id="patologias" 
+              [placeholder]="this.bundle('MHSPH')">
+            </p-dropdown>
+            <asc-message-error
+              [control]="patologia" type="required"
+              [errorMessage]="bundle('MA007')">
+            </asc-message-error>
+          </div>
+          <div *ngIf="id">
+            <input type="text" class="form-control" readonly [value]="nomePatologia">
+          </div>
+        </div>
+
+        <div class="col-md-6 pr-0">
+          <label class="control-label obrigatorio" for="Medicamentos">Medicamento</label>
+          <div *ngIf="!id">
+            <asc-dropdown
+              [items]="medicamentos" 
+              (filter)="filtroMedicamento($event)" 
+              [control]="medicamento"
+              (selected)="updateValue($event)" 
+              id="Medicamentos" required>
+            </asc-dropdown>
+          </div>
+          <div *ngIf="id">
+            <input type="text" class="form-control" readonly [value]="nomeMedicamento">
+          </div>
+        </div>
+
+      </div>
+
+      <div *ngIf="id" style="padding-top: 10px">
+        <div class="p-0 col-md-12 ">
+          <p-checkbox
+            inputId="inativo" name="inativo" formControlName="inativo" binary="true"
+            (onChange)="onChangeInativo($event)"
+          ></p-checkbox>
+          <label class="control-label" for="inativo">Inativo</label>
+        </div>
+        <div class="p-0 col-md-12" *ngIf="inativo.value">
+          <div class="col-md-2 coluna-interna">
+
+            <label class="control-label" for="dataInativacao">Data da Inativação</label>
+            <asc-input-date
+              [control]="formulario.get('dataInativacao')" inputId="dataInativacao"
+              label="" id="dataInativacao"
+            ></asc-input-date>
+            <div *ngIf="formulario.hasError('inativoMatch')" class="error-form">
+              <div>Campo obrigatório não informado.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-15">
+        <div class="col-md-12 p-0">
+          <label class="control-label" for="historico">Histórico</label>
+          <textarea
+            rows="5" cols="103" formControlName="historico" pInputTextarea name="historico"
+            id="historico" class="form-control"
+          ></textarea>
+        </div>
+      </div>
+
+      <div class="col-xs-12 p-0 mt-10 barra-botoes">
+        <button class="btn back-btn" (click)="voltar()">
+          <span class="fa fa-reply fa-fw"></span>Voltar
+        </button>
+        <button class="btn clean-btn" (click)="excluir()" id="btnFormExcluir" *ngIf="id">
+          <span class="fa fa-remove fa-fw"></span>Excluir
+        </button>
+        <button class="btn clean-btn" (click)="restaurarCampos()" id="btnFormRestaurar" *ngIf="id">
+          Restaurar Campos
+        </button>
+        <button id="btnLimparCampos" class="btn back-btn" (click)="limparCampos()" *ngIf="!id">
+          <span class="fa fa-trash fa-fw"></span>
+          Limpar Campos
+        </button>
+        <button class="btn continue-btn" (click)="salvar(formulario.value);">
+          Salvar
+        </button>
+      </div>
+    </form>
+  </section>
+
+</div>

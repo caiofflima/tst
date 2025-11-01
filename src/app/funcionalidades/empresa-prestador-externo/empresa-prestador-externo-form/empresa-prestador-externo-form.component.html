@@ -1,0 +1,160 @@
+<!-- Page Header-->
+<div class="container">
+  <div class="col-md-12 breadcrumb-header">
+    <ul class="breadcrumb">
+      <li><span (click)="voltar()" class="voltar"><i class="fa fa-arrow-left" aria-hidden="true"></i>Voltar</span></li>
+      <a routerLink="/home">Início</a>
+      <em class="fa fa-chevron-right"></em> Administração
+      <em class="fa fa-chevron-right"></em>
+      <a routerLink="/manutencao/empresa-prestador-externo">Empresa de Auditoria</a>
+      <em class="fa fa-chevron-right"></em>
+      Empresa de Auditoria – <span *ngIf="!empresaPrestadora.id">Inclusão</span><span *ngIf="empresaPrestadora.id">Edição</span>
+    </ul>
+  </div>
+
+  <div class="title-type">
+    <h1 class="titulo-pagina">
+      Empresa de Auditoria – <span *ngIf="!empresaPrestadora.id">Inclusão</span><span *ngIf="empresaPrestadora.id">Edição</span>
+    </h1>
+  </div>
+
+  <section class="row">
+    <form [formGroup]="formulario" name="form">
+      <div class="form-row row">
+        <div *ngIf="empresaPrestadora.id" class="pl-0 col-xs-4">
+          <label class="control-label" for="cnpj">ID</label>
+          <p class="marginBottom">{{empresaPrestadora.id}}</p>
+        </div>
+
+        <div *ngIf="empresaPrestadora.dataCadastramento" class="pl-0 col-xs-4">
+          <label class="control-label">Cadastramento</label>
+          <p class="marginBottom">{{empresaPrestadora.dataCadastramento |date:'dd/MM/yyyy HH:mm:ss'}}</p>
+        </div>
+
+        <div *ngIf="empresaPrestadora.usuarioCadastramento" class="pl-0 col-xs-4">
+          <label class="control-label" for="contrato">Usuário</label>
+          <p class="marginBottom">{{empresaPrestadora.usuarioCadastramento}}</p>
+        </div>
+      </div>
+
+      <div class="form-row row">
+        <div class="pl-0 col-xs-4">
+          <asc-cpf-cnpj
+            label="CNPJ"
+            [control]="cnpj"
+            id="cnpj"
+            title="{{bundle('MH126')}}"
+            [somenteCnpj]="true"
+            required
+          ></asc-cpf-cnpj>
+        </div>
+        <div class="pl-0 col-xs-8">
+          <asc-input-text
+            [control]="razaoSocial"
+            label="Razão Social"
+            [somenteLetrasMaiusculas]="true"
+            id="razaoSocial"
+            name="razaoSocial"
+            [maxlength]="150"
+            required
+          ></asc-input-text>
+        </div>
+      </div>
+      <div class="form-row row">
+        <div class="pl-0 col-xs-4">
+          <asc-input-text
+            [control]="contrato"
+            label="Contrato"
+            id="contrato"
+            name="contrato"
+            [maxlength]="20"
+          ></asc-input-text>
+        </div>
+      </div>
+      <div class="form-row row">
+        <div class="pl-0 col-xs-4 " style="left: 388px; margin-top: -69px; width: 67%;"  >
+          <asc-input-email
+                  [control]="formulario.get('email')"
+                  label="E-mail"
+                  id="email"
+                  name="email"
+                  [maxlength]="150"
+          ></asc-input-email>
+        </div>
+      </div>
+
+      <div class="card-caixa">
+        <div class="row col-md-12 p-0">
+          <h4 id="unidades">Abrangência</h4>
+        </div>
+        <div id="panelUnidades">
+          <div class="d-flex col-md-8 p-0" style="align-items: end; justify-content: start;">
+            <div class="col-md-4 p-0">
+              <label class="control-label obrigatorio" for="razaoSocial">Agrupadora</label>
+              <p-dropdown required [options]="filiais" filter="true" placeholder="{{bundle('MHSPH')}}"
+                          name="filial" formControlName="filial" optionLabel="nome"
+                          (ngModelChange)="onChangeFilial()">
+              </p-dropdown>
+              <asc-message-error [control]="formulario.controls['filial']" type="required"
+                                 [errorMessage]="bundle('MA007')"></asc-message-error>
+            </div>
+            &nbsp;&nbsp;&nbsp;
+            <div class="col-md-4 p-0">
+              <label class="control-label obrigatorio" for="razaoSocial">UF</label>
+              <p-dropdown required [options]="listComboUF" filter="true" placeholder="{{bundle('MHSPH')}}"
+                          name="UFEmpresa" formControlName="UFEmpresa" optionLabel="label"
+                          (ngModelChange)="onChangeUFEmpresa()">
+              </p-dropdown>
+              <asc-message-error [control]="formulario.controls['UFEmpresa']" type="required"
+                                 [errorMessage]="bundle('MA007')"></asc-message-error>
+            </div>
+
+            <div class="col-md-4">
+              <p style="height: 25px">&nbsp;</p>
+              <button class="btn custom-btn-confirm" style="height: 34px;"
+                      (click)="adicionarAbrangencia();">
+                <span class="fa fa-plus fa-fw"></span>Adicionar
+              </button>
+            </div>
+          </div>
+          <div *ngIf="mostrarFiltro();" class="row col-md-12 p-0" style="margin-top: 25px;">
+            <div class="col-xs-3 search-inp p-0" style="margin: 5px 0 8px; border-bottom: 0 none">
+              <input #gb type="text" class="form-control filtro-caixa" size="50"
+                     placeholder="Digite para filtrar resultado">
+              <em class="fas fa-search"></em>
+            </div>
+            <p-dataTable id="caixa-table" emptyMessage="{{bundle('MA003')}}" [value]="abrangenciaAdd" [rows]="10"
+                         [paginator]="true" [pageLinks]="5" [globalFilter]="gb" sortOrder="1"
+                         [rowsPerPageOptions]="[5,10,20]" reorderableColumns="true" sortField="nome"
+                         class="table table-striped table-sm table-hover">
+              <p-column field="nome" header="Abrangência" [sortable]="true"></p-column>
+              <p-column id="cl_Action" header="Ação">
+                <ng-template let-row="rowData" pTemplate="content">
+                  <span title="Remover" (click)="removerAbrangencia(row)">
+                    <span class="fas fa-trash red"></span>
+                  </span>
+                </ng-template>
+              </p-column>
+            </p-dataTable>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xs-12 p-0 pt-15 barra-botoes">
+        <button class="btn back-btn" (click)="voltar()">
+          <span class="fa fa-reply fa-fw"></span>Voltar
+        </button>
+        <button *ngIf="empresaPrestadora.id != null" class="btn clean-btn"
+                (click)="excluirEmpresa(empresaPrestadora);">
+          <span class="fa fa-remove fa-fw"></span>Excluir
+        </button>
+        <button id="btnLimparCampos" class="btn back-btn" (click)="limparCampos()">
+          <span class="fa fa-trash fa-fw"></span>Limpar Campos
+        </button>
+        <button class="btn continue-btn" (click)="salvar();">
+          Salvar
+        </button>
+      </div>
+    </form>
+  </section>
+</div>

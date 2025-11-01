@@ -1,0 +1,11 @@
+<main [class.principal-home]="true">
+  <app-cabecalho-padrao *ngIf="!isJanelaDownload()"></app-cabecalho-padrao>
+
+  <router-outlet></router-outlet>
+
+  <app-loading-modal></app-loading-modal>
+  <app-alert-message></app-alert-message>
+  <app-confirm-message></app-confirm-message>
+
+  <app-rodape-padrao *ngIf="!isJanelaDownload()"></app-rodape-padrao>
+</main>

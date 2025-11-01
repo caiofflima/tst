@@ -1,0 +1,9 @@
+@import "/src/assets/sass/colors";
+@import "/src/assets/sass/mixins";
+.red {
+    color: $btn-bg-red;
+  
+    &:hover, &:active {
+      color: $btn-bg-red-dark;
+    }
+  }

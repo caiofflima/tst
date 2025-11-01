@@ -1,0 +1,47 @@
+<form [formGroup]="form" #formDirective="ngForm">
+  <div class="custom-left-grid">
+    <div class="space-top">
+      <asc-select-procedimento
+        [parametros]="parametroSelectProcedimento"
+        [tipoAcaoService]="CONSULTAR_PROCEDIMENTO_POR_TIPO_PROCESSO"
+        [control]="form.get('idProcedimento')"
+        (dadoSelecionado)="procedimentoSelecionando($event)"
+        formControlName="idProcedimento"
+        label="Procedimento"
+        style="border-left: none !important;"
+      >
+      </asc-select-procedimento>
+    </div>
+    <div class="space-top" style="margin-top: 2em" *ngIf="isToShowForm">
+      <asc-graus-procedimento
+        [parametros]="parametrosSelectGrauProcedimento"
+        [control]="form.get('idGrauProcedimento')"
+        (dadosBackend)="grauProcedimentoCarregado($event)"
+        (dadoSelecionado)="grauProcedimentoSelecionado($event)"
+        formControlName="idGrauProcedimento"
+        label="{{ isTipoProcessoOdontologico() ? 'Região odontológica' : 'Grau'}}"
+        style="border-left: none !important;"
+      ></asc-graus-procedimento>
+    </div>
+    <div class="custom-form-group-input" style="margin-top: 2em" *ngIf="isToShowForm">
+      <p class="sub-titulo">Quantidade solicitada </p>
+      <div class="custom-input-container">
+        <input class="form-control" pInputText type="text" formControlName="qtdSolicitada" ascOnlyNumber maxlength="3">
+      </div>
+    </div>
+    <div class="flex-to-right">
+
+      <div class="footer-buttons">
+        <button class="custom-btn-confirm"
+                *ngIf="isToShowForm"
+                [disabled]="form.invalid"
+                (click)="adicionarProcedimento(formDirective)">
+          {{(isEditing) ? 'Concluir alteração' : 'Adicionar'}}
+        </button>
+        <button class="continue-btn" (click)="clickButtonCancelarProcedimento(formDirective)">
+          {{(isEditing) ? 'Cancelar' : 'Limpar'}}
+        </button>
+      </div>
+    </div>
+  </div>
+</form>

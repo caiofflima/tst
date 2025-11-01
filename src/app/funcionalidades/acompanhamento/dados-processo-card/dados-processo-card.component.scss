@@ -1,0 +1,14 @@
+@import "/src/assets/sass/colors";
+@import "/src/assets/sass/mixins";
+
+.cabecalho-card-processo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-btn-card {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}

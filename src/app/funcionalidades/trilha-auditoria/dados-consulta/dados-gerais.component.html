@@ -1,0 +1,141 @@
+<div class="col-md-12">
+  <p-table
+    [value]="dadosConsulta"
+    [paginator]="true"
+    [rows]="10"
+    class="table table-striped table-sm table-hover"
+    #dt
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th id="numeroPedido" style="width: 5%">Número do Pedido</th>
+        <th id="conselhoProfissional" style="width: 10%">
+          Conselho Profissional
+        </th>
+        <th id="numeroConselho" style="width: 10%">Número do Conselho</th>
+        <th id="ufConselho" style="width: 5%">UF do Conselho</th>
+        <th id="CNPJ" style="width: 10%">CPF/CNPJ</th>
+        <th id="UF" style="width: 5%">UF</th>
+        <th id="municipio" style="width: 10%">Município</th>
+        <th id="contato" style="width: 10%">Telefone de Contato</th>
+        <th id="evento" style="width: 5%">Evento</th>
+        <th id="data" style="width: 10%">Data</th>
+        <th id="acoes" style="width: 5%">Ação</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData>
+      <tr>
+        <td>{{ rowData.nroProcesso }}</td>
+        <td>{{ rowData.conselhoProfissional }}</td>
+        <td>{{ rowData.nroConselho }}</td>
+        <td>{{ rowData.ufConselho }}</td>
+        <td>{{ rowData.cpfCnpj | cpfCnpjMask }}</td>
+        <td>{{ rowData.ufAtendimento }}</td>
+        <td>{{ rowData.municipioAtendimento }}</td>
+        <td>{{ rowData.telefoneContato | telefone }}</td>
+        <td>{{ rowData.strEvento }}</td>
+        <td>{{ rowData.dataHoraEvento | date : "dd/MM/yyyy HH:mm:ss" }}</td>
+        <td>
+          <button
+            class="btn btn-info"
+            title="{{ bundle('MH154') }}"
+            (click)="abrirModalDetalhamento(rowData)"
+          >
+            <span class="fa fa-search fa-fw"></span>
+          </button>
+        </td>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="emptymessage">
+      {{ bundle("MA003") }}
+    </ng-template>
+
+    <!-- <p-column [style]="{'width':'5%'}" field="nroProcesso" header="Número do Pedido"></p-column>
+		<p-column [style]="{'width':'10%'}" field="conselhoProfissional" header="Conselho Profissional"></p-column>
+		<p-column [style]="{'width':'10%'}" field="nroConselho" header="Número do Conselho"></p-column>
+		<p-column [style]="{'width':'5%'}" field="ufConselho" header="UF do Conselho"></p-column>
+		<p-column [style]="{'width':'10%'}" field="cpfCnpj" header="CPF/CNPJ">
+			<ng-template let-row="rowData" pTemplate="content">
+              {{row.cpfCnpj| cpfCnpjMask}}
+        	</ng-template>
+		</p-column>
+		<p-column [style]="{'width':'5%'}" field="ufAtendimento" header="UF"></p-column>
+		<p-column [style]="{'width':'10%'}" field="municipioAtendimento" header="Município"></p-column>
+		<p-column [style]="{'width':'10%'}" header="Telefone de Contato">
+			<ng-template let-row="rowData" pTemplate="content">
+				{{row.telefoneContato | telefone}}
+			</ng-template>
+		</p-column>
+		<p-column [style]="{'width':'5%'}" field="strEvento" header="Evento"></p-column>
+		<p-column [style]="{'width':'10%'}" header="Data">
+			<ng-template let-row="rowData" pTemplate="content">
+              {{row.dataHoraEvento | date:'dd/MM/yyyy HH:mm:ss'}}
+        	</ng-template>
+		</p-column>
+		<p-column [style]="{'width':'5%'}" header="Ação">
+			<ng-template let-row="rowData" pTemplate="content">
+				<button class="btn btn-info" title="{{bundle('MH154')}}" (click)="abrirModalDetalhamento(row);">
+					<span class="fa fa-search fa-fw"></span>
+				</button>
+			</ng-template>
+		</p-column> -->
+  </p-table>
+
+  <p-dialog
+    header="Detalhes dos Dados Gerais"
+    [(visible)]="showModalDetalhamento"
+    [modal]="true"
+    width="800"
+    [responsive]="true"
+    #modalDetalhamento
+  >
+    <div class="col-md-12">
+      <div class="col-md-4">
+        <label for="nomeRazaoSocial">Nome/Razão Social</label>
+        <span id="nomeRazaoSocial" class="output-text">{{
+          selectedRow?.nomeRazaoSocial
+        }}</span>
+      </div>
+      <div class="col-md-4">
+        <label for="caraterSolicitacao">Caráter da Solicitação</label>
+        <span id="caraterSolicitacao" class="output-text">{{
+          selectedRow?.caraterSolicitacao
+        }}</span>
+      </div>
+      <div class="col-md-4">
+        <label for="email">E-mail</label>
+        <span id="email" class="output-text">{{ selectedRow?.email }}</span>
+        <span *ngIf="!selectedRow?.email">-</span>
+      </div>
+      <div class="col-md-4">
+        <label for="responsavel">Responsável</label>
+        <span id="responsavel" class="output-text">{{
+          selectedRow?.responsavel | cpfMask
+        }}</span>
+      </div>
+      <div class="col-md-4">
+        <label for="ipResponsavel">IP Responsável</label>
+        <span id="ipResponsavel" class="output-text">{{
+          selectedRow?.ipResponsavel
+        }}</span>
+      </div>
+      <div class="col-md-12">
+        <label for="observacoes">Observações</label>
+        <div
+          id="observacoes"
+          class="output-text"
+          [innerHtml]="selectedRow?.observacoes"
+        ></div>
+      </div>
+    </div>
+
+    <p-footer class="dmsg-footer">
+      <div style="display: flex; justify-content: flex-end">
+        <button class="btn btn-danger" (click)="fecharModalDetalhamento()">
+          <span class="fa fa-close fa-fw"></span>Fechar
+        </button>
+      </div>
+    </p-footer>
+  </p-dialog>
+</div>

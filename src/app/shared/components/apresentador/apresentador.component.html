@@ -1,0 +1,32 @@
+<p-dialog
+  header="{{ header }}"
+  [(visible)]="display"
+  [modal]="true"
+  width="800"
+  height="640"
+  [responsive]="true"
+>
+  <ng-content select="[conteudo]"></ng-content>
+  <p-footer class="apr-footer">
+    <div style="display: flex">
+      <button
+        class="btn btn-primary"
+        (click)="apresentarAnterior()"
+        [disabled]="disabledAnterior || !temAnterior()"
+      >
+        <span class="fa fa-arrow-left fa-fw"></span>
+      </button>
+      <button
+        class="btn btn-primary"
+        (click)="apresentarProximo()"
+        [disabled]="disabledProximo || !temProximo()"
+      >
+        <span class="fa fa-arrow-right fa-fw"></span>
+      </button>
+      <ng-content select="[acoes]"></ng-content>
+      <button class="btn btn-danger" (click)="close()">
+        <span class="fa fa-close fa-fw"></span>Fechar
+      </button>
+    </div>
+  </p-footer>
+</p-dialog>

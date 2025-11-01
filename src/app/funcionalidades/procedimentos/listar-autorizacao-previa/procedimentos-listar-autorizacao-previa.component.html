@@ -1,0 +1,52 @@
+<asc-base-layout-home
+baseTitulo="Procedimentos que exigem autorização prévia">
+
+  <ng-template #breadcrumb>
+    <em class="fa fa-chevron-right"></em>
+    {{duvidasService.getTitle()}}
+    <em class="fa fa-chevron-right"></em>
+    Procedimentos que exigem autorização prévia
+  </ng-template>
+
+  <div class="info-pagina" slot="info">
+    <p class="info-p">
+      A tabela abaixo contém os procedimentos cuja realização necessita de Autorização Prévia, apresentando as peculiaridades de cada código: 
+    </p>
+    <p class="info-p"><b>Nível</b></p>
+    <p class="info-p"><b>&nbsp;- AUDITORIA DE SAÚDE:</b> 
+      procedimento autorizado por Enfermeiro/Técnico da auditoria de saúde ou usuário com privilégio igual ou superior;
+    </p>
+    <p class="info-p"><b>&nbsp;- DENTISTA:</b> 
+      procedimento autorizado por Dentista ou usuários com privilégio igual ou superior;
+    </p>
+    <p class="info-p"><b>&nbsp;- CENTRALIZADORA:</b> 
+      procedimento autoridado pela Gerência regional ou instância superior;
+    </p>
+    <p class="info-p"><b>&nbsp;- MATRIZ:</b> 
+      procedimento autorizado apenas pela Gerência Nacional, máxima alçada.
+    </p>
+    
+  </div>
+
+  <div class="row p-0 col-md-12" slot="content">
+      <div class="col-xs-3 search-inp p-0" style="margin: 5px 0 8px; border-bottom: 0 none">
+        <input #gb type="text" class="form-control filtro-caixa" size="50" placeholder="Digite para filtrar resultado">
+        <em class="fas fa-search"></em>
+      </div>
+      <p-dataTable
+        id="caixa-table" [rows]="rowCounter" [paginator]="true" [pageLinks]="5" [totalRecords]="listaProcedimentos?.length"
+        emptyMessage="{{bundle('MA142')}}" [value]="listaProcedimentos" [rowsPerPageOptions]="[5,10,20]"
+        [globalFilter]="gb" reorderableColumns="true" sortField="id" [loading]="loading"
+        sortOrder="-1" class="table table-striped table-sm table-hover text-center">
+        <p-column field="id" header="Código" [sortable]="true" [style]="{'width':'35px'}">
+          <ng-template let-row="rowData" pTemplate="content">
+            {{row.id | handleMask}}
+          </ng-template>
+        </p-column>
+        <p-column field="descricaoProcedimento" header="Nome do Procedimento" [sortable]="true" [style]="{'width':'60px','text-align': 'left'}"></p-column>
+        <p-column field="noTipoProcesso" header="Tipo Pedido" [sortable]="true" [style]="{'width':'40px','text-align': 'left'}" ></p-column>
+        <p-column field="noNivelAutorizacao" header="Nível" [sortable]="true" [style]="{'width':'40px'}"></p-column>
+      </p-dataTable>
+    </div>
+
+</asc-base-layout-home>

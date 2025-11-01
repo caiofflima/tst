@@ -1,0 +1,53 @@
+@mixin add-btn-hover($mainColor, $hoverColor, $borderColor, $spanColor, $spanHoverColor) {
+    display         : flex;
+    align-items     : center;
+    justify-content : center;
+    border-radius   : 3px;
+    background-color: $mainColor;
+    border-color    : $borderColor;
+    transition      : 250ms ease-in-out;
+    box-shadow      : 0px 4px 4px rgba(0, 0, 0, 0.25);
+    padding         : 14px 16px;
+    min-width: 125px;
+
+    span {
+        color     : $spanColor;
+        transition: 300ms ease-in-out;
+    }
+
+    &:hover,
+    &:active {
+        background-color: $hoverColor;
+        transition      : 250ms ease-in-out;
+
+        span {
+            color     : $spanHoverColor;
+            transition: 300ms ease-in-out;
+        }
+    }
+}
+
+div.custom-container {
+    width    : 100%;
+    padding  : 12px;
+    max-width: 794px;
+    margin   : 0 auto;
+
+    p.titulo {
+        font-family: 'Caixa Std Bold', sans-serif;
+        font-style : normal;
+        font-weight: bold;
+        font-size  : 18px;
+        line-height: 25px;
+        color      : #0065B7;
+
+        &.margin-top-32 {
+            margin-top: 32px;
+        }
+
+        &.max-565 {
+            width    : 100%;
+            max-width: 565px;
+        }
+    }
+}

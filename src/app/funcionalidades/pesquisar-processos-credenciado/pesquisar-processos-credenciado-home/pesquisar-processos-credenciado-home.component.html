@@ -1,0 +1,114 @@
+<!-- Page Header-->
+<div class="col-md-12 breadcrumb-header">
+  <ul class="breadcrumb">
+    <li><span routerLink="/" class="voltar"><i class="fa fa-arrow-left" aria-hidden="true"></i>Voltar</span></li>
+    <a routerLink="/home">
+      <i class="fa fa-home"></i>
+      Home</a>
+    <i class="fa fa-chevron-right"></i>
+    <a>
+      {{tituloTela}}
+    </a>
+  </ul>
+</div>
+
+<header class="page-header">
+  <div class="container-fluid">
+    <h2 class="no-margin-bottom">{{tituloTela}}</h2>
+  </div>
+</header>
+<!-- Page Header-->
+
+
+<section class="row container-fluid">
+  <form [formGroup]="form">
+    <div class="row col-md-10">
+      <div class="row col-md-10">
+        <h4>Dados de Pedido</h4>
+      </div>
+      <div class="clearfix"></div>
+      <div class="col-md-10">
+        <label class="control-label" for="colaborador">Colaborador</label>
+        <p-dropdown id="colaborador" [options]="listColaboradores" [filter]="true"
+                    formControlName="idUsuarioCredenciado" placeholder="{{bundle('MHSPH')}}"></p-dropdown>
+      </div>
+      <div class="clearfix"></div>
+      <div class="col-md-2">
+        <label class="control-label" for="numeroProcesso">Pedido</label>
+        <input type="text" id="numeroProcesso" class="form-control" formControlName="idPedido"
+               title="Buscar um processo específico." [maxlength]="8"
+               (keydown)="constantes.control.somenteNumeros(this.idPedido)"
+               (keyup)="constantes.control.somenteNumeros(this.idPedido)">
+      </div>
+      <div class="col-md-4">
+        <label class="control-label" for="dataInicio">Data Início</label>&nbsp;<br>
+        <p-calendar id="dataInicio" class="form-control2" formControlName="dataInicio" [locale]="pt"
+                    dateFormat="dd/mm/yy" title="{{bundle('MH158')}}"
+                    [monthNavigator]="true" [yearNavigator]="true"
+                    yearRange="1900:2100" [showIcon]="true"></p-calendar>
+      </div>
+      <div class="col-md-4">
+        <label class="control-label" for="dataFim">Data Fim</label>&nbsp;<br>
+        <p-calendar id="dataFim" class="form-control2" formControlName="dataFim" [locale]="pt"
+                    dateFormat="dd/mm/yy" title="{{bundle('MH158')}}"
+                    [monthNavigator]="true" [yearNavigator]="true"
+                    yearRange="1900:2100" [showIcon]="true"></p-calendar>
+      </div>
+      <div class="clearfix"></div>
+      <div class="col-md-5">
+        <label class="control-label" for="tipoProcesso">Tipo de Pedido</label>
+        <asc-multiSelect
+          id="tipoProcesso" [options]="listComboTipoProcesso"
+          [control]="form.get('tiposProcesso')"
+        ></asc-multiSelect>
+      </div>
+      <div class="col-md-5">
+        <label class="control-label" for="situacaoProcesso">Situação do Pedido</label>
+        <asc-multiSelect
+          id="situacaoProcesso" [options]="listComboSituacaoProcesso"
+          [control]="form.get('situacoesProcesso')"
+        ></asc-multiSelect>
+      </div>
+
+      <div class="row col-md-10">
+        <h4>Dados de Beneficiário</h4>
+      </div>
+      <div class="clearfix"></div>
+      <div class="col-md-2">
+        <label class="control-label" for="numeroCartao">Cartão de Identificação</label>
+        <input type="text" id="numeroCartao" class="form-control" formControlName="numeroCartao"
+               title="Filtrar pelo cartão de identificação do beneficiário." [textMask]="{mask: maskCI}">
+      </div>
+      <div class="col-md-4">
+        <label class="control-label" for="cpfBeneficiario">CPF</label>
+        <input type="text" id="cpfBeneficiario" class="form-control" formControlName="cpfBeneficiario"
+               title="{{bundle('MH159')}}" [textMask]="{mask: maskCPF}">
+      </div>
+      <div class="col-md-4">
+        <label class="control-label" for="nomeBeneficiario">Nome</label>
+        <input type="text" id="nomeBeneficiario" class="form-control" formControlName="nomeBeneficiario"
+               title="Filtrar pelo nome do beneficiário." [maxlength]="255" minlength="3">
+      </div>
+    </div>
+  </form>
+
+  <div class="col-xs-12 barra-botoes">
+    <button
+      id="btnNovoPedido"
+      class="btn btn-primary"
+      data-toggle="collapse"
+      title="Solicitar Novo Pedido"
+      (click)="pesquisarProcessos()">
+      <span class="fa fa-search fa-fw"></span>Pesquisar
+    </button>
+  </div>
+
+  <div class="clearfix"></div>
+  <app-resultado-pesquisa-processos-credenciado
+    *ngIf="exibirResultadosUsuarioSessao"
+    [resultado]="listProcessosUsuarioSessao"
+    [minhasSolicitacoes]="exibirResultadosUsuarioSessao"
+    [hideGlobalFilter]="true"
+    [paginatorEnabled]="false"
+  ></app-resultado-pesquisa-processos-credenciado>
+</section>

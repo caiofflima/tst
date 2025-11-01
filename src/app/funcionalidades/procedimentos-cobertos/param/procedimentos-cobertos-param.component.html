@@ -1,0 +1,42 @@
+<!-- Page Header-->
+<div class="container">
+    <div class="col-md-12 breadcrumb-header">
+        <ul class="breadcrumb">
+            <li><span (click)="voltar()" class="voltar"><i class="fa fa-arrow-left" aria-hidden="true"></i>Voltar</span>
+            </li>
+            <a routerLink="/home">Início</a>
+            <em class="fa fa-chevron-right"></em> Dúvidas
+            <em class="fa fa-chevron-right"></em> Procedimentos Cobertos pelo Saúde CAIXA
+        </ul>
+    </div>
+
+    <div class="title-type">
+        <h1 class="titulo-pagina">Procedimentos Cobertos pelo Saúde CAIXA</h1>
+    </div>
+
+    <section class="row">
+        <form novalidate>
+            <div class="form-row">
+                <div class="col-md-6 mb-15 pl-0">
+                    <label class="control-label">Tipo de Pedido *</label>
+                    <asc-dropdown
+                        [items]="listComboTipoProcesso"
+                        [control]="formulario.get('tiposProcesso')"></asc-dropdown>
+                    <div *ngIf="formulario.get('tiposProcesso').invalid && (formulario.get('tiposProcesso').dirty || formulario.get('tiposProcesso').touched)" class="error-form" [ngStyle]="compStyle">
+                        <div *ngIf="formulario.get('tiposProcesso').errors?.required">Selecione um item na lista.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xs-12 barra-botoes">
+                <button (click)="limparCampos()" type="button" id="btnLimparCampos" class="btn back-btn">
+                    <span class="fa fa-trash fa-fw"></span>Limpar Campos
+                </button>
+                <button [disabled]="!formulario.valid" (click)="pesquisar()" type="submit" id="btnPesquisar" class="btn continue-btn">
+                    <span class="fa fa-search fa-fw"></span>Pesquisar
+                </button>
+            </div>
+
+        </form>
+    </section>
+</div>

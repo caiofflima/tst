@@ -1,0 +1,94 @@
+h1 {
+    border-bottom: none;
+ }
+ 
+ .text-align-center {
+    text-align: center;
+ }
+ 
+ .text-align-right {
+    text-align: right;
+ }
+ 
+ .margin-left-25 {
+    margin-left: 25px;
+ }
+ 
+ .margin-top-15 {
+    margin-top: 15px;
+ }
+ 
+ .color-darkorange {
+    color: darkorange;
+ }
+ 
+ .ans-box {
+    color: white;
+    background-color: darkblue;
+    padding: 4px 8px 4px 8px;
+    border-radius: 4px;
+ }
+ 
+ .card-box {
+    background-color: #f1f6f7;
+    border-radius: 25px;
+    padding: 40px 40px 20px 40px;
+ }
+ 
+ .input-box {
+    background-color:#f1f6f7;
+    border-radius: 4px;
+    padding: 15px 20px;
+ }
+ 
+ h3 {
+    border: none;
+    padding-bottom: 0px;
+  }
+ 
+  .no-padding-left {
+    padding-left: 0px;
+  }
+ 
+  .detalhe-aprovacao {
+    color:#fff;
+    background-color:#999999;
+    border-radius: 4px;
+    font-size: 10px;
+    padding: 2px 5px;
+    margin-left: 5px;
+  }
+ 
+  .det-option {
+    color:#999999 !important;
+  }
+  input.filtro {
+   background-color: #D0E0E3;
+   color: #000;
+}
+
+input.filtro::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+   color: #337ab7;
+   opacity: 1; /* Firefox */
+   font-weight: bold;
+ }
+ input.filtro:-ms-input-placeholder { /* Internet Explorer 10-11 */
+   color: #337ab7;
+   font-weight: bold;
+ }
+ input.filtro::-ms-input-placeholder { /* Microsoft Edge */
+   color: #337ab7;
+   font-weight: bold;
+ }
+
+ .float-direita {
+    float: right
+ }
+
+.iconeEmailStatus {
+   font-size: 25px;
+   color:#005CA9;
+}
+.iconeEmail {
+   font-size: 18px;
+}

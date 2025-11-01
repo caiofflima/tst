@@ -1,0 +1,103 @@
+<asc-modal-navegacao
+  #modalMensagem
+  class="mdl-custom"
+  tituloModal="Mensagens Enviadas"
+  [modoRotacao]="false"
+  [infoExibicao]="infoExibicao"
+  (infoExibicaoAtual$)="exibirItemAtual($event)"
+  (onFechar$)="fechar()"
+  [closeBottomLeft]="customStyleProperties?.closeBottomLeft">
+  <asc-viewport class="mdl-view-custom">
+    <div>
+      <div class="space-btw m-10">
+        <p class="modal-title-prime" id="titulo">{{ isTipoOcorrenciaObservacao ? 'Observação' : 'Mudança de Situação'}}</p>
+        <div class="dp-fl" *ngIf="!tituloAcompanhamento">
+          <em class="fa fa-user-circle-o fa-fw"></em>
+          <p class="no-margin">{{mensagem?.codigoUsuarioCadastramento}}</p>
+        </div>
+      </div>
+      <div class="situacao-container space-btw m-10">
+        <table style="width: 750px" aria-describedby="titulo">
+          <thead>
+            <tr>
+             <th></th>
+             <th></th>
+             <th></th>
+             <th></th>
+             <th></th>
+             <th></th>
+           </tr>
+          </thead>
+          <tbody>
+          <tr *ngIf="!isTipoOcorrenciaObservacao">
+            <td style="width: 20%; font-weight: bold;">Situação associada:</td>
+            <td>{{mensagem?.situacaoProcesso?.nome | campoVazioHifen}}</td>
+          </tr>
+          <tr>
+            <td style="width: 20%; font-weight: bold;">Data de envio:</td>
+            <td>{{mensagem?.dataHoraEnvio | date: "dd/MM/yyyy HH:mm:ss"}}</td>
+          </tr>
+          <tr>
+            <td style="width: 20%; font-weight: bold;">De:</td>
+            <td>{{mensagem?.emailRemetente | campoVazioHifen}}</td>
+          </tr>
+          <tr>
+            <td style="width: 20%; font-weight: bold;">Para:</td>
+            <td>{{mensagem?.emailDestinatario | campoVazioHifen}}</td>
+          </tr>
+          <tr *ngIf="emailsCopia">
+            <td style="width: 20%; font-weight: bold;">Cc:</td>
+            <td>{{emailsCopia | campoVazioHifen}}</td>
+          </tr>
+          <tr>
+            <td style="width: 20%; font-weight: bold;">Assunto:</td>
+            <td>{{mensagem?.assunto | campoVazioHifen}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="text-area-container txt-area">
+        <asc-text-area [rows]="10" aria-readonly="true" [innerHTML]="mensagem?.textoEmailEnviado"></asc-text-area>
+      </div>
+    </div>
+  </asc-viewport>
+
+  <asc-modal-acoes>
+    <div class="fl-sb-btn" *ngIf="(mostrarBotoes)">
+      <button (click)="modalMensagem.fecharModal(); abrirModal(modalMensagem, modalMensagemEmail)"
+              class="btn-cts btn-send">
+        <svg class="icon-re-send"></svg>
+        <span>Encaminhar</span>
+      </button>
+      <button class="btn-cts btn-send" (click)="clickReenviarMensagem('Mensagem reenviada!', mensagem)">
+        <svg class="icon-ree-send"></svg>
+        <span>Reenviar</span>
+      </button>
+    </div>
+  </asc-modal-acoes>
+
+</asc-modal-navegacao>
+
+<asc-modal #modalMensagemEmail class="modal-custom">
+  <asc-modal-header>Encaminhar Mensagem</asc-modal-header>
+  <asc-modal-body class="mdl-body-custom">
+    <div class="row">
+      <div class="form-group">
+        <h4>Digite um e-mail distinto para o qual deseja enviar esta mensagem</h4>
+        <input type="email" [(ngModel)]="emailEncaminhar" class="form-control">
+      </div>
+    </div>
+  </asc-modal-body>
+
+  <asc-modal-footer>
+    <div class="fl-sb-btn">
+      <button class="btn-cts btn-outline-closed" (click)="modalMensagemEmail.fechar()">
+        <span>Cancelar</span>
+      </button>
+      <button class="btn-cts btn-send" (click)="clickEnviarMensagem('Mensagem enviada!', mensagem, modalMensagemEmail)">
+        <svg class="icon-re-send" aria-hidden="true"></svg>
+        <span>Encaminhar</span>
+      </button>
+    </div>
+  </asc-modal-footer>
+</asc-modal>

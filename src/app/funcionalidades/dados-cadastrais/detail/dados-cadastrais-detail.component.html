@@ -1,0 +1,654 @@
+<!-- Header main Dados Cadastrais -->
+<section class="container-view" id="container-dados-cadastrais">
+  <!-- === HEADER VIEW ===  -->
+  <section class="container">
+    <div class="register-header">
+      <div class="register-breadcrumb">
+        <ul class="breadcrumb register-breadcrumb--wrapper">
+          <li>
+            <span (click)="backButton()" class="voltar"
+              ><i class="fa fa-arrow-left" aria-hidden="true"></i>Voltar</span
+            >
+          </li>
+          <a routerLink="/home">Início</a>
+          <em class="fa fa-chevron-right"></em>
+          Meus dados
+          <em class="fa fa-chevron-right"></em>
+          {{titulo}}
+
+        </ul>
+      </div>
+      <div class="register-title">
+        <p class="title-section">{{titulo}}</p>
+        <hr class="separador" />
+      </div>
+    </div>
+  </section>
+  <!-- === //HEADER VIEW ===  -->
+
+  <!-- === MAIN VIEW ===  -->
+  <section class="container">
+    <div class="box-data">
+      <div class="box-sect">
+        <h4 class="dadosDoTitularTitle">Dados do Titular</h4>
+        <div class="box-infos">
+          <div class="box-infos__header">
+            <h5 class="mt-0 mb-9">
+              <i class="fa fa-user"></i>
+              <span>Dados Pessoais</span>
+            </h5>
+            <button
+              class="btn is--secundary is--small is--bold"
+              (click)="gerenciarEdicaoDadosPessoais(true)"
+              [disabled]="isEditarDadosPessoais ? true : null"
+            >
+              <i class="fa fa-pencil"></i>
+              <span>Editar</span>
+            </button>
+          </div>
+          <hr class="separador" />
+          <div class="box-infos__main">
+            <div
+              class="box-infos__wrapper is--disabled"
+              *ngIf="!isEditarDadosPessoais"
+            >
+              <div class="">
+                <h4>Nome</h4>
+                <p>
+                  {{
+                    beneficiario?.nome ? beneficiario?.nome : ("-" | uppercase)
+                  }}
+                </p>
+              </div>
+              <div class="">
+                <h4>Telefone</h4>
+                <p>{{ beneficiario?.celular ? beneficiario?.celular : "-" }}</p>
+              </div>
+              <div class="">
+                <h4>E-mail</h4>
+                <p>{{ beneficiario?.email }}</p>
+              </div>
+            </div>
+            <div class="is--active" *ngIf="isEditarDadosPessoais">
+              <form [formGroup]="dadosPessoaisForm" class="box-form">
+                <div class="box-form__groups">
+                  <div class="box-form__title">
+                    <h5>Nome</h5>
+                    <p>{{ beneficiario?.nome | uppercase }}</p>
+                  </div>
+
+                  <div
+                    class="form-group col-md-6 noPaddingLeft box-form__group"
+                  >
+                    <div class="custom-form-group-input">
+                      <label class="control-label"
+                        >Telefone <small>Opcional</small></label
+                      >
+                      <div class="custom-size">
+                        <asc-input-telefone
+                          [control]="dadosPessoaisForm.get('telefone')"
+                          inputId="telefone"
+                          label=""
+                        ></asc-input-telefone>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div
+                    class="form-group col-md-6 noPaddingLeft box-form__group"
+                  >
+                    <div class="custom-form-group-input">
+                      <label class="control-label"
+                        >E-mail <small>Opcional</small></label
+                      >
+                      <div class="custom-size">
+                        <asc-input-text
+                          [control]="dadosPessoaisForm.get('email')"
+                          inputId="email"
+                          label=""
+                        ></asc-input-text>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="box-form__controls">
+                  <button
+                    class="btn is--auxiliary is--small"
+                    (click)="cancelarEdicaoDadosPessoais()"
+                    type="button"
+                  >
+                    Cancelar
+                  </button>
+                  <!-- 93 - ATUALIZAÇÃO DE DADOS DE CONTATO -->
+                  <button
+                    class="btn is--primary is--yellow is--small with--spinner"
+                    [ngStyle]="{ color: showProgress && 'transparent' }"
+                    (click)="atualizarDadosPessoais(93)"
+                    [disabled]="showProgressSending()"
+                    type="button"
+                  >
+                    <span
+                      [ngStyle]="{ display: showProgress && 'block' }"
+                      class="loading-spinner"
+                    >
+                      <p-progressSpinner
+                        animationDuration=".5s"
+                        strokeWidth="4"
+                        [style]="{ width: '100%', height: '100%' }"
+                      >
+                      </p-progressSpinner>
+                    </span>
+
+                    <span> Enviar Solicitação </span>
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="box-infos">
+          <div class="box-infos__header">
+            <h5>
+              <i class="fa fa-map-marker"></i>
+              <span>Endereço</span>
+            </h5>
+            <button
+              class="btn is--secundary is--small is--bold"
+              (click)="gerenciarEdicaoEndereco(true)"
+              [disabled]="isEditarEndereco ? true : null"
+            >
+              <i class="fa fa-pencil"></i>
+              <span>Editar</span>
+            </button>
+          </div>
+          <hr class="separador" />
+          <div class="box-infos__main">
+            <div
+              class="box-infos__wrapper is--disabled"
+              *ngIf="!isEditarEndereco"
+            >
+              <div class="info">
+                <h4>CEP</h4>
+                <p>{{ beneficiario?.endereco?.cep }}</p>
+              </div>
+              <div class="is--2-cols">
+                <h4>Logradouro</h4>
+                <p>{{ beneficiario?.endereco?.logradouro }}</p>
+              </div>
+
+              <div class="">
+                <h4>Número</h4>
+                <p>{{ beneficiario?.endereco?.numero }}</p>
+              </div>
+              <div class="">
+                <h4>Complemento</h4>
+                <p>{{ beneficiario?.endereco?.complemento }}</p>
+              </div>
+              <div class="">
+                <h4>Bairro</h4>
+                <p>{{ beneficiario?.endereco?.bairro || "-" }}</p>
+              </div>
+              <div class="">
+                <h4>Município/Estado</h4>
+                <p>
+                  {{
+                    beneficiario?.endereco?.municipio?.nome +
+                      "/" +
+                      beneficiario?.endereco?.estado?.sigla
+                  }}
+                </p>
+              </div>
+            </div>
+            <div class="is--active" *ngIf="isEditarEndereco">
+              <form [formGroup]="enderecoForm" class="form-container box-form">
+                <div class="box-form__groups">
+                  <div
+                    class="form-group col-md-6 noPaddingLeft box-form__group is--cep"
+                  >
+                    <div class="custom-form-group-input">
+                      <label class="control-label">CEP </label>
+                      <div class="custom-size form__input">
+                        <asc-input-text
+                          [control]="enderecoForm.get('cep')"
+                          maskName="cepMask"
+                          inputId="cep"
+                          label=""
+                        ></asc-input-text>
+                        <span class="reset-input">
+                          <button type="button" (click)="getEnderecoByCEP()">
+                            <i class="fa fa-sync"></i>
+                          </button>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div
+                    class="form-group col-md-6 noPaddingLeft box-form__group is--logradouro"
+                  >
+                    <div class="custom-form-group-input">
+                      <label class="control-label">Logradouro</label>
+                      <div class="custom-size form__input">
+                        <asc-input-text
+                          [control]="enderecoForm.get('logradouro')"
+                          inputId="logradouro"
+                          label=""
+                        ></asc-input-text>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div
+                    class="form-group col-md-6 noPaddingLeft box-form__group is--numero"
+                  >
+                    <div class="custom-form-group-input">
+                      <label class="control-label">Número</label>
+                      <div class="custom-size form__input">
+                        <asc-input-text
+                          [control]="enderecoForm.get('numero')"
+                          inputId="numero"
+                          label=""
+                        ></asc-input-text>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div
+                    class="form-group col-md-6 noPaddingLeft box-form__group is--bairro"
+                  >
+                    <div class="custom-form-group-input">
+                      <label class="control-label">Bairro</label>
+                      <div class="custom-size form__input">
+                        <asc-input-text
+                          [control]="enderecoForm.get('bairro')"
+                          inputId="bairro"
+                          label=""
+                        ></asc-input-text>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div
+                    class="form-group col-md-6 noPaddingLeft box-form__group is--municipio"
+                  >
+                    <div class="custom-form-group-input">
+                      <div class="col-md-12 mb-15 p-0">
+                        <asc-select-uf
+                          id="asc-select-uf-dados-cadastrais-details"
+                          label="Estado"
+                          [control]="enderecoForm.get('estado')"
+                          [index]="4"
+                        >
+                        </asc-select-uf>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div
+                    class="form-group col-md-6 noPaddingLeft box-form__group is--municipio"
+                  >
+                    <div class="custom-form-group-input">
+                      <div class="col-md-12 mb-15 p-0">
+                        <asc-select-municipio
+                          id="asc-select-municipio-dados-cadastrais-details"
+                          label="Município"
+                          [parametro]="{
+                            idMunicipio: enderecoForm.get('estado').value
+                          }"
+                          [index]="5"
+                          [control]="enderecoForm.get('municipio')"
+                          [required]="enderecoForm.get('estado').value"
+                        >
+                        </asc-select-municipio>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div
+                    class="form-group col-md-6 noPaddingLeft box-form__group is--complemento"
+                  >
+                    <div class="custom-form-group-input">
+                      <label class="control-label">Complemento</label
+                      ><small> - Opcional</small>
+                      <div class="custom-size form__input">
+                        <asc-input-text
+                          [control]="enderecoForm.get('complemento')"
+                          inputId="complemento"
+                          label=""
+                        ></asc-input-text>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  style="display: block"
+                  class="custom-card docsMP box-form__group is--file"
+                >
+                  <div
+                    id="container-asc-documento-card-dados-cadastrais-detail"
+                  >
+                    <asc-documento-card
+                      id="asc-documento-card-dados-cadastrais-detail"
+                      [documentos]="documentosCadastrados"
+                      (arquivosSelecionados)="arquivosSelecionados($event)"
+                      (documentosTipoProcessoSelecionados)="
+                        watchDocumentos($event)
+                      "
+                      (documentoTipoProcessoSelecionado)="
+                        selecionarTipoDocumento($event)
+                      "
+                    ></asc-documento-card>
+                  </div>
+                  <!-- <form [formGroup]="documentoForm" class="form-container">
+                  <div class="form-columns" style="width: 30%">
+                      <input
+                          type="file"
+                          #file
+                          style="display: none"
+                          (change)="onFilesAdded()"
+                          (click)="$event.target.value = null"
+                          multiple
+                      />
+
+                      <button id="anexar"
+                          mat-raised-button
+                          color="primary"
+                          class="add-files-btn"
+                          matTooltip="clique aqui para inserir documentos"
+                          (click)="addFiles()">
+                          Anexar Arquivo
+                      </button>
+                  </div>
+              </form>
+
+              <br />
+
+              <div class="form-columns" style="width: 80%">
+                <table *ngIf="anexos['length'] > 0" cellspacing="2" cellpadding="2">
+
+                    <tr>
+                        <th style="text-align: left;">#</th>
+                        <th style="text-align: left;"><b>Documento</b></th>
+                        <th></th>
+                    </tr>
+
+                    <tr *ngFor="let documento of anexos; let a=[index]">
+                        <td style="text-align: left;">{{a+1}}</td>
+                        <td style="text-align: left;"><span *ngIf="documento.name">{{documento.name}}</span> </td>
+
+                        <td style="text-align: left;">
+                            <div fxFlex fxLayoutAlign="end center" style="padding: 8px">
+                                <button id="excluirDocumento"
+                                    mat-icon-button
+                                    type="button"
+                                    color="warn"
+                                    matTooltip="Excluir arquivo"
+                                    (click)="excluirDocumentos(documento)">
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>-->
+                </div>
+                <div class="box-form__controls">
+                  <button
+                    class="btn is--auxiliary is--small"
+                    (click)="cancelarEdicaoEndereco()"
+                    type="button"
+                  >
+                    Cancelar
+                  </button>
+
+                  <!-- 94 - ATUALIZAÇÃO DE DADOS DE CONTATO -->
+                  <button
+                    class="btn is--primary is--yellow is--small with--spinner"
+                    [ngStyle]="{ color: showProgress && 'transparent' }"
+                    (click)="atualizarDadosPessoais(94)"
+                    [disabled]="
+                      desabilitarBotaoEnviar() || showProgressSending()
+                    "
+                    type="button"
+                  >
+                    <span
+                      [ngStyle]="{ display: showProgress && 'block' }"
+                      class="loading-spinner"
+                    >
+                      <p-progressSpinner
+                        animationDuration=".5s"
+                        strokeWidth="4"
+                        [style]="{ width: '100%', height: '100%' }"
+                      >
+                      </p-progressSpinner>
+                    </span>
+
+                    <span> Enviar Solicitação </span>
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="box-infos">
+          <div class="box-infos__header">
+            <h5>
+              <i class="fa fa-briefcase"></i>
+              <span>Profissional</span>
+            </h5>
+          </div>
+          <hr class="separador" />
+          <div class="box-infos__main">
+            <div class="box-infos__wrapper">
+              <div class="">
+                <h4>Matrícula</h4>
+                {{ beneficiario?.matriculaFuncional }}
+              </div>
+              <div class="">
+                <h4>Contrato</h4>
+                {{ beneficiario?.contrato?.contratante }}
+              </div>
+              <div class="">
+                <h4>Vínculo Funcional</h4>
+                {{ beneficiario?.vinculoFuncional?.descricao }}
+              </div>
+              <div class="">
+                <h4>Agrupadora</h4>
+                {{ beneficiario?.filial?.descricao }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="box-infos">
+          <div class="box-infos__header">
+            <h5>
+              <i class="fa fa-dollar-sign"></i>
+              <span>Financeiro</span>
+            </h5>
+          </div>
+          <hr class="separador" />
+          <div class="box-infos__main">
+            <div class="box-infos__wrapper">
+              <div class="">
+                <h4>Conta</h4>
+                {{ formatarContaCompleta() }}
+              </div>
+              <!--div class="">
+                <h4>Agência</h4>
+                {{ beneficiario?.agencia || '-' }}
+              </div-->
+              <div class="">
+                <h4>Desconto em</h4>
+                {{ beneficiario?.contaFin?.tipoDocumentoAgs?.descricao }}
+              </div>
+              <!--div class="">
+                <h4>Remuneração Base</h4>
+                {{ beneficiario?.vinculoFuncional?.descricao }}
+              </div-->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="box-cards">
+        <h4 class="box-cards__title">Família</h4>
+        <div class="box-cards__wrapper">
+          <div class="card">
+            <div class="card__header">
+              <h5 [attr.title]="beneficiario?.nome">
+                {{ beneficiario?.nome | uppercase }}
+              </h5>
+
+              <span></span>
+              <p>
+                ATIVO
+                <span class="is--success"
+                  ><i class="fa fa-check-circle"></i
+                ></span>
+              </p>
+            </div>
+            <div class="card__main">
+              <div class="">
+                <span
+                  *ngIf="beneficiario?.restrito === 'S'"
+                  class="badge is--small"
+                  >Restrito</span
+                >
+                <p>
+                  {{ beneficiario?.contratoTpdep?.tipoDependente?.descricao }}
+                </p>
+              </div>
+              <div class="">
+                <h5>Cod. Beneficiário:</h5>
+                <p>{{ beneficiario?.codigoBeneficiario }}</p>
+              </div>
+              <div class="">
+                <h5>Término Cartão:</h5>
+                <p>
+                  {{
+                    beneficiario?.cartaoIdentificacaoAtual?.dataFinalValidade
+                      | dateStringFormat : "dd/MM/yyyy"
+                  }}
+                </p>
+                <span
+                  *ngIf="
+                    isDataVencida(
+                      beneficiario?.cartaoIdentificacaoAtual?.dataFinalValidade
+                    )
+                  "
+                  class="is--warning"
+                >
+                  <i class="fa fa-exclamation-circle"></i>
+                </span>
+              </div>
+            </div>
+            <div class="card__controls">
+              <button
+                class="btn is--primary is--small is--bold"
+                (click)="redirectDetailPage(beneficiario?.id)"
+              >
+                <i class="fa fa-id-badge"></i>
+                <span>Detalhar Dados</span>
+              </button>
+              <button
+                class="btn is--secundary is--small is--bold"
+                (click)="redirectCartaoPage(beneficiario?.id)"
+              >
+                <i class="fa fa-address-card"></i>
+                <span>Acessar Cartão</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- === LOOP CARDS ===  -->
+          <ng-container *ngFor="let dependente of beneficiario?.dependentes">
+            <div class="card">
+              <div class="card__header">
+                <h5 [attr.title]="dependente?.nome">
+                  {{ dependente?.nome | uppercase }}
+                </h5>
+                <span></span>
+                <p *ngIf="dependente?.dataCancelamento === null">
+                  ATIVO
+                  <span class="is--success"
+                    ><i class="fa fa-check-circle"></i
+                  ></span>
+                </p>
+              </div>
+              <div class="card__main">
+                <div class="">
+                  <p>
+                    {{ dependente?.contratoTpdep?.tipoDependente?.descricao }}
+                  </p>
+                </div>
+                <div class="">
+                  <h5>Cod. Beneficiário:</h5>
+                  <p>{{ dependente?.codigoBeneficiario }}</p>
+                </div>
+                <div class="">
+                  <h5>Término Cartão:</h5>
+                  <p>
+                    {{
+                      dependente?.cartaoIdentificacaoAtual?.dataFinalValidade
+                        | dateStringFormat : "dd/MM/yyyy"
+                    }}
+                  </p>
+                  <span
+                    *ngIf="
+                      isDataVencida(
+                        dependente?.cartaoIdentificacaoAtual?.dataFinalValidade
+                      )
+                    "
+                    class="is--warning"
+                  >
+                    <i class="fa fa-exclamation-circle"></i>
+                  </span>
+                </div>
+              </div>
+              <div class="card__controls">
+                <button
+                  class="btn is--primary is--small is--bold"
+                  (click)="redirectDetailPage(dependente?.id)"
+                >
+                  <i class="fa fa-id-badge"></i>
+                  <span>Detalhar Dados</span>
+                </button>
+                <button
+                  class="btn is--secundary is--small is--bold"
+                  (click)="redirectCartaoPage(dependente?.id)"
+                >
+                  <i class="fa fa-address-card"></i>
+                  <span>Acessar Cartão</span>
+                </button>
+              </div>
+            </div>
+          </ng-container>
+          <!-- === //LOOP CARDS ===  -->
+        </div>
+
+        <div
+          *ngIf="
+            isCartaoExpirado(
+              beneficiario?.cartaoIdentificacaoAtual?.dataFinalValidade
+            )
+          "
+          class="message is--warning"
+        >
+          <span><i class="fa fa-exclamation"></i></span>
+          <p>O Cartão encontra-se expirado.</p>
+        </div>
+        <div class="box-cards__controls">
+          &nbsp;
+          <button
+            class="btn is--auxiliary is--bold"
+            (click)="novoBeneficiario()"
+            type="button"
+          >
+            <span>Adicionar Beneficiário</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- === //MAIN VIEW ===  -->
+<!-- Removido fechamento duplicado -->
+</section>

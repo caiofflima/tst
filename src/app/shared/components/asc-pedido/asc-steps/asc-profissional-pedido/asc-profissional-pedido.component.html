@@ -1,0 +1,220 @@
+<form [formGroup]="form">
+  <div class="solicitacao-container">
+    <p class="titulo margin">
+      Muito bem! Agora, precisamos dos dados do profissional que executou o procedimento.
+    </p>
+    <div class="ui-g">
+      <div class="ui-g-12 ui-md-6 no-padding" @fadeInOut>
+        <div class="custom-form-group-select">
+          <asc-select-conselho-profissional
+            [control]="form.get('idConselhoProfissional')" [required]="true"
+            (dadoSelecionado)="conselhoSelecionado($event)" label="Conselho Profissional">
+          </asc-select-conselho-profissional>
+          <small class="custom-form-group-info">
+            Exemplo: <strong>CRM</strong>-DF-65123
+          </small>
+        </div>
+
+        <div class="custom-form-group-input margin-16"
+             @fadeInOut *ngIf="form.get('idConselhoProfissional').dirty ">
+          <asc-input-text
+            [control]="form.get('numeroConselho')"
+            label="Número do Conselho"
+            [required]="true"
+            [maxlength]="15">
+          </asc-input-text>
+          <small class="custom-form-group-info">
+            Exemplo: CRM-DF-<strong>65123</strong>
+          </small>
+        </div>
+
+        <div class="custom-form-group-select margin-16"
+             @fadeInOut
+             *ngIf="form.get('idConselhoProfissional').dirty && form.get('numeroConselho').dirty">
+          <asc-select-uf
+            label="UF"
+            [required]="true"
+            *ngIf="form.get('idConselhoProfissional').dirty"
+            [control]="form.get('idEstadoConselho')"
+            (dadoSelecionado)="ufEstadoConselhoSelecionado($event)">
+          </asc-select-uf>
+          <small class="custom-form-group-info">
+            Exemplo: CRM-<strong>DF</strong>-65123
+          </small>
+        </div>
+      </div>
+
+      <div *ngIf="!form.get('idConselhoProfissional').valid" class="ui-g-12 ui-md-6 info-container margin-16">
+        <p class="info-title first-line-border">Essa informação pode ser encontrada no carimbo junto à assinatura,
+          no pedido. É composto pelas inicias do Conselho.</p>
+        <p class="info-title">Exemplo:</p>
+        <div class="ui-g">
+          <div class="ui-g-6 ui-md-6 no-padding">
+            <p class="info-secondary">Terapeuta Ocupacional CREFITO-8 1000257-TO</p>
+            <p class="info-secondary">CRM - Conselho Regional de Medicina</p>
+            <p class="info-secondary">CRBM - Conselho Regional de Biomedicina</p>
+            <p class="info-secondary">CRO - Conselho Regional de Odontologia</p>
+            <p class="info-secondary">CRP - Conselho Regional de Psicologia</p>
+            <p class="info-secondary">CREFONO - Conselho Regional de Fonoaudiologia</p>
+            <p class="info-secondary">CRN - Conselho Regional de Nutrição</p>
+            <p class="info-secondary">CREFFITO - Conselho Regional de Fisioterapia e Terapia Ocupacionais</p>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="form.get('idConselhoProfissional').valid && form.get('numeroConselho').invalid"
+           class="ui-g-12 ui-md-6 info-container margin-16">
+        <p class="info-title first-line-border">Essa informação pode ser encontrada no carimbo abaixo do nome
+          do profissional, afastado das iniciais do conselho.</p>
+        <p class="info-title">Exemplo:</p>
+        <div class="ui-g">
+          <div class="ui-g-6 ui-md-6 no-padding">
+            <p class="info-secondary">CREFITO-8 1000257-TO</p>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="form.get('idConselhoProfissional').valid && form.get('numeroConselho').valid"
+           class="ui-g-12 ui-md-6 info-container margin-16">
+        <p class="info-title first-line-border">Essa informação pode estar presente no carimbo como UF ou regional.
+          Selecione o conselho
+          desejado para verificar a unidade deferativa correspondente ao seu profissional.</p>
+        <p class="info-title">Exemplo:</p>
+        <div class="ui-g">
+          <div class="ui-g-6 ui-md-6 no-padding">
+            <p class="info-secondary">UF:</p>
+            <p class="info-secondary">Clínico Geral</p>
+            <p class="info-secondary">CRM-<strong>DF</strong> 65243</p>
+            <p class="info-secondary strong">CRM</p>
+            <p class="info-secondary strong">COREM</p>
+            <p class="info-secondary strong">CRO</p>
+          </div>
+          <div class="ui-g-6 ui-md-6 no-padding">
+            <p class="info-secondary">Regional:</p>
+            <p class="info-secondary">Terapeuta Ocupacional</p>
+            <p class="info-secondary">CREFITO-<strong>8</strong> 1000257-TO</p>
+            <div class="info-regional-container">
+              <p class="info-secondary-bold strong">CRBM</p>
+              <div class="tolltip-info-regional">
+                <ul>
+                  <li><span>CRBM-1:</span> ES, MS, RJ, SP</li>
+                  <li><span>CRBM-2:</span> AL, BA, CE, MA, PB, PE, PI, RN, SE</li>
+                  <li><span>CRBM-3:</span> DF, GO, MT, MG, TO</li>
+                  <li><span>CRBM-4:</span> AC, AP, AM, PA, RO</li>
+                  <li><span>CRBM-5:</span> RS, SC</li>
+                  <li><span>CRBM-6:</span> PR</li>
+                </ul>
+              </div>
+            </div>
+            <div class="info-regional-container">
+              <p class="info-secondary-bold strong">CRP</p>
+              <div class="tolltip-info-regional ui-g">
+                <div class="ui-g-6 ui-md-6 no-padding">
+                  <ul>
+                    <li><span>CRP-1:</span> DF</li>
+                    <li><span>CRP-2:</span> PE</li>
+                    <li><span>CRP-3:</span> BA</li>
+                    <li><span>CRP-4:</span> MG</li>
+                    <li><span>CRP-5:</span> RJ</li>
+                    <li><span>CRP-6:</span> SP</li>
+                    <li><span>CRP-7:</span> RS</li>
+                    <li><span>CRP-8:</span> PR</li>
+                    <li><span>CRP-9:</span> GO</li>
+                    <li><span>CRP-10:</span> PA, AP</li>
+                    <li><span>CRP-11:</span> CE</li>
+                    <li><span>CRP-12:</span> SC</li>
+                  </ul>
+                </div>
+                <div class="ui-g-6 ui-md-6 no-padding">
+                  <ul>
+                    <li><span>CRP-13:</span> PB</li>
+                    <li><span>CRP-14:</span> MS</li>
+                    <li><span>CRP-15:</span> AL</li>
+                    <li><span>CRP-16:</span> ES</li>
+                    <li><span>CRP-17:</span> RN</li>
+                    <li><span>CRP-18:</span> MT</li>
+                    <li><span>CRP-19:</span> SE</li>
+                    <li><span>CRP-20:</span> AM, RR</li>
+                    <li><span>CRP-21:</span> PI</li>
+                    <li><span>CRP-22:</span> MA</li>
+                    <li><span>CRP-23:</span> TO</li>
+                    <li><span>CRP-24:</span> AC, RO</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="info-regional-container">
+              <p class="info-secondary-bold strong">CREFONO</p>
+              <div class="tolltip-info-regional">
+                <ul>
+                  <li><span>CREFONO-1:</span> RJ</li>
+                  <li><span>CREFONO-2:</span> SP</li>
+                  <li><span>CREFONO-3:</span> PR, SC</li>
+                  <li><span>CREFONO-4:</span> AL, BA, PB, PE, SE</li>
+                  <li><span>CREFONO-5:</span> DF, GO, MS, MT, TO</li>
+                  <li><span>CREFONO-6:</span> ES, MG</li>
+                  <li><span>CREFONO-7:</span> RS</li>
+                  <li><span>CREFONO-8:</span> CE, MA, PI, RN</li>
+                  <li><span>CREFONO-9:</span> AC, AM, PA, RO, PR</li>
+                </ul>
+              </div>
+            </div>
+            <div class="info-regional-container">
+              <p class="info-secondary-bold strong">CRN</p>
+              <div class="tolltip-info-regional">
+                <ul>
+                  <li><span>CRN-1:</span> DF, GO, MT, TO</li>
+                  <li><span>CRN-2:</span> RS</li>
+                  <li><span>CRN-3:</span> MS, SP</li>
+                  <li><span>CRN-4:</span> ES, RJ</li>
+                  <li><span>CRN-5:</span> BA, SE</li>
+                  <li><span>CRN-6:</span> AL, CE, MA, PB, PE, PI, RN</li>
+                  <li><span>CRN-7:</span> AC, AM, AP, PA, RO, RR</li>
+                  <li><span>CRN-8:</span> PR</li>
+                  <li><span>CRN-9:</span> MG</li>
+                  <li><span>CRN-10:</span> SC</li>
+                </ul>
+              </div>
+            </div>
+            <div class="info-regional-container ">
+              <p class="info-secondary-bold strong">CREFITO</p>
+              <div class="tolltip-info-regional">
+                <div class="ui-g-4 ui-md-4 no-padding">
+                  <ul>
+                    <li><span>CREFITO-1:</span> PE</li>
+                    <li><span>CREFITO-2:</span> RJ</li>
+                    <li><span>CREFITO-3:</span> SP</li>
+                    <li><span>CREFITO-4:</span> MG</li>
+                    <li><span>CREFITO-5:</span> RS</li>
+                    <li><span>CREFITO-6:</span> CE</li>
+                    <li><span>CREFITO-7:</span> BA</li>
+                    <li><span>CREFITO-8:</span> PR</li>
+                    <li><span>CREFITO-9:</span> MT</li>
+                  </ul>
+                </div>
+                <div class="ui-g-8 ui-md-8 no-padding">
+                  <ul>
+                    <li><span>CREFITO-10:</span> SC</li>
+                    <li><span>CREFITO-11:</span> DF, GO</li>
+                    <li><span>CREFITO-12:</span> AM, AP, PA, RR, TO</li>
+                    <li><span>CREFITO-13:</span> MS</li>
+                    <li><span>CREFITO-14:</span> PI</li>
+                    <li><span>CREFITO-15:</span> ES</li>
+                    <li><span>CREFITO-16:</span> MA</li>
+                    <li><span>CREFITO-17:</span> SE</li>
+                    <li><span>CREFITO-18:</span> RO, AC</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+    <asc-button-secondary (onClick)="buttonToPrevious()" title="Voltar"></asc-button-secondary>
+
+    <asc-button-primary (onClick)="buttonToNext()" [disabled]="form.invalid" title="Continuar"></asc-button-primary>
+  </div>
+</form>

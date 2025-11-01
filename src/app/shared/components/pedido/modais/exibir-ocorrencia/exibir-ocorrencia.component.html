@@ -1,0 +1,37 @@
+<p-dialog header="Detalhe da Ocorrência" [(visible)]="display" [modal]="true" width="800" 
+  [responsive]="true" (onHide)="close()">
+
+  <div id="infoPanel" class="container-fluid info-box">
+  	<div class="row col-md-12">
+		<h4>{{situacaoPedido?.tipoOcorrencia?.nome}} <h5>{{situacaoPedido?.dataCadastramento | date: 'dd/MM/yyyy HH:mm:ss'}}</h5></h4>
+	</div>
+	
+		<div class="row col-md-4">
+	            <label class="control-label obrigatorio" for="sttus">Situação</label>
+	            <span id="sttus">{{situacaoPedido?.situacaoProcesso?.nome}}</span>
+	    </div>
+		<div class="row col-md-4">
+	            <label class="control-label obrigatorio" for="usr">Usuário</label>
+	            <span id="usr"><b>{{situacaoPedido?.strMatriculaCadastramento}}</b><br/>{{usuarioCadastramento?.nome}}</span>
+	    </div>
+		<div class="row col-md-4">
+	            <label class="control-label obrigatorio" for="hstrco">Histórico</label>
+	            <span id="hstrco">{{situacaoPedido?.descricaoHistorico}}</span>
+	    </div>
+		<div class="row col-md-4" >
+	            <label class="control-label obrigatorio" for="mtvoNgco">Motivo de Negação</label>
+	            <span id="mtvoNgco" *ngIf="!hasMotivoNegacao()">-</span>
+	            <span id="mtvoNgco" *ngIf="hasMotivoNegacao()">{{situacaoPedido?.motivoNegacao?.titulo}}</span>
+	    </div>
+		<div class="row col-md-12" *ngIf="showAnexos()">
+	            <label class="control-label obrigatorio" for="anxsStcoPrcsso">Arquivos</label>
+	            <span id="anxsStcoPrcsso"><asc-listagem-anexos [anexos]="listaAnexos" [fileNameMaxLength]="24" [hideExibirAnexo]="true"></asc-listagem-anexos></span>
+	    </div>
+  </div>
+
+  <br>
+  <p-footer>
+    <button type="button" pButton icon="fa-check" label="Fechar" (click)="close()"></button>
+  </p-footer>
+
+</p-dialog>

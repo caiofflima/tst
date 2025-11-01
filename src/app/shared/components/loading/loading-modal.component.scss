@@ -1,0 +1,27 @@
+.loadingText {
+  display: block;
+  font-size: 10px;
+  float: none;
+  position: absolute;
+  top: 30px;
+  width: 86%;
+}
+
+.modal-body {
+  display: table;
+  height:50px;
+  width: 100%;
+
+  & > div {
+    vertical-align: middle;
+    display: table-cell;
+
+    & > h4 {
+      color: #005DA8;
+    }
+  }
+}
+
+.modal-dialog .modal-body {
+  padding: 20px
+}

@@ -1,0 +1,17 @@
+<div *ngFor="let item of items" class="confirm-message modal" role="dialog" tabindex="-1">
+	<div class="modal-dialog mini-modal" role="document">
+		<div class="modal-content">
+			<div class="modal-body">{{item.msg}}</div>
+			<div class="modal-footer">
+				<div class="text-center" *ngIf="item.isConfirmTypeOk()">
+					<button  id="btnOk" type="button" class="btn-cts continue-btn" (click)="confirmYesOk(item)">{{'LABEL_CONFIRM_OK' | i18n}}</button>
+				</div>
+
+				<div class="text-center" *ngIf="item.isConfirmTypeYesNo()">
+					<button type="button"  class="btn-cts back-btn" (click)="confirmNo(item)">{{item.strBtnCancel}}</button>
+					<button id="btnOk" type="button" class="btn-cts continue-btn" (click)="confirmYesOk(item)">{{item.strBtnOk}}</button>					
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<div class="row col-md-12">
+		<h3>Dados do Titular</h3>
+	</div>
+
+	<div class="row col-xs-12">
+		<button id="btnTitular" class="btn btn-info" data-toggle="collapse" data-target="#infoPanel" title="Exibir/ocultar dados do(a) titular">
+			<span class="fa fa-user-circle fa-fw"></span>&nbsp;{{titular?.matriculaFuncional}} - {{titular?.nome}}
+		</button>
+		<button *ngIf="mostrarMeusProcessos == true" class="btn btn-primary" role="button" data-toggle="tooltip" (click)="chamarMeusProcessos()" title="Acessar Processos">
+			<span class="fa fa-archive"></span>
+		</button>
+	</div>
+
+	<div class="clearfix"></div>
+
+	<div id="infoPanel" class="collapse container-fluid info-box">
+		<div class="row col-xs-6">
+			<label class="control-label">Contrato</label> <label class="label-detalhar">{{titular?.contrato?.contratante}}</label>
+		</div>
+
+		<div class="row col-xs-6">
+			<label class="control-label">Vínculo Funcional</label>
+			<label class="label-detalhar">{{titular?.vinculoFuncional.codigo}} - {{titular?.vinculoFuncional.descricao}}</label>
+		</div>
+
+		<div class="clearfix"></div>
+
+		<div class="row col-xs-6">
+			<label class="control-label">Endereço Residencial</label> 
+			<label class="label-detalhar">{{titular?.endereco.logradouro}},
+				{{titular?.endereco.bairro}}<br /> {{titular?.endereco.cep}},
+				{{titular?.endereco?.municipio?.nome}}-{{titular?.endereco?.estado?.sigla}}
+			</label>
+		</div>
+
+		<div class="row col-xs-6">
+			<label class="control-label">Contato</label> <label class="label-detalhar">{{titular?.celular}}<br />
+				<a class="link-email" href="mailto:email">{{titular?.email}}</a></label>
+		</div>
+	</div>

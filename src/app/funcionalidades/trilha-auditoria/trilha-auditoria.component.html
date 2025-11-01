@@ -1,0 +1,446 @@
+<!-- Page Header-->
+<div class="container">
+  <div class="col-md-12 breadcrumb-header">
+    <ul class="breadcrumb">
+      <li>
+        <span (click)="voltar()" class="voltar"
+          ><i class="fa fa-arrow-left" aria-hidden="true"></i>Voltar</span
+        >
+      </li>
+      <a routerLink="/home">Início</a>
+      <em class="fa fa-chevron-right"></em>
+      Trilha de Auditoria
+      <em class="fa fa-chevron-right"></em>
+      <span *ngIf="moduloAutorizacaoPrevia">Autorização Prévia</span>
+      <span *ngIf="moduloEmail">E-mail</span>
+      <span *ngIf="moduloPrestadorExterno">Prestador Externo</span>
+    </ul>
+  </div>
+
+  <div class="title-type">
+    <h1 class="titulo-pagina" *ngIf="moduloAutorizacaoPrevia">
+      Trilhas de Auditoria – Autorização Prévia
+    </h1>
+    <h1 class="titulo-pagina" *ngIf="moduloEmail">
+      Trilhas de Auditoria – E-mail
+    </h1>
+    <h1 class="titulo-pagina" *ngIf="moduloPrestadorExterno">
+      Trilhas de Auditoria – Prestador Externo
+    </h1>
+  </div>
+
+  <section class="row">
+    <section class="col-md-12 p-0">
+      <form [formGroup]="form">
+        <div class="row d-flex p-0 col-md-12">
+          <div class="col-md-4 p-0">
+            <label class="control-label" for="modulo">Módulos</label>
+            <p-dropdown
+              id="modulo"
+              class="form-control2"
+              [options]="funcionalidades"
+              placeholder="{{ bundle('MHSPH') }}"
+              formControlName="modulo"
+            >
+            </p-dropdown>
+            <div
+              *ngIf="modulo.invalid && (modulo.dirty || modulo.touched)"
+              class="error-form"
+            >
+              <div *ngIf="modulo.errors['required']">{{ bundle("MA005") }}</div>
+            </div>
+          </div>
+
+          <div class="col-md-4" *ngIf="showSubModulos">
+            <label class="control-label obrigatorio" for="tabelas"
+              >Sub-módulos</label
+            >
+            <p-dropdown
+              [required]="true"
+              id="tabelas"
+              class="form-control2"
+              [options]="tabelas"
+              placeholder="{{ bundle('MHSPH') }}"
+              formControlName="subModulo"
+            >
+            </p-dropdown>
+            <div
+              *ngIf="
+                subModulo.invalid && (subModulo.dirty || subModulo.touched)
+              "
+              class="error-form"
+            >
+              <div *ngIf="subModulo.errors['required']">
+                {{ bundle("MA005") }}
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4 pl-0" *ngIf="moduloAutorizacaoPrevia">
+            <label class="control-label obrigatorio" for="numeroProcesso"
+              >Número do Pedido</label
+            >
+            <input
+              required
+              type="text"
+              id="numeroProcesso"
+              formControlName="numeroProcesso"
+              class="form-control"
+              size="8"
+              maxlength="8"
+              (keydown)="constantes.control.somenteNumeros(numeroProcesso)"
+              (keyup)="constantes.control.somenteNumeros(numeroProcesso)"
+            />
+            <div
+              *ngIf="
+                numeroProcesso.invalid &&
+                (numeroProcesso.dirty || numeroProcesso.touched)
+              "
+              class="error-form"
+            >
+              <div *ngIf="numeroProcesso.errors['required']">
+                {{ bundle("MA007") }}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row d-flex p-0 col-md-12" *ngIf="moduloEmails">
+          <div class="col-md-6 pl-0">
+            <label class="control-label obrigatorio" for="tipoProcesso"
+              >Tipo de Pedido</label
+            >
+            <p-dropdown
+              id="tipoProcesso"
+              [options]="itensTipoProcesso"
+              [filter]="true"
+              class="form-control2"
+              placeholder="{{ bundle('MHSPH') }}"
+              title="Situação do pedido."
+              formControlName="idTipoProcesso"
+            >
+            </p-dropdown>
+
+            <div
+              *ngIf="
+                tipoProcesso.invalid &&
+                (tipoProcesso.dirty || tipoProcesso.touched)
+              "
+              class="error-form"
+            >
+              <div *ngIf="tipoProcesso.errors['required']">
+                {{ bundle("MA005") }}
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 pl-0">
+            <label class="control-label obrigatorio" for="situacaoProcesso"
+              >Situação do Pedido</label
+            >
+            <p-dropdown
+              id="situacaoProcesso"
+              [options]="itensSituacaoProcesso"
+              [filter]="true"
+              class="form-control2"
+              placeholder="{{ bundle('MHSPH') }}"
+              title="Situação do processo."
+              formControlName="idSituacaoProcesso"
+            >
+            </p-dropdown>
+
+            <div
+              *ngIf="
+                situacaoProcesso.invalid &&
+                (situacaoProcesso.dirty || situacaoProcesso.touched)
+              "
+              class="error-form"
+            >
+              <div *ngIf="situacaoProcesso.errors['required']">
+                {{ bundle("MA005") }}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="row d-flex p-0 col-md-12"
+          *ngIf="moduloTiposDestinatarioEmail"
+        >
+          <div class="col-md-4 pl-0">
+            <label class="control-label obrigatorio" for="idEmail"
+              >ID E-mail</label
+            >
+            <input
+              required
+              type="text"
+              id="idEmail"
+              formControlName="idEmail"
+              class="form-control"
+              size="8"
+              maxlength="8"
+              (keydown)="constantes.control.somenteNumeros(idEmail)"
+              (keyup)="constantes.control.somenteNumeros(idEmail)"
+            />
+            <div
+              *ngIf="idEmail.invalid && (idEmail.dirty || idEmail.touched)"
+              class="error-form"
+            >
+              <div *ngIf="idEmail.errors['required']">
+                {{ bundle("MA007") }}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="row d-flex p-0 col-md-12"
+          *ngIf="moduloUsuarioPrestadorExterno"
+        >
+          <div class="col-md-4 pl-0" *ngIf="moduloUsuarioPrestadorExterno">
+            <label class="control-label" for="idEmail">ID Usuário</label>
+            <input
+              type="text"
+              id="idUsuario"
+              formControlName="idUsuario"
+              class="form-control"
+              size="8"
+              maxlength="8"
+              (keydown)="constantes.control.somenteNumeros(idUsuario)"
+              (keyup)="constantes.control.somenteNumeros(idUsuario)"
+            />
+            <div
+              *ngIf="
+                idUsuario.invalid && (idUsuario.dirty || idUsuario.touched)
+              "
+              class="error-form"
+            >
+              <div *ngIf="idUsuario.errors['required']">
+                {{ bundle("MA007") }}
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4 pl-0" *ngIf="moduloUsuarioPrestadorExterno">
+            <label class="control-label" for="cpfUsuario">CPF do Usuário</label>
+            <input
+              type="text"
+              id="cpfUsuario"
+              formControlName="cpfUsuario"
+              class="form-control"
+              size="14"
+              maxlength="14"
+              (blur)="cpfCnpjUtil.control.configurarMascara(this.cpfUsuario)"
+              (focus)="cpfCnpjUtil.control.limparFormatacao(this.cpfUsuario)"
+              (keyup)="checkCPFCNPJ(this.cpfUsuario, 11)"
+              (keydown)="checkCPFCNPJ(this.cpfUsuario, 11)"
+            />
+            <div
+              *ngIf="
+                cpfUsuario.invalid && (cpfUsuario.dirty || cpfUsuario.touched)
+              "
+              class="error-form"
+            >
+              <div *ngIf="cpfUsuario.errors['required']">
+                {{ bundle("MA007") }}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="row d-flex p-0 col-md-12"
+          *ngIf="moduloVinculosEmpresaPrestador"
+        >
+          <div class="col-md-4 pl-0" *ngIf="moduloVinculosEmpresaPrestador">
+            <label class="control-label" for="idUsuario2">ID Usuário</label>
+            <input
+              type="text"
+              id="idUsuario2"
+              formControlName="idUsuario"
+              class="form-control"
+              size="8"
+              maxlength="8"
+              (keydown)="constantes.control.somenteNumeros(idUsuario)"
+              (keyup)="constantes.control.somenteNumeros(idUsuario)"
+            />
+            <div
+              *ngIf="
+                idUsuario.invalid && (idUsuario.dirty || idUsuario.touched)
+              "
+              class="error-form"
+            >
+              <div *ngIf="idUsuario.errors['required']">
+                {{ bundle("MA007") }}
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4 pl-0" *ngIf="moduloVinculosEmpresaPrestador">
+            <label class="control-label" for="cpfUsuario2"
+              >CPF do Usuário</label
+            >
+            <input
+              type="text"
+              id="cpfUsuario2"
+              formControlName="cpfUsuario"
+              class="form-control"
+              title="{{ bundle('MH130') }}"
+              size="14"
+              maxlength="14"
+              (blur)="cpfUtil.control.configurarMascara(this.cpfUsuario)"
+              (focus)="cpfUtil.control.limparFormatacao(this.cpfUsuario)"
+              (keyup)="checkCPFCNPJ(this.cpfUsuario, 11)"
+              (keydown)="checkCPFCNPJ(this.cpfUsuario, 11)"
+            />
+            <div
+              *ngIf="
+                cpfUsuario.invalid && (cpfUsuario.dirty || cpfUsuario.touched)
+              "
+              class="error-form"
+            >
+              <div *ngIf="cpfUsuario.errors['required']">
+                {{ bundle("MA007") }}
+              </div>
+              <div *ngIf="cpfUsuario.errors['cpfCnpjInvalido']">
+                {{ bundle("MA009", "CPF") }}
+              </div>
+            </div>
+          </div>
+
+          <div class="clearfix" *ngIf="moduloVinculosEmpresaPrestador"></div>
+          <div class="col-md-4 pl-0" *ngIf="moduloVinculosEmpresaPrestador">
+            <label class="control-label" for="idEmpresa">ID Empresa</label>
+            <input
+              type="text"
+              id="idEmpresa"
+              formControlName="idEmpresa"
+              class="form-control"
+              size="8"
+              maxlength="8"
+              (keydown)="constantes.control.somenteNumeros(idEmpresa)"
+              (keyup)="constantes.control.somenteNumeros(idEmpresa)"
+            />
+            <div
+              *ngIf="
+                idEmpresa.invalid && (idEmpresa.dirty || idEmpresa.touched)
+              "
+              class="error-form"
+            >
+              <div *ngIf="idEmpresa.errors['required']">
+                {{ bundle("MA007") }}
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4 pl-0" *ngIf="moduloVinculosEmpresaPrestador">
+            <label class="control-label" for="cnpj">CNPJ da Empresa</label>
+            <input
+              type="text"
+              id="cnpj"
+              formControlName="cnpj"
+              class="form-control"
+              title="{{ bundle('MH126') }}"
+              size="18"
+              maxlength="18"
+              (blur)="cnpjUtil.control.configurarMascara(this.cnpj)"
+              (focus)="cnpjUtil.control.limparFormatacao(this.cnpj)"
+              (keyup)="checkCPFCNPJ(this.cnpj, 14)"
+              (keydown)="checkCPFCNPJ(this.cnpj, 14)"
+            />
+            <div
+              *ngIf="cnpj.invalid && (cnpj.dirty || cnpj.touched)"
+              class="error-form"
+            >
+              <div *ngIf="cnpj.errors['required']">{{ bundle("MA007") }}</div>
+              <div *ngIf="cnpj.errors['cpfCnpjInvalido']">
+                {{ bundle("MA009", "CNPJ") }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <div class="col-md-12 barra-botoes">
+        <button
+          id="btnLimparCampos"
+          class="btn back-btn"
+          (click)="limparCampos()"
+        >
+          <span class="fa fa-trash fa-fw"></span>Limpar Campos
+        </button>
+        <button
+          id="btnPesquisar"
+          class="btn continue-btn"
+          data-toggle="collapse"
+          title="Pesquisar"
+          (click)="pesquisar()"
+        >
+          <span class="fa fa-search fa-fw"></span>Pesquisar
+        </button>
+      </div>
+      <div *ngIf="showDadosConsulta">
+        <app-trilha-anexos-documentos
+          [dadosConsulta]="dadosConsulta"
+          *ngIf="moduloAnexosDocumentos"
+        ></app-trilha-anexos-documentos>
+        <app-trilha-dados-gerais
+          [dadosConsulta]="dadosConsulta"
+          *ngIf="moduloDadosGerais"
+        ></app-trilha-dados-gerais>
+        <app-trilha-documentos
+          [dadosConsulta]="dadosConsulta"
+          *ngIf="moduloDocumentos"
+        ></app-trilha-documentos>
+        <app-trilha-emails
+          [dadosConsulta]="dadosConsulta"
+          *ngIf="moduloEmails"
+        ></app-trilha-emails>
+        <app-trilha-tipos-destinatario-email
+          [dadosConsulta]="dadosConsulta"
+          *ngIf="moduloTiposDestinatarioEmail"
+        ></app-trilha-tipos-destinatario-email>
+        <app-trilha-empresa-prestador-externo
+          [dadosConsulta]="dadosConsulta"
+          *ngIf="moduloEmpresaPrestadorExterno"
+        ></app-trilha-empresa-prestador-externo>
+        <app-trilha-vinculos-empresa-prestador
+          [dadosConsulta]="dadosConsulta"
+          *ngIf="moduloVinculosEmpresaPrestador"
+        ></app-trilha-vinculos-empresa-prestador>
+        <app-trilha-mensagens
+          [dadosConsulta]="dadosConsulta"
+          *ngIf="moduloMensagens"
+        ></app-trilha-mensagens>
+        <app-trilha-ocorrencias
+          [dadosConsulta]="dadosConsulta"
+          *ngIf="moduloOcorrencias"
+        ></app-trilha-ocorrencias>
+        <app-trilha-perfil-prestador-externo
+          [dadosConsulta]="dadosConsulta"
+          *ngIf="moduloPerfilPrestadorExterno"
+        ></app-trilha-perfil-prestador-externo>
+        <app-trilha-procedimentos
+          [dadosConsulta]="dadosConsulta"
+          *ngIf="moduloProcedimentos"
+        ></app-trilha-procedimentos>
+        <app-trilha-autorizacoes-procedimentos
+          [dadosConsulta]="dadosConsulta"
+          *ngIf="moduloAutorizacoesProcedimentos"
+        ></app-trilha-autorizacoes-procedimentos>
+        <app-trilha-validacoes-documentos
+          [dadosConsulta]="dadosConsulta"
+          *ngIf="moduloValidacoesDocumentos"
+        ></app-trilha-validacoes-documentos>
+        <app-trilha-prestador-externo
+          [dadosConsulta]="dadosConsulta"
+          *ngIf="moduloUsuarioPrestadorExterno"
+        ></app-trilha-prestador-externo>
+        <app-trilha-gipes-empresa-prestador-externo
+          [dadosConsulta]="dadosConsulta"
+          *ngIf="moduloGipesEmpresaPrestadorExterno"
+        ></app-trilha-gipes-empresa-prestador-externo>
+      </div>
+    </section>
+  </section>
+</div>

@@ -1,0 +1,202 @@
+<!-- Page Header-->
+<div class="container">
+  <div class="col-md-12 breadcrumb-header">
+    <ul class="breadcrumb">
+      <li><span (click)="voltar()" class="voltar"><i class="fa fa-arrow-left" aria-hidden="true"></i>Voltar</span>
+      </li>
+      <a routerLink="/home">Início</a>
+      <em class="fa fa-chevron-right"></em> Administração
+      <em class="fa fa-chevron-right"></em> Parâmetros
+      <em class="fa fa-chevron-right"></em>
+      <a routerLink="/manutencao/parametros/documento-pedido">Documento por Tipo de Pedido</a>
+      <em class="fa fa-chevron-right"></em>
+      <span>
+         Documento por Tipo de Pedido – <span *ngIf="!id">Inclusão</span><span *ngIf="id">Edição</span>
+      </span>
+    </ul>
+  </div>
+
+  <div class="title-type">
+    <h1 class="titulo-pagina">
+      Documento por Tipo de Pedido – <span *ngIf="!id">Inclusão</span><span *ngIf="id">Edição</span>
+    </h1>
+  </div>
+
+  <section class="row">
+    <form [formGroup]="formulario" name="form">
+      <div class="form-row">
+        <div *ngIf="id" class="col-md-4 pl-0">
+          <label class="control-label" for="id">ID</label>
+          <p class="marginBottom" id="id">{{id}}</p>
+        </div>
+
+        <div *ngIf="id" class="col-md-4">
+          <label class="control-label" for="dataCadastramento">Cadastramento</label>
+          <p class="marginBottom"
+             id="dataCadastramento">{{documentoTipoProcesso.dataCadastramento | date:'dd/MM/yyyy HH:mm:ss'}}</p>
+        </div>
+
+        <div *ngIf="id" class="col-md-4">
+          <label class="control-label" for="codigoUsuarioCadastramento">Usuário</label>
+          <p class="marginBottom"
+             id="codigoUsuarioCadastramento">{{documentoTipoProcesso.codigoUsuarioCadastramento}}</p>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-md-6 mb-15 pl-0">
+          <asc-select-tipo-processo
+            label="Tipo de pedido"
+            (onChange)="onChangeProcesso()"
+            (dados)="carregaBeneficiarios()"
+            [control]="tiposProcesso"
+            [required]="!id"
+            [disabled]="id != null"
+          ></asc-select-tipo-processo>
+        </div>
+        <div class="col-md-6 mb-15 pl-0">
+          <label class="control-label obrigatorio" for="tiposBeneficiario">Tipo de Beneficiário</label>
+          <asc-listagem *ngIf="id" [lista]="listComboTipoBeneficiarioSelecionados"></asc-listagem>
+          <p-multiSelect
+            id="tiposBeneficiario"
+            [options]="listComboTipoBeneficiario"
+            [formControl]="tiposBeneficiario" 
+            [required]="!id"
+            class="form-control2 custom-border"
+            defaultLabel="Selecione as opções"
+            selectedItemsLabel="{0} itens selecionados"
+            [disabled]="id != null"
+          ></p-multiSelect>
+          <asc-input-error [control]="tiposBeneficiario" [requiredMsg]="requiredMsg"></asc-input-error>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-md-6 mb-15 pl-0">
+          <asc-dropdown
+            [items]="itensDocumento"
+            label="Documento"
+            [control]="idDocumento"
+            [required]="!id"
+            [disabled]="id != null"
+          ></asc-dropdown>
+        </div>
+        <div class="col-md-2 mb-15 pl-0">
+          <br>
+          <p-checkbox
+            inputId="obrigatorio"
+            name="obrigatorio"
+            [binary]="true"
+            [formControl]="obrigatorio">
+          </p-checkbox>
+          <label class="control-label" for="obrigatorio">Obrigatórios</label>
+        </div>
+        <div class="col-md-6 mb-15 pl-0">
+          <asc-dropdown
+            [items]="grupoDocumento"
+            label="Compõe Grupo"
+            [control]="idGrupoDocumento"
+          ></asc-dropdown>
+        </div>
+      </div>
+
+
+      <div class="form-row">
+        <div class="col-md-4 mb-15 pl-0">
+          <asc-select-estado-civil label="Estado Civil" [control]="idEstadoCivil">
+          </asc-select-estado-civil>
+        </div>
+        <div class="col-md-4 mb-15 pl-0">
+          <label class="control-label" for="sexo">Sexo</label>
+          <p-dropdown [options]="sexos" id="sexo" name="sexo" [formControl]="sexo"></p-dropdown>
+        </div>
+        <div class="col-md-4 mb-15 pl-0">
+          <asc-dropdown
+            [items]="tipoDeficiencias"
+            label="Tipo deficiência"
+            [control]="idTipoDeficiencia"
+          ></asc-dropdown>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-md-4 mb-15 pl-0">
+          <asc-input-text
+            label="Idade mínima" [somenteNumeros]="true" [maxlength]="3" [control]="idadeMinima">
+          </asc-input-text>
+        </div>
+        <div class="col-md-4 mb-15 pl-0">
+          <asc-input-text
+            label="Idade máxima" [somenteNumeros]="true" [maxlength]="3" [control]="idadeMaxima">
+          </asc-input-text>
+        </div>
+        <div class="col-md-4 mb-15 pl-0">
+          <asc-dropdown
+            [items]="caraterSolicitacao"
+            label="Caráter solicitação"
+            [control]="idCaraterSolicitacao"
+          ></asc-dropdown>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-md-4 mb-15 pl-0">
+          <asc-input-money-type
+            label="Renda mínima"
+            [control]="valorRendaMinima"
+          ></asc-input-money-type>
+        </div>
+        <div class="col-md-4 mb-15 pl-0">
+          <asc-input-money-type
+            label="Renda máxima"
+            [control]="valorRendaMaxima"
+          ></asc-input-money-type>
+        </div>
+        <div class="col-md-4 mb-15 pl-0">
+          <asc-select-finalidade
+            label="Motivo solicitação"
+            [control]="idMotivoSolicitacao"
+          ></asc-select-finalidade>
+        </div>
+      </div>
+
+      <div *ngIf="id">
+        <div class="form-row">
+          <div class="col-md-2 d-flex al-ic pl-0">
+            <p-checkbox formControlName="inativo" name="inativo" [binary]="true" inputId="inativo"
+                        (onChange)="onChangeInativo($event)"></p-checkbox>
+            <label class="control-label" style="margin: 0 0 0 5px!important" for="inativo">Inativo</label>
+          </div>
+          <div class="col-md-2 pl-0">
+            <asc-input-date [control]="dataInativacao" [required]="inativo.value"
+                            [disabled]="!inativo.value" inputId="dataInativacao" label="Data da Inativação"
+            ></asc-input-date>
+            <asc-message-error [control]="dataInativacao" type="dataIgualAtualMaior"
+                               errorMessage="Data de Inativação deve ser igual ou superior a data atual!">
+            </asc-message-error>
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-xs-12 barra-botoes">
+        <button class="btn back-btn" (click)="voltar()" id="btnFormVoltar">
+          <span class="fa fa-reply fa-fw"></span>Voltar
+        </button>
+        <button *ngIf="id" class="btn clean-btn" (click)="excluir()" id="btnFormExcluir">
+          <span class="fa fa-remove fa-fw"></span>Excluir
+        </button>
+        <button *ngIf="id" class="btn clean-btn" (click)="restaurarCampos()" id="btnFormRestaurar">
+          Restaurar Campos
+        </button>
+        <button (click)="limparCampos()" class="btn back-btn"
+                id="btnFormLimparCampos" *ngIf="!id">
+          <span class="fa fa-trash fa-fw"></span>Limpar Campos
+        </button>
+        <button [disabled]="!idDocumento.value || !tiposBeneficiario.value"
+                class="btn continue-btn"
+                id="btnFormSalvar" (click)="salvar()">
+          Salvar
+        </button>
+      </div>
+
+    </form>
+  </section>
+</div>

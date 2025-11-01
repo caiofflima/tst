@@ -1,0 +1,88 @@
+<!-- Page Header-->
+<div class="col-md-12 breadcrumb-header">
+   <ul class="breadcrumb"><li> <span routerLink="/" class="voltar"><i class="fa fa-arrow-left" aria-hidden="true"></i>Voltar</span></li>
+    <a routerLink="/home">
+            Início</a>
+    <i class="fa fa-chevron-right"></i>
+    Segurança
+    <i class="fa fa-chevron-right"></i>
+    <a routerLink="/seguranca/perfil-usuario-externo">
+      Perfil de Usuário Externo
+    </a>
+    <i class="fa fa-chevron-right"></i>
+    <a routerLink="/seguranca/perfil-usuario-externo/atualizar-credencial">
+      Atualizar Credencial
+    </a>
+  </ul>
+</div>
+
+<header class="page-header">
+  <div class="container-fluid">
+    <h2 class="no-margin-bottom">Atualizar Credencial</h2>
+  </div>
+</header>
+<!-- Page Header-->
+
+<section class="row container-fluid">
+  <form [formGroup]="formulario">
+    <div class="row col-xs-4">
+      <label class="control-label obrigatorio" for="perfil">Perfil</label>&nbsp;<br>
+      <p-dropdown id="perfil" [options]="perfis" placeholder="{{bundle('MHSPH')}}" formControlName="perfil" title="{{bundle('MH135')}}"></p-dropdown>
+      <asc-message-error [control]="formulario.controls['perfil']" type="required"
+      [errorMessage]="bundle('MA007')"></asc-message-error>
+    </div>
+    <div class="row col-xs-4">
+      <label class="control-label" for="atuacaoProfissional">Atuação Profissional</label>&nbsp;<br>
+      <p-dropdown id="atuacaoProfissional" [options]="tiposAuditores" placeholder="{{bundle('MHSPH')}}" formControlName="atuacaoProfissional"
+        title="{{bundle('MH136')}}">
+      </p-dropdown>
+    </div>
+    <div class="row col-xs-4">
+      <label class="control-label obrigatorio" for="dataLimite">Data Limite</label>&nbsp;<br>
+      <p-calendar formControlName="dataLimite" [locale]="pt" dateFormat="dd/mm/yy" [monthNavigator]="true" [yearNavigator]="true"
+          yearRange="1900:2100" [showIcon]="true"></p-calendar>
+          <asc-message-error [control]="formulario.controls['dataLimite']" type="required"
+      [errorMessage]="bundle('MA007')"></asc-message-error>
+    </div>
+    <div class="col-xs-12">
+        <button class="btn btn-primary" (click)="adicionarPerfilEmpresa();">
+          <span class="fa fa-plus fa-fw"></span>Adicionar
+        </button>
+    </div>
+    <div *ngIf="perfisEmpresas != undefined && perfisEmpresas.length > 0"  class="row col-md-8" style="margin-top: 25px">
+      <table class="table table-hover table-borderless">
+        <thead>
+          <tr>
+            <th>Perfil</th>
+            <th>Atuação Profissional</th>
+            <th>Data Limite</th>
+            <th>Ação</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let perfilEmpresa of perfisEmpresas; let i = index">
+          <tr *ngIf="perfilEmpresa.perfil != null" >
+            <td>{{perfilEmpresa.perfil | perfilMask: perfis}}</td>
+            <td>{{perfilEmpresa.atuacaoProfissional | atuacaoProfissionalMask: tiposAuditores}}</td>
+            <td>{{perfilEmpresa.dataLimite| date:'dd/MM/yyyy'}}</td>
+            <td>
+              <button class="btn btn-danger" title="Remover Empresa" (click)="removerPerfilEmpresa(i)">
+                <span class="fa fa-trash fa-fw"></span>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </form>
+  <div class="col-xs-12 barra-botoes">
+    <button class="btn btn-primary" (click)="salvar()">
+      <span class="fa fa-check fa-fw"></span>Salvar
+    </button>
+    <button class="btn back-btn" (click)="limparCampos()">
+      <span class="fa fa-trash fa-fw"></span>Limpar Campos
+    </button>
+    <button class="btn btn-info" (click)="voltar()">
+      <span class="fa fa-reply fa-fw"></span>Voltar
+    </button>
+  </div>
+</section>

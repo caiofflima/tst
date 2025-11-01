@@ -1,0 +1,77 @@
+<!-- Page Header -->
+<div class="col-md-12 breadcrumb-header">
+  <ul class="breadcrumb">
+     <li>
+        <span routerLink="/" class="voltar">
+           <i class="fa fa-arrow-left" aria-hidden="true"></i>Voltar
+        </span>
+     </li>
+     <a routerLink="/home">Início</a>
+     <i class="fa fa-chevron-right"></i>
+     Segurança
+     <i class="fa fa-chevron-right"></i>
+     <a routerLink="/seguranca/perfil-usuario-externo">Perfil de Usuário Externo</a>
+     <i class="fa fa-chevron-right"></i>
+     <a routerLink="/seguranca/perfil-usuario-externo/busca">Resultado da Consulta</a>
+  </ul>
+</div>
+
+<header class="page-header">
+ <div class="container-fluid">
+   <h2 class="no-margin-bottom">Consulta de Perfil Usuário Externo</h2>
+ </div>
+</header>
+
+<section class="row container-fluid">
+
+ <div class="row col-xs-3 floatRight" style="padding:4px 14px; border-bottom: 0 none">
+   <input #gb type="text" class="form-control filtro" pInputText size="50" placeholder="Digite para filtrar resultado">
+ </div>
+
+ <div class="row col-md-12">
+   <p-table [value]="listaPerfisUsuarios" [(selection)]="registrosSelecionados" [paginator]="true" [rows]="10" [totalRecords]="totalSize" [rowsPerPageOptions]="[5,10,20]" [globalFilter]="gb" [emptyMessage]="bundle('MA003')" reorderableColumns="true" class="table table-striped table-sm table-hover" (onRowSelect)="selecionarPerfis($event)" (onRowUnselect)="deSelecionarPerfis($event)">
+
+     <ng-template pTemplate="header">
+       <tr>
+         <th [style]="{'width':'38px'}" selectionMode="multiple"></th>
+         <th pSortableColumn="id" [style]="{'width':'50px'}">ID <p-sortIcon [field]="'id'"></p-sortIcon></th>
+         <th pSortableColumn="cpf">CPF <p-sortIcon [field]="'cpf'"></p-sortIcon></th>
+         <th pSortableColumn="nome">Nome <p-sortIcon [field]="'nome'"></p-sortIcon></th>
+         <th pSortableColumn="matricula">Matricula <p-sortIcon [field]="'matricula'"></p-sortIcon></th>
+         <th pSortableColumn="email">E-mail <p-sortIcon [field]="'email'"></p-sortIcon></th>
+         <th pSortableColumn="empresa">Empresa <p-sortIcon [field]="'empresa'"></p-sortIcon></th>
+         <th pSortableColumn="perfil" [style]="{'width':'200px'}">Perfil <p-sortIcon [field]="'perfil'"></p-sortIcon></th>
+         <th pSortableColumn="atuacaoProfissional" [style]="{'width':'200px'}">Atuação Profissional <p-sortIcon [field]="'atuacaoProfissional'"></p-sortIcon></th>
+         <th pSortableColumn="dataLimite">Data Limite <p-sortIcon [field]="'dataLimite'"></p-sortIcon></th>
+       </tr>
+     </ng-template>
+
+     <ng-template pTemplate="body" let-rowData>
+       <tr>
+         <td></td>
+         <td>{{rowData.id}}</td>
+         <td>{{rowData.cpf | cpfCnpjMask}}</td>
+         <td>{{rowData.nome}}</td>
+         <td>{{rowData.matricula}}</td>
+         <td>{{rowData.email}}</td>
+         <td>{{rowData.empresa}}</td>
+         <td>{{rowData.perfil}}</td>
+         <td>{{rowData.atuacaoProfissional}}</td>
+         <td>{{rowData.dataLimite | date:'dd/MM/yyyy'}}</td>
+       </tr>
+     </ng-template>
+   </p-table>
+ </div>
+
+ <div class="col-xs-12 barra-botoes">
+   <button class="btn btn-default" (click)="removerCredencial()">
+     <span class="fa fa-trash fa-fw"></span>Remover Credencial
+   </button>
+   <button class="btn btn-success" (click)="atualizarCredencial()">
+     <span class="fa fa-refresh fa-fw"></span>Atualizar Credencial
+   </button>
+   <button class="btn btn-info" (click)="voltar()">
+     <span class="fa fa-reply fa-fw"></span>Voltar
+   </button>
+ </div>
+</section>

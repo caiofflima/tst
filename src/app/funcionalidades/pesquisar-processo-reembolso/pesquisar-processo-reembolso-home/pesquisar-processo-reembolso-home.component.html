@@ -1,0 +1,96 @@
+<!-- Page Header-->
+<div class="container">
+  <div class="col-md-12 breadcrumb-header">
+    <ul class="breadcrumb">
+      <li><span (click)="voltar()" class="voltar"><i class="fa fa-arrow-left" aria-hidden="true"></i>Voltar</span></li>
+      <a routerLink="/home">Início</a>
+      <em class="fa fa-chevron-right"></em>
+      Administração
+      <em class="fa fa-chevron-right"></em>
+      Relatórios
+      <em class="fa fa-chevron-right"></em>
+      Pedidos de Reembolso
+    </ul>
+  </div>
+
+  <div class="title-type">
+    <h1 class="titulo-pagina">Pedidos de Reembolso</h1>
+  </div>
+
+  <section class="row">
+    <form class="row"  [formGroup]="formulario" name="form">
+      <div class="row p-0 col-xs-4">
+        <label class="control-label">Pedido</label>
+        <input
+          type="text"
+          id="processo"
+          name="processo"
+          class="form-control"
+          formControlName="processo"
+          title="Buscar um processo específico."
+          [maxlength]="8"
+          (keydown)="constantes.control.somenteNumeros(processo)"
+          (keyup)="constantes.control.somenteNumeros(processo)">
+      </div>
+
+      <div class="row col-xs-4" >
+        <label class="control-label">Tipo de Pedido</label>
+        <asc-multiSelect
+          id="tipoProcesso"
+          [options]="listComboTipoProcesso"
+          [control]="formulario.get('tipoProcesso')"
+          [selected]="tipoProcessoSelected">
+        </asc-multiSelect>
+      </div>
+
+      <div class="row col-xs-4" >
+        <label class="control-label">UF</label>
+        <asc-multiSelect
+          id="ufsProcesso"
+          [options]="listComboUF"
+          [control]="formulario.get('ufsProcesso')"
+          [selected]="ufsProcessoSelected">
+        </asc-multiSelect>
+      </div>
+      
+    <div class="row p-0 col-xs-12"> 
+      <label class="control-label">Período</label> </div>
+      <div class="row p-0 col-xs-2">
+          <asc-input-date
+          inputId="dataInicio"
+          [control]="formulario.get('dataInicio')"
+          label="Início" required>
+        </asc-input-date>
+      </div>
+
+      <div class="row col-xs-2">
+          <asc-input-date required
+          inputId="dataFim"
+          [control]="formulario.get('dataFim')"
+          label="Fim">
+        </asc-input-date>
+      </div>
+
+    <div class="row col-xs-6" >
+      <label class="control-label">Empresa de Auditoria</label>
+      <asc-multiSelect
+        id="empresasAuditoria"
+        [options]="listEmpresas"
+        [control]="formulario.get('empresasAuditoria')"
+        [selected]="empresasAuditoriaSelected">
+      </asc-multiSelect>
+    </div>
+
+      <div class="col-xs-12 p-0 barra-botoes">
+        <button type="button" id="btnLimparCampos" class="btn back-btn" (click)="limparCampos()">
+          <span class="fa fa-trash fa-fw"></span>Limpar Pesquisa
+        </button>
+
+        <button type="submit" id="btnPesquisar" class="btn continue-btn" (click)="pesquisar()">
+          <span class="fa fa-search fa-fw"></span>Pesquisar
+        </button>
+      </div>
+    </form>
+  </section>
+
+</div>

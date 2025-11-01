@@ -1,0 +1,55 @@
+<p class="list-title">Procedimentos adicionados</p>
+<div class="list">
+  <div class="header">
+    <p class="h-procedimento">Vacina</p>
+    <p class="h-procedimento">Procedimento</p>
+    <p class="h-procedimento">Patologia</p>
+    <p class="h-2">Grau</p>
+    <p class="h-2">Laboratorio</p>
+    <p class="h-2">Medicamento</p>
+    <p class="h-2">Região odontológica</p>
+    <p class="h-2"><span>Autorização Prévia</span></p>
+    <p><span>Quantidade</span></p>
+    <p class="h-2"><span>Dias Atendidos pela Quantidade</span>
+    </p>
+    <p class="h-4"><span>Data do procedimento</span></p>
+    <p class="h-2"><span>Valor unitário pago</span></p>
+    <p class="h-6"><span>Ação</span></p>
+  </div>
+  <div style="position: relative" *ngFor="let pedidoProcedimento of pedidosProcedimentos; let i = index">
+    <div class="card">
+      <p class="h-procedimento  "
+      >
+        <span>{{pedidoProcedimento?.procedimento?.estruturaNumerica}}
+        - </span>{{pedidoProcedimento?.procedimento?.descricaoProcedimento}}
+      </p>
+      <p class="h-procedimento  "
+      >
+        {{pedidoProcedimento?.patologia?.codigo}} - {{pedidoProcedimento?.patologia?.nome}}
+      </p>
+      <p class="h-2">
+        <span>{{pedidoProcedimento?.grauProcedimento?.nome}}</span></p>
+      <p class="h-2"><span>{{pedidoProcedimento?.laboratorio?.nome}}</span></p>
+      <p class="h-2"><span>{{pedidoProcedimento?.medicamento?.nome}}</span></p>
+      <p class="h-2">
+        <span>{{pedidoProcedimento?.regiaoOdontologica?.nome}}</span></p>
+      <p class="h-2">
+        <span>{{pedidoProcedimento?.autorizacaoPrevia | autorizacaoPreviaPedido }}</span></p>
+      <p><span>{{pedidoProcedimento?.qtdSolicitada}}</span></p>
+      <p class="h-2">
+        <span>{{pedidoProcedimento?.diasAtendidosPelaQuantidade}}</span></p>
+      <p class="h-4"
+      >{{pedidoProcedimento?.dataAtendimento | date : 'dd/MM/yyyy'}}</p>
+      <p class="h-2">R${{pedidoProcedimento?.valorUnitarioPago}}</p>
+      <div class="h-6">
+        <button [disabled]="isEditing" class="edit-proc" (click)="editar(pedidoProcedimento, i)">
+          <i class="fa fa-pencil" aria-hidden="true"></i>
+        </button>
+        <button [disabled]="isEditing" class="remove-proc" (click)="remove(pedidoProcedimento)">
+          <i class="fa fa-trash" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+</div>

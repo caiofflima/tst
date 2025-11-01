@@ -1,0 +1,155 @@
+@mixin add-btn-hover($mainColor, $hoverColor, $borderColor, $spanColor, $spanHoverColor) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  background-color: $mainColor;
+  border-color: $borderColor;
+  transition: 250ms ease-in-out;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  padding: 10px 16px;
+  min-width: 125px;
+
+  span,
+  i {
+    color: $spanColor;
+    transition: 300ms ease-in-out;
+  }
+
+  &:hover,
+  &:active {
+    background-color: $hoverColor;
+    transition: 250ms ease-in-out;
+
+    span {
+      color: $spanHoverColor;
+      transition: 300ms ease-in-out;
+    }
+  }
+}
+
+button {
+  &.edit {
+    @include add-btn-hover(#005CA9, #01377F, none, #fff, #fff);
+    min-width: 0;
+    width: 35px;
+    height: 35px;
+    padding: 0;
+    border: none;
+    box-shadow: none;
+    margin-left: 4px;
+
+    &:not(:disabled) {
+      &:hover,
+      &:focus,
+      &:active {
+        border: none;
+      }
+    }
+
+    &:disabled {
+      background-color: #dadada;
+    }
+  }
+
+  &.add-proc {
+    @include add-btn-hover(#41A495, #36877B, #36877B, #fff, #fff);
+    border: 1px solid #36877B;
+    padding: 8px 12px;
+
+    &:hover,
+    &:focus,
+    &:active {
+      border-color: #36877B;
+    }
+
+    i {
+      margin-right: 8px;
+    }
+  }
+}
+
+div.space-btw {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &.custom-padding {
+    padding: 26px 24px 0 24px;
+  }
+}
+
+div.m-10 {
+  margin-bottom: 10px;
+}
+
+.fl-bt {
+  display: flex;
+  align-items: flex-end;
+}
+
+.to-footer {
+  button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 6.5px 12px;
+    border-radius: 3px;
+    transition: 250ms ease-in-out;
+    margin: 8px 0 8px 8px;
+    flex-grow: 1;
+
+    &.cancel {
+      background-color: #fff;
+      border: 1px solid #01377F;
+
+      span {
+        color: #01377F;
+      }
+
+      &:hover,
+      &:active,
+      &:focus {
+        background-color: #01377F;
+        transition: 250ms ease-in-out;
+
+        span {
+          color: #fff;
+          transition: 250ms ease-in-out;
+        }
+      }
+    }
+
+    &.save {
+      background-color: #01377F;
+      border: none;
+
+      span {
+        color: #fff;
+      }
+
+      &:not(:disabled) {
+        &:hover,
+        &:focus,
+        &:active {
+          background-color: #02285a;
+          transition: 250ms ease-in-out;
+        }
+      }
+
+      &:disabled {
+        background-color: #dadada;
+      }
+
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .to-footer {
+    button {
+      width: 100%;
+      margin: 8px;
+    }
+  }
+}

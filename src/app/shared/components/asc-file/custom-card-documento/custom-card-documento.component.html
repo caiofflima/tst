@@ -1,0 +1,23 @@
+<div class="custom-card" [ngClass]="{'success': showSucess} ">
+  <div class="success-icon-container">
+    <em class="fa fa-check" aria-hidden="true"></em>
+  </div>
+  <p class="card-titulo">{{documento?.idTipoDocumento}} - {{documento?.documento?.nome}}</p>
+  <span class="card-info">{{documento?.documento?.descricao}}</span>
+  <p class="arquivos-label">Arquivos:</p>
+  <div class="arquivos">
+    <div class="arquivo-card" *ngFor="let arquivo of documento.arquivos">
+      <p class="arquivo-nome">{{arquivo?.name}}</p>
+      <div class="arquivo-actions">
+        <button><em class="fa fa-eye"></em></button>
+        <button (click)="removerDocumento(arquivo)"><em class="fa fa-trash"></em></button>
+      </div>
+    </div>
+  </div>
+  <div class="custom-card-footer">
+    <asc-file-selector
+      [documento]="documento"
+      (arquivos)="arquivosSelecionados($event, documento)"
+    ></asc-file-selector>
+  </div>
+</div>

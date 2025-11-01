@@ -1,0 +1,35 @@
+
+	<div class="row col-md-12">
+		<p-table emptyMessage=" " [value]="listaAnexos" [paginator]="true" [rows]="10"
+			class="table table-striped table-sm table-hover" #dt> 
+			<!-- <p-column header="Arquivo"> -->
+				<ng-template let-obj="rowData" pTemplate="content">
+					<span title="{{obj?.anexo?.nome}}">{{obj?.anexo?.nome | slice:0:fileNameMaxLength}}</span>
+				</ng-template>
+			<!-- </p-column> -->
+			<!-- <p-column header="Data Recebimento"> -->
+				<ng-template let-obj="rowData" pTemplate="content">
+					{{ obj?.anexo?.dataHoraCadastramento | date: 'dd/MM/yyyy HH:mm:ss' }}
+				</ng-template>
+			<!-- </p-column> -->
+			<!-- <p-column header="Usuário"> -->
+				<ng-template let-obj="rowData" pTemplate="content">
+					{{ obj?.anexo?.codigoUsuarioCadastramento }}
+				</ng-template>
+			<!-- </p-column> -->
+			<!-- <p-column header="Ação"> -->
+				<ng-template let-obj="rowData" pTemplate="content">
+					<button class="btn btn-info" title="Download Anexo" (click)="realizarDownloadArquivo(obj)">
+						<span class="fa fa-download fa-fw"></span>
+					</button>
+					<button class="btn btn-info" title="Exibir Anexo" (click)="(slideShow).apresentar(obj)" *ngIf="!hideExibirAnexo">
+						<span class="fa fa-search fa-fw"></span>
+					</button>
+					<button class="btn btn-danger" title="Excluir Anexo" (click)="confirmarExclusaoAnexo(obj)" *ngIf="permissaoExclusao">
+						<span class="fa fa-trash fa-fw"></span>
+					</button>
+				</ng-template>
+			<!-- </p-column> -->
+		</p-table>
+	</div>
+	<asc-apresentador-arquivos #slideShow [arquivos]="listaAnexos"></asc-apresentador-arquivos>

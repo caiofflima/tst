@@ -1,0 +1,132 @@
+<form [formGroup]="form">
+  <div class="row col-md-12">
+    <h4>Situação do Pedido</h4>
+  </div>
+
+  <div class="row col-md-6 coluna-interna">
+    <div class="row col-md-12">
+      <label class="control-label obrigatorio" for="situacaoProcesso"
+        >Situação</label
+      >
+      <p-dropdown
+        formControlName="situacaoProcesso"
+        placeholder="{{ bundle('MHSPH') }}"
+        [options]="itensSituacoesProcesso"
+        [filter]="true"
+        class="form-control2"
+      >
+      </p-dropdown>
+      <div
+        *ngIf="
+          situacaoProcesso.invalid &&
+          (situacaoProcesso.dirty || situacaoProcesso.touched)
+        "
+        class="error-form"
+      >
+        <div *ngIf="situacaoProcesso.errors['required']">
+          {{ bundle("MA005") }}
+        </div>
+      </div>
+    </div>
+
+    <div class="row col-md-12" [hidden]="hiddenMotivoNegacao()">
+      <label class="control-label obrigatorio" for="motivoNegacao"
+        >Motivo de Negação</label
+      >
+      <p-dropdown
+        formControlName="idMotivoNegacao"
+        [options]="itensMotivoNegacao"
+        [filter]="true"
+        class="form-control2"
+      >
+      </p-dropdown>
+      <div
+        *ngIf="
+          isIdMotivoNegacaoInvalido() &&
+          (this.idMotivoNegacao.dirty || this.idMotivoNegacao.touched)
+        "
+        class="error-form"
+      >
+        <div>{{ bundle("MA005") }}</div>
+      </div>
+    </div>
+
+    <div class="row col-md-12" *ngIf="podeAlterarSituacaoProcesso()">
+      <label class="control-label" for="anexarArquivo">Anexar Arquivo</label>
+      <p-fileUpload
+        #fileUploadSituacao
+        [showCancelButton]="true"
+        class="quebrarLinha"
+        chooseLabel="Escolher arquivo"
+        [multiple]="true"
+        name="arquivos[]"
+        mode="basic"
+        [customUpload]="true"
+        accept=".jpg,.png,.gif,.pdf"
+        [maxFileSize]="1000000"
+        (onSelect)="
+          configurarArquivosSelecionados($event.files, fileUploadSituacao)
+        "
+      ></p-fileUpload>
+    </div>
+    <div class="row col-md-12" *ngIf="podeAlterarSituacaoProcesso()">
+      <label class="control-label" for="arquivosSelecionados"
+        >Arquivos selecionados</label
+      >
+      <div id="arquivosSelecionados">
+        <div
+          class="col-md-6 custom-badge"
+          *ngFor="let f of files"
+          title="{{ f.name }}"
+        >
+          <div class="custom-badge-text">
+            {{ f.name }}
+          </div>
+          <div class="custom-badge-icon">
+            <i
+              class="fa fa-close"
+              (click)="removerArquivoSelecionado(f)"
+              title="Remover"
+            ></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row col-md-6 coluna-interna">
+    <div class="row col-md-12" [hidden]="hiddenJustificativa()">
+      <label class="control-label obrigatorio" for="descricaoHistorico"
+        >Justificativa</label
+      >
+      <textarea
+        formControlName="descricaoHistorico"
+        [rows]="6"
+        [cols]="30"
+        pInputTextarea
+        [autoResize]="true"
+        class="form-control"
+      ></textarea>
+      <div
+        *ngIf="
+          isHistoricoSituacaoProcessoInvalido() &&
+          (descricaoHistorico.dirty || descricaoHistorico.touched)
+        "
+        class="error-form"
+      >
+        <div>{{ bundle("MA007") }}</div>
+      </div>
+    </div>
+
+    <div class="col-xs-12 botoes-internos">
+      <button
+        class="btn btn-primary"
+        (click)="atualizarSituacaoProcesso()"
+        *ngIf="podeAlterarSituacaoProcesso()"
+      >
+        <span class="fa fa-pencil-square-o fa-fw"></span>Alterar Situação do
+        Pedido
+      </button>
+    </div>
+  </div>
+</form>

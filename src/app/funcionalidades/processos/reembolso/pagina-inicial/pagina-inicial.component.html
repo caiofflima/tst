@@ -1,0 +1,63 @@
+<div class="container">
+  <div class="header header-breadcumb">
+		<div class="bread-crumb-container">
+		  <span routerLink="/" class="voltar"><i class="fa fa-arrow-left" aria-hidden="true"></i> Voltar</span>
+		  <ul class="bread-crumb">
+			<li><a routerLink="/home">Início</a> <i class="fa fa-angle-right" aria-hidden="true"></i></li>
+			<li>Novo Pedido <i class="fa fa-angle-right" aria-hidden="true"></i></li>
+			<li>Reembolso</li>
+		  </ul>
+		</div>
+	</div>
+  <p class="titulo-pagina">Reembolso</p>
+  <p class="info-search-label">Quais passos?</p>
+  <div class="c-grid">
+    <div class="section">
+      <div (mouseover)="setIndex(i)" class="info-boxes" *ngFor="let descricao of options; let i = index">
+        <span>{{i + 1}}</span>
+        <p>{{descricao}}</p>
+      </div>
+    </div>
+    <div class="info-pagina">
+      <p class="info-p">
+        Para facilitar o preenchimento do formulário, nós o dividimos em passos. Antes de começar o
+        preenchimento, tenha em mãos as informações e documentação necessárias.
+      </p>
+      <p class="info-h1">O que é necessário?</p>
+      <small class="desktop">Clique ou passe o cursor sobre os itens ao lado para obter detalhes</small>
+      <small class="mobile">Clique ou passe o cursor sobre os itens abaixo para obter detalhes</small>
+      <div class="steps-info">
+        <p class="info-p bordered" *ngIf="index === 0"> Escolha o(a) beneficiário para o(a) qual deseja solicitar o
+          reembolso de despesas de saúde</p>
+        <p class="info-p bordered" *ngIf="index === 1">Escolha o tipo de reembolso e finalidade do seu pedido</p>
+        <p class="info-p bordered" *ngIf="index === 2"> Adicione um ou mais procedimentos ao pedido.
+          Se o procedimento exigir autorização prévia, esta deve ser obtida antes da
+          realização do procedimento e, por conseguinte, antes do pedido de reembolso
+        </p>
+        <p class="info-p bordered" *ngIf="index === 3"> Informe os dados de Conselho de Classe e dados pessoais do
+          profissional que executou o procedimento.
+          Dispensado quando se trata de reembolso de medicamentos.
+        </p>
+        <p class="info-p bordered" *ngIf="index === 4">
+          Informe os dados da Nota Fiscal, ou do Recibo emitido pelo estabelecimento, ou profissional de saúde que
+          realizou o atendimento
+        </p>
+        <p class="info-p bordered" *ngIf="index === 5"> Envie pelo menos um arquivo para cada documento exigido.
+        </p>
+        <p class="info-p bordered" *ngIf="index === 6"> Confira o resumo de todos os campos preenchidos antes de
+          finalizar o pedido
+        </p>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="pagina-inicial-botoes">
+    <button class="continue-btn" routerLink="./stepper">
+      <span>
+        Iniciar
+      </span>
+    </button>
+  </div>
+
+</div>

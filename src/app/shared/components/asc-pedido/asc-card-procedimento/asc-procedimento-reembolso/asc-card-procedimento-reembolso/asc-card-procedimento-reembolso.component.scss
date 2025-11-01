@@ -1,0 +1,105 @@
+@import "/src/assets/sass/colors";
+@import "/src/assets/sass/mixins";
+@import "/src/assets/sass/base";
+@import "/src/assets/sass/funcionalidades/processos-reembolso";
+
+@mixin add-btn-hover(
+  $mainColor,
+  $hoverColor,
+  $borderColor,
+  $spanColor,
+  $spanHoverColor
+) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  background-color: $mainColor;
+  border-color: $borderColor;
+  transition: 250ms ease-in-out;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  padding: 10px 16px;
+  min-width: 125px;
+
+  span,
+  i {
+    color: $spanColor;
+    transition: 300ms ease-in-out;
+  }
+
+  &:hover,
+  &:active {
+    background-color: $hoverColor;
+    transition: 250ms ease-in-out;
+
+    span {
+      color: $spanHoverColor;
+      transition: 300ms ease-in-out;
+    }
+  }
+}
+
+.no-padding {
+  padding: 0;
+}
+
+.to-right {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.max-100 {
+  max-width: 100%;
+}
+
+.min-100 {
+  width: 100%;
+}
+
+@media screen and (max-width: 500px) {
+  div.resumo-body {
+    padding: 8px 12px 16px 12px;
+
+    .space-btw {
+      &.custom-padding {
+        padding: 8px 12px;
+      }
+    }
+
+    .resumo-arquivos {
+      padding: 8px 12px;
+    }
+  }
+}
+
+button {
+  &.edit {
+    @include add-btn-hover(#005ca9, #01377f, none, #fff, #fff);
+    min-width: 0;
+    width: 35px;
+    height: 35px;
+    padding: 0;
+    border: none;
+    box-shadow: none;
+    margin-left: 4em;
+
+    &:not(:disabled) {
+      &:hover,
+      &:focus,
+      &:active {
+        border: none;
+      }
+    }
+
+    &:disabled {
+      background-color: #dadada;
+    }
+  }
+}
+
+.btn-excluir {
+  margin-left: 1em;
+  @include create-btn(normal_red);
+  width: 35px;
+  height: 35px;
+}

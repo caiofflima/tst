@@ -1,0 +1,35 @@
+<div style="margin: 1.5em 1.5em 0" @fadeInOut *ngIf="loading">
+  <p-progressBar mode="indeterminate" [style]="{ height: '6px' }">
+  </p-progressBar>
+</div>
+
+<section @fadeInOut>
+  <div class="titulo-card" style="padding-bottom: 0.75em">
+    Documentos condicionados / complementares
+  </div>
+
+  <!-- [permissoes]="permissoes" -->
+  <asc-documento-card
+    @fadeInOut
+    *ngIf="documentos && documentos.length"
+    [loading]="loading"
+    [processo]="processo"
+    [documentos]="documentoTipoProcessos"
+    [isComplementar]="true"
+    [isInResumo]="true"
+    [habilitarValidacao]="true"
+    (atualizarPedido)="atualizarPedido()"
+    (documentoTipoProcessoSelecionado)="
+      documentoTipoProcessoSelecionado($event)
+    "
+    (documentoComArquivoDeletado)="documentoComArquivoDeletado($event)"
+  ></asc-documento-card>
+
+  <!-- <div class="footer-btns-card" @fadeInOut *ngIf="permissaoLiberar  && documentosCondicionados" style="padding-bottom: 1.5em; padding-top: 1.5em;">
+    <div></div>
+    <asc-button-primary
+      (click)="liberarProcessoParaAnalise(processo.id)"
+      title="Liberar pedido para análise"
+    ></asc-button-primary>
+  </div> -->
+</section>

@@ -1,0 +1,167 @@
+<div class="fl-row">
+  <div
+    [ngClass]="{ 'min-100': pedidoProcedimento?.isEditing }"
+    class="ui-g-10 ui-md-10 ui-sm-10 no-padding"
+  >
+    <asc-card-procedimento-reembolso-consulta
+      *ngIf="isTipoProcessoReembolsoConsulta && !pedidoProcedimento?.isEditing"
+      [pedidoProcedimento]="pedidoProcedimento"
+      [permissoes]="permissoes"
+    ></asc-card-procedimento-reembolso-consulta>
+
+    <asc-formulario-reembolso-consulta
+      (adicionar$)="adicionar($event)"
+      (cancel$)="cancel($event)"
+      (isEditing$)="isToEdit($event)"
+      *ngIf="isTipoProcessoReembolsoConsulta && pedidoProcedimento?.isEditing"
+      [idBeneficario]="idBeneficiario"
+      [isEditing]="pedidoProcedimento?.isEditing"
+      [isToShowButtons]="isToShowButtons"
+      [parametroSelectProcedimento]="parametroSelectProcedimento"
+      [pedidoProcedimento]="pedidoProcedimento"
+      [permissoes]="permissoes"
+      [loading]="loading"
+      [idTipoProcesso]="idTipoProcesso"
+      [beneficiario]="beneficiario"
+      [pedido]="pedido"
+      [idMotivoSolicitacao]="idMotivoSolicitacao"
+    ></asc-formulario-reembolso-consulta>
+
+    <asc-card-procedimento-reembolso-ondontologico
+      *ngIf="
+        isTipoProcessoReembolsoOdontologico && !pedidoProcedimento?.isEditing
+      "
+      [pedidoProcedimento]="pedidoProcedimento"
+      [permissoes]="permissoes"
+    ></asc-card-procedimento-reembolso-ondontologico>
+
+    <asc-formulario-reembolso-odontologico
+      (adicionar$)="adicionar($event)"
+      (cancel$)="cancel($event)"
+      (isEditing$)="isToEdit($event)"
+      *ngIf="
+        isTipoProcessoReembolsoOdontologico && pedidoProcedimento?.isEditing
+      "
+      [enableAllAction]="enableAllAction"
+      [idBeneficario]="idBeneficiario"
+      [isToShowButtons]="isToShowButtons"
+      [parametroSelectProcedimento]="parametroSelectProcedimento"
+      [pedidoProcedimento]="pedidoProcedimento"
+      [permissoes]="permissoes"
+      [loading]="loading"
+      [idTipoProcesso]="idTipoProcesso"
+      [beneficiario]="beneficiario"
+      [pedido]="pedido"
+      [idMotivoSolicitacao]="idMotivoSolicitacao"
+    ></asc-formulario-reembolso-odontologico>
+
+    <asc-card-procedimento-reembolso-vacina
+      *ngIf="isTipoProcessoReembolsoVacina && !pedidoProcedimento?.isEditing"
+      [pedidoProcedimento]="pedidoProcedimento"
+      [permissoes]="permissoes"
+    ></asc-card-procedimento-reembolso-vacina>
+
+    <asc-formulario-reembolso-vacina
+      (adicionar$)="adicionar($event)"
+      (cancel$)="cancel($event)"
+      (isEditing$)="isToEdit($event)"
+      *ngIf="isTipoProcessoReembolsoVacina && pedidoProcedimento?.isEditing"
+      [enableAllAction]="enableAllAction"
+      [idBeneficario]="idBeneficiario"
+      [isToShowButtons]="isToShowButtons"
+      [parametroSelectProcedimento]="parametroSelectProcedimento"
+      [pedidoProcedimento]="pedidoProcedimento"
+      [permissoes]="permissoes"
+      [loading]="loading"
+      [idTipoProcesso]="idTipoProcesso"
+      [beneficiario]="beneficiario"
+      [pedido]="pedido"
+    ></asc-formulario-reembolso-vacina>
+
+    <asc-card-procedimento-reembolso-medicamento
+      *ngIf="
+        isTipoProcessoReembolsoMedicamento && !pedidoProcedimento?.isEditing
+      "
+      [pedidoProcedimento]="pedidoProcedimento"
+      [permissoes]="permissoes"
+    ></asc-card-procedimento-reembolso-medicamento>
+
+    <asc-formulario-reembolso-medicamento
+      (adicionar$)="adicionar($event)"
+      (cancel$)="cancel($event)"
+      (isEditing$)="isToEdit($event)"
+      *ngIf="
+        isTipoProcessoReembolsoMedicamento && pedidoProcedimento?.isEditing
+      "
+      [enableAllAction]="enableAllAction"
+      [idBeneficario]="idBeneficiario"
+      [isToShowButtons]="isToShowButtons"
+      [parametroSelectProcedimento]="parametroSelectProcedimento"
+      [pedidoProcedimento]="pedidoProcedimento"
+      [permissoes]="permissoes"
+      [loading]="loading"
+      [idTipoProcesso]="idTipoProcesso"
+      [beneficiario]="beneficiario"
+      [pedido]="pedido"
+    ></asc-formulario-reembolso-medicamento>
+
+    <asc-card-procedimento-reembolso-assistencial
+      *ngIf="
+        isTipoProcessoReembolsoAssistencial && !pedidoProcedimento?.isEditing
+      "
+      [pedidoProcedimento]="pedidoProcedimento"
+      [permissoes]="permissoes"
+    ></asc-card-procedimento-reembolso-assistencial>
+
+    <asc-reembolso-assistencial
+      (adicionar$)="adicionar($event)"
+      (cancel$)="cancel($event)"
+      (isEditing$)="isToEdit($event)"
+      *ngIf="
+        isTipoProcessoReembolsoAssistencial && pedidoProcedimento?.isEditing
+      "
+      [enableAllAction]="enableAllAction"
+      [idBeneficario]="idBeneficiario"
+      [isToShowButtons]="isToShowButtons"
+      [parametroSelectProcedimento]="parametroSelectProcedimento"
+      [pedidoProcedimento]="pedidoProcedimento"
+      [permissoes]="permissoes"
+      [loading]="loading"
+      [idTipoProcesso]="idTipoProcesso"
+      [beneficiario]="beneficiario"
+      [pedido]="pedido"
+      [idMotivoSolicitacao]="idMotivoSolicitacao"
+    ></asc-reembolso-assistencial>
+  </div>
+  <div
+    *ngIf="
+      (!permissoes && enableAllAction && !pedidoProcedimento?.isEditing) ||
+      permissoes?.editar
+    "
+    class="fl-row"
+    style="margin-left: auto"
+  >
+    <button
+      (click)="editar(pedidoProcedimento)"
+      *ngIf="verificarEhTitularEPedidoEmAnalise()"
+      [disabled]="isDisabled"
+      class="btn-editar"
+    >
+      <i aria-hidden="true" class="fa fa-pencil"></i>
+    </button>
+    <button
+      (click)="removerPedidoProcedimento(pedidoProcedimento)"
+      *ngIf="
+        (!permissoes &&
+          enableAllAction &&
+          !pedidoProcedimento?.isEditing &&
+          !isTipoProcessoReembolsoConsulta) ||
+        (permissoes?.analisar && !isUnico)
+      "
+      [disabled]="isDisabled"
+      class="btn-excluir"
+    >
+      <i aria-hidden="true" class="fa fa-trash"></i>
+    </button>
+  </div>
+</div>

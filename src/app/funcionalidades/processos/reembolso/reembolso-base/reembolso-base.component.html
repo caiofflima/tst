@@ -1,0 +1,117 @@
+<div class="container">
+  <asc-stepper
+    [disableClickOnLabel]="true"
+    [breadcrumbOptions]="breadcrumb"
+    #cdkStepper
+    [beneficiario]="beneficiarioModel"
+  >
+    <cdk-step label="Beneficiário">
+      <ng-template cdkStepLabel> Reembolso </ng-template>
+      <asc-beneficiario-pedido
+        [checkRestart]="reiniciarSubject"
+        [stepper]="cdkStepper"
+        routerLinkToBack="../"
+        (beneficiarioModel)="beneficiarioSelecionado($event)"
+        (beneficarioForm)="beneficiarioFormSelecionado($event)"
+      ></asc-beneficiario-pedido>
+    </cdk-step>
+    <cdk-step label="Finalidade">
+      <ng-template cdkStepLabel> Reembolso </ng-template>
+      <asc-finalidade-pedido
+        [checkRestart]="reiniciarSubject"
+        [idBeneficiario]="beneficiarioForm?.idBeneficiario"
+        [consultarTipoProcessoPara]="REEMBOLSO"
+        [stepper]="cdkStepper"
+        (beneficiario)="finalidadeSelecionada($event)"
+        (tipoProcesso)="tipoProcessoSelecionado($event)"
+      ></asc-finalidade-pedido>
+    </cdk-step>
+    <cdk-step label="Procedimento">
+      <ng-template cdkStepLabel>
+        {{ tipoProcesso?.nome | ascNormalizeFirstCharacterUpper }}
+      </ng-template>
+      <div class="custom-container">
+        <asc-procedimento-pedido
+          [checkRestart]="reiniciarSubject"
+          [pedido]="pedido"
+          [tipoProcesso]="tipoProcesso?.nome"
+          [stepper]="cdkStepper"
+          [beneficiario]="beneficiarioModel"
+          [idMotivoSolicitacao]="finalidade?.idMotivoSolicitacao"
+          [idTipoProcesso]="tipoProcesso?.id"
+          [tituloStepProcedimento]="titulo"
+          (pedido$)="pedidoCadastrado($event)"
+          (pedidoProcedimentos$)="pedidoProcedimentosSelecionados($event)"
+          (pedidoProcedimentosChanged)="pedidoProcedimentoChanged()"
+          (grauSelecionado)="grauProcedimentoSelecionado($event)"
+          (regiaoOdontologica)="regiaoOdontologicaSelecionada($event)"
+        ></asc-procedimento-pedido>
+      </div>
+    </cdk-step>
+    <cdk-step *ngIf="showStepProfissional" label="Profissional">
+      <ng-template cdkStepLabel>
+        {{ tipoProcesso?.nome | ascNormalizeFirstCharacterUpper }}
+      </ng-template>
+      <asc-profissional-pedido
+        [stepper]="cdkStepper"
+        [pedidoProcedimentoVersao]="pedidoProcedimentoVersao"
+        (conselhoProfissionalSelecionado)="
+          conselhoProfissionalSelecionado($event)
+        "
+        (municipioProfissional)="municipioProfissionalSelecionado($event)"
+        (profissional)="profissionalSelecionado($event)"
+        (ufEstadoConselho)="ufEstadoConselhoSelecionado($event)"
+      ></asc-profissional-pedido>
+    </cdk-step>
+    <cdk-step label="Fiscal">
+      <ng-template cdkStepLabel>
+        {{ tipoProcesso?.nome | ascNormalizeFirstCharacterUpper }}
+      </ng-template>
+      <asc-documentos-fiscal
+        *ngIf="tipoProcesso?.id"
+        [pedido]="pedido"
+        [pedidoProcedimentos]="pedidoProcedimentos"
+        [idTipoProcesso]="tipoProcesso?.id"
+        [pedidoProcedimentoVersao]="pedidoProcedimentoVersao"
+        [stepper]="cdkStepper"
+        (documentoFiscal$)="documentoFiscalSelecionado($event)"
+        [beneficiario]="beneficiarioModel"
+      >
+      </asc-documentos-fiscal>
+    </cdk-step>
+    <cdk-step label="Documentos">
+      <ng-template cdkStepLabel>
+        {{ tipoProcesso?.nome | ascNormalizeFirstCharacterUpper }}
+      </ng-template>
+      <asc-documentos-requeridos-pedido
+        [parametro]="parametroDocumento"
+        [pedidoProcedimentoVersao]="pedidoProcedimentoVersao"
+        [stepper]="cdkStepper"
+        (documentosSelecionados)="documentosSelecionados($event)"
+      ></asc-documentos-requeridos-pedido>
+    </cdk-step>
+    <cdk-step label="Resumo">
+      <ng-template cdkStepLabel>
+        {{ tipoProcesso?.nome | ascNormalizeFirstCharacterUpper }}
+      </ng-template>
+      <asc-resumo
+        [beneficiarioModel]="beneficiarioModel"
+        [finalidade]="finalidade"
+        [tipoProcesso]="tipoProcesso"
+        [pedido]="pedido"
+        [pedidoProcedimentos]="pedidoProcedimentos"
+        [grauProcedimento]="grauProcedimento"
+        [conselho]="conselho"
+        [municipioProfissional]="municipioProfissional"
+        [profissional]="profissional"
+        [ufConselho]="ufConselho"
+        [documentoFiscal]="documentoFiscal"
+        [documentos]="documentos"
+        [beneficiarioForm]="beneficiarioForm"
+        [stepper]="cdkStepper"
+        [showProfissionalExecutante]="showStepProfissional"
+        (reiniciarEvent)="reiniciarSubject.next()"
+      ></asc-resumo>
+    </cdk-step>
+  </asc-stepper>
+</div>

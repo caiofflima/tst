@@ -1,0 +1,24 @@
+<p-dialog
+  #dialog
+  (onHide)="fecharModal$($event)"
+  [(visible)]="showModal"
+  [draggable]="draggable"
+  [height]="height"
+  [resizable]="resizable"
+  [responsive]="responsive"
+  [width]="width"
+  [modal]="true"
+  class="wrapper"
+>
+  <p-header>
+    <ng-content select="asc-modal-header"></ng-content>
+  </p-header>
+
+  <div class="align-itens">
+    <ng-content select="asc-modal-body"></ng-content>
+  </div>
+
+  <div>
+    <ng-content select="asc-modal-footer"></ng-content>
+  </div>
+</p-dialog>

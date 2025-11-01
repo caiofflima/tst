@@ -1,0 +1,131 @@
+<base-layout-form
+[baseTitulo]="baseTitulo"
+(salvar)="salvar()"
+(limparCampos)="limparCampos()"
+[id]="atualizar"
+(excluir)="excluir()"
+(restaurarCampos)="restaurarCampos()"
+[disabled]="formInvalido()"
+>
+
+<ng-template #breadcrumb>
+  <em class="fa fa-chevron-right"></em> Administração
+  <em class="fa fa-chevron-right"></em> Parâmetros
+  <em class="fa fa-chevron-right"></em>
+  <a [routerLink]="[baseURL]">{{baseTitulo}}</a>
+</ng-template>
+
+<form [formGroup]="formulario" name="form" slot="form">
+
+  <div class="form-row">
+    <div class="col-md-6 mb-15 pl-0">
+      <asc-dropdown
+            [items]="listaComboTipoProcesso"
+            label="Tipo de Pedido"
+            [control]="idTipoProcesso"
+            [required]="!atualizar"
+            [disabled]="atualizar != null"
+            (selected)="carregaBeneficiariosPorTipoProcesso()"
+            name="idTipoProcesso"
+      ></asc-dropdown>
+    </div>
+  
+
+    <div class="col-md-6 mb-15 pl-0">
+      <label class="control-label obrigatorio" for="tiposBeneficiario">Tipo de Beneficiário</label>
+      <p-multiSelect
+        id="tiposBeneficiario"
+        [options]="listComboTipoBeneficiario"
+        [formControl]="listaIdTipoBeneficiario"
+        [required]="!atualizar"
+        class="form-control2 custom-border"
+        defaultLabel="Selecione as opções"
+        selectedItemsLabel="{0} itens selecionados"
+        name="listaIdTipoBeneficiario"
+      ></p-multiSelect>
+      <asc-input-error [control]="tiposBeneficiario" [requiredMsg]="requiredMsg"></asc-input-error>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="col-md-3 mb-15 pl-0" >
+      <asc-dropdown
+        [items]="icNiveisNegacao"
+        label="Nível de Negação"
+        [control]="icNiveisNegacaoCombo"
+        required
+        [disabled]="atualizar != null"
+        (selected)="prepararFiltroParaCarregarMotivoNegacao($event)"
+        name="icNiveisNegacao"
+        ></asc-dropdown>
+    </div>
+
+    <div class="col-md-9 mb-15 pl-0"  *ngIf="icNiveisNegacaoCombo.value == 'S'">
+      <asc-dropdown
+        [items]="listaComboSituacoesProcesso"
+        label="Situação do Pedido"
+        [control]="campoSituacaoProcesso"
+        (selected)="carregarMotivoNegacao()"
+        required
+        [disabled]="atualizar != null"
+        ></asc-dropdown>
+    </div>
+    <div class="col-md-9 mb-15 pl-0" *ngIf=" icNiveisNegacaoCombo.value == 'D'">
+      <asc-dropdown *ngIf="icNiveisNegacaoCombo.value"
+        [items]="listaComboMotivoNegacao"
+        label="Motivo de Negação"
+        [control]="idMotivoNegacao"
+        [required]="!atualizar"
+        [disabled]="atualizar != null"
+        name="idMotivoNegacao"
+        ></asc-dropdown>
+    </div>
+
+  </div>
+
+    <div class="form-row" *ngIf="icNiveisNegacaoCombo.value == 'S'">
+
+      <div class="col-md-9 mb-15 pl-0" >
+        <asc-dropdown *ngIf="icNiveisNegacaoCombo.value"
+          [items]="listaComboMotivoNegacao"
+          label="Motivo de Negação"
+          [control]="idMotivoNegacao"
+          [required]="!atualizar"
+          [disabled]="atualizar != null"
+          name="idMotivoNegacao"
+          ></asc-dropdown>
+      </div>    
+    </div>
+
+    
+  
+  
+  
+
+  <div class="form-row inativo-form" *ngIf="atualizar">
+    <div class="col-md-3 p-0">
+      <p-checkbox name="ativos" inputId="ativos" binary="true" formControlName="inativo"></p-checkbox>
+      <label for="ativos" class="control-label">Inativo</label>
+    </div>
+    <div class="col-md-3 pl-0">
+      <asc-input-date
+              [control]="dataInativacao" 
+              [required]="formulario.get('inativo').value"
+              *ngIf="formulario.get('inativo').value" 
+              inputId="dataInativacao" 
+              label="Data da Inativação"
+
+      ></asc-input-date>
+      <asc-message-error
+              [control]="dataInativacao" type="dataIgualAtualMaior"
+              errorMessage="Data de Inativação deve ser igual ou superior a data atual!"
+      ></asc-message-error>
+    </div>
+</div>
+
+</form>
+
+
+</base-layout-form>
+
+
+  

@@ -1,0 +1,79 @@
+import {
+    AfterViewInit,
+    ChangeDetectorRef,
+    Component,
+    EventEmitter,
+    Output,
+    Input,
+    OnInit,
+    ViewChild,
+    ViewEncapsulation
+} from '@angular/core';
+import {BaseInputComponent} from "../base-input.component";
+import {MessageService} from "../../../services/services";
+import {Calendar} from "primeng/calendar";
+import {CalendarLocalePt} from "../../../util/calendar-locale-pt";
+
+@Component({
+    selector: 'asc-input-date',
+    templateUrl: './asc-input-date.component.html',
+    styleUrls: ['./asc-input-date.component.scss'],
+    encapsulation: ViewEncapsulation.None
+})
+export class AscInputDateComponent extends BaseInputComponent implements OnInit, AfterViewInit {
+
+    @ViewChild("dateCalendar")
+    dateCalendar: Calendar;
+    @Input()
+    dateFormat: string;
+    @Input()
+    yearNavigator: boolean;
+    @Input()
+    monthNavigator: boolean;
+    @Input()
+    override required: boolean;
+    @Output() change = new EventEmitter();
+    pt: any;
+    @Input()
+    className: string;
+    @Input()
+    placeholder: string;
+    @Input()
+    readonlyInput: boolean;
+
+    constructor(messageService: MessageService, protected ref: ChangeDetectorRef) {
+        super(messageService);
+        this.pt = new CalendarLocalePt();
+        this.dateFormat = "dd/mm/yy"
+        this.yearNavigator = true;
+        this.monthNavigator = true;
+        this.placeholder = "  /  /  ";
+        this.readonlyInput = false;
+    }
+
+    ngAfterViewInit(): void {
+        this.inputDateMask(this.dateCalendar);
+        this.ref.detectChanges();
+        console.log('pt aq',this.pt)
+
+    }
+
+    blurAction(_: FocusEvent): void {console.log("blurAction");
+    }
+
+    changeAction(_: any): void {console.log("changeAction");
+    }
+
+    focusAction(_: FocusEvent): void {console.log("focusAction");
+    }
+
+    keyDownAction(_: KeyboardEvent): void {console.log("keyDownAction");
+    }
+
+    keyUpAction(_: KeyboardEvent): void {console.log("keyUpAction");
+    }
+
+    onSelect(event) {
+        this.change.emit(event);
+    }
+}

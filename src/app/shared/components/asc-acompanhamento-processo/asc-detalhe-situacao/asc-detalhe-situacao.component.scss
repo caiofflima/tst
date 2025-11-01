@@ -1,0 +1,11 @@
+.mdl-body-custom {
+  max-height: 70vh; /* Define a altura máxima do corpo do modal */
+  overflow-y: auto; /* Permite o scroll vertical */
+}
+
+.fl-sb-btn {
+  display: inline-flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+}

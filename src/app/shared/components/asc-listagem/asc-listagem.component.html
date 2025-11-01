@@ -1,0 +1,21 @@
+
+  <a [popover]="popoverTemplate" 
+     data-placement="right" 
+     title="Clique aqui para ver a lista"
+     >
+    <em class="fa fa-info-circle"></em>      
+  </a>
+
+  <ng-template #popoverTemplate>
+    <div class="area-lista">
+      <h3>{{titulo}} - {{lista.length}} itens</h3>
+      <hr>
+      <div *ngFor="let item of lista; let i = index">
+        {{i + 1}} - {{item.label}}
+      </div>
+      <hr>
+      <button class="btn btn-default" (click)="fecharPopover()" >
+        Fechar
+      </button>
+    </div>
+  </ng-template>

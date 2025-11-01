@@ -1,0 +1,36 @@
+export class RetornoExtratoDetalhadoDTO {
+
+    constructor( 
+     public strNomeBeneficiario: string,
+	 public strCpfBeneficiario: string,
+	 public lngHandleBeneficiario: number,
+	 public strCartao: string,
+	 public strExecutor: string,
+	 public nmrFatura: string,
+	 public guia: string,
+	 public lngRegimePgto: number,
+	 public abatimentoEvento: string,
+	 public cpfCnpj: string,
+	 public prestExecutante: number,
+	 public dtDataAtendimento: Date,
+	 public strDescEvento: string,
+	 public strTpFaturamento: string,
+	 public lngCodTpFaturamento: number,
+	 public strCategoriaPrestador: string,
+	 public qtdPgto: number,
+	 public valorPgto: number,
+	 public fltBaseCalculoIRPF: number,
+	 public valorPf: number,
+	 public lngExecHandle: number,
+	 public grauStrDescricao: string,
+	 public peg: string,
+	 public strEstrutura: string,
+	 public strNomeFantasia: string,
+	 public chrPFSujeitoATeto: string,
+	 public contrato: number,
+	 public deprestrito: string,
+	 public percentualPf: string,
+	 public competFin: string,
+	 public competencia: number) {
+    }
+} 

@@ -1,0 +1,57 @@
+<label
+  class="control-label label-class"
+  for="{{ inputId }}"
+  [class.obrigatorio]="required !== null && required !== false"
+>
+  {{ label }}
+</label>
+<div class="ui-inputgroup relative">
+  <button
+    pButton
+    label="R$"
+    type="button"
+    class="custom-input-btn left"
+  ></button>
+  <!-- [textMask]="{mask: mask}" -->
+  <input
+    *ngIf="maskName"
+    [formControl]="control"
+    [ngStyle]="compStyle"
+    id="m_{{ inputId }}"
+    pInputText
+    type="text"
+    name="{{ name }}"
+    class="form-control padding-button-left"
+    title="{{ hint }}"
+    maxlength="{{ maxlength }}"
+    [required]="required"
+    ui-money-mask
+    placeholder="{{ placeholder }}"
+    (keyup)="keyUpAction($event)"
+  />
+  <input
+    *ngIf="!maskName"
+    [formControl]="control"
+    [ngStyle]="compStyle"
+    id="{{ inputId }}"
+    pInputText
+    type="text"
+    name="{{ name }}"
+    class="form-control padding-button-left"
+    title="{{ hint }}"
+    placeholder="{{ placeholder }}"
+    [required]="required"
+    (keyup)="keyUpAction($event)"
+    (keydown)="keyDownAction($event)"
+    (drop)="dropAction($event)"
+  />
+</div>
+<div
+  *ngIf="control.invalid && (control.dirty || control.touched)"
+  [ngStyle]="compStyle"
+  class="error-form"
+>
+  <div *ngIf="control.errors.cpf">{{ bundle("MA009", "CPF") }}</div>
+  <div *ngIf="control.errors.email">{{ bundle("MA019") }}</div>
+  <div *ngIf="control.errors.required">{{ requiredMsg }}</div>
+</div>

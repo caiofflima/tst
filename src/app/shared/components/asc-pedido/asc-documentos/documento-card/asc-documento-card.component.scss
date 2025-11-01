@@ -1,0 +1,271 @@
+@import "/src/assets/sass/colors";
+@import "/src/assets/sass/mixins";
+
+@mixin add-btn-hover($mainColor, $hoverColor, $borderColor, $spanColor, $spanHoverColor) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  background-color: $mainColor;
+  border-color: $borderColor;
+  transition: 250ms ease-in-out;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  padding: 10px 16px;
+  height: 35px;
+  min-width: 125px;
+
+  span {
+    color: $spanColor;
+    transition: 300ms ease-in-out;
+  }
+
+  &:hover,
+  &:active {
+    background-color: $hoverColor;
+    transition: 250ms ease-in-out;
+
+    span {
+      color: $spanHoverColor;
+      transition: 300ms ease-in-out;
+    }
+  }
+}
+
+button {
+  &:disabled {
+    background-color: #E5E5E5 !important;
+    cursor: not-allowed;
+  }
+}
+
+.separador {
+  border-top: 0;
+  margin: 0 !important;
+}
+
+div.custom-card {
+  padding: 32px 8px 8px 8px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 3px;
+  border: 1px solid #B3C7CB;
+  position: relative;
+  margin-bottom: 16px;
+
+  div.success-icon-container {
+    display: none;
+    position: absolute;
+    top: 13px;
+    right: 11px;
+
+    em {
+      color: #53AA5C;
+    }
+  }
+
+  &.success {
+    border: 2px solid #53AA5C;
+
+    div.success-icon-container {
+      display: block;
+    }
+  }
+
+  p.card-titulo {
+    font-family: 'Caixa Std Bold', sans-serif;
+    font-size: 16px;
+    line-height: 19px;
+    color: #000000;
+    font-weight: bold;
+  }
+
+  span.card-info {
+    font-family: 'Caixa Std Bold', sans-serif;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 16px;
+    color: #000000;
+  }
+
+  p.arquivos-label {
+    font-family: 'Caixa Std Bold', sans-serif;
+    font-size: 14px;
+    line-height: 16px;
+    display: flex;
+    align-items: center;
+    color: #000000;
+    margin-top: 12px;
+    font-weight: bold;
+  }
+
+  div.arquivo-card {
+    border: 1px solid #5F758F;
+    padding: 8px;
+    margin: 6.5px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    div.arquivo-info {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      align-items: center;
+    }
+
+    p.arquivo-data {
+      font-family: 'Caixa Std Bold', sans-serif;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 13px;
+      line-height: 16px;
+      display: flex;
+      align-items: center;
+      text-align: right;
+      color: #3A4859;
+      margin: 0;
+
+      i, em {
+        margin-left: 10px;
+        font-size: 20px;
+        color: #0158AE;
+      }
+    }
+
+    p.arquivo-nome {
+      font-family: 'Caixa Std Regular', sans-serif;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 17px;
+      display: flex;
+      align-items: center;
+      color: #3A4859;
+      margin: 0;
+    }
+
+    div.arquivo-actions {
+      display: flex;
+      justify-content: space-between;
+      width: 85px;
+
+      button {
+        width: 35px;
+        height: 35px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: none;
+        border-radius: 3px;
+
+        &:disabled {
+          background-color: #E5E5E5;
+          cursor: not-allowed;
+        }
+
+        em {
+          color: #FFF;
+        }
+
+        &:first-child {
+          background-color: #17A2B8;
+
+          &:hover,
+          &:active {
+            background-color: #0f91a5;
+          }
+        }
+
+        &:last-child {
+          background-color: #DC3545;
+
+          &:hover,
+          &:active {
+            background-color: #bb1c2c;
+          }
+        }
+      }
+    }
+  }
+
+  div.custom-card-footer {
+    padding-top: 10px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    label {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #41A495;
+      border-radius: 3px;
+      border: 1px solid #36877B;
+      padding: 8px 12px;
+      cursor: pointer;
+      transition: 250ms ease-in-out;
+
+      &:hover,
+      &:active {
+        background-color: #36877B;
+        transition: 250ms ease-in-out;
+      }
+
+      em,
+      span {
+        color: #fff;
+
+      }
+
+      em, i {
+        margin-right: 8px;
+      }
+    }
+
+    input {
+      visibility: hidden;
+      position: absolute;
+    }
+  }
+
+}
+
+@media screen and (max-width: 500px) {
+
+  div.custom-card-footer {
+    label {
+      width: 100%;
+    }
+  }
+}
+
+.dangerIcon {
+  background-color: $btn-bg-red;
+  width: 35px;
+  height: 35px;
+  justify-content: center;
+  border: none;
+  border-radius: 3px;
+  align-items: center;
+  display: flex;
+  color: #fff;
+  padding: 12px;
+
+  &:hover, &:active {
+    background-color: $btn-bg-red-dark;
+  }
+}
+
+.infoIconColor {
+  background-color: #17A2B8 !important;
+}
+
+button {
+  margin: 0 !important;
+}
+
+.actionDoc {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 80px;
+}

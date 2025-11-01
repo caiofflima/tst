@@ -1,0 +1,449 @@
+
+.mainSection{
+    background: #F6F9F9;
+}
+.col-left {
+    width: 360px;
+    float: left;
+    background: white;
+    margin-bottom: 5%;
+    ::ng-deep p-accordionTab.menuremb{
+
+       div.ui-accordion-header{
+        border: none;
+        border-bottom: 1px solid #EFF4F5 !important;
+            a{
+                font-family: 'Caixa Std Bold' !important;
+                font-size: 16px;
+                font-weight: 700;
+        
+                color: #2E484D;
+                &:hover{
+                    text-decoration: none !important;
+                }
+                &:focus{
+                    text-decoration: none !important;
+                }
+            }
+        }
+
+
+
+    }
+    ::ng-deep p-accordionTab.menuremb2{
+        div.ui-accordion-header{
+            border: none;
+            border-bottom: 1px solid #EFF4F5 !important;
+                a{
+                    font-family: 'Caixa Std Bold' !important;
+                    font-size: 16px;
+                    font-weight: 700;
+            
+                    color: #2E484D;
+                    &:hover{
+                        text-decoration: none !important;
+                    }
+                    &:focus{
+                        text-decoration: none !important;
+                    }
+                }
+            }
+
+
+
+    }
+    
+}
+
+.col-right {
+    width: 792px;
+    float: right;
+    background: white;
+}
+
+.color3A4859{
+    color: #3A4859;
+};
+
+
+.box-reembolso {
+    border: 1px solid #AFCACF;
+}
+
+.title-blue {
+    border: none;
+    color: #0057AE;
+    font-size: 18px !important;
+    font-family: 'Caixa Std Bold', sans-serif;
+    font-weight: 700;
+}
+
+.container .valor-resultado {
+    font-size: 20px;
+    float: right;
+}
+
+.simple-border {
+    border-top: 1px solid #EFF4F5;
+    padding-top: 6px;
+}
+
+.beneficiario {
+    margin-top: 5px;
+    font-size: 16px;
+    color: #2E484D;
+}
+
+.fa-usd {
+    border-radius: 20px;
+    border: 1px solid #C6E5FF;
+    padding: 4px 8px;
+    font-size: 15px;
+    background: #C6E5FF;
+    color: #005CA9;
+    margin-right: 5px;
+    margin-left: -15px;
+}
+.fa-donate {
+    border-radius: 20px;
+    border: 1px solid #008254;
+    padding: 4px 8px;
+    font-size: 15px;
+    background: #008254;
+    color: #005CA9;
+    margin-right: 5px;
+    margin-left: -15px;
+}
+
+
+
+.reembolso-calendar {
+    border-radius: 20px;
+    border: 1px solid #008254;
+    padding: 5px 6px;
+    font-size: 12px;
+    background: #008254;
+    color: #fff;
+    margin-right: 8px;   
+}
+
+.selectAno {
+    max-width: 120px;
+    display: flex;
+    float: right;
+}
+
+.valor-accordion {
+    float: right;
+    font-size: 19px;
+    color: #0F92FF;
+    font-family: 'Caixa Std Bold', sans-serif;
+}
+    .valor-accordion i {        
+        font-size: 19px;
+        margin-left: 4px;
+        color: #0F92FF;
+    }
+
+.btn-accordion {
+    background: transparent;
+    border: none;
+    color: #0F92FF;
+    margin: 0 0 3% 3%;
+}
+
+.inline-resultado {
+    display: flex;
+}
+
+.inline-resultado p:first-child {
+    width: fit-content;
+    font-family: 'Caixa Std Bold', sans-serif;
+    font-size: 16px;
+    color: #2E484D;
+}
+
+.row-remb {
+    margin-bottom: 12%;
+}
+
+.comp-data {
+    text-transform: uppercase;
+    font-family: 'Caixa Std Bold', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    color: #637A97;
+}
+
+.nome-prestador, .valor-pgto, .nome-fantasia {
+    color: #2E484D;
+    font-size: 16px;
+    font-family: 'Caixa Std Bold', sans-serif;
+    font-weight: 700;
+}
+
+.float-right, .valor-pgto {
+    float: right;
+}
+
+.remb-cpfcnpj {
+
+    //styleName: Textos Medium/dsc-text-medium04;
+    font-family: 'Caixa Std SemiBold';
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 18.2px;
+    text-align: left;
+
+    color: #262F3B;
+
+
+}
+
+.info-remb, .info-financ {
+    font-family: 'Caixa Std Bold' , sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+    color: #4D7880;
+    display: flow-root;
+}
+.info-financ,.info-remb{
+    font-family: 'Caixa Std Book' , sans-serif !important;
+    //styleName: Textos Book/dsc-text-book03;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 22.4px;
+    text-align: left;
+    color: #3A4859;
+
+    
+}
+
+.box-info { 
+    border: 1px solid #B3C7CB;
+    background: #EFF5F6;
+    padding: 18px 68px;
+    color: #4D7880;
+    font-size: 14px;
+}
+
+.mensal-copar {
+    float: right;
+    color: #3A4859;
+
+    font-family: 'Caixa Std Book';
+    font-weight: 400;
+    font-size: 14px;
+    margin: 0;
+    span{
+        font-family: 'Caixa Std Book';
+        font-weight: 700;
+        font-size: 16px;
+
+    }
+}
+
+.margin-title {
+    padding-top: 1rem;
+    margin-left: -10px !important;
+}
+
+.padding-top {
+    padding-top: 15px;
+}
+
+.erro-um {
+    display: inline-block;
+    padding-top: 15px;
+}
+
+.msg-erro {
+    display: none;
+}
+
+:host ::ng-deep .menuremb > div {
+    border: none !important;
+    background: transparent !important;
+    padding: 2px 0;    
+}
+
+:host ::ng-deep .menuremb2 > div {   
+    background: transparent !important;
+    border-bottom: none !important;
+    padding: 2px 0;   
+}
+
+:host::ng-deep .menuremb2 .fa-caret-right {
+    left: 23em !important;
+  }
+  
+  :host::ng-deep .menuremb2 .fa-caret-down {
+    left: 23em !important;
+  }
+
+  :host::ng-deep .menuremb .fa-caret-right {
+    left: 23em !important;
+  }
+  
+  :host::ng-deep .menuremb .fa-caret-down {
+    left: 23em !important;
+  }
+
+  ::ng-deep #asc-modal-coparticipacao-reembolso-detail{
+    asc-modal-navegacao.mdl-custom-coparticipacao{
+        asc-modal{
+            p-dialog.wrapper{
+                div.ui-dialog{
+                    border: none !important;
+                   
+                    max-height: 95vh;
+                    height: fit-content;
+                    /* margin: auto 0px; */
+                    top: 50% !important;
+                    transform: translateY(-50%);
+                    div.ui-dialog-titlebar{
+                        border: none !important;
+                        background: linear-gradient(89.8deg, #005CA9 0%, #54BBAB 85.71%) !important;
+
+                    }
+                    div.ui-dialog-content{
+                        max-height: calc(95vh - 63px);
+                        padding: 1.5em;
+                        div.align-itens{
+                            asc-modal-body.mdl-body-custom{
+                                table{
+                                    tbody{
+                                        tr{
+                                            td.core-file{
+                                                asc-viewport.mdl-view-custom{
+                                                    div.nome-prestador{
+
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+  }
+
+  .containerLancamentoPorMes{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    .containericonCLPM{
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background: #005CA9;
+        padding: 2px 0px 0px 6px;
+
+        i.lancamento-calendar{
+            font-size: 12px;
+            color: white;
+        }
+        &-verde{
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #008254;
+
+            padding: 2px 0px 0px 6px;
+    
+            i.lancamento-calendar{
+                font-size: 12px;
+                color: white
+            }
+        }
+    }
+    .labelCLPM{
+        font-family: 'Caixa Std Bold';
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 22.4px;
+        text-align: center;
+
+        color: #262F3B;
+    }
+  }
+
+  .containerLancamentoItem{
+    min-height: 58px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #EFF4F5;
+    transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+    .leftHighlightStatus{
+        height: 58px;
+        width: 4px;
+        background: #F39200;
+
+    }
+    .strMesLI{
+        //styleName: Textos Medium (fw500) / btx-text-lg | 18px;
+        font-family: 'Caixa Std SemiBold';
+        font-size: 18px;
+        font-weight: 400;
+        line-height: 25.2px;
+        text-align: left;
+
+        color: #3A4859;
+
+    }
+    .statusLI{
+        //styleName: Textos Book (fw300) / btx-text-st | 16px (Root);
+        font-family: 'Caixa Std Book';
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 22.4px;
+        text-align: left;
+
+    }
+    .valor-accordion{
+        //styleName: Textos Heavy (fw700) / btx-text-st | 16px (Root);
+        font-family: 'Caixa Std Bold';
+        font-size: 16px;
+        line-height: 22.4px;
+        text-align: left;
+        margin-bottom: 7px;
+
+    }
+    .btn-accordion{
+        i{
+            font-size: 14px;
+            color: #3A4859;
+
+        }
+    }
+  }
+
+  .comp-data{
+    //styleName: Textos Medium/dsc-text-medium04;
+    font-family: 'Caixa Std SemiBold';
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 18.2px;
+    text-align: left;
+
+  }
+
+  .selectBeneficiarioLancamentos{
+    
+  }
+
+  .div-message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+  }

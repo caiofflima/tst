@@ -1,0 +1,48 @@
+<div class="container" *ngIf="!processoEnviado">
+  <asc-stepper
+    [fitScreen]="true"
+    [breadcrumbOptions]="breadcrumb"
+    [disableClickOnLabel]="true"
+    #cdkStepper
+    (selectionChange)="onStepperChange($event)"
+  >
+    <cdk-step label="Beneficiário">
+      <ng-template cdkStepLabel> Renovação de Dependente </ng-template>
+      <asc-etapa-motivo-renovacao
+        [checkRestart]="reinicarSubject"
+        (beneficiarioModel)="beneficiarioModelSelecionado($event)"
+        (motivoSolicitacaoModel)="motivoRenovacaoModelSelecionado($event)"
+        (tipoDependenteModel)="tipoDependenteModelSelecionado($event)"
+        [routerLinkToBack]="'/renovar-dependente'"
+        [idTipoProcesso]="idTipoProcesso"
+        [idBeneficiarioModel]="idBeneficiarioModel"
+        [stepper]="cdkStepper"
+      ></asc-etapa-motivo-renovacao>
+    </cdk-step>
+    <cdk-step label="Documentos">
+      <ng-template cdkStepLabel> Renovação de Dependente </ng-template>
+      <asc-documentos-requeridos-pedido
+        [parametro]="parametro"
+        [stepper]="cdkStepper"
+        (documentosSelecionados)="documentosSelecionados($event)"
+      ></asc-documentos-requeridos-pedido>
+    </cdk-step>
+    <cdk-step label="Resumo">
+      <ng-template cdkStepLabel> Renovação de Dependente </ng-template>
+      <asc-etapa-resumo-renovar
+        [beneficiario]="beneficiarioModel"
+        [tipoDependente]="tipoDependenteModel"
+        [documentos]="documentos"
+        [motivoSolicitacao]="motivoSolicitacaoModel"
+        [stepper]="cdkStepper"
+        (processoEnviadoEvent)="setProcessoEnviado($event)"
+        (reiniciarEvent)="reinicarSubject.next()"
+      ></asc-etapa-resumo-renovar>
+    </cdk-step>
+  </asc-stepper>
+</div>
+<asc-recibo-dependente
+  [pedido]="recibo"
+  [motivo]="motivoSolicitacaoModel?.nome"
+  *ngIf="processoEnviado"
+></asc-recibo-dependente>

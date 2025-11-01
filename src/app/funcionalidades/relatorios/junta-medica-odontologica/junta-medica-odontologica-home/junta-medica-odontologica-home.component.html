@@ -1,0 +1,211 @@
+<div class="container">
+  <div class="col-md-12 breadcrumb-header">
+    <ul class="breadcrumb">
+      <li>
+        <span (click)="voltar()" class="voltar"
+          ><i class="fa fa-arrow-left" aria-hidden="true"></i>Voltar</span
+        >
+      </li>
+      <a routerLink="/home">Início</a>
+      <em class="fa fa-chevron-right"></em>
+      Relatório
+      <em class="fa fa-chevron-right"></em>
+      Junta Médica/Odontológica
+    </ul>
+  </div>
+
+  <div class="title-type">
+    <h1 class="titulo-pagina">Junta Médica/Odontológica</h1>
+  </div>
+
+  <section class="row">
+    <form [formGroup]="formulario" name="form">
+      <div class="row pl-0 col-md-12">
+        <h4>Dados dos Pedidos</h4>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-4 pl-0">
+          <label class="control-label" for="filial">Agrupadora</label>
+          <asc-multiSelect
+            id="filial"
+            [options]="listComboFilial"
+            [control]="formulario.get('filiaisProcesso')"
+          ></asc-multiSelect>
+        </div>
+
+        <div class="col-xs-4">
+          <label class="control-label" for="ufA">UF Atendimento</label>
+          <p-dropdown
+            class="form-control2"
+            id="ufA"
+            [options]="listComboUF"
+            [filter]="true"
+            [placeholder]="this.bundle('MHSPH')"
+            title="Filtrar por UF de atendimento."
+            formControlName="ufAtendimento"
+            optionLabel="label"
+          ></p-dropdown>
+        </div>
+        <div class="col-xs-2 pl-0">
+          <asc-input-date
+            [required]="true"
+            [control]="formulario.get('dataInicio')"
+            label="Data Início"
+          ></asc-input-date>
+        </div>
+        <div class="col-xs-2">
+          <asc-input-date
+            [required]="true"
+            [control]="formulario.get('dataFim')"
+            label="Data Fim"
+          ></asc-input-date>
+        </div>
+      </div>
+    </form>
+
+    <div class="col-xs-12 barra-botoes">
+      <button
+        *ngIf="exibirResultado"
+        class="btn clean-btn"
+        (click)="downloadRelatorioJMO()"
+      >
+        <span class="fa fa-download fa-fw"></span>Exportar XLS
+      </button>
+      <button
+        id="btnLimparCampos"
+        class="btn back-btn"
+        (click)="limparCampos()"
+      >
+        <span class="fa fa-trash fa-fw"></span>Limpar Campos
+      </button>
+      <button
+        class="btn continue-btn"
+        (click)="consultarProcesso()"
+        [disabled]="!formulario.valid"
+      >
+        <span class="fa fa-search fa-fw"></span>Pesquisar
+      </button>
+    </div>
+
+    <div *ngIf="exibirResultado" class="row col-md-12" style="overflow-x: auto">
+      <p-table
+        [value]="listaProcessos"
+        [paginator]="true"
+        [rows]="rowCounter"
+        [rowsPerPageOptions]="[5, 10, 20]"
+        [totalRecords]="listaProcessos.length"
+        class="table table-striped table-sm table-hover table-fit tableFullviewGBAjustes"
+      >
+        <ng-template pTemplate="header">
+          <tr>
+            <th id="Agrupadora" style="width: 60px">Agrupadora</th>
+            <th id="UF" style="width: 80px">UF Atendimento</th>
+            <th id="Pedido" style="width: 100px">Pedido</th>
+            <th id="Data_Abertura" style="width: 130px">Data Abertura</th>
+            <th id="Data_Encerramento" style="width: 130px">
+              Data Encerramento
+            </th>
+            <th id="Tipo" style="width: 125px">Tipo de Pedido</th>
+            <th id="Nome" style="width: 160px">Nome Beneficiário</th>
+            <th id="cartao" style="width: 98px">Cartão Beneficiário</th>
+            <th id="matricula" style="width: 145px">Matrícula Tit.</th>
+            <th id="CPF" style="width: 110px">CPF/CNPJ</th>
+            <th id="Nome" style="width: 290px">Nome/Razão Social</th>
+            <th id="Procedimento" style="width: 400px">Procedimento</th>
+            <th id="OPME" style="width: 98px">OPME</th>
+            <th id="Data_Tentativa" style="width: 130px">
+              Data Tentativa Consenso
+            </th>
+            <th id="Data_Comun" style="width: 130px">Data Comun. Junta</th>
+            <th id="Data_Resultado" style="width: 130px">Data Resultado</th>
+            <th id="Resultado" style="width: 98px">Resultado</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData>
+          <tr>
+            <td>{{ rowData.siglaFilial }}</td>
+            <td>{{ rowData.ufAtendimento }}</td>
+            <td>{{ rowData.dataAbertura }}</td>
+            <td>{{ rowData.dataEncerramento }}</td>
+            <td>{{ rowData.tipoProcesso }}</td>
+            <td>{{ rowData.nomeBeneficiario }}</td>
+            <td>{{ rowData.cartaoBeneficiario }}</td>
+            <td>{{ rowData.cpfCnpjStr }}</td>
+            <td>{{ rowData.nomeRazaoSocial }}</td>
+            <td>{{ rowData.procedimento }}</td>
+            <td>{{ rowData.opme }}</td>
+            <td>{{ rowData.dataTentativaConsenso }}</td>
+            <td>{{ rowData.dataComunJunta }}</td>
+            <td>{{ rowData.dataResultado }}</td>
+            <td>{{ rowData.resultado }}</td>
+          </tr>
+        </ng-template>
+        <p-footer>
+          {{ mensagemPaginacao }}
+        </p-footer>
+
+        <ng-template pTemplate="emptymessage">
+          {{ bundle("MA003") }}
+        </ng-template>
+        <!-- <p-column field="siglaFilial" header="Agrupadora" [style]="{width: '60px', 'text-align': 'center'}"></p-column>
+        <p-column field="ufAtendimento" header="UF Atendimento" [style]="{width: '80px', 'text-align': 'center'}"
+        ></p-column>
+        <p-column field="numeroProcesso" header="Pedido" [style]="{width: '100px', 'text-align': 'center'}"
+        ></p-column>
+        <p-column field="dataAbertura" header="Data Abertura" [style]="{width: '130px', 'text-align': 'center'}"
+        ></p-column>
+        <p-column field="dataEncerramento" header="Data Encerramento"
+                  [style]="{width: '130px', 'text-align': 'center'}"
+        ></p-column>
+        <p-column field="tipoProcesso" header="Tipo de Pedido" [style]="{width: '125px', 'text-align': 'center'}">
+        </p-column>
+        <p-column field="nomeBeneficiario" header="Nome Beneficiário" [style]="{width: '160px', 'text-align': 'center'}"
+        ></p-column>
+        <p-column field="cartaoBeneficiario" header="Cartão Beneficiário"
+                  [style]="{width: '98px', 'text-align': 'center'}"
+        ></p-column>
+        <p-column field="matriculaTitular" header="Matrícula Tit."
+                  [style]="{width: '145px', 'text-align': 'center'}"
+        ></p-column>
+        <p-column field="cpfCnpjStr" header="CPF/CNPJ" [style]="{width: '110px', 'text-align': 'center'}"></p-column>
+        <p-column field="nomeRazaoSocial" header="Nome/Razão Social"
+                  [style]="{width: '290px', 'text-align': 'center'}"
+        ></p-column>
+        <p-column field="procedimento" header="Procedimento" [style]="{width: '400px', 'text-align': 'center'}"
+        ></p-column>
+        <p-column field="opme" header="OPME" [style]="{width: '98px', 'text-align': 'center'}"
+        ></p-column>
+        <p-column field="dataTentativaConsenso" header="Data Tentativa Consenso"
+                  [style]="{width: '130px', 'text-align': 'center'}"
+        ></p-column>
+        <p-column field="dataComunJunta" header="Data Comun. Junta"
+                  [style]="{width: '130px', 'text-align': 'center'}"
+        ></p-column>
+        <p-column field="dataResultado" header="Data Resultado" [style]="{width: '130px', 'text-align': 'center'}"
+        ></p-column>
+        <p-column field="resultado" header="Resultado" [style]="{width: '98px', 'text-align': 'center'}"></p-column>
+        <p-footer>
+          {{mensagemPaginacao}}
+        </p-footer> -->
+      </p-table>
+
+      <div class="row">
+        <div class="col-md-12">
+          <small>
+            <p><strong>Legenda</strong></p>
+            <p>
+              <strong>Matrícula Tit.</strong> - Matrícula do titular da familia
+              do beneficiário
+            </p>
+            <p>
+              <strong>Data Comun. Junta</strong> - Data/hora da Situação JUNTA
+              MÉDICA/ODONTOLÓGICA - AGUARDANDO MANIFESTAÇÃO DO PROFISSIONAL
+              ASSISTENTE.
+            </p>
+          </small>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

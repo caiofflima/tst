@@ -1,0 +1,62 @@
+<div class="custom-container">
+
+  <p class="titulo">OK. Agora, precisamos dos dados do procedimento.</p>
+
+  <asc-procedimento-form
+    [parametroSelectProcedimento]="parametroSelectProcedimento"
+    [pedidoProcedimentoFormInput]="pedidoProcedimentoForm"
+    (grauSelecionado)="grauProcedimentoSelecionado($event)"
+    (procedimento)="procedimentoSelecionado($event)"
+    [pedido]="pedido"
+  ></asc-procedimento-form>
+    
+    <!-- [beneficiario]="beneficiario" -->
+
+  <div class="ui-g">
+    <div class="ui-g-12">
+      <div class="custom-form-grid">
+        <label class="custom-input-label absolute">Tipo de pedido</label>
+        <asc-select-base-layout [control]="formularioProcedimento.get('procedimento')">
+        </asc-select-base-layout>
+      </div>
+    </div>
+  </div>
+  <div class="ui-g">
+    <div class="ui-g-12 ui-md-6">
+
+      <div class="ui-g-12 ui-md-12 custom-form-grid no-padding-left">
+        <label class="custom-input-label absolute">Grau</label>
+        <asc-select-base-layout label="" [control]="formularioProcedimento.get('grau')">
+        </asc-select-base-layout>
+      </div>
+
+      <div class="ui-g-12 ui-md-12 custom-form-grid no-padding-left">
+        <label class="custom-input-label absolute">Quantidade</label>
+        <asc-input-text label="" [control]="formularioProcedimento.get('quantidade')">
+        </asc-input-text>
+      </div>
+    </div>
+    <div class="ui-g-12 ui-md-6">
+      <div class="ui-g-12 ui-md-12 custom-form-grid no-padding-right">
+        <label class="custom-input-label absolute">Valor unitário pago</label>
+        <asc-input-money label="" [control]="formularioProcedimento.get('valorUnitarioPago')">
+        </asc-input-money>
+      </div>
+      <div class="ui-g-12 ui-md-12 custom-form-grid no-padding-right">
+        <label class="custom-input-label absolute">Data do procedimento</label>
+        <asc-input-date label="" [control]="formularioProcedimento.get('data')">
+        </asc-input-date>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="footer">
+  <button class="back-btn" cdkStepperPrevious>
+    Voltar
+  </button>
+  <button class="next-btn" cdkStepperNext>
+    Continuar
+  </button>
+</div>

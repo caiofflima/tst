@@ -1,0 +1,171 @@
+<asc-modal
+  class="mdl-custom"
+  [ngClass]="{ 'modal-fade': isModalFaded }"
+  (closeModal)="fecharModal()"
+  #modalComponent
+>
+  <asc-modal-header>Nova ocorrência</asc-modal-header>
+  <asc-modal-body class="mdl-body-custom">
+    <section>
+      <form
+        [formGroup]="form"
+        style="display: flex; flex-direction: column; height: 100%"
+      >
+        <div class="row" style="flex-grow: 1">
+          <div class="form-row">
+            <div class="form-group col-md-4">
+              <asc-select-tipo-ocorrencia
+                label="Tipo de ocorrência"
+                [standalone]="true"
+                [control]="tipoOcorrencia"
+                style="border-left: none !important"
+                [required]
+              >
+              </asc-select-tipo-ocorrencia>
+            </div>
+            <div class="form-group col-md-8">
+              <div class="desc-tipo">
+                <h4>{{ tipoOcorrencia?.value?.nome }}</h4>
+                <p>{{ tipoOcorrencia?.value?.descricao }}</p>
+              </div>
+            </div>
+
+            <ng-container
+              *ngIf="!isInResumo; then button; else paperclip"
+            ></ng-container>
+
+            <ng-template #button>
+              <div class="custom-card-footer">
+                <label [attr.disabled]="disabled" [class.disabled]="disabled">
+                  <span *ngIf="!disabled">
+                    <svg class="icon-clip"></svg>
+                    <span>Adicionar arquivo</span>
+                  </span>
+                  <span *ngIf="disabled">
+                    <p-progressSpinner
+                      [style]="{ width: '25px', height: '25px' }"
+                      animationDuration=".5s"
+                      fill="#EEEEEE"
+                      strokeWidth="4"
+                    >
+                    </p-progressSpinner>
+                  </span>
+                  <input
+                    #buttonDirective
+                    type="file"
+                    [disabled]="disabled"
+                    [accept]="extensions"
+                    (change)="onChangeFile(buttonDirective)"
+                    [id]="inputId"
+                    [multiple]="true"
+                  />
+                </label>
+              </div>
+            </ng-template>
+
+            <ng-template #paperclip>
+              <label
+                [attr.disabled]="disabled"
+                [class.disabled]="disabled"
+                class="file-selector"
+                style="margin-right: 0; cursor: pointer"
+              >
+                <input
+                  #paperClipDirective
+                  [accept]="extensions"
+                  [disabled]="disabled"
+                  type="file"
+                  (change)="onChangeFile(paperClipDirective)"
+                  [multiple]="true"
+                />
+                <i class="fa fa-paperclip" aria-hidden="true"></i>
+              </label>
+            </ng-template>
+
+            <!-- Contêiner de rolagem para anexos -->
+            <div class="arquivo-scroll-container">
+              <div class="arquivo-card-container">
+                <div
+                  *ngFor="let file of files; let i = index"
+                  class="arquivo-card"
+                >
+                  <div class="arquivo-info">
+                    <p class="arquivo-nome">{{ file.name }}</p>
+                    <p class="arquivo-data">
+                      {{ file.data | date : "short" }}
+                      <i
+                        class="fa fa-user-circle-o"
+                        aria-hidden="true"
+                        [title]="usuarioMatricula"
+                      ></i>
+                    </p>
+                  </div>
+                  <div class="arquivo-actions">
+                    <button
+                      (click)="
+                        abrirModalVisualizarDocumentos(
+                          $event,
+                          file,
+                          modalVisualizarDocumentoComponent,
+                          files
+                        )
+                      "
+                      [disabled]="loading"
+                      [attr.title]="bundle('MH147')"
+                    >
+                      <em class="fa fa-eye"></em>
+                    </button>
+                    <button
+                      (click)="removerDocumento(file)"
+                      [attr.title]="bundle('MH148')"
+                      [disabled]="loading"
+                    >
+                      <em class="fa fa-trash"></em>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-md-12">
+              <label class="custom-form-grid" for="textoOcorrencia"
+                >Histórico <span class="required-asterisk">*</span></label
+              >
+              <textarea
+                id="textoOcorrencia"
+                class="form-control"
+                maxlength="4000"
+                cols="150"
+                rows="8"
+                formControlName="descricaoHistorico"
+                required
+              >
+              </textarea>
+            </div>
+          </div>
+        </div>
+      </form>
+    </section>
+  </asc-modal-body>
+
+  <asc-modal-footer class="mdl-footer-custom">
+    <div class="fl-sb-btn">
+      <button class="btn-cts btn-outline-closed" (click)="hide()">
+        <span>Cancelar</span>
+      </button>
+      <button
+        class="btn-cts btn-popup"
+        (click)="adicionarOcorrencia($event)"
+        [disabled]="form.invalid || isButtonDisabled"
+      >
+        <span>Adicionar</span>
+      </button>
+    </div>
+  </asc-modal-footer>
+</asc-modal>
+
+<asc-modal-visualizar-documento
+  #modalVisualizarDocumentoComponent
+></asc-modal-visualizar-documento>

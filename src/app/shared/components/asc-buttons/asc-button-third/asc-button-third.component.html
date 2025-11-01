@@ -1,0 +1,14 @@
+<button (click)="clickButton($event)" [attr.id]="buttonId" [disabled]="disabled" class="next">
+    <span *ngIf="showProgress">
+      <p-progressSpinner
+        [style]="{width: '25px', height: '25px'}"
+        strokeWidth="4"
+        fill="#EEEEEE"
+        animationDuration=".5s">
+      </p-progressSpinner>
+    </span>
+  <span *ngIf="!showProgress">
+      {{title}}
+    </span>
+</button>
+

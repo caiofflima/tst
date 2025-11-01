@@ -1,0 +1,46 @@
+@mixin add-btn-hover($mainColor, $hoverColor, $borderColor, $spanColor, $spanHoverColor) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  background-color: $mainColor;
+  border-color: $borderColor;
+  transition: 250ms ease-in-out;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  padding: 0 16px;
+  height: 42px;
+  min-width: 125px;
+
+  span {
+    color: $spanColor;
+    transition: 300ms ease-in-out;
+  }
+
+  &:hover,
+  &:active {
+    background-color: $hoverColor;
+    transition: 250ms ease-in-out;
+
+    span {
+      color: $spanHoverColor;
+      transition: 300ms ease-in-out;
+    }
+
+    &:disabled {
+      background-color: #E5E5E5;
+      cursor: not-allowed;
+    }
+  }
+}
+
+button {
+  &.back {
+    @include add-btn-hover(#fff, #fafafa, #01377F, #01377F, #01377F);
+    border: 1px solid #01377f;
+  }
+
+  &.next {
+    @include add-btn-hover(#F39200, #db6e00, none, #fff, #fff);
+    border: none;
+  }
+}

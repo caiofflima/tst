@@ -1,0 +1,88 @@
+<main>
+  <div class="banner-home">
+    <div class="container logo">
+      <img id="logo-saude" src="assets/images/logo-saude.png" alt="Logotipo Caixa">
+    </div>
+    <div class="container banner">
+      <div class="context-banner-align">
+        <div class="context-banner">
+          <a routerLink="/meus-dados/pedidos">
+            <div id="card1" class="card-banner">
+              <img src="assets/images/card1.svg" alt="Meus Pedidos">
+              <div class="content">
+                <span>Meus Pedidos</span>
+                <p>Acesse todos os pedidos abertos por você e sua família.</p>
+                <a>Acessar</a>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="pr-servicos">
+    <div class="container">
+
+      <div class="row">
+        <h1 class="titulo-pagina">Principais serviços</h1>
+      </div>
+
+      <div class="row content-section d-flex">
+        <a routerLink="/pedidos/autorizacao-previa" class="card-servicos">
+          <img src="assets/images/pscard1.svg" alt="Autorização prévia">
+          <div class="content">
+            <h4>Autorização prévia</h4>
+          </div>
+          <a>Realizar pedido</a>
+        </a>
+
+        <a routerLink="/pedidos/reembolso" class="card-servicos">
+          <img src="assets/images/pscard2.svg" alt="Reembolso">
+          <div class="content">
+            <h4>Reembolso</h4>
+          </div>
+          <a>Realizar pedido</a>
+        </a>
+
+        <a class="card-servicos" routerLink="/pedidos/inscricao/programas-medicamentos">
+          <img src="assets/images/pscard3.svg" alt="Minha família">
+          <div class="content">
+            <h4>Inscrição no programa de medicamentos</h4>
+          </div>
+          <a>Realizar pedido</a>
+        </a>
+
+        <a class="card-servicos" routerLink="/dependente/incluir">
+          <img src="assets/images/pscard4.svg" alt="Cartão de identificação">
+          <div class="content">
+            <h4>Inclusão de beneficiário</h4>
+          </div>
+          <a>Realizar pedido</a>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script>
+  $('.carousel .carousel-item').each(function () {
+    let minPerSlide = 3;
+    let next = $(this).next();
+    if (!next.length) {
+      next = $(this).siblings(':first');
+    }
+    next.children(':first-child').clone().appendTo($(this));
+
+    for (let i = 0; i < minPerSlide; i++) {
+      next = next.next();
+      if (!next.length) {
+        next = $(this).siblings(':first');
+      }
+
+      next.children(':first-child').clone().appendTo($(this));
+    }
+  });
+</script>

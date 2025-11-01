@@ -1,0 +1,639 @@
+@mixin add-btn-hover($mainColor, $hoverColor, $borderColor, $spanColor, $spanHoverColor) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  background-color: $mainColor;
+  border-color: $borderColor;
+  transition: 250ms ease-in-out;
+  padding: 10px 16px;
+  min-width: 125px;
+
+  span {
+    color: $spanColor;
+    transition: 300ms ease-in-out;
+  }
+
+  &:hover,
+  &:active {
+    background-color: $hoverColor;
+    transition: 250ms ease-in-out;
+
+    span {
+      color: $spanHoverColor;
+      transition: 300ms ease-in-out;
+    }
+  }
+}
+
+@mixin widths($porcentage) {
+  min-width: $porcentage;
+  width: $porcentage;
+}
+
+$card-width: 900px;
+
+div.custom-container {
+  width: 100%;
+  padding: 12px;
+  max-width: 794px;
+  margin: 0 auto;
+
+  p.titulo {
+    font-family: 'Caixa Std Bold', sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 25px;
+    color: #0065B7;
+
+    &.margin-top-32 {
+      margin-top: 32px;
+    }
+
+    &.max-565 {
+      width: 100%;
+      max-width: 565px;
+    }
+
+    &.big {
+      font-size: 34px;
+      padding-left: 12px;
+      border-left: 6px solid #F59300;
+    }
+
+    &.margin-top-32 {
+      margin-top: 32px;
+    }
+
+    &.max-565 {
+      width: 100%;
+      max-width: 565px;
+    }
+
+    &.left-border {
+      border-left: 6px solid #54BBAB;
+      padding-left: 12px;
+    }
+  }
+}
+
+div.custom-form-grid {
+  box-sizing: border-box;
+  width: 100%;
+  position: relative;
+
+  &.size-365 {
+    max-width: 365px;
+  }
+
+  &.margin-24 {
+    margin-top: 24px;
+  }
+
+  &.margin-16 {
+    margin-top: 16px;
+  }
+
+  label.custom-input-label {
+    font-family: 'Caixa Std Bold', sans-serif;
+    font-style: normal;
+    font-size: 16px;
+    line-height: 100%;
+    display: flex;
+    align-items: center;
+    color: #2E484D;
+
+    &.absolute {
+      position: absolute;
+      background-color: #fff;
+    }
+
+    small {
+      font-family: 'Caixa Std Regular', sans-serif;
+      font-style: normal;
+      font-size: 16px;
+      line-height: 100%;
+      display: flex;
+      align-items: center;
+      color: #5C9099;
+      margin: 0 8px;
+      font-weight: 200;
+    }
+  }
+}
+
+
+div.footer {
+
+  div.fl {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    button.add-proc {
+      @include add-btn-hover(#41A495, #36877B, none, #fff, #fff);
+      border: 1px solid #36877B;
+      padding: 10px 15px;
+      height: 42px;
+    }
+  }
+}
+
+.no-padding-left {
+  padding-left: 0;
+}
+
+.no-padding-right {
+  padding-right: 0;
+}
+
+.main {
+  padding-left: 64px;
+}
+
+p.titulo-page {
+  font-family: 'Caixa Std Bold', sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 25px;
+  color: #0065B7;
+
+  &.big {
+    font-size: 34px;
+    padding-left: 12px;
+    border-left: 6px solid #F59300;
+    margin-top: 32px;
+  }
+
+  &.margin-top-32 {
+    margin-top: 32px;
+  }
+
+  &.max-565 {
+    width: 100%;
+    max-width: 565px;
+  }
+}
+
+div.custom-form-grid {
+  box-sizing: border-box;
+  width: 100%;
+  position: relative;
+
+  &.size-365 {
+    max-width: 365px;
+  }
+
+  &.margin-24 {
+    margin-top: 24px;
+  }
+
+  &.margin-16 {
+    margin-top: 16px;
+  }
+
+  label.custom-input-label {
+    font-family: 'Caixa Std Bold', sans-serif;
+    font-style: normal;
+    font-size: 16px;
+    line-height: 100%;
+    display: flex;
+    align-items: center;
+    color: #2E484D;
+
+    &.absolute {
+      position: absolute;
+      background-color: #fff;
+    }
+
+    small {
+      font-family: 'Caixa Std Regular', sans-serif;
+      font-style: normal;
+      font-size: 16px;
+      line-height: 100%;
+      display: flex;
+      align-items: center;
+      color: #5C9099;
+      margin: 0 8px;
+      font-weight: 200;
+    }
+  }
+}
+
+.fl {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  margin-top: 24px;
+}
+
+button {
+  &.back {
+    @include add-btn-hover(#fff, #fafafa, #01377F, #01377F, #01377F);
+    border: 1px solid #01377f;
+  }
+
+  &.next {
+    @include add-btn-hover(#36877B, #2c7066, none, #fff, #fff);
+    border: none;
+  }
+}
+
+.full-gray {
+  border-radius: 3px;
+  background-color: #fdfdfd;
+}
+
+@media screen and (max-width: 500px) {
+
+  .main {
+    padding-left: 8px;
+  }
+
+
+}
+
+.custom-container-larger {
+  padding: 8px;
+  max-width: 1280px;
+  margin: 0 auto;
+  position: relative;
+  width: 100%;
+  border-top: 1px solid #D0E0E3;
+  overflow-y: hidden;
+  overflow-x: auto;
+
+  p.list-title {
+    font-family: 'Caixa Std Bold', sans-serif;
+    font-style: normal;
+    font-size: 18px;
+    line-height: 25px;
+    color: #0065B7;
+    margin-top: 24px;
+  }
+}
+
+.list {
+
+
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  &.odontológico {
+
+    .h-1 {
+      @include widths(55%);
+      padding-right: 2px;
+    }
+
+
+    .h-procedimento {
+      @include widths(40%);
+      padding-right: 2px;
+      span {
+        font-family: 'Caixa Std Bold', 'sans-serif';
+      }
+    }
+
+    .h-2 {
+      @include widths(10%);
+      padding-right: 2px;
+    }
+
+    .h-3 {
+      @include widths(15%);
+      padding-right: 2px;
+    }
+
+    .h-4 {
+      @include widths(10%);
+      padding-right: 2px;
+    }
+
+    .h-5 {
+      @include widths(10%);
+      padding-right: 2px;
+    }
+
+    .h-7 {
+      @include widths(10%);
+      padding-right: 2px;
+    }
+
+    .h-8 {
+      @include widths(10%);
+      padding-right: 2px;
+    }
+
+    .h-6 {
+      width: 10%;
+      display: flex;
+      justify-content: center;
+    }
+  }
+
+  &.outros {
+    .h-1 {
+      @include widths(55%);
+      padding-right: 2px;
+    }
+
+
+    .h-procedimento {
+      @include widths(55%);
+      padding-right: 2px;
+      span {
+        font-family: 'Caixa Std Bold', 'sans-serif';
+      }
+    }
+
+    .h-2 {
+      @include widths(10%);
+      padding-right: 2px;
+    }
+
+    .h-3 {
+      @include widths(15%);
+      padding-right: 2px;
+    }
+
+    .h-4 {
+      @include widths(15%);
+      padding-right: 2px;
+    }
+
+    .h-5 {
+      @include widths(10%);
+      padding-right: 2px;
+    }
+
+    .h-7 {
+      @include widths(10%);
+      padding-right: 2px;
+    }
+
+    .h-8 {
+      @include widths(10%);
+      padding-right: 2px;
+    }
+
+    .h-6 {
+      width: 10%;
+      display: flex;
+      justify-content: center;
+    }
+
+
+    p {
+      padding: 0;
+      margin: 0;
+    }
+  }
+
+  &.assistencial {
+
+    .h-1 {
+      @include widths(55%);
+      padding-right: 2px;
+    }
+
+
+    .h-procedimento {
+      @include widths(40%);
+      padding-right: 2px;
+
+      span {
+        font-family: 'Caixa Std Bold', 'sans-serif';
+      }
+    }
+
+    .h-2 {
+      @include widths(10%);
+      padding-right: 2px;
+    }
+
+    .h-3 {
+      @include widths(15%);
+      padding-right: 2px;
+    }
+
+    .h-4 {
+      @include widths(10%);
+      padding-right: 2px;
+    }
+
+    .h-5 {
+      @include widths(10%);
+      padding-right: 2px;
+    }
+
+    .h-7 {
+      @include widths(10%);
+      padding-right: 2px;
+    }
+
+    .h-8 {
+      @include widths(10%);
+      padding-right: 2px;
+    }
+
+    .h-6 {
+      width: 10%;
+      display: flex;
+      justify-content: center;
+    }
+  }
+
+  &.medicamento {
+
+    .h-1 {
+      @include widths(55%);
+      padding-right: 2px;
+    }
+
+
+    .h-procedimento {
+      @include widths(40%);
+      padding-right: 2px;
+      span {
+        font-family: 'Caixa Std Bold', 'sans-serif';
+      }
+    }
+
+    .h-2 {
+      @include widths(10%);
+      padding-right: 2px;
+    }
+
+    .h-3 {
+      @include widths(15%);
+      padding-right: 2px;
+    }
+
+    .h-4 {
+      @include widths(10%);
+      padding-right: 2px;
+    }
+
+    .h-5 {
+      @include widths(10%);
+      padding-right: 2px;
+    }
+
+    .h-7 {
+      @include widths(10%);
+      padding-right: 2px;
+    }
+
+    .h-8 {
+      @include widths(10%);
+      padding-right: 2px;
+    }
+
+    .h-6 {
+      width: 10%;
+      display: flex;
+      justify-content: center;
+    }
+  }
+
+  .header {
+    display: flex;
+    align-items: center;
+    margin: 21px 0;
+    padding: 0 12px;
+    min-width: $card-width;
+
+    p {
+      font-family: 'Caixa Std Bold', sans-serif;
+      font-style: normal;
+      font-size: 14px;
+      line-height: 16px;
+      color: #48586C;
+
+    }
+  }
+
+  .card {
+    display: flex;
+    box-sizing: border-box;
+    border: 1px solid #669AA3;
+    align-items: center;
+    padding: 16px 12px;
+    margin: 8px 0;
+    cursor: pointer;
+    min-width: $card-width;
+
+    p {
+      font-family: 'Caixa Std Bold', sans-serif;
+      font-size: 14px;
+      line-height: 17px;
+      color: #3A4859;
+      transition: 250ms ease-in-out;
+    }
+
+    &:hover {
+
+      p {
+        color: #fff;
+        transition: 250ms ease-in-out;
+      }
+
+      &::before {
+        width: 100%;
+        transition: 250ms ease-in-out;
+      }
+
+      p,
+      div {
+        z-index: 2;
+      }
+
+    }
+
+    button {
+      border: none;
+      padding: 3px;
+      width: 35px;
+      height: 35px;
+      min-width: 35px;
+      min-height: 35px;
+
+      &:disabled {
+        background-color: #E5E5E5;
+        cursor: not-allowed;
+      }
+
+      &.remove-proc {
+
+        &:disabled {
+          background-color: #E5E5E5;
+          cursor: not-allowed;
+        }
+
+        @include add-btn-hover(#DC3545, #bb2837, inherit, #fff, #fff);
+        width: 35px;
+        height: 35px;
+        min-width: 35px;
+        min-height: 35px;
+        margin: 0 4px;
+        color: whitesmoke;
+      }
+
+      &.edit-proc {
+        &:disabled {
+          background-color: #E5E5E5;
+          cursor: not-allowed;
+        }
+
+        @include add-btn-hover(#005CA9, #01377F, inherit, #fff, #fff);
+        width: 35px;
+        height: 35px;
+        min-width: 35px;
+        min-height: 35px;
+        margin: 0 4px;
+        color: whitesmoke;
+      }
+
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      width: 6px;
+      height: 100%;
+      background-color: #036EC4;
+      left: 0;
+      z-index: 1;
+      transition: 250ms ease-in-out;
+    }
+
+  }
+}
+
+.max-width-512 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 32px;
+
+  div {
+    max-width: 360px;
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 500px) {
+
+  .no-padding-left {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .no-padding-right {
+    padding-right: 0;
+    padding-left: 0;
+  }
+}

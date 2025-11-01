@@ -1,0 +1,49 @@
+<section>
+  <div class="titulo-card">Adicionar documento complementar</div>
+  <div class="ui-g">
+    <div class="ui-g-12 no-padding">
+      <p class="label-campo-card">Documento complementar</p>
+      <p-dropdown
+        [options]="tipoDocumentoComplementar"
+        [(ngModel)]="documentoComplementar"
+        (onChange)="onChange($event)"
+        [placeholder]="this.bundle('MHSPH')"
+        class="form-control2"
+        [filter]="true"
+        filterBy="filter"
+      >
+        <ng-template let-item pTemplate="item">
+          <div class="ui-helper-clearfix">
+            <div title="{{ item.label }}">
+              {{ item.label }} - (tipo {{ item.value }})
+            </div>
+          </div>
+        </ng-template>
+      </p-dropdown>
+    </div>
+    <div *ngIf="selected" class="ui-g-12 no-padding margin-16">
+      <p class="label-campo-card">Descrição</p>
+      <p>{{ descricao | campoVazioHifen }}</p>
+    </div>
+  </div>
+
+  <div class="btn-footer">
+    <div *ngIf="!possuiDocumentosObrigatorios"></div>
+    <button
+      class="btn-cts back-btn"
+      *ngIf="possuiDocumentosObrigatorios"
+      (click)="cancelar()"
+      [disabled]="loading"
+    >
+      Cancelar
+    </button>
+
+    <asc-button-primary
+      title="Adicionar"
+      @fadeInOut
+      [showProgress]="loading"
+      [disabled]="loading"
+      (onClick)="adicionarDocComplementar()"
+    ></asc-button-primary>
+  </div>
+</section>

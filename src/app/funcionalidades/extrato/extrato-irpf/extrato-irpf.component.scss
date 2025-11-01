@@ -1,0 +1,126 @@
+
+.separador {
+    width:80%;
+    align-self:center;
+    background: aqua;
+    margin: 0 !important;
+    border: 1px solid rgb(103, 191, 224);
+  }
+
+.card-extrato-irpf {
+    border-radius: 5px;
+    box-shadow: 7px 7px 13px 7px rgba(50, 50, 50, 0.22);
+    padding: 30px;
+    margin: 20px;
+    width: 80%;
+    transition: all 0.3s ease-out;
+    margin-left: 0;
+  }
+
+  .texto-extrato-irpf {
+    color: #005CA9;
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  .texto-ano-base {
+    color: #3A4859;
+    font-family: 'Caixa Std Bold', sans-serif;
+    font-size: 18px;
+  }
+
+  .btn-imprimir {    
+    align-items: right;
+    padding: 8px;
+    gap: 8px;
+    background: #F6F9F9;
+    border-radius: 18px;    
+    width: 154px;
+    height: 48px;
+    border-color: transparent;
+}
+
+.btn-pdf {
+    align-items: center;
+    padding: 8px;
+    gap: 8px;
+    background: #F6F9F9;
+    border-radius: 18px;    
+    width: 154px;
+    height: 48px;
+    border-color: transparent;
+}
+
+.col-xs-12 {
+    text-align: center;
+    margin-top: 10%;
+    display: inline-block;
+}
+
+.pagina-inicial-botoes {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 8px;
+  
+    button {
+      background: #F39200;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 16px;
+      height: 44px;
+      border: none;
+      border-radius: 3px;
+  
+      span {
+        color: #fff;
+      }
+  
+      &:hover,
+      &:active {
+        background-color: #db6e00;
+        transition: 250ms ease-in-out;
+      }
+    }
+  }
+
+  
+.continue-btn {
+    font-family: 'Caixa Std Bold', sans-serif;
+    box-shadow: 0 3px 2px #0000002b;
+    background-color: #F7941E;
+    border: 1px solid #e98a19;
+    border-radius: 4px;
+    line-height: 0;
+    color: #fff;
+    min-width: 120px;
+    height: 42px;
+    transition: 250ms ease-in-out;
+  
+    &:disabled {
+      background-color: #E5E5E5;
+      border: 1px solid #e5e5e5 !important;
+      cursor: not-allowed;
+  
+      &:hover {
+        background-color: #dadada;
+      }
+    }
+  
+    span {
+      color: #fff !important;
+      font-weight: bold !important;
+    }
+  
+    .fa {
+      color: #fff !important;
+    }
+  
+    &:hover, &:focus, &:active {
+      background-color: #cf7306;
+      border: 1px solid #e98a19;
+      color: #fff !important;
+      transition: 250ms ease-in-out;
+    }
+  }
+

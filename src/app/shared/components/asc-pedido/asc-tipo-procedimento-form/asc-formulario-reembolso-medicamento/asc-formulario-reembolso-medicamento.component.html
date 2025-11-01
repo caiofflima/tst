@@ -1,0 +1,112 @@
+<form [formGroup]="form" #formDirective="ngForm" style="min-width: 48em">
+
+  <div class="ui-g">
+
+    <div class="ui-g-12 no-padding-left no-padding-right relative">
+      <asc-select-patologia
+        selectId="patologia"
+        (dadoSelecionado)="patologiaSelecionado($event)"
+        [control]="form.get('idPatologia')"
+        [parametro]="parametroSelectPatologia"
+        id="patologiaPrgMed"
+        label="Patologia" [required]="true"
+      ></asc-select-patologia>
+    </div>
+  </div>
+
+  <div class="ui-g">
+    <!-- Início da Colunas da esquerda  -->
+    <div class="ui-g-12 ui-md-6 no-padding-left">
+      <div *ngIf="mostrarCampo('idLaboratorio')"
+           class="ui-g-12 ui-md-12 custom-form-grid no-padding-left">
+        <asc-select-laboratorio
+          selectId="laboratorio"
+          (dadoSelecionado)="laboratorioSelecionado($event)"
+          [control]="form.get('idLaboratorio')"
+          [parametros]="patologia"
+          formControlName="idLaboratorio"
+          style="border-left: none !important;"
+          label="Laboratório"
+          [required]="true">
+        </asc-select-laboratorio>
+      </div>
+
+      <div *ngIf="mostrarCampo('codigoMedicamento')" class="ui-g-12 ui-md-12 med-form custom-form-grid no-padding-left">
+        <asc-select-medicamento
+          selectId="medicamento"
+          (dadoSelecionado)="medicamentoSelecionado($event)"
+          [control]="form.get('codigoMedicamento')"
+          [parametros]="medicamentoParam"
+          formControlName="codigoMedicamento"
+          label="Medicamento"
+          style="border-left: none !important;" [required]="true">
+        </asc-select-medicamento>
+      </div>
+
+      <div class="ui-g-12 ui-md-12 custom-form-grid no-padding-left">
+        <asc-select-medicamento-apresentacao
+          selectId="apresentacaoMedicamento"
+          (dadoSelecionado)="medicamentoApresentacaoSelecionado($event)"
+          *ngIf="mostrarCampo('idMedicamento')"
+          [control]="form.get('idMedicamento')"
+          [parametros]="medicamentoApresentacaoParam"
+          formControlName="idMedicamento"
+          label="Apresentação"
+          style="border-left: none !important;"
+          [required]="true">
+        </asc-select-medicamento-apresentacao>
+      </div>
+    </div>
+    <!-- Fim da Colunas da esquerda  -->
+    <!-- Início da Colunas da direita  -->
+    <div class="ui-g-12 ui-md-6">
+
+      <div *ngIf="mostrarCampo('qtdSolicitada')"
+           class="ui-g-12 ui-md-12 custom-form-grid no-padding-left">
+        <asc-input-text [control]="form.get('qtdSolicitada')" [maxlength]="3" inputId="qtdSolicitada"
+                        [somenteNumeros]="true" label="Quantidade solicitada" [required]="true">
+          <asc-input-error [msgErro]="bundle('MA012')" nomeErro="min"></asc-input-error>
+        </asc-input-text>
+      </div>
+      <div *ngIf="mostrarCampo('diasAtendidosPelaQuantidade')"
+           class="ui-g-12 ui-md-12 custom-form-grid no-padding-right">
+        <asc-input-text [control]="form.get('diasAtendidosPelaQuantidade')" [maxlength]="3"
+                        inputId="diasAtendidosPelaQuantidade" [somenteNumeros]="true"
+                        label="Dias atendidos pela quantidade" [required]="true">
+          <asc-input-error [msgErro]="bundle('MA078')" nomeErro="min"></asc-input-error>
+        </asc-input-text>
+      </div>
+
+      <div *ngIf="mostrarCampo('valorUnitarioPago')" class="ui-g-12 ui-md-12 custom-form-grid no-padding-right">
+        <asc-input-money-type [control]="form.get('valorUnitarioPago')" inputId="valorUnitarioPago"
+                              label="Valor unitário pago" [required]="true">
+          <asc-input-error [msgErro]="'O Valor Unitário Pago deve ser maior do que 0 (zero).'"
+                           nomeErro="min"></asc-input-error>
+        </asc-input-money-type>
+        <div class="error-form" *ngIf="erroValorDocumentoFiscal">{{ bundle('MA083') }}</div> 
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="isToShowForm && enableAllAction" class="flex-end">
+    <button (click)="adicionarProcedimento(formDirective, $event)" [disabled]="form?.invalid || loading"
+            class="custom-btn-confirm" id="adicionarProcedimento">
+       <span *ngIf="loading" style="height: 1.6em; width: 4em;">
+          <p-progressSpinner
+            [style]="{width: '25px', height: '25px'}"
+            animationDuration=".5s"
+            fill="#EEEEEE"
+            strokeWidth="4">
+          </p-progressSpinner>
+        </span>
+      <span *ngIf="!loading" class="span-btn">{{(isEditing) ? 'Concluir alteração' : 'Adicionar'}}</span>
+    </button>
+
+    <asc-button-primary
+      (onClick)="clickButtonCancelarProcedimento(formDirective, $event)"
+      [title]="isEditing ? 'Cancelar' : 'Limpar'"
+      buttonId="limpar"
+    ></asc-button-primary>
+  </div>
+
+</form>

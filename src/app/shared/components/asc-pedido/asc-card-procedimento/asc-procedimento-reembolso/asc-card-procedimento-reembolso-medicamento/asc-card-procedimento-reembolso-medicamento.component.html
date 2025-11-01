@@ -1,0 +1,48 @@
+<div class="relative">
+  <div class="relative">
+    <label class="label-campo-card">Patologia</label>
+    <p>{{pedidoProcedimento?.medicamentoPatologia['patologia']?.nome | campoVazioHifen }}</p>
+  </div>
+  <div class="ui-g">
+    <div class="ui-g-6 ui-md-6 no-padding margin-16">
+      <label class="label-campo-card">Laboratório</label>
+      <p>{{pedidoProcedimento?.medicamentoPatologia['medicamento']?.laboratorio?.nome | campoVazioHifen }}</p>
+    </div>
+
+    <div class="ui-g-6 ui-md-6 no-padding margin-16">
+      <label class="label-campo-card">Quantidade</label>
+      <p>{{ pedidoProcedimento?.qtdMedicamento | campoVazioHifen }}</p>
+    </div>
+
+    <div class="ui-g-6 ui-md-6 no-padding margin-16">
+      <label class="label-campo-card">Medicamento</label>
+      <p>{{pedidoProcedimento?.medicamentoPatologia['medicamento']?.nome | campoVazioHifen }}</p>
+    </div>
+
+    <div class="ui-g-6 ui-md-6 no-padding margin-16">
+      <label class="label-campo-card">Dias atendidos pela quantidade</label>
+      <p>
+        {{
+          pedidoProcedimento?.qtdDiasAtendidosPeloMedicamento | campoVazioHifen
+        }}
+      </p>
+    </div>
+
+    <div class="ui-g-6 ui-md-6 no-padding margin-16">
+      <label class="label-campo-card">Apresentação </label>
+      <p>{{pedidoProcedimento?.medicamentoPatologia['medicamento']?.descricaoApresentacao | campoVazioHifen  }}</p>
+    </div>
+
+    <div class="ui-g-6 ui-md-6 no-padding margin-16">
+      <label class="label-campo-card">Valor unitário pago</label>
+      <p *ngIf="!pedidoProcedimento?.valorUnitarioPago">R$ 0,00</p>
+      <p *ngIf="pedidoProcedimento?.valorUnitarioPago">
+        {{
+          pedidoProcedimento?.valorUnitarioPago
+            | currency : "BRL" : true
+            | campoVazioHifen
+        }}
+      </p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,180 @@
+<div class="container">
+  <div class="col-md-12 breadcrumb-header">
+    <ul class="breadcrumb">
+      <li>
+        <span (click)="voltar()" class="voltar">
+          <i class="fa fa-arrow-left" aria-hidden="true"></i>Voltar
+        </span>
+      </li>
+      <a routerLink="/home">Início</a>
+      <em class="fa fa-chevron-right"></em>
+      Administração
+      <em class="fa fa-chevron-right"></em>
+      {{
+        titulo
+      }}
+    </ul>
+  </div>
+
+  <div class="title-type">
+    <h1 class="titulo-pagina">{{ titulo }}</h1>
+    <div class="info-pagina" *ngIf="mostrarTabela">
+      <p class="info-p">Selecione um ou mais pedidos a serem liberados.</p>
+    </div>
+  </div>
+
+  <section class="row" *ngIf="mostrarTabela">
+    <div class="row p-0 col-md-12">
+      <div
+        class="col-xs-3 search-inp p-0"
+        style="margin: 5px 0 8px; border-bottom: 0 none"
+      >
+        <input
+          #gb
+          type="text"
+          class="form-control filtro-caixa"
+          size="50"
+          placeholder="Digite para filtrar resultado"
+        />
+        <em class="fas fa-search"></em>
+      </div>
+      <div class="col-xs-12 selectAll ajusteCheckboxPrime15">
+        <fieldset>
+          <p-checkbox
+            inputId="selectAll"
+            class="selectAll-input"
+            [binary]="true"
+            [(ngModel)]="selectAllState"
+            (onChange)="selectAll()"
+          ></p-checkbox>
+          <label for="selectAll">Selecionar Todos</label>
+        </fieldset>
+        <p *ngIf="idSelecionados.length > 0">
+          {{ idSelecionados?.length }} Itens Selecionados
+        </p>
+        <p>{{ listaProcessos?.length }} Total Itens</p>
+      </div>
+      <!-- emptyMessage="{{(!loading)?bundle('MA142'):'Carregando ...'}}" 
+        [globalFilter]="gb"
+      
+      -->
+
+      <p-table
+        #datatable
+        id="caixa-table"
+        (onPage)="onPageChange($event)"
+        (onFilter)="updateAtualItems()"
+        [rows]="rowCounter"
+        [paginator]="true"
+        [pageLinks]="5"
+        [totalRecords]="totalProcessos"
+        [value]="listaProcessos"
+        [rowsPerPageOptions]="[5, 10, 20]"
+        [reorderableColumns]="true"
+        sortField="id"
+        [loading]="loading"
+        [sortOrder]="-1"
+        class="table table-striped table-sm table-hover text-center"
+      >
+        <!-- <p-column
+          field=""
+          header=""
+          [style]="{ width: '25px' }"> -->
+        <ng-template style="width: 25px" let-row="rowData" pTemplate="content">
+          <p-checkbox
+            [binary]="true"
+            [ngModel]="idSelecionados.includes(row.idPedido)"
+            (onChange)="mudarSelecao(row.idPedido)"
+          >
+          </p-checkbox>
+        </ng-template>
+        <!-- </p-column> -->
+
+        <!-- <p-column 
+          field="idPedido" 
+          header="Pedido" 
+          [sortable]="true" 
+          [style]="{ width: '35px' }"> -->
+        <ng-template style="width: 35px" let-row="rowData" pTemplate="content">
+          <span
+            title="Editar registro"
+            (click)="editar(row)"
+            id="editar"
+            style="cursor: pointer"
+          >
+            {{ row.idPedido }}
+          </span>
+        </ng-template>
+        <!-- </p-column> -->
+
+        <!-- <p-column
+          field="descPedido"
+          header="Tipo Reemb."
+          [sortable]="true"
+          [style]="{ width: '40px', 'text-align': 'left' }"
+        ></p-column> -->
+
+        <!-- <p-column
+          field="descBeneficiario"
+          header="Beneficiário"
+          [sortable]="true"
+          [style]="{ width: '60px', 'text-align': 'left' }"
+        ></p-column> -->
+
+        <!-- <p-column
+          field="descSituacaoPedido"
+          header="Situação"
+          [sortable]="true"
+          [style]="{ width: '60px' }"
+        ></p-column> -->
+
+        <!-- <p-column
+          field="dataUltimaAlteracao"
+          header="Data da Situação"
+          [sortable]="true"
+          [style]="{ width: '60px' }"> -->
+        <ng-template let-obj="rowData" pTemplate="content">
+          {{ obj.dataUltimaAlteracao | date : "dd/MM/yyyy HH:mm:ss" }}
+        </ng-template>
+        <!-- </p-column> -->
+
+        <!-- <p-column
+          field="maximoValorUnitarioPago"
+          header="Valor Máximo"
+          [sortable]="true"
+          [style]="{ width: '40px' }"> -->
+        <ng-template let-obj="rowData" pTemplate="content">
+          {{ obj.maximoValorUnitarioPago | currency : "BRL" : true }}
+        </ng-template>
+        <!-- </p-column> -->
+
+        <!--p-column header="Ação">
+          <ng-template let-row="rowData" pTemplate="content">
+            <span title="Editar registro" (click)="editar(row)" id="editar" style="cursor: pointer">
+              <em class="fas fa-pen"></em>
+            </span>
+          </ng-template>
+        </p-column-->
+      </p-table>
+    </div>
+  </section>
+
+  <div class="pagina-inicial-botoes" *ngIf="mostrarTabela">
+    <button
+      class="continue-btn"
+      (click)="liberarAlcada()"
+      [disabled]="!habilitarBotao()"
+    >
+      <span>Realizar Liberação</span>
+    </button>
+  </div>
+
+  <div class="div-message" *ngIf="!mostrarTabela">
+    <span
+      ><b
+        >Você não possui privilégio para atuar nesta funcionalidade. Caso
+        necessário, entre em contato com o administrador do sistema.</b
+      ></span
+    >
+  </div>
+</div>

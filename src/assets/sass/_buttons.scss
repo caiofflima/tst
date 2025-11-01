@@ -1,0 +1,367 @@
+.btn-cts {
+  display: inline-block;
+  padding: 10px 25px;
+  margin-bottom: 0;
+  margin-left: 5px;
+  font-size: 14px;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+
+.btn-small {
+  display: inline-block;
+  padding: 6px 12px !important;
+  margin-bottom: 0;
+  font-size: 14px;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  font-family: "Caixa Std Bold", sans-serif;
+}
+
+@mixin add-btn-hover(
+  $mainColor,
+  $hoverColor,
+  $borderColor,
+  $spanColor,
+  $spanHoverColor
+) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  background-color: $mainColor;
+  border-color: $borderColor;
+  transition: 250ms ease-in-out;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  padding: 10px 16px;
+  min-width: 125px;
+
+  span,
+  i {
+    color: $spanColor;
+    transition: 300ms ease-in-out;
+  }
+
+  &:not(:disabled) {
+    &:hover,
+    &:active {
+      background-color: $hoverColor;
+      transition: 250ms ease-in-out;
+
+      span {
+        color: $spanHoverColor;
+        transition: 300ms ease-in-out;
+      }
+    }
+  }
+  &:disabled,
+  &:disabled:hover {
+    background-color: #dadada;
+    border-color: #dadada;
+  }
+}
+
+button.btn-popup {
+  @include add-btn-hover(#41a495, #36877b, #36877b, #fff, #fff);
+  border: 1px solid #36877b;
+  padding: 8px 12px;
+
+  &:hover,
+  &:focus,
+  &:active {
+    border-color: #36877b;
+  }
+}
+
+.btn-cts span {
+  font-family: "Caixa Std Bold", sans-serif;
+}
+
+.btn-rt {
+  position: absolute;
+  right: 0;
+}
+
+.btn-outline-closed {
+  color: #f39200;
+  background: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  border: 1px solid #f39200;
+}
+
+.btn-outline-closed:hover {
+  color: #fff;
+  background: #f39200;
+}
+
+.btn-outline-closed:focus {
+  outline: none;
+}
+
+.btn-to-top {
+  span {
+    font-family: "Caixa Std Bold", sans-serif;
+  }
+}
+
+.btn-card-novo {
+  color: #fff;
+  background: #00a996;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  font-family: "Caixa Std Bold", sans-serif;
+
+  &:disabled {
+    background-color: #dadada;
+  }
+
+  &:hover:not(:disabled) {
+    color: #fff;
+    background: #36877b;
+  }
+
+  &.btn-send:focus {
+    outline: none;
+  }
+}
+
+.btn-send {
+  color: #fff;
+  background: #00a996;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.btn-send:disabled {
+  color: #fff;
+  background-color: #dadada;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.btn-send:hover {
+  color: #fff;
+  background: #36877b;
+}
+
+.btn-send:focus {
+  outline: none;
+}
+
+.ver-mensagem {
+  justify-content: center;
+  border-radius: 3px;
+  background-color: #005ca9;
+  color: #fff;
+}
+
+.ver-mensagem:hover {
+  background-color: #004680;
+}
+
+.ver-mensagem:focus {
+  outline: none;
+}
+
+.btn-ver-mensagem {
+  color: #fff;
+  background-color: #00aa9a;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  border-radius: 3px;
+  transition: 250ms ease-in-out;
+  box-sizing: border-box;
+  margin-left: auto;
+}
+
+.btn-ver-mensagem:hover {
+  color: #fff;
+  background-color: #00aa9a;
+  border: none;
+}
+
+.btn-ver-mensagem:focus {
+  outline: none;
+}
+
+.btn-to-clean {
+  align-items: center;
+  box-sizing: border-box;
+  background-color: #fff;
+  border: 1px solid #005ca9;
+  border-radius: 3px;
+  color: #005ca9;
+  display: flex;
+  justify-content: center;
+  transition: 250ms ease-in-out;
+}
+
+.btn-to-clean:hover {
+  color: #fff;
+  background: #005ca9;
+}
+
+.btn-to-clean:focus {
+  outline: none;
+}
+
+.btn-p {
+  color: #fff;
+  background-color: #f39200;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 25px;
+  transition: 250ms ease-in-out;
+}
+
+.btn-p:hover {
+  color: #fff;
+  background-color: #db6e00;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-p:focus {
+  outline: none;
+}
+
+.btn-p span {
+  font-family: "Caixa Std Bold", sans-serif;
+}
+
+div.flex-end {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  padding: 8px;
+
+  button.add-proc {
+    @include add-btn-hover(#41a495, #36877b, none, #fff, #fff);
+    border: 1px solid #36877b;
+    padding: 0 15px;
+    height: 42px;
+    margin-right: 1em;
+    color: whitesmoke;
+
+    &:disabled {
+      background-color: #e5e5e5;
+      border: none;
+      cursor: not-allowed;
+    }
+  }
+}
+.title-card {
+  font-family: "Caixa Std Bold", sans-serif;
+  font-size: 18px;
+  line-height: 22px;
+  color: #0065b7;
+  margin: 0 0 1em 0;
+}
+
+.mg-card {
+  background: #fff;
+  border: 1px solid #b3c7cb;
+  box-sizing: border-box;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 4px;
+  padding: 1.5em 1.5em;
+  position: relative;
+  display: flex;
+  flex-flow: column;
+
+  &.conteudo-spacing {
+    margin-bottom: 0.75em;
+  }
+
+  &.gray-line::after {
+    content: "";
+    position: absolute;
+    right: -22px;
+    top: -10px;
+    width: 1.5px;
+    height: calc(100% + 10px);
+    background-color: #dadada;
+  }
+
+  .orange-ball {
+    position: absolute;
+    right: calc(-22px - 8.5px);
+    top: calc(50% - 9px);
+    width: 18px;
+    height: 18px;
+    border-radius: 9px;
+    background-color: #f7941e;
+    z-index: 2;
+  }
+}
+
+.label-card {
+  font-family: "Caixa Std Book", sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  color: #3a4859;
+}
+
+.footer-card {
+  margin-top: auto;
+  text-align: right;
+}
+
+.ht-txt-area textarea.form-control {
+  min-height: 120px;
+}
+
+.ctm-card-footer {
+  padding-top: 10px;
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.ctm-card-footer label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #53aa5c;
+  border-radius: 3px;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: 250ms ease-in-out;
+
+  &[disabled="true"] {
+    background-color: #e5e5e5 !important;
+    border: none !important;
+    cursor: not-allowed !important;
+  }
+}
+
+.ctm-card-footer label em,
+.ctm-card-footer label span {
+  color: #fff;
+}
+
+.ctm-card-footer label em {
+  margin-right: 4px;
+}
+
+.ctm-card-footer input {
+  visibility: hidden;
+  position: absolute;
+}
+
+.dados-options,
+.to-footer {
+  text-align: right;
+  width: 100%;
+}

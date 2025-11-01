@@ -1,0 +1,143 @@
+<div class="col-md-12">
+  <p-table
+    [value]="dadosConsulta"
+    [paginator]="true"
+    [rows]="10"
+    class="table table-striped table-sm table-hover"
+    #dt
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th id="Situacao">Situação</th>
+        <th id="tipoPedido" style="width: 10%">Tipo do Pedido</th>
+        <th id="nomeRemetente">Nome do Remetente</th>
+        <th id="emailRemetente">Email do Remetente</th>
+        <th id="Assunto">Assunto</th>
+        <th id="Inativacao" style="width: 10%">Data de Inativação</th>
+        <th id="Inativo" style="width: 5%">Inativo</th>
+        <th id="Evento" style="width: 5%">Evento</th>
+        <th id="Data" style="width: 10%">Data</th>
+        <th id="acoes" style="width: 5%">Ação</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData>
+      <tr>
+        <td>{{ rowData.situacaoProcesso }}</td>
+        <td>
+          <ng-container *ngFor="let tp of rowData.tiposProcesso">
+            <span>{{ tp }}</span
+            ><br /><br />
+          </ng-container>
+        </td>
+        <td>{{ rowData.nomeRemetente }}</td>
+        <td>{{ rowData.emailRemetente }}</td>
+        <td>{{ rowData.assunto }}</td>
+        <td>{{ rowData.dataInativacao | date : "dd/MM/yyyy" }}</td>
+        <td>{{ rowData.inativo }}</td>
+        <td>{{ rowData.strEvento }}</td>
+        <td>{{ rowData.dataHoraEvento | date : "dd/MM/yyyy HH:mm:ss" }}</td>
+        <td>
+          <button
+            class="btn btn-info"
+            title="{{ bundle('MH154') }}"
+            (click)="abrirModalDetalhamento(rowData)"
+          >
+            <span class="fa fa-search fa-fw"></span>
+          </button>
+        </td>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="emptymessage">
+      {{ bundle("MA003") }}
+    </ng-template>
+    <!-- <p-column field="situacaoProcesso" header="Situação"></p-column>
+    <p-column [style]="{'width':'10%'}" header="Tipo do Pedido">
+      <ng-template let-row="rowData" pTemplate="content">
+        <ng-container *ngFor="let tp of row.tiposProcesso">
+          <span>{{tp}}</span><br/><br/>
+        </ng-container>
+      </ng-template>
+    </p-column>
+    <p-column field="nomeRemetente" header="Nome do Remetente"></p-column>
+    <p-column field="emailRemetente" header="Email do Remetente"></p-column>
+    <p-column field="assunto" header="Assunto"></p-column>
+    <p-column [style]="{'width':'10%'}" header="Data de Inativação">
+      <ng-template let-row="rowData" pTemplate="content">
+        {{row.dataInativacao | date:'dd/MM/yyyy'}}
+      </ng-template>
+    </p-column>
+    <p-column [style]="{'width':'5%'}" field="inativo" header="Inativo"></p-column>
+    <p-column [style]="{'width':'5%'}" field="strEvento" header="Evento"></p-column>
+    <p-column [style]="{'width':'10%'}" header="Data">
+      <ng-template let-row="rowData" pTemplate="content">
+        {{row.dataHoraEvento | date:'dd/MM/yyyy HH:mm:ss'}}
+      </ng-template>
+    </p-column>
+    <p-column [style]="{'width':'5%'}" header="Ação">
+      <ng-template let-row="rowData" pTemplate="content">
+        <button class="btn btn-info" title="{{bundle('MH154')}}" (click)="abrirModalDetalhamento(row);">
+          <span class="fa fa-search fa-fw"></span>
+        </button>
+      </ng-template>
+    </p-column> -->
+  </p-table>
+
+  <p-dialog
+    header="Detalhes do E-mail"
+    [(visible)]="showModalDetalhamento"
+    [modal]="true"
+    width="800"
+    [responsive]="true"
+    #exibicaoEmail
+  >
+    <div class="col-md-12">
+      <div class="col-md-12">
+        <label for="tipoBeneficiario">Tipo de Beneficiário</label>
+        <div style="overflow-y: auto; max-height: 100px">
+          <span
+            *ngFor="let tb of selectedRow?.tiposBeneficiario"
+            id="tipoBeneficiario"
+            class="output-text"
+          >
+            {{ tb }}
+          </span>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <label for="copiaPara">Cópia para</label>
+        <span id="copiaPara" class="output-text">
+          {{ selectedRow?.copiaPara | campoVazioHifen }}
+        </span>
+      </div>
+      <div class="col-md-12">
+        <label for="mensagemEmail">Mensagem do Email</label>
+        <div
+          id="mensagemEmail"
+          class="output-text"
+          [innerHtml]="selectedRow?.mensagemEmail"
+        ></div>
+      </div>
+      <div class="col-md-6">
+        <label for="responsavel">Responsável</label>
+        <span id="responsavel" class="output-text">
+          {{ selectedRow?.responsavel | cpfMask }}
+        </span>
+      </div>
+      <div class="col-md-6">
+        <label for="ipResponsavel">IP do Responsável</label>
+        <span id="ipResponsavel" class="output-text">
+          {{ selectedRow?.ipResponsavel }}
+        </span>
+      </div>
+    </div>
+
+    <p-footer class="dmsg-footer">
+      <div style="display: flex; justify-content: flex-end">
+        <button class="btn btn-danger" (click)="fecharModalDetalhamento()">
+          <span class="fa fa-close fa-fw"></span>Fechar
+        </button>
+      </div>
+    </p-footer>
+  </p-dialog>
+</div>

@@ -1,0 +1,119 @@
+<section>
+  <div class="title-card">Mudança de situação</div>
+  <div class="ui-g">
+    <div class="ui-g-12 no-padding">
+      <p class="label-card"></p>
+      <asc-dropdown
+        label="Situação"
+        [required]="true"
+        [disabled]="loading"
+        [items]="itensSituacoesProcesso"
+        [control]="fcSituacaoProcesso"
+        class="form-control2"
+      ></asc-dropdown>
+    </div>
+
+    <div *ngIf="(isProcessoReembolso || isProcessoAutorizacao) && isExibeCampoAutorizacaoOuReembolso" class="col-md-12 mb-15 no-padding-left">
+      <asc-input-text
+        [control]="fcAutorizacao" inputId="idAutorizacao" label="{{isProcessoReembolso ? 'Número do PEG' : 'Número da autorização'}}"
+        [required]="(isProcessoReembolso || isProcessoAutorizacao) && isExibeCampoAutorizacaoOuReembolso" 
+        autocomplete="off" 
+        [index]="1"
+        (onBlur)="obterDataValidacaoPorNumeroAutorizacao()"
+        [maxlength]="20">
+      </asc-input-text>
+
+      <div *ngIf="dataValidade != null">
+        <label class="label-campo-card">Data de Validade</label>
+        <p>{{dataValidade | date: 'dd/MM/yyyy'}}</p>
+      </div>
+
+    </div> 
+
+    <div class="ui-g-6 ui-md-6 ui-sm-6 no-padding margin-16 modificate-custom-grid">
+      <div class="container-group-label-select">
+        <asc-dropdown
+          label="Motivo de negação"
+          [required]="true"
+          [items]="itensMotivoNegacao"
+          [disabled]="ePositivo || loading"
+          [required]="!(ePositivo || loading)"
+          [control]="fcMotivoNegacao"
+          class="form-control2"
+        ></asc-dropdown>
+      </div>
+
+      <asc-file-selector
+        *ngIf="!loading"
+        [extensions]="'.jpg,.png,.gif,.pdf'"
+        [limitLengthFile]="4096000"
+        (arquivos)="arquivos($event)">
+      </asc-file-selector>
+    </div>
+
+    <div class="ui-g-6 ui-md-6 ui-sm-6 no-padding margin-16">
+
+      <label
+        for="historicoSituacao" class="label-card no-padding"
+        [class.obrigatorio]="dadosSituacao?.requerJustificativa === 'SIM'">
+        {{dadosSituacao?.requerJustificativa === 'SIM' ? 'Justificativa' : 'Histórico'}}
+      </label>
+
+      <div class="ht-txt-area">
+        <textarea 
+          id="historicoSituacao"
+          [required]="dadosSituacao?.requerJustificativa === 'SIM'"
+          [disabled]="loading"
+          class="form-control"
+          [formControl]="fcHistoricoSituacao"
+          [maxlength]="4000">
+        </textarea>
+      </div>
+    </div>
+  </div>
+
+  <div *ngFor="let file of fileUpload; let i = index" @fadeInOut>
+    <div class="arquivo-card">
+      <div class="arquivo-info">
+        <p class="arquivo-nome">{{file.name}}</p>
+        <p class="arquivo-data">{{file.data}}
+          <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+        </p>
+      </div>
+      <div class="arquivo-actions">
+        <button
+          (click)="abrirModalVisualizarDocumentos( $event, file, modalVisualizarDocumentoComponent, fileUpload)"
+          [disabled]="loading"
+          [attr.title]="bundle('MH147')">
+          <em class="fa fa-eye"></em>
+        </button>
+        <button
+          (click)="removerDocumento(i)"
+          [attr.title]="bundle('MH148')"
+          [disabled]="loading">
+          <em class="fa fa-trash"></em>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-btns-card" style="padding-top: 1em !important;">
+    <button
+      class="btn-cts back-btn"
+      (click)="limpaCampos()"
+      [disabled]="loading">
+      Limpar campos
+    </button>
+
+    <asc-button-primary
+      title="Alterar Situação"
+      @fadeInOut
+      style="padding-left: .5em;"
+      [showProgress]="loading"
+      [disabled]="loading || isHabilitaBotaoPorNumeroAutorizacao"
+      (onClick)="atualizarSituacaoProcesso()">
+    </asc-button-primary>
+  </div>
+</section>
+
+<asc-modal-visualizar-documento @fadeInOut #modalVisualizarDocumentoComponent></asc-modal-visualizar-documento>

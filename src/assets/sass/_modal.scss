@@ -1,0 +1,238 @@
+.modal {
+  text-align: center;
+  padding: 0 !important;
+}
+
+.modal:before {
+  content: "";
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+  margin-right: -4px;
+}
+
+.mdl-overf-body > p {
+  overflow-y: auto;
+  max-height: 120px;
+  padding-right: 15px;
+  font-family: "Caixa Std Regular", sans-serif;
+}
+
+.mdl-overf-body2 > p {
+  overflow-y: auto;
+  max-height: 320px;
+  padding-right: 15px;
+  font-family: "Caixa Std Regular", sans-serif;
+}
+
+.modal-dialog {
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.modal-dialog-size {
+  width: 800px !important;
+}
+
+.modal-dialog.mini-modal {
+  width: 270px;
+}
+
+.mini-modal .modal-content {
+  border-radius: 4px;
+}
+
+.mini-modal .modal-body {
+  color: #005ca9;
+  font-family: "Caixa Std Bold", sans-serif;
+  font-size: 18px;
+  text-align: center;
+  margin-top: 15px;
+}
+
+.mdl-custom .ui-widget-content {
+  border: none;
+}
+
+/*.modal-custom .ui-dialog {
+  width: 600px !important;
+  height: 900px !important;
+  margin: auto 0;
+}*/
+.mdl-custom .ui-dialog {
+  width: 800px !important;
+  height: 400px !important;
+  margin: auto 0;
+}
+
+.mdl-custom-lista-anexos .ui-dialog {
+  width: 800px !important;
+  height: 500px !important;
+  margin: auto 0;
+}
+
+.mdl-custom-pdf .ui-dialog {
+  width: 800px !important;
+  height: 630px !important;
+  margin: auto 0;
+}
+
+.mdl-custom-middle .ui-dialog {
+  width: 800px !important;
+  height: 400px !important;
+  margin: auto 0;
+}
+
+.mdl-custom .ui-dialog .ui-dialog-content {
+  overflow-y: scroll;
+}
+
+.modal-custom .ui-dialog .ui-dialog-titlebar-icon:hover,
+.mdl-custom .ui-dialog .ui-dialog-titlebar-icon:hover {
+  border-color: transparent;
+  background: transparent;
+  color: #212121;
+}
+
+.modal-custom .ui-dialog .ui-dialog-titlebar-icon:focus,
+.mdl-custom .ui-dialog .ui-dialog-titlebar-icon:focus {
+  outline: none;
+}
+
+.mdl-body-custom h4 {
+  font-family: "Caixa Std Bold", sans-serif;
+}
+
+.mdl-body-custom .align-itens {
+  margin-top: -15px;
+}
+
+.mdl-body-custom .form-control {
+  font-family: "Caixa Std Regular", sans-serif;
+}
+
+.mdl-body-custom .align-itens .icon-tag {
+  display: table-cell;
+  position: relative;
+  top: 110px;
+  width: 20px;
+  cursor: pointer;
+  color: #0c56af;
+}
+
+.mdl-body-custom .align-itens .icon-tag-center {
+  display: table-cell;
+  position: relative;
+  top: 110px;
+  width: 100%;
+  z-index: -1;
+}
+
+.mdl-view-custom .container-situacao {
+  display: grid;
+  grid-template-columns: 170px 1fr;
+  line-height: 10px;
+}
+
+.modal-title-prime {
+  font-family: "Caixa Std Bold", sans-serif;
+  font-size: 18px;
+  color: #0065b7;
+}
+
+.desc-tipo {
+  position: relative;
+  padding: 0 40px;
+}
+
+.custom-form-grid {
+  width: 100%;
+  position: relative;
+}
+
+.custom-form-grid.size-365 {
+  max-width: 365px;
+}
+
+.custom-form-grid.margin-24 {
+  margin-top: 24px;
+}
+
+.margin-16 {
+  margin-top: 16px;
+}
+
+.custom-form-grid,
+label.custom-input-label {
+  font-family: "Caixa Std Book", sans-serif;
+  padding-left: 0 !important;
+  font-weight: 700;
+
+  small {
+    font-family: "Caixa Std Regular", sans-serif;
+    font-style: normal;
+    font-size: 14px;
+    color: #5c9099;
+    font-weight: 200;
+  }
+
+  small::before {
+    content: "– ";
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .modal-custom .ui-dialog {
+    width: 340px !important;
+    margin: auto 0;
+  }
+
+  .mdl-custom .ui-dialog {
+    width: 340px !important;
+    margin: auto 0;
+  }
+  .mdl-view-custom .container-situacao {
+    display: flex;
+    vertical-align: middle;
+    align-items: center;
+  }
+  .modal-title-prime {
+    line-height: 1em;
+    margin-left: -15px;
+  }
+  .btn-send span {
+    display: none;
+  }
+  .ver-mensagem span {
+    display: none;
+  }
+  .desc-tipo {
+    padding: 0;
+  }
+}
+
+.ui-dialog .ui-dialog-content {
+  overflow: hidden;
+}
+
+.ui-dialog-content {
+  height: 600px;
+}
+
+.txt-area {
+  overflow-y: scroll;
+  padding: 15px;
+  height: 100px;
+  border-radius: 3px;
+  border: 2px solid #b6ccca;
+  margin: 1em 1.5em 1em 1.5em;
+}
+
+.txt-area2 {
+  overflow-y: scroll;
+  padding: 15px;
+  height: 150px;
+  border-radius: 3px;
+  border: 2px solid #b6ccca;
+}

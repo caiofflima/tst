@@ -1,0 +1,32 @@
+<section class="docsMP" @fadeInOut>
+  <div style="margin: 1.5em 1.5em 0" @fadeInOut *ngIf="loading">
+    <p-progressBar
+      @fadeInOut
+      mode="indeterminate"
+      *ngIf="loading"
+      [style]="{ height: '6px' }"
+    >
+    </p-progressBar>
+  </div>
+
+  <div class="titulo-card">Documentos obrigatórios</div>
+  <div *ngIf="mostrarComponente">
+    <!-- [permissoes]="permissoes" -->
+    <asc-documento-card
+      @fadeInOut
+      *ngIf="documentos && documentos.length"
+      [loading]="loading"
+      [habilitarValidacao]="true"
+      [processo]="processo"
+      [documentos]="documentoTipoProcessos"
+      (documentoTipoProcessoSelecionado)="
+        documentoTipoProcessoSelecionado($event)
+      "
+      (documentoComArquivoDeletado)="documentoComArquivoDeletado($event)"
+      (atualizacaoSituacaoDocumento$)="atualizarDocumentoCard()"
+      (atualizarPedido)="atualizarPedido()"
+      [isInResumo]="true"
+      [controls]="true"
+    ></asc-documento-card>
+  </div>
+</section>

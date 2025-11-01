@@ -1,0 +1,95 @@
+<p-dialog
+  header="Incluir Nova Ocorrência"
+  [(visible)]="display"
+  [modal]="true"
+  width="800"
+  [responsive]="true"
+>
+  <div id="infoPanel" class="container-fluid">
+    <form [formGroup]="form">
+      <div class="row col-md-12">
+        <label class="control-label obrigatorio" for="tpOcrrnca"
+          >Tipo Ocorrência</label
+        >
+        <p-dropdown
+          class="form-control2"
+          id="tpOcrrnca"
+          formControlName="idTipoOcorrencia"
+          [options]="itensTipoOcorrencia"
+          [filter]="true"
+          [placeholder]="this.bundle('MHSPH')"
+          class="form-control2 select-especial"
+        >
+          <ng-template let-item pTemplate="item">
+            <div
+              class="ui-helper-clearfix"
+              style="position: relative; height: 25px"
+            >
+              <div>{{ item.label }}</div>
+            </div>
+          </ng-template>
+        </p-dropdown>
+        <div
+          *ngIf="
+            idTipoOcorrencia.invalid &&
+            (idTipoOcorrencia.dirty || idTipoOcorrencia.touched)
+          "
+          class="error-form"
+        >
+          <div *ngIf="idTipoOcorrencia.errors['required']">
+            {{ bundle("MA005") }}
+          </div>
+        </div>
+      </div>
+
+      <div class="row col-md-12">
+        <label class="control-label obrigatorio" for="hstrco">Histórico</label>
+        <textarea
+          id="hstrco"
+          formControlName="descricaoHistorico"
+          [rows]="5"
+          [cols]="30"
+          pInputTextarea
+          [autoResize]="true"
+          class="form-control"
+        ></textarea>
+        <div
+          *ngIf="
+            descricaoHistorico.invalid &&
+            (descricaoHistorico.dirty || descricaoHistorico.touched)
+          "
+          class="error-form"
+        >
+          <div *ngIf="descricaoHistorico.errors['required']">
+            {{ bundle("MA007") }}
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <br />
+  <p-footer>
+    <button
+      type="button"
+      pButton
+      icon="fa-check"
+      label="Adicionar"
+      (click)="adicionarOcorrencia()"
+    ></button>
+    <button
+      type="button"
+      pButton
+      icon="fa-check"
+      label="Limpar Campos"
+      (click)="limparCampos()"
+    ></button>
+    <button
+      type="button"
+      pButton
+      icon="fa-check"
+      label="Fechar"
+      (click)="display = false"
+    ></button>
+  </p-footer>
+</p-dialog>

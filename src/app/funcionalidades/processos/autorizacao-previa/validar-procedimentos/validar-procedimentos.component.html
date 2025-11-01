@@ -1,0 +1,155 @@
+<p-dialog
+  header="{{ pedidoProcedimento?.procedimento?.descricaoProcedimento }}"
+  [(visible)]="display"
+  [modal]="true"
+  width="800"
+  [responsive]="true"
+>
+  <div id="infoPanel" class="container-fluid info-box" style="height: 350px">
+    <div class="row col-md-12">
+      <label class="control-label" for="nome">Procedimento</label>
+      <p id="nome" title="Beneficiário ao qual o pedido se refere.">
+        {{
+          pedidoProcedimento?.procedimento.estruturaNumerica
+            | estruturaProcedimento
+        }}
+        - {{ pedidoProcedimento?.procedimento?.descricaoProcedimento }}
+      </p>
+    </div>
+
+    <div class="row col-md-4">
+      <label
+        class="control-label obrigatorio"
+        for="grau"
+        *ngIf="!isAutorizacaoODT()"
+        >Grau</label
+      >
+      <label
+        class="control-label obrigatorio"
+        for="grau"
+        *ngIf="isAutorizacaoODT()"
+        >Região Odontológica</label
+      >
+      <p id="grau">{{ pedidoProcedimento?.grauProcedimento?.nome }}</p>
+    </div>
+
+    <div class="row col-md-4">
+      <label class="control-label" for="quantidadeSolicitada"
+        >Quantidade Solicitada</label
+      >
+      <p id="quantidadeSolicitada">{{ pedidoProcedimento?.qtdSolicitada }}</p>
+    </div>
+    <div *ngIf="validado">
+      <div class="row col-md-4">
+        <label class="control-label" for="quantidadeAutorizada"
+          >Quantidade autorizada</label
+        >
+        <p
+          id="quantidadeAutorizada"
+          title="Beneficiário ao qual o pedido se refere."
+        >
+          {{ ultimaSituacao?.qtdAutorizada }}
+        </p>
+      </div>
+
+      <div class="row col-md-8">
+        <label class="control-label" for="motivoNegacao"
+          >Motivo de Negação</label
+        >
+        <p id="motivoNegacao">{{ ultimaSituacao?.motivoNegacao?.titulo }}</p>
+      </div>
+    </div>
+
+    <form [formGroup]="form" *ngIf="!validado && possivelAutorizar">
+      <div class="row col-md-12 coluna-interna">
+        <div class="row col-md-4">
+          <label class="control-label obrigatorio" for="qtddeAutrzda"
+            >Quantidade Autorizada</label
+          >
+          <input
+            type="text"
+            id="qtddeAutrzda"
+            name="qtdAutorizada"
+            formControlName="qtdAutorizada"
+            class="form-control"
+            (keyup)="constantes.control.somenteNumeros(this.qtdAutorizada)"
+            (keydown)="constantes.control.somenteNumeros(this.qtdAutorizada)"
+          />
+          <div
+            *ngIf="
+              qtdAutorizada.invalid &&
+              (qtdAutorizada.dirty || qtdAutorizada.touched)
+            "
+            class="error-form"
+          >
+            <div *ngIf="qtdAutorizada.errors['required']">
+              {{ bundle("MA007") }}
+            </div>
+            <div *ngIf="qtdAutorizada.errors['numeroInvalido']">
+              Informe um número válido
+            </div>
+          </div>
+        </div>
+
+        <div class="row col-md-8">
+          <label
+            class="control-label"
+            for="mtvoNgco"
+            *ngIf="idMotivoNegacao.disabled"
+            >Motivo de Negação</label
+          >
+          <label
+            class="control-label obrigatorio"
+            for="mtvoNgco"
+            *ngIf="!idMotivoNegacao.disabled"
+            >Motivo de Negação</label
+          >
+          <p-dropdown
+            id="mtvoNgco"
+            formControlName="idMotivoNegacao"
+            [options]="itensMotivoNegacao"
+            [filter]="true"
+            [placeholder]="this.bundle('MHSPH')"
+            class="form-control2"
+          >
+            <ng-template let-item pTemplate="item">
+              <span class="ui-helper-clearfix" title="{{ item.label }}">{{
+                item.label
+              }}</span>
+            </ng-template>
+          </p-dropdown>
+          <div
+            *ngIf="
+              idMotivoNegacao.invalid &&
+              (idMotivoNegacao.dirty || idMotivoNegacao.touched)
+            "
+            class="error-form"
+          >
+            <div *ngIf="idMotivoNegacao.errors['required']">
+              {{ bundle("MA005") }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <br />
+  <p-footer>
+    <button
+      type="button"
+      pButton
+      icon="fa-check"
+      label="Enviar Validação"
+      (click)="enviarValidacao()"
+      *ngIf="!validado && possivelAutorizar"
+    ></button>
+    <button
+      type="button"
+      pButton
+      icon="fa-check"
+      (click)="display = false"
+      label="Fechar"
+    ></button>
+  </p-footer>
+</p-dialog>

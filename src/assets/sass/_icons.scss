@@ -1,0 +1,89 @@
+//Variáveis Tamanho Fonte
+$pxfontsize11: 11px;
+$pxfontsize12: 12px;
+$pxfontsize14: 14px;
+$pxfontsize16: 16px;
+$pxfontsize18: 18px;
+$pxfontsize20: 20px;
+$pxfontsize24: 24px;
+$pxfontsize28: 28px;
+$pxfontsize32: 32px;
+$pxfontsize36: 36px;
+$pxfontsize40: 40px;
+
+//Variáveis Tamanho Fonte
+$emfontsize11: 0.6875em;
+$emfontsize12: 0.75em;
+$emfontsize14: 0.875em;
+$emfontsize16: 1em;
+$emfontsize18: 1.125em;
+$emfontsize20: 1.25em;
+$emfontsize24: 1.5em;
+$emfontsize28: 1.75em;
+$emfontsize32: 2em;
+$emfontsize36: 2.25em;
+$emfontsize40: 2.5em;
+
+svg.icon-clip {
+  background-image: url("../svg/icon-clip.svg");
+  background-repeat: no-repeat;
+  width: 27px;
+  height: 22px;
+  vertical-align: bottom;
+}
+
+svg.icon-clip-black {
+  background-image: url("../svg/icon-clip-black.svg");
+  background-repeat: no-repeat;
+  width: 14px;
+  height: 24px;
+  vertical-align: top;
+}
+
+svg.icon-re-send {
+  background-image: url("../svg/icon-reesend.svg");
+  background-repeat: no-repeat;
+  width: 27px;
+  height: 20px;
+  vertical-align: middle;
+}
+
+svg.icon-ree-send {
+  background-image: url("../svg/icon-msg-reenviada.svg");
+  background-repeat: no-repeat;
+  width: 27px;
+  height: 20px;
+  vertical-align: middle;
+}
+
+svg.icon-arrow-rt {
+  background-image: url("../svg/chevron-arrow-right.svg");
+  background-repeat: no-repeat;
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+}
+
+svg.icon-arrow-lt {
+  background-image: url("../svg/chevron-arrow-left.svg");
+  background-repeat: no-repeat;
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+}
+
+svg.icon-msg-action {
+  background-image: url("../svg/icon-msg-action.svg");
+  background-repeat: no-repeat;
+  width: 26px;
+  height: 28px;
+  vertical-align: middle;
+}
+
+svg.icon-msg-nao-lida {
+  background-image: url("../svg/icon-msg-nao-lida.svg");
+  background-repeat: no-repeat;
+  width: 22px;
+  height: 18px;
+  vertical-align: sub;
+}
