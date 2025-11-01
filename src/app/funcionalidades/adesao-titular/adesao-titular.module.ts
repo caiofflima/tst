@@ -50,6 +50,7 @@ import { AscDocumentosModule } from 'app/shared/components/asc-pedido/asc-docume
 import { PlaygroundModule } from 'app/shared/playground/playground.module';
 import { AscAcompanhamentoProcessoModule } from 'app/shared/components/asc-acompanhamento-processo/asc-acompanhamento-processo.module';
 import { AscModalModule } from 'app/shared/components/asc-modal/asc-modal.module';
+import { AcompanhamentoAdesaoComponent } from './acompanhamento-adesao/acompanhamento-adesao.component';
 
 @NgModule({
     imports: [
@@ -87,7 +88,8 @@ import { AscModalModule } from 'app/shared/components/asc-modal/asc-modal.module
         CadastroTitularComponent,
         EtapaContatoTitularComponent,
         EtapaComplementotitularComponent,
-        EtapaResumoTitularComponent
+        EtapaResumoTitularComponent,
+        AcompanhamentoAdesaoComponent
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

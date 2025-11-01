@@ -92,7 +92,7 @@
                   <div class="arquivo-info">
                     <p class="arquivo-nome">{{ file.name }}</p>
                     <p class="arquivo-data">
-                      {{ file.data | date : "short" }}
+                      {{ file.lastModified | date : "short" }}
                       <i
                         class="fa fa-user-circle-o"
                         aria-hidden="true"
@@ -107,7 +107,7 @@
                           $event,
                           file,
                           modalVisualizarDocumentoComponent,
-                          files
+                          converterSetParaArray(files)
                         )
                       "
                       [disabled]="loading"

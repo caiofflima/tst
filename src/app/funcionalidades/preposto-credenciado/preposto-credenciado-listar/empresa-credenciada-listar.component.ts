@@ -48,6 +48,15 @@ export class EmpresaCredenciadaListarComponent extends BaseComponent {
         }, err => this.showDangerMsg(err.error));
     }
 
+    get totalSize(): number {
+        return this.listaEmpresas?.length || 0;
+    }
+
+    get mensagemPaginacao(): string {
+        const total = this.totalSize;
+        return total > 0 ? `Exibindo ${total} registro${total > 1 ? 's' : ''}` : 'Nenhum registro encontrado';
+    }
+
     retornarListaEmpresas() {
         return this.router.navigateByUrl('/manutencao/empresa-prestador-externo');
     }   

@@ -23,7 +23,8 @@ import { DocumentoPedidoService, SIASCFluxoService } from 'app/shared/services/s
     animations: [...fadeAnimation]
 })
 export class AcompanhamentoAdesaoComponent extends AcompanhamentoCommon implements OnInit {
-    corSituacaoComplementar=''
+    corSituacao = true;
+    corSituacaoComplementar = true;
     possuiDocumentos = true;
     possuiAnexoDocumentos = true;
     override possuiDocumentosComplementares = true;

@@ -124,6 +124,14 @@ export class MotivoNegacaoTipoPedidoFormComponent extends BaseComponent {
     return this.formulario.get('inativo')
   }
 
+  get tiposBeneficiario(){
+    return this.formulario.get('listaIdTipoBeneficiario')
+  }
+
+  get requiredMsg(): string {
+    return 'Este campo é obrigatório';
+  }
+
   carregaBeneficiarios(): void {
     this.comboService
         .consultarComboTipoBeneficiario()
@@ -225,7 +233,7 @@ export class MotivoNegacaoTipoPedidoFormComponent extends BaseComponent {
           Loading.stop()
           if( resp ){
             this.listComboTipoBeneficiario = this.listaTodosComboTipoBeneficiario.filter(b => {
-              if( resp[0].listaIdTipoBeneficiario.findIndex(r => r  == b.value) == -1 ) return b
+              return resp[0].listaIdTipoBeneficiario.findIndex(r => r  == b.value) == -1;
             })
             
           }else {

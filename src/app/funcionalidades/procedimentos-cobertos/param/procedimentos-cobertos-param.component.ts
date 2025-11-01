@@ -19,6 +19,10 @@ export class ProcedimentosCobertosParamComponent implements OnInit{
         tiposProcesso: [null, Validators.required],
     });
 
+    get compStyle(): any {
+        return {};
+    }
+
     public inicializarCombos(): void {
         this.comboService.consultarComboTipoProcesso().pipe(
             take<DadoComboDTO[]>(1)

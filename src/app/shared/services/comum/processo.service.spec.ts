@@ -56,10 +56,10 @@ describe('ProcessoService', () => {
   });
 
   it('should call consultarPorMatriculaTitular and return data', () => {
-    const mockResponse: ProcessoDTO[] = [];
+    const mockResponse: Pageable<Pedido> = {} as Pageable<Pedido>;
     const matricula = '12345';
 
-    service.consultarPorMatriculaTitular(matricula).subscribe(response => {
+    service.consultarPorMatriculaTitular(matricula).subscribe((response: Pageable<Pedido>) => {
       expect(response).toEqual(mockResponse);
     });
 

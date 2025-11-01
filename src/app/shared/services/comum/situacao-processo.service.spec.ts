@@ -69,7 +69,7 @@ describe('SituacaoProcessoService', () => {
   });
 
   it('should fetch all manual transitions', () => {
-    const dummyResponse = { data: 'some data' };
+    const dummyResponse = { data: 'some data' } as any;
 
     service.consultarTodasTransicoesManuais().subscribe(response => {
       expect(response).toEqual(dummyResponse);

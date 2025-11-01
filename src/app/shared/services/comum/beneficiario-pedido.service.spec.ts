@@ -34,8 +34,8 @@ describe('BeneficiarioPedidoService', () => {
   });
 
   it('should call consultarBeneficiarioPedido and return a BeneficiarioPedido', () => {
-    const mockBeneficiarioPedido: BeneficiarioPedido = { id: 1, idTipoProcesso: 1, idTipoBeneficiario: 2 };
-    const responseBeneficiarioPedido: BeneficiarioPedido = { id: 1, idTipoProcesso: 1, idTipoBeneficiario: 2 };
+    const mockBeneficiarioPedido: BeneficiarioPedido = { idTipoProcesso: 1, idTipoBeneficiario: 2 };
+    const responseBeneficiarioPedido: BeneficiarioPedido = { idTipoProcesso: 1, idTipoBeneficiario: 2 };
 
     service.consultarBeneficiarioPedido(mockBeneficiarioPedido).subscribe((res) => {
       expect(res).toEqual(responseBeneficiarioPedido);
@@ -47,10 +47,10 @@ describe('BeneficiarioPedidoService', () => {
   });
 
   it('should call consultarPorFiltro and return an array of BeneficiarioPedido', () => {
-    const mockDto: BeneficiarioPedido = { id: null, idsTipoProcesso: [1, 2], somenteAtivos: true, tiposBeneficiario: [3, 4] };
+    const mockDto: BeneficiarioPedido = { idsTipoProcesso: [1, 2], somenteAtivos: true, tiposBeneficiario: [3, 4] };
     const responseBeneficiarioPedidos: BeneficiarioPedido[] = [
-      { id: 1, idTipoProcesso: 1, idTipoBeneficiario: 2 },
-      { id: 2, idTipoProcesso: 3, idTipoBeneficiario: 4 }
+      { idTipoProcesso: 1, idTipoBeneficiario: 2 },
+      { idTipoProcesso: 3, idTipoBeneficiario: 4 }
     ];
 
     service.consultarPorFiltro(mockDto).subscribe((res) => {
@@ -63,7 +63,7 @@ describe('BeneficiarioPedidoService', () => {
   });
 
   it('should call remover and return the response', () => {
-    const mockBeneficiarioPedido = { id: 1 };
+    const mockBeneficiarioPedido: BeneficiarioPedido = { idTipoProcesso: 1 };
     const response = { success: true };
 
     service.remover(mockBeneficiarioPedido).subscribe((res) => {

@@ -18,6 +18,10 @@ export class DocumentoTipoProcessoService extends CrudHttpClientService<Document
         super('documentos/tipo-processo', http, messageService);
     }
 
+    public getTitle(): string {
+        return 'Documentos por Tipo de Processo';
+    }
+
     public consultarPorTipoProcessoAndTipoBeneficiario(parametro: DocumentoParam): Observable<DocumentoTipoProcesso[]> {
         let url = this.url;
         if (parametro.idTipoProcesso && parametro.idTipoBeneficiario) {

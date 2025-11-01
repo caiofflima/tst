@@ -148,7 +148,7 @@ export class ParametrizacaoDocumentoProcessoFormComponent extends BaseComponent 
     }
 
     formulario: FormGroup = this.formBuilder.group({
-        id: this.id,
+        id: this.formBuilder.control(null),
         sexo: this.sexo,
         inativo: this.inativo,
         idDocumento: this.idDocumento,

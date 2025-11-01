@@ -27,7 +27,7 @@ export class EtapaTipoDependenteComponent {
     readonly beneficiarioDependenteModel = new EventEmitter<BeneficiarioDependenteFormModel>();
 
     @Output()
-    readonly tipoDependenteModel = new EventEmitter<TipoDependente>();
+    readonly tipoDependenteModel = new EventEmitter<TipoBeneficiarioDTO>();
 
     @Output()
     readonly beneficiarioModel = new EventEmitter<Beneficiario>();
@@ -106,7 +106,7 @@ export class EtapaTipoDependenteComponent {
         this.formularioSolicitacao.controls['matricula'].updateValueAndValidity();
         this.tipoDependente = tipo;
         this.tipoDependenteCompleto = tipo;
-        this.tipoDependenteModel.emit(this.tipoDependente);
+        this.tipoDependenteModel.emit(this.tipoDependenteCompleto);
     }
 
     onSubmit(): void {
