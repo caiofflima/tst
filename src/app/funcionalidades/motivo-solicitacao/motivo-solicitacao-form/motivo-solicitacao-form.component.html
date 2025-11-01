@@ -104,7 +104,6 @@
           </span>
           <span
           *ngIf="loadingRM"
-            [ngStyle]="{ display: showProgress && 'block' }"
             class="loading-spinner"
           >
             <p-progressSpinner
@@ -133,7 +132,6 @@
           </span>
           <span
             *ngIf="loading"
-            [ngStyle]="{ display: showProgress && 'block' }"
             class="loading-spinner"
           >
             <p-progressSpinner

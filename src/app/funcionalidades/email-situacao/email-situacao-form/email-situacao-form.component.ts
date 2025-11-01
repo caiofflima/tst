@@ -82,6 +82,10 @@ export class EmailSituacaoFormComponent extends BaseComponent implements OnInit 
         this.changeDetectorRef.detectChanges()
     }
 
+    get listComboTipoBeneficiarioSelecionado(): DadoComboDTO[] {
+        return this.tiposBeneficiario.value || [];
+    }
+
     private consultarEstadoInicialEmail(): void {
         if (this.id) {
             this.emailService.get(this.id).pipe(

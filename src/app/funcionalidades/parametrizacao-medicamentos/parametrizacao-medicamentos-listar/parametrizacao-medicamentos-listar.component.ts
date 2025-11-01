@@ -28,9 +28,10 @@ export class ParametrizacaoMedicamentosListarComponent extends BaseComponent imp
 
     filtroConsultaMedicamento: FiltroConsultaMedicamento;
     listaMedicamento: ResultadoPesquisaMedicamento[];
+    listaLaboratoriosNome: string;
+    listaMedicamentosNome: string;
     situacaoPedido: string;
     loading = false;
-    listaMedicamentosNome: any;
     id:number;
 
     constructor(

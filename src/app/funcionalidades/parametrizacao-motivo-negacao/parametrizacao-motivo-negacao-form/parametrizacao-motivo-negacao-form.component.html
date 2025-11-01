@@ -46,14 +46,14 @@
                     [required]="true"
                     (selected)="nivelNegacaoSelecionado($event)"
                     [control]="icNiveisNegacaoCombo"
-                    [disabled]="id"
+                    [disabled]="!!id"
                   ></asc-dropdown>
                 </div>
                 <div class="pl-0 col-md-7 mb-15" *ngIf="isShowComboSituacao">
                     <asc-dropdown
                         label="Situação do Pedido" [items]="situacaoPedidos" [required]="true" [control]="idSituacaoPedidoCombo"
                         id="idSituacaoPedidoCombo"
-                        [disabled]="id"
+                        [disabled]="!!id"
                     ></asc-dropdown>
                 </div>
                 <div class="pl-0 col-md-3 mb-15">

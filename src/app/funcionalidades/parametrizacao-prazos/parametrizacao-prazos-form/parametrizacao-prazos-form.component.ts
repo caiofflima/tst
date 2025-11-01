@@ -117,6 +117,10 @@ export class ParametrizacaoPrazosFormComponent extends BaseComponent {
         return padrao;
     }
 
+    get listComboTipoBeneficiarioSelecionados(): DadoComboDTO[] {
+        return this.tiposBeneficiario.value || [];
+    }
+
     public limparCampos(): void {
         this.formulario.reset();
         this.formulario.markAsPristine();

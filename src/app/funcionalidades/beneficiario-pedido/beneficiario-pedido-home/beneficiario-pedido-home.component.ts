@@ -88,6 +88,10 @@ export class BeneficiarioPedidoHomeComponent extends BaseComponent implements On
         this.formulario.updateValueAndValidity();
     }
 
+    onChangeInativo(event: any): void {
+        // Método para lidar com mudanças no checkbox de inativo
+    }
+
     voltar(): void {
         this.location.back();
     }
