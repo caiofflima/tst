@@ -318,7 +318,7 @@ html {
   &__controls {
     margin-top: 24px;
     @include center-flex;
-    justify-content: end;
+    justify-content: flex-end;
     gap: 24px;
   }
 }
@@ -507,7 +507,7 @@ html {
   &__controls {
     display: flex;
     align-items: center;
-    justify-content: end;
+    justify-content: flex-end;
   }
 }
 

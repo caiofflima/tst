@@ -1333,7 +1333,7 @@ a.ui-state-active {
 }
 
 .barra-botoes {
-  justify-content: end;
+  justify-content: flex-end;
   align-items: baseline;
   padding: 15px 10px;
   border-radius: 4px;
@@ -2568,7 +2568,7 @@ button:focus {
 
 .ft-consult {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
 }
 
 .card-footer {

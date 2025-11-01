@@ -44,23 +44,23 @@ export class ParametrizacaoMotivoTipoPedidoListarComponent extends BaseComponent
         private readonly route: ActivatedRoute
     ) {
         super(messageService);
-        this.id = this.route.snapshot.queryParams.id;
-        this.isRetorno = this.route.snapshot.queryParams.isRetorno;
+        this.id = this.route.snapshot.queryParams['id'];
+        this.isRetorno = this.route.snapshot.queryParams['isRetorno'];
         this.retornaValorFiltro();
     }
 
     private retornaValorFiltro(): void { 
         this.filtro.id = this.id;
-        this.filtro.sexo = ArrayUtil.get<string>(this.route.snapshot.queryParams.sexo);
-        this.filtro.somenteAtivos = this.route.snapshot.queryParams.somenteAtivos;
-        this.filtro.tiposProcesso = NumberUtil.getArray(this.route.snapshot.queryParams.tiposProcesso);
-        this.filtro.tiposBeneficiario = NumberUtil.getArray(this.route.snapshot.queryParams.tiposBeneficiario);
-        this.filtro.idTipoDeficiencia = this.route.snapshot.queryParams.idTipoDeficiencia;
-        this.descricaoSexo = this.route.snapshot.queryParams.descricaoSexo || 'Todas';
-        this.descricaoMotivoSolicitacao = this.route.snapshot.queryParams.descricaoMotivoSolicitacao || 'Todas';
-        this.descricaoTipoDeficiencia = this.route.snapshot.queryParams.descricaoTipoDeficiencia || 'Todas';
-        this.descricaoTiposProcesso = this.route.snapshot.queryParams.descricaoTiposProcesso || 'Todas';
-        this.descricaoTiposBeneficiario = this.route.snapshot.queryParams.descricaoTiposBeneficiario || 'Todas';
+        this.filtro.sexo = ArrayUtil.get<string>(this.route.snapshot.queryParams['sexo']);
+        this.filtro.somenteAtivos = this.route.snapshot.queryParams['somenteAtivos'];
+        this.filtro.tiposProcesso = NumberUtil.getArray(this.route.snapshot.queryParams['tiposProcesso']);
+        this.filtro.tiposBeneficiario = NumberUtil.getArray(this.route.snapshot.queryParams['tiposBeneficiario']);
+        this.filtro.idTipoDeficiencia = this.route.snapshot.queryParams['idTipoDeficiencia'];
+        this.descricaoSexo = this.route.snapshot.queryParams['descricaoSexo'] || 'Todas';
+        this.descricaoMotivoSolicitacao = this.route.snapshot.queryParams['descricaoMotivoSolicitacao'] || 'Todas';
+        this.descricaoTipoDeficiencia = this.route.snapshot.queryParams['descricaoTipoDeficiencia'] || 'Todas';
+        this.descricaoTiposProcesso = this.route.snapshot.queryParams['descricaoTiposProcesso'] || 'Todas';
+        this.descricaoTiposBeneficiario = this.route.snapshot.queryParams['descricaoTiposBeneficiario'] || 'Todas';
     }
 
     ngOnInit(): void {
