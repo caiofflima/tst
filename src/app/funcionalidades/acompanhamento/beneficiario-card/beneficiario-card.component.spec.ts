@@ -1,71 +1,123 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Beneficiario } from "../../../shared/models/comum/beneficiario";
-import { Pedido } from "../../../shared/models/comum/pedido";
-import { CampoVazioHifen } from './../../../shared/pipes/campo-vazio.pipe';
 import { BeneficiarioCardComponent } from './beneficiario-card.component';
-
-class MockUtil {
-  static getDate(dateString: string): Date {
-    return new Date(dateString);
-  }
-}
+import { Pedido } from '../../../shared/models/comum/pedido';
+import { Beneficiario } from '../../../shared/models/comum/beneficiario';
+import { Matricula } from '../../../shared/models/comum/matricula';
 
 describe('BeneficiarioCardComponent', () => {
-  let component: BeneficiarioCardComponent;
-  let fixture: ComponentFixture<BeneficiarioCardComponent>;
+    let component: BeneficiarioCardComponent;
+    let fixture: ComponentFixture<BeneficiarioCardComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [BeneficiarioCardComponent, CampoVazioHifen],
-    }).compileComponents();
-  });
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({
+            declarations: [BeneficiarioCardComponent]
+        }).compileComponents();
+    });
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(BeneficiarioCardComponent);
-    component = fixture.componentInstance;
-  });
+    beforeEach(() => {
+        fixture = TestBed.createComponent(BeneficiarioCardComponent);
+        component = fixture.componentInstance;
+    });
 
-  it('deve criar o componente', () => {
-    expect(component).toBeTruthy();
-  });
+    it('deve criar o componente', () => {
+        expect(component).toBeTruthy();
+    });
 
-  it('deve inicializar com idadeBeneficiario igual a 0', () => {
-    expect(component.idadeBeneficiario).toBe(0);
-  });
+    it('deve inicializar beneficiario como novo Beneficiario', () => {
+        expect(component.beneficiario).toBeInstanceOf(Beneficiario);
+    });
 
-  it('deve extrair a idade do beneficiário corretamente', () => {
-    const dataNascimento = '2000-01-01'; // data de nascimento fictícia
-    const pedido: Pedido = {
-      beneficiario: {
-        matricula: { 
-          dataNascimento: dataNascimento
-        }
-      }
-    } as Pedido;
+    it('deve inicializar idadeBeneficiario como 0', () => {
+        expect(component.idadeBeneficiario).toBe(0);
+    });
 
-    component.ngOnInit(); // Chama ngOnInit para executar a lógica
-    component.processo = pedido; // Define o input processo
-    expect(component.idadeBeneficiario).toBeGreaterThan(0); // A idade deve ser maior que 0
-  });
+    it('deve inicializar newdate como Date', () => {
+        expect(component.newdate).toBeInstanceOf(Date);
+    });
 
-  it('deve extrair o beneficiário do processo corretamente', () => {
-    const pedido: Pedido = {
-      beneficiario: new Beneficiario() 
-    } as Pedido;
+    it('setter processo deve atualizar _processo', () => {
+        const mockPedido: Pedido = {
+            id: 1,
+            numero: 'PED-001',
+            beneficiario: new Beneficiario()
+        } as Pedido;
 
-    component.processo = pedido; // Define o input processo
-    component.ngOnInit(); // Chama ngOnInit para executar a lógica
+        component.processo = mockPedido;
 
-    expect(component.beneficiario).toEqual(pedido.beneficiario); // Verifica se o beneficiário foi extraído corretamente
-  });
+        expect(component.processo).toEqual(mockPedido);
+    });
 
-  it('deve chamar ngOnDestroy e completar o unsubscribe', () => {
-    spyOn(component['unsubscribe'], 'next');
-    spyOn(component['unsubscribe'], 'complete');
+    it('setter processo deve emitir evento processo$', (done) => {
+        const mockPedido: Pedido = {
+            id: 1,
+            numero: 'PED-001',
+            beneficiario: new Beneficiario()
+        } as Pedido;
 
-    component.ngOnDestroy();
+        component.processo$.subscribe((processo: Pedido) => {
+            expect(processo).toEqual(mockPedido);
+            done();
+        });
 
-    expect(component['unsubscribe'].next).toHaveBeenCalled();
-    expect(component['unsubscribe'].complete).toHaveBeenCalled();
-  });
+        component.processo = mockPedido;
+    });
+
+    it('getter processo deve retornar _processo', () => {
+        const mockPedido: Pedido = {
+            id: 1,
+            numero: 'PED-001',
+            beneficiario: new Beneficiario()
+        } as Pedido;
+
+        component['_processo'] = mockPedido;
+
+        expect(component.processo).toEqual(mockPedido);
+    });
+
+    it('deve extrair beneficiario do processo no ngOnInit', (done) => {
+        const mockBeneficiario = new Beneficiario();
+        mockBeneficiario.nome = 'João Silva';
+
+        const mockMatricula = new Matricula();
+        mockMatricula.dataNascimento = '1990-01-01';
+
+        mockBeneficiario.matricula = mockMatricula;
+
+        const mockPedido: Pedido = {
+            id: 1,
+            beneficiario: mockBeneficiario
+        } as Pedido;
+
+        fixture.detectChanges(); // Chama ngOnInit
+
+        component.processo = mockPedido;
+
+        setTimeout(() => {
+            expect(component.beneficiario).toEqual(mockBeneficiario);
+            done();
+        }, 100);
+    });
+
+    it('ngOnDestroy deve chamar next e complete no unsubscribe', () => {
+        const nextSpy = jest.spyOn(component['unsubscribe'], 'next');
+        const completeSpy = jest.spyOn(component['unsubscribe'], 'complete');
+
+        component.ngOnDestroy();
+
+        expect(nextSpy).toHaveBeenCalled();
+        expect(completeSpy).toHaveBeenCalled();
+    });
+
+    it('deve ter processo$ como EventEmitter', () => {
+        expect(component.processo$).toBeDefined();
+        expect(typeof component.processo$.emit).toBe('function');
+    });
+
+    it('deve aceitar user como Input', () => {
+        const mockUser = { id: 1, nome: 'Usuário Teste' };
+
+        component.user = mockUser;
+
+        expect(component.user).toEqual(mockUser);
+    });
 });

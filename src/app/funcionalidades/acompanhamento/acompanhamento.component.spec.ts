@@ -1,87 +1,168 @@
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ActivatedRoute } from '@angular/router';
-import { of } from 'rxjs';
-import { Pedido } from '../../shared/models/comum/pedido';
+import { of, Subject } from 'rxjs';
 import { ProcessoService } from '../../shared/services/comum/processo.service';
+import { Pedido } from '../../shared/models/comum/pedido';
+import { PedidoProcedimento } from '../../shared/models/entidades';
 import { AcompanhamentoComponent } from './acompanhamento.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('AcompanhamentoComponent', () => {
-  let component: AcompanhamentoComponent;
-  let fixture: ComponentFixture<AcompanhamentoComponent>;
-  let mockActivatedRoute: any;
-  let mockProcessoService: any;
+    let component: AcompanhamentoComponent;
+    let fixture: ComponentFixture<AcompanhamentoComponent>;
+    let processoService: jest.Mocked<ProcessoService>;
+    let activatedRoute: any;
+    let paramMapSubject: Subject<any>;
 
-  beforeEach(async () => {
-    mockActivatedRoute = {
-      paramMap: of({
-        get: (key: string) => {
-          if (key === 'idPedido') return '123'; // Mockando o ID do pedido
-          return null; // Retorna null para chaves não reconhecidas
-        }
-      })
-    };
-  
-    mockProcessoService = {
-      consultarPorId: (id: number) => {
-        return of(new Pedido()); // Retorna um Pedido mockado
-      }
-    };
-  
-    await TestBed.configureTestingModule({
-      imports: [BrowserAnimationsModule],
-      declarations: [AcompanhamentoComponent],
-      providers: [
-        { provide: ActivatedRoute, useValue: mockActivatedRoute },
-        { provide: ProcessoService, useValue: mockProcessoService }
-      ],
-      schemas: [NO_ERRORS_SCHEMA] // Para ignorar erros de template
-    }).compileComponents();
-  });
-  
-  beforeEach(() => {
-    fixture = TestBed.createComponent(AcompanhamentoComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges(); // Inicializa o componente
-  });
+    beforeEach(async () => {
+        paramMapSubject = new Subject<any>();
 
-  it('deve criar o componente', () => {
-    expect(component).toBeTruthy(); // Verifica se o componente foi criado
-  });
+        processoService = {
+            consultarPorId: jest.fn()
+        } as unknown as jest.Mocked<ProcessoService>;
 
-  it('deve inicializar o processo no ngOnInit', () => {
-    component.ngOnInit(); // Chama o método ngOnInit
-    expect(component.processo).toBeDefined(); // Verifica se a propriedade processo está definida
-  });
+        activatedRoute = {
+            paramMap: paramMapSubject.asObservable()
+        };
 
-  it('deve aumentar a porcentagem corretamente', () => {
-    component.increase(); // Chama o método increase
-    expect(component.porcentagem).toBe(10); // Verifica se a porcentagem aumentou para 10
-    component.increase(); // Chama o método novamente
-    expect(component.porcentagem).toBe(20); // Verifica se a porcentagem aumentou para 20
-  });
+        await TestBed.configureTestingModule({
+            imports: [NoopAnimationsModule],
+            declarations: [AcompanhamentoComponent],
+            providers: [
+                { provide: ProcessoService, useValue: processoService },
+                { provide: ActivatedRoute, useValue: activatedRoute }
+            ]
+        }).compileComponents();
+    });
 
-  it('deve definir a cor corretamente com base na porcentagem', () => {
-    component.porcentagem = 30;
-    expect(component.setColor()).toBe("#17A2B8"); // Verifica a cor para porcentagem <= 50
+    beforeEach(() => {
+        fixture = TestBed.createComponent(AcompanhamentoComponent);
+        component = fixture.componentInstance;
+    });
 
-    component.porcentagem = 70;
-    expect(component.setColor()).toBe("orange"); // Verifica a cor para porcentagem > 50 e <= 80
+    it('deve criar o componente', () => {
+        expect(component).toBeTruthy();
+    });
 
-    component.porcentagem = 90;
-    expect(component.setColor()).toBe("red"); // Verifica a cor para porcentagem > 80
-  });
+    it('deve inicializar processo como novo Pedido', () => {
+        expect(component.processo).toBeInstanceOf(Pedido);
+    });
 
-  it('deve rolar para o topo', () => {
-    spyOn(window, 'scrollTo'); // Espiona a função scrollTo
-    component.goToTop(); // Chama o método goToTop
-    expect(window.scrollTo).toHaveBeenCalledWith(0, 0); // Verifica se scrollTo foi chamado com os argumentos corretos
-  });
+    it('deve inicializar porcentagem como 0', () => {
+        expect(component.porcentagem).toBe(0);
+    });
 
-  it('deve chamar pedidoProcedimentosAtualizados', () => {
-    spyOn(console, 'log'); // Espiona a função console.log
-    component.pedidoProcedimentosAtualizados([]); // Chama o método
-    expect(console.log).toHaveBeenCalledWith('pedidoProcedimentosAtualizados'); // Verifica se o log foi chamado
-  });
+    it('deve buscar processo por ID da rota no ngOnInit', () => {
+        const mockPedido: Pedido = { id: 123, numero: 'PED-001' } as Pedido;
+        processoService.consultarPorId.mockReturnValue(of(mockPedido));
+
+        fixture.detectChanges(); // Chama ngOnInit
+
+        paramMapSubject.next({ get: (key: string) => '123' });
+
+        expect(processoService.consultarPorId).toHaveBeenCalledWith(123);
+    });
+
+    it('deve atualizar processo quando receber dados da rota', (done) => {
+        const mockPedido: Pedido = { id: 123, numero: 'PED-001' } as Pedido;
+        processoService.consultarPorId.mockReturnValue(of(mockPedido));
+
+        fixture.detectChanges();
+
+        paramMapSubject.next({ get: (key: string) => '123' });
+
+        setTimeout(() => {
+            expect(component.processo).toEqual(mockPedido);
+            done();
+        }, 100);
+    });
+
+    it('goToTop deve chamar window.scrollTo com 0, 0', () => {
+        const scrollToSpy = jest.spyOn(window, 'scrollTo').mockImplementation();
+
+        component.goToTop();
+
+        expect(scrollToSpy).toHaveBeenCalledWith(0, 0);
+
+        scrollToSpy.mockRestore();
+    });
+
+    it('increase deve aumentar porcentagem em 10', () => {
+        component.porcentagem = 0;
+
+        component.increase();
+
+        expect(component.porcentagem).toBe(10);
+    });
+
+    it('increase deve acumular porcentagem corretamente', () => {
+        component.porcentagem = 20;
+
+        component.increase();
+        component.increase();
+
+        expect(component.porcentagem).toBe(40);
+    });
+
+    it('setColor deve retornar "#17A2B8" quando porcentagem é 0', () => {
+        component.porcentagem = 0;
+
+        const cor = component.setColor();
+
+        expect(cor).toBe('#17A2B8');
+    });
+
+    it('setColor deve retornar "#17A2B8" quando porcentagem é 50', () => {
+        component.porcentagem = 50;
+
+        const cor = component.setColor();
+
+        expect(cor).toBe('#17A2B8');
+    });
+
+    it('setColor deve retornar "orange" quando porcentagem é 51', () => {
+        component.porcentagem = 51;
+
+        const cor = component.setColor();
+
+        expect(cor).toBe('orange');
+    });
+
+    it('setColor deve retornar "orange" quando porcentagem é 80', () => {
+        component.porcentagem = 80;
+
+        const cor = component.setColor();
+
+        expect(cor).toBe('orange');
+    });
+
+    it('setColor deve retornar "red" quando porcentagem é 81', () => {
+        component.porcentagem = 81;
+
+        const cor = component.setColor();
+
+        expect(cor).toBe('red');
+    });
+
+    it('setColor deve retornar "red" quando porcentagem é 100', () => {
+        component.porcentagem = 100;
+
+        const cor = component.setColor();
+
+        expect(cor).toBe('red');
+    });
+
+    it('pedidoProcedimentosAtualizados deve receber array de PedidoProcedimento', () => {
+        const consoleSpy = jest.spyOn(console, 'log').mockImplementation();
+        const mockProcedimentos: PedidoProcedimento[] = [
+            { id: 1 } as PedidoProcedimento,
+            { id: 2 } as PedidoProcedimento
+        ];
+
+        component.pedidoProcedimentosAtualizados(mockProcedimentos);
+
+        expect(consoleSpy).toHaveBeenCalledWith('pedidoProcedimentosAtualizados');
+
+        consoleSpy.mockRestore();
+    });
 });

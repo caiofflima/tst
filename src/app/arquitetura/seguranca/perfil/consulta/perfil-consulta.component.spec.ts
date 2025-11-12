@@ -1,84 +1,210 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { of } from 'rxjs';
-
-import { PerfilService } from '../../../../../app/arquitetura/shared/services/seguranca/perfil.service';
-
+import { of, throwError } from 'rxjs';
 import { MessageService } from 'app/shared/services/services';
-import { Perfil } from './../../../shared/models/seguranca/perfil';
+import { Perfil } from '../../../shared/models/seguranca/perfil';
+import { PerfilService } from '../../../shared/services/seguranca/perfil.service';
 import { PerfilConsultaComponent } from './perfil-consulta.component';
 
-
 describe('PerfilConsultaComponent', () => {
-  let component: PerfilConsultaComponent;
-  let fixture: ComponentFixture<PerfilConsultaComponent>;
-  const messageServiceSpy = jasmine.createSpyObj('MessageService', ['addConfirmYesNo', 'addMsgSuccess', 'addMsgDanger']);
-  const routerSpy = jasmine.createSpyObj('Router', ['navigate']);
-  const activatedRouteSpy = { parent: { url: of('') } } as any;
-  const perfilServiceSpy = jasmine.createSpyObj('PerfilService', ['consultarPorNome', 'delete']);
+    let component: PerfilConsultaComponent;
+    let fixture: ComponentFixture<PerfilConsultaComponent>;
+    let messageService: jest.Mocked<MessageService>;
+    let router: jest.Mocked<Router>;
+    let activatedRoute: any;
+    let perfilService: jest.Mocked<PerfilService>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [PerfilConsultaComponent],
-      providers: [
-        { provide: MessageService, useValue: messageServiceSpy },
-        { provide: Router, useValue: routerSpy },
-        { provide: ActivatedRoute, useValue: activatedRouteSpy },
-        { provide: PerfilService, useValue: perfilServiceSpy },
-        FormBuilder
-      ]
-    }).compileComponents();
-  });
+    beforeEach(async () => {
+        messageService = {
+            addMsgDanger: jest.fn(),
+            addMsgSuccess: jest.fn(),
+            addConfirmYesNo: jest.fn()
+        } as unknown as jest.Mocked<MessageService>;
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(PerfilConsultaComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+        router = {
+            navigate: jest.fn()
+        } as unknown as jest.Mocked<Router>;
 
-  it('deve criar o componente', () => {
-    expect(component).toBeTruthy();
-  });
+        activatedRoute = {
+            parent: {}
+        };
 
-  it('deve chamar consultar e definir perfis', () => {
-    const mockPerfis = [{ id: 1, nome: 'Perfil 1' }  as Perfil, { id: 2, nome: 'Perfil 2' }  as Perfil ];
-    perfilServiceSpy.consultarPorNome.and.returnValue(of(mockPerfis));
+        perfilService = {
+            consultarPorNome: jest.fn(),
+            delete: jest.fn()
+        } as unknown as jest.Mocked<PerfilService>;
 
-    component.consultar();
+        await TestBed.configureTestingModule({
+            imports: [ReactiveFormsModule],
+            declarations: [PerfilConsultaComponent],
+            providers: [
+                FormBuilder,
+                { provide: MessageService, useValue: messageService },
+                { provide: Router, useValue: router },
+                { provide: ActivatedRoute, useValue: activatedRoute },
+                { provide: PerfilService, useValue: perfilService }
+            ]
+        }).compileComponents();
+    });
 
-    expect(component.perfis).toEqual(mockPerfis);
-  });
+    beforeEach(() => {
+        fixture = TestBed.createComponent(PerfilConsultaComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
 
-  it('deve navegar para a rota de inclusão', () => {
-    component.incluir();
+    it('deve criar o componente', () => {
+        expect(component).toBeTruthy();
+    });
 
-    expect(routerSpy.navigate).toHaveBeenCalledWith(['novo'], { relativeTo: activatedRouteSpy.parent });
-  });
+    it('deve inicializar com valores padrão', () => {
+        expect(component.pagina).toBe(1);
+        expect(component.itens).toBe(5);
+        expect(component.nome).toBe('');
+        expect(component.perfis).toBeNull();
+    });
 
-  it('deve navegar para a rota de edição', () => {
-    const mockPerfil = { id: 1, nome: 'Perfil 1' } as Perfil;
+    it('deve inicializar o formulário com campo nome', () => {
+        expect(component.formulario).toBeDefined();
+        expect(component.formulario.get('nome')).toBeDefined();
+        expect(component.formulario.get('nome')?.value).toBe('');
+    });
 
-    component.alterar(mockPerfil);
+    it('consultar deve chamar perfilService.consultarPorNome e definir perfis', () => {
+        const mockPerfis: Perfil[] = [
+            { id: 1, codigo: 'ADMIN', descricao: 'Administrador' } as Perfil,
+            { id: 2, codigo: 'USER', descricao: 'Usuário' } as Perfil
+        ];
+        perfilService.consultarPorNome.mockReturnValue(of(mockPerfis));
 
-    expect(routerSpy.navigate).toHaveBeenCalledWith([mockPerfil.id, 'editar'], { relativeTo: activatedRouteSpy.parent });
-  });
+        component.nome = 'ADMIN';
+        component.consultar();
 
-  it('deve excluir o perfil e chamar messageService.addMsgSuccess', () => {
-    const mockPerfil = { id: 1, nome: 'Perfil 1' } as Perfil;
-    component.perfis = [mockPerfil];
-    perfilServiceSpy.delete.and.returnValue(of({}));
+        expect(perfilService.consultarPorNome).toHaveBeenCalledWith('ADMIN');
+        expect(component.perfis).toEqual(mockPerfis);
+    });
 
-    component.excluir(mockPerfil);
+    it('consultar deve mostrar mensagem de erro ao falhar', () => {
+        perfilService.consultarPorNome.mockReturnValue(throwError(() => new Error('Erro')));
 
-    expect(messageServiceSpy.addConfirmYesNo).toHaveBeenCalled();
-    const confirmCallback = messageServiceSpy.addConfirmYesNo.calls.mostRecent().args[1];
-    confirmCallback();
+        component.consultar();
 
-    expect(perfilServiceSpy.delete).toHaveBeenCalledWith(mockPerfil.id);
-    expect(messageServiceSpy.addMsgSuccess).toHaveBeenCalledWith('Perfil excluído com sucesso.');
-    expect(component.perfis.length).toBe(0);
-  });
+        expect(messageService.addMsgDanger).toHaveBeenCalledWith('Ocorreu um erro ao pesquisar perfis.');
+    });
 
- 
+    it('incluir deve navegar para a rota de novo perfil', () => {
+        component.incluir();
+
+        expect(router.navigate).toHaveBeenCalledWith(['novo'], { relativeTo: activatedRoute.parent });
+    });
+
+    it('alterar deve navegar para a rota de edição do perfil', () => {
+        const mockPerfil: Perfil = { id: 123, codigo: 'ADMIN' } as Perfil;
+
+        component.alterar(mockPerfil);
+
+        expect(router.navigate).toHaveBeenCalledWith([123, 'editar'], { relativeTo: activatedRoute.parent });
+    });
+
+    it('excluir deve mostrar confirmação com ID do perfil', () => {
+        const mockPerfil: Perfil = { id: 1, codigo: 'ADMIN' } as Perfil;
+        component.perfis = [mockPerfil];
+
+        component.excluir(mockPerfil);
+
+        expect(messageService.addConfirmYesNo).toHaveBeenCalledWith(
+            'Deseja realmente excluir o perfil de ID 1?',
+            expect.any(Function),
+            null,
+            null,
+            'Sim',
+            'Não'
+        );
+    });
+
+    it('excluir deve excluir perfil com sucesso e remover da lista', () => {
+        const mockPerfil: Perfil = { id: 1, codigo: 'ADMIN' } as Perfil;
+        component.perfis = [mockPerfil];
+        perfilService.delete.mockReturnValue(of(null));
+        messageService.addConfirmYesNo.mockImplementation((msg: string, listenerYes: () => void) => {
+            listenerYes();
+        });
+
+        component.excluir(mockPerfil);
+
+        expect(perfilService.delete).toHaveBeenCalledWith(1);
+        expect(messageService.addMsgSuccess).toHaveBeenCalledWith('Perfil excluído com sucesso.');
+        expect(component.perfis.length).toBe(0);
+    });
+
+    it('excluir deve mostrar erro ao falhar ao excluir perfil', () => {
+        const mockPerfil: Perfil = { id: 1, codigo: 'ADMIN' } as Perfil;
+        component.perfis = [mockPerfil];
+        perfilService.delete.mockReturnValue(throwError(() => new Error('Erro')));
+        messageService.addConfirmYesNo.mockImplementation((msg: string, listenerYes: () => void) => {
+            listenerYes();
+        });
+
+        component.excluir(mockPerfil);
+
+        expect(perfilService.delete).toHaveBeenCalledWith(1);
+        expect(messageService.addMsgDanger).toHaveBeenCalledWith('Ocorreu um erro ao excluir o perfil.');
+    });
+
+    it('excluir deve remover apenas o perfil correto da lista', () => {
+        const mockPerfil1: Perfil = { id: 1, codigo: 'ADMIN' } as Perfil;
+        const mockPerfil2: Perfil = { id: 2, codigo: 'USER' } as Perfil;
+        const mockPerfil3: Perfil = { id: 3, codigo: 'GUEST' } as Perfil;
+        component.perfis = [mockPerfil1, mockPerfil2, mockPerfil3];
+        perfilService.delete.mockReturnValue(of(null));
+        messageService.addConfirmYesNo.mockImplementation((msg: string, listenerYes: () => void) => {
+            listenerYes();
+        });
+
+        component.excluir(mockPerfil2);
+
+        expect(component.perfis.length).toBe(2);
+        expect(component.perfis).toEqual([mockPerfil1, mockPerfil3]);
+    });
+
+    it('excluir não deve remover da lista se perfil não for encontrado', () => {
+        const mockPerfil1: Perfil = { id: 1, codigo: 'ADMIN' } as Perfil;
+        const mockPerfilNaoExiste: Perfil = { id: 999, codigo: 'NAO_EXISTE' } as Perfil;
+        component.perfis = [mockPerfil1];
+        perfilService.delete.mockReturnValue(of(null));
+        messageService.addConfirmYesNo.mockImplementation((msg: string, listenerYes: () => void) => {
+            listenerYes();
+        });
+
+        component.excluir(mockPerfilNaoExiste);
+
+        expect(component.perfis.length).toBe(1);
+        expect(component.perfis).toEqual([mockPerfil1]);
+    });
+
+    it('handleSelectElemChange deve atualizar itens com o valor do select', () => {
+        const mockEvent = {
+            target: {
+                value: '10'
+            }
+        } as unknown as Event;
+
+        component.handleSelectElemChange(mockEvent);
+
+        expect(component.itens).toBe(10);
+    });
+
+    it('handleSelectElemChange deve converter string para número', () => {
+        const mockEvent = {
+            target: {
+                value: '25'
+            }
+        } as unknown as Event;
+
+        component.handleSelectElemChange(mockEvent);
+
+        expect(component.itens).toBe(25);
+        expect(typeof component.itens).toBe('number');
+    });
 });
