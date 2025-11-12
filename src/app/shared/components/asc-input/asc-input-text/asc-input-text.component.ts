@@ -40,7 +40,7 @@ export class AscInputTextComponent extends BaseInputComponent implements OnInit 
     @Output()
     onDrop: EventEmitter<any>;
 
-    mask: Array<string | RegExp> = null;
+    mask: string = null;
 
     constructor(messageService: MessageService) {
         super(messageService);

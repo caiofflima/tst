@@ -18,6 +18,7 @@ import {MotivoSolicitacaoTipoPedidoDTO} from 'app/shared/models/dto/motivo-solic
 import {MotivoSolicitacaoTipoPedidoIncluirDTO} from 'app/shared/models/dto/motivo-solicitacao-tipo-pedido-incluir';
 import {MotivoSolicitacaoTipoPedidoBeneficiariosDTO} from 'app/shared/models/dto/motivo-solicitacao-tipo-pedido-beneficiarios';
 
+import { CheckboxChangeEvent } from 'primeng/checkbox';
 @Component({
     selector: 'asc-parametrizacao-motivo-tipo-pedido-form',
     templateUrl: './parametrizacao-motivo-tipo-pedido-form.component.html',
@@ -314,8 +315,8 @@ export class ParametrizacaoMotivoTipoPedidoFormComponent extends BaseComponent {
         return null;
     }
 
-    public onChangeInativo(inativo: boolean): void {
-        if (inativo) {
+    public onChangeInativo(event: CheckboxChangeEvent): void {
+        if (event.checked) {
             this.dataInativacao.setValue(new Date())
         } else {
             this.dataInativacao.reset();

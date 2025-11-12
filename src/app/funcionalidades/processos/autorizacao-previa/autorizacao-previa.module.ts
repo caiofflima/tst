@@ -8,7 +8,7 @@ import { ProfissionalComponent } from './profissional/profissional.component';
 import { DocumentosComponent } from './documentos/documentos.component';
 import { ResumoComponent } from './resumo/resumo.component';
 import { SolicitacaoComponent } from './solicitacao/solicitacao.component';
-import { TextMaskModule } from 'angular2-text-mask';
+import { NgxMaskModule } from 'ngx-mask';
 import { AutorizacaoPreviaBaseComponent } from './autorizacao-previa-base/autorizacao-previa-base.component';
 import { CdkStepperModule } from '@angular/cdk/stepper';
 import { AscStepperModule } from '../../../shared/components/asc-stepper/asc-stepper.module';
@@ -34,7 +34,7 @@ import {AscCardModule} from "../../../shared/components/asc-card/asc-card.module
     imports: [
         CommonModule,
         AutorizacaoPreviaRoutingModule,
-        TextMaskModule,
+        NgxMaskModule,
         AscStepperModule,
         CdkStepperModule,
         ComponentModule,

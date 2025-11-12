@@ -25,7 +25,7 @@ import {
 
 } from "primeng/overlaypanel";
 
-// import {TextMaskModule} from 'angular2-text-mask';
+// import { NgxMaskModule } from 'ngx-mask';
 import {CdkStepperModule} from '@angular/cdk/stepper';
 import {AscStepperModule} from '../../shared/components/asc-stepper/asc-stepper.module';
 import {ComponentModule} from '../../shared/components/component.module';
@@ -55,7 +55,7 @@ import { AcompanhamentoAdesaoComponent } from './acompanhamento-adesao/acompanha
 @NgModule({
     imports: [
         CommonModule,
-        // TextMaskModule,
+        // NgxMaskModule,
         AscStepperModule,
         CdkStepperModule,
         ComponentModule,

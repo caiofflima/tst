@@ -11,6 +11,7 @@ import { MotivoNegacao, SituacaoProcesso } from 'app/shared/models/entidades';
 import { ComboService, MotivoNegacaoService } from 'app/shared/services/services';
 import { take } from 'rxjs';
 
+import { CheckboxChangeEvent } from 'primeng/checkbox';
 @Component({
     selector: 'asc-parametrizacao-motivo-negacao-form',
     templateUrl: './parametrizacao-motivo-negacao-form.component.html',
@@ -158,8 +159,8 @@ export class ParametrizacaoMotivoNegacaoFormComponent extends BaseComponent {
         });
     }
 
-    public onChangeInativo(inativo: boolean) {
-        if (inativo) {
+    public onChangeInativo(event: CheckboxChangeEvent) {
+        if (event.checked) {
             this.dataInativacao.setValue(new Date())
         } else {
             this.dataInativacao.clearValidators();

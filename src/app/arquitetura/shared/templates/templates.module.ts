@@ -36,9 +36,6 @@ import {RadioButtonModule} from "primeng/radiobutton";
         CabecalhoPadraoComponent,
         RodapePadraoComponent,
         PaginaNaoEncontradaComponent
-    ],
-    entryComponents: [
-        CabecalhoPadraoComponent
     ]
 })
 export class TemplatesModule {

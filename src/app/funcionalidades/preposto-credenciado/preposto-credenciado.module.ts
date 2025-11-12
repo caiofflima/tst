@@ -10,7 +10,7 @@ import { EmpresaCredenciadaFormComponent } from 'app/funcionalidades/preposto-cr
 import { EmpresaCredenciadaListarComponent } from 'app/funcionalidades/preposto-credenciado/preposto-credenciado-listar/empresa-credenciada-listar.component';
 import { EmpresaCredenciadaRoutingModule } from './preposto-credenciado.routing.module';
 import { ComposicaoPedidoModule } from 'app/shared/components/pedido/composicao-pedido.module';
-import { TextMaskModule } from 'angular2-text-mask';
+import { NgxMaskModule } from 'ngx-mask';
 import { PrimeNGModule } from 'app/shared/primeng.module';
 import { PipeModule } from 'app/shared/pipes/pipe.module';
 
@@ -24,7 +24,7 @@ import { PipeModule } from 'app/shared/pipes/pipe.module';
         TemplatesModule,
         EmpresaCredenciadaRoutingModule,
         ComposicaoPedidoModule,
-		TextMaskModule,
+		NgxMaskModule,
 		PrimeNGModule,
 		PipeModule
     ],

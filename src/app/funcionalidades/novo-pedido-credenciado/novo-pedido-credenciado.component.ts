@@ -20,8 +20,8 @@ export class NovoPedidoAutorizadorComponent extends BaseComponent {
 
     beneficiarios: Beneficiario[];
     beneficiario: Beneficiario;
-    maskCI: Array<string | RegExp> = CI_MASK;
-    maskCPF: Array<string | RegExp> = CPF_MASK;
+    maskCI: string = CI_MASK;
+    maskCPF: string = CPF_MASK;
     titular: any;
     form: any;
 

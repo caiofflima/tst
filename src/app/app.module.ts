@@ -28,6 +28,7 @@ import { PaginationModule } from './shared/components/pagination/pagination.modu
 import localePt from '@angular/common/locales/pt';
 import {registerLocaleData} from '@angular/common';
 import { AscDocumentosModule } from "./shared/components/asc-pedido/asc-documentos/asc-documentos.module";
+import { NgxMaskModule } from 'ngx-mask';
 
 
 registerLocaleData(localePt,'pt')
@@ -52,6 +53,7 @@ registerLocaleData(localePt,'pt')
       TemplatesModule,
       AppRoutingModule,
       PrimeNGModule,
+      NgxMaskModule.forRoot(),
     //   PdfViewerModule,
     AscDocumentosModule
   ],

@@ -24,12 +24,12 @@
       <label class="control-label" for="numeroCartao">Cartão de Identificação</label>
       <input type="text" id="numeroCartao" [formControl]="numeroCartao" name="numeroCartao" class="form-control"
              title="Informe o número da carteira do beneficiário"
-             [textMask]="{mask: maskCI}">
+             [mask]="maskCI">
     </div>
     <div class="col-md-2">
       <label class="control-label" for="cpf">CPF</label>
       <input type="text" id="cpf" [formControl]="cpf" name="cpf" class="form-control"
-             title="Informe o CPF do beneficiário" [textMask]="{mask: maskCPF}">
+             title="Informe o CPF do beneficiário" [mask]="maskCPF">
     </div>
   </div>
   <div class="col-xs-12 barra-botoes">

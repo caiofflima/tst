@@ -16,7 +16,7 @@ import {Util} from '../../../../../app/arquitetura/shared/util/util';
 })
 export class PerfilCadastroComponent extends BaseComponent {
   formulario: FormGroup;
-  maskDataHora: Array<string | RegExp>;
+  maskDataHora: string;
   perfil: Perfil = null;
 
   constructor(

@@ -41,7 +41,7 @@ export class PrestadorExternoFormComponent extends BaseComponent implements OnIn
 
     form: FormGroup;
     formEmpresaPerfil: FormGroup;
-    maskCpf: Array<string | RegExp> = null;
+    maskCpf: string = null;
     prestadorExterno: PrestadorExterno = new PrestadorExterno();
     empresas: any[];
     perfisEmpresas: any[] = [];

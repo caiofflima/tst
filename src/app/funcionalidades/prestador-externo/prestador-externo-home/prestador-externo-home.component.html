@@ -21,7 +21,7 @@
       <div class="row p-0 col-xs-2">
         <label class="control-label" for="cpf">CPF</label>
         <input
-          type="text" id="cpf" class="form-control" [textMask]="{mask: maskCpf}"
+          type="text" id="cpf" class="form-control" [mask]="maskCpf"
           [(ngModel)]="filtro.cpf" name="cpf" title="{{bundle('MH130')}}"/>
       </div>
 
@@ -35,7 +35,7 @@
       <div class="row pl-0 col-xs-4">
         <label class="control-label" for="codigoUsuario">Código do Usuário</label>
         <input
-          type="text" id="codigoUsuario" [textMask]="{mask: maskCodigoUsuario}" class="form-control maiusculo"
+          type="text" id="codigoUsuario" [mask]="maskCodigoUsuario" class="form-control maiusculo"
           [(ngModel)]="filtro.codigoUsuario" name="codigoUsuario" title="{{bundle('MH163')}}">
       </div>
 

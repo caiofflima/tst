@@ -7,7 +7,7 @@ import {InputTextareaModule} from "primeng/inputtextarea";
 import {DialogModule} from "primeng/dialog";
 import {MessageModule  as PrimeMessageModule} from "primeng/message";
 import {OverlayPanelModule} from "primeng/overlaypanel";
-import {TextMaskModule} from 'angular2-text-mask';
+import { NgxMaskModule } from 'ngx-mask';
 import {CdkStepperModule} from '@angular/cdk/stepper';
 import {AscStepperModule} from '../../../shared/components/asc-stepper/asc-stepper.module';
 import {ComponentModule} from '../../../shared/components/component.module';
@@ -22,7 +22,7 @@ import {ReciboComponent} from './recibo.component';
 @NgModule({
   imports: [
     CommonModule,
-    TextMaskModule,
+    NgxMaskModule,
     AscStepperModule,
     CdkStepperModule,
     ComponentModule,

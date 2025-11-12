@@ -1,19 +1,20 @@
-export let CI_MASK = [/\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/];
-export let CPF_MASK = [/\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '-', /\d/, /\d/];
-export let CNPJ_MASK = [/\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/];
-export let SIICO_MASK = [/\d/, /\d/, /\d/, /\d/, '-', /\d/];
-export let DATA_MASK = [/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/];
-export let DDMMYY_MASK = [/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/];
-export let DATAHORA_MASK = [/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, ':', /\d/, /\d/, ':', /\d/, /\d/];
-export let TELEFONE_MASK = ['(', /[1-9]/, /[1-9]/, ')', ' ', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/,];
-export let CELULAR_MASK = ['(', /[1-9]/, /[1-9]/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/,];
-export let NIS_MASK = [/\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/];
-export let NUMERO_MASK = [/\d/, /\d/, /\d/, /\d/];
-export let CEP_MASK = [/\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/];
-export let PROCEDIMENTO_MASK = [/\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/];
-export let COD_USUARIO_MASK = [/[A-Za-z]/, /[A-Za-z]/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/];
-export let MATRICULA_MASK = [/\d/, /\d/, /\d/, /\d/, /\d/, /\d/];
-export let MATRICULA_MASK_DIGITO = [/\d/, /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/];
+// Máscaras convertidas para ngx-mask (formato string)
+export let CI_MASK = '0000000000-00';
+export let CPF_MASK = '000.000.000-00';
+export let CNPJ_MASK = '00.000.000/0000-00';
+export let SIICO_MASK = '0000-0';
+export let DATA_MASK = '00/00/0000';
+export let DDMMYY_MASK = '00/00/00';
+export let DATAHORA_MASK = '00/00/0000 00:00:00';
+export let TELEFONE_MASK = '(00) 0000-0000';
+export let CELULAR_MASK = '(00) 00000-0000';
+export let NIS_MASK = '00000000000';
+export let NUMERO_MASK = '0000';
+export let CEP_MASK = '00000-000';
+export let PROCEDIMENTO_MASK = '0000000-0';
+export let COD_USUARIO_MASK = 'AA000000';
+export let MATRICULA_MASK = '000000';
+export let MATRICULA_MASK_DIGITO = '000000-0';
 
 export const registeredMasks = {
     ciMask: CI_MASK,

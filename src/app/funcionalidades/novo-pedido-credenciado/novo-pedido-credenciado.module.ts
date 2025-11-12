@@ -12,7 +12,7 @@ import { NovoPedidoCredenciadoRoutingModule } from './novo-pedido-credenciado.ro
 import { ComposicaoPedidoModule } from 'app/shared/components/pedido/composicao-pedido.module';
 import { PrimeNGModule } from 'app/shared/primeng.module';
 import { ComponentModule } from 'app/shared/components/component.module';
-import {TextMaskModule} from "angular2-text-mask";
+import { NgxMaskModule } from 'ngx-mask';
 
 @NgModule( {
     imports: [
@@ -24,7 +24,7 @@ import {TextMaskModule} from "angular2-text-mask";
         TemplatesModule,
         NovoPedidoCredenciadoRoutingModule,
         ComposicaoPedidoModule,
-        TextMaskModule,
+        NgxMaskModule,
         PrimeNGModule,
         ComponentModule
     ],

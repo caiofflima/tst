@@ -22,7 +22,7 @@ import { take } from 'rxjs';
 })
 export class EmpresaPrestadorExternoHomeComponent extends BaseComponent implements OnInit{
 
-    maskCnpj: any[] = null;
+    maskCnpj: string = null;
     filtro: FiltroConsultaEmpresa;
 
     listComboUF: DadoComboDTO[];

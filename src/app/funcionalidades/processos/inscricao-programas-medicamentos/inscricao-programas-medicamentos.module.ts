@@ -8,7 +8,7 @@ import {ResumoComponent} from './resumo/resumo.component';
 import {DialogModule,} from "primeng/dialog";
 import {MessageModule as PrimeMessageModule} from "primeng/message";
 import {OverlayPanelModule} from "primeng/overlaypanel";
-import {TextMaskModule} from 'angular2-text-mask';
+import { NgxMaskModule } from 'ngx-mask';
 import {
     InscricaoProgramasMendicamentosBaseComponent
 } from './inscricao-programas-medicamentos-base/inscricao-programas-medicamentos-base.component';
@@ -39,7 +39,7 @@ import { AcompanhamentoModule } from '../../acompanhamento/acompanhamento.module
     imports: [
         CommonModule,
         InscricaoProgramasMedicamentosRoutingModule,
-        TextMaskModule,
+        NgxMaskModule,
         AscStepperModule,
         CdkStepperModule,
         ComponentModule,

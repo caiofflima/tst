@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { TextMaskModule } from 'angular2-text-mask';
+import { NgxMaskModule } from 'ngx-mask';
 // Aplicação
 import { TemplatesModule } from 'app/arquitetura/shared/templates/templates.module';
 import { EmpresaPrestadorExternoFormComponent } from 'app/funcionalidades/empresa-prestador-externo/empresa-prestador-externo-form/empresa-prestador-externo-form.component';
@@ -31,7 +31,7 @@ import {AscMultiSelectModule} from "../../shared/components/multiselect/asc-mult
         ReactiveFormsModule,
         TemplatesModule,
         NgxPaginationModule,
-        TextMaskModule,
+        NgxMaskModule,
         TableModule,
         AscMessageErrorModule,
         FieldsetModule,

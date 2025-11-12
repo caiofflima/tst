@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { TextMaskModule } from 'angular2-text-mask';
+import { NgxMaskModule } from 'ngx-mask';
 import { TemplatesModule } from 'app/arquitetura/shared/templates/templates.module';
 import { AscMessageErrorModule } from 'app/shared/components/message-error/asc-message-error.module';
 import { NgxPaginationModule } from 'ngx-pagination';
@@ -27,7 +27,7 @@ import { PipeModule } from 'app/shared/pipes/pipe.module';
 		ReactiveFormsModule,
     TemplatesModule,
 		NgxPaginationModule,
-		TextMaskModule,
+		NgxMaskModule,
 		TableModule,
 		SharedModule,
 		AscMessageErrorModule,

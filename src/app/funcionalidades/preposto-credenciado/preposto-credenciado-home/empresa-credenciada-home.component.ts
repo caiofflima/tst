@@ -15,7 +15,7 @@ import { CNPJ_MASK } from 'app/shared/util/masks';
 })
 export class EmpresaCredenciadaHomeComponent  extends BaseComponent implements OnInit {
 
-  maskCnpj: Array<string | RegExp> = null;
+  maskCnpj: string = null;
   listaEmpresas = new Array<EmpresaPrestadora>();
   filtro: FiltroConsultaEmpresa;
 

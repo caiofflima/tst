@@ -2,7 +2,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    
+    "skipLibCheck": true,
     "strictPropertyInitialization":false,
     "noImplicitAny":false,
     "experimentalDecorators":true,
@@ -39,7 +39,8 @@
   },
   "exclude": [
     "**/*.spec.ts",
-    "src/test.ts"
+    "src/test.ts",
+    "node_modules/@types/glob"
   ]
 }
 

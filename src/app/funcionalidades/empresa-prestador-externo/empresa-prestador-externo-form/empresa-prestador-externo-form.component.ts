@@ -23,7 +23,7 @@ import {EmpresaPrestadora} from 'app/shared/models/comum/empresa-prestadora';
 })
 export class EmpresaPrestadorExternoFormComponent extends BaseComponent implements OnInit {
     @ViewChild('caixaTableEmpresaPrestadorExternoForm')caixaTableEmpresaPrestadorExternoForm:any
-    maskCnpj: Array<string | RegExp> = null;
+    maskCnpj: string = null;
     filiais: Array<Filial>;
     filiaisAdd: Array<FilialDTO> = [];
     filial: Filial = new Filial();

@@ -9,7 +9,7 @@ import {PesquisarProcessosCredenciadoListarComponent} from "./pesquisar-processo
 import {PesquisarProcessosCredenciadoRoutingModule} from "./pesquisar-processos-credenciado.routing.module";
 import {PipeModule} from "../../../app/shared/pipes/pipe.module";
 import {ResultadoPesquisaProcessosCredenciadoComponent} from "./resultado-pesquisa-processos-credenciado/resultado-pesquisa-processos-credenciado.component";
-import {TextMaskModule} from "angular2-text-mask";
+import { NgxMaskModule } from 'ngx-mask';
 import { PesquisarProcessosV2Component } from './pesquisar-processos-v2/pesquisar-processos-v2.component';
 import { PesquisarProcessosListaV2Component } from './pesquisar-processos-lista-v2/pesquisar-processos-lista-v2.component';
 import {PrimeNGModule} from "../../../app/shared/primeng.module";
@@ -25,7 +25,7 @@ import {AscMultiSelectModule} from "../../../app/shared/components/multiselect/a
     RouterModule,
     TemplatesModule,
     PesquisarProcessosCredenciadoRoutingModule,
-    TextMaskModule,
+    NgxMaskModule,
     PipeModule,
     PrimeNGModule,
     ComponentModule,

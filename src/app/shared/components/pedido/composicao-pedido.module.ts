@@ -100,8 +100,7 @@ import {AscProcedimentosPedidoComponent} from './procedimentos-pedido/procedimen
     HistoricoProcessoService,
     ComposicaoPedidoService,
     MensagemPedidoService
-  ],
-  entryComponents: []
+  ]
 })
 export class ComposicaoPedidoModule {
 }

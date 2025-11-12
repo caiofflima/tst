@@ -14,6 +14,7 @@ import {Location} from "@angular/common";
 import {SituacaoProcesso} from "../../../shared/models/comum/situacao-processo";
 import {Util} from "../../../arquitetura/shared/util/util";
 
+import { CheckboxChangeEvent } from 'primeng/checkbox';
 @Component({
     selector: 'asc-parametrizacao-prazos-form',
     templateUrl: './parametrizacao-prazos-form.component.html',
@@ -208,8 +209,8 @@ export class ParametrizacaoPrazosFormComponent extends BaseComponent {
         }
     }
 
-    public onChangeInativo(inativo: boolean) {
-        if (inativo) {
+    public onChangeInativo(event: CheckboxChangeEvent) {
+        if (event.checked) {
             this.dataInativacao.setValue(new Date())
             this.dataInativacao.setValidators(Validators.required);
         } else {

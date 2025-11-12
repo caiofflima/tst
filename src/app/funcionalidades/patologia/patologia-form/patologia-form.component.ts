@@ -10,6 +10,7 @@ import {Util} from "../../../arquitetura/shared/util/util";
 import {AscValidators} from "../../../shared/validators/asc-validators";
 import {Location} from "@angular/common";
 
+import { CheckboxChangeEvent } from 'primeng/checkbox';
 @Component({
     selector: 'asc-patologia-form',
     templateUrl: './patologia-form.component.html',
@@ -87,8 +88,8 @@ export class PatologiaFormComponent extends BaseComponent {
         }
     }
 
-    public onChangeInativo(inativo: boolean) {
-        if (inativo) {
+    public onChangeInativo(event: CheckboxChangeEvent) {
+        if (event.checked) {
             this.dataInativacao.setValue(new Date())
         } else {
             this.dataInativacao.reset();

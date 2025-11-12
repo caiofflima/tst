@@ -20,6 +20,7 @@ import {ComboService} from "../../../shared/services/comum/combo.service";
 import {take} from "rxjs/operators";
 import {NumberUtil} from "../../../shared/util/number-util";
 
+import { CheckboxChangeEvent } from 'primeng/checkbox';
 @Component({
     selector: 'asc-parametrizacao-documento-processo-form',
     templateUrl: './parametrizacao-documento-processo-form.component.html',
@@ -237,8 +238,8 @@ export class ParametrizacaoDocumentoProcessoFormComponent extends BaseComponent 
         }
     }
 
-    public onChangeInativo(inativo: boolean): void {
-        if (inativo) {
+    public onChangeInativo(event: CheckboxChangeEvent): void {
+        if (event.checked) {
             this.dataInativacao.setValue(new Date())
         } else {
             this.dataInativacao.reset();

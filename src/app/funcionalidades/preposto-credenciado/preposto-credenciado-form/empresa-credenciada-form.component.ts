@@ -18,7 +18,7 @@ import {AscValidators} from 'app/shared/validators/asc-validators';
 })
 export class EmpresaCredenciadaFormComponent extends BaseComponent implements OnInit {
     formulario: FormGroup;
-    maskCnpj: Array<string | RegExp> = null;
+    maskCnpj: string = null;
     filiais: Array<Filial>;
     filiaisAdd: Array<FilialDTO> = [];
     filial: Filial = new Filial();

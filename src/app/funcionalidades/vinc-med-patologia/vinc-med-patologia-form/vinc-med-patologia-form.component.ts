@@ -14,6 +14,7 @@ import {Util} from "../../../arquitetura/shared/util/util";
 import {Location} from "@angular/common";
 
 
+import { CheckboxChangeEvent } from 'primeng/checkbox';
 @Component({
     selector: 'asc-vinc-med-patologia-form',
     templateUrl: './vinc-med-patologia-form.component.html',
@@ -240,8 +241,8 @@ export class VincMedPatologiaFormComponent extends BaseComponent implements OnIn
         this.medicamento.markAsTouched();
     }
 
-    public onChangeInativo(inativo: boolean) {
-        if (inativo) {
+    public onChangeInativo(event: CheckboxChangeEvent) {
+        if (event.checked) {
             this.dataInativacao.setValue(new Date())
             this.dataInativacao.setValidators(Validators.required);
         } else {

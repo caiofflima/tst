@@ -51,7 +51,7 @@
     <div class="row col-md-6 coluna-interna">
       <div class="row col-md-8">
         <label class="control-label obrigatorio" for="cnpj">CNPJ</label>
-        <input type="text" id="cnpj" name="cnpj" [textMask]="{mask: maskCnpj}" class="form-control"
+        <input type="text" id="cnpj" name="cnpj" [mask]="maskCnpj" class="form-control"
                title="CNPJ da empresa conveniada." formControlName="cnpj">
         <asc-message-error [control]="formulario.controls['cnpj']" type="required"
                            [errorMessage]="bundle('MA007')"></asc-message-error>

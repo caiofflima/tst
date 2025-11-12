@@ -28,7 +28,7 @@
           id="cnpj"
           name="cnpj"
           formControlName="cnpj"
-          [textMask]="{ mask: maskCnpj }"
+          [mask]="maskCnpj"
           class="form-control"
           title="CNPJ da empresa conveniada."
         />
@@ -130,7 +130,7 @@
       <div class="row col-xs-2 p-0">
         <label class="control-label" for="cnpj">CNPJ</label>&nbsp;<br>
         <input type="text" id="cnpj" name="cnpj" formControlName="cnpj"
-          [textMask]="{mask: maskCnpj}" class="form-control" title="CNPJ da empresa conveniada.">
+          [mask]="maskCnpj" class="form-control" title="CNPJ da empresa conveniada.">
       </div>
       <div class="row col-xs-6">
         <label class="control-label" for="cnpj">Razão Social</label>&nbsp;<br>

@@ -17,6 +17,7 @@ import {AscValidators} from "../../../shared/validators/asc-validators";
 import {Util} from "../../../arquitetura/shared/util/util";
 import { SituacaoProcesso } from 'app/shared/models/entidades';
 
+import { CheckboxChangeEvent } from 'primeng/checkbox';
 @Component({
     selector: 'app-email-situacao-novo',
     templateUrl: './email-situacao-form.component.html'
@@ -235,8 +236,8 @@ export class EmailSituacaoFormComponent extends BaseComponent implements OnInit 
         return isNaN(id) || (id===null);
     }
 
-    public onChangeInativo(inativo: boolean) {
-        if (inativo) {
+    public onChangeInativo(event: CheckboxChangeEvent) {
+        if (event.checked) {
             this.dataInativacao.setValue(new Date())
         } else {
             this.dataInativacao.reset();

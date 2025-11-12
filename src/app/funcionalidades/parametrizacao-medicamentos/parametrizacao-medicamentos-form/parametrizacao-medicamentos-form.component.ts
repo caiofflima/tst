@@ -14,6 +14,7 @@ import {Util} from "../../../arquitetura/shared/util/util";
 import {Medicamento} from 'app/shared/models/entidades';
 import {SimNaoEnum} from "app/shared/models/comum/sim-nao";
 
+import { CheckboxChangeEvent } from 'primeng/checkbox';
 @Component({
     selector: 'asc-parametrizacao-medicamentos-form',
     templateUrl: './parametrizacao-medicamentos-form.component.html',
@@ -201,8 +202,8 @@ export class ParametrizacaoMedicamentosFormComponent extends BaseComponent {
         });
     }
 
-    public onChangeInativo(inativo: boolean) {
-        if (inativo) {
+    public onChangeInativo(event: CheckboxChangeEvent) {
+        if (event.checked) {
             this.dataInativacao.setValue(new Date())
         } else {
             this.dataInativacao.clearValidators();

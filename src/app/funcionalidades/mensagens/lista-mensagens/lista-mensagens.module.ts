@@ -8,7 +8,7 @@ import { DirectivesModule } from 'app/arquitetura/shared/directives/directives.m
 
 import { TabsModule } from 'ngx-bootstrap/tabs';
 
-import { TextMaskModule } from 'angular2-text-mask';
+import { NgxMaskModule } from 'ngx-mask';
 
 import { NgxPaginationModule } from 'ngx-pagination';
 import { TabViewModule} from 'primeng/tabview';
@@ -38,7 +38,7 @@ import { ListaMensagensRoutingModule } from './lista-mensagens.routing.module';
 		RouterModule,
 		TabsModule.forRoot(),
 		TemplatesModule,
-		TextMaskModule,
+		NgxMaskModule,
 	],
 	declarations: [
 		ListaMensagensComponent,

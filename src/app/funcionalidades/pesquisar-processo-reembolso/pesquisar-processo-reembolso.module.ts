@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { TextMaskModule } from 'angular2-text-mask';
+import { NgxMaskModule } from 'ngx-mask';
 // Aplicação
 import { TemplatesModule } from 'app/arquitetura/shared/templates/templates.module';
 
@@ -38,7 +38,7 @@ import { EmpresaPrestadorExternoRoutingModule } from 'app/funcionalidades/empres
         ReactiveFormsModule,
         TemplatesModule,
         NgxPaginationModule,
-        TextMaskModule,
+        NgxMaskModule,
         TableModule,
         AscMessageErrorModule,
         FieldsetModule,

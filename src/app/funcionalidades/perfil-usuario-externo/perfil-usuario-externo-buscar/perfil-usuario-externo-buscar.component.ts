@@ -26,7 +26,7 @@ export class PerfilUsuarioExternoBuscarComponent extends BaseComponent implement
   perfis: any[] = [];
   tiposAuditores: any[] = [];
   perfilPrestadorDtoSave: PerfilPrestadorEmpresaSaveDTO = new PerfilPrestadorEmpresaSaveDTO();
-  maskCpf: Array<string | RegExp> = null;
+  maskCpf: string = null;
 
   constructor(messageService: MessageService,
               private comboService: ComboService,

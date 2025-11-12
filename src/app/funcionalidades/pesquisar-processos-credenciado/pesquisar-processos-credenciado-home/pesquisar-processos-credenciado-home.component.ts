@@ -42,8 +42,8 @@ export class PesquisarProcessosCredenciadoHomeComponent extends BaseComponent im
     listComboSituacaoProcesso: DadoComboDTO[];
     exibirResultadosUsuarioSessao: boolean;
     listProcessosUsuarioSessao: ProcessoDTO[];
-    maskCI: Array<string | RegExp> = CI_MASK;
-    maskCPF: Array<string | RegExp> = CPF_MASK;
+    maskCI: string = CI_MASK;
+    maskCPF: string = CPF_MASK;
 
     constructor(
         messageService: MessageService,

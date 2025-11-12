@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, CanActivateChild, CanLoad, Route, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { Route, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { SessaoService } from '../../../../../app/arquitetura/shared/services/seguranca/sessao.service';
@@ -9,7 +9,7 @@ import { MessageService } from '../../../../../app/shared/components/messages/me
  * Guard para verificar a autenticação e a verificação da permissão na rota acessada
  */
 @Injectable()
-export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
+export class AuthGuard  {
 	constructor(
 		private sessaoService: SessaoService,
 		private messageService: MessageService

@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { TextMaskModule } from 'angular2-text-mask';
+import { NgxMaskModule } from 'ngx-mask';
 // Aplicação
 import { TemplatesModule } from 'app/arquitetura/shared/templates/templates.module';
 import { PrestadorExternoHomeComponent } from 'app/funcionalidades/prestador-externo/prestador-externo-home/prestador-externo-home.component';
@@ -47,7 +47,7 @@ import {ComponentModule} from "../../shared/components/component.module";
         CalendarModule,
         OverlayPanelModule,
         DialogModule,
-        TextMaskModule,
+        NgxMaskModule,
         AscMessageErrorModule,
         FieldsetModule,
         PipeModule,

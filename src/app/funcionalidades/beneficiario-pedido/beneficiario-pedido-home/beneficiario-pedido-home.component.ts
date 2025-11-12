@@ -9,6 +9,7 @@ import {take} from "rxjs/operators";
 import {Location} from "@angular/common";
 import { BeneficiarioPedidoService } from 'app/shared/services/services';
 
+import { CheckboxChangeEvent } from 'primeng/checkbox';
 @Component({
     selector: 'asc-beneficiario-pedido-home',
     templateUrl: './beneficiario-pedido-home.component.html',

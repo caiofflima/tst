@@ -12,6 +12,7 @@ import {Location} from "@angular/common";
 import {Util} from "../../../arquitetura/shared/util/util";
 import { take } from 'rxjs';
 
+import { CheckboxChangeEvent } from 'primeng/checkbox';
 @Component({
     selector: 'asc-parametrizacao-documentos-from',
     templateUrl: './parametrizacao-documentos-from.component.html',
@@ -137,8 +138,8 @@ export class ParametrizacaoDocumentosFromComponent extends BaseComponent {
         });
     }
 
-    public onChangeInativo(inativo: boolean) {
-        if (inativo) {
+    public onChangeInativo(event: CheckboxChangeEvent) {
+        if (event.checked) {
             this.dataInativacao.setValue(new Date())
         } else {
             this.dataInativacao.reset();

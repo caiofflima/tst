@@ -21,10 +21,10 @@ import {EmpresaPrestadora} from "app/shared/models/entidades";
 })
 export class PrestadorExternoHomeComponent extends BaseComponent implements OnInit{
     id = new FormControl(null);
-    mask: Array<string | RegExp> = null;
-    maskCpf: Array<string | RegExp> = null;
+    mask: string = null;
+    maskCpf: string = null;
     filtro: FiltroConsultaPrestadorExterno;
-    maskCodigoUsuario: Array<string | RegExp> = null;
+    maskCodigoUsuario: string = null;
     listComboPerfil: DadoComboDTO[];
     perfis = this.formBuilder.control(null);
     empresas: DadoComboDTO[];

@@ -22,7 +22,7 @@ export class PerfilUsuarioExternoHomeComponent extends BaseComponent
   perfis: any[];
   tiposAuditores: any[];
   empresas: any[];
-  maskCpf: Array<string | RegExp> = null;
+  maskCpf: string = null;
   filtro: FiltroConsultaPerfilUsuarioExterno;
   pt: any;
 

@@ -22,7 +22,7 @@
   <form>
     <div class="row col-xs-2">
       <label class="control-label" for="cnpj">CNPJ</label>&nbsp;<br>
-      <input type="text" id="cnpj" name="cnpj" [(ngModel)]="filtro.cnpj" [textMask]="{mask: maskCnpj}"
+      <input type="text" id="cnpj" name="cnpj" [(ngModel)]="filtro.cnpj" [mask]="maskCnpj"
         class="form-control" title="CNPJ da empresa conveniada.">
     </div>
     <div class="row col-xs-6">

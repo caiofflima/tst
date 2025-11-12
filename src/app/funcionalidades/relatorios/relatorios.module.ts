@@ -5,7 +5,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {TemplatesModule} from "../../arquitetura/shared/templates/templates.module";
 import {DirectivesModule} from "../../arquitetura/shared/directives/directives.module";
 import {TabsModule} from "ngx-bootstrap/tabs";
-import {TextMaskModule} from "angular2-text-mask";
+import { NgxMaskModule } from 'ngx-mask';
 import {RelatorioAnaliticoRoutingModule} from "./analitico/relatorio-analitico.routing.module";
 import {
     RelatorioControlePrazosProcessosRoutingModule
@@ -61,7 +61,7 @@ import {ProgressSpinnerModule} from "primeng/progressspinner";
         RouterModule,
         TabsModule.forRoot(),
         TemplatesModule,
-        TextMaskModule,
+        NgxMaskModule,
         PipeModule,
         AscMultiSelectModule,
         AscMessageErrorModule,
@@ -84,7 +84,7 @@ export class RelatorioAnaliticoModule {
         RouterModule,
         TabsModule.forRoot(),
         TemplatesModule,
-        TextMaskModule,
+        NgxMaskModule,
         PipeModule,
         AscMultiSelectModule,
         AscMessageErrorModule,
@@ -110,7 +110,7 @@ export class RelatorioControlePrazosModule {
         RouterModule,
         TabsModule.forRoot(),
         TemplatesModule,
-        TextMaskModule,
+        NgxMaskModule,
         PipeModule,
         AscMultiSelectModule,
         AscMessageErrorModule,
@@ -136,7 +136,7 @@ export class RelatorioJuntaMedicaOdontologicaModule {
         RouterModule,
         TabsModule.forRoot(),
         TemplatesModule,
-        TextMaskModule,
+        NgxMaskModule,
         PipeModule,
         AscMultiSelectModule,
         AscMessageErrorModule,
@@ -163,7 +163,7 @@ export class RelatorioProcedimentosSolicitadosPorProfissionalModule {
         RouterModule,
         TabsModule.forRoot(),
         TemplatesModule,
-        TextMaskModule,
+        NgxMaskModule,
         PipeModule,
         AscMultiSelectModule,
         AscMessageErrorModule,

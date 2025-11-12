@@ -7,7 +7,7 @@ import {ComposicaoPedidoModule} from "app/shared/components/pedido/composicao-pe
 import {DirectivesModule} from "app/arquitetura/shared/directives/directives.module";
 import {TabsModule} from "ngx-bootstrap/tabs";
 import {ComponentModule} from "app/shared/components/component.module";
-import {TextMaskModule} from "angular2-text-mask";
+import { NgxMaskModule } from 'ngx-mask';
 import {NgxPaginationModule} from "ngx-pagination";
 import {SharedModule} from "primeng/api";
 import {TableModule} from "primeng/table";
@@ -46,7 +46,7 @@ import { CartoesRoutingModule } from "./cartoes.routing.module";
         TabsModule.forRoot(),
         TemplatesModule,
         ComposicaoPedidoModule,
-        TextMaskModule,
+        NgxMaskModule,
         TableModule,
         SharedModule,
         PipeModule,

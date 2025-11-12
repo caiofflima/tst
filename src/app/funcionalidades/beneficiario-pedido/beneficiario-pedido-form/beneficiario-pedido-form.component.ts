@@ -18,6 +18,7 @@ import { BehaviorSubject } from 'rxjs';
 import { of } from 'rxjs';
 import { SelectItem } from 'primeng/api';
 
+import { CheckboxChangeEvent } from 'primeng/checkbox';
 @Component({
     selector: 'asc-beneficiario-pedido-form',
     templateUrl: './beneficiario-pedido-form.component.html',
@@ -264,8 +265,8 @@ export class BeneficiarioPedidoFormComponent extends BaseComponent {
     }
 
 
-    public onChangeInativo(inativo: boolean) {
-        if (inativo) {
+    public onChangeInativo(event: CheckboxChangeEvent) {
+        if (event.checked) {
             this.dataInativacao.setValue(new Date())
             this.dataInativacao.setValidators(Validators.required);
         } else {

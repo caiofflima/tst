@@ -77,12 +77,12 @@
       <div class="col-md-2">
         <label class="control-label" for="numeroCartao">Cartão de Identificação</label>
         <input type="text" id="numeroCartao" class="form-control" formControlName="numeroCartao"
-               title="Filtrar pelo cartão de identificação do beneficiário." [textMask]="{mask: maskCI}">
+               title="Filtrar pelo cartão de identificação do beneficiário." [mask]="maskCI">
       </div>
       <div class="col-md-4">
         <label class="control-label" for="cpfBeneficiario">CPF</label>
         <input type="text" id="cpfBeneficiario" class="form-control" formControlName="cpfBeneficiario"
-               title="{{bundle('MH159')}}" [textMask]="{mask: maskCPF}">
+               title="{{bundle('MH159')}}" [mask]="maskCPF">
       </div>
       <div class="col-md-4">
         <label class="control-label" for="nomeBeneficiario">Nome</label>

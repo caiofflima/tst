@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {ActivatedRouteSnapshot, CanActivate, CanActivateChild, Router, RouterStateSnapshot} from '@angular/router';
+import { ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/router';
 import {UsuarioService} from '../../../../../app/arquitetura/shared/services/cadastrobasico/usuario.service';
 import {MessageService} from '../../../../../app/shared/components/messages/message.service';
 
@@ -9,7 +9,7 @@ import {MessageService} from '../../../../../app/shared/components/messages/mess
  * Também verifica a situação do usuário
  */
 @Injectable()
-export class DadosUsuarioGuard implements CanActivate, CanActivateChild {
+export class DadosUsuarioGuard  {
   private verificandoUsuario = false;
 
   constructor(

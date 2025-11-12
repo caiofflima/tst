@@ -12,6 +12,7 @@ import { BehaviorSubject } from 'rxjs';
 import { of } from 'rxjs';
 import { switchMap, take, tap } from 'rxjs/operators';
 
+import { CheckboxChangeEvent } from 'primeng/checkbox';
 @Component({
   selector: 'asc-motivo-solicitacao-form',
   templateUrl: './motivo-solicitacao-form.component.html',
@@ -171,8 +172,8 @@ export class MotivoSolicitacaoFormComponent extends BaseComponent {
   }
 
 
-  public onChangeInativo(inativo: boolean) {
-      if (inativo) {
+  public onChangeInativo(event: CheckboxChangeEvent) {
+      if (event.checked) {
           this.dataInativacao.setValue(new Date())
           this.dataInativacao.setValidators(Validators.required);
       } else {

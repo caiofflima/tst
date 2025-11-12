@@ -15,7 +15,6 @@ import {RelatorioControlePrazosProcessosDTO} from "../../../../shared/models/dto
 import {FiltroRelatorioAnalitico} from "../../../../shared/models/filtro/filtro-relatorio-analitico";
 import {Observable} from "rxjs";
 import {RelatorioAnaliticoDTO} from "../../../../shared/models/dto/relatorio-analitico";
-import {TextMaskModule} from "angular2-text-mask";
 import {take} from "rxjs/operators";
 import {Location} from "@angular/common";
 import {Loading} from "../../../../shared/components/loading/loading-modal.component";
@@ -32,7 +31,6 @@ import { map } from "rxjs";
 export class RelatorioControlePrazosProcessosHomeComponent extends RelatorioComponent<RelatorioControlePrazosProcessosDTO,
     FiltroRelatorioControlePrazosProcessos> implements AfterViewInit, OnInit {
 
-    textMask: TextMaskModule
     formulario: FormGroup;
     filtro: FiltroRelatorioControlePrazosProcessos;
     listComboTipoProcesso: DadoComboDTO[];
