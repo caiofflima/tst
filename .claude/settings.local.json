@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find:*)",
+      "Bash(python fix_required.py:*)",
+      "Bash(node run-build-with-logs.js:*)",
+      "Bash(python fix_primeng.py:*)",
+      "Bash(python fix_boolean_attrs.py:*)",
+      "Bash(python fix_remaining_emptyMessage.py:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
