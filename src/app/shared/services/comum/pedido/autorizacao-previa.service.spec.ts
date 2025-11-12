@@ -55,7 +55,7 @@ describe('AutorizacaoPreviaService', () => {
   });
 
   it('should update process status', () => {
-    const mockResponse = {};
+    const mockResponse = {} as any;
     const idPedido = 1;
     const idSituacaoProcesso = 2;
 
@@ -69,7 +69,7 @@ describe('AutorizacaoPreviaService', () => {
   });
 
   it('should release process for analysis', () => {
-    const mockResponse = {};
+    const mockResponse = {} as any;
     const idPedido = 1;
 
     service.liberarProcessoParaAnalise(idPedido).subscribe(response => {
@@ -126,10 +126,10 @@ describe('AutorizacaoPreviaService', () => {
   });
 
   it('should get order by id', () => {
-    const mockResponse = {};
+    const mockResponse: Pedido = {} as Pedido;
     const idPedido = 1;
 
-    service.consultarPorId(idPedido).subscribe(response => {
+    service.consultarPorId(idPedido).subscribe((response: Pedido) => {
       expect(response).toEqual(mockResponse);
     });
 

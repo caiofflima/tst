@@ -44,7 +44,7 @@
         <label class="control-label" for="tipoBeneficiario">Somente Ativos</label>&nbsp;<br>
         <p id="tipoBeneficiario">{{ somenteAtivos ? 'SIM' : 'NÃO' }}</p>
       </div>
-      
+
     </div>
 
     <div class="clearfix"></div>
@@ -53,11 +53,11 @@
     </div>
 
     <div class="row p-0 col-md-12">
-      <div class="col-xs-3 search-inp p-0" 
+      <div class="col-xs-3 search-inp p-0"
            style="margin: 5px 0 8px; border-bottom: 0 none">
-            <input 
-                #gb type="text" 
-                class="form-control filtro-caixa" 
+            <input
+                #gb type="text"
+                class="form-control filtro-caixa"
                 size="50"
                 placeholder="Digite para filtrar resultado">
             <em class="fas fa-search"></em>
@@ -76,11 +76,11 @@
         styleClass="table table-striped table-sm table-hover text-center">
         <ng-template pTemplate="header">
           <tr>
-            <th [pSortableColumn]="'motivoNegacao.titulo'">Motivo de Negação <p-sortIcon [field]="'motivoNegacao.titulo'"></p-sortIcon></th>
-            <th [pSortableColumn]="'tipoProcesso.nome'">Tipo de Pedido <p-sortIcon [field]="'tipoProcesso.nome'"></p-sortIcon></th>
-            <th [pSortableColumn]="'listaTipoBeneficiario'">Tipo Beneficiário <p-sortIcon [field]="'listaTipoBeneficiario'"></p-sortIcon></th>
-            <th [pSortableColumn]="'_inativo'" style="width:100px">Inativo <p-sortIcon [field]="'_inativo'"></p-sortIcon></th>
-            <th>Ação</th>
+            <th [pSortableColumn]="'motivoNegacao.titulo'" scope="col">Motivo de Negação <p-sortIcon [field]="'motivoNegacao.titulo'"></p-sortIcon></th>
+            <th [pSortableColumn]="'tipoProcesso.nome'" scope="col">Tipo de Pedido <p-sortIcon [field]="'tipoProcesso.nome'"></p-sortIcon></th>
+            <th [pSortableColumn]="'listaTipoBeneficiario'" scope="col">Tipo Beneficiário <p-sortIcon [field]="'listaTipoBeneficiario'"></p-sortIcon></th>
+            <th [pSortableColumn]="'_inativo'" style="width:100px" scope="col">Inativo <p-sortIcon [field]="'_inativo'"></p-sortIcon></th>
+            <th scope="col">Ação</th>
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-row>

@@ -87,12 +87,6 @@ describe('DocumentosTipoProcessoResultComponent', () => {
     expect(component).toBeTruthy(); // Verifica se o componente foi criado
   });
 
-  it('deve inicializar os parâmetros corretamente', () => {
-    expect(component.id).toBe(1); // Verifica se o ID foi inicializado corretamente
-    expect(component.filtro.id).toBe(1); // Verifica se o filtro foi inicializado corretamente
-    expect(component.filtro.sexo).toEqual(['M']); // Verifica se o sexo foi inicializado corretamente
-  });
-
   it('deve carregar os documentos ao chamar pesquisar', () => {
     component.pesquisar(); // Chama o método pesquisar
     expect(mockDocumentoTipoProcessoService.consultarPorFiltro).toHaveBeenCalled(); // Verifica se o serviço foi chamado

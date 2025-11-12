@@ -4,18 +4,21 @@ import { MessageService } from 'app/shared/components/messages/message.service';
 import { CampoVazioHifen } from 'app/shared/pipes/campo-vazio.pipe';
 import { TelefonePipe } from 'app/shared/pipes/telefone.pipe';
 import { PaginaInicialAlterarComponent } from './pagina-inicial-alterar.component';
+import { InscricaoDependenteService } from 'app/shared/services/services';
 
 describe('PaginaInicialAlterarComponent', () => {
   let component: PaginaInicialAlterarComponent;
   let fixture: ComponentFixture<PaginaInicialAlterarComponent>;
 
   const messageServiceSpy = jasmine.createSpyObj('MessageService', ['getDescription']);
+  const inscricaoDependenteServiceSpy = jasmine.createSpyObj('InscricaoDependenteService', ['setEditMode']);
   
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [PaginaInicialAlterarComponent, CampoVazioHifen, TelefonePipe],
       providers: [
         { provide: MessageService, useValue: messageServiceSpy },
+        { provide: InscricaoDependenteService, useValue: inscricaoDependenteServiceSpy },
        
       ],
       imports:[

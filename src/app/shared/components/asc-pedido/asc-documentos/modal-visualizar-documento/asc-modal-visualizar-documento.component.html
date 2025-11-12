@@ -38,13 +38,13 @@
       [src]="urlDocumento"
       [render-text]="true"
       [show-all]="false"
-      [(page)]="page"
+      [page]="page"
       [zoom]="zoom"
       [original-size]="true"
       [fit-to-page]="true"
       class="posicaoPDF"
-      (after-load-complete)="onLoadComplete($event)"
-      (pageChange)="onPageChange($event)"
+      (after-load-complete)="onLoadComplete($any($event))"
+      (pageChange)="onPageChange($any($event))"
     ></pdf-viewer>
     <!-- Fim de pdf antigo -->
 

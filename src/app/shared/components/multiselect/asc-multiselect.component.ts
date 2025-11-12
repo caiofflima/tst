@@ -1,5 +1,5 @@
 import {Component, EventEmitter, forwardRef, Input, Output} from '@angular/core';
-import {AbstractControl, ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
+import {AbstractControl, ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR} from '@angular/forms';
 
 @Component({
     selector: 'asc-multiSelect',

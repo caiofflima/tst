@@ -1,9 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Observable, Subject} from 'rxjs';
-import {of} from "rxjs";
-import {map} from "rxjs/operators";
-
+import {Observable, Subject, of} from 'rxjs';
 import {CrudHttpClientService} from 'app/arquitetura/shared/services/crud-http-client.service';
 import {ValidacaoDocumentoPedido} from "../../models/comum/validacao-documento-pedido";
 import {MessageService} from "../../components/messages/message.service";
@@ -55,8 +52,7 @@ export class ValidacaoDocumentoPedidoService extends CrudHttpClientService<Valid
             request.subscribe((documentos: ValidacaoDocumentoPedido[])=>{
                 documentos.forEach(doc=>listaConvertida.push(of(doc)));
             });
-            
-            return listaConvertida;
+
         }
 
         return listaConvertida;

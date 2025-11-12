@@ -10,7 +10,7 @@ import { BeneficiarioService } from 'app/shared/services/comum/beneficiario.serv
 @Component({
     selector: 'asc-select-beneficiario',
     templateUrl: 'asc-select.component.html',
-    encapsulation: ViewEncapsulation.None
+    styleUrls: ['./asc-select.component.scss']
 })
 export class AscSelectBeneficiarioComponent extends BaseSelectComponent<Beneficiario> implements OnInit {
 

@@ -51,12 +51,13 @@
     </div>
     <div *ngIf="perfisEmpresas != undefined && perfisEmpresas.length > 0"  class="row col-md-8" style="margin-top: 25px">
       <table class="table table-hover table-borderless">
+        <caption>Perfil Usuário</caption>
         <thead>
           <tr>
-            <th>Perfil</th>
-            <th>Atuação Profissional</th>
-            <th>Data Limite</th>
-            <th>Ação</th>
+            <th scope="col">Perfil</th>
+            <th scope="col">Atuação Profissional</th>
+            <th scope="col">Data Limite</th>
+            <th scope="col">Ação</th>
           </tr>
         </thead>
         <tbody *ngFor="let perfilEmpresa of perfisEmpresas; let i = index">

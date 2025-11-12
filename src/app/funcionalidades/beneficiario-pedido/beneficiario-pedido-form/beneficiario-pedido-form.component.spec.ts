@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TipoBeneficiarioService } from 'app/shared/services/comum/tipo-beneficiario.service';
-import { BeneficiarioPedidoService, ComboService, MessageService, PrestadorExternoService } from 'app/shared/services/services';
+import { BeneficiarioPedidoService, ComboService, MessageService, PerfilMinimoService, PrestadorExternoService } from 'app/shared/services/services';
 import { of } from 'rxjs';
 import { PerfilService } from './../../../arquitetura/shared/services/seguranca/perfil.service';
 import { BeneficiarioPedidoFormComponent } from './beneficiario-pedido-form.component';
@@ -30,6 +30,8 @@ describe('BeneficiarioPedidoFormComponent', () => {
   prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro = of({})
   comboServiceSpy.consultarComboPerfil.and.returnValue(of({}));
 
+   const perfilMinimoServiceSpy = jasmine.createSpyObj('PerfilMinimoService', ['consultarTodos']);
+   perfilMinimoServiceSpy.consultarTodos.and.returnValue(of([]));
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -41,8 +43,8 @@ describe('BeneficiarioPedidoFormComponent', () => {
         { provide: PerfilService, useValue: perfilServiceSpy },
         { provide: BeneficiarioPedidoService, useValue: beneficiarioPedidoServiceSpy },
         { provide: TipoBeneficiarioService, useValue: tipoBeneficiarioServiceSpy },
-  {provide: PrestadorExternoService, useValue: prestadorExternoServiceSpy },
-
+        {provide: PrestadorExternoService, useValue: prestadorExternoServiceSpy },
+        {provide: PerfilMinimoService, useValue: perfilMinimoServiceSpy},
         { provide: ComboService, useValue: comboServiceSpy },
       ]
     }).compileComponents();

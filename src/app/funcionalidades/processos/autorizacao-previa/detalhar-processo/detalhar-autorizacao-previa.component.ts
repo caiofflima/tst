@@ -258,26 +258,37 @@ export class DetalharAutorizacaoPreviaComponent extends BaseComponent implements
     }
 
     private initForm(): void {
-        this.form = this.fb.group({
-            id: this.fb.control(this.pedido ? this.pedido.id : null, Validators.required),
-            idBeneficiario: this.fb.control(this.pedido ? this.pedido.idBeneficiario : '', Validators.required),
-            idTipoProcesso: this.fb.control(this.pedido ? this.pedido.idTipoProcesso : '', Validators.required),
-            idMotivoSolicitacao: this.fb.control(this.pedido ? this.pedido.idMotivoSolicitacao : '', Validators.required),
-            pedidosProcedimento: this.fb.control(this.pedido ? this.pedido.pedidosProcedimento : ''),
-            ufAtendimento: this.fb.control(null, Validators.required),
-            idMunicipioProfissional: this.fb.control(this.pedido ? this.pedido.idMunicipioProfissional : '', Validators.required),
-            idConselhoProfissional: this.fb.control(this.pedido ? this.pedido.idConselhoProfissional : '', Validators.required),
-            idCaraterSolicitacao: this.fb.control(this.pedido ? this.pedido.idCaraterSolicitacao : '', Validators.required),
-            idEstadoConselho: this.fb.control(this.pedido ? this.pedido.idEstadoConselho : '', Validators.required),
-            numeroConselho: this.fb.control(this.pedido ? this.pedido.numeroConselho : '', Validators.required),
-            cpfCnpj: this.fb.control(DetalharAutorizacaoPreviaComponent.getValorCpfCnpj(this.pedido), [Validators.required, validarCpfOuCnpj()]),
-            cnpj: this.fb.control(this.pedido && this.pedido.cnpj ? this.pedido.cnpj : ''),
-            cpf: this.fb.control(this.pedido && this.pedido.cpf ? this.pedido.cpf : ''),
-            nomeProfissional: this.fb.control(this.pedido ? this.pedido.nomeProfissional : '', Validators.required),
-            email: this.fb.control(this.pedido ? this.pedido.email : '', validarEmails()),
-            telefoneContato: this.fb.control(this.pedido ? this.pedido.telefoneContato : ''),
-            observacao: this.fb.control(this.pedido ? this.pedido.observacao : '')
-        });
+        if(this.pedido){
+            this.form = this.fb.group({
+                id: this.fb.control(this.pedido.id || null, Validators.required),
+                idBeneficiario: this.fb.control(this.getValor(this.pedido.idBeneficiario, ''), Validators.required),
+                idTipoProcesso: this.fb.control(this.getValor(this.pedido.idTipoProcesso,''), Validators.required),
+                idMotivoSolicitacao: this.fb.control(this.getValor(this.pedido.idMotivoSolicitacao, ''), Validators.required),
+                pedidosProcedimento: this.fb.control(this.getValor(this.pedido.pedidosProcedimento,'')),
+                ufAtendimento: this.fb.control(null, Validators.required),
+                idMunicipioProfissional: this.fb.control(this.getValor(this.pedido.idMunicipioProfissional,''), Validators.required),
+                idConselhoProfissional: this.fb.control(this.getValor(this.pedido.idConselhoProfissional,''), Validators.required),
+                idCaraterSolicitacao: this.fb.control(this.getValor(this.pedido.idCaraterSolicitacao,''), Validators.required),
+                idEstadoConselho: this.fb.control(this.getValor(this.pedido.idEstadoConselho,''), Validators.required),
+                numeroConselho: this.fb.control(this.getValor(this.pedido.numeroConselho,''), Validators.required),
+                cpfCnpj: this.fb.control(DetalharAutorizacaoPreviaComponent.getValorCpfCnpj(this.pedido), [Validators.required, validarCpfOuCnpj()]),
+                cnpj: this.fb.control(this.pedido.cnpj ? this.pedido.cnpj : ''),
+                cpf: this.fb.control(this.pedido.cpf ? this.pedido.cpf : ''),
+                nomeProfissional: this.fb.control(this.getValor(this.pedido.nomeProfissional,''), Validators.required),
+                email: this.fb.control(this.getValor(this.pedido.email, ''), validarEmails()),
+                telefoneContato: this.fb.control(this.getValor(this.pedido.telefoneContato,'')),
+                observacao: this.fb.control(this.getValor(this.pedido.observacao,''))
+            });
+        }
+
+    }
+
+    getValor(valor:any, substituto:any):any{
+        if(valor){
+            return valor;
+        }else{
+            return substituto;
+        }
     }
 
     private static getValorCpfCnpj(pedido: Pedido): string {

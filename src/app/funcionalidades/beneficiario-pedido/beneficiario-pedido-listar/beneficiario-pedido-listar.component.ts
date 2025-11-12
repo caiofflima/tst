@@ -50,7 +50,6 @@ export class BeneficiarioPedidoListarComponent extends BaseComponent {
 
         this.loading = true;
         const dto: BeneficiarioPedido = {
-            id: this.id,
             idsTipoProcesso: this.idsTipoProcesso,
             somenteAtivos: this.somenteAtivos,
             tiposBeneficiario: this.tiposBeneficiario

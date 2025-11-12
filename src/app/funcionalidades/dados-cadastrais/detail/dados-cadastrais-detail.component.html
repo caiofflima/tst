@@ -367,9 +367,9 @@
                 <table *ngIf="anexos['length'] > 0" cellspacing="2" cellpadding="2">
 
                     <tr>
-                        <th style="text-align: left;">#</th>
-                        <th style="text-align: left;"><b>Documento</b></th>
-                        <th></th>
+                        <th scope="col" style="text-align: left;">#</th>
+                        <th scope="col" style="text-align: left;"><b>Documento</b></th>
+                        <th scope="col"></th>
                     </tr>
 
                     <tr *ngFor="let documento of anexos; let a=[index]">

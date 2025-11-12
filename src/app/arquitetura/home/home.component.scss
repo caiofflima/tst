@@ -42,7 +42,7 @@ main {
 
     .context-banner {
       display: flex;
-      align-items: end;
+      align-items: flex-end;
       flex-direction: column;
 
       a {
@@ -279,7 +279,7 @@ main {
                   justify-content: space-between;
                   text-decoration: none;
                   line-height: 24px;
-                  font-family: 'Caixa Std Regular';
+                  font-family: 'Caixa Std Regular', sans-serif;
                   transition: .2s linear;
 
                   &:hover {

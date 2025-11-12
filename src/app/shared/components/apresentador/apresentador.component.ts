@@ -9,7 +9,7 @@ import * as constantes from 'app/shared/constantes';
     templateUrl: './apresentador.component.html',
     styleUrls: ['./apresentador.component.scss']
 } )
-export class AscApresentadorComponent<T> implements OnInit {
+export class AscApresentadorComponent<T> {
 
     @Output('onNavigate')
     private emitter: EventEmitter<T>;
@@ -32,8 +32,7 @@ export class AscApresentadorComponent<T> implements OnInit {
         this.display = false;
     }
 
-    public ngOnInit(): void {
-    }
+
     
     public setHeader(header: string): void {
         this.header = header;

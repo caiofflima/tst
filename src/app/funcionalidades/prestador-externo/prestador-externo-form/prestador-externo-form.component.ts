@@ -194,40 +194,7 @@ export class PrestadorExternoFormComponent extends BaseComponent implements OnIn
             if (erroData) {
                 this.showDangerMsg("Data de nascimento deve ser menor que a data limite..");
             } else {
-                if (Number(idade) < Number(18)) {
-                    this.showDangerMsg("Usuário deve ser maior de 18 anos.");
-                } else {
-                    let qtdGrupo = this.qtdGrupoPerfilUsuario();
-
-                    if (qtdGrupo === 1) {
-                        let prestadorExterno = this.cleanObjForm(this.form.value);
-                        let eNovo;
-
-                        if (prestadorExterno.id == null) {
-                            eNovo = this.prestadorExternoService.consultarPorCPF(prestadorExterno.cpf);
-                        } else {
-                            eNovo = this.prestadorExternoService.consultarPorCpfAlteracao(prestadorExterno.cpf, prestadorExterno.id);
-                        }
-
-                        eNovo.subscribe(res => {
-                            if (res) {
-                                this.showDangerMsg("CPF já resgistrado na base de dados.");
-                            } else {
-                                this.mensagemSucesso = this.form.get("id").value != null ? "MA022" : "MA038";
-
-                                this.prestadorExternoService.salvar(prestadorExterno).subscribe(async () => {
-                                        this.showSuccessMsg(this.bundle(this.mensagemSucesso));
-                                        if (prestadorExterno.id == null) {
-                                            await this.router.navigateByUrl("/seguranca/prestador-externo");
-                                        }
-                                    }, err => this.showDangerMsg(err.error)
-                                );
-                            }
-                        });
-                    } else {
-                        this.showDangerMsg("Perfis adicionados pertencem a grupos incompatíveis.");
-                    }
-                }
+                this.tratarErro(idade);
             }
         } else {
             if (this.form.valid && this.perfisEmpresas.length <= 0) {
@@ -237,6 +204,49 @@ export class PrestadorExternoFormComponent extends BaseComponent implements OnIn
             this.validateAllFormFields(this.form);
         }
     }
+
+    tratarErro(idade:number):void{
+        if (Number(idade) < Number(18)) {
+            this.showDangerMsg("Usuário deve ser maior de 18 anos.");
+        } else {
+            let qtdGrupo = this.qtdGrupoPerfilUsuario();
+
+            if (qtdGrupo === 1) {
+                let prestadorExterno = this.cleanObjForm(this.form.value);
+                let eNovo;
+
+                if (prestadorExterno.id == null) {
+                    eNovo = this.prestadorExternoService.consultarPorCPF(prestadorExterno.cpf);
+                } else {
+                    eNovo = this.prestadorExternoService.consultarPorCpfAlteracao(prestadorExterno.cpf, prestadorExterno.id);
+                }
+
+                this.validaExisteRegistroCPF(eNovo, prestadorExterno);
+
+            } else {
+                this.showDangerMsg("Perfis adicionados pertencem a grupos incompatíveis.");
+            }
+        }
+    }
+  
+    validaExisteRegistroCPF(eNovo:any, prestadorExterno: any):void{
+        eNovo.subscribe(res => {
+            if (res) {
+                this.showDangerMsg("CPF já registrado na base de dados.");
+            } else {
+                this.mensagemSucesso = this.form.get("id").value != null ? "MA022" : "MA038";
+
+                this.prestadorExternoService.salvar(prestadorExterno).subscribe(async () => {
+                        this.showSuccessMsg(this.bundle(this.mensagemSucesso));
+                        if (prestadorExterno.id == null) {
+                            await this.router.navigateByUrl("/seguranca/prestador-externo");
+                        }
+                    }, err => this.showDangerMsg(err.error)
+                );
+            }
+        });
+    }
+
 
     public formControls(): void {
         if (this.perfisEmpresas.length > 0) {

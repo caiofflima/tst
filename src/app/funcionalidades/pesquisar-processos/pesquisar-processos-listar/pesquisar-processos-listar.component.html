@@ -142,15 +142,15 @@
       </ng-template>
       <ng-template pTemplate="header">
         <tr>
-          <th [pSortableColumn]="'idPedido'">Pedido <p-sortIcon [field]="'idPedido'"></p-sortIcon></th>
-          <th>Tipo de Pedido</th>
-          <th>Tipo de Beneficiário</th>
-          <th [pSortableColumn]="'idFilial'">Agrupadora <p-sortIcon [field]="'idFilial'"></p-sortIcon></th>
-          <th [pSortableColumn]="'descBeneficiario'">Beneficiário <p-sortIcon [field]="'descBeneficiario'"></p-sortIcon></th>
-          <th [pSortableColumn]="'descSituacaoPedido'">Situação Atual <p-sortIcon [field]="'descSituacaoPedido'"></p-sortIcon></th>
-          <th [pSortableColumn]="'dataUltimaAlteracao'">Data e Hora <p-sortIcon [field]="'dataUltimaAlteracao'"></p-sortIcon></th>
-          <th [pSortableColumn]="'matriculaUltimoUsuario'">Último Usuário <p-sortIcon [field]="'matriculaUltimoUsuario'"></p-sortIcon></th>
-          <th>Ação</th>
+          <th [pSortableColumn]="'idPedido'" scope="col">Pedido <p-sortIcon [field]="'idPedido'"></p-sortIcon></th>
+          <th scope="col">Tipo de Pedido</th>
+          <th scope="col">Tipo de Beneficiário</th>
+          <th [pSortableColumn]="'idFilial'" scope="col">Agrupadora <p-sortIcon [field]="'idFilial'"></p-sortIcon></th>
+          <th [pSortableColumn]="'descBeneficiario'" scope="col">Beneficiário <p-sortIcon [field]="'descBeneficiario'"></p-sortIcon></th>
+          <th [pSortableColumn]="'descSituacaoPedido'" scope="col">Situação Atual <p-sortIcon [field]="'descSituacaoPedido'"></p-sortIcon></th>
+          <th [pSortableColumn]="'dataUltimaAlteracao'" scope="col">Data e Hora <p-sortIcon [field]="'dataUltimaAlteracao'"></p-sortIcon></th>
+          <th [pSortableColumn]="'matriculaUltimoUsuario'" scope="col">Último Usuário <p-sortIcon [field]="'matriculaUltimoUsuario'"></p-sortIcon></th>
+          <th scope="col">Ação</th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-row>

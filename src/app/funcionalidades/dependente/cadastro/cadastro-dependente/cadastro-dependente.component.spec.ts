@@ -7,7 +7,7 @@ import { PatologiaService } from 'app/shared/services/comum/patologia.service';
 import { MedicamentoService } from 'app/shared/services/comum/pedido/medicamento.service';
 import { ProcedimentoService } from 'app/shared/services/comum/procedimento.service';
 import { ProcessoService } from 'app/shared/services/comum/processo.service';
-import { BeneficiarioService, DocumentoPedidoService, SessaoService, SIASCFluxoService } from 'app/shared/services/services';
+import { BeneficiarioService, DocumentoPedidoService, InscricaoDependenteService, SessaoService, SIASCFluxoService } from 'app/shared/services/services';
 import { of } from 'rxjs';
 import { CadastroDependenteComponent } from './cadastro-dependente.component';
 import { AtendimentoService } from 'app/shared/services/comum/atendimento.service';
@@ -24,9 +24,12 @@ describe('CadastroDependenteComponent', () => {
       id: null
     }
   }
+
   const processoServiceSpy = jasmine.createSpyObj('ProcessoService', ['getProcesso']);
-  const beneficiarioServiceSpy = jasmine.createSpyObj('BeneficiarioService',['consultarBeneficiarioPorId','consultarFamiliaPorMatricula']);
+  const beneficiarioServiceSpy = jasmine.createSpyObj('BeneficiarioService',['consultarBeneficiarioPorId','consultarFamiliaPorMatricula','consultarTodaFamiliaPorMatriculaRenovacao','consultarTitularPorMatricula']);
   beneficiarioServiceSpy.consultarFamiliaPorMatricula.and.returnValue(of({}))
+  beneficiarioServiceSpy.consultarTodaFamiliaPorMatriculaRenovacao.and.returnValue(of([]))
+  beneficiarioServiceSpy.consultarTitularPorMatricula.and.returnValue(of({}))
   const patologiaServiceSpy = jasmine.createSpyObj('PatologiaService', ['getPatologia']);
   const procedimentoServiceSpy = jasmine.createSpyObj('ProcedimentoService', ['getProcedimento']);
   const medicamentoServiceSpy = jasmine.createSpyObj('MedicamentoService', ['getMedicamento']);
@@ -38,6 +41,8 @@ describe('CadastroDependenteComponent', () => {
   const sessaoServiceSpy = jasmine.createSpyObj('SessaoService',['getUsuario']);
   const atendimentoServiceSpy = jasmine.createSpyObj('AtendimentoService',['get']);
   atendimentoServiceSpy.get.and.returnValue(of({}))
+
+  const inscricaoDependenteServiceSpy = jasmine.createSpyObj('InscricaoDependenteService',['setEditMode']);
 
   const usuario = {} as Usuario;
     usuario.matriculaFuncional = "C123000";
@@ -60,6 +65,7 @@ describe('CadastroDependenteComponent', () => {
         { provide: BeneficiarioService, useValue: beneficiarioServiceSpy },
         { provide: SessaoService, useValue: sessaoServiceSpy },
         { provide: AtendimentoService, useValue: atendimentoServiceSpy },
+        { provide: InscricaoDependenteService, useValue: inscricaoDependenteServiceSpy },
       ],
       imports:[
         BrowserAnimationsModule

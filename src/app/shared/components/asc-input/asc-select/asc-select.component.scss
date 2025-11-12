@@ -1,0 +1,29 @@
+$corPreta: #000;
+$fontFamilyCaixa: "Caixa Std Regular", sans-serif;
+::ng-deep .p-dropdown-panel {
+  .p-dropdown-items {
+    .p-dropdown-item {
+      color: $corPreta !important;
+    }
+  }
+}
+
+::ng-deep .p-dropdown-label{
+  width: 100% !important;
+  font-family: $fontFamilyCaixa !important;
+  font-size: 15px;
+  font-weight: 400;
+  color: $corPreta;
+}
+
+::ng-deep .p-dropdown-trigger{
+  position: absolute;
+  right: 1px;
+  top: 9px
+}
+
+::ng-deep .p-dropdown-items{
+  font-size: 13px !important;
+  font-family: $fontFamilyCaixa !important;
+  color: $corPreta !important;
+}

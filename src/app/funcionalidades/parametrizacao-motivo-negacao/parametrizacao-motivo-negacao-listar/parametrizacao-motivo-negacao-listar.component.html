@@ -66,12 +66,12 @@
         styleClass="table table-striped table-sm table-hover text-center">
         <ng-template pTemplate="header">
           <tr>
-            <th [pSortableColumn]="'nivelNegacao'">Nível de Negação <p-sortIcon [field]="'nivelNegacao'"></p-sortIcon></th>
-            <th [pSortableColumn]="'situacaoPedido.nome'">Situação do Pedido <p-sortIcon [field]="'situacaoPedido.nome'"></p-sortIcon></th>
-            <th [pSortableColumn]="'tituloNegacao'">Título de Negação <p-sortIcon [field]="'tituloNegacao'"></p-sortIcon></th>
-            <th [pSortableColumn]="'motivoNegacao'">Motivo de Negação <p-sortIcon [field]="'motivoNegacao'"></p-sortIcon></th>
-            <th [pSortableColumn]="'inativo'" style="width:90px">Inativo <p-sortIcon [field]="'inativo'"></p-sortIcon></th>
-            <th>Ação</th>
+            <th scope="col" [pSortableColumn]="'nivelNegacao'">Nível de Negação <p-sortIcon [field]="'nivelNegacao'"></p-sortIcon></th>
+            <th scope="col" [pSortableColumn]="'situacaoPedido.nome'">Situação do Pedido <p-sortIcon [field]="'situacaoPedido.nome'"></p-sortIcon></th>
+            <th scope="col" [pSortableColumn]="'tituloNegacao'">Título de Negação <p-sortIcon [field]="'tituloNegacao'"></p-sortIcon></th>
+            <th scope="col" [pSortableColumn]="'motivoNegacao'">Motivo de Negação <p-sortIcon [field]="'motivoNegacao'"></p-sortIcon></th>
+            <th scope="col" [pSortableColumn]="'inativo'" style="width:90px">Inativo <p-sortIcon [field]="'inativo'"></p-sortIcon></th>
+            <th scope="col">Ação</th>
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-row>

@@ -84,8 +84,10 @@ export class AcompanhamentoComponent extends AcompanhamentoCommon implements OnI
       });
     }
 
-    pedidoProcedimentosAtualizados(pedidosProcedimento: PedidoProcedimento) {
-        this.processo.pedidosProcedimento = pedidosProcedimento;
+    pedidoProcedimentosAtualizados(pedidosProcedimento: PedidoProcedimento | PedidoProcedimento[]) {
+        this.processo.pedidosProcedimento = Array.isArray(pedidosProcedimento) 
+            ? pedidosProcedimento 
+            : [pedidosProcedimento];
     }
 
     showDocumentoComplementar(valor: boolean) {

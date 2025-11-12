@@ -28,9 +28,10 @@ export class ParametrizacaoMedicamentosListarComponent extends BaseComponent imp
 
     filtroConsultaMedicamento: FiltroConsultaMedicamento;
     listaMedicamento: ResultadoPesquisaMedicamento[];
+    listaLaboratoriosNome: string;
+    listaMedicamentosNome: string;
     situacaoPedido: string;
     loading = false;
-    listaMedicamentosNome: any;
     id:number;
 
     constructor(
@@ -49,17 +50,17 @@ export class ParametrizacaoMedicamentosListarComponent extends BaseComponent imp
     private montaFiltro(): FiltroConsultaMedicamento {
         this.filtroConsultaMedicamento = new FiltroConsultaMedicamento();
 
-        this.filtroConsultaMedicamento.id = this.activatedRoute.snapshot.queryParams.id;
+        this.filtroConsultaMedicamento.id = this.activatedRoute.snapshot.queryParams['id'];
 
-        this.listaLaboratoriosNome = this.activatedRoute.snapshot.queryParams.listaLaboratoriosNome;
-        this.listaMedicamentosNome = this.activatedRoute.snapshot.queryParams.listaMedicamentosNome;
+        this.listaLaboratoriosNome = this.activatedRoute.snapshot.queryParams['listaLaboratoriosNome'];
+        this.listaMedicamentosNome = this.activatedRoute.snapshot.queryParams['listaMedicamentosNome'];
         
-        this.filtroConsultaMedicamento.listaLaboratorios = this.converterListaArray(this.activatedRoute.snapshot.queryParams.listaLaboratorios);
-        this.filtroConsultaMedicamento.listaMedicamentos = this.converterListaArray(this.activatedRoute.snapshot.queryParams.listaMedicamentos);
-        this.filtroConsultaMedicamento.apresentacao = this.activatedRoute.snapshot.queryParams.apresentacao;
-        this.filtroConsultaMedicamento.numeroTuss = this.activatedRoute.snapshot.queryParams.numeroTuss?Number(this.activatedRoute.snapshot.queryParams.numeroTuss):null;
-        this.filtroConsultaMedicamento.ativos = this.obterParametroBooleano(this.activatedRoute.snapshot.queryParams.ativos);
-        this.filtroConsultaMedicamento.generico = this.obterParametroBooleano(this.activatedRoute.snapshot.queryParams.generico);
+        this.filtroConsultaMedicamento.listaLaboratorios = this.converterListaArray(this.activatedRoute.snapshot.queryParams['listaLaboratorios']);
+        this.filtroConsultaMedicamento.listaMedicamentos = this.converterListaArray(this.activatedRoute.snapshot.queryParams['listaMedicamentos']);
+        this.filtroConsultaMedicamento.apresentacao = this.activatedRoute.snapshot.queryParams['apresentacao'];
+        this.filtroConsultaMedicamento.numeroTuss = this.activatedRoute.snapshot.queryParams['numeroTuss']?Number(this.activatedRoute.snapshot.queryParams['numeroTuss']):null;
+        this.filtroConsultaMedicamento.ativos = this.obterParametroBooleano(this.activatedRoute.snapshot.queryParams['ativos']);
+        this.filtroConsultaMedicamento.generico = this.obterParametroBooleano(this.activatedRoute.snapshot.queryParams['generico']);
 
         return this.filtroConsultaMedicamento;
     }

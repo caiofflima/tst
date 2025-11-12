@@ -70,12 +70,12 @@
         </ng-template>
         <ng-template pTemplate="header">
           <tr>
-            <th [pSortableColumn]="'id'" style="width:70px">ID <p-sortIcon [field]="'id'"></p-sortIcon></th>
-            <th [pSortableColumn]="'cnpj'" style="width:150px">CNPJ <p-sortIcon [field]="'cnpj'"></p-sortIcon></th>
-            <th [pSortableColumn]="'razaoSocial'">Razão Social <p-sortIcon [field]="'razaoSocial'"></p-sortIcon></th>
-            <th [pSortableColumn]="'contrato'">Contrato <p-sortIcon [field]="'contrato'"></p-sortIcon></th>
-            <th [pSortableColumn]="'gipes'">Abrangência <p-sortIcon [field]="'gipes'"></p-sortIcon></th>
-            <th id="cl_Action">Ação</th>
+            <th [pSortableColumn]="'id'" style="width:70px" scope="col">ID <p-sortIcon [field]="'id'"></p-sortIcon></th>
+            <th [pSortableColumn]="'cnpj'" style="width:150px" scope="col">CNPJ <p-sortIcon [field]="'cnpj'"></p-sortIcon></th>
+            <th [pSortableColumn]="'razaoSocial'" scope="col">Razão Social <p-sortIcon [field]="'razaoSocial'"></p-sortIcon></th>
+            <th [pSortableColumn]="'contrato'" scope="col">Contrato <p-sortIcon [field]="'contrato'"></p-sortIcon></th>
+            <th [pSortableColumn]="'gipes'" scope="col">Abrangência <p-sortIcon [field]="'gipes'"></p-sortIcon></th>
+            <th id="cl_Action" scope="col">Ação</th>
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-row>

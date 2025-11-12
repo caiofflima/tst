@@ -10,22 +10,22 @@ baseTitulo="Procedimentos que exigem autorização prévia">
 
   <div class="info-pagina" slot="info">
     <p class="info-p">
-      A tabela abaixo contém os procedimentos cuja realização necessita de Autorização Prévia, apresentando as peculiaridades de cada código: 
+      A tabela abaixo contém os procedimentos cuja realização necessita de Autorização Prévia, apresentando as peculiaridades de cada código:
     </p>
     <p class="info-p"><b>Nível</b></p>
-    <p class="info-p"><b>&nbsp;- AUDITORIA DE SAÚDE:</b> 
+    <p class="info-p"><b>&nbsp;- AUDITORIA DE SAÚDE:</b>
       procedimento autorizado por Enfermeiro/Técnico da auditoria de saúde ou usuário com privilégio igual ou superior;
     </p>
-    <p class="info-p"><b>&nbsp;- DENTISTA:</b> 
+    <p class="info-p"><b>&nbsp;- DENTISTA:</b>
       procedimento autorizado por Dentista ou usuários com privilégio igual ou superior;
     </p>
-    <p class="info-p"><b>&nbsp;- CENTRALIZADORA:</b> 
+    <p class="info-p"><b>&nbsp;- CENTRALIZADORA:</b>
       procedimento autoridado pela Gerência regional ou instância superior;
     </p>
-    <p class="info-p"><b>&nbsp;- MATRIZ:</b> 
+    <p class="info-p"><b>&nbsp;- MATRIZ:</b>
       procedimento autorizado apenas pela Gerência Nacional, máxima alçada.
     </p>
-    
+
   </div>
 
   <div class="row p-0 col-md-12" slot="content">
@@ -53,10 +53,10 @@ baseTitulo="Procedimentos que exigem autorização prévia">
         </ng-template>
         <ng-template pTemplate="header">
           <tr>
-            <th [pSortableColumn]="'id'" style="width:35px">Código <p-sortIcon [field]="'id'"></p-sortIcon></th>
-            <th [pSortableColumn]="'descricaoProcedimento'" style="width:60px;text-align: left">Nome do Procedimento <p-sortIcon [field]="'descricaoProcedimento'"></p-sortIcon></th>
-            <th [pSortableColumn]="'noTipoProcesso'" style="width:40px;text-align: left">Tipo Pedido <p-sortIcon [field]="'noTipoProcesso'"></p-sortIcon></th>
-            <th [pSortableColumn]="'noNivelAutorizacao'" style="width:40px">Nível <p-sortIcon [field]="'noNivelAutorizacao'"></p-sortIcon></th>
+            <th scope="col" [pSortableColumn]="'id'" style="width:35px">Código <p-sortIcon [field]="'id'"></p-sortIcon></th>
+            <th scope="col" [pSortableColumn]="'descricaoProcedimento'" style="width:60px;text-align: left">Nome do Procedimento <p-sortIcon [field]="'descricaoProcedimento'"></p-sortIcon></th>
+            <th scope="col" [pSortableColumn]="'noTipoProcesso'" style="width:40px;text-align: left">Tipo Pedido <p-sortIcon [field]="'noTipoProcesso'"></p-sortIcon></th>
+            <th scope="col" [pSortableColumn]="'noNivelAutorizacao'" style="width:40px">Nível <p-sortIcon [field]="'noNivelAutorizacao'"></p-sortIcon></th>
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-row>

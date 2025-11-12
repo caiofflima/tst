@@ -6,7 +6,7 @@ const PROXY_CONFIG = {
   "/siasc-api": {
     //target: "http://localhost:8080",
     target: "https://siasc-backend-novo-des.apps.nprd.caixa",
-    secure: true,
+    secure: false,
     logLevel: "debug",
     changeOrigin: true,
   },

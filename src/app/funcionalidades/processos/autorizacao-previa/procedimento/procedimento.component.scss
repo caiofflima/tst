@@ -316,8 +316,8 @@ div.procedimentos-adicionados {
     p.pa-lh-2 {
       width: 15%;
       display: flex;
-      align-items: start;
-      justify-content: start;
+      align-items: flex-start;
+      justify-content: flex-start;
     }
 
     p.pa-lh-3 {
@@ -330,8 +330,8 @@ div.procedimentos-adicionados {
     p.pa-lh-4 {
       width: 17%;
       display: flex;
-      justify-content: end;
-      align-items: end;
+      justify-content: flex-end;
+      align-items: flex-end;
     }
   }
 
@@ -369,8 +369,8 @@ div.procedimentos-adicionados {
     p.pa-lb-2 {
       width: 15%;
       display: flex;
-      justify-content: start;
-      align-items: start;
+      justify-content: flex-start;
+      align-items: flex-start;
       text-align: start;
     }
 

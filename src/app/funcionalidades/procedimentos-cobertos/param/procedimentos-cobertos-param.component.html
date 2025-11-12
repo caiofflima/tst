@@ -23,7 +23,7 @@
                         [items]="listComboTipoProcesso"
                         [control]="formulario.get('tiposProcesso')"></asc-dropdown>
                     <div *ngIf="formulario.get('tiposProcesso').invalid && (formulario.get('tiposProcesso').dirty || formulario.get('tiposProcesso').touched)" class="error-form" [ngStyle]="compStyle">
-                        <div *ngIf="formulario.get('tiposProcesso').errors?.required">Selecione um item na lista.</div>
+                        <div *ngIf="formulario.get('tiposProcesso').errors?.['required']">Selecione um item na lista.</div>
                     </div>
                 </div>
             </div>

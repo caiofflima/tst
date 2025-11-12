@@ -41,7 +41,7 @@
         <label class="control-label" for="tuss">Número TUSS</label>&nbsp;<br>
         <p id="numeroTuss">{{filtroConsultaMedicamento.numeroTuss}}</p>
       </div>
-     
+
       <div class="p-0 col-xs-2" *ngIf="filtroConsultaMedicamento.ativos">
         <label class="control-label" for="ativos">Somente ativos</label>&nbsp;<br>
         <p id="ativos">{{filtroConsultaMedicamento.ativos === true ? 'Sim' : 'Não'}}</p>
@@ -66,7 +66,7 @@
         <input #gb type="text" class="form-control filtro-caixa" pInputText size="50"
                placeholder="Digite para filtrar resultado">
         <em class="fas fa-search"></em>
-      </div> 
+      </div>
 
       <p-table
         id="caixa-table" [value]="listaMedicamento" [rows]="10"
@@ -76,13 +76,13 @@
         styleClass="table table-striped table-sm table-hover text-center">
         <ng-template pTemplate="header">
           <tr>
-            <th [pSortableColumn]="'nomeLaboratorio'">Laboratório <p-sortIcon [field]="'nomeLaboratorio'"></p-sortIcon></th>
-            <th [pSortableColumn]="'nomeMedicamento'">Nome do medicamento <p-sortIcon [field]="'nomeMedicamento'"></p-sortIcon></th>
-            <th [pSortableColumn]="'apresentacao'">Apresentação <p-sortIcon [field]="'apresentacao'"></p-sortIcon></th>
-            <th [pSortableColumn]="'numeroTuss'">Número TUSS <p-sortIcon [field]="'numeroTuss'"></p-sortIcon></th>
-            <th [pSortableColumn]="'valor'">Valor do Medicamento <p-sortIcon [field]="'valor'"></p-sortIcon></th>
-            <th [pSortableColumn]="'ativo'" style="width:90px">Ativo <p-sortIcon [field]="'ativo'"></p-sortIcon></th>
-            <th>Ação</th>
+            <th scope="col" [pSortableColumn]="'nomeLaboratorio'">Laboratório <p-sortIcon [field]="'nomeLaboratorio'"></p-sortIcon></th>
+            <th scope="col" [pSortableColumn]="'nomeMedicamento'">Nome do medicamento <p-sortIcon [field]="'nomeMedicamento'"></p-sortIcon></th>
+            <th scope="col" [pSortableColumn]="'apresentacao'">Apresentação <p-sortIcon [field]="'apresentacao'"></p-sortIcon></th>
+            <th scope="col" [pSortableColumn]="'numeroTuss'">Número TUSS <p-sortIcon [field]="'numeroTuss'"></p-sortIcon></th>
+            <th scope="col" [pSortableColumn]="'valor'">Valor do Medicamento <p-sortIcon [field]="'valor'"></p-sortIcon></th>
+            <th scope="col" [pSortableColumn]="'ativo'" style="width:90px">Ativo <p-sortIcon [field]="'ativo'"></p-sortIcon></th>
+            <th scope="col">Ação</th>
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-row>

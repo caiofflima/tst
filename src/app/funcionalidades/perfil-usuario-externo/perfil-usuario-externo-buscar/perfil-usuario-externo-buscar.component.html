@@ -33,16 +33,16 @@
 
      <ng-template pTemplate="header">
        <tr>
-         <th [style]="{'width':'38px'}" selectionMode="multiple"></th>
-         <th pSortableColumn="id" [style]="{'width':'50px'}">ID <p-sortIcon [field]="'id'"></p-sortIcon></th>
-         <th pSortableColumn="cpf">CPF <p-sortIcon [field]="'cpf'"></p-sortIcon></th>
-         <th pSortableColumn="nome">Nome <p-sortIcon [field]="'nome'"></p-sortIcon></th>
-         <th pSortableColumn="matricula">Matricula <p-sortIcon [field]="'matricula'"></p-sortIcon></th>
-         <th pSortableColumn="email">E-mail <p-sortIcon [field]="'email'"></p-sortIcon></th>
-         <th pSortableColumn="empresa">Empresa <p-sortIcon [field]="'empresa'"></p-sortIcon></th>
-         <th pSortableColumn="perfil" [style]="{'width':'200px'}">Perfil <p-sortIcon [field]="'perfil'"></p-sortIcon></th>
-         <th pSortableColumn="atuacaoProfissional" [style]="{'width':'200px'}">Atuação Profissional <p-sortIcon [field]="'atuacaoProfissional'"></p-sortIcon></th>
-         <th pSortableColumn="dataLimite">Data Limite <p-sortIcon [field]="'dataLimite'"></p-sortIcon></th>
+         <th [style]="{'width':'38px'}" selectionMode="multiple" scope="col"></th>
+         <th pSortableColumn="id" [style]="{'width':'50px'}" scope="col">ID <p-sortIcon [field]="'id'"></p-sortIcon></th>
+         <th pSortableColumn="cpf" scope="col">CPF <p-sortIcon [field]="'cpf'"></p-sortIcon></th>
+         <th pSortableColumn="nome" scope="col">Nome <p-sortIcon [field]="'nome'"></p-sortIcon></th>
+         <th pSortableColumn="matricula" scope="col">Matricula <p-sortIcon [field]="'matricula'"></p-sortIcon></th>
+         <th pSortableColumn="email" scope="col">E-mail <p-sortIcon [field]="'email'"></p-sortIcon></th>
+         <th pSortableColumn="empresa" scope="col">Empresa <p-sortIcon [field]="'empresa'"></p-sortIcon></th>
+         <th pSortableColumn="perfil" [style]="{'width':'200px'}" scope="col">Perfil <p-sortIcon [field]="'perfil'"></p-sortIcon></th>
+         <th pSortableColumn="atuacaoProfissional" [style]="{'width':'200px'}" scope="col">Atuação Profissional <p-sortIcon [field]="'atuacaoProfissional'"></p-sortIcon></th>
+         <th pSortableColumn="dataLimite" scope="col">Data Limite <p-sortIcon [field]="'dataLimite'"></p-sortIcon></th>
        </tr>
      </ng-template>
 

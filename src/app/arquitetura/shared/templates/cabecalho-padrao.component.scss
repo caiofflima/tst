@@ -71,7 +71,7 @@ body {
     }
 
     em {
-      justify-content: end;
+      justify-content: flex-end;
       display: flex;
     }
 
@@ -173,7 +173,7 @@ body {
       .about-user {
         display: flex;
         flex-direction: column;
-        align-items: end;
+        align-items: flex-end;
 
         h5 {
           margin: 0 0 5px;
@@ -239,7 +239,7 @@ body {
 
             .botao-msg {
               display: flex;
-              justify-content: end;
+              justify-content: flex-end;
 
               button {
                 display: flex;
@@ -342,6 +342,7 @@ body {
           span.p-menuitem-text {
             font-family:"Caixa Std Regular", sans-serif !important;
             color: #000 !important;
+            font-size: 16px;
           }
           .p-icon-wrapper {
             svg {
@@ -357,12 +358,14 @@ body {
           background: #004680 !important;
           span.p-menuitem-text {
             color: white !important;
+            font-size: 16px;
           }
         }
         .p-menuitem-link:hover {
           background-color: #0073d1 !important;
           span.p-menuitem-text {
             color: white !important;
+            font-size: 16px;
           }
           .p-icon-wrapper {
             svg {
@@ -631,7 +634,7 @@ input[type="submit"] {
   .info {
     display: flex;
     flex-direction: column;
-    align-items: end;
+    align-items: flex-end;
 
     p {
       margin-bottom: 0 !important;
@@ -1209,7 +1212,7 @@ table {
 @media (max-width: 700px) {
   .barra-sistema {
     flex-direction: row;
-    align-items: start;
+    align-items: flex-start;
     gap: 15px;
   }
   .buttons-header {
@@ -1221,7 +1224,7 @@ table {
     justify-content: space-between;
 
     .info {
-      align-items: start;
+      align-items: flex-start;
 
       p {
         text-align: start;

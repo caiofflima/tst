@@ -189,7 +189,7 @@ export class VincMedPatologiaHomeComponent extends BaseComponent implements OnIn
     }
 
     formatarNumeroTiss(numeroTiss: number): string {
-        var numeroTissStr = numeroTiss.toString();
+        let numeroTissStr = numeroTiss.toString();
         while (numeroTissStr.length < 10) {
             numeroTissStr = '0' + numeroTissStr;
         }

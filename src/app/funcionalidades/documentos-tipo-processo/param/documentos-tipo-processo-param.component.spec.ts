@@ -4,10 +4,11 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { MessageService } from '../../../shared/components/messages/message.service';
-import { TipoDeficienciaService, ComboService } from 'app/shared/services/services';
+import { TipoDeficienciaService, ComboService, DocumentoTipoProcessoService } from 'app/shared/services/services';
 import { of } from 'rxjs';
 import { DadoComboDTO } from 'app/shared/models/dtos';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { DuvidasService } from 'app/shared/services/comum/duvidas.service';
 
 describe('DocumentosTipoProcessoParamComponent', () => {
   let component: DocumentosTipoProcessoParamComponent;
@@ -17,6 +18,8 @@ describe('DocumentosTipoProcessoParamComponent', () => {
   let mockMessageService: any;
   let mockComboService: any;
   let mockTipoDeficienciaService: any;
+  let mockDocumentoTipoProcessoService = jasmine.createSpyObj('DocumentoTipoProcessoService',['getTitle'])
+  let mockDuvidasService: any;
 
   beforeEach(async () => {
     mockRouter = {
@@ -48,7 +51,9 @@ describe('DocumentosTipoProcessoParamComponent', () => {
         { provide: Location, useValue: mockLocation },
         { provide: MessageService, useValue: mockMessageService },
         { provide: ComboService, useValue: mockComboService },
-        { provide: TipoDeficienciaService, useValue: mockTipoDeficienciaService }
+        { provide: TipoDeficienciaService, useValue: mockTipoDeficienciaService },
+        { provide: DocumentoTipoProcessoService, useValue: mockDocumentoTipoProcessoService },
+        { provide: DuvidasService, useValue: mockDuvidasService }
       ],
       schemas: [
           CUSTOM_ELEMENTS_SCHEMA

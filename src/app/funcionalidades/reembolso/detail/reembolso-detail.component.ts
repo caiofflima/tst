@@ -84,6 +84,15 @@ export class ReembolsoDetailComponent implements OnInit {
         return SessaoService.getMatriculaFuncional();
     }
 
+    voltar(): void {
+        window.history.back();
+    }
+
+    stylePropsModal = {
+        width: '90vw',
+        maxWidth: '1200px'
+    };
+
     ngOnInit() {
         this.anoCorrente = new Date().getFullYear();
         this.carregarComboAno();
@@ -160,7 +169,7 @@ export class ReembolsoDetailComponent implements OnInit {
                 };
             });
        }
-       
+       return [];
     }
     lancamentosReembolsoMockado:LancamentoDTO[] = [
         {
@@ -322,7 +331,7 @@ export class ReembolsoDetailComponent implements OnInit {
         if(data === null || data === undefined){
             return null;
         }
-        var parts = data.split('-');
+        let parts = data.split('-');
         return new Date(Number(parts[0]), Number(parts[1]) - 1, Number(parts[2])); 
     }
     getReembolsoPorCPFMesAno(cpf: string, mes: number, ano: number) {
@@ -376,7 +385,7 @@ export class ReembolsoDetailComponent implements OnInit {
         });
     }
 
-    beneficiarioSelecionadoLancamento(beneficiario: Beneficiario, mes: number, ano: number, matricula: string) {
+    beneficiarioSelecionadoLancamento(beneficiario: Beneficiario, mes: number, ano: number, matricula?: string) {
         if (beneficiario) {
             //console.log('Beneficiario');
             //console.log(beneficiario);

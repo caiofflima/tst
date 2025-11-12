@@ -8,13 +8,13 @@
 
   <ng-template pTemplate="header">
     <tr>
-      <th pSortableColumn="idPedido">Pedido <p-sortIcon [field]="'idPedido'"></p-sortIcon></th>
-      <th pSortableColumn="codTipoProcesso">Tipo de Pedido <p-sortIcon [field]="'codTipoProcesso'"></p-sortIcon></th>
-      <th pSortableColumn="descBeneficiario">Beneficiário <p-sortIcon [field]="'descBeneficiario'"></p-sortIcon></th>
-      <th pSortableColumn="descSituacaoPedido">Situação Atual <p-sortIcon [field]="'descSituacaoPedido'"></p-sortIcon></th>
-      <th pSortableColumn="dataUltimaAlteracao">Data e Hora <p-sortIcon [field]="'dataUltimaAlteracao'"></p-sortIcon></th>
-      <th pSortableColumn="nomeColaborador">Colaborador <p-sortIcon [field]="'nomeColaborador'"></p-sortIcon></th>
-      <th>Ação</th>
+      <th scope="col" pSortableColumn="idPedido">Pedido <p-sortIcon [field]="'idPedido'"></p-sortIcon></th>
+      <th scope="col" pSortableColumn="codTipoProcesso">Tipo de Pedido <p-sortIcon [field]="'codTipoProcesso'"></p-sortIcon></th>
+      <th scope="col" pSortableColumn="descBeneficiario">Beneficiário <p-sortIcon [field]="'descBeneficiario'"></p-sortIcon></th>
+      <th scope="col" pSortableColumn="descSituacaoPedido">Situação Atual <p-sortIcon [field]="'descSituacaoPedido'"></p-sortIcon></th>
+      <th scope="col" pSortableColumn="dataUltimaAlteracao">Data e Hora <p-sortIcon [field]="'dataUltimaAlteracao'"></p-sortIcon></th>
+      <th scope="col" pSortableColumn="nomeColaborador">Colaborador <p-sortIcon [field]="'nomeColaborador'"></p-sortIcon></th>
+      <th scope="col">Ação</th>
     </tr>
   </ng-template>
 

@@ -261,6 +261,10 @@ export class AscModalOcorrenciaComponent implements OnInit, OnDestroy {
         return BundleUtil.fromBundle(key, args);
     }
 
+    public converterSetParaArray(files: Set<File>): Arquivo[] {
+        return Array.from(files) as Arquivo[];
+    }
+
     public abrirModalVisualizarDocumentos(event: any, arquivo: Arquivo, modalVisualizarDocumentoComponent: AscModalVisualizarDocumentoComponent, arquivos: Arquivo[]): void {
         const arquivoModal = {event, arquivo, arquivos, modalVisualizarDocumentoComponent};
         if (arquivo && arquivo.id) {

@@ -7,10 +7,10 @@ import { PatologiaService } from 'app/shared/services/comum/patologia.service';
 import { MedicamentoService } from 'app/shared/services/comum/pedido/medicamento.service';
 import { ProcedimentoService } from 'app/shared/services/comum/procedimento.service';
 import { ProcessoService } from 'app/shared/services/comum/processo.service';
-import { BeneficiarioService, DocumentoPedidoService, SessaoService, SIASCFluxoService, TipoDeficienciaService } from 'app/shared/services/services';
-import { of } from 'rxjs';
+import { BeneficiarioService, DocumentoPedidoService, InscricaoDependenteService, MotivoSolicitacaoService, SessaoService, SIASCFluxoService, TipoDeficienciaService } from 'app/shared/services/services';
+import { BehaviorSubject, of } from 'rxjs';
 import { AtendimentoService } from 'app/shared/services/comum/atendimento.service';
-import { Usuario } from 'app/shared/models/entidades';
+import { MotivoSolicitacao, Usuario } from 'app/shared/models/entidades';
 import { EtapaComplementoDependenteComponent } from './etapa-complemento-dependente.component';
 
 describe('EtapaComplementoDependenteComponent', () => {
@@ -39,6 +39,8 @@ describe('EtapaComplementoDependenteComponent', () => {
   atendimentoServiceSpy.get.and.returnValue(of({}))
   const tipoDeficienciaServiceSpy = jasmine.createSpyObj('TipoDeficienciaService', ['consultarTodos']);
   tipoDeficienciaServiceSpy.consultarTodos.and.returnValue(of({}));
+  const motivoSolicitacaoServiceSpy = jasmine.createSpyObj('MotivoSolicitacaoService', ['consultarTodos']);
+  const inscricaoDependenteServiceSpy = jasmine.createSpyObj('InscricaoDependenteService', ['consultarTodos']);
 
   const usuario = {} as Usuario;
     usuario.matriculaFuncional = "C123000";
@@ -62,6 +64,8 @@ describe('EtapaComplementoDependenteComponent', () => {
         { provide: SessaoService, useValue: sessaoServiceSpy },
         { provide: AtendimentoService, useValue: atendimentoServiceSpy },
         { provide: TipoDeficienciaService, useValue: tipoDeficienciaServiceSpy },
+        { provide: MotivoSolicitacaoService, useValue: motivoSolicitacaoServiceSpy },
+        { provide: InscricaoDependenteService, useValue: inscricaoDependenteServiceSpy },
       ],
       imports:[
         BrowserAnimationsModule
@@ -70,6 +74,9 @@ describe('EtapaComplementoDependenteComponent', () => {
   });
 
   beforeEach(() => {
+    const selectedOptionSource = new BehaviorSubject<MotivoSolicitacao | null>(null);
+    motivoSolicitacaoServiceSpy.selectedOption$ = selectedOptionSource.asObservable();
+
     fixture = TestBed.createComponent(EtapaComplementoDependenteComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

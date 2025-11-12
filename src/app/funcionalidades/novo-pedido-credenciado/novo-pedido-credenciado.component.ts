@@ -1,6 +1,6 @@
 import {Component} from "@angular/core";
 import {Router} from "@angular/router";
-import {AbstractControl, FormBuilder, FormGroup} from "@angular/forms";
+import {AbstractControl, FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {BaseComponent} from "app/shared/components/base.component";
 import {MessageService} from "app/shared/components/messages/message.service";
 import {Beneficiario} from "app/shared/models/entidades";
@@ -47,12 +47,12 @@ export class NovoPedidoAutorizadorComponent extends BaseComponent {
         this.router.navigateByUrl(`/pedido/autorizacao-previa/${btoa('novo-pedido-credenciado')}`);
     }
 
-    get numeroCartao(): AbstractControl {
-        return this.form.get('numeroCartao');
+    get numeroCartao(): FormControl {
+        return this.form.get('numeroCartao') as FormControl;
     }
 
-    get cpf(): AbstractControl {
-        return this.form.get('cpf');
+    get cpf(): FormControl {
+        return this.form.get('cpf') as FormControl;
     }
 
     get tipoProcesso(): AbstractControl {

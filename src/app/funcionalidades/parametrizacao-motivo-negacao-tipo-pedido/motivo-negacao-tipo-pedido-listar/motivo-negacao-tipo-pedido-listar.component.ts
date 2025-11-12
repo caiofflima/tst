@@ -26,14 +26,14 @@ export class MotivoNegacaoTipoPedidoListarComponent extends BaseComponent{
   listaTipoProcesso: string[] = []
   listaTipoBeneficiario: string[] = []
   listaNiveisNegacao: string
-  somenteAtivos: boolean 
+  somenteAtivos: boolean
   constructor(
     override readonly messageService: MessageService,
     private service: MotivoNegacaoTipoPedidoService,
     private readonly activatedRoute: ActivatedRoute,
     private readonly router: Router,
     private readonly location: Location,
-  ) { 
+  ) {
     super(messageService);
   }
 
@@ -47,8 +47,8 @@ export class MotivoNegacaoTipoPedidoListarComponent extends BaseComponent{
     this.listaTipoProcesso = this.activatedRoute.snapshot.queryParams['listaTipoProcesso'] || 'Todas'
     this.listaTipoBeneficiario = this.activatedRoute.snapshot.queryParams['listaTipoBeneficiario'] || 'Todas'
     this.somenteAtivos = this.activatedRoute.snapshot.queryParams['somenteAtivos'] == 'true'
-    
-    
+
+
     this.baseURL = this.service.getBaseURL()
     this.baseTitulo = this.service.getTitulo()
 
@@ -58,9 +58,8 @@ export class MotivoNegacaoTipoPedidoListarComponent extends BaseComponent{
   pesquisarDados(){
     Loading.start()
     const dto: MotivoNegacaoTipoPedido = new MotivoNegacaoTipoPedido();
-    if( this.listaIdMotivoNegacao  )
-      dto.listaIdMotivoNegacao = Array.isArray( this.listaIdMotivoNegacao ) ? this.listaIdMotivoNegacao : [this.listaIdMotivoNegacao];
-    
+    this.analistaIdMotivacao(dto)
+
     if( this.listaIdTipoBeneficiario )
       dto.listaIdTipoBeneficiario = Array.isArray( this.listaIdTipoBeneficiario ) ? this.listaIdTipoBeneficiario : [ this.listaIdTipoBeneficiario ];
 
@@ -79,8 +78,13 @@ export class MotivoNegacaoTipoPedidoListarComponent extends BaseComponent{
             this.total = resp.length || 0
             this.lista = resp.map(r => ({...r, _inativo: r.dataInativacao ? 'SIM' : 'NÃO'}))
           }
-          
+
         })
+  }
+
+  analistaIdMotivacao(dto: MotivoNegacaoTipoPedido){
+    if( this.listaIdMotivoNegacao  )
+      dto.listaIdMotivoNegacao = Array.isArray( this.listaIdMotivoNegacao ) ? this.listaIdMotivoNegacao : [this.listaIdMotivoNegacao];
   }
 
   voltar(){
@@ -92,21 +96,21 @@ export class MotivoNegacaoTipoPedidoListarComponent extends BaseComponent{
   }
 
   editar(row: any){
-    
+
     const objetoParametro =  JSON.stringify( {
-      atualizar: true, 
-      motivoNegacao: row.motivoNegacao.id, 
-      tipoProcesso: row.tipoProcesso.id, 
+      atualizar: true,
+      motivoNegacao: row.motivoNegacao.id,
+      tipoProcesso: row.tipoProcesso.id,
       listaBeneficiarios: row.listaIdTipoBeneficiario,
       nivelNegacao: row.nivelNegacao,
       dataInativacao: row.dataInativacao,
       situacaoProcesso: row.idSituacaoProcesso
-    } ) 
-    
+    } )
+
     let base64String = btoa(objetoParametro);
-    
+
     this.router.navigate([`${this.baseURL}/editar/${base64String}`])
-    
+
   }
 
 }

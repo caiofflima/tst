@@ -13,10 +13,8 @@ import {TextMaskModule} from "angular2-text-mask";
 import { PesquisarProcessosV2Component } from './pesquisar-processos-v2/pesquisar-processos-v2.component';
 import { PesquisarProcessosListaV2Component } from './pesquisar-processos-lista-v2/pesquisar-processos-lista-v2.component';
 import {PrimeNGModule} from "../../../app/shared/primeng.module";
-// import { ComponentModule } from "../../../app/shared/components/component.module";
-// import {ComposicaoPedidoModule} from "../../../app/shared/components/pedido/composicao-pedido.module";
-// import {AscMultiSelectModule} from "../../../app/shared/components/multiselect/asc-multiselect.module";
-// import { CdkStepperModule } from '@angular/cdk/stepper';
+import { ComponentModule } from "../../../app/shared/components/component.module";
+import {AscMultiSelectModule} from "../../../app/shared/components/multiselect/asc-multiselect.module";
 
 @NgModule({
   imports: [
@@ -30,7 +28,8 @@ import {PrimeNGModule} from "../../../app/shared/primeng.module";
     TextMaskModule,
     PipeModule,
     PrimeNGModule,
-    
+    ComponentModule,
+    AscMultiSelectModule
   ],exports:[
     ResultadoPesquisaProcessosCredenciadoComponent
   ],

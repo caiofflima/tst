@@ -11,7 +11,7 @@
       <em class="fa fa-chevron-right"></em>
       <a routerLink="/manutencao/parametros/prazos-status">Prazos para Tratamento de Situação</a>
       <em class="fa fa-chevron-right"></em>
-      Prazos para Tratamento de Situação – Resultado  
+      Prazos para Tratamento de Situação – Resultado
     </ul>
   </div>
 
@@ -72,14 +72,14 @@
         [sortOrder]="-1" styleClass="table table-striped table-sm table-hover text-center">
         <ng-template pTemplate="header">
           <tr>
-            <th [pSortableColumn]="'id'" style="width:60px">ID <p-sortIcon [field]="'id'"></p-sortIcon></th>
-            <th [pSortableColumn]="'situacaoProcesso'">Situação Pedido <p-sortIcon [field]="'situacaoProcesso'"></p-sortIcon></th>
-            <th [pSortableColumn]="'tipoProcesso'">Tipo Pedido <p-sortIcon [field]="'tipoProcesso'"></p-sortIcon></th>
-            <th [pSortableColumn]="'nomeTiposBeneficiario'">Tipo de Beneficiário <p-sortIcon [field]="'nomeTiposBeneficiario'"></p-sortIcon></th>
-            <th [pSortableColumn]="'prazo'" style="width:80px">Prazo <p-sortIcon [field]="'prazo'"></p-sortIcon></th>
-            <th [pSortableColumn]="'mudancaAutomatica'">Mudança Automática <p-sortIcon [field]="'mudancaAutomatica'"></p-sortIcon></th>
-            <th [pSortableColumn]="'inativo'" style="width:100px">Inativo <p-sortIcon [field]="'inativo'"></p-sortIcon></th>
-            <th>Ação</th>
+            <th scope="col" [pSortableColumn]="'id'" style="width:60px">ID <p-sortIcon [field]="'id'"></p-sortIcon></th>
+            <th scope="col" [pSortableColumn]="'situacaoProcesso'">Situação Pedido <p-sortIcon [field]="'situacaoProcesso'"></p-sortIcon></th>
+            <th scope="col" [pSortableColumn]="'tipoProcesso'">Tipo Pedido <p-sortIcon [field]="'tipoProcesso'"></p-sortIcon></th>
+            <th scope="col" [pSortableColumn]="'nomeTiposBeneficiario'">Tipo de Beneficiário <p-sortIcon [field]="'nomeTiposBeneficiario'"></p-sortIcon></th>
+            <th scope="col" [pSortableColumn]="'prazo'" style="width:80px">Prazo <p-sortIcon [field]="'prazo'"></p-sortIcon></th>
+            <th scope="col" [pSortableColumn]="'mudancaAutomatica'">Mudança Automática <p-sortIcon [field]="'mudancaAutomatica'"></p-sortIcon></th>
+            <th scope="col" [pSortableColumn]="'inativo'" style="width:100px">Inativo <p-sortIcon [field]="'inativo'"></p-sortIcon></th>
+            <th scope="col">Ação</th>
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-row>

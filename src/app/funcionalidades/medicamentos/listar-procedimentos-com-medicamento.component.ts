@@ -22,6 +22,7 @@ export class ListarProcedimentosComMedicamentoComponent implements OnInit {
   loading = false;
   rowCounter: number = 10;
   tituloPagina = 'Tabela de Reembolso de Medicamentos do Saúde Caixa';
+  registrosSelecionados: any[] = [];
   
   constructor(
     private readonly medicamentoPatologiaService: MedicamentoPatologiaService,

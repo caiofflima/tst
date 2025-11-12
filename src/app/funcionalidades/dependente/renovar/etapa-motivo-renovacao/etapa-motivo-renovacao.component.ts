@@ -184,10 +184,11 @@ export class EtapaMotivoRenovacaoComponent implements OnInit, OnDestroy {
         const benef: any = this.beneficiario
         
         if(matricula.dataNascimento !== null){
-            const arrDataNascimento = matricula.dataNascimento.split('-').map(Number)            
-            const novaDataNascimento = new Date( arrDataNascimento[0], (arrDataNascimento[1] -1), arrDataNascimento[2] )
-            const arrVigencia = benef.cartaoIdentificacaoAtual.dataFinalValidade.split('-').map(Number)
-            let vigencia = new Date( arrVigencia[0], (arrVigencia[1] -1), arrVigencia[2] )
+            const arrDataNascimento = matricula.dataNascimento.split('-').map(Number);            
+            const novaDataNascimento = new Date( arrDataNascimento[0], (arrDataNascimento[1] -1), arrDataNascimento[2] );
+            const arrVigencia = benef.cartaoIdentificacaoAtual.dataFinalValidade.split('-').map(Number);
+            let vigencia = new Date( arrVigencia[0], (arrVigencia[1] -1), arrVigencia[2] );
+
             if( this.verificarNascimentoNosProximos30Dias(vigencia, novaDataNascimento, this._tipoDependente) ){
                 return false
             }
@@ -195,32 +196,42 @@ export class EtapaMotivoRenovacaoComponent implements OnInit, OnDestroy {
 
                 let idade = DateUtil.getIdade( novaDataNascimento );
                 
-                if(this._tipoDependente.idadeMinima && this._tipoDependente.idadeMaxima){
-                    if(idade < this._tipoDependente.idadeMinima  || idade > this._tipoDependente.idadeMaxima){
-                        let mensagem = this.mensagemIdade
-                        this.messageService.addMsgDanger(mensagem);
-                        return true;
-                    }
-                }else if(this._tipoDependente.idadeMinima){
-                    if(idade < this._tipoDependente.idadeMinima){
-                        let mensagem = this.mensagemIdade
-                        this.messageService.addMsgDanger(mensagem);
-                        return true;
-                    }
-                }else if(this._tipoDependente.idadeMaxima){
-                    if(idade > this._tipoDependente.idadeMaxima){
-                        let mensagem = this.mensagemIdade
-                        this.messageService.addMsgDanger(mensagem);
-                        return true;
-                    }
+                if(this.erroIdades(idade)){
+                    return true;
                 }
             
             }
-         }
+        }
 
         return false;
         
     }
+
+    erroIdades(idade:number):boolean{
+
+        if(this._tipoDependente.idadeMinima && this._tipoDependente.idadeMaxima){
+            if(idade < this._tipoDependente.idadeMinima  || idade > this._tipoDependente.idadeMaxima){
+                let mensagem = this.mensagemIdade
+                this.messageService.addMsgDanger(mensagem);
+                return true;
+            }
+        }else if(this._tipoDependente.idadeMinima){
+            if(idade < this._tipoDependente.idadeMinima){
+                let mensagem = this.mensagemIdade
+                this.messageService.addMsgDanger(mensagem);
+                return true;
+            }
+        }else if(this._tipoDependente.idadeMaxima){
+            if(idade > this._tipoDependente.idadeMaxima){
+                let mensagem = this.mensagemIdade
+                this.messageService.addMsgDanger(mensagem);
+                return true;
+            }
+        }
+
+        return false;
+    }
+
 
     verificarNascimentoNosProximos30Dias(vigencia: Date,nascimento: Date, tipoDependente: any): boolean{
         const expiration = vigencia;

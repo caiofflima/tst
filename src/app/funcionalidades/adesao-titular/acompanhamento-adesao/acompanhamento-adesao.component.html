@@ -1,5 +1,5 @@
 <asc-acompanhamento-processo-base
-  (onPermissoes)="updatePermissoes($event)"
+  (onPermissoes)="updatePermissoes($any($event))"
   [processo]="processo">
 
   <div asc-conteudo>
@@ -10,13 +10,13 @@
     [class.c-card-valido]="mostrarBordaVerdeObrigatorios"
     *ngIf="(mostrarBordaVerdeObrigatorios || mostrarBordaVermelhaObrigatorios) && !(isAguardandoDocumentoComplementar && mostrarBordaVerdeObrigatorios)">
     <asc-documentos-obrigatorios-card
-        (hasDocumentos)="possuiDocumentosObrigatorios($event)"
-        (hasDocumentosInvalidos)="hasDocumentosinvalido($event)"
-        (hasAnexos)="hasAnexosDocumentosObrigatorio($event)"
+        (hasDocumentos)="possuiDocumentosObrigatorios($any($event))"
+        (hasDocumentosInvalidos)="hasDocumentosinvalido($any($event))"
+        (hasAnexos)="hasAnexosDocumentosObrigatorio($any($event))"
         [permissoes]="permissoes"
         [processo]="processo"
         [tipoProcessadorUpload]="'adesao'"
-        (listAnexos)="getListAnexosObrigatorio($event)"
+        (listAnexos)="getListAnexosObrigatorio($any($event))"
         (onUploadComplete)="atualizarProcesso()"
         (atualizarPedido)="atualizarProcesso();"
       ></asc-documentos-obrigatorios-card>
@@ -33,12 +33,12 @@
          [class.c-card-invalido]="mostrarBordaVermelhaCondicionais"
          [class.c-card-valido]="mostrarBordaVerdeCondicionais">
       <asc-documentos-condicionados
-        (hasDocumentos)="hasDocumentos($event)"
+        (hasDocumentos)="hasDocumentos($any($event))"
         (atualizarPedido$)="atualizarProcesso()"
         [permissoes]="permissoes"
         [processo]="processo"
         [atualizarProcesso]="subjectAtualizarProcesso"
-        (listAnexos)="getListAnexosObrigatorio($event)"
+        (listAnexos)="getListAnexosObrigatorio($any($event))"
         (onUploadComplete)="atualizarProcesso()"
       ></asc-documentos-condicionados>
     </div>
@@ -74,9 +74,9 @@
     <div class="c-card conteudo-spacing docsMP" @fadeInOut
     *ngIf="possuiDocumentos && (!recebendoDocumentacaoTitular || (isAguardandoDocumentoComplementar && mostrarBordaVerdeObrigatorios))" >
     <asc-documentos-obrigatorios-card
-        (hasDocumentos)="possuiDocumentosObrigatorios($event)"
-        (hasDocumentosInvalidos)="hasDocumentosinvalido($event)"
-        (hasAnexos)="hasAnexosDocumentosObrigatorio($event)"
+        (hasDocumentos)="possuiDocumentosObrigatorios($any($event))"
+        (hasDocumentosInvalidos)="hasDocumentosinvalido($any($event))"
+        (hasAnexos)="hasAnexosDocumentosObrigatorio($any($event))"
         [permissoes]="permissoes"
         [processo]="processo"
         [tipoProcessadorUpload]="'adesao'"
@@ -98,7 +98,7 @@
         [processo]="processo"
         [possuiDocumentosObrigatorios]="possuiDocumentos"
         (onCancelar)="showDocumentoComplementar(false)"
-        (hasDocumentos)="hasDocumentos($event)"
+        (hasDocumentos)="hasDocumentos($any($event))"
         (atualizarProcesso$)="atualizarProcesso()"
         (atualizarPedido)="atualizarProcesso()"
       ></asc-documento-complementar-card>
@@ -114,7 +114,7 @@
         [tipoProcessadorUpload]="'adesao'"
         [processo]="processo"
         [atualizarProcesso]="subjectAtualizarProcesso"
-        (hasDocumentos)="hasDocumentos($event)"
+        (hasDocumentos)="hasDocumentos($any($event))"
         (atualizarPedido$)="atualizarProcesso()"
       ></asc-documentos-condicionados>
       <div class="dados-options">

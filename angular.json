@@ -19,18 +19,21 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              {
+                "glob": "**/*",
+                "input": "src/assets",
+                "output": "/assets/",
+                "ignore": ["**/fonts/fontawesome-webfont.*"]
+              }
             ],
             "styles": [
               "./src/assets/sass/main.scss",
               "./src/assets/less/main.less",
               "./node_modules/bootstrap/dist/css/bootstrap.min.css",
               "./src/assets/css/fonts-google-open_sans.css",
-              "./src/assets/css/font-awesome.min.css",
               "./node_modules/quill/dist/quill.bubble.css",
               "./node_modules/quill/dist/quill.snow.css",
-              "./node_modules/@fortawesome/fontawesome-free/css/all.min.css",
-              "./node_modules/font-awesome/css/font-awesome.min.css",
+              "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
               "./node_modules/primeng/resources/primeng.min.css",
               "node_modules/primeng/resources/themes/mira/theme.css"
             ],
@@ -45,6 +48,10 @@
             ],
             "allowedCommonJsDependencies": [
               "date-fns-tz",
+              "date-fns/_lib/cloneObject/index.js",
+              "date-fns/format/index.js",
+              "date-fns/_lib/getTimezoneOffsetInMilliseconds/index.js",
+              "date-fns/_lib/toInteger/index.js",
               "keycloak-js",
               "quill",
               "quill-delta",

@@ -21,6 +21,7 @@ export class ListarProcedimentosComReembolsoComponent implements OnInit {
   loading = false;
   rowCounter: number = 10;
   tituloPagina = 'Tabela Reembolso'
+  registrosSelecionados: any[] = [];
 
   constructor(
     private readonly procedimentoService: ProcedimentoService,
@@ -54,6 +55,14 @@ export class ListarProcedimentosComReembolsoComponent implements OnInit {
 
   voltar(): void {
       this.location.back();
+  }
+
+  selecionarPerfis(event: any): void {
+    // Método para lidar com seleção de linhas
+  }
+
+  deSelecionarPerfis(event: any): void {
+    // Método para lidar com desseleção de linhas
   }
 
   public exportarExcel(){

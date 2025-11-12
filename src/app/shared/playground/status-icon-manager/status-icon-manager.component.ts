@@ -5,18 +5,13 @@ import { Component, OnInit, Input } from '@angular/core';
   templateUrl: './status-icon-manager.component.html',
   styleUrls: ['./status-icon-manager.component.scss']
 })
-export class StatusIconManagerComponent implements OnInit {
+export class StatusIconManagerComponent {
 
   @Input()
   status: string
 
   @Input()
   onHover: boolean
-
-  constructor() { }
-
-  ngOnInit() {
-  }
 
   setColor() {
     if(this.onHover) {

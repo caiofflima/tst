@@ -52,7 +52,7 @@
           <asc-input-text
             [control]="razaoSocial"
             label="Razão Social"
-            [somenteLetrasMaiusculas]="true"
+            somenteLetrasMaiusculas="true"
             id="razaoSocial"
             name="razaoSocial"
             [maxlength]="150"
@@ -141,8 +141,8 @@
               </ng-template>
               <ng-template pTemplate="header">
                 <tr>
-                  <th [pSortableColumn]="'nome'">Abrangência <p-sortIcon [field]="'nome'"></p-sortIcon></th>
-                  <th id="cl_Action">Ação</th>
+                  <th scope="col" [pSortableColumn]="'nome'">Abrangência <p-sortIcon [field]="'nome'"></p-sortIcon></th>
+                  <th scope="col" id="cl_Action">Ação</th>
                 </tr>
               </ng-template>
               <ng-template pTemplate="body" let-row>

@@ -9,6 +9,7 @@ import { AscPedidoModule } from "../../../shared/components/asc-pedido/asc-pedid
 import { PlaygroundModule } from '../../../shared/playground/playground.module';
 import { AscCardModule } from "../../../shared/components/asc-card/asc-card.module";
 import { AscDocumentosModule } from "../../../shared/components/asc-pedido/asc-documentos/asc-documentos.module";
+import { ComponentModule } from "../../../shared/components/component.module";
 
 @NgModule({
   imports: [
@@ -19,7 +20,8 @@ import { AscDocumentosModule } from "../../../shared/components/asc-pedido/asc-d
     AscPedidoModule,
     PlaygroundModule,
     AscCardModule,
-    AscDocumentosModule
+    AscDocumentosModule,
+    ComponentModule
   ],
   declarations: [AcompanhamentoAdesaoComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

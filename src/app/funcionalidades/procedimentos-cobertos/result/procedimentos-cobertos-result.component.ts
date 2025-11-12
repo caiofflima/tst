@@ -27,6 +27,7 @@ export class ProcedimentosCobertosResultComponent extends BaseComponent {
     idTipoProcesso: number = null;
     procedimentos: Procedimento[];
     descricaoTiposProcesso: string;
+    registrosSelecionados: any[] = [];
   
     constructor(
         override readonly messageService: MessageService,

@@ -10,7 +10,6 @@
     "paths":{
       "app/*":["app/*"]
     },
-    "suppressImplicitAnyIndexErrors": true,
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "strict": false,
@@ -39,3 +38,4 @@
     "strictTemplates": true
   }
 }
+

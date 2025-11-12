@@ -7,7 +7,7 @@ import {FormControl} from "@angular/forms";
 import {Location} from "@angular/common";
 import { FiltroConsultaMotivoNegacao } from 'app/shared/models/filtro/filtro-consulta-motivo-negacao';
 import { SituacaoProcesso } from 'app/shared/models/entidades';
-import { ComboService } from 'app/shared/services/services';
+import { ComboService, SituacaoProcessoService } from 'app/shared/services/services';
 
 @Component({
     selector: 'asc-parametrizacao-motivo-negacao-home',
@@ -42,6 +42,7 @@ export class ParametrizacaoMotivoNegacaoHomeComponent extends BaseComponent impl
     constructor(
         override readonly messageService: MessageService,
         private readonly service: ComboService,
+        private readonly situacaoProcessoService: SituacaoProcessoService,
         private readonly route: Router,
         private readonly location: Location
     ) {

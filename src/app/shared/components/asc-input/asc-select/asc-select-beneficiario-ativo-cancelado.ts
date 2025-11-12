@@ -9,7 +9,8 @@ import {tap} from "rxjs/operators";
 @Component({
     selector: 'asc-select-beneficiario-ativo-cancelado',
     templateUrl: 'asc-select.component.html',
-    encapsulation: ViewEncapsulation.None
+    styleUrls: ['./asc-select.component.scss']
+
 })
 export class AscSelectBeneficiarioAtivoCanceladoComponent extends BaseSelectComponent<Beneficiario> implements OnInit {
 

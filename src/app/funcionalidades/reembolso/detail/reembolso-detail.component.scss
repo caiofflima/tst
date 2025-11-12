@@ -7,7 +7,7 @@
     float: left;
     background: white;
     margin-bottom: 5%;
-    ::ng-deep p-accordionTab.menuremb{
+    ::ng-deep p-accordiontab.menuremb{
 
        div.ui-accordion-header{
         border: none;
@@ -30,7 +30,7 @@
 
 
     }
-    ::ng-deep p-accordionTab.menuremb2{
+    ::ng-deep p-accordiontab.menuremb2{
         div.ui-accordion-header{
             border: none;
             border-bottom: 1px solid #EFF4F5 !important;

@@ -1,38 +1,36 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
-import { DocumentoTipoProcesso } from "../../../../models/dto/documento-tipo-processo";
-import { ArrayUtil } from "../../../../util/array-util";
-import { ArquivoParam } from "../../../asc-file/models/arquivo.param";
-import { MessageService } from "../../../messages/message.service";
-import { AscModalVisualizarDocumentoComponent } from "../modal-visualizar-documento/asc-modal-visualizar-documento.component";
-import {
-  isNotUndefinedNullOrEmpty,
-  isUndefinedNullOrEmpty,
-  isUndefinedOrNull,
-} from "../../../../constantes";
-import { DocumentoParam } from "../../models/documento.param";
+import { forkJoin, of, Observable, ReplaySubject, Subject, Subscription } from "rxjs";
 import { distinctUntilChanged, map, switchMap, take, takeUntil, tap } from "rxjs/operators";
-import { Observable, ReplaySubject, Subject, Subscription } from "rxjs";
-import { DocumentoTipoProcessoService } from "../../../../services/comum/documento-tipo-processo.service";
-import { Arquivo } from "../../../../models/dto/arquivo";
+import { ActivatedRoute } from "@angular/router";
+
+import { AscModalVisualizarDocumentoComponent } from "../modal-visualizar-documento/asc-modal-visualizar-documento.component";
+import { ArrayUtil } from "../../../../util/array-util";
+import { isNotUndefinedNullOrEmpty,isUndefinedNullOrEmpty,isUndefinedOrNull,} from "../../../../constantes";
+import { ArquivoParam } from "../../../asc-file/models/arquivo.param";
+import { DocumentoParam } from "../../models/documento.param";
 import { fadeAnimation } from "../../../../animations/faded.animation";
+import { CustomOperatorsRxUtil } from "../../../../util/custom-operators-rx-util";
+import { Util } from "../../../../../arquitetura/shared/util/util";
+import { Arquivo } from "../../../../models/dto/arquivo";
+import { Pedido } from "app/shared/models/comum/pedido";
+import { StatusProcessoEnum } from "../../../../enums/status-processo.enum";
+import { DocumentoPedidoDTO } from "app/shared/models/dto/documento-pedido";
+import { ValidacaoDocumentoPedido } from "../../../../models/comum/validacao-documento-pedido";
+import { DocumentoTipoProcesso } from "../../../../models/dto/documento-tipo-processo";
+import { SelectItem } from "primeng/api";
+import { TipoValidacaoDTO } from "../../../../models/dto/tipo-validacao";
+import { AscComponenteAutorizadoMessage } from "../../asc-componente-autorizado-message";
+import { PerfilEnum } from "../../../../enums/perfil.enum";
+import { timeStamp } from "console";
+
+import { ValidacaoDocumentoPedidoService } from "app/shared/services/comum/validacao-documento-pedido.service";
+import { DocumentoTipoProcessoService } from "../../../../services/comum/documento-tipo-processo.service";
+import { DocumentoPedidoService } from "app/shared/services/comum/documento-pedido.service";
+import { MessageService } from "../../../messages/message.service";
 import { AnexoService } from "../../../../services/comum/anexo.service";
 import { TipoValidacaoService } from "app/shared/services/comum/tipo-validacao.service";
 import { ProcessoService } from "app/shared/services/comum/processo.service";
-import { Pedido } from "app/shared/models/comum/pedido";
-import { ValidacaoDocumentoPedidoService } from "app/shared/services/comum/validacao-documento-pedido.service";
-import { SelectItem } from "primeng/api";
-import { TipoValidacaoDTO } from "../../../../models/dto/tipo-validacao";
-import { CustomOperatorsRxUtil } from "../../../../util/custom-operators-rx-util";
-import { forkJoin, of } from "rxjs";
-import { ValidacaoDocumentoPedido } from "../../../../models/comum/validacao-documento-pedido";
-import { DocumentoPedidoService } from "app/shared/services/comum/documento-pedido.service";
-import { AscComponenteAutorizadoMessage } from "../../asc-componente-autorizado-message";
-import { Util } from "../../../../../arquitetura/shared/util/util";
 import { SessaoService } from "../../../../../arquitetura/shared/services/seguranca/sessao.service";
-import { StatusProcessoEnum } from "../../../../enums/status-processo.enum";
-import { PerfilEnum } from "../../../../enums/perfil.enum";
-import { ActivatedRoute } from "@angular/router";
-import { DocumentoPedidoDTO } from "app/shared/models/dto/documento-pedido";
 
 interface ArquivoModal {
   arquivos: Arquivo[];
@@ -412,19 +410,17 @@ export class AscDocumentoCardComponent
     return this.processo && this.processo.ultimaSituacao ? this.isPermiteUpload(documento.id) && new Date(arquivo.data) > dataCadastramentoMais5Segundos : true;
   }
 
+  // private isPossuiPermissao(permissao: string): boolean {
+  //   if (this.permissoes && this.permissoes.perfil) {
+  //     return this.permissoes.perfil.some((x) => x.codigo == permissao);
+  //   }
 
+  //   return false;
+  // }
 
-  private isPossuiPermissao(permissao: string): boolean {
-    if (this.permissoes && this.permissoes.perfil) {
-      return this.permissoes.perfil.some((x) => x.codigo == permissao);
-    }
-
-    return false;
-  }
-
-  private isSituacaoProcesso(situacao): boolean {
-    return this.processo.ultimaSituacao.situacaoProcesso.id == situacao;
-  }
+  // private isSituacaoProcesso(situacao): boolean {
+  //   return this.processo.ultimaSituacao.situacaoProcesso.id == situacao;
+  // }
 
   get statusAComparar(){
     return [
@@ -578,33 +574,27 @@ export class AscDocumentoCardComponent
         },
       });
   }  
-  
-     
-  
+
   private atualizarEstadoDocumento(validacao: ValidacaoDocumentoPedido): void {
     this.mapaValidacoesEncontradas.set(validacao.idDocumentoTipoProcesso, validacao);
     this.validacoes[validacao.idDocumentoTipoProcesso] = validacao.idTipoValidacao;
     this.situacaoDocValidacao = { ...this.situacaoDocValidacao };
   }
 
-  private isDocumentoValidoOuDispensado(validacao: ValidacaoDocumentoPedido): boolean {
-    const situacaoDocumento = this.mostraSituacao(validacao.idDocumentoTipoProcesso);
-
-    // console.log("Validacao recebida:", validacao);
-    // console.log("Situação do documento:", situacaoDocumento);
-
+  validaSituacaoDocumentoValidoOuDispensado(situacaoDocumento:string):boolean{
     // Verifica se a situação é "VÁLIDO" ou "DISPENSADO"
     if (situacaoDocumento === 'VÁLIDO' || situacaoDocumento === 'DISPENSADO') {
-        // console.log(
-        //     `Documento ID ${validacao.idDocumentoTipoProcesso} é considerado válido ou dispensado pela situação: ${situacaoDocumento}`
-        // );
-        return true;
+      // console.log(
+      //     `Documento ID ${validacao.idDocumentoTipoProcesso} é considerado válido ou dispensado pela situação: ${situacaoDocumento}`
+      // );
+      return true;
     }
 
-    // Buscar o documento correspondente
-    const documento = this.documentos.find(
-        (doc) => doc.id === validacao.idDocumentoTipoProcesso
-    );
+    return false;
+  }
+
+  validarSemDocumento(documento: DocumentoTipoProcesso, validacao:ValidacaoDocumentoPedido):boolean{
+    let retorno:boolean = false;
 
     if (!documento) {
       // console.log(
@@ -618,29 +608,25 @@ export class AscDocumentoCardComponent
         // console.log(
         //   `Documento obrigatório. Estado atual do aviso de obrigatórios: ${estadoAtualObrigatorios}`
         // );
-        return estadoAtualObrigatorios;
+        retorno = estadoAtualObrigatorios;
       } else if (validacao.codigoUsuarioValidacao === '2') {
         // Documento complementar
         const estadoAtualComplementares = this.documentoPedidoService.getAvisoSituacaoPedidoComplementaresState();
         // console.log(
         //   `Documento complementar. Estado atual do aviso de complementares: ${estadoAtualComplementares}`
         // );
-        return estadoAtualComplementares;
+        retorno = estadoAtualComplementares;
       }
   
       // console.log(
       //   `Documento ID ${validacao.idDocumentoTipoProcesso} possui um código de validação desconhecido: ${validacao.codigoUsuarioValidacao}`
       // );
-      return false;
-    }
 
-    if (!documento.arquivos || documento.arquivos.length === 0) {
-        // console.log(
-        //     `Documento ID ${validacao.idDocumentoTipoProcesso} não possui anexos.`
-        // );
-        return false;
     }
+    return retorno;
+  }
 
+  validaDocumentoEArquivos(documento:DocumentoTipoProcesso):boolean{
     // Verifica se o documento existe e possui anexos
     if (!documento || !documento.arquivos || documento.arquivos.length === 0) {
         // console.log(
@@ -648,53 +634,56 @@ export class AscDocumentoCardComponent
         // );
         return false;
     }
+    return true;
+  }
 
+  anexoRecenteProcessoUltimaSituacao(documento:DocumentoTipoProcesso):boolean{
     if (this.processo && this.processo.ultimaSituacao) {
-        // Obtém a data da última situação do pedido
-        const dataUltimaSituacao = new Date(this.processo.ultimaSituacao.dataCadastramento);
-        // console.log("Data da última situação do pedido:", dataUltimaSituacao);
+      // Obtém a data da última situação do pedido
+      const dataUltimaSituacao = new Date(this.processo.ultimaSituacao.dataCadastramento);
+      // console.log("Data da última situação do pedido:", dataUltimaSituacao);
 
-        // Subtrai 5 segundos da data da última situação
-        const dataLimite = new Date(dataUltimaSituacao.getTime() - 10000);
-        // console.log("Data limite (última situação - 10 segundos):", dataLimite);
+      // Subtrai 5 segundos da data da última situação
+      const dataLimite = new Date(dataUltimaSituacao.getTime() - 10000);
+      // console.log("Data limite (última situação - 10 segundos):", dataLimite);
 
-        // Verifica se algum anexo é mais recente que a data limite
-        const anexoRecente = documento.arquivos.some(
-            (arquivo) => new Date(arquivo.data) > dataLimite
-        );
+      // Verifica se algum anexo é mais recente que a data limite
+      const anexoRecente = documento.arquivos.some(
+          (arquivo) => new Date(arquivo.data) > dataLimite
+      );
 
-        if (anexoRecente) {
-            // console.log(
-            //     `Documento ID ${validacao.idDocumentoTipoProcesso} possui ao menos um anexo mais recente do que a data limite.`
-            // );
-            return true;
-        } else {
-            // console.log(
-            //     `Documento ID ${validacao.idDocumentoTipoProcesso} não possui anexos mais recentes do que a data limite.`
-            // );
-        }
-    } else {
-        // console.log("Processo ou última situação do pedido não encontrada.");
+      if (anexoRecente) {
+          // console.log(
+          //     `Documento ID ${validacao.idDocumentoTipoProcesso} possui ao menos um anexo mais recente do que a data limite.`
+          // );
+          return true;
+      } else {
+          // console.log(
+          //     `Documento ID ${validacao.idDocumentoTipoProcesso} não possui anexos mais recentes do que a data limite.`
+          // );
+      }
     }
+    return false;
 
-    // console.log("situacao", situacaoDocumento)
-
+  }
+    
+  situacaoDocumentoTraco(situacaoDocumento:string, validacao:ValidacaoDocumentoPedido):boolean{
     if (situacaoDocumento == '—') {
       // console.log(
       //     `Situação do documento é nula para o documento ID ${validacao.idDocumentoTipoProcesso}.`
       // );
-  
+
       const documento = this.documentos.find(
-          (doc) => doc.id === validacao.idDocumentoTipoProcesso
+        (doc) => doc.id === validacao.idDocumentoTipoProcesso
       );
-  
+
       if (!documento || !documento.arquivos || documento.arquivos.length === 0) {
           // console.log(
           //     `Documento ID ${validacao.idDocumentoTipoProcesso} não possui anexos. Considerado inválido.`
           // );
           return false;
       }
-  
+
       if (validacao.codigoUsuarioValidacao === '1') {
           // console.log(
           //     `Documento ID ${validacao.idDocumentoTipoProcesso} é obrigatório e possui anexos. Considerado válido.`
@@ -706,12 +695,51 @@ export class AscDocumentoCardComponent
           // );
           return true;
       }
-  
+
       // console.log(
       //     `Documento ID ${validacao.idDocumentoTipoProcesso} possui um código de validação desconhecido: ${validacao.codigoUsuarioValidacao}`
       // );
       return false;
+    }
+
+    return false;
   }
+
+  private isDocumentoValidoOuDispensado(validacao: ValidacaoDocumentoPedido): boolean {
+    const situacaoDocumento = this.mostraSituacao(validacao.idDocumentoTipoProcesso);
+
+    // console.log("Validacao recebida:", validacao);
+    // console.log("Situação do documento:", situacaoDocumento);
+
+    // Verifica se a situação é "VÁLIDO" ou "DISPENSADO"
+    if (this.validaSituacaoDocumentoValidoOuDispensado(situacaoDocumento)) {
+        return true;
+    }
+
+    // Buscar o documento correspondente
+    const documento = this.documentos.find(
+        (doc) => doc.id === validacao.idDocumentoTipoProcesso
+    );
+
+    if (!documento) {
+      return this.validarSemDocumento(documento, validacao);
+    }
+
+    // Verifica se o documento existe e possui anexos
+    if(!this.validaDocumentoEArquivos(documento)){
+      return false;
+    }
+    
+    if (this.processo && this.processo.ultimaSituacao) {
+      if(this.anexoRecenteProcessoUltimaSituacao(documento)){
+        return true;
+      }     
+    }
+    // console.log("situacao", situacaoDocumento)
+
+    if (situacaoDocumento == '—') {
+      return this.situacaoDocumentoTraco(situacaoDocumento, validacao);
+    }
 
     // Caso nenhuma das regras acima seja atendida, o documento não é válido
     // console.log(

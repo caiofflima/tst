@@ -14,22 +14,22 @@
     <p class="info-p"><b>&nbsp; Reembolso:</b>
       Valor reembolsado para o procedimento, ressalvado o percentual de coparticipação;
     </p>
-    <p class="info-p"><b>&nbsp; Dep. Rest. = SIM:</b> 
+    <p class="info-p"><b>&nbsp; Dep. Rest. = SIM:</b>
       Procedimento permitidos aos Dependentes Restritos;
     </p>
-    <p class="info-p"><b>&nbsp; Aut. Prévia = SIM:</b> 
+    <p class="info-p"><b>&nbsp; Aut. Prévia = SIM:</b>
       Procedimentos cuja realização necessita de Autorização Prévia.
     </p>
-    <p class="info-p"><b>&nbsp; Aux.:</b> 
+    <p class="info-p"><b>&nbsp; Aux.:</b>
       Número de auxiliares permitidos na execução do procedimento;
     </p>
-    <p class="info-p"><b>&nbsp; Instr. = SIM:</b> 
+    <p class="info-p"><b>&nbsp; Instr. = SIM:</b>
       Permite participação do instrumentador na execução do procedimento;
     </p>
-    <p class="info-p"><b>&nbsp; Intervalo entre atendimentos (qtd p/dia):</b> 
+    <p class="info-p"><b>&nbsp; Intervalo entre atendimentos (qtd p/dia):</b>
       Periodicidade na qual cada procedimento pode ser executado novamente, com desconto normal de participação;
     </p>
-    
+
     <p style="display: flex; justify-content: end;">
       <button class="btn back-btn" (click)="exportarExcel()">
         <span class="fa fa-download"></span>&nbsp;Exportar
@@ -44,22 +44,22 @@
       <input #gb type="text" class="form-control filtro-caixa" size="50" placeholder="Digite para filtrar resultado">
       <em class="fas fa-search"></em>
     </div>
-    
+
     <p-table id="caixa-table" [value]="listaProcedimentos" [(selection)]="registrosSelecionados" [paginator]="true" [rows]="10" [totalRecords]="listaProcedimentos?.length" [rowsPerPageOptions]="[5,10,20]" [reorderableColumns]="true" sortField="id" [loading]="loading" [sortOrder]="-1" class="table table-striped table-sm table-hover text-center" (onRowSelect)="selecionarPerfis($event)" (onRowUnselect)="deSelecionarPerfis($event)">
 
       <ng-template pTemplate="header">
         <tr>
-          <th [style]="{'width':'35px'}" selectionMode="multiple"></th>
-          <th pSortableColumn="estruturaNumerica">Código <p-sortIcon [field]="'estruturaNumerica'"></p-sortIcon></th>
-          <th pSortableColumn="descricao">Nome do Procedimento <p-sortIcon [field]="'descricao'"></p-sortIcon></th>
-          <th pSortableColumn="vlrReembolso">Reembolso <p-sortIcon [field]="'vlrReembolso'"></p-sortIcon></th>
-          <th pSortableColumn="permitidoDepRestrito">Dep. Rest. <p-sortIcon [field]="'permitidoDepRestrito'"></p-sortIcon></th>
-          <th pSortableColumn="autorizacaoPrevia">Aut. Prévia <p-sortIcon [field]="'autorizacaoPrevia'"></p-sortIcon></th>
-          <th pSortableColumn="qtdAuxiliares">Aux. <p-sortIcon [field]="'qtdAuxiliares'"></p-sortIcon></th>
-          <th pSortableColumn="preveInstrumentador">Instr. <p-sortIcon [field]="'preveInstrumentador'"></p-sortIcon></th>
-          <th pSortableColumn="intervaloAtendimentos">Intervalo entre atendimentos <p-sortIcon [field]="'intervaloAtendimentos'"></p-sortIcon></th>
-          <th pSortableColumn="idadeMinima">Idade mínima <p-sortIcon [field]="'idadeMinima'"></p-sortIcon></th>
-          <th pSortableColumn="idadeMaxima">Idade máxima <p-sortIcon [field]="'idadeMaxima'"></p-sortIcon></th>
+          <th [style]="{'width':'35px'}" selectionMode="multiple" scope="col"></th>
+          <th pSortableColumn="estruturaNumerica" scope="col">Código <p-sortIcon [field]="'estruturaNumerica'"></p-sortIcon></th>
+          <th pSortableColumn="descricao" scope="col">Nome do Procedimento <p-sortIcon [field]="'descricao'"></p-sortIcon></th>
+          <th pSortableColumn="vlrReembolso" scope="col">Reembolso <p-sortIcon [field]="'vlrReembolso'"></p-sortIcon></th>
+          <th pSortableColumn="permitidoDepRestrito" scope="col">Dep. Rest. <p-sortIcon [field]="'permitidoDepRestrito'"></p-sortIcon></th>
+          <th pSortableColumn="autorizacaoPrevia" scope="col">Aut. Prévia <p-sortIcon [field]="'autorizacaoPrevia'"></p-sortIcon></th>
+          <th pSortableColumn="qtdAuxiliares" scope="col">Aux. <p-sortIcon [field]="'qtdAuxiliares'"></p-sortIcon></th>
+          <th pSortableColumn="preveInstrumentador" scope="col">Instr. <p-sortIcon [field]="'preveInstrumentador'"></p-sortIcon></th>
+          <th pSortableColumn="intervaloAtendimentos" scope="col">Intervalo entre atendimentos <p-sortIcon [field]="'intervaloAtendimentos'"></p-sortIcon></th>
+          <th pSortableColumn="idadeMinima" scope="col">Idade mínima <p-sortIcon [field]="'idadeMinima'"></p-sortIcon></th>
+          <th pSortableColumn="idadeMaxima" scope="col">Idade máxima <p-sortIcon [field]="'idadeMaxima'"></p-sortIcon></th>
         </tr>
       </ng-template>
 

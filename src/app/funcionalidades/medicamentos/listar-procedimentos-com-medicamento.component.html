@@ -15,7 +15,7 @@
     <p class="info-p"><b>&nbsp;&bull; Comp. Teto - SIM - Medicamentos cujo reembolso sensibiliza o teto anual de R$ 4.800,00 </b></p>
     <p class="info-p"><b>&nbsp;&bull; Laborat. - Laboratório</b></p>
     <p class="info-p"><b>&nbsp;&bull; Apresent. - Apresentação</b></p>
-        
+
     <p style="display: flex; justify-content: end;">
       <button class="btn back-btn" (click)="exportarExcel()">
         <span class="fa fa-download"></span>&nbsp;Exportar
@@ -35,13 +35,13 @@
 
       <ng-template pTemplate="header">
         <tr>
-          <th [style]="{'width':'35px'}" selectionMode="multiple"></th>
-          <th pSortableColumn="nomePatologia" [style]="{'width':'100px','text-align': 'left'}">Patologia <p-sortIcon [field]="'nomePatologia'"></p-sortIcon></th>
-          <th pSortableColumn="reembolso" [style]="{'width':'60px','text-align': 'center'}">Perc. Reembolso <p-sortIcon [field]="'reembolso'"></p-sortIcon></th>
-          <th pSortableColumn="compoeTeto" [style]="{'width':'50px','text-align': 'center'}">Comp. Teto <p-sortIcon [field]="'compoeTeto'"></p-sortIcon></th>
-          <th pSortableColumn="nomeLaboratorio" [style]="{'width':'80px','text-align': 'left'}">Laboratório <p-sortIcon [field]="'nomeLaboratorio'"></p-sortIcon></th>
-          <th pSortableColumn="nomeMedicamento" [style]="{'width':'100px','text-align': 'left'}">Medicamento <p-sortIcon [field]="'nomeMedicamento'"></p-sortIcon></th>
-          <th pSortableColumn="nomeApresentacao" [style]="{'width':'100px','text-align': 'left'}">Apresentação <p-sortIcon [field]="'nomeApresentacao'"></p-sortIcon></th>
+          <th [style]="{'width':'35px'}" selectionMode="multiple" scope="col"></th>
+          <th pSortableColumn="nomePatologia" [style]="{'width':'100px','text-align': 'left'}" scope="col">Patologia <p-sortIcon [field]="'nomePatologia'"></p-sortIcon></th>
+          <th pSortableColumn="reembolso" [style]="{'width':'60px','text-align': 'center'}" scope="col">Perc. Reembolso <p-sortIcon [field]="'reembolso'"></p-sortIcon></th>
+          <th pSortableColumn="compoeTeto" [style]="{'width':'50px','text-align': 'center'}" scope="col">Comp. Teto <p-sortIcon [field]="'compoeTeto'"></p-sortIcon></th>
+          <th pSortableColumn="nomeLaboratorio" [style]="{'width':'80px','text-align': 'left'}" scope="col">Laboratório <p-sortIcon [field]="'nomeLaboratorio'"></p-sortIcon></th>
+          <th pSortableColumn="nomeMedicamento" [style]="{'width':'100px','text-align': 'left'}" scope="col">Medicamento <p-sortIcon [field]="'nomeMedicamento'"></p-sortIcon></th>
+          <th pSortableColumn="nomeApresentacao" [style]="{'width':'100px','text-align': 'left'}" scope="col">Apresentação <p-sortIcon [field]="'nomeApresentacao'"></p-sortIcon></th>
         </tr>
       </ng-template>
 

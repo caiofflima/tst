@@ -18,6 +18,7 @@ import {AtendimentoService} from "app/shared/services/comum/atendimento.service"
 import {MessageService} from "../../../../shared/components/messages/message.service";
 import {SessaoService, BeneficiarioService, InscricaoDependenteService} from '../../../../shared/services/services';
 import { take } from 'rxjs/operators';
+import {TipoBeneficiarioDTO} from "../../../../shared/models/dto/tipo-beneficiario";
 @Component({
     selector: 'asc-cadastro-dependente',
     templateUrl: './cadastro-dependente.component.html',
@@ -37,7 +38,7 @@ export class CadastroDependenteComponent extends BaseComponent {
     complementoDependenteModel?: ComplementoDependenteFormModel;
     estado: DadoComboDTO;
     tipoDeficienciaModel: TipoDeficiencia;
-    tipoDependenteModel: TipoDependente;
+    tipoDependenteModel: TipoBeneficiarioDTO;
     estadoCivilModel: EstadoCivil;
     beneficiarioModel?: Beneficiario;
     tipoProcesso: TipoProcesso;
@@ -114,7 +115,7 @@ export class CadastroDependenteComponent extends BaseComponent {
     }
 
 
-    tipoDependenteModelSelecionado(tipoDependenteModel: TipoDependente) {
+    tipoDependenteModelSelecionado(tipoDependenteModel: TipoBeneficiarioDTO) {
 
         if (this.tipoDependenteModel) {
             this.parametroDocumento.idTipoBeneficiario = this.tipoDependenteModel.id

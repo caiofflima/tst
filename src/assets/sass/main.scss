@@ -293,8 +293,8 @@ p-dropdown.ng-valid[required] > div,
 p-dropdown.ng-valid[required]:hover > div,
 p-dropdown.ng-valid[required] > div,
 p-dropdown.ng-valid[required]:hover > div,
-p-multiSelect.ng-valid[required] > div,
-p-multiSelect.ng-valid[required]:hover > div {
+p-multiselect.ng-valid[required] > div,
+p-multiselect.ng-valid[required]:hover > div {
   border-left: 5px solid #42a948 !important;
   border-top-left-radius: 3px;
   border-bottom-left-radius: 3px;
@@ -303,16 +303,16 @@ p-multiSelect.ng-valid[required]:hover > div {
 .ng-invalid[required]:not(p-dropdown) > span > input,
 p-dropdown.ng-invalid[required] > div,
 p-dropdown.ng-invalid[required]:hover > div,
-p-multiSelect.ng-invalid[required] > div,
-p-multiSelect.ng-invalid[required]:hover > div {
+p-multiselect.ng-invalid[required] > div,
+p-multiselect.ng-invalid[required]:hover > div {
   border-left: 5px solid #a94442 !important;
   border-top-left-radius: 3px;
   border-bottom-left-radius: 3px;
 }
 
-.ng-invalid[required]:not(p-multiSelect) > span > input,
-p-multiSelect.ng-invalid[required] > div,
-p-multiSelect.ng-invalid[required]:hover > div {
+.ng-invalid[required]:not(p-multiselect) > span > input,
+p-multiselect.ng-invalid[required] > div,
+p-multiselect.ng-invalid[required]:hover > div {
   border-left: 5px solid #a94442 !important;
   border-top-left-radius: 3px;
   border-bottom-left-radius: 3px;
@@ -1333,7 +1333,7 @@ a.ui-state-active {
 }
 
 .barra-botoes {
-  justify-content: end;
+  justify-content: flex-end;
   align-items: baseline;
   padding: 15px 10px;
   border-radius: 4px;
@@ -2568,7 +2568,7 @@ button:focus {
 
 .ft-consult {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
 }
 
 .card-footer {

@@ -14,9 +14,9 @@
         <div class="p-0 col-md-12">
           <h4>Dados da Pesquisa</h4>
         </div>
-  
+
         <div class="clearfix"></div>
-  
+
         <div class="p-0 col-xs-3" *ngIf="descricaoTiposProcesso">
           <label class="control-label" for="tipoProcesso">Tipo Pedido</label>&nbsp;<br>
           <p id="tipoProcesso">{{ descricaoTiposProcesso }}</p>
@@ -40,22 +40,22 @@
         <div class="p-0 col-xs-3" *ngIf="descricaoTipoDeficiencia && isMostrarInfoLabel()">
             <label class="control-label" for="tipoDeficiencia">Tipo de deficiência</label>&nbsp;<br>
             <p id="tipoDeficiencia">{{ descricaoTipoDeficiencia }}</p>
-        </div>   
+        </div>
         <div class="p-0 col-xs-3" *ngIf="idade">
             <label class="control-label" for="idade">Idade</label>&nbsp;<br>
             <p id="idade">{{ idade }}</p>
-        </div>  
+        </div>
         <div class="p-0 col-xs-3" *ngIf="valorRenda">
             <label class="control-label" for="idade">Renda</label>&nbsp;<br>
             <p id="valorRenda">{{ valorRenda }}</p>
-        </div>  
-    </div> 
+        </div>
+    </div>
 
       <div class="clearfix"></div>
       <div class="row p-0 col-md-9">
         <h4>Resultado da Consulta</h4>
       </div>
-  
+
       <div class="row p-0 col-md-12">
         <div class="col-xs-3 search-inp p-0" style="margin: 5px 0 8px; border-bottom: 0 none">
           <input #gb type="text" class="form-control filtro-caixa" size="50"
@@ -81,14 +81,17 @@
           </ng-template>
           <ng-template pTemplate="header">
             <tr>
-              <th [pSortableColumn]="'documento.nome'" style="width:120px">Nome do Documento <p-sortIcon [field]="'documento.nome'"></p-sortIcon></th>
-              <th [pSortableColumn]="'estadoCivil'" style="width:100px">ESTADO CIVIL <p-sortIcon [field]="'estadoCivil'"></p-sortIcon></th>
-              <th [pSortableColumn]="'sexo'" style="width:60px">SEXO <p-sortIcon [field]="'sexo'"></p-sortIcon></th>
-              <th [pSortableColumn]="'idTipoDeficiencia'" style="width:120px">IDENT. DEFICIÊNCIA <p-sortIcon [field]="'idTipoDeficiencia'"></p-sortIcon></th>
-              <th [pSortableColumn]="'idadeMinima'" style="width:100px">IDADE MINIMA <p-sortIcon [field]="'idadeMinima'"></p-sortIcon></th>
-              <th [pSortableColumn]="'idadeMaxima'" style="width:100px">IDADE MÁXIMA <p-sortIcon [field]="'idadeMaxima'"></p-sortIcon></th>
-              <th [pSortableColumn]="'valorRendaMinima'" style="width:100px">VALOR RENDA MINIMA <p-sortIcon [field]="'valorRendaMinima'"></p-sortIcon></th>
-              <th [pSortableColumn]="'valorRendaMaxima'" style="width:100px">VALOR RENDA MÁXIMA <p-sortIcon [field]="'valorRendaMaxima'"></p-sortIcon></th>
+              <th scope="col" [pSortableColumn]="'documento.nome'" style="width:120px">Nome do Documento <p-sortIcon [field]="'documento.nome'"></p-sortIcon></th>
+              <th scope="col" [pSortableColumn]="'estadoCivil'" style="width:100px">ESTADO CIVIL <p-sortIcon [field]="'estadoCivil'"></p-sortIcon></th>
+              <th scope="col" [pSortableColumn]="'sexo'" style="width:60px">SEXO <p-sortIcon [field]="'sexo'"></p-sortIcon></th>
+              <th scope="col" [pSortableColumn]="'idTipoDeficiencia'" style="width:120px">IDENT. DEFICIÊNCIA <p-sortIcon [field]="'idTipoDeficiencia'"></p-sortIcon></th>
+              <th scope="col" [pSortableColumn]="'idadeMinima'" style="width:100px">IDADE MINIMA <p-sortIcon [field]="'idadeMinima'"></p-sortIcon></th>
+              <th scope="col" [pSortableColumn]="'idadeMaxima'" style="width:100px">IDADE MÁXIMA <p-sortIcon [field]="'idadeMaxima'"></p-sortIcon></th>
+              <th scope="col" [pSortableColumn]="'valorRendaMinima'" style="width:100px">VALOR RENDA MINIMA <p-sortIcon [field]="'valorRendaMinima'"></p-sortIcon></th>
+              <th scope="col" [pSortableColumn]="'valorRendaMaxima'" style="width:100px">VALOR RENDA MÁXIMA <p-sortIcon [field]="'valorRendaMaxima'"></p-sortIcon></th>
+              <th scope="col" pSortableColumn="id" scope="col">ID <p-sortIcon [field]="'id'"></p-sortIcon></th>
+              <th scope="col" pSortableColumn="descricao" scope="col">Descrição <p-sortIcon [field]="'descricao'"></p-sortIcon></th>
+              <th scope="col" scope="col">Ação</th>
             </tr>
           </ng-template>
           <ng-template pTemplate="body" let-row>
@@ -105,7 +108,7 @@
           </ng-template>
         </p-table>
       </div>
-  
+
       <div class="col-xs-12 p-0 barra-botoes">
         <button class="btn back-btn" (click)="voltar()" id="btnListarVoltar">
           <span class="fa fa-reply fa-fw"></span>Voltar

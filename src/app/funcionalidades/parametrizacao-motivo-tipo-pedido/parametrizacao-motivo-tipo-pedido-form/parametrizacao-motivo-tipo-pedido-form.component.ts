@@ -106,6 +106,11 @@ export class ParametrizacaoMotivoTipoPedidoFormComponent extends BaseComponent {
     }
 
     private consultarEstadoInicial(): void {
+        this.carregarFormDados();
+        this.iniciarDadosParaAtualizacao();
+    }
+
+    carregarFormDados():void{
         if(this.motivoSolicitacaoTipoPedidoBeneficiariosDTO){ 
             this.motivoSolicitacaoTipoPedidoDTO = this.motivoSolicitacaoTipoPedidoBeneficiariosDTO;
             this.motivoSolicitacaoTipoPedidoDTO.dataInativacao = Util.getDate(this.motivoSolicitacaoTipoPedidoBeneficiariosDTO.dataInativacao);
@@ -115,23 +120,28 @@ export class ParametrizacaoMotivoTipoPedidoFormComponent extends BaseComponent {
                     this.formulario.get(key).setValue(this.motivoSolicitacaoTipoPedidoBeneficiariosDTO[key]);
                 }
             }
-            this.idMotivoSolicitacao.setValue(this.motivoSolicitacaoTipoPedidoBeneficiariosDTO.idMotivoSolicitacao);  
-            this.inativo.setValue(this.motivoSolicitacaoTipoPedidoBeneficiariosDTO.inativo === 'SIM');
-            this.sexo.setValue(this.getSiglaSexo(this.motivoSolicitacaoTipoPedidoBeneficiariosDTO.sexo));
-            this.idTipoDeficiencia.setValue(this.motivoSolicitacaoTipoPedidoBeneficiariosDTO.tipoDeficiencia);     
-            this.tiposProcesso.setValue(this.motivoSolicitacaoTipoPedidoBeneficiariosDTO.idTipoProcesso);
-            //let idsBeneficiarios = [];
-            //idsBeneficiarios.push(this.motivoSolicitacaoTipoPedidoDTO.idTipoBeneficiario)
-            //this.tiposBeneficiario.setValue(idsBeneficiarios.map(x => Number(x)));
-            this.tiposBeneficiario.setValue(this.motivoSolicitacaoTipoPedidoBeneficiariosDTO.idsTipoBeneficiario.map(x => Number(x)));
-             
+
+            this.motivoSolicitacaoTipoPedidoBeneficiariosDTOToForm();
+
             //Algumas vezes não carrega a combobox de beneficiarios, esta parte força a carga.
             if(!this.listComboTipoBeneficiario || this.listComboTipoBeneficiario.length === 0)
             {
                 this.carregaBeneficiarios();
             }
         }
+    }
 
+    motivoSolicitacaoTipoPedidoBeneficiariosDTOToForm():void{
+            this.idMotivoSolicitacao.setValue(this.motivoSolicitacaoTipoPedidoBeneficiariosDTO.idMotivoSolicitacao);  
+            this.inativo.setValue(this.motivoSolicitacaoTipoPedidoBeneficiariosDTO.inativo === 'SIM');
+            this.sexo.setValue(this.getSiglaSexo(this.motivoSolicitacaoTipoPedidoBeneficiariosDTO.sexo));
+            this.idTipoDeficiencia.setValue(this.motivoSolicitacaoTipoPedidoBeneficiariosDTO.tipoDeficiencia);     
+            this.tiposProcesso.setValue(this.motivoSolicitacaoTipoPedidoBeneficiariosDTO.idTipoProcesso);
+            this.tiposBeneficiario.setValue(this.motivoSolicitacaoTipoPedidoBeneficiariosDTO.idsTipoBeneficiario.map(x => Number(x)));
+          
+    }
+
+    iniciarDadosParaAtualizacao():void{
          if (this.id !== null && this.id !== undefined) {
             
              this.serviceMotivoSolicitacaoTipoPedido.consultarPorId(this.id).pipe(
@@ -163,6 +173,8 @@ export class ParametrizacaoMotivoTipoPedidoFormComponent extends BaseComponent {
              });
          }
     }
+
+
 
     formulario: FormGroup = this.formBuilder.group({
         sexo: this.sexo,

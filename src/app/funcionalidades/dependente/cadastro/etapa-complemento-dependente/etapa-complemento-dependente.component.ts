@@ -98,7 +98,7 @@ export class EtapaComplementoDependenteComponent extends BaseComponent implement
 
     getTipoDeficiencia() {
         this.service.consultarTodos().subscribe(result => {
-            var itemFilter: number;
+            let itemFilter: number;
 
             if(this.motivoSolicitacaoselected !== null && this.inscricaoDependenteService.isEditMode()) {
 

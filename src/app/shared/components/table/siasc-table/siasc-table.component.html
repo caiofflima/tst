@@ -2,14 +2,14 @@
   <table summary="mytable" class="table table-sm table-hover">
     <thead>
       <tr *ngIf="showTitle()">
-        <th [attr.colspan]="headers().length">
+        <th scope="col" [attr.colspan]="headers().length">
           {{ title() }}
         </th>
       </tr>
       <tr>
         <ng-container *ngFor="let header of headers()">
           <th [id]="header.id"
-              [class]="header.clazz" 
+              [class]="header.clazz"
               [ngStyle]="style(header)"
               [style.width]="header.width + '%'">
             {{ header.text }}
@@ -20,12 +20,12 @@
     <tbody>
       <ng-container *ngFor="let row of rows() | paginate: configPagination()">
         <tr [id]="row.id"
-            [class]="rowClass(row)" 
+            [class]="rowClass(row)"
             [ngStyle]="style(row)">
           <ng-container *ngFor="let col of row.coluns">
             <td [id]="col.id"
                 (click)="callbackCol(col)"
-                [ngClass]="col.clazz" 
+                [ngClass]="col.clazz"
                 [ngStyle]="style(col)">
               {{ col.text }}
 
@@ -37,7 +37,7 @@
                   <span *ngIf="!textAlert(col)" [ngClass]="classIcon(col)"></span>
                 </label>
               </div>
-              
+
             </td>
           </ng-container>
           <td [id]="fieldId('_col_' + row.id)"
@@ -46,7 +46,7 @@
               style="vertical-align: middle">
             <button [id]="fieldId('_btnEditar_' + row.id)"
                     *ngIf="showEdit(row)"
-                    class="btn btn-warning btn-sm" 
+                    class="btn btn-warning btn-sm"
                     [title]="hintEdit"
                     alt="Alterar"
                     (click)="edit(row.object)">
@@ -55,18 +55,18 @@
 
             <button [id]="fieldId('_btnExcluir_' + row.id)"
                     *ngIf="showDelete(row)"
-                    class="btn btn-danger btn-sm" 
+                    class="btn btn-danger btn-sm"
                     [title]="hintDelete"
-                    alt="Excluir"		
+                    alt="Excluir"
                     (click)="delete(row.object)">
               <span class="fa fa-trash fa-fw"></span>
             </button>
 
             <button [id]="fieldId('_btnDetalhar_' + row.id)"
                     *ngIf="showDetail(row) && !showLinkModal(row)"
-                    class="btn btn-info btn-sm" 
+                    class="btn btn-info btn-sm"
                     [title]="hintDetail"
-                    alt="Detalhar"		
+                    alt="Detalhar"
                     (click)="detail(row.object)">
               <span class="fa fa-search fa-fw"></span>
             </button>
@@ -75,25 +75,25 @@
                     *ngIf="showDetail(row) && showLinkModal(row)"
                     data-toggle="modal"
                     [attr.data-target]="getIdModal(row)"
-                    class="btn btn-info btn-sm" 
+                    class="btn btn-info btn-sm"
                     [title]="hintDetail"
-                    alt="Detalhar"		
+                    alt="Detalhar"
                     (click)="detail(row.object)">
               <span class="fa fa-search fa-fw"></span>
             </button>
 
             <button [id]="fieldId('_btnSelecionar_modal_' + row.id)"
                     *ngIf="showSelect(row)"
-                    class="btn btn-success btn-sm" 
+                    class="btn btn-success btn-sm"
                     [title]="hintSelect"
-                    alt="Selecionar"		
+                    alt="Selecionar"
                     (click)="select(row.object, row.idModal)">
               <span class="fa fa-check fa-fw"></span>
             </button>
 
             <button [id]="fieldId('_btnEditar_' + row.id)"
                     *ngIf="showPdf(row)"
-                    class="btn btn-success btn-sm" 
+                    class="btn btn-success btn-sm"
                     [title]="hintPdf"
                     alt="Enviar"
                     (click)="pdf(row.object)">
@@ -131,9 +131,9 @@
     </div>
     <div>
         <pagination-controls [id]="getIdPagination()"
-                             class="col-md-6.5 pull-right" 
+                             class="col-md-6.5 pull-right"
                              (pageChange)="dataList.numberPage = $event;"
-                             previousLabel="" 
+                             previousLabel=""
                              nextLabel="">
         </pagination-controls>
     </div>

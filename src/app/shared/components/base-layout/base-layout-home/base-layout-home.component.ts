@@ -7,13 +7,10 @@ import { Location } from '@angular/common';
   templateUrl: './base-layout-home.component.html',
   styleUrls: ['./base-layout-home.component.scss']
 })
-export class BaseLayoutHomeComponent extends BaseLayout implements OnInit {
+export class BaseLayoutHomeComponent extends BaseLayout {
 
   constructor(protected override location: Location) {
     super(location)
    }
-
-  ngOnInit() {
-  }
 
 }

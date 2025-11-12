@@ -12,7 +12,7 @@ import { ContratoDTO } from '../../../shared/models/dto/contrato';
   providers: [DatePipe]
 })
 
-export class AscModalTitularContratoComponent implements OnInit, OnDestroy {
+export class AscModalTitularContratoComponent implements OnInit {
 
   @Input() idBase: string = 'navegacaoTitular';
   @Output() onConfirmar = new EventEmitter<string>();
@@ -50,9 +50,6 @@ export class AscModalTitularContratoComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.idModal = ModalUtil.idModal(this.idBase, 'titularContrato', []);
     this.changeDetector;
-  }
-
-  ngOnDestroy(): void {
   }
 
   ngAfterViewChecked() {

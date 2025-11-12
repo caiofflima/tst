@@ -1,5 +1,5 @@
 <asc-acompanhamento-processo-base
-  (onPermissoes)="updatePermissoes($event)"
+  (onPermissoes)="updatePermissoes($any($event))"
   [processo]="processo">
 
   <div asc-conteudo>
@@ -7,13 +7,13 @@
          [class.c-card-valido]="corSituacao"
          [class.c-card-invalido]="!corSituacao">
       <asc-documentos-obrigatorios-card
-        (hasDocumentos)="possuiDocumentosObrigatorios($event)"
-        (hasDocumentosInvalidos)="hasDocumentosinvalido($event)"
-        (hasAnexos)="hasAnexosDocumentosObrigatorio($event)"
+        (hasDocumentos)="possuiDocumentosObrigatorios($any($event))"
+        (hasDocumentosInvalidos)="hasDocumentosinvalido($any($event))"
+        (hasAnexos)="hasAnexosDocumentosObrigatorio($any($event))"
         [permissoes]="permissoes"
         [processo]="processo"
         [tipoProcessadorUpload]="'adesao'"
-        (listAnexos)="getListAnexosObrigatorio($event)"
+        (listAnexos)="getListAnexosObrigatorio($any($event))"
         (onUploadComplete)="atualizarProcesso()"
         (atualizarPedido)="atualizarProcesso()"
       ></asc-documentos-obrigatorios-card>
@@ -41,12 +41,12 @@
          @fadeInOut class="c-card conteudo-spacing docsMP" [class.c-card-invalido]="!corSituacaoComplementar"
          [class.c-card-valido]="corSituacaoComplementar">
       <asc-documentos-condicionados
-        (hasDocumentos)="hasDocumentos($event)"
+        (hasDocumentos)="hasDocumentos($any($event))"
         (atualizarPedido$)="atualizarProcesso()"
         [permissoes]="permissoes"
         [processo]="processo"
         [atualizarProcesso]="subjectAtualizarProcesso"
-        (listAnexos)="getListAnexosObrigatorio($event)"
+        (listAnexos)="getListAnexosObrigatorio($any($event))"
         (onUploadComplete)="atualizarProcesso()"
       ></asc-documentos-condicionados>
     </div>
@@ -94,9 +94,9 @@
 
     <div class="c-card conteudo-spacing docsMP" @fadeInOut *ngIf="possuiDocumentos" [hidden]="!(possuiDocumentos && !recebendoDocumentacaoTitular) && possuiDocumentosObrigatoriosinvalidos">
       <asc-documentos-obrigatorios-card
-        (hasDocumentos)="possuiDocumentosObrigatorios($event)"
-        (hasDocumentosInvalidos)="hasDocumentosinvalido($event)"
-        (hasAnexos)="hasAnexosDocumentosObrigatorio($event)"
+        (hasDocumentos)="possuiDocumentosObrigatorios($any($event))"
+        (hasDocumentosInvalidos)="hasDocumentosinvalido($any($event))"
+        (hasAnexos)="hasAnexosDocumentosObrigatorio($any($event))"
         [permissoes]="permissoes"
         [processo]="processo"
         [tipoProcessadorUpload]="'adesao'"
@@ -140,7 +140,7 @@
         [processo]="processo"
         [possuiDocumentosObrigatorios]="possuiDocumentos"
         (onCancelar)="showDocumentoComplementar(false)"
-        (hasDocumentos)="hasDocumentos($event)"
+        (hasDocumentos)="hasDocumentos($any($event))"
         (atualizarProcesso$)="atualizarProcesso()"
       ></asc-documento-complementar-card>
       <button (click)="goToTop()" class="btn-to-top">Retornar ao topo</button>
@@ -156,7 +156,7 @@
         [tipoProcessadorUpload]="'adesao'"
         [processo]="processo"
         [atualizarProcesso]="subjectAtualizarProcesso"
-        (hasDocumentos)="hasDocumentos($event)"
+        (hasDocumentos)="hasDocumentos($any($event))"
         (atualizarPedido$)="atualizarProcesso()"
       ></asc-documentos-condicionados>
       <div class="dados-options">

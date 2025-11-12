@@ -52,6 +52,11 @@ export class PerfilUsuarioExternoBuscarComponent extends BaseComponent implement
   ngOnInit() {
    // no aguardo de funcionalidades  
   }
+  
+  get totalSize(): number {
+    return this.listaPerfisUsuarios?.length || 0;
+  }
+
   applyGlobalFilter(evento:Event){
     const input = evento.target as HTMLInputElement
     const value = input.value

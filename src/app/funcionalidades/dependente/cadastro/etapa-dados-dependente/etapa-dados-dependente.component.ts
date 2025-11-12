@@ -335,14 +335,26 @@ export class EtapaDadosDependenteComponent extends BaseComponent implements OnIn
         return age;
     }
 
-    idadeIncompativel():boolean{ console.log("idadeIncompativel():boolean{  ");
-    //- validação de compatibilidade entre o tipo de beneficiário 
-    //	(colunas NU_IDADE_MINIMA e NU_IDADE_MAXIMA da tabela SSCTB068_TIPO_BENEFICIARIO) 
-    //e a idade do beneficiário; 
-    if(this.dadoDependente.dataNascimento == null)
-    return false
+    idadeIncompativel():boolean{ 
+        //console.log("idadeIncompativel():boolean{  ");
+        //- validação de compatibilidade entre o tipo de beneficiário 
+        //	(colunas NU_IDADE_MINIMA e NU_IDADE_MAXIMA da tabela SSCTB068_TIPO_BENEFICIARIO) 
+        //e a idade do beneficiário; 
+        if(this.dadoDependente.dataNascimento == null){
+            return false;
+        }
+            
         //let idade = this.calculaIdade(this.dadoDependente.dataNascimento);
         let idade = this.getAge(this.dadoDependente.dataNascimento);
+
+        if(this.erroIdades(idade)){
+            return true;
+        }
+
+        return false;
+    }
+
+    erroIdades(idade:number):boolean{
         if(this.tipoDependente.idadeMinima  && this.tipoDependente.idadeMaxima){
             if(idade < this.tipoDependente.idadeMinima  || idade > this.tipoDependente.idadeMaxima){
                 let mensagem = "Idade incompatível com o tipo de beneficiário selecionado.";
@@ -363,8 +375,8 @@ export class EtapaDadosDependenteComponent extends BaseComponent implements OnIn
             }
         }
 
-    return false;
-}
+        return false;
+    }
 
     isDependenteCadastradoOutraFamilia(){
         /* ---------------------- [ INCLUSAO ] ----------------------

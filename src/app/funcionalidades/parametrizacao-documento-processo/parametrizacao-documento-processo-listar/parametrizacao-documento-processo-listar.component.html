@@ -92,15 +92,15 @@
         </ng-template>
         <ng-template pTemplate="header">
           <tr>
-            <th [pSortableColumn]="'tipoProcesso'">Tipo de Pedido <p-sortIcon [field]="'tipoProcesso'"></p-sortIcon></th>
-            <th [pSortableColumn]="'tipoBeneficiario'">Tipo de Beneficiário <p-sortIcon [field]="'tipoBeneficiario'"></p-sortIcon></th>
-            <th [pSortableColumn]="'motivoDeSolicitacao'">Motivo de Solicitação <p-sortIcon [field]="'motivoDeSolicitacao'"></p-sortIcon></th>
-            <th [pSortableColumn]="'documento.nome'">Documento <p-sortIcon [field]="'documento.nome'"></p-sortIcon></th>
-            <th [pSortableColumn]="'sexo'" style="width:100px">Sexo <p-sortIcon [field]="'sexo'"></p-sortIcon></th>
-            <th [pSortableColumn]="'estadoCivil'">Estado Civil <p-sortIcon [field]="'estadoCivil'"></p-sortIcon></th>
-            <th [pSortableColumn]="'descricaoObrigatorio'" style="width:120px">Obrigatório <p-sortIcon [field]="'descricaoObrigatorio'"></p-sortIcon></th>
-            <th [pSortableColumn]="'descricaoInativo'" style="width:90px">Inativo <p-sortIcon [field]="'descricaoInativo'"></p-sortIcon></th>
-            <th>Ação</th>
+            <th [pSortableColumn]="'tipoProcesso'" scope="col">Tipo de Pedido <p-sortIcon [field]="'tipoProcesso'"></p-sortIcon></th>
+            <th [pSortableColumn]="'tipoBeneficiario'" scope="col">Tipo de Beneficiário <p-sortIcon [field]="'tipoBeneficiario'"></p-sortIcon></th>
+            <th [pSortableColumn]="'motivoDeSolicitacao'" scope="col">Motivo de Solicitação <p-sortIcon [field]="'motivoDeSolicitacao'"></p-sortIcon></th>
+            <th [pSortableColumn]="'documento.nome'" scope="col">Documento <p-sortIcon [field]="'documento.nome'"></p-sortIcon></th>
+            <th [pSortableColumn]="'sexo'" style="width:100px" scope="col">Sexo <p-sortIcon [field]="'sexo'"></p-sortIcon></th>
+            <th [pSortableColumn]="'estadoCivil'" scope="col">Estado Civil <p-sortIcon [field]="'estadoCivil'"></p-sortIcon></th>
+            <th [pSortableColumn]="'descricaoObrigatorio'" style="width:120px" scope="col">Obrigatório <p-sortIcon [field]="'descricaoObrigatorio'"></p-sortIcon></th>
+            <th [pSortableColumn]="'descricaoInativo'" style="width:90px" scope="col">Inativo <p-sortIcon [field]="'descricaoInativo'"></p-sortIcon></th>
+            <th scope="col">Ação</th>
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-row>

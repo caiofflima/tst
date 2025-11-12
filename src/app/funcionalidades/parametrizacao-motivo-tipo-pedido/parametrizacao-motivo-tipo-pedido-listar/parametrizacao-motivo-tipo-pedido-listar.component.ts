@@ -13,9 +13,6 @@ import {MotivoSolicitacaoTipoPedidoDTO} from 'app/shared/models/dto/motivo-solic
 import {MotivoSolicitacaoTipoPedidoConsultaDTO} from 'app/shared/models/dto/motivo-solicitacao-tipo-pedido-consulta';
 import {MotivoSolicitacaoTipoPedidoBeneficiariosDTO} from 'app/shared/models/dto/motivo-solicitacao-tipo-pedido-beneficiarios';
 
-import {Pageable} from "../../../shared/components/pageable.model";
-import {TipoProcessoMotivoSolicitacao} from 'app/shared/models/entidades';
-
 @Component({
     selector: 'asc-parametrizacao-motivo-tipo-pedido-listar',
     templateUrl: './parametrizacao-motivo-tipo-pedido-listar.component.html',
@@ -44,23 +41,23 @@ export class ParametrizacaoMotivoTipoPedidoListarComponent extends BaseComponent
         private readonly route: ActivatedRoute
     ) {
         super(messageService);
-        this.id = this.route.snapshot.queryParams.id;
-        this.isRetorno = this.route.snapshot.queryParams.isRetorno;
+        this.id = this.route.snapshot.queryParams['id'];
+        this.isRetorno = this.route.snapshot.queryParams['isRetorno'];
         this.retornaValorFiltro();
     }
 
     private retornaValorFiltro(): void { 
         this.filtro.id = this.id;
-        this.filtro.sexo = ArrayUtil.get<string>(this.route.snapshot.queryParams.sexo);
-        this.filtro.somenteAtivos = this.route.snapshot.queryParams.somenteAtivos;
-        this.filtro.tiposProcesso = NumberUtil.getArray(this.route.snapshot.queryParams.tiposProcesso);
-        this.filtro.tiposBeneficiario = NumberUtil.getArray(this.route.snapshot.queryParams.tiposBeneficiario);
-        this.filtro.idTipoDeficiencia = this.route.snapshot.queryParams.idTipoDeficiencia;
-        this.descricaoSexo = this.route.snapshot.queryParams.descricaoSexo || 'Todas';
-        this.descricaoMotivoSolicitacao = this.route.snapshot.queryParams.descricaoMotivoSolicitacao || 'Todas';
-        this.descricaoTipoDeficiencia = this.route.snapshot.queryParams.descricaoTipoDeficiencia || 'Todas';
-        this.descricaoTiposProcesso = this.route.snapshot.queryParams.descricaoTiposProcesso || 'Todas';
-        this.descricaoTiposBeneficiario = this.route.snapshot.queryParams.descricaoTiposBeneficiario || 'Todas';
+        this.filtro.sexo = ArrayUtil.get<string>(this.route.snapshot.queryParams['sexo']);
+        this.filtro.somenteAtivos = this.route.snapshot.queryParams['somenteAtivos'];
+        this.filtro.tiposProcesso = NumberUtil.getArray(this.route.snapshot.queryParams['tiposProcesso']);
+        this.filtro.tiposBeneficiario = NumberUtil.getArray(this.route.snapshot.queryParams['tiposBeneficiario']);
+        this.filtro.idTipoDeficiencia = this.route.snapshot.queryParams['idTipoDeficiencia'];
+        this.descricaoSexo = this.route.snapshot.queryParams['descricaoSexo'] || 'Todas';
+        this.descricaoMotivoSolicitacao = this.route.snapshot.queryParams['descricaoMotivoSolicitacao'] || 'Todas';
+        this.descricaoTipoDeficiencia = this.route.snapshot.queryParams['descricaoTipoDeficiencia'] || 'Todas';
+        this.descricaoTiposProcesso = this.route.snapshot.queryParams['descricaoTiposProcesso'] || 'Todas';
+        this.descricaoTiposBeneficiario = this.route.snapshot.queryParams['descricaoTiposBeneficiario'] || 'Todas';
     }
 
     ngOnInit(): void {
@@ -75,56 +72,62 @@ export class ParametrizacaoMotivoTipoPedidoListarComponent extends BaseComponent
 
     }
 
-    private consultarFiltro(){
+    private consultarFiltro() {
         this.serviceMotivo.consultarPorFiltro(this.filtro).pipe(
-            take<MotivoSolicitacaoTipoPedidoConsultaDTO[]>(1)
-        ).subscribe(res => {
-            this.listaTipoProcessoMotivoSolicitacao = res;
-            
-            if(this.isRetorno){
-                this.listaTotal = 1;
-                this.listaTipoProcessoMotivoSolicitacao = [ this.listaTipoProcessoMotivoSolicitacao[0] ];
-                this.isRetorno = false;
+            take(1)
+        ).subscribe({
+            next: (res: MotivoSolicitacaoTipoPedidoConsultaDTO[]) => {
+                this.listaTipoProcessoMotivoSolicitacao = res;
+                if (this.isRetorno) {
+                    this.listaTotal = 1;
+                    this.listaTipoProcessoMotivoSolicitacao = [this.listaTipoProcessoMotivoSolicitacao[0]];
+                    this.isRetorno = false;
+                }
+                this.loading = false;
+            },
+            error: (err) => {
+                this.showDangerMsg(err.error);
+                this.loading = false;
             }
-        
-            this.loading = false;
-        }, err => {
-            this.showDangerMsg(err.error);
-            this.loading = false;
-        } );
+        });
     }
 
-    private consultarFiltroAgrupar(){
+    private consultarFiltroAgrupar() {
         this.serviceMotivo.consultarPorFiltroAgrupar(this.filtro).pipe(
-            take<MotivoSolicitacaoTipoPedidoBeneficiariosDTO[]>(1)
-        ).subscribe(res => {
-            this.listaTipoProcessoMotivoSolicitacaoBeneficiarios = res;
-
-            //console.log(res);
-            if(this.isRetorno){
-                this.listaTotal = 1;
-                this.listaTipoProcessoMotivoSolicitacaoBeneficiarios = [ this.listaTipoProcessoMotivoSolicitacaoBeneficiarios[0] ];
-                this.isRetorno = false;
+            take(1)
+        ).subscribe({
+            next: (res: MotivoSolicitacaoTipoPedidoBeneficiariosDTO[]) => {
+                this.listaTipoProcessoMotivoSolicitacaoBeneficiarios = res;
+    
+                if (this.isRetorno) {
+                    this.listaTotal = 1;
+                    this.listaTipoProcessoMotivoSolicitacaoBeneficiarios = [this.listaTipoProcessoMotivoSolicitacaoBeneficiarios[0]];
+                    this.isRetorno = false;
+                }
+    
+                this.loading = false;
+            },
+            error: (err) => {
+                this.showDangerMsg(err.error);
+                this.loading = false;
             }
-        
-            this.loading = false;
-        }, err => {
-            this.showDangerMsg(err.error);
-            this.loading = false;
-        } );
+        });
     }
 
     public pesquisar($event): void {
         this.loading = true;
 
         this.serviceMotivo.consultarPorFiltro(this.filtro).pipe(
-            take<MotivoSolicitacaoTipoPedidoConsultaDTO[]>(1)
-        ).subscribe(res => {
-            this.listaTipoProcessoMotivoSolicitacao = res;
-        }, err => {
-            this.showDangerMsg(err.error);
-            this.loading = false;
-        } );
+            take(1)
+        ).subscribe({
+            next: (res: MotivoSolicitacaoTipoPedidoConsultaDTO[]) => {
+                this.listaTipoProcessoMotivoSolicitacao = res;
+            },
+            error: (err) => {
+                this.showDangerMsg(err.error);
+                this.loading = false;
+            }
+        });
     }
 
     public novo(): void {
@@ -141,7 +144,6 @@ export class ParametrizacaoMotivoTipoPedidoListarComponent extends BaseComponent
     }
 
     public editar(motivoSolicitacaoTipoPedidoDTO: MotivoSolicitacaoTipoPedidoDTO): void {
-        //console.log(motivoSolicitacaoTipoPedidoDTO);
         this.router.navigateByUrl('manutencao/parametros/motivo-tipo-pedido/editar/' + motivoSolicitacaoTipoPedidoDTO.id);
     }
 
@@ -152,17 +154,18 @@ export class ParametrizacaoMotivoTipoPedidoListarComponent extends BaseComponent
 
     public remover(motivoSolicitacaoTipoPedidoDTO: MotivoSolicitacaoTipoPedidoDTO): void {
         this.messageService.addConfirmYesNo(this.bundle("MA021"), () => {
-            this.serviceMotivo.delete(motivoSolicitacaoTipoPedidoDTO.id).pipe(take(1)).subscribe(async () => {
+            this.serviceMotivo.delete(motivoSolicitacaoTipoPedidoDTO.id).pipe(take(1)).subscribe({
+                next: () => {
                     this.showSuccessMsg(this.bundle("MA039"));
-                    await this.pesquisaInicial();
-                }, err => this.showDangerMsg(err.error)
-            );
+                    this.pesquisaInicial();
+                },
+                error: (err) => this.showDangerMsg(err.error)
+            });
         });
     }
 
     public voltar(): void {
         this.location.back();
     }
-
     
 }

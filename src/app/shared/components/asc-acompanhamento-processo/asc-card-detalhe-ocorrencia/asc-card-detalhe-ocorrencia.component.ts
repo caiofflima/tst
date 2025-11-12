@@ -223,58 +223,58 @@ export class AscCardDetalheOcorrenciaComponent extends AscComponenteAutorizado i
         this.historicoProcessoService.consultarUltimaMudanca(processoPedido.id, !permissao.analisar).pipe(
           take<SituacaoPedido>(1)
         ).subscribe(situacao => {
+          
           this.ultimaSituacao = situacao;
-          if (this.ultimaSituacao && this.ultimaSituacao.countAnexos) {
-            this.documentoPedidoService.consultarDocumentosPorPedidoAndSituacao(this.processoPedido.id, this.ultimaSituacao.id).pipe(
-              take<AnexoDTO[]>(1)
-            ).subscribe(anexos => {
-              this.documentos = [];
+          this.verificarDocumentosEIncluirNaList();
 
-              if (anexos && anexos.length > 0) {
-                this.documentos.push({
-                  arquivos: [{
-                    id: anexos[0].id,
-                    name: anexos[0].nome,
-                    idDocTipoProcesso: anexos[0].idTipoDocumento,
-                    idDocumentoGED: anexos[0].idDocumentoGED,
-                    data: anexos[0].dataHoraCadastramento
-                  }]
-                });
-              }
-            });
-          } else {
-            this.documentos = [];
-          }
+          this.verificarArquivoProcessadoEInlcluirNaLista();
 
-          //[INI]
-          // console.log( "TESTE DETALHE OCORRENCIA = "+ ( this.ultimaSituacao.idSituacaoProcesso === this.EM_PROCESSAMENTO_SIST_SAUDE));
-          // console.log( this.documentos.length);
-          // console.log( this.ultimaSituacao.idSituacaoProcesso + " === "+this.EM_PROCESSAMENTO_SIST_SAUDE );
-
-          if(localStorage.getItem('arquivoEnvioDado')){
-            console.log( JSON.parse(localStorage.getItem('arquivoEnvioDado')) ) ;
-          }    
-
-          if( this.ultimaSituacao.idSituacaoProcesso === this.EM_PROCESSAMENTO_SIST_SAUDE){
-            if(localStorage.getItem('arquivoEnvioDado')){
-              console.log( JSON.parse(localStorage.getItem('arquivoEnvioDado')) ) ;
-              let arquivoEnvioDado = JSON.parse(localStorage.getItem('arquivoEnvioDado'));
-
-              this.documentos.push({
-                arquivos: [{
-                  id: arquivoEnvioDado.id,
-                  name: arquivoEnvioDado.nome,
-                  idDocTipoProcesso: null,
-                  idDocumentoGED: null,
-                  data: arquivoEnvioDado.dataGeracao,
-                }]
-              });
-            }
-
-          }
-          //[FIM]
         });
       });
+    }
+  }
+
+  verificarDocumentosEIncluirNaList():void{
+    if (this.ultimaSituacao && this.ultimaSituacao.countAnexos) {
+      this.documentoPedidoService.consultarDocumentosPorPedidoAndSituacao(this.processoPedido.id, this.ultimaSituacao.id).pipe(
+        take<AnexoDTO[]>(1)
+      ).subscribe(anexos => {
+        this.documentos = [];
+
+        if (anexos && anexos.length > 0) {
+          this.documentos.push({
+            arquivos: [{
+              id: anexos[0].id,
+              name: anexos[0].nome,
+              idDocTipoProcesso: anexos[0].idTipoDocumento,
+              idDocumentoGED: anexos[0].idDocumentoGED,
+              data: anexos[0].dataHoraCadastramento
+            }]
+          });
+        }
+      });
+    } else {
+      this.documentos = [];
+    }
+  }
+
+  verificarArquivoProcessadoEInlcluirNaLista():void{
+    if( this.ultimaSituacao.idSituacaoProcesso === this.EM_PROCESSAMENTO_SIST_SAUDE){
+      if(localStorage.getItem('arquivoEnvioDado')){
+        console.log( JSON.parse(localStorage.getItem('arquivoEnvioDado')) ) ;
+        let arquivoEnvioDado = JSON.parse(localStorage.getItem('arquivoEnvioDado'));
+
+        this.documentos.push({
+          arquivos: [{
+            id: arquivoEnvioDado.id,
+            name: arquivoEnvioDado.nome,
+            idDocTipoProcesso: null,
+            idDocumentoGED: null,
+            data: arquivoEnvioDado.dataGeracao,
+          }]
+        });
+      }
+
     }
   }
 

@@ -6,12 +6,7 @@ import { ProcessosComponent } from 'app/funcionalidades/processos/processos.comp
   templateUrl: './consulta-processo-pl.component.html',
   styleUrls: ['./consulta-processo-pl.component.scss']
 })
-export class ConsultaProcessoPlComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
-  }
+export class ConsultaProcessoPlComponent {
 
   processos: Array<any> = [
     {
