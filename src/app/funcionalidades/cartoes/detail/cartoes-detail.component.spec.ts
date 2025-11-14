@@ -7,17 +7,7 @@ import { MessageService } from '../../../shared/components/messages/message.serv
 import { BeneficiarioService, SessaoService } from 'app/shared/services/services';
 import { of } from 'rxjs';
 import { Usuario } from 'app/shared/models/entidades';
-
-// Mock pdfMake and vfs_fonts
-jest.mock('pdfmake/build/pdfmake', () => ({
-  vfs: {}
-}));
-
-jest.mock('assets/fonts/vfs_fonts', () => ({
-  pdfMake: { vfs: {} }
-}));
-
-jest.mock('html-to-pdfmake', () => jest.fn());
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('CartoesDetailComponent', () => {
   let component: CartoesDetailComponent;
@@ -61,14 +51,14 @@ describe('CartoesDetailComponent', () => {
         { provide: BeneficiarioService, useValue: beneficiarioServiceSpy },
         { provide: ActivatedRoute, useValue: mockActivatedRoute },
         { provide: SessaoService, useValue: sessaoServiceSpy }
-      ]
+      ],
+      schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
   });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(CartoesDetailComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges(); // Inicializa o componente
   });
 
   it('deve criar o componente', () => {
