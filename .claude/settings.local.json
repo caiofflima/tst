@@ -14,7 +14,8 @@
       "Bash(npx jest:*)",
       "Bash(tee:*)",
       "Bash(python convert_jasmine_to_jest.py:*)",
-      "Bash(cat:*)"
+      "Bash(cat:*)",
+      "Bash(python fix_activated_route_params.py:*)"
     ],
     "deny": [],
     "ask": []

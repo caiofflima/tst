@@ -1,5 +1,5 @@
 import { of } from 'rxjs';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BaseLayoutFormComponent } from './base-layout-form.component';
 
@@ -7,11 +7,10 @@ describe('BaseLayoutFormComponent', () => {
   let component: BaseLayoutFormComponent;
   let fixture: ComponentFixture<BaseLayoutFormComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
       declarations: [ BaseLayoutFormComponent ]
-    })
-    .compileComponents();
+    }).compileComponents();
   });
   beforeEach(() => {
     fixture = TestBed.createComponent(BaseLayoutFormComponent);

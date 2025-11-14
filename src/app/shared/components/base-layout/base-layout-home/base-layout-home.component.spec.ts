@@ -1,5 +1,5 @@
 import { of } from 'rxjs';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BaseLayoutHomeComponent } from './base-layout-home.component';
 
@@ -7,11 +7,10 @@ describe('BaseLayoutHomeComponent', () => {
   let component: BaseLayoutHomeComponent;
   let fixture: ComponentFixture<BaseLayoutHomeComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
       declarations: [ BaseLayoutHomeComponent ]
-    })
-    .compileComponents();
+    }).compileComponents();
   });
   beforeEach(() => {
     fixture = TestBed.createComponent(BaseLayoutHomeComponent);

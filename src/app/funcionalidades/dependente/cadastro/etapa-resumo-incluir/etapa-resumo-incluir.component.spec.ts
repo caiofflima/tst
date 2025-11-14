@@ -16,11 +16,12 @@ describe('EtapaResumoIncluirComponent', () => {
   let fixture: ComponentFixture<EtapaResumoIncluirComponent>;
 
   const messageServiceSpy = { getDescription: jest.fn() };
-  const activatedRouteSpy = { snapshot: jest.fn() };
-  activatedRouteSpy.snapshot = {
+  const activatedRouteSpy = {
+    snapshot: {
     params: {
       id: null
     }
+  };
   }
   const processoServiceSpy = { getProcesso: jest.fn() };
   const fileUploadServiceSpy = { getProcesso: jest.fn() };

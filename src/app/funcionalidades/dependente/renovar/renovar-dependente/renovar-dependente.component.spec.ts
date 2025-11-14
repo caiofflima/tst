@@ -15,11 +15,12 @@ describe('RenovarDependenteComponent', () => {
   let fixture: ComponentFixture<RenovarDependenteComponent>;
 
   const messageServiceSpy = { getDescription: jest.fn() };
-  const activatedRouteSpy = { snapshot: jest.fn() };
-  activatedRouteSpy.snapshot = {
+  const activatedRouteSpy = {
+    snapshot: {
     params:{
       idBeneficiario: 1
     }
+  };
   }
   const usuario = {} as Usuario;
   usuario.matriculaFuncional = "C123000";

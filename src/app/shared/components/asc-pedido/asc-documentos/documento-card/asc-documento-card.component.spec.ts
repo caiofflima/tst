@@ -25,9 +25,7 @@ describe('AscDocumentoCardComponent', () => {
     const messageServiceSpy = { getDescription: jest.fn(), addMsgSuccess: jest.fn(), addMsgDanger: jest.fn(), addConfirmYesNo: jest.fn() };
     const sessaoServiceSpy = { init: jest.fn() };
     const routerSpy = { navigate: jest.fn(), url: jest.fn() };
-    const activatedRouteSpy = { url: jest.fn() , snapshot: null, paramMap: of({}) };
-    
-    activatedRouteSpy.params.mockReturnValue(of({id: 1}));
+    const activatedRouteSpy = { url: jest.fn() , snapshot: null, paramMap: of({}), params: of({id: 1}) };
     const mockDocs: DocumentoTipoProcesso[] = [ {id:1, texto:"RG", assunto:"RG"} as DocumentoTipoProcesso] ;
     const mockPedido: Pedido = {id:1} as Pedido ;
     //const mockArquivos: Arquivo[] = [ {id:1} as Arquivo] ;
