@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { IntegracaoCorreiosService } from 'app/shared/services/comum/integracao-correios.service';
 import { of } from 'rxjs';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { Usuario } from 'app/shared/models/entidades';
 
 describe('DadosCadastraisDetailComponent', () => {
   let component: DadosCadastraisDetailComponent;
@@ -22,6 +23,10 @@ describe('DadosCadastraisDetailComponent', () => {
   const integracaoCorreiosServiceSpy = { consultarEnderecoPorCep: jest.fn() };
 
   beforeEach(async () => {
+    const usuario = {} as Usuario;
+    usuario.matriculaFuncional = "C123000";
+    usuario.menu = [];
+    SessaoService.usuario = usuario;
     await TestBed.configureTestingModule({
       declarations: [DadosCadastraisDetailComponent],
       providers: [

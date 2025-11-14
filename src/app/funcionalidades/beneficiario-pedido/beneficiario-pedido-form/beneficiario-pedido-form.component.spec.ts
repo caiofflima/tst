@@ -12,12 +12,13 @@ describe('BeneficiarioPedidoFormComponent', () => {
   const messageServiceSpy = { getDescription: jest.fn() };
   const routerSpy = { navigate: jest.fn(), url: jest.fn() };
   
-  const activatedRouteSpy = { snapshot: jest.fn() };
-  activatedRouteSpy.snapshot = {
+  const activatedRouteSpy = {
+    snapshot: {
       params: {
         id: null
       }
     }
+  };
   
   const perfilServiceSpy = { consultarPorNome: jest.fn() };
   
