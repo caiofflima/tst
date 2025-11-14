@@ -13,7 +13,7 @@ describe('NovoPedidoAutorizadorComponent', () => {
   let fixture: ComponentFixture<NovoPedidoAutorizadorComponent>;
   const messageServiceSpy = { getDescription: jest.fn() };
   const empresaPrestadorExternoServiceSpy = { consultarEmpresaPorId: jest.fn(), consultarFiliais: jest.fn() };
-  const activatedRouteSpy = { getDescription: jest.fn() , snapshot: null, paramMap: jest.fn() };
+  const activatedRouteSpy = { getDescription: jest.fn() , snapshot: null, paramMap: of({}) };
   const routerSpy = { getDescription: jest.fn() };
   const locationSpy = { getDescription: jest.fn() };
   const meusDadosServiceSpy = { carregarTitular: jest.fn() };

@@ -29,7 +29,7 @@ describe('AcompanhamentoDependenteComponent', () => {
   const medicamentoPatologiaPedidoServiceSpy = { getMedicamentoPatologiaPedido: jest.fn() };
   const siascFluxoServiceSpy = { getFluxo: jest.fn(), consultarPermissoesFluxoPorPedido: jest.fn() };
   siascFluxoServiceSpy.consultarPermissoesFluxoPorPedido.mockReturnValue(of({}));
-  const documentoPedidoServiceSpy = { getDocumentoPedido: jest.fn() , avisoSituacaoPedido: jest.fn(), avisoSituacaoPedidoComplementares: jest.fn() };
+  const documentoPedidoServiceSpy = { getDocumentoPedido: jest.fn() , avisoSituacaoPedido: of(true), avisoSituacaoPedidoComplementares: of(true) };
   documentoPedidoServiceSpy.avisoSituacaoPedido.mockReturnValue(of({}));
   documentoPedidoServiceSpy.avisoSituacaoPedidoComplementares.mockReturnValue(of({}));
   beforeEach(async () => {

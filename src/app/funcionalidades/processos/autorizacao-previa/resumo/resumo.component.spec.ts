@@ -15,7 +15,7 @@ describe('ResumoComponent', () => {
   let fixture: ComponentFixture<ResumoComponent>;
   const messageServiceSpy = { getDescription: jest.fn(), fromResourceBundle: jest.fn() };
   const empresaPrestadorExternoServiceSpy = { consultarPorFiltro: jest.fn(), consultarFiliais: jest.fn(), buscarEmpresas: jest.fn() };
-  const activatedRouteSpy = { getDescription: jest.fn() , snapshot: null, paramMap: jest.fn() };
+  const activatedRouteSpy = { getDescription: jest.fn() , snapshot: null, paramMap: of({}) };
   const routerSpy = { getDescription: jest.fn() };
   const locationSpy = { getDescription: jest.fn() };
   const comboServiceSpy = { consultarComboTiposAuditor: jest.fn(), consultarComboPerfisPrestadoresExternos: jest.fn() };

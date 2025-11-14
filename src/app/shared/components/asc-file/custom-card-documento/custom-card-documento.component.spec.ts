@@ -1,3 +1,4 @@
+import { of } from 'rxjs';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CustomCardDocumentoComponent } from './custom-card-documento.component';
 import { ArquivoParam } from '../models/arquivo.param';

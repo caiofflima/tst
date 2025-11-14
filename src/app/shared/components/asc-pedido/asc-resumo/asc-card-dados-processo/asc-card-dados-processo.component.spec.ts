@@ -1,3 +1,4 @@
+import { of } from 'rxjs';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { DocumentoPedidoService, MessageService } from 'app/shared/services/services';
 import { AnexoService } from './../../../../services/comum/anexo.service';
@@ -9,7 +10,7 @@ describe('AscCardDadosProcessoComponent', () => {
   let fixture: ComponentFixture<AscCardDadosProcessoComponent>;
   const messageServiceSpy = { getDescription: jest.fn() };
   const anexoServiceSpy = { getDescription: jest.fn() };
-  const documentoPedidoServiceSpy = { getDescription: jest.fn() , avisoSituacaoPedido: jest.fn(), avisoSituacaoPedidoComplementares: jest.fn() };
+  const documentoPedidoServiceSpy = { getDescription: jest.fn() , avisoSituacaoPedido: of(true), avisoSituacaoPedidoComplementares: of(true) };
  
   beforeEach(async () => {
     await TestBed.configureTestingModule({

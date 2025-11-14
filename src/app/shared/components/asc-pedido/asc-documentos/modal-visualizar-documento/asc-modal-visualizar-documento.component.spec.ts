@@ -1,3 +1,4 @@
+import { of } from 'rxjs';
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -10,7 +11,7 @@ describe('AscModalVisualizarDocumentoComponent', () => {
   let fixture: ComponentFixture<AscModalVisualizarDocumentoComponent>;
   const messageServiceSpy = { getDescription: jest.fn() };
   const anexoServiceSpy = { getDescription: jest.fn() };
-  const documentoPedidoServiceSpy = { getDescription: jest.fn() , avisoSituacaoPedido: jest.fn(), avisoSituacaoPedidoComplementares: jest.fn() };
+  const documentoPedidoServiceSpy = { getDescription: jest.fn() , avisoSituacaoPedido: of(true), avisoSituacaoPedidoComplementares: of(true) };
  
   beforeEach(async () => {
     await TestBed.configureTestingModule({

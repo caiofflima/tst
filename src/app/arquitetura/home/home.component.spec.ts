@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Subject } from 'rxjs';
+import {Subject, of} from 'rxjs';
 import { MessageService } from 'app/shared/services/services';
 import { SessaoService } from '../shared/services/seguranca/sessao.service';
 import { HomeComponent } from './home.component';

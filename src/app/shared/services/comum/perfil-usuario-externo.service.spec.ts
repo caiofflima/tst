@@ -1,3 +1,4 @@
+import { of } from 'rxjs';
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { PerfilUsuarioExternoService } from './perfil-usuario-externo.service';

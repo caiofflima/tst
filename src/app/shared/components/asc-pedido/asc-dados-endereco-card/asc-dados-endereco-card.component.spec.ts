@@ -1,3 +1,4 @@
+import { of } from 'rxjs';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InscricaoDependenteService } from 'app/shared/services/comum/inscricao-dependente.service';

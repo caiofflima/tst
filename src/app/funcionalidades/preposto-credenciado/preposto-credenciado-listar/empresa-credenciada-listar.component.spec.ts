@@ -14,7 +14,7 @@ describe('EmpresaCredenciadaListarComponent', () => {
   let fixture: ComponentFixture<EmpresaCredenciadaListarComponent>;
   const messageServiceSpy = { getDescription: jest.fn(), fromResourceBundle: jest.fn() };
   const empresaPrestadorExternoServiceSpy = { consultarEmpresaPorId: jest.fn(), consultarFiliais: jest.fn(), consultarPorFiltro: jest.fn() };
-  const activatedRouteSpy = { getDescription: jest.fn() , snapshot: null, paramMap: jest.fn() };
+  const activatedRouteSpy = { getDescription: jest.fn() , snapshot: null, paramMap: of({}) };
   const routerSpy = { getDescription: jest.fn() };
   const locationSpy = { getDescription: jest.fn() };
   const comboServiceSpy = { consultarComboUF: jest.fn() };

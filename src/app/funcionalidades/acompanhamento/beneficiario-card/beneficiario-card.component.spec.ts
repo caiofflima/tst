@@ -1,3 +1,4 @@
+import { of } from 'rxjs';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BeneficiarioCardComponent } from './beneficiario-card.component';
 import { Pedido } from '../../../shared/models/comum/pedido';
