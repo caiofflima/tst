@@ -36,7 +36,7 @@ describe('CadastroDependenteComponent', () => {
   const medicamentoPatologiaPedidoServiceSpy = { getMedicamentoPatologiaPedido: jest.fn() };
   const siascFluxoServiceSpy = { getFluxo: jest.fn(), consultarPermissoesFluxoPorPedido: jest.fn() };
   siascFluxoServiceSpy.consultarPermissoesFluxoPorPedido.mockReturnValue(of({}));
-  const documentoPedidoServiceSpy = { getDocumentoPedido: jest.fn() };
+  const documentoPedidoServiceSpy = { getDocumentoPedido: jest.fn() , avisoSituacaoPedido: jest.fn(), avisoSituacaoPedidoComplementares: jest.fn() };
   documentoPedidoServiceSpy.avisoSituacaoPedido.mockReturnValue(of({}));
   const sessaoServiceSpy = { getUsuario: jest.fn() };
   const atendimentoServiceSpy = { get: jest.fn() };

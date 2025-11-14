@@ -9,7 +9,7 @@ describe('AscCardDadosProcessoComponent', () => {
   let fixture: ComponentFixture<AscCardDadosProcessoComponent>;
   const messageServiceSpy = { getDescription: jest.fn() };
   const anexoServiceSpy = { getDescription: jest.fn() };
-  const documentoPedidoServiceSpy = { getDescription: jest.fn() };
+  const documentoPedidoServiceSpy = { getDescription: jest.fn() , avisoSituacaoPedido: jest.fn(), avisoSituacaoPedidoComplementares: jest.fn() };
  
   beforeEach(async () => {
     await TestBed.configureTestingModule({

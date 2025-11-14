@@ -14,7 +14,7 @@ describe('PrestadorExternoFormComponent', () => {
   let fixture: ComponentFixture<PrestadorExternoFormComponent>;
   const messageServiceSpy = { getDescription: jest.fn(), fromResourceBundle: jest.fn() };
   const empresaPrestadorExternoServiceSpy = { consultarEmpresaPorId: jest.fn(), consultarFiliais: jest.fn(), buscarEmpresas: jest.fn() };
-  const activatedRouteSpy = { getDescription: jest.fn() };
+  const activatedRouteSpy = { getDescription: jest.fn() , snapshot: null, paramMap: jest.fn() };
   const routerSpy = { getDescription: jest.fn() };
   const locationSpy = { getDescription: jest.fn() };
   const comboServiceSpy = { consultarComboTiposAuditor: jest.fn(), consultarComboPerfisPrestadoresExternos: jest.fn() };

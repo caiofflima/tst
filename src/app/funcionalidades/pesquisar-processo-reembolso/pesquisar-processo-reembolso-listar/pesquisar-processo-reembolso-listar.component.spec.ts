@@ -12,7 +12,7 @@ describe('PesquisarProcessoReembolsoListarComponent', () => {
   let fixture: ComponentFixture<PesquisarProcessoReembolsoListarComponent>;
   const messageServiceSpy = { getDescription: jest.fn(), fromResourceBundle: jest.fn() };
   const empresaPrestadorExternoServiceSpy = { consultarEmpresaPorId: jest.fn(), consultarFiliais: jest.fn() };
-  const activatedRouteSpy = { getDescription: jest.fn() };
+  const activatedRouteSpy = { getDescription: jest.fn() , snapshot: null, paramMap: jest.fn() };
   const routerSpy = { getDescription: jest.fn() };
   const locationSpy = { getDescription: jest.fn() };
   const comboServiceSpy = { consultarComboUF: jest.fn() };

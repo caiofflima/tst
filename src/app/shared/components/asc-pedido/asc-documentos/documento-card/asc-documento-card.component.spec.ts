@@ -25,7 +25,7 @@ describe('AscDocumentoCardComponent', () => {
     const messageServiceSpy = { getDescription: jest.fn(), addMsgSuccess: jest.fn(), addMsgDanger: jest.fn(), addConfirmYesNo: jest.fn() };
     const sessaoServiceSpy = { init: jest.fn() };
     const routerSpy = { navigate: jest.fn(), url: jest.fn() };
-    const activatedRouteSpy = { url: jest.fn() };
+    const activatedRouteSpy = { url: jest.fn() , snapshot: null, paramMap: jest.fn() };
     
     activatedRouteSpy.params.mockReturnValue(of({id: 1});
     const mockDocs: DocumentoTipoProcesso[] = [ {id:1, texto:"RG", assunto:"RG"} as DocumentoTipoProcesso] ;
@@ -47,10 +47,10 @@ describe('AscDocumentoCardComponent', () => {
     tipoValidacaoServiceSpy.post.mockReturnValue(of({}));
     tipoValidacaoServiceSpy.put.mockReturnValue(of({}));
     tipoValidacaoServiceSpy.get.mockReturnValue(of({}));
-    const validacaoDocumentoPedidoServiceSpy = { get: jest.fn(), post: jest.fn(), put: jest.fn(), delete: jest.fn() };
+    const validacaoDocumentoPedidoServiceSpy = { get: jest.fn(), post: jest.fn(), put: jest.fn(), delete: jest.fn() , atualizacaoValidacoes$: null };
     validacaoDocumentoPedidoServiceSpy.post.mockReturnValue(of({}));
     validacaoDocumentoPedidoServiceSpy.put.mockReturnValue(of({}));
-    const documentoPedidoServiceSpy = { get: jest.fn(), post: jest.fn(), put: jest.fn(), delete: jest.fn() };
+    const documentoPedidoServiceSpy = { get: jest.fn(), post: jest.fn(), put: jest.fn(), delete: jest.fn() , avisoSituacaoPedido: jest.fn(), avisoSituacaoPedidoComplementares: jest.fn() };
     documentoPedidoServiceSpy.post.mockReturnValue(of({}));
     documentoPedidoServiceSpy.put.mockReturnValue(of({}));
     //tipoDocumentoServiceSpy.consultarTodos.mockReturnValue(of({}));

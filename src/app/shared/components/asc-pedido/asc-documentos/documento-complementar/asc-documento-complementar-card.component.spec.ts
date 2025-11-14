@@ -10,7 +10,7 @@ describe('DocumentoComplementarCardComponent', () => {
   let fixture: ComponentFixture<DocumentoComplementarCardComponent>;
   const messageServiceSpy = { getDescription: jest.fn() };
   const documentoServiceSpy = { getDescription: jest.fn() };
-  const documentoPedidoServiceSpy = { getDescription: jest.fn() };
+  const documentoPedidoServiceSpy = { getDescription: jest.fn() , avisoSituacaoPedido: jest.fn(), avisoSituacaoPedidoComplementares: jest.fn() };
  
   
 

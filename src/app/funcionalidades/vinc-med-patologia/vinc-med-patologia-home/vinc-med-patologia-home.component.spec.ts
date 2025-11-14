@@ -22,7 +22,7 @@ describe('VincMedPatologiaHomeComponent', () => {
   let fixture: ComponentFixture<VincMedPatologiaHomeComponent>;
   const messageServiceSpy = { getDescription: jest.fn(), fromResourceBundle: jest.fn() };
   const empresaPrestadorExternoServiceSpy = { consultarPorFiltro: jest.fn(), consultarFiliais: jest.fn(), buscarEmpresas: jest.fn() };
-  const activatedRouteSpy = { getDescription: jest.fn() };
+  const activatedRouteSpy = { getDescription: jest.fn() , snapshot: null, paramMap: jest.fn() };
   const routerSpy = { getDescription: jest.fn() };
   const locationSpy = { getDescription: jest.fn() };
   const comboServiceSpy = { consultarComboTiposAuditor: jest.fn(), consultarComboPerfisPrestadoresExternos: jest.fn() };
@@ -49,7 +49,7 @@ describe('VincMedPatologiaHomeComponent', () => {
   const situacaoPedidoProcedimentoServiceSpy = { get: jest.fn() };
   const medicamentoServiceSpy = { get: jest.fn() };
   const medicamentoPatologiaPedidoServiceSpy = { get: jest.fn() };
-  const documentoPedidoServiceSpy = { get: jest.fn() };
+  const documentoPedidoServiceSpy = { get: jest.fn() , avisoSituacaoPedido: jest.fn(), avisoSituacaoPedidoComplementares: jest.fn() };
   const inscricaoProgramasMedicamentosServiceSpy = { get: jest.fn() };
   const localidadeServiceSpy = { get: jest.fn() };
   const reembolsoServiceSpy = { get: jest.fn() };
