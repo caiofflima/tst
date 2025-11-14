@@ -14,8 +14,9 @@ describe('DadosCadastraisDetailComponent', () => {
   const messageServiceSpy = { addMsgDanger: jest.fn(), addMsgSuccess: jest.fn() };
   const beneficiarioServiceSpy = { consultarPorMatricula: jest.fn() };
   beneficiarioServiceSpy.consultarPorMatricula.mockReturnValue(of({}));
-  const documentoTipoProcessoServiceSpy = { consultarPorTipoProcesso: jest.fn() };
+  const documentoTipoProcessoServiceSpy = { consultarPorTipoProcesso: jest.fn(), consultarPorMotivoSolicitacao: jest.fn() };
   documentoTipoProcessoServiceSpy.consultarPorTipoProcesso.mockReturnValue(of([]));
+  documentoTipoProcessoServiceSpy.consultarPorMotivoSolicitacao.mockReturnValue(of([]));
   const inscricaoDependenteServiceSpy = { save: jest.fn() };
   const processoServiceSpy = { consultarPorId: jest.fn() };
   const sessaoServiceSpy = { getUsuario: jest.fn() };
