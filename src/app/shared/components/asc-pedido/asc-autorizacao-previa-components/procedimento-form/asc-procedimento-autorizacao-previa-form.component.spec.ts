@@ -11,8 +11,8 @@ describe('AscProcedimentoAutorizacaoPreviaFormComponent', () => {
   const situacaoPedidoProcedimentoServiceSpy = { init: jest.fn() };
   const sessaoServiceSpy = { init: jest.fn() };
   const procedimentoServiceSpy = { init: jest.fn() };
-  const procedimentoPedidoServiceSpy = { pedidoListenerValorNotaFiscal: jest.fn() };
-  procedimentoPedidoServiceSpy.pedidoListenerValorNotaFiscal.mockReturnValue(of({valor: 1}));
+  const procedimentoPedidoServiceSpy = { pedidoListenerValorNotaFiscal: of({valor: 1}) };
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports:[
