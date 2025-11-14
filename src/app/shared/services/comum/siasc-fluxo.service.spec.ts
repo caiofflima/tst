@@ -41,7 +41,7 @@ describe('SIASCFluxoService', () => {
     const tipo = 'someTipo';
     const url = `${baseUrl}/pedido/${idPedido}/${tipo}/permissoes`;
 
-    spyOnProperty(router, 'url', 'get').mockReturnValue(`${baseUrl}/pedido/${idPedido}/${tipo}`);
+    Object.defineProperty(router, 'url', { value: `${baseUrl}/pedido/${idPedido}/${tipo}`, writable: true });
 
     service.consultarPermissoesFluxoPorPedido(idPedido).subscribe(permissoes => {
       expect(permissoes).toEqual(dummyPermissoes);

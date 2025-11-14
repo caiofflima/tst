@@ -116,7 +116,7 @@ describe('ProcedimentoPedidoService', () => {
   });
 
   it('should return the current route', () => {
-    routerSpy.url = 'test/url';
+    Object.defineProperty(routerSpy, 'url', { value: 'test/url', writable: true });
     expect(service.obterRotaAtual()).toBe('test/url');
   });
 });
