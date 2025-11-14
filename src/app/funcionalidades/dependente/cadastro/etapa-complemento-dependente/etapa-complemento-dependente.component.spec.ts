@@ -40,7 +40,7 @@ params: {
   atendimentoServiceSpy.get.mockReturnValue(of({}));
   const tipoDeficienciaServiceSpy = { consultarTodos: jest.fn() };
   tipoDeficienciaServiceSpy.consultarTodos.mockReturnValue(of({}));
-  const motivoSolicitacaoServiceSpy = { consultarTodos: jest.fn() };
+  const motivoSolicitacaoServiceSpy: any = { consultarTodos: jest.fn() };
   const inscricaoDependenteServiceSpy = { consultarTodos: jest.fn() };
 
   const usuario = {} as Usuario;
