@@ -1,0 +1,984 @@
+
+> siasc-angular-15@0.0.0 test
+> jest
+
+PASS src/app/funcionalidades/prestador-externo/prestador-externo-form/prestador-externo-form.component.spec.ts
+PASS src/app/funcionalidades/dependente/renovar/etapa-resumo-renovar/etapa-resumo-renovar.component.spec.ts
+PASS src/app/shared/components/asc-pedido/asc-tipo-procedimento-form/asc-formulario-reembolso-consulta/asc-formulario-reembolso-consulta.component.spec.ts
+PASS src/app/arquitetura/seguranca/perfil/consulta/perfil-consulta.component.spec.ts
+PASS src/app/shared/components/asc-pedido/asc-steps/procedimento/asc-procedimento-pedido.component.spec.ts (5.031 s)
+PASS src/app/shared/components/asc-pedido/asc-modal-ocorrencia/asc-modal-ocorrencia.component.spec.ts (5.036 s)
+PASS src/app/funcionalidades/dependente/cancelar/etapa-resumo-cancelar/etapa-resumo-cancelar.component.spec.ts (5.095 s)
+  ● Console
+
+    console.log
+      dataOcorrencia = undefined
+
+      at EtapaResumoCancelarComponent.ngOnInit (src/app/funcionalidades/dependente/cancelar/etapa-resumo-cancelar/etapa-resumo-cancelar.component.ts:57:17)
+
+    console.log
+      motivoCancelamento = undefined
+
+      at EtapaResumoCancelarComponent.ngOnInit (src/app/funcionalidades/dependente/cancelar/etapa-resumo-cancelar/etapa-resumo-cancelar.component.ts:58:17)
+
+PASS src/app/funcionalidades/dependente/cadastro/etapa-resumo-alterar/etapa-resumo-alterar.component.spec.ts (5.144 s)
+PASS src/app/shared/components/base-layout/base-layout-home/base-layout-home.component.spec.ts
+PASS src/app/shared/components/base-layout/base-layout-form/base-layout-form.component.spec.ts
+PASS src/app/arquitetura/seguranca/perfil/cadastro/perfil-cadastro.component.spec.ts (5.354 s)
+PASS src/app/shared/components/asc-pedido/asc-documentos/documento-card/asc-documento-card.component.spec.ts
+PASS src/app/funcionalidades/empresa-prestador-externo/empresa-prestador-externo-listar/empresa-prestador-externo-listar.component.spec.ts
+  ● Console
+
+    console.log
+      this.empresaService.consultarPorFiltro ========
+
+      at EmpresaPrestadorExternoListarComponent.pesquisarEmpresas (src/app/funcionalidades/empresa-prestador-externo/empresa-prestador-externo-listar/empresa-prestador-externo-listar.component.ts:48:17)
+
+    console.log
+      FiltroConsultaEmpresa { ufsProcesso: [], filiaisProcesso: [] }
+
+      at EmpresaPrestadorExternoListarComponent.pesquisarEmpresas (src/app/funcionalidades/empresa-prestador-externo/empresa-prestador-externo-listar/empresa-prestador-externo-listar.component.ts:49:17)
+
+    console.log
+      [REVISADO] this.empresaService.consultarPorFiltro ========
+
+      at EmpresaPrestadorExternoListarComponent.pesquisarEmpresas (src/app/funcionalidades/empresa-prestador-externo/empresa-prestador-externo-listar/empresa-prestador-externo-listar.component.ts:56:17)
+
+    console.log
+      FiltroConsultaEmpresa {
+        ufsProcesso: [],
+        filiaisProcesso: [],
+        razaoSocial: null
+      }
+
+      at EmpresaPrestadorExternoListarComponent.pesquisarEmpresas (src/app/funcionalidades/empresa-prestador-externo/empresa-prestador-externo-listar/empresa-prestador-externo-listar.component.ts:57:17)
+
+    console.log
+      {}
+
+      at Object.next (src/app/funcionalidades/empresa-prestador-externo/empresa-prestador-externo-listar/empresa-prestador-externo-listar.component.ts:59:21)
+
+PASS src/app/funcionalidades/dependente/renovar/etapa-motivo-renovacao/etapa-motivo-renovacao.component.spec.ts (5.694 s)
+PASS src/app/funcionalidades/procedimentos-cobertos/listar-procedimentos-com-reembolso/listar-procedimentos-com-reembolso.component.spec.ts
+PASS src/app/funcionalidades/processos/reembolso/resumo/resumo.component.spec.ts
+PASS src/app/shared/components/asc-pedido/asc-steps/asc-documentos-requeridos-pedido/asc-documentos-requeridos-pedido.component.spec.ts
+  ● Console
+
+    console.log
+      init
+
+      at AscDocumentosRequeridosPedidoComponent.ngOnInit (src/app/shared/components/asc-pedido/asc-steps/asc-documentos-requeridos-pedido/asc-documentos-requeridos-pedido.component.ts:45:17)
+
+PASS src/app/app.component.spec.ts
+PASS src/app/funcionalidades/acompanhamento/acompanhamento.component.spec.ts
+  ● Console
+
+    console.log
+      aqui sssss
+
+      at AcompanhamentoComponent.ngOnInit (src/app/funcionalidades/acompanhamento/acompanhamento.component.ts:26:13)
+
+    console.log
+      aqui sssss
+
+      at AcompanhamentoComponent.ngOnInit (src/app/funcionalidades/acompanhamento/acompanhamento.component.ts:26:13)
+
+PASS src/app/funcionalidades/vinc-med-patologia/vinc-med-patologia-home/vinc-med-patologia-home.component.spec.ts
+PASS src/app/funcionalidades/processos/autorizacao-previa/detalhar-processo/detalhar-autorizacao-previa.component.spec.ts
+PASS src/app/funcionalidades/perfil-usuario-externo/perfil-usuario-externo-form/perfil-usuario-externo-form.component.spec.ts
+PASS src/app/shared/components/apresentador/apresentador.component.spec.ts
+PASS src/app/funcionalidades/empresa-prestador-externo/empresa-prestador-externo-form/empresa-prestador-externo-form.component.spec.ts
+PASS src/app/shared/components/asc-pedido/asc-steps/asc-finalidade-beneficiario/asc-finalidade.component.spec.ts
+  ● Console
+
+    console.log
+      init
+
+      at AscDocumentosRequeridosPedidoComponent.ngOnInit (src/app/shared/components/asc-pedido/asc-steps/asc-documentos-requeridos-pedido/asc-documentos-requeridos-pedido.component.ts:45:17)
+
+PASS src/app/funcionalidades/parametrizacao-documentos/parametrizacao-documentos-from/parametrizacao-documentos-from.component.spec.ts
+PASS src/app/funcionalidades/processos/reembolso/documentos-fiscal/documentos-fiscal.component.spec.ts
+PASS src/app/funcionalidades/dados-cadastrais/dependente-detail/dependente-detail.component.spec.ts (6.48 s)
+  ● Console
+
+    console.log
+      idBeneficiario: 1
+
+      at DependenteDetailComponent.ngOnInit (src/app/funcionalidades/dados-cadastrais/dependente-detail/dependente-detail.component.ts:32:15)
+
+    console.log
+      idBeneficiario: 1
+
+      at DependenteDetailComponent.ngOnInit (src/app/funcionalidades/dados-cadastrais/dependente-detail/dependente-detail.component.ts:32:15)
+
+    console.log
+      idBeneficiario: 1
+
+      at DependenteDetailComponent.ngOnInit (src/app/funcionalidades/dados-cadastrais/dependente-detail/dependente-detail.component.ts:32:15)
+
+    console.log
+      idBeneficiario: 1
+
+      at DependenteDetailComponent.ngOnInit (src/app/funcionalidades/dados-cadastrais/dependente-detail/dependente-detail.component.ts:32:15)
+
+PASS src/app/funcionalidades/adesao-titular/pagina-inicial/pagina-inicial-adesao-titular.component.spec.ts
+PASS src/app/funcionalidades/dependente/cancelar/etapa-motivo-beneficiario/etapa-motivo-beneficiario.component.spec.ts
+PASS src/app/funcionalidades/processos/reembolso/reembolso-base/reembolso-base.component.spec.ts
+PASS src/app/funcionalidades/processos/autorizacao-previa/resumo/resumo.component.spec.ts
+PASS src/app/funcionalidades/processos/autorizacao-previa/pagina-inicial/pagina-inicial-apr.component.spec.ts
+PASS src/app/shared/components/asc-file/custom-card-documento/custom-card-documento.component.spec.ts
+PASS src/app/funcionalidades/acompanhamento/procedimento-pedido-card/procedimento-pedido-card.component.spec.ts
+PASS src/app/shared/services/comum/patologia.service.spec.ts
+PASS src/app/funcionalidades/documentos-tipo-processo/param/documentos-tipo-processo-param.component.spec.ts
+PASS src/app/shared/components/asc-pedido/asc-steps/asc-profissional-pedido/asc-profissional-pedido.component.spec.ts
+PASS src/app/funcionalidades/processos/autorizacao-previa/autorizacao-previa-base/autorizacao-previa-base.component.spec.ts
+PASS src/app/shared/components/asc-pedido/asc-resumo/asc-profissional-executante/asc-profissional-executante.component.spec.ts
+PASS src/app/funcionalidades/documentos-tipo-processo/result/documentos-tipo-processo-result.component.spec.ts
+PASS src/app/funcionalidades/dependente/cancelar/pagina-inicial/pagina-inicial.component.spec.ts
+PASS src/app/shared/components/asc-pedido/asc-resumo/asc-card-documento-fiscal/asc-card-documento-fiscal.component.spec.ts
+PASS src/app/funcionalidades/email-situacao/email-situacao-form/email-situacao-form.component.spec.ts
+PASS src/app/funcionalidades/parametrizacao-documentos/parametrizacao-documentos-listar/parametrizacao-documentos-listar.component.spec.ts
+PASS src/app/shared/components/asc-pedido/asc-dados-endereco-card/asc-dados-endereco-card.component.spec.ts
+PASS src/app/funcionalidades/relatorios/procedimentos-solicitados-por-profissional/procedimentos-solicitados-por-profissional-listar/procedimentos-solicitados-por-profissional-listar.component.spec.ts
+PASS src/app/funcionalidades/relatorios/junta-medica-odontologica/junta-medica-odontologica-listar/junta-medica-odontologica-listar.component.spec.ts
+PASS src/app/funcionalidades/processos/inscricao-programas-medicamentos/acompanhamento-pmd/acompanhamento-pmd.component.spec.ts
+PASS src/app/shared/services/comum/pedido/medicamento.service.spec.ts
+PASS src/app/funcionalidades/processos/reembolso/documentos/documentos.component.spec.ts
+PASS src/app/funcionalidades/pesquisar-processos/pesquisar-processos-home/pesquisar-processos-home.component.spec.ts
+PASS src/app/funcionalidades/meus-dados/exibir-dados-beneficiario/dados-beneficiario.component.spec.ts
+PASS src/app/funcionalidades/processos/inscricao-programas-medicamentos/resumo/resumo.component.spec.ts
+PASS src/app/funcionalidades/pesquisar-processos-credenciado/pesquisar-processos-credenciado-home/pesquisar-processos-credenciado-home.component.spec.ts
+PASS src/app/funcionalidades/parametrizacao-prazos/parametrizacao-prazos-listar/parametrizacao-prazos-listar.component.spec.ts
+PASS src/app/arquitetura/home/home.component.spec.ts
+PASS src/app/funcionalidades/pesquisar-processo-reembolso/pesquisar-processo-reembolso-home/pesquisar-processo-reembolso-home.component.spec.ts
+PASS src/app/shared/components/asc-file/asc-file-selector/asc-file-selector.component.spec.ts
+PASS src/app/funcionalidades/mensagens/lista-mensagens/lista-mensagens.component.spec.ts
+PASS src/app/funcionalidades/patologia/patologia-form/patologia-form.component.spec.ts
+PASS src/app/shared/services/comum/processo.service.spec.ts
+  ● Console
+
+    console.log
+      1
+
+      at ProcessoService.consultarPaginado (src/app/shared/services/comum/processo.service.ts:65:17)
+
+    console.log
+      2
+
+      at ProcessoService.consultar (src/app/shared/services/comum/processo.service.ts:70:17)
+
+    console.log
+      /siasc-api/api/pedidos/pedidos-reembolso
+
+      at ProcessoService.consultarProcessosReembolso (src/app/shared/services/comum/processo.service.ts:86:17)
+
+    console.log
+      {}
+
+      at ProcessoService.consultarProcessosReembolso (src/app/shared/services/comum/processo.service.ts:87:17)
+
+PASS src/app/shared/components/asc-pedido/asc-resumo/asc-card-beneficiario/asc-card-beneficiario.component.spec.ts
+PASS src/app/funcionalidades/relatorios/tempo-medio-processos/tempo-medio-processos-listar/tempo-medio-processos-listar.component.spec.ts
+PASS src/app/funcionalidades/relatorios/analitico/analitico-listar/analitico-listar.component.spec.ts
+PASS src/app/funcionalidades/parametrizacao-documento-processo/parametrizacao-documento-processo-form/parametrizacao-documento-processo-form.component.spec.ts
+PASS src/app/funcionalidades/acompanhamento/listagem/listagem.component.spec.ts
+  ● Console
+
+    console.log
+
+
+      at new ListagemComponent (src/app/funcionalidades/acompanhamento/listagem/listagem.component.ts:10:27)
+
+    console.log
+
+
+      at ListagemComponent.ngOnInit (src/app/funcionalidades/acompanhamento/listagem/listagem.component.ts:12:24)
+
+    console.log
+
+
+      at new ListagemComponent (src/app/funcionalidades/acompanhamento/listagem/listagem.component.ts:10:27)
+
+    console.log
+
+
+      at ListagemComponent.ngOnInit (src/app/funcionalidades/acompanhamento/listagem/listagem.component.ts:12:24)
+
+    console.log
+
+
+      at Object.<anonymous> (node_modules/jest-mock/build/index.js:794:25)
+
+PASS src/app/funcionalidades/pesquisar-processos-credenciado/pesquisar-processos-credenciado-listar/pesquisar-processos-credenciado-listar.component.spec.ts
+PASS src/app/funcionalidades/processos/reembolso/acompanhamento-reembolso/acompanhamento/acompanhamento.component.spec.ts
+PASS src/app/funcionalidades/processos/inscricao-programas-medicamentos/inscricao-programas-medicamentos-base/inscricao-programas-medicamentos-base.component.spec.ts
+PASS src/app/funcionalidades/perfil-usuario-externo/perfil-usuario-externo-home/perfil-usuario-externo-home.component.spec.ts
+PASS src/app/funcionalidades/meus-dados/visualizar-dados-titular/dados-titular.component.spec.ts
+PASS src/app/funcionalidades/pesquisar-processos/pesquisar-processos-listar/pesquisar-processos-listar.component.spec.ts
+PASS src/app/arquitetura/shared/templates/rodape-padrao.component.spec.ts
+PASS src/app/funcionalidades/preposto-credenciado/preposto-credenciado-home/empresa-credenciada-home.component.spec.ts
+PASS src/app/funcionalidades/pesquisar-processo-reembolso/pesquisar-processo-reembolso-listar/pesquisar-processo-reembolso-listar.component.spec.ts
+PASS src/app/funcionalidades/processos/reembolso/pagina-inicial/pagina-inicial.component.spec.ts
+PASS src/app/funcionalidades/processos/inscricao-programas-medicamentos/patologia/patologia.component.spec.ts
+PASS src/app/funcionalidades/empresa-prestador-externo/empresa-prestador-externo-home/empresa-prestador-externo-home.component.spec.ts
+PASS src/app/funcionalidades/parametrizacao-prazos/parametrizacao-prazos-form/parametrizacao-prazos-form.component.spec.ts
+PASS src/app/funcionalidades/dependente/cancelar/pagina-inicial/cancelar-dependente.module.spec.ts
+PASS src/app/funcionalidades/relatorios/controle-prazos-processos/controle-prazos-processos-listar/controle-prazos-processos-listar.component.spec.ts
+PASS src/app/shared/components/asc-pedido/asc-documentos/modal-visualizar-documento/asc-modal-visualizar-documento.component.spec.ts
+PASS src/app/shared/components/asc-buttons/asc-button-third/asc-button-third.component.spec.ts
+PASS src/app/shared/components/asc-pedido/asc-dependentes/asc-dependentes-card/asc-dependentes-card.component.spec.ts
+PASS src/app/funcionalidades/processos/autorizacao-previa/profissional/profissional.component.spec.ts
+PASS src/app/funcionalidades/preposto-credenciado/preposto-credenciado-listar/empresa-credenciada-listar.component.spec.ts
+PASS src/app/funcionalidades/mensagens/detalhar-mensagens/detalhar-mensagens.component.spec.ts
+PASS src/app/funcionalidades/parametrizacao-prazos/parametrizacao-prazos-home/parametrizacao-prazos-home.component.spec.ts
+PASS src/app/shared/components/asc-pedido/asc-resumo/asc-card-procedimento/asc-card-procedimento.component.spec.ts
+PASS src/app/funcionalidades/patologia/patologia-listar/patologia-listar.component.spec.ts
+PASS src/app/funcionalidades/preposto-credenciado/preposto-credenciado-form/empresa-credenciada-form.component.spec.ts
+PASS src/app/funcionalidades/processos/reembolso/recibo/recibo.component.spec.ts
+PASS src/app/shared/components/asc-pedido/asc-dados-contato-card/asc-dados-contato-card.component.spec.ts
+PASS src/app/funcionalidades/prestador-externo/prestador-externo-home/prestador-externo-home.component.spec.ts
+PASS src/app/funcionalidades/patologia/patologia-home/patologia-home.component.spec.ts
+PASS src/app/shared/components/asc-card/asc-card-component/asc-card-component.component.spec.ts
+PASS src/app/funcionalidades/extrato/extrato-irpf/extrato-irpf.component.spec.ts
+PASS src/app/shared/components/asc-pedido/asc-documentos/documento-complementar/asc-documento-complementar-card.component.spec.ts
+PASS src/app/funcionalidades/processos/reembolso/profissional/profissional.component.spec.ts
+PASS src/app/funcionalidades/processos/reembolso/finalidade/finalidade.component.spec.ts
+PASS src/app/funcionalidades/prestador-externo/prestador-externo-listar/prestador-externo-listar.component.spec.ts
+PASS src/app/funcionalidades/perfil-usuario-externo/perfil-usuario-externo-buscar/perfil-usuario-externo-buscar.component.spec.ts
+PASS src/app/funcionalidades/pesquisar-processo-reembolso/pesquisar-processo-reembolso-form/pesquisar-processo-reembolso-form.component.spec.ts
+PASS src/app/funcionalidades/processos/reembolso/procedimento/procedimento.component.spec.ts
+PASS src/app/funcionalidades/parametrizacao-documentos/parametrizacao-documentos-home/parametrizacao-documentos-home.component.spec.ts
+PASS src/app/funcionalidades/pesquisar-processos-credenciado/pesquisar-processos-v2/pesquisar-processos-v2.component.spec.ts
+PASS src/app/funcionalidades/processos/autorizacao-previa/documentos/documentos.component.spec.ts
+PASS src/app/shared/services/comum/procedimento.service.spec.ts
+  ● Console
+
+    console.log
+      options
+
+      at ProcedimentoService.consultarProcedimentosPorTipoProcesso (src/app/shared/services/comum/procedimento.service.ts:35:17)
+
+    console.log
+      {
+        headers: HttpHeaders {
+          normalizedNames: Map(0) {},
+          lazyUpdate: null,
+          headers: Map(0) {}
+        },
+        responseType: 'json',
+        withCredentials: true,
+        params: HttpParams {
+          updates: [ [Object] ],
+          cloneFrom: HttpParams {
+            updates: null,
+            cloneFrom: null,
+            encoder: HttpUrlEncodingCodec {},
+            map: null
+          },
+          encoder: HttpUrlEncodingCodec {},
+          map: null
+        }
+      }
+
+      at ProcedimentoService.consultarProcedimentosPorTipoProcesso (src/app/shared/services/comum/procedimento.service.ts:36:17)
+
+PASS src/app/funcionalidades/processos/autorizacao-previa/solicitacao/solicitacao.component.spec.ts
+PASS src/app/funcionalidades/novo-pedido-credenciado/novo-pedido-credenciado.component.spec.ts
+PASS src/app/funcionalidades/processos/reembolso/beneficiario/beneficiario.component.spec.ts
+PASS src/app/shared/components/asc-pedido/asc-steps/asc-beneficiario-pedido/asc-beneficiario-pedido.component.spec.ts
+PASS src/app/shared/components/asc-pedido/asc-autorizacao-previa-components/procedimento-form/asc-procedimento-autorizacao-previa-form.component.spec.ts
+PASS src/app/shared/services/comum/combo.service.spec.ts
+PASS src/app/funcionalidades/beneficiario-pedido/beneficiario-pedido-home/beneficiario-pedido-home.component.spec.ts
+PASS src/app/funcionalidades/dependente/cadastro/pagina-inicial-alterar/pagina-inicial-alterar.component.spec.ts
+PASS src/app/shared/services/comum/mensagem-enviada.service.spec.ts
+PASS src/app/funcionalidades/acompanhamento/dados-processo-card/dados-processo-card.component.spec.ts
+PASS src/app/funcionalidades/pesquisar-processos-credenciado/pesquisar-processos-lista-v2/pesquisar-processos-lista-v2.component.spec.ts
+PASS src/app/funcionalidades/processos/autorizacao-previa/validar-procedimentos/validar-procedimentos.component.spec.ts
+PASS src/app/funcionalidades/processos/inscricao-programas-medicamentos/pagina-incial/pagina-incial.component.spec.ts
+PASS src/app/shared/components/asc-pedido/asc-resumo/asc-card-dados-processo/asc-card-dados-processo.component.spec.ts
+PASS src/app/funcionalidades/processos/autorizacao-previa/acompanhamento-apr/acompanhamento-apr/acompanhamento-apr.component.spec.ts
+PASS src/app/funcionalidades/acompanhamento/profissional-card/profissional-card.component.spec.ts
+PASS src/app/shared/components/asc-buttons/asc-button-primary/asc-button-primary.component.spec.ts
+PASS src/app/funcionalidades/dependente/renovar/pagina-inicial/pagina-inicial.component.spec.ts
+PASS src/app/shared/services/meus-dados/meus-dados.service.spec.ts
+PASS src/app/shared/components/asc-pedido/asc-resumo/asc-card-info-adicional/asc-card-info-adicional.component.spec.ts
+PASS src/app/funcionalidades/pesquisar-processos-credenciado/resultado-pesquisa-processos-credenciado/resultado-pesquisa-processos-credenciado.component.spec.ts
+PASS src/app/shared/services/comum/situacao-pedido.service.spec.ts
+PASS src/app/shared/components/asc-buttons/asc-button-secondary/asc-button-secondary.component.spec.ts
+PASS src/app/shared/services/comum/beneficiario-pedido.service.spec.ts
+PASS src/app/shared/services/comum/documento-pedido.service.spec.ts
+PASS src/app/shared/services/comum/email.service.spec.ts
+PASS src/app/shared/services/comum/pedido/especialidade.service.spec.ts
+PASS src/app/shared/services/comum/integracao-correios.service.spec.ts
+PASS src/app/shared/services/comum/credenciado.service.spec.ts
+PASS src/app/shared/services/comum/pedido/autorizacao-previa.service.spec.ts
+PASS src/app/shared/services/comum/estado-civil.service.spec.ts
+PASS src/app/arquitetura/shared/templates/pagina-nao-encontrada.component.spec.ts
+PASS src/app/shared/services/comum/tipo-beneficiario.service.spec.ts
+PASS src/app/shared/services/comum/profissional-executante.service.spec.ts
+PASS src/app/shared/services/comum/reembolso-saude-caixa.service.spec.ts
+  ● Console
+
+    console.log
+      /siasc-api/api/reembolso/getCoparticipacoes/12345678900/1/2023/1/12345
+
+      at ReembolsoSaudeCaixaService.getCoparticipacoes (src/app/shared/services/comum/reembolso-saude-caixa.service.ts:62:17)
+
+PASS src/app/shared/services/comum/exportacao/csv/exportacao-csv.service.spec.ts
+PASS src/app/shared/services/cadastrobasico/fundoinvestimento.service.spec.ts
+PASS src/app/shared/services/comum/laboratorio.service.spec.ts
+PASS src/app/shared/services/comum/exportacao.service.spec.ts
+PASS src/app/shared/services/comum/medicamento-patologia-pedido.service.spec.ts
+PASS src/app/shared/services/comum/tipo-documento.service.spec.ts
+PASS src/app/shared/services/comum/validacao-documento-pedido.service.spec.ts
+PASS src/app/shared/services/comum/tipo-deficiencia.service.spec.ts
+PASS src/app/shared/services/comum/perfil-usuario-externo.service.spec.ts
+PASS src/app/shared/services/comum/atendimento.service.spec.ts
+PASS src/app/shared/services/comum/empresa-prestador-externo.service.spec.ts
+  ● Console
+
+    console.log
+      public consultarPorFiltro(filtro: any)
+
+      at EmpresaPrestadorExternoService.consultarPorFiltro (src/app/shared/services/comum/empresa-prestador-externo.service.ts:30:17)
+
+    console.log
+      /siasc-api/api/empresas-prestadoras/filtro
+
+      at EmpresaPrestadorExternoService.consultarPorFiltro (src/app/shared/services/comum/empresa-prestador-externo.service.ts:31:17)
+
+    console.log
+      { nome: 'Teste' }
+
+      at EmpresaPrestadorExternoService.consultarPorFiltro (src/app/shared/services/comum/empresa-prestador-externo.service.ts:32:17)
+
+PASS src/app/shared/services/comum/tipo-dependente.service.spec.ts
+PASS src/app/shared/services/comum/documento-tipo-processo.service.spec.ts
+PASS src/app/shared/services/comum/trilha-auditoria.service.spec.ts
+PASS src/app/shared/services/comum/inscricao-programas-medicamento.service.spec.ts
+PASS src/app/shared/services/comum/prazo-tratamento.service.spec.ts
+PASS src/app/shared/services/comum/historico-processo.service.spec.ts
+PASS src/app/shared/services/comum/prestador-externo.service.spec.ts
+PASS src/app/shared/services/comum/localidade.service.spec.ts
+PASS src/app/shared/services/comum/documento.service.spec.ts
+PASS src/app/shared/services/comum/anexo.service.spec.ts
+PASS src/app/shared/services/comum/conselho-profissional.service.spec.ts
+PASS src/app/shared/services/comum/motivo-negacao.service.spec.ts
+PASS src/app/funcionalidades/credenciados/credenciados/credenciados.component.spec.ts
+PASS src/app/shared/services/comum/grupo-documento.service.spec.ts
+PASS src/app/shared/services/cadastrobasico/item.service.spec.ts
+PASS src/app/shared/services/comum/reembolso-ags.service.spec.ts
+PASS src/app/shared/services/comum/carater-solicitacao.service.spec.ts
+PASS src/app/shared/services/comum/situacao-pedido-procedimento.service.spec.ts
+PASS src/app/shared/services/comum/tipo-destinatario.service.spec.ts
+PASS src/app/shared/services/comum/exportacao/xls/exportacao-xls.service.spec.ts
+PASS src/app/shared/services/comum/grau-procedimento.service.spec.ts
+PASS src/app/shared/services/comum/inscricao-dependente.service.spec.ts
+PASS src/app/shared/services/comum/situacao-processo.service.spec.ts
+PASS src/app/shared/services/comum/medicamento-patologia.service.spec.ts
+PASS src/app/shared/services/comum/motivo-cancelamento.service.spec.ts
+PASS src/app/shared/services/comum/tipo-validacao.service.spec.ts
+PASS src/app/shared/services/cadastrobasico/lista.restritiva.service.spec.ts
+PASS src/app/shared/services/comum/reembolso.service.spec.ts
+PASS src/app/shared/services/comum/tipo-processo.service.spec.ts
+PASS src/app/shared/services/comum/tipo-ocorrencia.service.spec.ts
+PASS src/app/shared/services/comum/exportacao/pdf/exportacao-pdf.service.spec.ts
+PASS src/app/shared/services/comum/motivo-solicitacao.service.spec.ts
+PASS src/app/shared/services/comum/categoria-beneficiario.service.spec.ts
+FAIL src/app/funcionalidades/reembolso/detail/reembolso-detail.component.spec.ts
+  ● Test suite failed to run
+
+    Your test suite must contain at least one test.
+
+      at onResult (node_modules/@jest/core/build/TestScheduler.js:133:18)
+      at node_modules/@jest/core/build/TestScheduler.js:254:19
+      at node_modules/emittery/index.js:363:13
+          at Array.map (<anonymous>)
+      at Emittery.emit (node_modules/emittery/index.js:361:23)
+
+FAIL src/app/funcionalidades/procedimentos-cobertos/result/procedimentos-cobertos-result.component.spec.ts
+  ● Test suite failed to run
+
+    Your test suite must contain at least one test.
+
+      at onResult (node_modules/@jest/core/build/TestScheduler.js:133:18)
+      at node_modules/@jest/core/build/TestScheduler.js:254:19
+      at node_modules/emittery/index.js:363:13
+          at Array.map (<anonymous>)
+      at Emittery.emit (node_modules/emittery/index.js:361:23)
+
+FAIL src/app/funcionalidades/procedimentos-cobertos/param/procedimentos-cobertos-param.component.spec.ts
+  ● Test suite failed to run
+
+    Your test suite must contain at least one test.
+
+      at onResult (node_modules/@jest/core/build/TestScheduler.js:133:18)
+      at node_modules/@jest/core/build/TestScheduler.js:254:19
+      at node_modules/emittery/index.js:363:13
+          at Array.map (<anonymous>)
+      at Emittery.emit (node_modules/emittery/index.js:361:23)
+
+FAIL src/app/funcionalidades/procedimentos/listar-autorizacao-previa/procedimentos-listar-autorizacao-previa.component.spec.ts
+  ● Test suite failed to run
+
+    Your test suite must contain at least one test.
+
+      at onResult (node_modules/@jest/core/build/TestScheduler.js:133:18)
+      at node_modules/@jest/core/build/TestScheduler.js:254:19
+      at node_modules/emittery/index.js:363:13
+          at Array.map (<anonymous>)
+      at Emittery.emit (node_modules/emittery/index.js:361:23)
+
+FAIL src/app/funcionalidades/portabilidade/detail/portabilidade-detail.component.spec.ts
+  ● Test suite failed to run
+
+    Your test suite must contain at least one test.
+
+      at onResult (node_modules/@jest/core/build/TestScheduler.js:133:18)
+      at node_modules/@jest/core/build/TestScheduler.js:254:19
+      at node_modules/emittery/index.js:363:13
+          at Array.map (<anonymous>)
+      at Emittery.emit (node_modules/emittery/index.js:361:23)
+
+FAIL src/app/funcionalidades/dados-cadastrais/informacoes-pedido-detail/informacoes-pedido-detail.component.spec.ts
+  ● Test suite failed to run
+
+    Your test suite must contain at least one test.
+
+      at onResult (node_modules/@jest/core/build/TestScheduler.js:133:18)
+      at node_modules/@jest/core/build/TestScheduler.js:254:19
+      at node_modules/emittery/index.js:363:13
+          at Array.map (<anonymous>)
+      at Emittery.emit (node_modules/emittery/index.js:361:23)
+
+FAIL src/app/funcionalidades/dados-cadastrais/detail/dados-cadastrais-detail.component.spec.ts
+  ● Test suite failed to run
+
+    Your test suite must contain at least one test.
+
+      at onResult (node_modules/@jest/core/build/TestScheduler.js:133:18)
+      at node_modules/@jest/core/build/TestScheduler.js:254:19
+      at node_modules/emittery/index.js:363:13
+          at Array.map (<anonymous>)
+      at Emittery.emit (node_modules/emittery/index.js:361:23)
+
+FAIL src/app/funcionalidades/dependente/cadastro/cadastro-dependente/cadastro-dependente.component.spec.ts
+  ● Test suite failed to run
+
+    [96msrc/app/funcionalidades/dependente/cadastro/cadastro-dependente/cadastro-dependente.component.spec.ts[0m:[93m26[0m:[93m4[0m - [91merror[0m[90m TS1005: [0m',' expected.
+
+    [7m26[0m   };
+    [7m  [0m [91m   ~[0m
+
+FAIL src/app/funcionalidades/dependente/cadastro/etapa-complemento-dependente/etapa-complemento-dependente.component.spec.ts
+  ● Test suite failed to run
+
+    [96msrc/app/funcionalidades/dependente/cadastro/etapa-complemento-dependente/etapa-complemento-dependente.component.spec.ts[0m:[93m79[0m:[93m33[0m - [91merror[0m[90m TS2339: [0mProperty 'selectedOption$' does not exist on type '{ consultarTodos: Mock<any, any, any>; }'.
+
+    [7m79[0m     motivoSolicitacaoServiceSpy.selectedOption$ = selectedOptionSource.asObservable();
+    [7m  [0m [91m                                ~~~~~~~~~~~~~~~[0m
+
+PASS src/app/funcionalidades/dependente/cadastro/pagina-inicial/pagina-inicial.component.spec.ts
+PASS src/app/funcionalidades/dependente/cadastro/etapa-tipo-dependente/etapa-tipo-dependente.component.spec.ts
+FAIL src/app/funcionalidades/dependente/cadastro/etapa-dados-dependente/etapa-dados-dependente.component.spec.ts
+  ● Test suite failed to run
+
+    [96msrc/app/funcionalidades/dependente/cadastro/etapa-dados-dependente/etapa-dados-dependente.component.spec.ts[0m:[93m52[0m:[93m5[0m - [91merror[0m[90m TS2740: [0mType '{ next: Mock<any, any, any>; previous: Mock<any, any, any>; }' is missing the following properties from type 'CdkStepper': _dir, _changeDetectorRef, _elementRef, _destroyed, and 34 more.
+
+    [7m52[0m     component.stepper = cdkStepperSpy;
+    [7m  [0m [91m    ~~~~~~~~~~~~~~~~~[0m
+    [96msrc/app/funcionalidades/dependente/cadastro/etapa-dados-dependente/etapa-dados-dependente.component.spec.ts[0m:[93m137[0m:[93m43[0m - [91merror[0m[90m TS2551: [0mProperty 'toBeFalse' does not exist on type 'JestMatchers<boolean>'. Did you mean 'toBeFalsy'?
+
+    [7m137[0m     expect(component.idadeIncompativel()).toBeFalse;
+    [7m   [0m [91m                                          ~~~~~~~~~[0m
+
+      [96mnode_modules/@types/jest/index.d.ts[0m:[93m887[0m:[93m9[0m
+        [7m887[0m         toBeFalsy(): R;
+        [7m   [0m [96m        ~~~~~~~~~~~~~~~[0m
+        'toBeFalsy' is declared here.
+
+PASS src/app/funcionalidades/dependente/cancelar/cancelar-dependente/cancelar-dependente.component.spec.ts
+PASS src/app/funcionalidades/dependente/renovar/renovar-dependente/renovar-dependente.component.spec.ts
+FAIL src/app/funcionalidades/dependente/acompanhamento-dependente/acompanhamento-dependente.component.spec.ts
+  ● Test suite failed to run
+
+    [96msrc/app/funcionalidades/dependente/acompanhamento-dependente/acompanhamento-dependente.component.spec.ts[0m:[93m21[0m:[93m5[0m - [91merror[0m[90m TS2322: [0mType '{ params: { id: null; }; }' is not assignable to type 'Mock<any, any, any>'.
+      Object literal may only specify known properties, and 'params' does not exist in type 'Mock<any, any, any>'.
+
+    [7m21[0m     params: {
+    [7m  [0m [91m    ~~~~~~[0m
+
+FAIL src/app/funcionalidades/beneficiario-pedido/beneficiario-pedido-listar/beneficiario-pedido-listar.component.spec.ts
+  ● Test suite failed to run
+
+    [96msrc/app/funcionalidades/beneficiario-pedido/beneficiario-pedido-listar/beneficiario-pedido-listar.component.spec.ts[0m:[93m23[0m:[93m5[0m - [91merror[0m[90m TS2322: [0mType '{ queryParams: { id: null; }; }' is not assignable to type 'Mock<any, any, any>'.
+      Object literal may only specify known properties, and 'queryParams' does not exist in type 'Mock<any, any, any>'.
+
+    [7m23[0m     queryParams: {
+    [7m  [0m [91m    ~~~~~~~~~~~[0m
+
+PASS src/app/funcionalidades/dependente/cadastro/etapa-selecao-dependente/etapa-selecao-dependente.component.spec.ts
+FAIL src/app/funcionalidades/beneficiario-pedido/beneficiario-pedido-form/beneficiario-pedido-form.component.spec.ts
+  ● Test suite failed to run
+
+    [96msrc/app/funcionalidades/beneficiario-pedido/beneficiario-pedido-form/beneficiario-pedido-form.component.spec.ts[0m:[93m17[0m:[93m7[0m - [91merror[0m[90m TS2322: [0mType '{ params: { id: null; }; }' is not assignable to type 'Mock<any, any, any>'.
+      Object literal may only specify known properties, and 'params' does not exist in type 'Mock<any, any, any>'.
+
+    [7m17[0m       params: {
+    [7m  [0m [91m      ~~~~~~[0m
+
+FAIL src/app/funcionalidades/extrato/extrato-irpf-detalhar/extrato-irpf-detalhar.component.spec.ts
+  ● Test suite failed to run
+
+    [96msrc/app/funcionalidades/extrato/extrato-irpf-detalhar/extrato-irpf-detalhar.component.spec.ts[0m:[93m54[0m:[93m66[0m - [91merror[0m[90m TS1005: [0m',' expected.
+
+    [7m54[0m       getComprovanteIRPFPorCPF: jest.fn().mockReturnValue(of({}));
+    [7m  [0m [91m                                                                 ~[0m
+
+FAIL src/app/shared/services/comum/procedimento-pedido.service.spec.ts
+  ● Test suite failed to run
+
+    [96msrc/app/shared/services/comum/procedimento-pedido.service.spec.ts[0m:[93m119[0m:[93m5[0m - [91merror[0m[90m TS2322: [0mType 'string' is not assignable to type 'Mock<any, any, any>'.
+
+    [7m119[0m     routerSpy.url = 'test/url';
+    [7m   [0m [91m    ~~~~~~~~~~~~~[0m
+
+FAIL src/app/shared/services/comum/siasc-fluxo.service.spec.ts
+  ● Test suite failed to run
+
+    [96msrc/app/shared/services/comum/siasc-fluxo.service.spec.ts[0m:[93m44[0m:[93m5[0m - [91merror[0m[90m TS2304: [0mCannot find name 'spyOnProperty'.
+
+    [7m44[0m     spyOnProperty(router, 'url', 'get').mockReturnValue(`${baseUrl}/pedido/${idPedido}/${tipo}`);
+    [7m  [0m [91m    ~~~~~~~~~~~~~[0m
+
+FAIL src/app/funcionalidades/cartoes/detail/cartoes-detail.component.spec.ts
+  ● Test suite failed to run
+
+    [96msrc/app/funcionalidades/cartoes/detail/cartoes-detail.component.ts[0m:[93m9[0m:[93m27[0m - [91merror[0m[90m TS2306: [0mFile 'D:/Projetos/tst/src/assets/fonts/vfs_fonts.js' is not a module.
+
+    [7m9[0m import * as pdfFonts from "assets/fonts/vfs_fonts";
+    [7m [0m [91m                          ~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+FAIL src/app/shared/services/comum/file-upload.service.spec.ts
+  ● Test suite failed to run
+
+    [96msrc/app/shared/services/comum/file-upload.service.spec.ts[0m:[93m52[0m:[93m18[0m - [91merror[0m[90m TS2558: [0mExpected 2 type arguments, but got 1.
+
+    [7m52[0m       jest.spyOn<any>(FileUploadService, 'configurarFormDataComArquivos');
+    [7m  [0m [91m                 ~~~[0m
+
+FAIL src/app/funcionalidades/acompanhamento/beneficiario-card/beneficiario-card.component.spec.ts
+  ● Test suite failed to run
+
+    [96msrc/app/funcionalidades/acompanhamento/beneficiario-card/beneficiario-card.component.spec.ts[0m:[93m6[0m:[93m27[0m - [91merror[0m[90m TS2307: [0mCannot find module '../../../shared/models/comum/matricula' or its corresponding type declarations.
+
+    [7m6[0m import { Matricula } from '../../../shared/models/comum/matricula';
+    [7m [0m [91m                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+PASS src/app/funcionalidades/dependente/cadastro/etapa-resumo-incluir/etapa-resumo-incluir.component.spec.ts
+FAIL src/app/funcionalidades/medicamentos/listar-procedimentos-com-medicamento.component.spec.ts
+  ● Test suite failed to run
+
+    [96msrc/app/funcionalidades/medicamentos/listar-procedimentos-com-medicamento.component.spec.ts[0m:[93m31[0m:[93m5[0m - [91merror[0m[90m TS1005: [0m')' expected.
+
+    [7m31[0m   });
+    [7m  [0m [91m    ~[0m
+
+FAIL src/test.ts
+  ● Test suite failed to run
+
+    Cannot set base providers because it has already been called
+
+    [0m [90m 5 |[39m
+     [90m 6 |[39m
+    [31m[1m>[22m[39m[90m 7 |[39m getTestBed()[33m.[39minitTestEnvironment([33mBrowserDynamicTestingModule[39m[33m,[39m platformBrowserDynamicTesting()[33m,[39m {
+     [90m   |[39m              [31m[1m^[22m[39m
+     [90m 8 |[39m   teardown[33m:[39m { destroyAfterEach[33m:[39m [36mtrue[39m }[33m,[39m
+     [90m 9 |[39m })[33m;[39m[0m
+
+      at _TestBedImpl.initTestEnvironment (node_modules/@angular/core/fesm2022/testing.mjs:27331:19)
+      at Object.<anonymous> (src/test.ts:7:14)
+
+FAIL src/app/arquitetura/shared/templates/cabecalho-padrao.component.spec.ts
+  ● Test suite failed to run
+
+    [96msrc/app/arquitetura/shared/templates/cabecalho-padrao.component.spec.ts[0m:[93m5[0m:[93m31[0m - [91merror[0m[90m TS2307: [0mCannot find module '../../services/seguranca/sessao.service' or its corresponding type declarations.
+
+    [7m5[0m import { SessaoService } from '../../services/seguranca/sessao.service';
+    [7m [0m [91m                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+    [96msrc/app/arquitetura/shared/templates/cabecalho-padrao.component.spec.ts[0m:[93m6[0m:[93m33[0m - [91merror[0m[90m TS2307: [0mCannot find module '../../services/seguranca/keycloak.service' or its corresponding type declarations.
+
+    [7m6[0m import { KeycloakService } from '../../services/seguranca/keycloak.service';
+    [7m [0m [91m                                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+FAIL ./gerar-cronograma-leilao.component.spec.ts
+  ● Test suite failed to run
+
+    [96mgerar-cronograma-leilao.component.spec.ts[0m:[93m17[0m:[93m34[0m - [91merror[0m[90m TS2307: [0mCannot find module '@ngx-loading-bar/core' or its corresponding type declarations.
+
+    [7m17[0m import { LoadingBarModule } from '@ngx-loading-bar/core';
+    [7m  [0m [91m                                 ~~~~~~~~~~~~~~~~~~~~~~~[0m
+    [96mgerar-cronograma-leilao.component.spec.ts[0m:[93m18[0m:[93m45[0m - [91merror[0m[90m TS2307: [0mCannot find module 'ngx-material-timepicker' or its corresponding type declarations.
+
+    [7m18[0m import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
+    [7m  [0m [91m                                            ~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+    [96mgerar-cronograma-leilao.component.spec.ts[0m:[93m19[0m:[93m45[0m - [91merror[0m[90m TS2307: [0mCannot find module 'ngx-toastr' or its corresponding type declarations.
+
+    [7m19[0m import { ToastrModule, ToastrService } from 'ngx-toastr';
+    [7m  [0m [91m                                            ~~~~~~~~~~~~[0m
+    [96mgerar-cronograma-leilao.component.spec.ts[0m:[93m21[0m:[93m41[0m - [91merror[0m[90m TS2307: [0mCannot find module 'src/app/services/cronograma-leilao.service' or its corresponding type declarations.
+
+    [7m21[0m import { CronogramaLeilaoService } from 'src/app/services/cronograma-leilao.service';
+    [7m  [0m [91m                                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+    [96mgerar-cronograma-leilao.component.spec.ts[0m:[93m22[0m:[93m36[0m - [91merror[0m[90m TS2307: [0mCannot find module 'src/app/services/data-storage-service.service' or its corresponding type declarations.
+
+    [7m22[0m import { DataStorageService } from 'src/app/services/data-storage-service.service';
+    [7m  [0m [91m                                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+    [96mgerar-cronograma-leilao.component.spec.ts[0m:[93m23[0m:[93m35[0m - [91merror[0m[90m TS2307: [0mCannot find module 'src/app/shared/app-material.module' or its corresponding type declarations.
+
+    [7m23[0m import { AppMaterialModule } from 'src/app/shared/app-material.module';
+    [7m  [0m [91m                                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+    [96mgerar-cronograma-leilao.component.spec.ts[0m:[93m24[0m:[93m51[0m - [91merror[0m[90m TS2307: [0mCannot find module 'src/app/shared/model/cronograma-leilao-centralizadora-dto.model' or its corresponding type declarations.
+
+    [7m24[0m import { CronogramaLeilaoCentralizadoraDTO } from 'src/app/shared/model/cronograma-leilao-centralizadora-dto.model';
+    [7m  [0m [91m                                                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+    [96mgerar-cronograma-leilao.component.spec.ts[0m:[93m25[0m:[93m37[0m - [91merror[0m[90m TS2307: [0mCannot find module 'src/app/shared/model/cronograma-leilao-dto.model' or its corresponding type declarations.
+
+    [7m25[0m import { CronogramaLeilaoDTO } from 'src/app/shared/model/cronograma-leilao-dto.model';
+    [7m  [0m [91m                                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+    [96mgerar-cronograma-leilao.component.spec.ts[0m:[93m26[0m:[93m29[0m - [91merror[0m[90m TS2307: [0mCannot find module 'src/app/shared/pipes/pipes.module' or its corresponding type declarations.
+
+    [7m26[0m import { PipesModule } from 'src/app/shared/pipes/pipes.module';
+    [7m  [0m [91m                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+    [96mgerar-cronograma-leilao.component.spec.ts[0m:[93m27[0m:[93m48[0m - [91merror[0m[90m TS2307: [0mCannot find module './gerar-cronograma-leilao.component' or its corresponding type declarations.
+
+    [7m27[0m import { GerarCronogramaLeilaoComponent } from './gerar-cronograma-leilao.component';
+    [7m  [0m [91m                                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+    [96mgerar-cronograma-leilao.component.spec.ts[0m:[93m28[0m:[93m36[0m - [91merror[0m[90m TS2307: [0mCannot find module 'sidsc-components/dsc-select' or its corresponding type declarations.
+
+    [7m28[0m import { DscSelectComponent } from 'sidsc-components/dsc-select';
+    [7m  [0m [91m                                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+    [96mgerar-cronograma-leilao.component.spec.ts[0m:[93m29[0m:[93m35[0m - [91merror[0m[90m TS2307: [0mCannot find module 'sidsc-components/dsc-table' or its corresponding type declarations.
+
+    [7m29[0m import { DscTableComponent } from 'sidsc-components/dsc-table';
+    [7m  [0m [91m                                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+    [96mgerar-cronograma-leilao.component.spec.ts[0m:[93m30[0m:[93m39[0m - [91merror[0m[90m TS2307: [0mCannot find module 'sidsc-components/dsc-paginator' or its corresponding type declarations.
+
+    [7m30[0m import { DscPaginatorComponent } from 'sidsc-components/dsc-paginator';
+    [7m  [0m [91m                                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+    [96mgerar-cronograma-leilao.component.spec.ts[0m:[93m31[0m:[93m36[0m - [91merror[0m[90m TS2307: [0mCannot find module 'sidsc-components/dsc-button' or its corresponding type declarations.
+
+    [7m31[0m import { DscButtonComponent } from 'sidsc-components/dsc-button';
+    [7m  [0m [91m                                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+    [96mgerar-cronograma-leilao.component.spec.ts[0m:[93m32[0m:[93m38[0m - [91merror[0m[90m TS2307: [0mCannot find module 'sidsc-components/dsc-textarea' or its corresponding type declarations.
+
+    [7m32[0m import { DscTextareaComponent } from 'sidsc-components/dsc-textarea';
+    [7m  [0m [91m                                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+FAIL src/app/funcionalidades/dependente/recibo/recibo.component.spec.ts
+  ● Test suite failed to run
+
+    [96msrc/app/shared/pdf.ts[0m:[93m1[0m:[93m24[0m - [91merror[0m[90m TS2306: [0mFile 'D:/Projetos/tst/src/assets/js/kendo/kendo.all.min.js' is not a module.
+
+    [7m1[0m import * as kendo from "../../../src/assets/js/kendo/kendo.all.min.js";
+    [7m [0m [91m                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+Summary of all failing tests
+FAIL src/app/funcionalidades/reembolso/detail/reembolso-detail.component.spec.ts
+  ● Test suite failed to run
+
+    Your test suite must contain at least one test.
+
+      at onResult (node_modules/@jest/core/build/TestScheduler.js:133:18)
+      at node_modules/@jest/core/build/TestScheduler.js:254:19
+      at node_modules/emittery/index.js:363:13
+          at Array.map (<anonymous>)
+      at Emittery.emit (node_modules/emittery/index.js:361:23)
+
+FAIL src/app/funcionalidades/procedimentos-cobertos/result/procedimentos-cobertos-result.component.spec.ts
+  ● Test suite failed to run
+
+    Your test suite must contain at least one test.
+
+      at onResult (node_modules/@jest/core/build/TestScheduler.js:133:18)
+      at node_modules/@jest/core/build/TestScheduler.js:254:19
+      at node_modules/emittery/index.js:363:13
+          at Array.map (<anonymous>)
+      at Emittery.emit (node_modules/emittery/index.js:361:23)
+
+FAIL src/app/funcionalidades/procedimentos-cobertos/param/procedimentos-cobertos-param.component.spec.ts
+  ● Test suite failed to run
+
+    Your test suite must contain at least one test.
+
+      at onResult (node_modules/@jest/core/build/TestScheduler.js:133:18)
+      at node_modules/@jest/core/build/TestScheduler.js:254:19
+      at node_modules/emittery/index.js:363:13
+          at Array.map (<anonymous>)
+      at Emittery.emit (node_modules/emittery/index.js:361:23)
+
+FAIL src/app/funcionalidades/procedimentos/listar-autorizacao-previa/procedimentos-listar-autorizacao-previa.component.spec.ts
+  ● Test suite failed to run
+
+    Your test suite must contain at least one test.
+
+      at onResult (node_modules/@jest/core/build/TestScheduler.js:133:18)
+      at node_modules/@jest/core/build/TestScheduler.js:254:19
+      at node_modules/emittery/index.js:363:13
+          at Array.map (<anonymous>)
+      at Emittery.emit (node_modules/emittery/index.js:361:23)
+
+FAIL src/app/funcionalidades/portabilidade/detail/portabilidade-detail.component.spec.ts
+  ● Test suite failed to run
+
+    Your test suite must contain at least one test.
+
+      at onResult (node_modules/@jest/core/build/TestScheduler.js:133:18)
+      at node_modules/@jest/core/build/TestScheduler.js:254:19
+      at node_modules/emittery/index.js:363:13
+          at Array.map (<anonymous>)
+      at Emittery.emit (node_modules/emittery/index.js:361:23)
+
+FAIL src/app/funcionalidades/dados-cadastrais/informacoes-pedido-detail/informacoes-pedido-detail.component.spec.ts
+  ● Test suite failed to run
+
+    Your test suite must contain at least one test.
+
+      at onResult (node_modules/@jest/core/build/TestScheduler.js:133:18)
+      at node_modules/@jest/core/build/TestScheduler.js:254:19
+      at node_modules/emittery/index.js:363:13
+          at Array.map (<anonymous>)
+      at Emittery.emit (node_modules/emittery/index.js:361:23)
+
+FAIL src/app/funcionalidades/dados-cadastrais/detail/dados-cadastrais-detail.component.spec.ts
+  ● Test suite failed to run
+
+    Your test suite must contain at least one test.
+
+      at onResult (node_modules/@jest/core/build/TestScheduler.js:133:18)
+      at node_modules/@jest/core/build/TestScheduler.js:254:19
+      at node_modules/emittery/index.js:363:13
+          at Array.map (<anonymous>)
+      at Emittery.emit (node_modules/emittery/index.js:361:23)
+
+FAIL src/app/funcionalidades/dependente/cadastro/cadastro-dependente/cadastro-dependente.component.spec.ts
+  ● Test suite failed to run
+
+    [96msrc/app/funcionalidades/dependente/cadastro/cadastro-dependente/cadastro-dependente.component.spec.ts[0m:[93m26[0m:[93m4[0m - [91merror[0m[90m TS1005: [0m',' expected.
+
+    [7m26[0m   };
+    [7m  [0m [91m   ~[0m
+
+FAIL src/app/funcionalidades/dependente/cadastro/etapa-complemento-dependente/etapa-complemento-dependente.component.spec.ts
+  ● Test suite failed to run
+
+    [96msrc/app/funcionalidades/dependente/cadastro/etapa-complemento-dependente/etapa-complemento-dependente.component.spec.ts[0m:[93m79[0m:[93m33[0m - [91merror[0m[90m TS2339: [0mProperty 'selectedOption$' does not exist on type '{ consultarTodos: Mock<any, any, any>; }'.
+
+    [7m79[0m     motivoSolicitacaoServiceSpy.selectedOption$ = selectedOptionSource.asObservable();
+    [7m  [0m [91m                                ~~~~~~~~~~~~~~~[0m
+
+FAIL src/app/funcionalidades/dependente/cadastro/etapa-dados-dependente/etapa-dados-dependente.component.spec.ts
+  ● Test suite failed to run
+
+    [96msrc/app/funcionalidades/dependente/cadastro/etapa-dados-dependente/etapa-dados-dependente.component.spec.ts[0m:[93m52[0m:[93m5[0m - [91merror[0m[90m TS2740: [0mType '{ next: Mock<any, any, any>; previous: Mock<any, any, any>; }' is missing the following properties from type 'CdkStepper': _dir, _changeDetectorRef, _elementRef, _destroyed, and 34 more.
+
+    [7m52[0m     component.stepper = cdkStepperSpy;
+    [7m  [0m [91m    ~~~~~~~~~~~~~~~~~[0m
+    [96msrc/app/funcionalidades/dependente/cadastro/etapa-dados-dependente/etapa-dados-dependente.component.spec.ts[0m:[93m137[0m:[93m43[0m - [91merror[0m[90m TS2551: [0mProperty 'toBeFalse' does not exist on type 'JestMatchers<boolean>'. Did you mean 'toBeFalsy'?
+
+    [7m137[0m     expect(component.idadeIncompativel()).toBeFalse;
+    [7m   [0m [91m                                          ~~~~~~~~~[0m
+
+      [96mnode_modules/@types/jest/index.d.ts[0m:[93m887[0m:[93m9[0m
+        [7m887[0m         toBeFalsy(): R;
+        [7m   [0m [96m        ~~~~~~~~~~~~~~~[0m
+        'toBeFalsy' is declared here.
+
+FAIL src/app/funcionalidades/dependente/acompanhamento-dependente/acompanhamento-dependente.component.spec.ts
+  ● Test suite failed to run
+
+    [96msrc/app/funcionalidades/dependente/acompanhamento-dependente/acompanhamento-dependente.component.spec.ts[0m:[93m21[0m:[93m5[0m - [91merror[0m[90m TS2322: [0mType '{ params: { id: null; }; }' is not assignable to type 'Mock<any, any, any>'.
+      Object literal may only specify known properties, and 'params' does not exist in type 'Mock<any, any, any>'.
+
+    [7m21[0m     params: {
+    [7m  [0m [91m    ~~~~~~[0m
+
+FAIL src/app/funcionalidades/beneficiario-pedido/beneficiario-pedido-listar/beneficiario-pedido-listar.component.spec.ts
+  ● Test suite failed to run
+
+    [96msrc/app/funcionalidades/beneficiario-pedido/beneficiario-pedido-listar/beneficiario-pedido-listar.component.spec.ts[0m:[93m23[0m:[93m5[0m - [91merror[0m[90m TS2322: [0mType '{ queryParams: { id: null; }; }' is not assignable to type 'Mock<any, any, any>'.
+      Object literal may only specify known properties, and 'queryParams' does not exist in type 'Mock<any, any, any>'.
+
+    [7m23[0m     queryParams: {
+    [7m  [0m [91m    ~~~~~~~~~~~[0m
+
+FAIL src/app/funcionalidades/beneficiario-pedido/beneficiario-pedido-form/beneficiario-pedido-form.component.spec.ts
+  ● Test suite failed to run
+
+    [96msrc/app/funcionalidades/beneficiario-pedido/beneficiario-pedido-form/beneficiario-pedido-form.component.spec.ts[0m:[93m17[0m:[93m7[0m - [91merror[0m[90m TS2322: [0mType '{ params: { id: null; }; }' is not assignable to type 'Mock<any, any, any>'.
+      Object literal may only specify known properties, and 'params' does not exist in type 'Mock<any, any, any>'.
+
+    [7m17[0m       params: {
+    [7m  [0m [91m      ~~~~~~[0m
+
+FAIL src/app/funcionalidades/extrato/extrato-irpf-detalhar/extrato-irpf-detalhar.component.spec.ts
+  ● Test suite failed to run
+
+    [96msrc/app/funcionalidades/extrato/extrato-irpf-detalhar/extrato-irpf-detalhar.component.spec.ts[0m:[93m54[0m:[93m66[0m - [91merror[0m[90m TS1005: [0m',' expected.
+
+    [7m54[0m       getComprovanteIRPFPorCPF: jest.fn().mockReturnValue(of({}));
+    [7m  [0m [91m                                                                 ~[0m
+
+FAIL src/app/shared/services/comum/procedimento-pedido.service.spec.ts
+  ● Test suite failed to run
+
+    [96msrc/app/shared/services/comum/procedimento-pedido.service.spec.ts[0m:[93m119[0m:[93m5[0m - [91merror[0m[90m TS2322: [0mType 'string' is not assignable to type 'Mock<any, any, any>'.
+
+    [7m119[0m     routerSpy.url = 'test/url';
+    [7m   [0m [91m    ~~~~~~~~~~~~~[0m
+
+FAIL src/app/shared/services/comum/siasc-fluxo.service.spec.ts
+  ● Test suite failed to run
+
+    [96msrc/app/shared/services/comum/siasc-fluxo.service.spec.ts[0m:[93m44[0m:[93m5[0m - [91merror[0m[90m TS2304: [0mCannot find name 'spyOnProperty'.
+
+    [7m44[0m     spyOnProperty(router, 'url', 'get').mockReturnValue(`${baseUrl}/pedido/${idPedido}/${tipo}`);
+    [7m  [0m [91m    ~~~~~~~~~~~~~[0m
+
+FAIL src/app/funcionalidades/cartoes/detail/cartoes-detail.component.spec.ts
+  ● Test suite failed to run
+
+    [96msrc/app/funcionalidades/cartoes/detail/cartoes-detail.component.ts[0m:[93m9[0m:[93m27[0m - [91merror[0m[90m TS2306: [0mFile 'D:/Projetos/tst/src/assets/fonts/vfs_fonts.js' is not a module.
+
+    [7m9[0m import * as pdfFonts from "assets/fonts/vfs_fonts";
+    [7m [0m [91m                          ~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+FAIL src/app/shared/services/comum/file-upload.service.spec.ts
+  ● Test suite failed to run
+
+    [96msrc/app/shared/services/comum/file-upload.service.spec.ts[0m:[93m52[0m:[93m18[0m - [91merror[0m[90m TS2558: [0mExpected 2 type arguments, but got 1.
+
+    [7m52[0m       jest.spyOn<any>(FileUploadService, 'configurarFormDataComArquivos');
+    [7m  [0m [91m                 ~~~[0m
+
+FAIL src/app/funcionalidades/acompanhamento/beneficiario-card/beneficiario-card.component.spec.ts
+  ● Test suite failed to run
+
+    [96msrc/app/funcionalidades/acompanhamento/beneficiario-card/beneficiario-card.component.spec.ts[0m:[93m6[0m:[93m27[0m - [91merror[0m[90m TS2307: [0mCannot find module '../../../shared/models/comum/matricula' or its corresponding type declarations.
+
+    [7m6[0m import { Matricula } from '../../../shared/models/comum/matricula';
+    [7m [0m [91m                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+FAIL src/app/funcionalidades/medicamentos/listar-procedimentos-com-medicamento.component.spec.ts
+  ● Test suite failed to run
+
+    [96msrc/app/funcionalidades/medicamentos/listar-procedimentos-com-medicamento.component.spec.ts[0m:[93m31[0m:[93m5[0m - [91merror[0m[90m TS1005: [0m')' expected.
+
+    [7m31[0m   });
+    [7m  [0m [91m    ~[0m
+
+FAIL src/test.ts
+  ● Test suite failed to run
+
+    Cannot set base providers because it has already been called
+
+    [0m [90m 5 |[39m
+     [90m 6 |[39m
+    [31m[1m>[22m[39m[90m 7 |[39m getTestBed()[33m.[39minitTestEnvironment([33mBrowserDynamicTestingModule[39m[33m,[39m platformBrowserDynamicTesting()[33m,[39m {
+     [90m   |[39m              [31m[1m^[22m[39m
+     [90m 8 |[39m   teardown[33m:[39m { destroyAfterEach[33m:[39m [36mtrue[39m }[33m,[39m
+     [90m 9 |[39m })[33m;[39m[0m
+
+      at _TestBedImpl.initTestEnvironment (node_modules/@angular/core/fesm2022/testing.mjs:27331:19)
+      at Object.<anonymous> (src/test.ts:7:14)
+
+FAIL src/app/arquitetura/shared/templates/cabecalho-padrao.component.spec.ts
+  ● Test suite failed to run
+
+    [96msrc/app/arquitetura/shared/templates/cabecalho-padrao.component.spec.ts[0m:[93m5[0m:[93m31[0m - [91merror[0m[90m TS2307: [0mCannot find module '../../services/seguranca/sessao.service' or its corresponding type declarations.
+
+    [7m5[0m import { SessaoService } from '../../services/seguranca/sessao.service';
+    [7m [0m [91m                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+    [96msrc/app/arquitetura/shared/templates/cabecalho-padrao.component.spec.ts[0m:[93m6[0m:[93m33[0m - [91merror[0m[90m TS2307: [0mCannot find module '../../services/seguranca/keycloak.service' or its corresponding type declarations.
+
+    [7m6[0m import { KeycloakService } from '../../services/seguranca/keycloak.service';
+    [7m [0m [91m                                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+FAIL ./gerar-cronograma-leilao.component.spec.ts
+  ● Test suite failed to run
+
+    [96mgerar-cronograma-leilao.component.spec.ts[0m:[93m17[0m:[93m34[0m - [91merror[0m[90m TS2307: [0mCannot find module '@ngx-loading-bar/core' or its corresponding type declarations.
+
+    [7m17[0m import { LoadingBarModule } from '@ngx-loading-bar/core';
+    [7m  [0m [91m                                 ~~~~~~~~~~~~~~~~~~~~~~~[0m
+    [96mgerar-cronograma-leilao.component.spec.ts[0m:[93m18[0m:[93m45[0m - [91merror[0m[90m TS2307: [0mCannot find module 'ngx-material-timepicker' or its corresponding type declarations.
+
+    [7m18[0m import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
+    [7m  [0m [91m                                            ~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+    [96mgerar-cronograma-leilao.component.spec.ts[0m:[93m19[0m:[93m45[0m - [91merror[0m[90m TS2307: [0mCannot find module 'ngx-toastr' or its corresponding type declarations.
+
+    [7m19[0m import { ToastrModule, ToastrService } from 'ngx-toastr';
+    [7m  [0m [91m                                            ~~~~~~~~~~~~[0m
+    [96mgerar-cronograma-leilao.component.spec.ts[0m:[93m21[0m:[93m41[0m - [91merror[0m[90m TS2307: [0mCannot find module 'src/app/services/cronograma-leilao.service' or its corresponding type declarations.
+
+    [7m21[0m import { CronogramaLeilaoService } from 'src/app/services/cronograma-leilao.service';
+    [7m  [0m [91m                                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+    [96mgerar-cronograma-leilao.component.spec.ts[0m:[93m22[0m:[93m36[0m - [91merror[0m[90m TS2307: [0mCannot find module 'src/app/services/data-storage-service.service' or its corresponding type declarations.
+
+    [7m22[0m import { DataStorageService } from 'src/app/services/data-storage-service.service';
+    [7m  [0m [91m                                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+    [96mgerar-cronograma-leilao.component.spec.ts[0m:[93m23[0m:[93m35[0m - [91merror[0m[90m TS2307: [0mCannot find module 'src/app/shared/app-material.module' or its corresponding type declarations.
+
+    [7m23[0m import { AppMaterialModule } from 'src/app/shared/app-material.module';
+    [7m  [0m [91m                                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+    [96mgerar-cronograma-leilao.component.spec.ts[0m:[93m24[0m:[93m51[0m - [91merror[0m[90m TS2307: [0mCannot find module 'src/app/shared/model/cronograma-leilao-centralizadora-dto.model' or its corresponding type declarations.
+
+    [7m24[0m import { CronogramaLeilaoCentralizadoraDTO } from 'src/app/shared/model/cronograma-leilao-centralizadora-dto.model';
+    [7m  [0m [91m                                                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+    [96mgerar-cronograma-leilao.component.spec.ts[0m:[93m25[0m:[93m37[0m - [91merror[0m[90m TS2307: [0mCannot find module 'src/app/shared/model/cronograma-leilao-dto.model' or its corresponding type declarations.
+
+    [7m25[0m import { CronogramaLeilaoDTO } from 'src/app/shared/model/cronograma-leilao-dto.model';
+    [7m  [0m [91m                                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+    [96mgerar-cronograma-leilao.component.spec.ts[0m:[93m26[0m:[93m29[0m - [91merror[0m[90m TS2307: [0mCannot find module 'src/app/shared/pipes/pipes.module' or its corresponding type declarations.
+
+    [7m26[0m import { PipesModule } from 'src/app/shared/pipes/pipes.module';
+    [7m  [0m [91m                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+    [96mgerar-cronograma-leilao.component.spec.ts[0m:[93m27[0m:[93m48[0m - [91merror[0m[90m TS2307: [0mCannot find module './gerar-cronograma-leilao.component' or its corresponding type declarations.
+
+    [7m27[0m import { GerarCronogramaLeilaoComponent } from './gerar-cronograma-leilao.component';
+    [7m  [0m [91m                                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+    [96mgerar-cronograma-leilao.component.spec.ts[0m:[93m28[0m:[93m36[0m - [91merror[0m[90m TS2307: [0mCannot find module 'sidsc-components/dsc-select' or its corresponding type declarations.
+
+    [7m28[0m import { DscSelectComponent } from 'sidsc-components/dsc-select';
+    [7m  [0m [91m                                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+    [96mgerar-cronograma-leilao.component.spec.ts[0m:[93m29[0m:[93m35[0m - [91merror[0m[90m TS2307: [0mCannot find module 'sidsc-components/dsc-table' or its corresponding type declarations.
+
+    [7m29[0m import { DscTableComponent } from 'sidsc-components/dsc-table';
+    [7m  [0m [91m                                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+    [96mgerar-cronograma-leilao.component.spec.ts[0m:[93m30[0m:[93m39[0m - [91merror[0m[90m TS2307: [0mCannot find module 'sidsc-components/dsc-paginator' or its corresponding type declarations.
+
+    [7m30[0m import { DscPaginatorComponent } from 'sidsc-components/dsc-paginator';
+    [7m  [0m [91m                                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+    [96mgerar-cronograma-leilao.component.spec.ts[0m:[93m31[0m:[93m36[0m - [91merror[0m[90m TS2307: [0mCannot find module 'sidsc-components/dsc-button' or its corresponding type declarations.
+
+    [7m31[0m import { DscButtonComponent } from 'sidsc-components/dsc-button';
+    [7m  [0m [91m                                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+    [96mgerar-cronograma-leilao.component.spec.ts[0m:[93m32[0m:[93m38[0m - [91merror[0m[90m TS2307: [0mCannot find module 'sidsc-components/dsc-textarea' or its corresponding type declarations.
+
+    [7m32[0m import { DscTextareaComponent } from 'sidsc-components/dsc-textarea';
+    [7m  [0m [91m                                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+FAIL src/app/funcionalidades/dependente/recibo/recibo.component.spec.ts
+  ● Test suite failed to run
+
+    [96msrc/app/shared/pdf.ts[0m:[93m1[0m:[93m24[0m - [91merror[0m[90m TS2306: [0mFile 'D:/Projetos/tst/src/assets/js/kendo/kendo.all.min.js' is not a module.
+
+    [7m1[0m import * as kendo from "../../../src/assets/js/kendo/kendo.all.min.js";
+    [7m [0m [91m                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+Test Suites: 24 failed, 194 passed, 218 total
+Tests:       668 passed, 668 total
+Snapshots:   0 total
+Time:        18.506 s
+Ran all test suites.
