@@ -24,7 +24,7 @@ describe('BeneficiarioPedidoHomeComponent', () => {
   const tipoBeneficiarioServiceSpy = { consultarTodosBeneficiarios: jest.fn() };
   const comboServiceSpy = { consultarComboUF: jest.fn(), consultarComboPerfil: jest.fn() };
   const prestadorExternoServiceSpy = { get: jest.fn(), consultarUsuarioExternoPorFiltro: jest.fn() };
-  prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro.mockReturnValue(of({})
+  prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro.mockReturnValue(of({});
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({

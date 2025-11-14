@@ -22,7 +22,7 @@ describe('ParametrizacaoPrazosFormComponent', () => {
   const tipoBeneficiarioServiceSpy = { get: jest.fn() };
   const situacaoProcessoServiceSpy = { consultarTodasTransicoesManuais: jest.fn() };
   const prestadorExternoServiceSpy = { get: jest.fn(), consultarUsuarioExternoPorFiltro: jest.fn() };
-  prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro.mockReturnValue(of({})
+  prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro.mockReturnValue(of({});
   empresaPrestadorExternoServiceSpy.consultarFiliais.mockReturnValue(of({}));
   comboServiceSpy.consultarComboUF.mockReturnValue(of({}));
   tipoDocumentoServiceSpy.consultarTodos.mockReturnValue(of({}));

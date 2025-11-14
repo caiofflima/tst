@@ -19,7 +19,7 @@ describe('DocumentosTipoProcessoResultComponent', () => {
   let mockActivatedRoute: any;
   let mockDocumentoTipoProcessoService: any;
   const prestadorExternoServiceSpy = { get: jest.fn(), consultarUsuarioExternoPorFiltro: jest.fn() };
-  prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro.mockReturnValue(of({})
+  prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro.mockReturnValue(of({});
 
   beforeEach(async () => {
     mockRouter = {

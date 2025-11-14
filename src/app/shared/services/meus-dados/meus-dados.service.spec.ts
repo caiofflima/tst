@@ -14,7 +14,7 @@ describe('MeusDadosService', () => {
   let exportacaoServiceSpy: jest.Mocked<ExportacaoService>;
   let cartaoIdServiceSpy: jest.Mocked<CartaoIdentificacaoService>;
   const prestadorExternoServiceSpy = { get: jest.fn(), consultarUsuarioExternoPorFiltro: jest.fn() };
-  prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro.mockReturnValue(of({})
+  prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro.mockReturnValue(of({});
 
   beforeEach(() => {
     const beneficiarioSpy = { consultarTitularPorMatricula: jest.fn()) };

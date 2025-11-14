@@ -27,7 +27,7 @@ describe('BeneficiarioPedidoFormComponent', () => {
   const tipoBeneficiarioServiceSpy = { consultarTodosBeneficiarios: jest.fn() };
   const comboServiceSpy = { consultarComboUF: jest.fn(), consultarComboPerfil: jest.fn() };
   const prestadorExternoServiceSpy = { get: jest.fn(), consultarUsuarioExternoPorFiltro: jest.fn() };
-  prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro.mockReturnValue(of({})
+  prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro.mockReturnValue(of({});
   comboServiceSpy.consultarComboPerfil.mockReturnValue(of({}));
 
    const perfilMinimoServiceSpy = { consultarTodos: jest.fn() };
