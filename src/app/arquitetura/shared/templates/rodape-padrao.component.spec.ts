@@ -32,7 +32,7 @@ describe('RodapePadraoComponent', () => {
     });
 
     it('isHome deve retornar true quando a URL é /home', () => {
-        router.url = '/home';
+        jest.spyOn(router, 'url', 'get').mockReturnValue('/home');
 
         const resultado = component.isHome;
 
@@ -40,7 +40,7 @@ describe('RodapePadraoComponent', () => {
     });
 
     it('isHome deve retornar false quando a URL não é /home', () => {
-        router.url = '/perfil';
+        jest.spyOn(router, 'url', 'get').mockReturnValue('/perfil');
 
         const resultado = component.isHome;
 
@@ -48,7 +48,7 @@ describe('RodapePadraoComponent', () => {
     });
 
     it('isHome deve retornar false para URL vazia', () => {
-        router.url = '';
+        jest.spyOn(router, 'url', 'get').mockReturnValue('');
 
         const resultado = component.isHome;
 
@@ -56,7 +56,7 @@ describe('RodapePadraoComponent', () => {
     });
 
     it('isHome deve retornar false para URL com /home como parte de outro caminho', () => {
-        router.url = '/home/perfil';
+        jest.spyOn(router, 'url', 'get').mockReturnValue('/home/perfil');
 
         const resultado = component.isHome;
 
@@ -64,7 +64,7 @@ describe('RodapePadraoComponent', () => {
     });
 
     it('isHome deve ser sensível a maiúsculas e minúsculas', () => {
-        router.url = '/Home';
+        jest.spyOn(router, 'url', 'get').mockReturnValue('/Home');
 
         const resultado = component.isHome;
 
