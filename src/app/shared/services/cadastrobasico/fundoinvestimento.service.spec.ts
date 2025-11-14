@@ -62,7 +62,7 @@ describe('FundoInvestimentoService', () => {
     const newFundo: FundoInvestimento = {} as FundoInvestimento;
 
     service.incluir(newFundo).subscribe(response => {
-      expect(response).toBeTrue();
+      expect(response).toBe(true);
     });
 
     const req = httpMock.expectOne(`${baseUrl}/incluir`);
@@ -86,7 +86,7 @@ describe('FundoInvestimentoService', () => {
     const updatedFundo: FundoInvestimento = {} as FundoInvestimento;
 
     service.atualizar(updatedFundo).subscribe(response => {
-      expect(response).toBeTrue();
+      expect(response).toBe(true);
     });
 
     const req = httpMock.expectOne(`${baseUrl}/atualizar`);
@@ -99,7 +99,7 @@ describe('FundoInvestimentoService', () => {
     dummyFundo.id = 1;
 
     service.remover(dummyFundo).subscribe(response => {
-      expect(response).toBeTrue();
+      expect(response).toBe(true);
     });
 
     const req = httpMock.expectOne(`${baseUrl}/remover/1`);

@@ -123,7 +123,7 @@ describe('EtapaDadosDependenteComponent', () => {
       codigoLegadoDependencia: 'C'
     } as TipoBeneficiarioDTO;
     
-    expect(component.isMenorIdade(13)).toBeTrue();
+    expect(component.isMenorIdade(13)).toBe(true);
     
   });
 

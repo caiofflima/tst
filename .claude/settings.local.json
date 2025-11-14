@@ -8,7 +8,9 @@
       "Bash(python fix_boolean_attrs.py:*)",
       "Bash(python fix_remaining_emptyMessage.py:*)",
       "Bash(git add:*)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Bash(npm test:*)",
+      "Bash(python fix_tests.py:*)"
     ],
     "deny": [],
     "ask": []

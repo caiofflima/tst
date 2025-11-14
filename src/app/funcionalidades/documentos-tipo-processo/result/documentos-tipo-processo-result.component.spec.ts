@@ -97,7 +97,7 @@ describe('DocumentosTipoProcessoResultComponent', () => {
     const errorResponse = { error: 'Error message' };
     mockDocumentoTipoProcessoService.consultarPorFiltro.and.returnValue(throwError(errorResponse));
     component.pesquisar(); // Chama o método pesquisar
-    expect(component.loading).toBeFalse();
+    expect(component.loading).toBe(false);
     expect(mockMessageService.addMsgDanger).toHaveBeenCalled() // Verifica se a mensagem de erro foi chamada
   });
 
