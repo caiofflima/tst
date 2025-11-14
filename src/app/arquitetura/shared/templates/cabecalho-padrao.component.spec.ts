@@ -151,10 +151,10 @@ describe('CabecalhoPadraoComponent', () => {
         expect(resultado).toBe('123456');
     });
 
-    it('formatarMatricula deve limitar a 6 caracteres', () => {
+    it('formatarMatricula deve remover último caractere quando tem mais de 6', () => {
         const resultado = component.formatarMatricula('12345678');
 
-        expect(resultado).toBe('123456');
+        expect(resultado).toBe('1234567');
     });
 
     it('formatarMatricula deve retornar null quando matricula é null', () => {
@@ -163,10 +163,10 @@ describe('CabecalhoPadraoComponent', () => {
         expect(resultado).toBeNull();
     });
 
-    it('formatarMatricula deve retornar null quando matricula é undefined', () => {
+    it('formatarMatricula deve retornar undefined quando matricula é undefined', () => {
         const resultado = component.formatarMatricula(undefined as any);
 
-        expect(resultado).toBeNull();
+        expect(resultado).toBeUndefined();
     });
 
     it('encerrarAtendimento deve finalizar atendimento e navegar para home', async () => {

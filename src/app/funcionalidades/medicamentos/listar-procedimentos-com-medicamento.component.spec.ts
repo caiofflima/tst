@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ListarProcedimentosComReembolsoComponent } from '../procedimentos-cobertos/listar-procedimentos-com-reembolso/listar-procedimentos-com-reembolso.component';
 import { ComboService, DocumentoTipoProcessoService, MessageService, ProcedimentoService, TipoDeficienciaService } from 'app/shared/services/services';
 import { DuvidasService } from 'app/shared/services/comum/duvidas.service';
@@ -15,8 +15,8 @@ describe('ListarProcedimentosComReembolsoComponent', () => {
   let procedimentoServiceSpy = { listarProcedimentosComReembolso: jest.fn() };
   procedimentoServiceSpy.listarProcedimentosComReembolso.mockReturnValue(of([]));
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
       declarations: [ ListarProcedimentosComReembolsoComponent ],
       providers:[
         {provide: MessageService, useValue: messageServiceSpy},
@@ -26,8 +26,7 @@ describe('ListarProcedimentosComReembolsoComponent', () => {
         {provide: DuvidasService, useValue: duvidasServiceSpy},
         {provide: ProcedimentoService, useValue: procedimentoServiceSpy},
       ]
-    })
-    .compileComponents();
+    }).compileComponents();
   });
   beforeEach(() => {
     fixture = TestBed.createComponent(ListarProcedimentosComReembolsoComponent);
