@@ -70,7 +70,7 @@ describe('VincMedPatologiaHomeComponent', () => {
   sIASCFluxoServiceSpy.consultarPermissoesFluxoPorPedido.mockReturnValue(of({}));
   tipoProcessoServiceSpy.consultarTiposProcessoAutorizacaoPrevia.mockReturnValue(of({}));
   medicamentoPatologiaServiceSpy.get.mockReturnValue(of({}));
-  documentoPedidoServiceSpy.avisoSituacaoPedido.mockReturnValue(of({}));
+
   activatedRouteSpy.snapshot = {
     params:{
         id: 1
@@ -80,7 +80,6 @@ describe('VincMedPatologiaHomeComponent', () => {
     }
   }
 
-  activatedRouteSpy.paramMap.mockReturnValue(of({}));
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports:[

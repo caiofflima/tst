@@ -66,7 +66,7 @@ describe('RelatorioTempoMedioProcessosListarComponent', () => {
   patologiaServiceSpy.consultarDTOPorId.mockReturnValue(of({}));
   sIASCFluxoServiceSpy.consultarPermissoesFluxoPorPedido.mockReturnValue(of({}));
   tipoProcessoServiceSpy.consultarTiposProcessoAutorizacaoPrevia.mockReturnValue(of({}));
-  documentoPedidoServiceSpy.avisoSituacaoPedido.mockReturnValue(of({}));
+
   activatedRouteSpy.snapshot = {
     params:{
         id: 1
@@ -76,7 +76,6 @@ describe('RelatorioTempoMedioProcessosListarComponent', () => {
     }
   }
 
-  activatedRouteSpy.paramMap.mockReturnValue(of({}));
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports:[

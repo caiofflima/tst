@@ -30,8 +30,7 @@ describe('AcompanhamentoDependenteComponent', () => {
   const siascFluxoServiceSpy = { getFluxo: jest.fn(), consultarPermissoesFluxoPorPedido: jest.fn() };
   siascFluxoServiceSpy.consultarPermissoesFluxoPorPedido.mockReturnValue(of({}));
   const documentoPedidoServiceSpy = { getDocumentoPedido: jest.fn() , avisoSituacaoPedido: of(true), avisoSituacaoPedidoComplementares: of(true) };
-  documentoPedidoServiceSpy.avisoSituacaoPedido.mockReturnValue(of({}));
-  documentoPedidoServiceSpy.avisoSituacaoPedidoComplementares.mockReturnValue(of({}));
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [AcompanhamentoDependenteComponent],

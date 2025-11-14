@@ -62,8 +62,7 @@ describe('AcompanhamentoComponent', () => {
   patologiaServiceSpy.consultarDTOPorId.mockReturnValue(of({}));
   sIASCFluxoServiceSpy.consultarPermissoesFluxoPorPedido.mockReturnValue(of({}));
   sIASCFluxoServiceSpy.consultarPermissoesFluxoPorPedido.mockReturnValue(of({}));
-  documentoPedidoServiceSpy.avisoSituacaoPedido.mockReturnValue(of({}));
-  documentoPedidoServiceSpy.avisoSituacaoPedidoComplementares.mockReturnValue(of({}));
+
   activatedRouteSpy.snapshot = {
     params:{
         id: 1
@@ -73,7 +72,6 @@ describe('AcompanhamentoComponent', () => {
     }
   }
 
-  activatedRouteSpy.paramMap.mockReturnValue(of({}));
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports:[
