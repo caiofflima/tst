@@ -18,7 +18,7 @@ describe('DocumentosTipoProcessoResultComponent', () => {
   let mockMessageService: any;
   let mockActivatedRoute: any;
   let mockDocumentoTipoProcessoService: any;
-  const prestadorExternoServiceSpy = jasmine.createSpyObj('PrestadorExternoService',['get','consultarUsuarioExternoPorFiltro']);
+  const prestadorExternoServiceSpy = { get: jest.fn(), consultarUsuarioExternoPorFiltro: jest.fn() };
   prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro = of({})
 
   beforeEach(async () => {

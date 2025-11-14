@@ -16,8 +16,8 @@ describe('ProcessoService', () => {
   let service: ProcessoService;
   let httpMock: HttpTestingController;
   const baseUrl = '/siasc-api/api/pedidos';
-  const messageServiceSpy = jasmine.createSpyObj('MessageService',['getDescription']);
-  const exportacaoServiceSpy = jasmine.createSpyObj('ExportacaoService', ['exportarPDF', 'exportarXLS', 'exportarCSV']);
+  const messageServiceSpy = { getDescription: jest.fn() };
+  const exportacaoServiceSpy = { exportarPDF: jest.fn(), exportarXLS: jest.fn(), exportarCSV: jest.fn() };
 
   beforeEach(() => {
 

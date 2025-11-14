@@ -7,7 +7,7 @@ describe('CategoriaBeneficiarioService', () => {
   let service: CategoriaBeneficiarioService;
   let httpMock: HttpTestingController;
   const baseUrl = '/siasc-api/api/categorias-beneficiario';
-  const messageServiceSpy = jasmine.createSpyObj('MessageService',['getDescription']);
+  const messageServiceSpy = { getDescription: jest.fn() };
 
   beforeEach(() => {
 

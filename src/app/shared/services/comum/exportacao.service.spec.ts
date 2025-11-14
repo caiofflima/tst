@@ -13,9 +13,9 @@ describe('ExportacaoService', () => {
   let xlsServiceSpy: jasmine.SpyObj<ExportacaoXLSService>;
 
   beforeEach(() => {
-    const csvSpy = jasmine.createSpyObj('ExportacaoCSVService', ['exportar']);
-    const pdfSpy = jasmine.createSpyObj('ExportacaoPDFService', ['exportar']);
-    const xlsSpy = jasmine.createSpyObj('ExportacaoXLSService', ['exportar']);
+    const csvSpy = { exportar: jest.fn() };
+    const pdfSpy = { exportar: jest.fn() };
+    const xlsSpy = { exportar: jest.fn() };
 
     TestBed.configureTestingModule({
       providers: [

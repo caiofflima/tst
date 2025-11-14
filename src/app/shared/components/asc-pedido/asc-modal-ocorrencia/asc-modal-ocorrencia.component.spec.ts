@@ -10,10 +10,10 @@ import { AscModalOcorrenciaComponent } from './asc-modal-ocorrencia.component';
 describe('AscModalOcorrenciaComponent', () => {
   let component: AscModalOcorrenciaComponent;
   let fixture: ComponentFixture<AscModalOcorrenciaComponent>;
-  const messageServiceSpy = jasmine.createSpyObj('MessageService',['getDescription']);
-  const situacaoPedidoServiceSpy = jasmine.createSpyObj('SituacaoPedidoService',['getDescription']);
-  const fileUploadServiceSpy = jasmine.createSpyObj('FileUploadService',['getDescription']);
-  const sessaoServiceSpy = jasmine.createSpyObj('FileUploadService',['ini']);
+  const messageServiceSpy = { getDescription: jest.fn() };
+  const situacaoPedidoServiceSpy = { getDescription: jest.fn() };
+  const fileUploadServiceSpy = { getDescription: jest.fn() };
+  const sessaoServiceSpy = { ini: jest.fn() };
  
   beforeEach(async () => {
     await TestBed.configureTestingModule({

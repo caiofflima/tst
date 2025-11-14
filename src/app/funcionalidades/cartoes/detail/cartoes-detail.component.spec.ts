@@ -22,10 +22,10 @@ describe('CartoesDetailComponent', () => {
     usuario.matriculaFuncional = "C123000";
     SessaoService.usuario = usuario;
 
-    const beneficiarioServiceSpy = jasmine.createSpyObj('BeneficiarioService',['consultarBeneficiarioPorId']);
+    const beneficiarioServiceSpy = { consultarBeneficiarioPorId: jest.fn() };
     beneficiarioServiceSpy.consultarBeneficiarioPorId.and.returnValue(of())
 
-    const sessaoServiceSpy = jasmine.createSpyObj('SessaoService', ['getMatriculaFuncional','usuario']);   
+    const sessaoServiceSpy = { getMatriculaFuncional: jest.fn(), usuario: jest.fn() };   
 
     mockRouter = {
       navigate: jasmine.createSpy('navigate')

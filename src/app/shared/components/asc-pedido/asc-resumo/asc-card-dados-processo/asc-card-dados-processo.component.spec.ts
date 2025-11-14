@@ -7,9 +7,9 @@ import { AscCardDadosProcessoComponent } from './asc-card-dados-processo.compone
 describe('AscCardDadosProcessoComponent', () => {
   let component: AscCardDadosProcessoComponent;
   let fixture: ComponentFixture<AscCardDadosProcessoComponent>;
-  const messageServiceSpy = jasmine.createSpyObj('MessageService',['getDescription']);
-  const anexoServiceSpy = jasmine.createSpyObj('AnexoService',['getDescription']);
-  const documentoPedidoServiceSpy = jasmine.createSpyObj('DocumentoPedidoService',['getDescription']);
+  const messageServiceSpy = { getDescription: jest.fn() };
+  const anexoServiceSpy = { getDescription: jest.fn() };
+  const documentoPedidoServiceSpy = { getDescription: jest.fn() };
  
   beforeEach(async () => {
     await TestBed.configureTestingModule({

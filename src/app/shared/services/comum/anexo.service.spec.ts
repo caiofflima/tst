@@ -8,7 +8,7 @@ describe('AnexoService', () => {
   let service: AnexoService;
   let httpMock: HttpTestingController;
   const baseUrl = '/siasc-api/api/anexos';
-  const messageServiceSpy = jasmine.createSpyObj('MessageService',['getDescription']);
+  const messageServiceSpy = { getDescription: jest.fn() };
   const mockConstantes = {
     downloadFile: jasmine.createSpy('downloadFile')
   };

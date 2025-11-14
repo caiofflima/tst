@@ -9,8 +9,8 @@ describe('ExtratoIRPFComponent', () => {
   let fixture: ComponentFixture<ExtratoIRPFComponent>;
 
   beforeEach(() => {
-    const messageServiceSpy = jasmine.createSpyObj('MessageService', ['showDangerMsg']);
-    const sessaoServiceSpy = jasmine.createSpyObj('SessaoService', ['getUsuario']);
+    const messageServiceSpy = { showDangerMsg: jest.fn() };
+    const sessaoServiceSpy = { getUsuario: jest.fn() };
 
     TestBed.configureTestingModule({
       declarations: [ ExtratoIRPFComponent ],

@@ -10,8 +10,8 @@ describe('TipoDeficienciaService', () => {
   let service: TipoDeficienciaService;
   let httpMock: HttpTestingController;
   const baseUrl = '/siasc-api/api/tipos-deficiencia';
-  const messageServiceSpy = jasmine.createSpyObj('MessageService',['getDescription']);
-  const prestadorExternoServiceSpy = jasmine.createSpyObj('PrestadorExternoService',['get','consultarUsuarioExternoPorFiltro']);
+  const messageServiceSpy = { getDescription: jest.fn() };
+  const prestadorExternoServiceSpy = { get: jest.fn(), consultarUsuarioExternoPorFiltro: jest.fn() };
   prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro = of({})
 
   beforeEach(() => {

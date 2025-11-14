@@ -7,8 +7,8 @@ import { Item } from '../../../../app/shared/models/item';
 describe('ItemService', () => {
   let service: ItemService;
   let routerSpy: jasmine.SpyObj<Router>;
-  const routerSpyObj = jasmine.createSpyObj('Router', ['navigate']);
-  const itemStorageSpy = jasmine.createSpyObj('ItemStorage', ['gravar', 'ler', 'limpar']);
+  const routerSpyObj = { navigate: jest.fn() };
+  const itemStorageSpy = { gravar: jest.fn(), ler: jest.fn(), limpar: jest.fn() };
   
   beforeEach(() => {
     TestBed.configureTestingModule({

@@ -11,7 +11,7 @@ describe('SIASCFluxoService', () => {
   let httpMock: HttpTestingController;
   let router: Router;
   const baseUrl = '/siasc-api/api/fluxos';
-  const messageServiceSpy = jasmine.createSpyObj('MessageService',['getDescription']);
+  const messageServiceSpy = { getDescription: jest.fn() };
 
   beforeEach(() => {
     TestBed.configureTestingModule({

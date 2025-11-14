@@ -8,7 +8,7 @@ import { Atendimento } from '../../models/comum/atendimento';
 describe('AtendimentoService', () => {
   let service: AtendimentoService;
   let httpMock: HttpTestingController;
-  const messageServiceSpy = jasmine.createSpyObj('MessageService',['getDescription']);
+  const messageServiceSpy = { getDescription: jest.fn() };
   const baseUrl = '/siasc-api/api/atendimentos';
 
   beforeEach(() => {

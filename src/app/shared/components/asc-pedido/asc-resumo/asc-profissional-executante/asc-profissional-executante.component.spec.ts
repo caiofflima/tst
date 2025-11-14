@@ -6,11 +6,11 @@ import { AscProfissionalExecutanteComponent } from './asc-profissional-executant
 describe('AscProfissionalExecutanteComponent', () => {
   let component: AscProfissionalExecutanteComponent;
   let fixture: ComponentFixture<AscProfissionalExecutanteComponent>;
-  const messageServiceSpy = jasmine.createSpyObj('MessageService',['getDescription']);
-  const localidadeServiceSpy = jasmine.createSpyObj('LocalidadeService',['getDescription']);
-  const procedimentoPedidoServiceSpy = jasmine.createSpyObj('ProcedimentoPedidoService',['getDescription']);
-  const processoServiceSpy = jasmine.createSpyObj('ProcessoService',['getDescription']);
-  const conselhoProfissionalServiceSpy = jasmine.createSpyObj('ConselhoProfissionalService',['getDescription']);
+  const messageServiceSpy = { getDescription: jest.fn() };
+  const localidadeServiceSpy = { getDescription: jest.fn() };
+  const procedimentoPedidoServiceSpy = { getDescription: jest.fn() };
+  const processoServiceSpy = { getDescription: jest.fn() };
+  const conselhoProfissionalServiceSpy = { getDescription: jest.fn() };
  
   beforeEach(async () => {
     await TestBed.configureTestingModule({

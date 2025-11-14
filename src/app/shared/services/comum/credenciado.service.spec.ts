@@ -12,8 +12,8 @@ describe('CredenciadoService', () => {
   let service: CredenciadoService;
   let httpMock: HttpTestingController;
   const baseUrl = '/siasc-api/api/credenciados';
-  const messageServiceSpy = jasmine.createSpyObj('MessageService',['getDescription']);
-  const exportacaoServiceSpy = jasmine.createSpyObj('ExportacaoService',['exportarPDF']);
+  const messageServiceSpy = { getDescription: jest.fn() };
+  const exportacaoServiceSpy = { exportarPDF: jest.fn() };
 
   beforeEach(() => {
     TestBed.configureTestingModule({

@@ -7,7 +7,7 @@ describe('InscricaoProgramasMedicamentosService', () => {
   let service: InscricaoProgramasMedicamentosService;
   let httpMock: HttpTestingController;
   const baseUrl = '/siasc-api/api/inscricao-programas-medicamentos';
-  const messageServiceSpy = jasmine.createSpyObj('MessageService',['getDescription']);
+  const messageServiceSpy = { getDescription: jest.fn() };
 
   beforeEach(() => {
     TestBed.configureTestingModule({

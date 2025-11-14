@@ -9,7 +9,7 @@ import { ListaMensagensComponent } from './lista-mensagens.component';
 describe('ListaMensagensComponent', () => {
   let component: ListaMensagensComponent;
   let fixture: ComponentFixture<ListaMensagensComponent>;
-  const messageServiceSpy = jasmine.createSpyObj('MessageService',['getDescription']);
+  const messageServiceSpy = { getDescription: jest.fn() };
  
  
   beforeEach(async () => {

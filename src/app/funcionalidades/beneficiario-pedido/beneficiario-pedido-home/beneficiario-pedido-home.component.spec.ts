@@ -16,14 +16,14 @@ class MockUtil {
 describe('BeneficiarioPedidoHomeComponent', () => {
   let component: BeneficiarioPedidoHomeComponent;
   let fixture: ComponentFixture<BeneficiarioPedidoHomeComponent>;
-  const messageServiceSpy = jasmine.createSpyObj('MessageService',['getDescription']);
-  const routerSpy = jasmine.createSpyObj('Router', ['navigate', 'url']);
-  const activatedRouteSpy = jasmine.createSpyObj('ActivatedRoute', ['snapshot']);
-  const perfilServiceSpy = jasmine.createSpyObj('PerfilService', ['consultarPorNome']);
-  const beneficiarioPedidoServiceSpy = jasmine.createSpyObj('BeneficiarioPedidoService', ['getTitulo','getBaseURL']);
-  const tipoBeneficiarioServiceSpy = jasmine.createSpyObj('TipoBeneficiarioService', ['consultarTodosBeneficiarios']);
-  const comboServiceSpy = jasmine.createSpyObj('ComboService', ['consultarComboUF','consultarComboPerfil']);
-  const prestadorExternoServiceSpy = jasmine.createSpyObj('PrestadorExternoService',['get','consultarUsuarioExternoPorFiltro']);
+  const messageServiceSpy = { getDescription: jest.fn() };
+  const routerSpy = { navigate: jest.fn(), url: jest.fn() };
+  const activatedRouteSpy = { snapshot: jest.fn() };
+  const perfilServiceSpy = { consultarPorNome: jest.fn() };
+  const beneficiarioPedidoServiceSpy = { getTitulo: jest.fn(), getBaseURL: jest.fn() };
+  const tipoBeneficiarioServiceSpy = { consultarTodosBeneficiarios: jest.fn() };
+  const comboServiceSpy = { consultarComboUF: jest.fn(), consultarComboPerfil: jest.fn() };
+  const prestadorExternoServiceSpy = { get: jest.fn(), consultarUsuarioExternoPorFiltro: jest.fn() };
   prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro = of({})
 
   beforeEach(async () => {

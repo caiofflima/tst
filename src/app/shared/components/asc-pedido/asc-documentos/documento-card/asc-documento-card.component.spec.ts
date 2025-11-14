@@ -22,10 +22,10 @@ describe('AscDocumentoCardComponent', () => {
     let component: AscDocumentoCardComponent;
     let fixture: ComponentFixture<AscDocumentoCardComponent>;
     
-    const messageServiceSpy = jasmine.createSpyObj('MessageService',['getDescription','addMsgSuccess','addMsgDanger','addConfirmYesNo']);
-    const sessaoServiceSpy = jasmine.createSpyObj('SessaoService',['init']);
-    const routerSpy = jasmine.createSpyObj('Router', ['navigate', 'url']);
-    const activatedRouteSpy = jasmine.createSpyObj('ActivatedRoute', ['url']);
+    const messageServiceSpy = { getDescription: jest.fn(), addMsgSuccess: jest.fn(), addMsgDanger: jest.fn(), addConfirmYesNo: jest.fn() };
+    const sessaoServiceSpy = { init: jest.fn() };
+    const routerSpy = { navigate: jest.fn(), url: jest.fn() };
+    const activatedRouteSpy = { url: jest.fn() };
     
     activatedRouteSpy.params = of({id: 1});
     const mockDocs: DocumentoTipoProcesso[] = [ {id:1, texto:"RG", assunto:"RG"} as DocumentoTipoProcesso] ;
@@ -34,28 +34,28 @@ describe('AscDocumentoCardComponent', () => {
     const mockArquivo: Arquivo = {id:1} as Arquivo ;
     const mockDocumentoTipoProcesso: DocumentoTipoProcesso = {id:1} as DocumentoTipoProcesso ;
 
-    const documentoTipoProcessoServiceSpy = jasmine.createSpyObj('DocumentoTipoProcessoService', ['get', 'post', 'put', 'delete']);
+    const documentoTipoProcessoServiceSpy = { get: jest.fn(), post: jest.fn(), put: jest.fn(), delete: jest.fn() };
     documentoTipoProcessoServiceSpy.post.and.returnValue(of({}));
     documentoTipoProcessoServiceSpy.put.and.returnValue(of({}));
 
-    const anexoServiceSpy = jasmine.createSpyObj('AnexoService', ['get', 'post', 'put', 'delete']);
+    const anexoServiceSpy = { get: jest.fn(), post: jest.fn(), put: jest.fn(), delete: jest.fn() };
     anexoServiceSpy.post.and.returnValue(of({}));
     anexoServiceSpy.put.and.returnValue(of({}));
 
-    const processoServiceSpy = jasmine.createSpyObj('ProcessoService', ['get', 'post', 'put', 'delete']);
+    const processoServiceSpy = { get: jest.fn(), post: jest.fn(), put: jest.fn(), delete: jest.fn() };
     processoServiceSpy.post.and.returnValue(of({}));
     processoServiceSpy.put.and.returnValue(of({}));
 
-    const tipoValidacaoServiceSpy = jasmine.createSpyObj('TipoValidacaoService', ['get', 'post', 'put', 'delete']);
+    const tipoValidacaoServiceSpy = { get: jest.fn(), post: jest.fn(), put: jest.fn(), delete: jest.fn() };
     tipoValidacaoServiceSpy.post.and.returnValue(of({}));
     tipoValidacaoServiceSpy.put.and.returnValue(of({}));
     tipoValidacaoServiceSpy.get.and.returnValue(of({}));
 
-    const validacaoDocumentoPedidoServiceSpy = jasmine.createSpyObj('ValidacaoDocumentoPedidoService', ['get', 'post', 'put', 'delete']);
+    const validacaoDocumentoPedidoServiceSpy = { get: jest.fn(), post: jest.fn(), put: jest.fn(), delete: jest.fn() };
     validacaoDocumentoPedidoServiceSpy.post.and.returnValue(of({}));
     validacaoDocumentoPedidoServiceSpy.put.and.returnValue(of({}));
 
-    const documentoPedidoServiceSpy = jasmine.createSpyObj('DocumentoPedidoService', ['get', 'post', 'put', 'delete']);
+    const documentoPedidoServiceSpy = { get: jest.fn(), post: jest.fn(), put: jest.fn(), delete: jest.fn() };
     documentoPedidoServiceSpy.post.and.returnValue(of({}));
     documentoPedidoServiceSpy.put.and.returnValue(of({}));
   

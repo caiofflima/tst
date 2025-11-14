@@ -7,8 +7,8 @@ import { AscDadosEnderecoCardComponent } from './asc-dados-endereco-card.compone
 describe('AscDadosEnderecoCardComponent', () => {
   let component: AscDadosEnderecoCardComponent;
   let fixture: ComponentFixture<AscDadosEnderecoCardComponent>;
-  const messageServiceSpy = jasmine.createSpyObj('MessageService',['getDescription']);
-  const inscricaoDependenteServiceSpy = jasmine.createSpyObj('InscricaoDependenteService',['init']);
+  const messageServiceSpy = { getDescription: jest.fn() };
+  const inscricaoDependenteServiceSpy = { init: jest.fn() };
 
 
   beforeEach(async () => {

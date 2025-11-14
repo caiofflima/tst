@@ -13,17 +13,17 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 describe('ParametrizacaoDocumentoProcessoFormComponent', () => {
   let component: ParametrizacaoDocumentoProcessoFormComponent;
   let fixture: ComponentFixture<ParametrizacaoDocumentoProcessoFormComponent>;
-  const messageServiceSpy = jasmine.createSpyObj('MessageService',['fromResourceBundle']);
-  const empresaPrestadorExternoServiceSpy = jasmine.createSpyObj('EmpresaPrestadorExternoService',['consultarEmpresaPorId', 'consultarFiliais']);
-  const activatedRouteSpy = jasmine.createSpyObj('ActivatedRoute',['getDescription']);
-  const routerSpy = jasmine.createSpyObj('Router',['getDescription']);
-  const locationSpy = jasmine.createSpyObj('Location',['getDescription']);
-  const meusDadosServiceSpy = jasmine.createSpyObj('ComboService',['carregarTitular']);
-  const documentoServiceSpy = jasmine.createSpyObj('DocumentoService',['get']);
-  const tipoDeficienciaServiceSpy = jasmine.createSpyObj('TipoDeficienciaService',['consultarTodos']);
-  const grupoDocumentoServiceSpy = jasmine.createSpyObj('GrupoDocumentoService',['consultarTodos']);
-  const caraterSolicitacaoServiceSpy = jasmine.createSpyObj('CaraterSolicitacaoService',['consultarTodos']);
-  const prestadorExternoServiceSpy = jasmine.createSpyObj('PrestadorExternoService',['get','consultarUsuarioExternoPorFiltro']);
+  const messageServiceSpy = { fromResourceBundle: jest.fn() };
+  const empresaPrestadorExternoServiceSpy = { consultarEmpresaPorId: jest.fn(), consultarFiliais: jest.fn() };
+  const activatedRouteSpy = { getDescription: jest.fn() };
+  const routerSpy = { getDescription: jest.fn() };
+  const locationSpy = { getDescription: jest.fn() };
+  const meusDadosServiceSpy = { carregarTitular: jest.fn() };
+  const documentoServiceSpy = { get: jest.fn() };
+  const tipoDeficienciaServiceSpy = { consultarTodos: jest.fn() };
+  const grupoDocumentoServiceSpy = { consultarTodos: jest.fn() };
+  const caraterSolicitacaoServiceSpy = { consultarTodos: jest.fn() };
+  const prestadorExternoServiceSpy = { get: jest.fn(), consultarUsuarioExternoPorFiltro: jest.fn() };
   prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro = of({})
   empresaPrestadorExternoServiceSpy.consultarFiliais.and.returnValue(of({}));
   meusDadosServiceSpy.carregarTitular.and.returnValue(of({}));

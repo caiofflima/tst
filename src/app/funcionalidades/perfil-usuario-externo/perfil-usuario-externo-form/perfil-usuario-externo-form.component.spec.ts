@@ -8,13 +8,13 @@ import { of } from 'rxjs';
 import { PerfilUsuarioExternoFormComponent } from './perfil-usuario-externo-form.component';
 
 describe('PerfilUsuarioExternoFormComponent', () => {
-  const messageServiceSpy = jasmine.createSpyObj('MessageService', ['showDangerMsg', 'fromResourceBundle']);
+  const messageServiceSpy = { showDangerMsg: jest.fn(), fromResourceBundle: jest.fn() };
 
-  const perfilUsuarioExternoServiceSpy = jasmine.createSpyObj('ComboService', ['consultarComboPerfisPrestadoresExternos', 'consultarComboTiposAuditor', 'consultarPorFiltro', 'removerCredenciais']);
+  const perfilUsuarioExternoServiceSpy = { consultarComboPerfisPrestadoresExternos: jest.fn(), consultarComboTiposAuditor: jest.fn(), consultarPorFiltro: jest.fn(), removerCredenciais: jest.fn() };
   perfilUsuarioExternoServiceSpy.consultarPorFiltro.and.returnValue(of());
-    const prestadorExternoServiceSpy = jasmine.createSpyObj('PrestadorExternoService',['get','consultarUsuarioExternoPorFiltro']);
+    const prestadorExternoServiceSpy = { get: jest.fn(), consultarUsuarioExternoPorFiltro: jest.fn() };
     prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro = of({})
-  const dataSpy = jasmine.createSpyObj('Data', ['storage']);
+  const dataSpy = { storage: jest.fn() };
 
   let component: PerfilUsuarioExternoFormComponent;
   let fixture: ComponentFixture<PerfilUsuarioExternoFormComponent>;

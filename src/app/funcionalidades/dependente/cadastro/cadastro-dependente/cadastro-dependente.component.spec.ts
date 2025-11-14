@@ -17,32 +17,32 @@ describe('CadastroDependenteComponent', () => {
   let component: CadastroDependenteComponent;
   let fixture: ComponentFixture<CadastroDependenteComponent>;
 
-  const messageServiceSpy = jasmine.createSpyObj('MessageService', ['getDescription']);
-  const activatedRouteSpy = jasmine.createSpyObj('ActivatedRoute', ['snapshot']);
+  const messageServiceSpy = { getDescription: jest.fn() };
+  const activatedRouteSpy = { snapshot: jest.fn() };
   activatedRouteSpy.snapshot = {
     params: {
       id: null
     }
   }
 
-  const processoServiceSpy = jasmine.createSpyObj('ProcessoService', ['getProcesso']);
-  const beneficiarioServiceSpy = jasmine.createSpyObj('BeneficiarioService',['consultarBeneficiarioPorId','consultarFamiliaPorMatricula','consultarTodaFamiliaPorMatriculaRenovacao','consultarTitularPorMatricula']);
+  const processoServiceSpy = { getProcesso: jest.fn() };
+  const beneficiarioServiceSpy = { consultarBeneficiarioPorId: jest.fn(), consultarFamiliaPorMatricula: jest.fn(), consultarTodaFamiliaPorMatriculaRenovacao: jest.fn(), consultarTitularPorMatricula: jest.fn() };
   beneficiarioServiceSpy.consultarFamiliaPorMatricula.and.returnValue(of({}))
   beneficiarioServiceSpy.consultarTodaFamiliaPorMatriculaRenovacao.and.returnValue(of([]))
   beneficiarioServiceSpy.consultarTitularPorMatricula.and.returnValue(of({}))
-  const patologiaServiceSpy = jasmine.createSpyObj('PatologiaService', ['getPatologia']);
-  const procedimentoServiceSpy = jasmine.createSpyObj('ProcedimentoService', ['getProcedimento']);
-  const medicamentoServiceSpy = jasmine.createSpyObj('MedicamentoService', ['getMedicamento']);
-  const medicamentoPatologiaPedidoServiceSpy = jasmine.createSpyObj('MedicamentoPatologiaPedidoService', ['getMedicamentoPatologiaPedido']);
-  const siascFluxoServiceSpy = jasmine.createSpyObj('SIASCFluxoService', ['getFluxo','consultarPermissoesFluxoPorPedido']);
+  const patologiaServiceSpy = { getPatologia: jest.fn() };
+  const procedimentoServiceSpy = { getProcedimento: jest.fn() };
+  const medicamentoServiceSpy = { getMedicamento: jest.fn() };
+  const medicamentoPatologiaPedidoServiceSpy = { getMedicamentoPatologiaPedido: jest.fn() };
+  const siascFluxoServiceSpy = { getFluxo: jest.fn(), consultarPermissoesFluxoPorPedido: jest.fn() };
   siascFluxoServiceSpy.consultarPermissoesFluxoPorPedido.and.returnValue(of({}))
-  const documentoPedidoServiceSpy = jasmine.createSpyObj('DocumentoPedidoService', ['getDocumentoPedido']);
+  const documentoPedidoServiceSpy = { getDocumentoPedido: jest.fn() };
   documentoPedidoServiceSpy.avisoSituacaoPedido = of({});
-  const sessaoServiceSpy = jasmine.createSpyObj('SessaoService',['getUsuario']);
-  const atendimentoServiceSpy = jasmine.createSpyObj('AtendimentoService',['get']);
+  const sessaoServiceSpy = { getUsuario: jest.fn() };
+  const atendimentoServiceSpy = { get: jest.fn() };
   atendimentoServiceSpy.get.and.returnValue(of({}))
 
-  const inscricaoDependenteServiceSpy = jasmine.createSpyObj('InscricaoDependenteService',['setEditMode']);
+  const inscricaoDependenteServiceSpy = { setEditMode: jest.fn() };
 
   const usuario = {} as Usuario;
     usuario.matriculaFuncional = "C123000";

@@ -10,8 +10,8 @@ describe('PaginaInicialAlterarComponent', () => {
   let component: PaginaInicialAlterarComponent;
   let fixture: ComponentFixture<PaginaInicialAlterarComponent>;
 
-  const messageServiceSpy = jasmine.createSpyObj('MessageService', ['getDescription']);
-  const inscricaoDependenteServiceSpy = jasmine.createSpyObj('InscricaoDependenteService', ['setEditMode']);
+  const messageServiceSpy = { getDescription: jest.fn() };
+  const inscricaoDependenteServiceSpy = { setEditMode: jest.fn() };
   
   beforeEach(async () => {
     await TestBed.configureTestingModule({

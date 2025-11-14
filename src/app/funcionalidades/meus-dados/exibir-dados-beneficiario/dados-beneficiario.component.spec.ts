@@ -7,7 +7,7 @@ import { DadosBeneficiarioComponent } from './dados-beneficiario.component';
 describe('DadosBeneficiarioComponent', () => {
   let component: DadosBeneficiarioComponent;
   let fixture: ComponentFixture<DadosBeneficiarioComponent>;
-  const messageServiceSpy = jasmine.createSpyObj('MessageService',['getDescription']);
+  const messageServiceSpy = { getDescription: jest.fn() };
  
   beforeEach(async () => {
     await TestBed.configureTestingModule({

@@ -17,17 +17,17 @@ describe('EtapaSelecaoDependenteComponent', () => {
   let component: EtapaSelecaoDependenteComponent;
   let fixture: ComponentFixture<EtapaSelecaoDependenteComponent>;
 
-  const messageServiceSpy = jasmine.createSpyObj('MessageService', ['getDescription']);
-  const activatedRouteSpy = jasmine.createSpyObj('ActivatedRoute', ['snapshot']);
+  const messageServiceSpy = { getDescription: jest.fn() };
+  const activatedRouteSpy = { snapshot: jest.fn() };
   activatedRouteSpy.snapshot = {
     params: {
       id: null
     }
   }
-  const processoServiceSpy = jasmine.createSpyObj('ProcessoService', ['getProcesso']);
-  const beneficiarioServiceSpy = jasmine.createSpyObj('BeneficiarioService', ['getProcesso']);
-  const tipoDependenteServiceSpy = jasmine.createSpyObj('TipoDependenteService',['consultarTodos']); 
-  const sessaoServiceSpy = jasmine.createSpyObj('SessaoService',['SessaoService']); 
+  const processoServiceSpy = { getProcesso: jest.fn() };
+  const beneficiarioServiceSpy = { getProcesso: jest.fn() };
+  const tipoDependenteServiceSpy = { consultarTodos: jest.fn() }; 
+  const sessaoServiceSpy = { SessaoService: jest.fn() }; 
 
   const usuario = {} as Usuario;
     usuario.matriculaFuncional = "C123000";

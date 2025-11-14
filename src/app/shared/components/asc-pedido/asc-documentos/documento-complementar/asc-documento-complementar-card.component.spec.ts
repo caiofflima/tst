@@ -8,9 +8,9 @@ import { DocumentoComplementarCardComponent } from './asc-documento-complementar
 describe('DocumentoComplementarCardComponent', () => {
   let component: DocumentoComplementarCardComponent;
   let fixture: ComponentFixture<DocumentoComplementarCardComponent>;
-  const messageServiceSpy = jasmine.createSpyObj('MessageService',['getDescription']);
-  const documentoServiceSpy = jasmine.createSpyObj('DocumentoService',['getDescription']);
-  const documentoPedidoServiceSpy = jasmine.createSpyObj('DocumentoPedidoService',['getDescription']);
+  const messageServiceSpy = { getDescription: jest.fn() };
+  const documentoServiceSpy = { getDescription: jest.fn() };
+  const documentoPedidoServiceSpy = { getDescription: jest.fn() };
  
   
 

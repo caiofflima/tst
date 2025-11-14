@@ -13,12 +13,12 @@ describe('EtapaMotivoRenovacaoComponent', () => {
   let component: EtapaMotivoRenovacaoComponent;
   let fixture: ComponentFixture<EtapaMotivoRenovacaoComponent>;
 
-  const messageServiceSpy = jasmine.createSpyObj('MessageService', ['getDescription']);
-  const processoServiceSpy = jasmine.createSpyObj('ProcessoService', ['getDescription']);
-  const tipoDependenteServiceSpy = jasmine.createSpyObj('TipoDependenteService', ['getDescription']);
-  const motivoCancelamentoServiceSpy = jasmine.createSpyObj('MotivoCancelamentoService', ['getDescription']);
-  const beneficiarioServiceSpy = jasmine.createSpyObj('BeneficiarioService', ['getDescription']);
-  const sctivatedRouteSpy = jasmine.createSpyObj('ActivatedRoute', ['getDescription']);
+  const messageServiceSpy = { getDescription: jest.fn() };
+  const processoServiceSpy = { getDescription: jest.fn() };
+  const tipoDependenteServiceSpy = { getDescription: jest.fn() };
+  const motivoCancelamentoServiceSpy = { getDescription: jest.fn() };
+  const beneficiarioServiceSpy = { getDescription: jest.fn() };
+  const sctivatedRouteSpy = { getDescription: jest.fn() };
   const usuario = {} as Usuario;
   usuario.matriculaFuncional = "C123000";
   

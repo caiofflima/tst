@@ -7,7 +7,7 @@ import { ListaRestritivaService } from './lista.restritiva.service';
 describe('ListaRestritivaService', () => {
   let service: ListaRestritivaService;
   let httpMock: HttpTestingController;
-  const messageServiceSpy = jasmine.createSpyObj('MessageService',['getDescription']);
+  const messageServiceSpy = { getDescription: jest.fn() };
   const baseUrl = '/siasc-api/api/cadastrobasico/lista-restritiva';
 
   beforeEach(() => {

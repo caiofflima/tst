@@ -9,7 +9,7 @@ describe('DocumentoService', () => {
   let service: DocumentoService;
   let httpMock: HttpTestingController;
   const baseUrl = '/siasc-api/api/documentos';
-  const messageServiceSpy = jasmine.createSpyObj('MessageService',['getDescription']);
+  const messageServiceSpy = { getDescription: jest.fn() };
 
   beforeEach(() => {
     TestBed.configureTestingModule({

@@ -8,7 +8,7 @@ describe('GrupoDocumentoService', () => {
   let service: GrupoDocumentoService;
   let httpMock: HttpTestingController;
   const baseUrl = '/siasc-api/api/grupo-documento';
-  const messageServiceSpy = jasmine.createSpyObj('MessageService',['getDescription']);
+  const messageServiceSpy = { getDescription: jest.fn() };
 
   beforeEach(() => {
     TestBed.configureTestingModule({

@@ -6,7 +6,7 @@ import { ProfissionalCardComponent } from './profissional-card.component';
 describe('ProfissionalCardComponent', () => {
   let component: ProfissionalCardComponent;
   let fixture: ComponentFixture<ProfissionalCardComponent>;
-  const prestadorExternoServiceSpy = jasmine.createSpyObj('PrestadorExternoService',['get','consultarUsuarioExternoPorFiltro']);
+  const prestadorExternoServiceSpy = { get: jest.fn(), consultarUsuarioExternoPorFiltro: jest.fn() };
   prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro = of({})
 
   beforeEach(async () => {

@@ -8,7 +8,7 @@ import { AscCardInfoAdicionalComponent } from './asc-card-info-adicional.compone
 describe('AscCardInfoAdicionalComponent', () => {
   let component: AscCardInfoAdicionalComponent;
   let fixture: ComponentFixture<AscCardInfoAdicionalComponent>;
-  const messageServiceSpy = jasmine.createSpyObj('MessageService',['getDescription']);
+  const messageServiceSpy = { getDescription: jest.fn() };
   
  
   beforeEach(async () => {

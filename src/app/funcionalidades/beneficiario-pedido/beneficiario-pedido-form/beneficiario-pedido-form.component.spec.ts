@@ -9,28 +9,28 @@ import { BeneficiarioPedidoFormComponent } from './beneficiario-pedido-form.comp
 describe('BeneficiarioPedidoFormComponent', () => {
   let component: BeneficiarioPedidoFormComponent;
   let fixture: ComponentFixture<BeneficiarioPedidoFormComponent>;
-  const messageServiceSpy = jasmine.createSpyObj('MessageService',['getDescription']);
-  const routerSpy = jasmine.createSpyObj('Router', ['navigate', 'url']);
+  const messageServiceSpy = { getDescription: jest.fn() };
+  const routerSpy = { navigate: jest.fn(), url: jest.fn() };
   
-  const activatedRouteSpy = jasmine.createSpyObj('ActivatedRoute', ['snapshot']);
+  const activatedRouteSpy = { snapshot: jest.fn() };
   activatedRouteSpy.snapshot = {
       params: {
         id: null
       }
     }
   
-  const perfilServiceSpy = jasmine.createSpyObj('PerfilService', ['consultarPorNome']);
+  const perfilServiceSpy = { consultarPorNome: jest.fn() };
   
-  const beneficiarioPedidoServiceSpy = jasmine.createSpyObj('BeneficiarioPedidoService', ['getTitulo','getBaseURL']);
+  const beneficiarioPedidoServiceSpy = { getTitulo: jest.fn(), getBaseURL: jest.fn() };
    
 
-  const tipoBeneficiarioServiceSpy = jasmine.createSpyObj('TipoBeneficiarioService', ['consultarTodosBeneficiarios']);
-  const comboServiceSpy = jasmine.createSpyObj('ComboService', ['consultarComboUF','consultarComboPerfil']);
-  const prestadorExternoServiceSpy = jasmine.createSpyObj('PrestadorExternoService',['get','consultarUsuarioExternoPorFiltro']);
+  const tipoBeneficiarioServiceSpy = { consultarTodosBeneficiarios: jest.fn() };
+  const comboServiceSpy = { consultarComboUF: jest.fn(), consultarComboPerfil: jest.fn() };
+  const prestadorExternoServiceSpy = { get: jest.fn(), consultarUsuarioExternoPorFiltro: jest.fn() };
   prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro = of({})
   comboServiceSpy.consultarComboPerfil.and.returnValue(of({}));
 
-   const perfilMinimoServiceSpy = jasmine.createSpyObj('PerfilMinimoService', ['consultarTodos']);
+   const perfilMinimoServiceSpy = { consultarTodos: jest.fn() };
    perfilMinimoServiceSpy.consultarTodos.and.returnValue(of([]));
 
   beforeEach(async () => {

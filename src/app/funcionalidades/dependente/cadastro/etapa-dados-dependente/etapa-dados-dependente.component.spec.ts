@@ -15,12 +15,12 @@ describe('EtapaDadosDependenteComponent', () => {
   let component: EtapaDadosDependenteComponent;
   let fixture: ComponentFixture<EtapaDadosDependenteComponent>;
 
-  const messageServiceSpy = jasmine.createSpyObj('MessageService', ['addMsgDanger']);
-   const processoServiceSpy = jasmine.createSpyObj('ProcessoService', ['getProcesso']);
-  const beneficiarioServiceSpy = jasmine.createSpyObj('BeneficiarioService',['consultarPorMatricula','consultarFamiliaPorMatricula']);
-  const tipoDependenteServiceSpy = jasmine.createSpyObj('TipoDependenteService', ['consultarTipoDependente']);
-  const cdkStepperSpy = jasmine.createSpyObj('CdkStepper', ['next', 'previous']);
-  const atendimentoServiceSpy = jasmine.createSpyObj('AtendimentoService', ['init']);
+  const messageServiceSpy = { addMsgDanger: jest.fn() };
+   const processoServiceSpy = { getProcesso: jest.fn() };
+  const beneficiarioServiceSpy = { consultarPorMatricula: jest.fn(), consultarFamiliaPorMatricula: jest.fn() };
+  const tipoDependenteServiceSpy = { consultarTipoDependente: jest.fn() };
+  const cdkStepperSpy = { next: jest.fn(), previous: jest.fn() };
+  const atendimentoServiceSpy = { init: jest.fn() };
   
 
   const usuario = {} as Usuario;

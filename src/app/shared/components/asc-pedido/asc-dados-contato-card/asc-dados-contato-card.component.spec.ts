@@ -7,11 +7,11 @@ import { AscProcedimentoAutorizacaoPreviaFormComponent } from './../asc-autoriza
 describe('AscProcedimentoAutorizacaoPreviaFormComponent', () => {
   let component: AscProcedimentoAutorizacaoPreviaFormComponent;
   let fixture: ComponentFixture<AscProcedimentoAutorizacaoPreviaFormComponent>;
-  const messageServiceSpy = jasmine.createSpyObj('MessageService',['getDescription']);
-  const situacaoPedidoProcedimentoServiceSpy = jasmine.createSpyObj('SituacaoPedidoProcedimentoService',['init']);
-  const sessaoServiceSpy = jasmine.createSpyObj('SessaoService',['init']);
-  const procedimentoServiceSpy = jasmine.createSpyObj('ProcedimentoService',['init']);
-  const procedimentoPedidoServiceSpy = jasmine.createSpyObj('ProcedimentoPedidoService',['pedidoListenerValorNotaFiscal']);
+  const messageServiceSpy = { getDescription: jest.fn() };
+  const situacaoPedidoProcedimentoServiceSpy = { init: jest.fn() };
+  const sessaoServiceSpy = { init: jest.fn() };
+  const procedimentoServiceSpy = { init: jest.fn() };
+  const procedimentoPedidoServiceSpy = { pedidoListenerValorNotaFiscal: jest.fn() };
   procedimentoPedidoServiceSpy.pedidoListenerValorNotaFiscal = of({valor: 1});
 
 

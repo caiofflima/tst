@@ -10,13 +10,13 @@ describe('ResultadoPesquisaProcessosCredenciadoComponent', () => {
   let fixture: ComponentFixture<ResultadoPesquisaProcessosCredenciadoComponent>;
 
   beforeEach(async () => {
-    const messageServiceSpy = jasmine.createSpyObj('MessageService', ['showDangerMsg']);
-    const siascFluxoServiceSpy = jasmine.createSpyObj('SIASCFluxoService', ['consultarPermissoesFluxoPorPedido']);
-    const dataSpy = jasmine.createSpyObj('Data', ['storage']);
-    const routerSpy = jasmine.createSpyObj('Router', ['navigateByUrl']);
-    const sessaoServiceSpy = jasmine.createSpyObj('SessaoService', ['getUsuario']);
-    const processoServiceSpy = jasmine.createSpyObj('ProcessoService', ['consultarProcessosNaoConclusivosPorOperadorCredenciado', 'consultarRecentesPorOperadorCredenciado']);
-    const prestadorExternoServiceSpy = jasmine.createSpyObj('PrestadorExternoService',['get','consultarUsuarioExternoPorFiltro']);
+    const messageServiceSpy = { showDangerMsg: jest.fn() };
+    const siascFluxoServiceSpy = { consultarPermissoesFluxoPorPedido: jest.fn() };
+    const dataSpy = { storage: jest.fn() };
+    const routerSpy = { navigateByUrl: jest.fn() };
+    const sessaoServiceSpy = { getUsuario: jest.fn() };
+    const processoServiceSpy = { consultarProcessosNaoConclusivosPorOperadorCredenciado: jest.fn(), consultarRecentesPorOperadorCredenciado: jest.fn() };
+    const prestadorExternoServiceSpy = { get: jest.fn(), consultarUsuarioExternoPorFiltro: jest.fn() };
   prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro = of({})
     await TestBed.configureTestingModule({
       declarations: [ResultadoPesquisaProcessosCredenciadoComponent],

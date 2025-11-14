@@ -8,7 +8,7 @@ describe('PerfilUsuarioExternoService', () => {
   let service: PerfilUsuarioExternoService;
   let httpMock: HttpTestingController;
   const baseUrl = '/siasc-api/api/perfis-prestadores-empresas';
-  const messageServiceSpy = jasmine.createSpyObj('MessageService',['getDescription']);
+  const messageServiceSpy = { getDescription: jest.fn() };
 
   beforeEach(() => {
     TestBed.configureTestingModule({

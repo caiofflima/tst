@@ -7,12 +7,12 @@ import { AscFormularioReembolsoConsultaComponent } from './asc-formulario-reembo
 describe('AscFormularioReembolsoConsultaComponent', () => {
   let component: AscFormularioReembolsoConsultaComponent;
   let fixture: ComponentFixture<AscFormularioReembolsoConsultaComponent>;
-  const messageServiceSpy = jasmine.createSpyObj('MessageService',['getDescription']);
-  const situacaoPedidoProcedimentoServiceSpy = jasmine.createSpyObj('SituacaoPedidoProcedimentoService',['init']);
-  const sessaoServiceSpy = jasmine.createSpyObj('SessaoService',['init']);
-  const procedimentoServiceSpy = jasmine.createSpyObj('ProcedimentoService',['init']);
-  const procedimentoPedidoServiceSpy = jasmine.createSpyObj('ProcedimentoPedidoService',['pedidoListenerValorNotaFiscal']);
-  const autorizacaoPreviaServiceSpy = jasmine.createSpyObj('AutorizacaoPreviaService',['consultarPorIdBeneficiarioAndIdProcedimento']);
+  const messageServiceSpy = { getDescription: jest.fn() };
+  const situacaoPedidoProcedimentoServiceSpy = { init: jest.fn() };
+  const sessaoServiceSpy = { init: jest.fn() };
+  const procedimentoServiceSpy = { init: jest.fn() };
+  const procedimentoPedidoServiceSpy = { pedidoListenerValorNotaFiscal: jest.fn() };
+  const autorizacaoPreviaServiceSpy = { consultarPorIdBeneficiarioAndIdProcedimento: jest.fn() };
   procedimentoPedidoServiceSpy.pedidoListenerValorNotaFiscal = of({valor: 1});
 
 

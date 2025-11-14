@@ -9,7 +9,7 @@ describe('IntegracaoCorreiosService', () => {
   let service: IntegracaoCorreiosService;
   let httpMock: HttpTestingController;
   const baseUrl = '/siasc-api/api/correios';
-  const messageServiceSpy = jasmine.createSpyObj('MessageService',['getDescription']);
+  const messageServiceSpy = { getDescription: jest.fn() };
 
   beforeEach(() => {
 

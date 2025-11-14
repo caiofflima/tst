@@ -8,7 +8,7 @@ describe('MedicamentoPatologiaService', () => {
   let service: MedicamentoPatologiaService;
   let httpMock: HttpTestingController;
   const baseUrl = '/siasc-api/api/medicamentos-patologias';
-  const messageServiceSpy = jasmine.createSpyObj('MessageService',['getDescription']);
+  const messageServiceSpy = { getDescription: jest.fn() };
 
   beforeEach(() => {
 

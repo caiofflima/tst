@@ -9,7 +9,7 @@ describe('FileUploadService', () => {
   let service: FileUploadService;
   let httpMock: HttpTestingController;
   const baseUrl = '/siasc-api/api/uploads';
-  const messageServiceSpy = jasmine.createSpyObj('MessageService',['getDescription']);
+  const messageServiceSpy = { getDescription: jest.fn() };
 
   beforeEach(() => {
     TestBed.configureTestingModule({

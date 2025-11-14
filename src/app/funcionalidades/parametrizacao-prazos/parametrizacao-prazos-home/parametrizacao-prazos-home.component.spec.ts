@@ -10,18 +10,18 @@ import { ParametrizacaoPrazosHomeComponent } from './parametrizacao-prazos-home.
 describe('ParametrizacaoPrazosHomeComponent', () => {
   let component: ParametrizacaoPrazosHomeComponent;
   let fixture: ComponentFixture<ParametrizacaoPrazosHomeComponent>;
-  const messageServiceSpy = jasmine.createSpyObj('MessageService',['getDescription', 'fromResourceBundle']);
-  const empresaPrestadorExternoServiceSpy = jasmine.createSpyObj('EmpresaPrestadorExternoService',['consultarEmpresaPorId', 'consultarFiliais']);
-  const activatedRouteSpy = jasmine.createSpyObj('ActivatedRoute',['getDescription']);
-  const routerSpy = jasmine.createSpyObj('Router',['getDescription']);
-  const locationSpy = jasmine.createSpyObj('Location',['getDescription']);
-  const comboServiceSpy = jasmine.createSpyObj('ComboService',['consultarComboUF']);
-  const tipoDocumentoServiceSpy = jasmine.createSpyObj('TipoDocumentoService',['consultarTodos']);
-  const documentoServiceSpy = jasmine.createSpyObj('DocumentoService',['get']);
-  const prazoTratamentoServiceSpy = jasmine.createSpyObj('DocumentoService',['get']);
+  const messageServiceSpy = { getDescription: jest.fn(), fromResourceBundle: jest.fn() };
+  const empresaPrestadorExternoServiceSpy = { consultarEmpresaPorId: jest.fn(), consultarFiliais: jest.fn() };
+  const activatedRouteSpy = { getDescription: jest.fn() };
+  const routerSpy = { getDescription: jest.fn() };
+  const locationSpy = { getDescription: jest.fn() };
+  const comboServiceSpy = { consultarComboUF: jest.fn() };
+  const tipoDocumentoServiceSpy = { consultarTodos: jest.fn() };
+  const documentoServiceSpy = { get: jest.fn() };
+  const prazoTratamentoServiceSpy = { get: jest.fn() };
   const tipoBeneficiarioServiceSpy = jasmine.createSpyObj('DocumentoServ   ice',['get']);
-  const situacaoProcessoServiceSpy = jasmine.createSpyObj('SituacaoProcessoService',['consultarTodasTransicoesManuais']);
-  const prestadorExternoServiceSpy = jasmine.createSpyObj('PrestadorExternoService',['get','consultarUsuarioExternoPorFiltro']);
+  const situacaoProcessoServiceSpy = { consultarTodasTransicoesManuais: jest.fn() };
+  const prestadorExternoServiceSpy = { get: jest.fn(), consultarUsuarioExternoPorFiltro: jest.fn() };
   prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro = of({})
   empresaPrestadorExternoServiceSpy.consultarFiliais.and.returnValue(of({}));
   comboServiceSpy.consultarComboUF.and.returnValue(of({}));

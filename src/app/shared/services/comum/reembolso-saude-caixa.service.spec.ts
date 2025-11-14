@@ -15,7 +15,7 @@ describe('ReembolsoSaudeCaixaService', () => {
   let service: ReembolsoSaudeCaixaService;
   let httpMock: HttpTestingController;
   const baseUrl = '/siasc-api/api/reembolso';
-  const messageServiceSpy = jasmine.createSpyObj('MessageService',['getDescription']);
+  const messageServiceSpy = { getDescription: jest.fn() };
 
   beforeEach(() => {
     TestBed.configureTestingModule({

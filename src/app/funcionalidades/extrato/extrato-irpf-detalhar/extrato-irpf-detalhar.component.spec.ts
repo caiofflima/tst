@@ -21,11 +21,11 @@ describe('ExtratoIRPFDetalharComponent', () => {
   let mockReembolsoSaudeCaixaService: any;
 
   beforeEach(async () => {
-    const sessaoServiceSpy = jasmine.createSpyObj('SessaoService', ['getUsuario']);
-    const beneficiarioServiceSpy = jasmine.createSpyObj('BeneficiarioService', ['consultarPorMatricula']);
+    const sessaoServiceSpy = { getUsuario: jest.fn() };
+    const beneficiarioServiceSpy = { consultarPorMatricula: jest.fn() };
     beneficiarioServiceSpy.consultarPorMatricula.and.returnValue(of());
-    const reembolsoAGSServiceSpy = jasmine.createSpyObj('ReembolsoAGSService', ['getLancamentosDoAnoPorCPF']);
-    const atendimentoServiceSpy = jasmine.createSpyObj('AtendimentoService', ['get']);
+    const reembolsoAGSServiceSpy = { getLancamentosDoAnoPorCPF: jest.fn() };
+    const atendimentoServiceSpy = { get: jest.fn() };
     
     mockMessageService = {
       addMsgDanger: jasmine.createSpy('addMsgDanger'),

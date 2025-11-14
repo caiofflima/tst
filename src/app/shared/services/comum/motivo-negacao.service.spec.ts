@@ -7,7 +7,7 @@ describe('MotivoNegacaoService', () => {
   let service: MotivoNegacaoService;
   let httpMock: HttpTestingController;
   const baseUrl = '/siasc-api/api/motivos-negacao';
-  const messageServiceSpy = jasmine.createSpyObj('MessageService',['getDescription']);
+  const messageServiceSpy = { getDescription: jest.fn() };
 
   beforeEach(() => {
     TestBed.configureTestingModule({

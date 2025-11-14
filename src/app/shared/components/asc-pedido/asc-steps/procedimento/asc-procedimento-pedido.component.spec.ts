@@ -16,12 +16,12 @@ describe('AscProcedimentoPedidoComponent', () => {
   let fixture: ComponentFixture<AscProcedimentoPedidoComponent>;
   
   beforeEach(async () => {
-    const mockAutorizacaoPreviaService = jasmine.createSpyObj('AutorizacaoPreviaService', ['incluirPedidoModoRascunho', 'verificarAutorizacoesComDataAtentimentoValida']);
-    const mockProcessoService = jasmine.createSpyObj('ProcessoService', ['consultarPedidoEmAbertoSemelhante', 'consultarPedidosProcedimentoPorPedido', 'consultarMedicamentoPatologiaPedidoPorPedido']);
-    const mockMessageService = jasmine.createSpyObj('MessageService', ['showDangerMsg', 'showSuccessMsg']);
-    const mockProcedimentoPedidoService = jasmine.createSpyObj('ProcedimentoPedidoService', ['incluirOuAtualizarPedidoProcedimento', 'consultarPedidosProcedimentoPorPedido']);
-    const mockBeneficiarioService = jasmine.createSpyObj('BeneficiarioService', ['']);
-    const mockMedicamentoPatologiaPedidoService = jasmine.createSpyObj('MedicamentoPatologiaPedidoService', ['incluir', 'atualizar']);
+    const mockAutorizacaoPreviaService = { incluirPedidoModoRascunho: jest.fn(), verificarAutorizacoesComDataAtentimentoValida: jest.fn() };
+    const mockProcessoService = { consultarPedidoEmAbertoSemelhante: jest.fn(), consultarPedidosProcedimentoPorPedido: jest.fn(), consultarMedicamentoPatologiaPedidoPorPedido: jest.fn() };
+    const mockMessageService = { showDangerMsg: jest.fn(), showSuccessMsg: jest.fn() };
+    const mockProcedimentoPedidoService = { incluirOuAtualizarPedidoProcedimento: jest.fn(), consultarPedidosProcedimentoPorPedido: jest.fn() };
+    const mockBeneficiarioService = {  };
+    const mockMedicamentoPatologiaPedidoService = { incluir: jest.fn(), atualizar: jest.fn() };
 
     await TestBed.configureTestingModule({
       declarations: [ AscProcedimentoPedidoComponent, ProcedimentoFormComponent ],

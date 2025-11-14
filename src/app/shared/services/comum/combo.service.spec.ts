@@ -8,7 +8,7 @@ describe('ComboService', () => {
   let service: ComboService;
   let httpMock: HttpTestingController;
   const baseUrl = '/siasc-api/api/combos';
-  const messageServiceSpy = jasmine.createSpyObj('MessageService',['getDescription']);
+  const messageServiceSpy = { getDescription: jest.fn() };
   const mockData: DadoComboDTO[] = [{} as DadoComboDTO, {} as DadoComboDTO];
 
   beforeEach(() => {

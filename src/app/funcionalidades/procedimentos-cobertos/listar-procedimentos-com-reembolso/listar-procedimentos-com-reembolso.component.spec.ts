@@ -10,12 +10,12 @@ describe('ListarProcedimentosComReembolsoComponent', () => {
   let fixture: ComponentFixture<ListarProcedimentosComReembolsoComponent>;
 
   beforeEach(() => {
-    const procedimentoServiceSpy = jasmine.createSpyObj('ProcedimentoService', ['listarProcedimentosComReembolso']);
+    const procedimentoServiceSpy = { listarProcedimentosComReembolso: jest.fn() };
     procedimentoServiceSpy.listarProcedimentosComReembolso.and.returnValue(of());
-    const prestadorExternoServiceSpy = jasmine.createSpyObj('PrestadorExternoService',['get','consultarUsuarioExternoPorFiltro']);
+    const prestadorExternoServiceSpy = { get: jest.fn(), consultarUsuarioExternoPorFiltro: jest.fn() };
     prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro = of({})
 
-    const messageServiceSpy = jasmine.createSpyObj('MessageService', ['showDangerMsg']);
+    const messageServiceSpy = { showDangerMsg: jest.fn() };
 
     TestBed.configureTestingModule({
       declarations: [ ListarProcedimentosComReembolsoComponent ],

@@ -12,9 +12,9 @@ describe('EtapaResumoRenovarComponent', () => {
   let component: EtapaResumoRenovarComponent;
   let fixture: ComponentFixture<EtapaResumoRenovarComponent>;
 
-  const messageServiceSpy = jasmine.createSpyObj('MessageService', ['getDescription']);
-  const fileUploadServiceSpy = jasmine.createSpyObj('FileUploadService', ['getDescription']);
-  const inscricaoDependenteServiceSpy = jasmine.createSpyObj('InscricaoDependenteService', ['getDescription']);
+  const messageServiceSpy = { getDescription: jest.fn() };
+  const fileUploadServiceSpy = { getDescription: jest.fn() };
+  const inscricaoDependenteServiceSpy = { getDescription: jest.fn() };
   const usuario = {} as Usuario;
   usuario.matriculaFuncional = "C123000";
    

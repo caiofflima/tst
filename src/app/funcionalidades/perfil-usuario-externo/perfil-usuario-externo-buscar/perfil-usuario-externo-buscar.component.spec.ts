@@ -12,16 +12,16 @@ describe('PerfilUsuarioExternoBuscarComponent', () => {
   let fixture: ComponentFixture<PerfilUsuarioExternoBuscarComponent>;
 
   beforeEach(() => {
-    const messageServiceSpy = jasmine.createSpyObj('MessageService', ['showDangerMsg']);
-    const comboServiceSpy = jasmine.createSpyObj('ComboService', ['consultarComboPerfisPrestadoresExternos', 'consultarComboTiposAuditor']);
+    const messageServiceSpy = { showDangerMsg: jest.fn() };
+    const comboServiceSpy = { consultarComboPerfisPrestadoresExternos: jest.fn(), consultarComboTiposAuditor: jest.fn() };
     comboServiceSpy.consultarComboPerfisPrestadoresExternos.and.returnValue(of());
     comboServiceSpy.consultarComboTiposAuditor.and.returnValue(of());
-    const prestadorExternoServiceSpy = jasmine.createSpyObj('PrestadorExternoService',['get','consultarUsuarioExternoPorFiltro']);
+    const prestadorExternoServiceSpy = { get: jest.fn(), consultarUsuarioExternoPorFiltro: jest.fn() };
     prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro = of({})
-    const perfilUsuarioExternoServiceSpy = jasmine.createSpyObj('ComboService', ['consultarComboPerfisPrestadoresExternos', 'consultarComboTiposAuditor', 'consultarPorFiltro', 'removerCredenciais']);
+    const perfilUsuarioExternoServiceSpy = { consultarComboPerfisPrestadoresExternos: jest.fn(), consultarComboTiposAuditor: jest.fn(), consultarPorFiltro: jest.fn(), removerCredenciais: jest.fn() };
     perfilUsuarioExternoServiceSpy.consultarPorFiltro.and.returnValue(of());
     
-    const dataSpy = jasmine.createSpyObj('Data', ['storage']);
+    const dataSpy = { storage: jest.fn() };
 
     TestBed.configureTestingModule({
       declarations: [ PerfilUsuarioExternoBuscarComponent ],

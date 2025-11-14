@@ -7,12 +7,12 @@ import { AscCardProcedimentoComponent } from './asc-card-procedimento.component'
 describe('AscCardProcedimentoComponent', () => {
   let component: AscCardProcedimentoComponent;
   let fixture: ComponentFixture<AscCardProcedimentoComponent>;
-  const messageServiceSpy = jasmine.createSpyObj('MessageService',['getDescription']);
-  const localidadeServiceSpy = jasmine.createSpyObj('LocalidadeService',['getDescription']);
-  const procedimentoPedidoServiceSpy = jasmine.createSpyObj('ProcedimentoPedidoService',['getDescription']);
-  const processoServiceSpy = jasmine.createSpyObj('ProcessoService',['getDescription']);
-  const autorizacaoPreviaServiceSpy = jasmine.createSpyObj('AutorizacaoPreviaService',['getDescription']);
-  const medicamentoPatologiaPedidoServiceSpy = jasmine.createSpyObj('MedicamentoPatologiaPedidoService',['getDescription']);
+  const messageServiceSpy = { getDescription: jest.fn() };
+  const localidadeServiceSpy = { getDescription: jest.fn() };
+  const procedimentoPedidoServiceSpy = { getDescription: jest.fn() };
+  const processoServiceSpy = { getDescription: jest.fn() };
+  const autorizacaoPreviaServiceSpy = { getDescription: jest.fn() };
+  const medicamentoPatologiaPedidoServiceSpy = { getDescription: jest.fn() };
  
   beforeEach(async () => {
     await TestBed.configureTestingModule({

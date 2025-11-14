@@ -13,13 +13,13 @@ describe('MeusDadosService', () => {
   let beneficiarioServiceSpy: jasmine.SpyObj<BeneficiarioService>;
   let exportacaoServiceSpy: jasmine.SpyObj<ExportacaoService>;
   let cartaoIdServiceSpy: jasmine.SpyObj<CartaoIdentificacaoService>;
-  const prestadorExternoServiceSpy = jasmine.createSpyObj('PrestadorExternoService',['get','consultarUsuarioExternoPorFiltro']);
+  const prestadorExternoServiceSpy = { get: jest.fn(), consultarUsuarioExternoPorFiltro: jest.fn() };
   prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro = of({})
 
   beforeEach(() => {
-    const beneficiarioSpy = jasmine.createSpyObj('BeneficiarioService', ['consultarTitularPorMatricula']);
-    const exportacaoSpy = jasmine.createSpyObj('ExportacaoService', ['exportarPDF']);
-    const cartaoSpy = jasmine.createSpyObj('CartaoIdentificacaoService', ['enviarCartaoEmail']);
+    const beneficiarioSpy = { consultarTitularPorMatricula: jest.fn() };
+    const exportacaoSpy = { exportarPDF: jest.fn() };
+    const cartaoSpy = { enviarCartaoEmail: jest.fn() };
 
     TestBed.configureTestingModule({
       providers: [

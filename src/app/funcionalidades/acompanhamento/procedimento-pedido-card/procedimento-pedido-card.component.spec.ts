@@ -6,7 +6,7 @@ import { ProcedimentoPedidoCardComponent } from './procedimento-pedido-card.comp
 describe('ProcedimentoPedidoCardComponent', () => {
   let component: ProcedimentoPedidoCardComponent;
   let fixture: ComponentFixture<ProcedimentoPedidoCardComponent>;
-  const prestadorExternoServiceSpy = jasmine.createSpyObj('PrestadorExternoService',['get','consultarUsuarioExternoPorFiltro']);
+  const prestadorExternoServiceSpy = { get: jest.fn(), consultarUsuarioExternoPorFiltro: jest.fn() };
   prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro = of({})
 
   beforeEach(async () => {

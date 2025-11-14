@@ -8,7 +8,7 @@ describe('FundoInvestimentoService', () => {
   let service: FundoInvestimentoService;
   let httpMock: HttpTestingController;
   const baseUrl = '/siasc-api/api/cadastrobasico/fundoinvestimento';
-  const messageServiceSpy = jasmine.createSpyObj('MessageService',['getDescription']);
+  const messageServiceSpy = { getDescription: jest.fn() };
   const dummyFundos: FundoInvestimento[] = [
     {} as FundoInvestimento,
     {} as FundoInvestimento

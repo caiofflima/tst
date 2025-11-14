@@ -16,18 +16,18 @@ describe('EmailSituacaoFormComponent', () => {
   let component: EmailSituacaoFormComponent;
   let fixture: ComponentFixture<EmailSituacaoFormComponent>;
 
-  const messageServiceSpy = jasmine.createSpyObj('MessageService', ['addMsgDanger', 'addSuccessMsg', 'addConfirmYesNo','fromResourceBundle']);
-  const comboServiceSpy = jasmine.createSpyObj('ComboService', ['consultarComboTipoBeneficiarioPorTipoProcesso', 'consultarTipoDestinatario']);
-  const tipoProcessoServiceSpy = jasmine.createSpyObj('TipoProcessoService', ['consultarTodos']);
-  const prestadorExternoServiceSpy = jasmine.createSpyObj('PrestadorExternoService',['get','consultarUsuarioExternoPorFiltro']);
+  const messageServiceSpy = { addMsgDanger: jest.fn(), addSuccessMsg: jest.fn(), addConfirmYesNo: jest.fn(), fromResourceBundle: jest.fn() };
+  const comboServiceSpy = { consultarComboTipoBeneficiarioPorTipoProcesso: jest.fn(), consultarTipoDestinatario: jest.fn() };
+  const tipoProcessoServiceSpy = { consultarTodos: jest.fn() };
+  const prestadorExternoServiceSpy = { get: jest.fn(), consultarUsuarioExternoPorFiltro: jest.fn() };
   prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro = of({})
-  const emailServiceSpy = jasmine.createSpyObj('EmailService', ['get', 'put', 'post', 'delete']);
+  const emailServiceSpy = { get: jest.fn(), put: jest.fn(), post: jest.fn(), delete: jest.fn() };
   const activatedRouteSpy = {
     snapshot: { params: { id: '1' } }
   };
-  const routerSpy = jasmine.createSpyObj('Router', ['navigate']);
-  const locationSpy = jasmine.createSpyObj('Location', ['back']);
-  const changeDetectorRefSpy = jasmine.createSpyObj('ChangeDetectorRef', ['detectChanges']);
+  const routerSpy = { navigate: jest.fn() };
+  const locationSpy = { back: jest.fn() };
+  const changeDetectorRefSpy = { detectChanges: jest.fn() };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({

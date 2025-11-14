@@ -14,14 +14,14 @@ describe('EmpresaPrestadorExternoListarComponent', () => {
   
   let component: EmpresaPrestadorExternoListarComponent;
   let fixture: ComponentFixture<EmpresaPrestadorExternoListarComponent>;
-  const messageServiceSpy = jasmine.createSpyObj('MessageService',['getDescription']);
-  const empresaPrestadorExternoServiceSpy = jasmine.createSpyObj('EmpresaPrestadorExternoService',['consultarPorFiltro', 'consultarFiliais']);
-  const activatedRouteSpy = jasmine.createSpyObj('ActivatedRoute',['getDescription']);
-  const routerSpy = jasmine.createSpyObj('Router',['getDescription']);
-  const locationSpy = jasmine.createSpyObj('Location',['getDescription']);
-  const comboServiceSpy = jasmine.createSpyObj('ComboService',['consultarComboUF']);
-  const empresaerviceSpy = jasmine.createSpyObj('EmpresaPrestadorExternoService',['consultarPorFiltro']);
-  const prestadorExternoServiceSpy = jasmine.createSpyObj('PrestadorExternoService',['get','consultarUsuarioExternoPorFiltro']);
+  const messageServiceSpy = { getDescription: jest.fn() };
+  const empresaPrestadorExternoServiceSpy = { consultarPorFiltro: jest.fn(), consultarFiliais: jest.fn() };
+  const activatedRouteSpy = { getDescription: jest.fn() };
+  const routerSpy = { getDescription: jest.fn() };
+  const locationSpy = { getDescription: jest.fn() };
+  const comboServiceSpy = { consultarComboUF: jest.fn() };
+  const empresaerviceSpy = { consultarPorFiltro: jest.fn() };
+  const prestadorExternoServiceSpy = { get: jest.fn(), consultarUsuarioExternoPorFiltro: jest.fn() };
   prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro = of({})
   empresaPrestadorExternoServiceSpy.consultarPorFiltro.and.returnValue(of({}));
   comboServiceSpy.consultarComboUF.and.returnValue(of({}));

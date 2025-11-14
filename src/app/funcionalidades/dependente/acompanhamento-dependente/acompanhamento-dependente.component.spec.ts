@@ -15,21 +15,21 @@ describe('AcompanhamentoDependenteComponent', () => {
   let component: AcompanhamentoDependenteComponent;
   let fixture: ComponentFixture<AcompanhamentoDependenteComponent>;
 
-  const messageServiceSpy = jasmine.createSpyObj('MessageService', ['getDescription']);
-  const activatedRouteSpy = jasmine.createSpyObj('ActivatedRoute', ['snapshot']);
+  const messageServiceSpy = { getDescription: jest.fn() };
+  const activatedRouteSpy = { snapshot: jest.fn() };
   activatedRouteSpy.snapshot = {
     params: {
       id: null
     }
   }
-  const processoServiceSpy = jasmine.createSpyObj('ProcessoService', ['getProcesso']);
-  const patologiaServiceSpy = jasmine.createSpyObj('PatologiaService', ['getPatologia']);
-  const procedimentoServiceSpy = jasmine.createSpyObj('ProcedimentoService', ['getProcedimento']);
-  const medicamentoServiceSpy = jasmine.createSpyObj('MedicamentoService', ['getMedicamento']);
-  const medicamentoPatologiaPedidoServiceSpy = jasmine.createSpyObj('MedicamentoPatologiaPedidoService', ['getMedicamentoPatologiaPedido']);
-  const siascFluxoServiceSpy = jasmine.createSpyObj('SIASCFluxoService', ['getFluxo','consultarPermissoesFluxoPorPedido']);
+  const processoServiceSpy = { getProcesso: jest.fn() };
+  const patologiaServiceSpy = { getPatologia: jest.fn() };
+  const procedimentoServiceSpy = { getProcedimento: jest.fn() };
+  const medicamentoServiceSpy = { getMedicamento: jest.fn() };
+  const medicamentoPatologiaPedidoServiceSpy = { getMedicamentoPatologiaPedido: jest.fn() };
+  const siascFluxoServiceSpy = { getFluxo: jest.fn(), consultarPermissoesFluxoPorPedido: jest.fn() };
   siascFluxoServiceSpy.consultarPermissoesFluxoPorPedido.and.returnValue(of({}))
-  const documentoPedidoServiceSpy = jasmine.createSpyObj('DocumentoPedidoService', ['getDocumentoPedido']);
+  const documentoPedidoServiceSpy = { getDocumentoPedido: jest.fn() };
   documentoPedidoServiceSpy.avisoSituacaoPedido = of({});
   documentoPedidoServiceSpy.avisoSituacaoPedidoComplementares = of({});
 

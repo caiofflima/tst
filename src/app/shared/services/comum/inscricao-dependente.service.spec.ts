@@ -8,7 +8,7 @@ describe('InscricaoDependenteService', () => {
   let service: InscricaoDependenteService;
   let httpMock: HttpTestingController;
   const baseUrl = '/siasc-api/api/dependente';
-  const messageServiceSpy = jasmine.createSpyObj('MessageService',['getDescription']);
+  const messageServiceSpy = { getDescription: jest.fn() };
 
   beforeEach(() => {
     TestBed.configureTestingModule({

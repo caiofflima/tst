@@ -13,13 +13,13 @@ describe('EtapaResumoAlterarComponent', () => {
   let component: EtapaResumoAlterarComponent;
   let fixture: ComponentFixture<EtapaResumoAlterarComponent>;
 
-  const messageServiceSpy = jasmine.createSpyObj('MessageService', ['getDescription']);
-   const processoServiceSpy = jasmine.createSpyObj('ProcessoService', ['getProcesso']);
-  const beneficiarioServiceSpy = jasmine.createSpyObj('BeneficiarioService',['consultarBeneficiarioPorId','consultarFamiliaPorMatricula']);
-  const tipoDependenteServiceSpy = jasmine.createSpyObj('TipoDependenteService', ['consultarTodos']);
-  const fileUploadServiceSpy = jasmine.createSpyObj('FileUploadService',['init']);
-  const inscricaoDependenteServiceSpy = jasmine.createSpyObj('InscricaoDependenteService',['init']);
-  const tipoDeficienciaServiceSpy = jasmine.createSpyObj('TipoDeficienciaService',['consultarTodos']);
+  const messageServiceSpy = { getDescription: jest.fn() };
+   const processoServiceSpy = { getProcesso: jest.fn() };
+  const beneficiarioServiceSpy = { consultarBeneficiarioPorId: jest.fn(), consultarFamiliaPorMatricula: jest.fn() };
+  const tipoDependenteServiceSpy = { consultarTodos: jest.fn() };
+  const fileUploadServiceSpy = { init: jest.fn() };
+  const inscricaoDependenteServiceSpy = { init: jest.fn() };
+  const tipoDeficienciaServiceSpy = { consultarTodos: jest.fn() };
   tipoDeficienciaServiceSpy.consultarTodos.and.returnValue(of({}))
   
 

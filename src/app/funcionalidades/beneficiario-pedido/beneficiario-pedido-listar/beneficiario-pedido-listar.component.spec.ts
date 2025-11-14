@@ -16,22 +16,22 @@ class MockUtil {
 describe('BeneficiarioPedidoListarComponent', () => {
   let component: BeneficiarioPedidoListarComponent;
   let fixture: ComponentFixture<BeneficiarioPedidoListarComponent>;
-  const messageServiceSpy = jasmine.createSpyObj('MessageService',['getDescription']);
-  const routerSpy = jasmine.createSpyObj('Router', ['navigate', 'url']);
-  const activatedRouteSpy = jasmine.createSpyObj('ActivatedRoute', ['snapshot']);
+  const messageServiceSpy = { getDescription: jest.fn() };
+  const routerSpy = { navigate: jest.fn(), url: jest.fn() };
+  const activatedRouteSpy = { snapshot: jest.fn() };
   activatedRouteSpy.snapshot = {
     queryParams: {
       id: null
     }
   }
-  const perfilServiceSpy = jasmine.createSpyObj('PerfilService', ['consultarPorNome']);
-  const beneficiarioPedidoServiceSpy = jasmine.createSpyObj('BeneficiarioPedidoService', ['getTitulo','getBaseURL', 'consultarPorFiltro']);
+  const perfilServiceSpy = { consultarPorNome: jest.fn() };
+  const beneficiarioPedidoServiceSpy = { getTitulo: jest.fn(), getBaseURL: jest.fn(), consultarPorFiltro: jest.fn() };
   beneficiarioPedidoServiceSpy.consultarPorFiltro.and.returnValue(of({}));
   beneficiarioPedidoServiceSpy.getTitulo.and.returnValue('Tipo de Beneficiário por Tipo de Pedido');
   beneficiarioPedidoServiceSpy.getBaseURL.and.returnValue('/manutencao/parametros/tipobeneficiario-tipopedido');
   
-  const tipoBeneficiarioServiceSpy = jasmine.createSpyObj('TipoBeneficiarioService', ['consultarTodosBeneficiarios']);
-  const comboServiceSpy = jasmine.createSpyObj('ComboService', ['consultarComboUF','consultarComboPerfil']);
+  const tipoBeneficiarioServiceSpy = { consultarTodosBeneficiarios: jest.fn() };
+  const comboServiceSpy = { consultarComboUF: jest.fn(), consultarComboPerfil: jest.fn() };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({

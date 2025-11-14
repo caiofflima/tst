@@ -8,7 +8,7 @@ describe('CaraterSolicitacaoService', () => {
   let service: CaraterSolicitacaoService;
   let httpMock: HttpTestingController;
   const baseUrl = '/siasc-api/api/caracteres-solicitacao';
-  const messageServiceSpy = jasmine.createSpyObj('MessageService',['getDescription']);
+  const messageServiceSpy = { getDescription: jest.fn() };
 
   beforeEach(() => {
 

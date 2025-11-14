@@ -13,8 +13,8 @@ describe('RenovarDependenteComponent', () => {
   let component: RenovarDependenteComponent;
   let fixture: ComponentFixture<RenovarDependenteComponent>;
 
-  const messageServiceSpy = jasmine.createSpyObj('MessageService', ['getDescription']);
-  const activatedRouteSpy = jasmine.createSpyObj('ActivatedRoute', ['snapshot']);
+  const messageServiceSpy = { getDescription: jest.fn() };
+  const activatedRouteSpy = { snapshot: jest.fn() };
   activatedRouteSpy.snapshot = {
     params:{
       idBeneficiario: 1

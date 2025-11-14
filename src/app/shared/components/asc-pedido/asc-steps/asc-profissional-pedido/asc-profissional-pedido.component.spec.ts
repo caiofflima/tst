@@ -12,7 +12,7 @@ describe('AscProfissionalPedidoComponent', () => {
   let fixture: ComponentFixture<AscProfissionalPedidoComponent>;
 
   beforeEach(async () => {
-    const messageServiceSpy = jasmine.createSpyObj('MessageService', ['showDangerMsg']);
+    const messageServiceSpy = { showDangerMsg: jest.fn() };
     spyOn(SessaoService, 'getMatriculaFuncional').and.returnValue('C000123');
 
     await TestBed.configureTestingModule({

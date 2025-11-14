@@ -8,7 +8,7 @@ describe('LocalidadeService', () => {
   let service: LocalidadeService;
   let httpMock: HttpTestingController;
   const baseUrl = '/siasc-api/api/localidades';
-  const messageServiceSpy = jasmine.createSpyObj('MessageService',['getDescription']);
+  const messageServiceSpy = { getDescription: jest.fn() };
   const dummyMunicipios: Municipio[] = [
     {} as Municipio,
     {} as Municipio

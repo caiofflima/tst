@@ -15,18 +15,18 @@ describe('CancelarDependenteComponent', () => {
   let component: CancelarDependenteComponent;
   let fixture: ComponentFixture<CancelarDependenteComponent>;
 
-  const messageServiceSpy = jasmine.createSpyObj('MessageService', ['getDescription']);
-  const activatedRouteSpy = jasmine.createSpyObj('ActivatedRoute', ['snapshot']);
+  const messageServiceSpy = { getDescription: jest.fn() };
+  const activatedRouteSpy = { snapshot: jest.fn() };
   activatedRouteSpy.snapshot = {
     params: {
       id: null
     }
   }
-  const processoServiceSpy = jasmine.createSpyObj('ProcessoService', ['getProcesso']);
-  const fileUploadServiceSpy = jasmine.createSpyObj('FileUploadService', ['getProcesso']);
-  const beneficiarioServiceSpy = jasmine.createSpyObj('BeneficiarioService',['consultarBeneficiarioPorId','consultarFamiliaPorMatricula']);
-  const inscricaoDependenteServiceSpy = jasmine.createSpyObj('InscricaoDependenteService',['consultarBeneficiarioPorId']);
-  const tipoDeficienciaServiceSpy = jasmine.createSpyObj('TipoDeficienciaService',['consultarTodos']);
+  const processoServiceSpy = { getProcesso: jest.fn() };
+  const fileUploadServiceSpy = { getProcesso: jest.fn() };
+  const beneficiarioServiceSpy = { consultarBeneficiarioPorId: jest.fn(), consultarFamiliaPorMatricula: jest.fn() };
+  const inscricaoDependenteServiceSpy = { consultarBeneficiarioPorId: jest.fn() };
+  const tipoDeficienciaServiceSpy = { consultarTodos: jest.fn() };
   beneficiarioServiceSpy.consultarFamiliaPorMatricula.and.returnValue(of({}))
   tipoDeficienciaServiceSpy.consultarTodos.and.returnValue(of({}))
   

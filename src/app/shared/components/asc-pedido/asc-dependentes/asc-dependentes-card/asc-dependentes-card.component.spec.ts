@@ -10,11 +10,11 @@ import { AscDependentesCardComponent } from './asc-dependentes-card.component';
 describe('AscDependentesCardComponent', () => {
   let component: AscDependentesCardComponent;
   let fixture: ComponentFixture<AscDependentesCardComponent>;
-  const messageServiceSpy = jasmine.createSpyObj('MessageService',['getDescription']);
-  const inscricaoDependenteServiceSpy = jasmine.createSpyObj('InscricaoDependenteService',['init']);
-  const tipoDependenteServiceSpy = jasmine.createSpyObj('TipoDependenteService',['init']);
-  const BeneficiarioServiceSpy = jasmine.createSpyObj('BeneficiarioService',['init']);
-  const tipoDeficienciaServiceSpy = jasmine.createSpyObj('TipoDeficienciaService',['consultarTodos']);
+  const messageServiceSpy = { getDescription: jest.fn() };
+  const inscricaoDependenteServiceSpy = { init: jest.fn() };
+  const tipoDependenteServiceSpy = { init: jest.fn() };
+  const BeneficiarioServiceSpy = { init: jest.fn() };
+  const tipoDeficienciaServiceSpy = { consultarTodos: jest.fn() };
   tipoDeficienciaServiceSpy.consultarTodos.and.returnValue(of([]));
 
   beforeEach(async () => {

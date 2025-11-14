@@ -7,7 +7,7 @@ describe('ProfissionalExecutanteService', () => {
   let service: ProfissionalExecutanteService;
   let httpMock: HttpTestingController;
   const baseUrl = '/siasc-api/api/profissionais-executantes';
-  const messageServiceSpy = jasmine.createSpyObj('MessageService',['getDescription']);
+  const messageServiceSpy = { getDescription: jest.fn() };
 
   beforeEach(() => {
     TestBed.configureTestingModule({

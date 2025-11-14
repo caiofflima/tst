@@ -12,7 +12,7 @@ describe('PaginaInicialComponent', () => {
   let component: PaginaInicialComponent;
   let fixture: ComponentFixture<PaginaInicialComponent>;
 
-  const messageServiceSpy = jasmine.createSpyObj('MessageService', ['getDescription']);
+  const messageServiceSpy = { getDescription: jest.fn() };
  
   const usuario = {} as Usuario;
   usuario.matriculaFuncional = "C123000";
