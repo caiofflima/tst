@@ -27,7 +27,7 @@ describe('AscDocumentoCardComponent', () => {
     const routerSpy = { navigate: jest.fn(), url: jest.fn() };
     const activatedRouteSpy = { url: jest.fn() , snapshot: null, paramMap: of({}) };
     
-    activatedRouteSpy.params.mockReturnValue(of({id: 1})));
+    activatedRouteSpy.params.mockReturnValue(of({id: 1}));
     const mockDocs: DocumentoTipoProcesso[] = [ {id:1, texto:"RG", assunto:"RG"} as DocumentoTipoProcesso] ;
     const mockPedido: Pedido = {id:1} as Pedido ;
     //const mockArquivos: Arquivo[] = [ {id:1} as Arquivo] ;
@@ -108,7 +108,7 @@ describe('AscDocumentoCardComponent', () => {
     it('deve atribuir pedido', () => {
         component.processo = mockPedido;
         const result = component.processo;
-        expect(result).toEqual(expect.objectContaining({id:1})));
+        expect(result).toEqual(expect.objectContaining({id:1}));
     });
 
     it('deve verificar se está editando', () => {
