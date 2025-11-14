@@ -41,7 +41,7 @@ describe('BeneficiarioCardComponent', () => {
             id: 1,
             numero: 'PED-001',
             beneficiario: new Beneficiario()
-        } as Pedido;
+        } as unknown as Pedido;
 
         component.processo = mockPedido;
 
@@ -53,7 +53,7 @@ describe('BeneficiarioCardComponent', () => {
             id: 1,
             numero: 'PED-001',
             beneficiario: new Beneficiario()
-        } as Pedido;
+        } as unknown as Pedido;
 
         component.processo$.subscribe((processo: Pedido) => {
             expect(processo).toEqual(mockPedido);
@@ -68,7 +68,7 @@ describe('BeneficiarioCardComponent', () => {
             id: 1,
             numero: 'PED-001',
             beneficiario: new Beneficiario()
-        } as Pedido;
+        } as unknown as Pedido;
 
         component['_processo'] = mockPedido;
 

@@ -53,7 +53,7 @@ describe('AcompanhamentoComponent', () => {
     });
 
     it('deve buscar processo por ID da rota no ngOnInit', () => {
-        const mockPedido: Pedido = { id: 123, numero: 'PED-001' } as Pedido;
+        const mockPedido: Pedido = { id: 123, numero: 'PED-001' } as unknown as Pedido;
         processoService.consultarPorId.mockReturnValue(of(mockPedido));
 
         fixture.detectChanges(); // Chama ngOnInit
@@ -64,7 +64,7 @@ describe('AcompanhamentoComponent', () => {
     });
 
     it('deve atualizar processo quando receber dados da rota', (done) => {
-        const mockPedido: Pedido = { id: 123, numero: 'PED-001' } as Pedido;
+        const mockPedido: Pedido = { id: 123, numero: 'PED-001' } as unknown as Pedido;
         processoService.consultarPorId.mockReturnValue(of(mockPedido));
 
         fixture.detectChanges();
