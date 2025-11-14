@@ -15,7 +15,7 @@ describe('ListarProcedimentosComReembolsoComponent', () => {
     const prestadorExternoServiceSpy = { get: jest.fn(), consultarUsuarioExternoPorFiltro: jest.fn() };
     prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro.mockReturnValue(of({}));
 
-    const messageServiceSpy = { showDangerMsg: jest.fn()) };
+    const messageServiceSpy = { showDangerMsg: jest.fn() };
 
     TestBed.configureTestingModule({
       declarations: [ ListarProcedimentosComReembolsoComponent ],

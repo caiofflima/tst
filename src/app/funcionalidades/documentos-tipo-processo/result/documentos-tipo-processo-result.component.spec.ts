@@ -23,7 +23,7 @@ describe('DocumentosTipoProcessoResultComponent', () => {
 
   beforeEach(async () => {
     mockRouter = {
-      navigate: jest.fn())
+      navigate: jest.fn()
     };
 
     mockLocation = {

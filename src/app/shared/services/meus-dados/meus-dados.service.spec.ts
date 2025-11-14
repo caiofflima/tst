@@ -17,7 +17,7 @@ describe('MeusDadosService', () => {
   prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro.mockReturnValue(of({}));
 
   beforeEach(() => {
-    const beneficiarioSpy = { consultarTitularPorMatricula: jest.fn()) };
+    const beneficiarioSpy = { consultarTitularPorMatricula: jest.fn() };
     const exportacaoSpy = { exportarPDF: jest.fn() };
     const cartaoSpy = { enviarCartaoEmail: jest.fn() };
 

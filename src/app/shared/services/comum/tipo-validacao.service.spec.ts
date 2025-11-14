@@ -15,7 +15,7 @@ describe('TipoValidacaoService', () => {
   prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro.mockReturnValue(of({}));
 
   beforeEach(() => {
-    const spy = { add: jest.fn()) };
+    const spy = { add: jest.fn() };
 
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
