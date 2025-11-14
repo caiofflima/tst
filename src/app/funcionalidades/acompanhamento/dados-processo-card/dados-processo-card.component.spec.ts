@@ -51,7 +51,7 @@ describe('DadosProcessoCardComponent', () => {
     });
 
     it('goToTop deve chamar window.scrollTo com 0, 0', () => {
-        const scrollToSpy = jest.jest.jest.jest.spyOn(window, 'scrollTo').mockImplementation();
+        const scrollToSpy = jest.jest.jest.jest.jest.spyOn(window, 'scrollTo').mockImplementation();
 
         component.goToTop();
 
@@ -61,7 +61,7 @@ describe('DadosProcessoCardComponent', () => {
     });
 
     it('goToTop deve rolar para o topo da página', () => {
-        const scrollToSpy = jest.jest.jest.jest.spyOn(window, 'scrollTo').mockImplementation();
+        const scrollToSpy = jest.jest.jest.jest.jest.spyOn(window, 'scrollTo').mockImplementation();
 
         component.goToTop();
 

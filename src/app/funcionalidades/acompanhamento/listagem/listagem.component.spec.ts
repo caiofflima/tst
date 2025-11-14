@@ -22,7 +22,7 @@ describe('ListagemComponent', () => {
   });
 
   it('deve chamar ngOnInit ao inicializar', () => {
-    jest.jest.jest.spyOn(console, 'log'); // Espiona a função console.log
+    jest.jest.jest.jest.spyOn(console, 'log'); // Espiona a função console.log
     component.ngOnInit(); // Chama ngOnInit
     expect(console.log).toHaveBeenCalled(); // Verifica se console.log foi chamado
   });

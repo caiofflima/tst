@@ -20,16 +20,16 @@ describe('DependenteDetailComponent', () => {
 
   beforeEach(async () => {
     mockRouter = {
-      navigate: jasmine.createSpy('navigate')
+      navigate: jest.fn()
     };
 
     mockLocation = {
-      back: jasmine.createSpy('back')
+      back: jest.fn()
     };
 
     mockMessageService = {
-      addMsgDanger: jasmine.createSpy('addMsgDanger'),
-      showDangerMsg: jasmine.createSpy('showDangerMsg')
+      addMsgDanger: jest.fn(),
+      showDangerMsg: jest.fn()
     };
 
     mockActivatedRoute = {
@@ -41,7 +41,7 @@ describe('DependenteDetailComponent', () => {
     };
 
     mockBeneficiarioService = {
-      getDadosBeneficiarioCartaoPlano: jasmine.createSpy('getDadosBeneficiarioCartaoPlano').mockReturnValue(of({} as DetalheBeneficiarioDTO))
+      getDadosBeneficiarioCartaoPlano: jest.fn().mockReturnValue(of({} as DetalheBeneficiarioDTO))
     };
 
     await TestBed.configureTestingModule({
@@ -72,7 +72,7 @@ describe('DependenteDetailComponent', () => {
   });
 
   it('deve carregar dados do beneficiário ao inicializar', () => {
-    jest.jest.jest.spyOn(component, 'getDadosBeneficiarioCartaoPlano').and.callThrough(); // Espiona o método
+    jest.jest.jest.jest.spyOn(component, 'getDadosBeneficiarioCartaoPlano').and.callThrough(); // Espiona o método
     component.ngOnInit(); // Chama ngOnInit
     expect(component.getDadosBeneficiarioCartaoPlano).toHaveBeenCalledWith(1); // Verifica se o método foi chamado com o ID correto
   });

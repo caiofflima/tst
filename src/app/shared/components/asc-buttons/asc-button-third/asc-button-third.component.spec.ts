@@ -60,7 +60,7 @@ describe('AscButtonThirdComponent', () => {
 
     it('clickButton deve emitir evento onClick', () => {
         const mockEvent = new MouseEvent('click');
-        const emitSpy = jest.jest.jest.jest.spyOn(component.onClick, 'emit');
+        const emitSpy = jest.jest.jest.jest.jest.spyOn(component.onClick, 'emit');
 
         component.clickButton(mockEvent);
 
@@ -88,7 +88,7 @@ describe('AscButtonThirdComponent', () => {
     });
 
     it('deve permitir múltiplas chamadas de clickButton', () => {
-        const emitSpy = jest.jest.jest.jest.spyOn(component.onClick, 'emit');
+        const emitSpy = jest.jest.jest.jest.jest.spyOn(component.onClick, 'emit');
 
         for (let i = 0; i < 5; i++) {
             component.clickButton(new MouseEvent('click'));
@@ -118,7 +118,7 @@ describe('AscButtonThirdComponent', () => {
     });
 
     it('deve emitir eventos mesmo quando disabled é true', () => {
-        const emitSpy = jest.jest.jest.jest.spyOn(component.onClick, 'emit');
+        const emitSpy = jest.jest.jest.jest.jest.spyOn(component.onClick, 'emit');
         component.disabled = true;
 
         const mockEvent = new MouseEvent('click');

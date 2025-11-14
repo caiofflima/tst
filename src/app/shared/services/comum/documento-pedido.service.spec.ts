@@ -113,13 +113,13 @@ describe('DocumentoPedidoService', () => {
   });
 
   it('should emit avisoParaBotao on setAvisoDeMudanca', () => {
-    jest.jest.jest.spyOn(service.avisoParaBotao, 'emit');
+    jest.jest.jest.jest.spyOn(service.avisoParaBotao, 'emit');
     service.setAvisoDeMudanca('doc');
     expect(service.avisoParaBotao.emit).toHaveBeenCalledWith('doc');
   });
 
   // it('should emit avisoSituacaoPedido on setAvisoSituacaoPedido', () => {
-  //   jest.jest.jest.spyOn(service.avisoSituacaoPedido, 'emit');
+  //   jest.jest.jest.jest.spyOn(service.avisoSituacaoPedido, 'emit');
   //   service.setAvisoSituacaoPedido(true);
   //   expect(service.avisoSituacaoPedido.emit).toHaveBeenCalledWith(true);
   // });

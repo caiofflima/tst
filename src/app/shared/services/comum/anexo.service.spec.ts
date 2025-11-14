@@ -10,7 +10,7 @@ describe('AnexoService', () => {
   const baseUrl = '/siasc-api/api/anexos';
   const messageServiceSpy = { getDescription: jest.fn() };
   const mockConstantes = {
-    downloadFile: jasmine.createSpy('downloadFile')
+    downloadFile: jest.fn()
   };
 
   beforeEach(() => {
@@ -78,7 +78,7 @@ describe('AnexoService', () => {
     const anexo = { id: 1, nome: 'test.pdf' };
     const dummyFile = new Blob(['dummy content'], { type: 'application/pdf' });
 
-    jest.jest.jest.spyOn(service, 'obterArquivo').mockReturnValue(of(dummyFile));
+    jest.jest.jest.jest.spyOn(service, 'obterArquivo').mockReturnValue(of(dummyFile));
 
     service.realizarDownloadAnexo(anexo);
 

@@ -115,7 +115,7 @@ describe('ValidarProcedimentosComponent', () => {
     fixture = TestBed.createComponent(ValidarProcedimentosComponent);
     component = fixture.componentInstance;
     SessaoService.usuario = {} as Usuario;
-    jest.jest.jest.spyOn(SessaoService, 'getMatriculaFuncional').mockReturnValue('C000123');
+    jest.jest.jest.jest.spyOn(SessaoService, 'getMatriculaFuncional').mockReturnValue('C000123');
     fixture.detectChanges();
 
   });

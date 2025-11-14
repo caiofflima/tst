@@ -23,24 +23,24 @@ describe('DocumentosTipoProcessoParamComponent', () => {
 
   beforeEach(async () => {
     mockRouter = {
-      navigate: jasmine.createSpy('navigate').mockReturnValue(new Promise<any>(null)),
+      navigate: jest.fn().mockReturnValue(new Promise<any>(null)),
     };
 
     mockLocation = {
-      back: jasmine.createSpy('back')
+      back: jest.fn()
     };
 
     mockMessageService = {
-      addMsgDanger: jasmine.createSpy('addMsgDanger')
+      addMsgDanger: jest.fn()
     };
 
     mockComboService = {
-      consultarComboTipoBeneficiario: jasmine.createSpy('consultarComboTipoBeneficiario').mockReturnValue(of([])),
-      consultarComboTipoProcesso: jasmine.createSpy('consultarComboTipoProcesso').mockReturnValue(of([]))
+      consultarComboTipoBeneficiario: jest.fn().mockReturnValue(of([])),
+      consultarComboTipoProcesso: jest.fn().mockReturnValue(of([]))
     };
 
     mockTipoDeficienciaService = {
-      consultarTodos: jasmine.createSpy('consultarTodos').mockReturnValue(of([]))
+      consultarTodos: jest.fn().mockReturnValue(of([]))
     };
 
     await TestBed.configureTestingModule({
@@ -72,7 +72,7 @@ describe('DocumentosTipoProcessoParamComponent', () => {
   });
 
   it('deve inicializar os combos ao ngOnInit', () => {
-    jest.jest.jest.spyOn(component, 'inicializarCombos').and.callThrough(); // Espiona o método
+    jest.jest.jest.jest.spyOn(component, 'inicializarCombos').and.callThrough(); // Espiona o método
     component.ngOnInit(); // Chama ngOnInit
     expect(component.inicializarCombos).toHaveBeenCalled(); // Verifica se inicializarCombos foi chamado
   });

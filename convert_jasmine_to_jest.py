@@ -61,6 +61,9 @@ def convert_jasmine_to_jest(content):
         return f"{{ {jest_methods} }}"
     content = re.sub(pattern2, replace_spy2, content)
 
+    # 9. Convert jasmine.createSpy('name') to jest.fn()
+    content = re.sub(r"jasmine\.createSpy\(['\"][^'\"]*['\"]\)", 'jest.fn()', content)
+
     return content
 
 def process_file(file_path):

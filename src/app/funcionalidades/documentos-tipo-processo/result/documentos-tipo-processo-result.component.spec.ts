@@ -23,17 +23,17 @@ describe('DocumentosTipoProcessoResultComponent', () => {
 
   beforeEach(async () => {
     mockRouter = {
-      navigate: jasmine.createSpy('navigate')
+      navigate: jest.fn()
     };
 
     mockLocation = {
-      back: jasmine.createSpy('back')
+      back: jest.fn()
     };
 
     mockMessageService = {
-      addMsgDanger: jasmine.createSpy('addMsgDanger'),
-      showDangerMsg: jasmine.createSpy('showDangerMsg'),
-      fromResourceBundle: jasmine.createSpy('fromResourceBundle')
+      addMsgDanger: jest.fn(),
+      showDangerMsg: jest.fn(),
+      fromResourceBundle: jest.fn()
     };
 
     mockActivatedRoute = {
@@ -53,7 +53,7 @@ describe('DocumentosTipoProcessoResultComponent', () => {
     };
 
     mockDocumentoTipoProcessoService = {
-      consultarPorFiltro: jasmine.createSpy('consultarPorFiltro').mockReturnValue(of({
+      consultarPorFiltro: jest.fn().mockReturnValue(of({
         total: 1,
         dados: [new DocumentoTipoProcesso()]
       })),

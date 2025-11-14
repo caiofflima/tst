@@ -28,16 +28,16 @@ describe('CartoesDetailComponent', () => {
     const sessaoServiceSpy = { getMatriculaFuncional: jest.fn(), usuario: jest.fn() };   
 
     mockRouter = {
-      navigate: jasmine.createSpy('navigate')
+      navigate: jest.fn()
     };
 
     mockLocation = {
-      back: jasmine.createSpy('back')
+      back: jest.fn()
     };
 
     mockMessageService = {
-      addMsgDanger: jasmine.createSpy('addMsgDanger'),
-      showDangerMsg: jasmine.createSpy('showDangerMsg')
+      addMsgDanger: jest.fn(),
+      showDangerMsg: jest.fn()
     };
 
     await TestBed.configureTestingModule({

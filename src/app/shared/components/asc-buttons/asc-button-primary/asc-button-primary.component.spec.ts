@@ -73,7 +73,7 @@ describe('AscButtonPrimaryComponent', () => {
 
     it('clickButton deve emitir evento onClick', () => {
         const mockEvent = new MouseEvent('click');
-        const emitSpy = jest.jest.jest.jest.spyOn(component.onClick, 'emit');
+        const emitSpy = jest.jest.jest.jest.jest.spyOn(component.onClick, 'emit');
 
         component.clickButton(mockEvent);
 
@@ -99,7 +99,7 @@ describe('AscButtonPrimaryComponent', () => {
     });
 
     it('deve permitir múltiplas chamadas de clickButton', () => {
-        const emitSpy = jest.jest.jest.jest.spyOn(component.onClick, 'emit');
+        const emitSpy = jest.jest.jest.jest.jest.spyOn(component.onClick, 'emit');
         const mockEvent1 = new MouseEvent('click');
         const mockEvent2 = new MouseEvent('click');
 

@@ -46,7 +46,7 @@ describe('PatologiaService', () => {
   it('should fetch patologias by filter', () => {
     const dummyPatologias: Patologia[] = [{ id: 1, nome: 'Patologia 1' }];
     const filtro = new FiltroPatologia();
-    jest.jest.jest.spyOn(filtro, 'montarQueryString').mockReturnValue('nome=Patologia 1');
+    jest.jest.jest.jest.spyOn(filtro, 'montarQueryString').mockReturnValue('nome=Patologia 1');
 
     service.consultarPorFiltro(filtro).subscribe(patologias => {
       expect(patologias.length).toBe(1);
