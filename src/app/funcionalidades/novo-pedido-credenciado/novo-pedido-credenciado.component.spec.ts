@@ -18,7 +18,7 @@ describe('NovoPedidoAutorizadorComponent', () => {
   const locationSpy = { getDescription: jest.fn() };
   const meusDadosServiceSpy = { carregarTitular: jest.fn() };
   const prestadorExternoServiceSpy = { get: jest.fn(), consultarUsuarioExternoPorFiltro: jest.fn() };
-  prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro.mockReturnValue(of({});
+  prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro.mockReturnValue(of({}));
   empresaPrestadorExternoServiceSpy.consultarFiliais.mockReturnValue(of({}));
   meusDadosServiceSpy.carregarTitular.mockReturnValue(of({}));
   beforeEach(async () => {

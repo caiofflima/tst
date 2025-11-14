@@ -13,7 +13,7 @@ describe('ListarProcedimentosComReembolsoComponent', () => {
     const procedimentoServiceSpy = { listarProcedimentosComReembolso: jest.fn() };
     procedimentoServiceSpy.listarProcedimentosComReembolso.mockReturnValue(of());
     const prestadorExternoServiceSpy = { get: jest.fn(), consultarUsuarioExternoPorFiltro: jest.fn() };
-    prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro.mockReturnValue(of({});
+    prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro.mockReturnValue(of({}));
 
     const messageServiceSpy = { showDangerMsg: jest.fn()) };
 

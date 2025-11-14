@@ -12,7 +12,7 @@ describe('TipoDocumentoService', () => {
   const baseUrl = '/siasc-api/api/tipo-documento';
   const messageServiceSpy = { getDescription: jest.fn() };
   const prestadorExternoServiceSpy = { get: jest.fn(), consultarUsuarioExternoPorFiltro: jest.fn() };
-  prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro.mockReturnValue(of({});
+  prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro.mockReturnValue(of({}));
 
   beforeEach(() => {
 

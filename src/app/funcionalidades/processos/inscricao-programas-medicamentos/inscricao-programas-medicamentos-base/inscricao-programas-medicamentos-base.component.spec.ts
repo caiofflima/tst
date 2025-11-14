@@ -51,7 +51,7 @@ describe('InscricaoProgramasMendicamentosBaseComponent', () => {
 
   empresaPrestadorExternoServiceSpy.buscarEmpresas.mockReturnValue(of({}));
   prestadorExternoServiceSpy.consultarPorFiltro.mockReturnValue(of({}));
-  prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro.mockReturnValue(of({});
+  prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro.mockReturnValue(of({}));
 
   comboServiceSpy.consultarComboPerfisPrestadoresExternos.mockReturnValue(of({}));
   comboServiceSpy.consultarComboTiposAuditor.mockReturnValue(of({}));

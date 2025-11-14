@@ -17,7 +17,7 @@ describe('PerfilUsuarioExternoBuscarComponent', () => {
     comboServiceSpy.consultarComboPerfisPrestadoresExternos.mockReturnValue(of());
     comboServiceSpy.consultarComboTiposAuditor.mockReturnValue(of());
     const prestadorExternoServiceSpy = { get: jest.fn(), consultarUsuarioExternoPorFiltro: jest.fn() };
-    prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro.mockReturnValue(of({});
+    prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro.mockReturnValue(of({}));
     const perfilUsuarioExternoServiceSpy = { consultarComboPerfisPrestadoresExternos: jest.fn(), consultarComboTiposAuditor: jest.fn(), consultarPorFiltro: jest.fn(), removerCredenciais: jest.fn()) };
     perfilUsuarioExternoServiceSpy.consultarPorFiltro.mockReturnValue(of());
     

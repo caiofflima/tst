@@ -12,7 +12,7 @@ describe('TipoProcessoService', () => {
   const baseUrl = '/siasc-api/api/tipos-processo';
   const messageServiceSpy = { getDescription: jest.fn() };
   const prestadorExternoServiceSpy = { get: jest.fn(), consultarUsuarioExternoPorFiltro: jest.fn() };
-  prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro.mockReturnValue(of({});
+  prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro.mockReturnValue(of({}));
 
   beforeEach(() => {
     TestBed.configureTestingModule({
