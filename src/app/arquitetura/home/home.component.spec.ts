@@ -47,7 +47,7 @@ describe('HomeComponent', () => {
     });
 
     it('deve se inscrever em subjectIdCredenciado no ngAfterViewInit', async () => {
-        const subscribeSpy = jest.jest.jest.jest.jest.spyOn(subjectIdCredenciado, 'subscribe');
+        const subscribeSpy = jest.spyOn(subjectIdCredenciado, 'subscribe');
 
         await component.ngAfterViewInit();
 

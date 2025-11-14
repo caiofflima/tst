@@ -65,7 +65,7 @@ describe('AscApresentadorComponent', () => {
 
     it('apresentar deve emitir evento com currentInfo', () => {
         const item = { id: 1, nome: 'Teste' };
-        const emitSpy = jest.jest.jest.jest.jest.spyOn(component['emitter'], 'emit');
+        const emitSpy = jest.spyOn(component['emitter'], 'emit');
 
         component.apresentar(item);
 
@@ -186,7 +186,7 @@ describe('AscApresentadorComponent', () => {
 
     it('deve emitir evento ao navegar para próximo', () => {
         const items = [{ id: 1 }, { id: 2 }];
-        const emitSpy = jest.jest.jest.jest.jest.spyOn(component['emitter'], 'emit');
+        const emitSpy = jest.spyOn(component['emitter'], 'emit');
         component.setApresentaveis(items);
         component.apresentar(items[0]);
 

@@ -132,7 +132,7 @@ describe('AcompanhamentoPmdComponent', () => {
     fixture = TestBed.createComponent(AcompanhamentoPmdComponent);
     component = fixture.componentInstance;
     SessaoService.usuario = {} as Usuario;
-    jest.jest.jest.jest.spyOn(SessaoService, 'getMatriculaFuncional').mockReturnValue('C000123');
+    jest.spyOn(SessaoService, 'getMatriculaFuncional').mockReturnValue('C000123');
     fixture.detectChanges();
 
   });

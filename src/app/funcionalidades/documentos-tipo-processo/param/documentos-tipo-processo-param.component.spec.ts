@@ -72,7 +72,7 @@ describe('DocumentosTipoProcessoParamComponent', () => {
   });
 
   it('deve inicializar os combos ao ngOnInit', () => {
-    jest.jest.jest.jest.spyOn(component, 'inicializarCombos').and.callThrough(); // Espiona o método
+    jest.spyOn(component, 'inicializarCombos').and.callThrough(); // Espiona o método
     component.ngOnInit(); // Chama ngOnInit
     expect(component.inicializarCombos).toHaveBeenCalled(); // Verifica se inicializarCombos foi chamado
   });

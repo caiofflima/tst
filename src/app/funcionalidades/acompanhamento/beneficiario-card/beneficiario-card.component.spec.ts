@@ -99,8 +99,8 @@ describe('BeneficiarioCardComponent', () => {
     });
 
     it('ngOnDestroy deve chamar next e complete no unsubscribe', () => {
-        const nextSpy = jest.jest.jest.jest.jest.spyOn(component['unsubscribe'], 'next');
-        const completeSpy = jest.jest.jest.jest.jest.spyOn(component['unsubscribe'], 'complete');
+        const nextSpy = jest.spyOn(component['unsubscribe'], 'next');
+        const completeSpy = jest.spyOn(component['unsubscribe'], 'complete');
 
         component.ngOnDestroy();
 
