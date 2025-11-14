@@ -49,7 +49,7 @@ describe('EtapaDadosDependenteComponent', () => {
     fixture = TestBed.createComponent(EtapaDadosDependenteComponent);
     component = fixture.componentInstance;
     component.checkRestart = new Observable<void>();
-    component.stepper = cdkStepperSpy;
+    component.stepper = cdkStepperSpy as any;
     fixture.detectChanges();
   });
 
@@ -134,8 +134,8 @@ describe('EtapaDadosDependenteComponent', () => {
     component.tipoDependente = {
       codigoLegadoDependencia: 'C'
     } as TipoBeneficiarioDTO;
-    expect(component.idadeIncompativel()).toBeFalse;
-    
+    expect(component.idadeIncompativel()).toBeFalsy();
+
   });
 
 });
