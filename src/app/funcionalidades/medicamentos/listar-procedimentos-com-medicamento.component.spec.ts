@@ -13,7 +13,7 @@ describe('ListarProcedimentosComReembolsoComponent', () => {
   let documentoTipoProcessoServiceSpy = jasmine.createSpyObj('DocumentoTipoProcessoService',['get']);
   let duvidasServiceSpy = jasmine.createSpyObj('DuvidasService',['get']);
   let procedimentoServiceSpy = jasmine.createSpyObj('ProcedimentoService',['listarProcedimentosComReembolso']);
-  procedimentoServiceSpy.listarProcedimentosComReembolso.and.returnValue(of([]));
+  procedimentoServiceSpy.listarProcedimentosComReembolso.mockReturnValue(of([]));
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({

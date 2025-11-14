@@ -23,7 +23,7 @@ describe('ExtratoIRPFDetalharComponent', () => {
   beforeEach(async () => {
     const sessaoServiceSpy = { getUsuario: jest.fn() };
     const beneficiarioServiceSpy = { consultarPorMatricula: jest.fn() };
-    beneficiarioServiceSpy.consultarPorMatricula.and.returnValue(of());
+    beneficiarioServiceSpy.consultarPorMatricula.mockReturnValue(of());
     const reembolsoAGSServiceSpy = { getLancamentosDoAnoPorCPF: jest.fn() };
     const atendimentoServiceSpy = { get: jest.fn() };
     
@@ -51,7 +51,7 @@ describe('ExtratoIRPFDetalharComponent', () => {
     };
 
     mockReembolsoSaudeCaixaService = {
-      getComprovanteIRPFPorCPF: jasmine.createSpy('getComprovanteIRPFPorCPF').and.returnValue(of({}))
+      getComprovanteIRPFPorCPF: jasmine.createSpy('getComprovanteIRPFPorCPF').mockReturnValue(of({}))
     };
 
     await TestBed.configureTestingModule({
@@ -90,7 +90,7 @@ describe('ExtratoIRPFDetalharComponent', () => {
   });
 
   it('deve chamar carregarBeneficiario no ngOnInit', () => {
-    spyOn(component, 'carregarBeneficiario').and.callThrough(); // Espiona o método
+    jest.spyOn(component, 'carregarBeneficiario').and.callThrough(); // Espiona o método
     component.ngOnInit(); // Chama ngOnInit
     expect(component.carregarBeneficiario).toHaveBeenCalledWith('12345678900'); // Verifica se o método foi chamado com a matrícula correta
   });

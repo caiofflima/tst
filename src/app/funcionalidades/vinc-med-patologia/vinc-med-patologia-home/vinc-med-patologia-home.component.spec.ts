@@ -55,21 +55,21 @@ describe('VincMedPatologiaHomeComponent', () => {
   const reembolsoServiceSpy = { get: jest.fn() };
   const medicamentoPatologiaServiceSpy = { get: jest.fn() };
 
-  empresaPrestadorExternoServiceSpy.buscarEmpresas.and.returnValue(of({}));
-  prestadorExternoServiceSpy.consultarPorFiltro.and.returnValue(of({}));
+  empresaPrestadorExternoServiceSpy.buscarEmpresas.mockReturnValue(of({}));
+  prestadorExternoServiceSpy.consultarPorFiltro.mockReturnValue(of({}));
   prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro = of({})
 
-  comboServiceSpy.consultarComboPerfisPrestadoresExternos.and.returnValue(of({}));
-  comboServiceSpy.consultarComboTiposAuditor.and.returnValue(of({}));
-  tipoDocumentoServiceSpy.consultarTodos.and.returnValue(of({}));
-  documentoServiceSpy.get.and.returnValue(of({}));
-  prazoTratamentoServiceSpy.consultarPorFiltro.and.returnValue(of({}));
-  situacaoProcessoServiceSpy.consultarTodasTransicoesManuais.and.returnValue(of({}));
-  patologiaServiceSpy.consultarDTOPorId.and.returnValue(of({}));
-  patologiaServiceSpy.consultarTodos.and.returnValue(of({}));
-  sIASCFluxoServiceSpy.consultarPermissoesFluxoPorPedido.and.returnValue(of({}));
-  tipoProcessoServiceSpy.consultarTiposProcessoAutorizacaoPrevia.and.returnValue(of({}));
-  medicamentoPatologiaServiceSpy.get.and.returnValue(of({}));
+  comboServiceSpy.consultarComboPerfisPrestadoresExternos.mockReturnValue(of({}));
+  comboServiceSpy.consultarComboTiposAuditor.mockReturnValue(of({}));
+  tipoDocumentoServiceSpy.consultarTodos.mockReturnValue(of({}));
+  documentoServiceSpy.get.mockReturnValue(of({}));
+  prazoTratamentoServiceSpy.consultarPorFiltro.mockReturnValue(of({}));
+  situacaoProcessoServiceSpy.consultarTodasTransicoesManuais.mockReturnValue(of({}));
+  patologiaServiceSpy.consultarDTOPorId.mockReturnValue(of({}));
+  patologiaServiceSpy.consultarTodos.mockReturnValue(of({}));
+  sIASCFluxoServiceSpy.consultarPermissoesFluxoPorPedido.mockReturnValue(of({}));
+  tipoProcessoServiceSpy.consultarTiposProcessoAutorizacaoPrevia.mockReturnValue(of({}));
+  medicamentoPatologiaServiceSpy.get.mockReturnValue(of({}));
 
   documentoPedidoServiceSpy.avisoSituacaoPedido = of({});
 

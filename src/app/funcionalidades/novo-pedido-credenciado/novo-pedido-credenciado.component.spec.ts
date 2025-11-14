@@ -19,8 +19,8 @@ describe('NovoPedidoAutorizadorComponent', () => {
   const meusDadosServiceSpy = { carregarTitular: jest.fn() };
   const prestadorExternoServiceSpy = { get: jest.fn(), consultarUsuarioExternoPorFiltro: jest.fn() };
   prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro = of({})
-  empresaPrestadorExternoServiceSpy.consultarFiliais.and.returnValue(of({}));
-  meusDadosServiceSpy.carregarTitular.and.returnValue(of({}));
+  empresaPrestadorExternoServiceSpy.consultarFiliais.mockReturnValue(of({}));
+  meusDadosServiceSpy.carregarTitular.mockReturnValue(of({}));
  
   beforeEach(async () => {
     await TestBed.configureTestingModule({

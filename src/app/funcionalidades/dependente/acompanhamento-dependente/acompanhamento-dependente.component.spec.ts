@@ -28,7 +28,7 @@ describe('AcompanhamentoDependenteComponent', () => {
   const medicamentoServiceSpy = { getMedicamento: jest.fn() };
   const medicamentoPatologiaPedidoServiceSpy = { getMedicamentoPatologiaPedido: jest.fn() };
   const siascFluxoServiceSpy = { getFluxo: jest.fn(), consultarPermissoesFluxoPorPedido: jest.fn() };
-  siascFluxoServiceSpy.consultarPermissoesFluxoPorPedido.and.returnValue(of({}))
+  siascFluxoServiceSpy.consultarPermissoesFluxoPorPedido.mockReturnValue(of({}))
   const documentoPedidoServiceSpy = { getDocumentoPedido: jest.fn() };
   documentoPedidoServiceSpy.avisoSituacaoPedido = of({});
   documentoPedidoServiceSpy.avisoSituacaoPedidoComplementares = of({});

@@ -12,7 +12,7 @@ describe('AscBeneficiarioPedido', () => {
 
   beforeEach(async () => {
     const messageServiceSpy = { showDangerMsg: jest.fn() };
-    spyOn(SessaoService, 'getMatriculaFuncional').and.returnValue('C000123');
+    jest.spyOn(SessaoService, 'getMatriculaFuncional').mockReturnValue('C000123');
 
     await TestBed.configureTestingModule({
       declarations: [ AscBeneficiarioPedido ],

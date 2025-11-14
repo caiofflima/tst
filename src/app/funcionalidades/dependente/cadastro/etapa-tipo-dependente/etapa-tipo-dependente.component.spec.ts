@@ -26,7 +26,7 @@ describe('EtapaTipoDependenteComponent', () => {
   }
   const processoServiceSpy = { getProcesso: jest.fn() };
   const beneficiarioServiceSpy = { consultarPorMatricula: jest.fn() };
-  beneficiarioServiceSpy.consultarPorMatricula.and.returnValue(of({}))
+  beneficiarioServiceSpy.consultarPorMatricula.mockReturnValue(of({}))
   const tipoDependenteServiceSpy = { consultarTodos: jest.fn() }; 
   const sessaoServiceSpy = { SessaoService: jest.fn() }; 
 

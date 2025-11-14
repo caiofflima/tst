@@ -23,12 +23,12 @@ describe('ParametrizacaoPrazosHomeComponent', () => {
   const situacaoProcessoServiceSpy = { consultarTodasTransicoesManuais: jest.fn() };
   const prestadorExternoServiceSpy = { get: jest.fn(), consultarUsuarioExternoPorFiltro: jest.fn() };
   prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro = of({})
-  empresaPrestadorExternoServiceSpy.consultarFiliais.and.returnValue(of({}));
-  comboServiceSpy.consultarComboUF.and.returnValue(of({}));
-  tipoDocumentoServiceSpy.consultarTodos.and.returnValue(of({}));
-  documentoServiceSpy.get.and.returnValue(of({}));
-  prazoTratamentoServiceSpy.get.and.returnValue(of({}));
-  situacaoProcessoServiceSpy.consultarTodasTransicoesManuais.and.returnValue(of({}));
+  empresaPrestadorExternoServiceSpy.consultarFiliais.mockReturnValue(of({}));
+  comboServiceSpy.consultarComboUF.mockReturnValue(of({}));
+  tipoDocumentoServiceSpy.consultarTodos.mockReturnValue(of({}));
+  documentoServiceSpy.get.mockReturnValue(of({}));
+  prazoTratamentoServiceSpy.get.mockReturnValue(of({}));
+  situacaoProcessoServiceSpy.consultarTodasTransicoesManuais.mockReturnValue(of({}));
 
   activatedRouteSpy.snapshot = {
     params:{

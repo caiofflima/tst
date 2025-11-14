@@ -53,7 +53,7 @@ describe('DocumentosTipoProcessoResultComponent', () => {
     };
 
     mockDocumentoTipoProcessoService = {
-      consultarPorFiltro: jasmine.createSpy('consultarPorFiltro').and.returnValue(of({
+      consultarPorFiltro: jasmine.createSpy('consultarPorFiltro').mockReturnValue(of({
         total: 1,
         dados: [new DocumentoTipoProcesso()]
       })),
@@ -95,7 +95,7 @@ describe('DocumentosTipoProcessoResultComponent', () => {
 
   it('deve lidar com erros ao carregar documentos', () => {
     const errorResponse = { error: 'Error message' };
-    mockDocumentoTipoProcessoService.consultarPorFiltro.and.returnValue(throwError(errorResponse));
+    mockDocumentoTipoProcessoService.consultarPorFiltro.mockReturnValue(throwError(errorResponse));
     component.pesquisar(); // Chama o método pesquisar
     expect(component.loading).toBe(false);
     expect(mockMessageService.addMsgDanger).toHaveBeenCalled() // Verifica se a mensagem de erro foi chamada

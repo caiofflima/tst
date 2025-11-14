@@ -51,14 +51,14 @@ describe('MeusDadosService', () => {
 
   it('should call exportarPDF on exportarPDF', () => {
     const beneficiario: Beneficiario = {} as Beneficiario;
-    exportacaoServiceSpy.exportarPDF.and.returnValue(of({}));
+    exportacaoServiceSpy.exportarPDF.mockReturnValue(of({}));
     service.exportarPDF(beneficiario).subscribe();
     expect(exportacaoServiceSpy.exportarPDF).toHaveBeenCalledWith('/beneficiario/declaracao-permanencia', beneficiario);
   });
 
   it('should call enviarCartaoEmail on enviarCartaoEmail', () => {
     const beneficiario: Beneficiario = {} as Beneficiario;
-    cartaoIdServiceSpy.enviarCartaoEmail.and.returnValue(of({}));
+    cartaoIdServiceSpy.enviarCartaoEmail.mockReturnValue(of({}));
     service.enviarCartaoEmail(beneficiario).subscribe();
     expect(cartaoIdServiceSpy.enviarCartaoEmail).toHaveBeenCalledWith(beneficiario);
   });

@@ -95,9 +95,9 @@ describe('EtapaDadosDependenteComponent', () => {
     component.beneficiarioDependente = {matricula:1} as BeneficiarioDependenteFormModel;
 
     const beneficiario = {tipoDependente: {id:1} } as Beneficiario;
-    beneficiarioServiceSpy.consultarPorMatricula.and.returnValue(of(beneficiario));
+    beneficiarioServiceSpy.consultarPorMatricula.mockReturnValue(of(beneficiario));
 
-    tipoDependenteServiceSpy.consultarTipoDependente.and.returnValue(of({} as TipoBeneficiarioDTO));
+    tipoDependenteServiceSpy.consultarTipoDependente.mockReturnValue(of({} as TipoBeneficiarioDTO));
     
     const dados = {
       nomeCompleto: 'TESTE TESTE ',

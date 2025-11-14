@@ -41,7 +41,7 @@ describe('DependenteDetailComponent', () => {
     };
 
     mockBeneficiarioService = {
-      getDadosBeneficiarioCartaoPlano: jasmine.createSpy('getDadosBeneficiarioCartaoPlano').and.returnValue(of({} as DetalheBeneficiarioDTO))
+      getDadosBeneficiarioCartaoPlano: jasmine.createSpy('getDadosBeneficiarioCartaoPlano').mockReturnValue(of({} as DetalheBeneficiarioDTO))
     };
 
     await TestBed.configureTestingModule({
@@ -72,7 +72,7 @@ describe('DependenteDetailComponent', () => {
   });
 
   it('deve carregar dados do beneficiário ao inicializar', () => {
-    spyOn(component, 'getDadosBeneficiarioCartaoPlano').and.callThrough(); // Espiona o método
+    jest.spyOn(component, 'getDadosBeneficiarioCartaoPlano').and.callThrough(); // Espiona o método
     component.ngOnInit(); // Chama ngOnInit
     expect(component.getDadosBeneficiarioCartaoPlano).toHaveBeenCalledWith(1); // Verifica se o método foi chamado com o ID correto
   });

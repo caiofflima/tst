@@ -35,32 +35,32 @@ describe('AscDocumentoCardComponent', () => {
     const mockDocumentoTipoProcesso: DocumentoTipoProcesso = {id:1} as DocumentoTipoProcesso ;
 
     const documentoTipoProcessoServiceSpy = { get: jest.fn(), post: jest.fn(), put: jest.fn(), delete: jest.fn() };
-    documentoTipoProcessoServiceSpy.post.and.returnValue(of({}));
-    documentoTipoProcessoServiceSpy.put.and.returnValue(of({}));
+    documentoTipoProcessoServiceSpy.post.mockReturnValue(of({}));
+    documentoTipoProcessoServiceSpy.put.mockReturnValue(of({}));
 
     const anexoServiceSpy = { get: jest.fn(), post: jest.fn(), put: jest.fn(), delete: jest.fn() };
-    anexoServiceSpy.post.and.returnValue(of({}));
-    anexoServiceSpy.put.and.returnValue(of({}));
+    anexoServiceSpy.post.mockReturnValue(of({}));
+    anexoServiceSpy.put.mockReturnValue(of({}));
 
     const processoServiceSpy = { get: jest.fn(), post: jest.fn(), put: jest.fn(), delete: jest.fn() };
-    processoServiceSpy.post.and.returnValue(of({}));
-    processoServiceSpy.put.and.returnValue(of({}));
+    processoServiceSpy.post.mockReturnValue(of({}));
+    processoServiceSpy.put.mockReturnValue(of({}));
 
     const tipoValidacaoServiceSpy = { get: jest.fn(), post: jest.fn(), put: jest.fn(), delete: jest.fn() };
-    tipoValidacaoServiceSpy.post.and.returnValue(of({}));
-    tipoValidacaoServiceSpy.put.and.returnValue(of({}));
-    tipoValidacaoServiceSpy.get.and.returnValue(of({}));
+    tipoValidacaoServiceSpy.post.mockReturnValue(of({}));
+    tipoValidacaoServiceSpy.put.mockReturnValue(of({}));
+    tipoValidacaoServiceSpy.get.mockReturnValue(of({}));
 
     const validacaoDocumentoPedidoServiceSpy = { get: jest.fn(), post: jest.fn(), put: jest.fn(), delete: jest.fn() };
-    validacaoDocumentoPedidoServiceSpy.post.and.returnValue(of({}));
-    validacaoDocumentoPedidoServiceSpy.put.and.returnValue(of({}));
+    validacaoDocumentoPedidoServiceSpy.post.mockReturnValue(of({}));
+    validacaoDocumentoPedidoServiceSpy.put.mockReturnValue(of({}));
 
     const documentoPedidoServiceSpy = { get: jest.fn(), post: jest.fn(), put: jest.fn(), delete: jest.fn() };
-    documentoPedidoServiceSpy.post.and.returnValue(of({}));
-    documentoPedidoServiceSpy.put.and.returnValue(of({}));
+    documentoPedidoServiceSpy.post.mockReturnValue(of({}));
+    documentoPedidoServiceSpy.put.mockReturnValue(of({}));
   
-    //tipoDocumentoServiceSpy.consultarTodos.and.returnValue(of({}));
-    //documentoServiceSpy.get.and.returnValue(of({}));
+    //tipoDocumentoServiceSpy.consultarTodos.mockReturnValue(of({}));
+    //documentoServiceSpy.get.mockReturnValue(of({}));
 
     beforeEach(async () => {
       await TestBed.configureTestingModule({

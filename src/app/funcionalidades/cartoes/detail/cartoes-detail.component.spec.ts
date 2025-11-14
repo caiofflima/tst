@@ -23,7 +23,7 @@ describe('CartoesDetailComponent', () => {
     SessaoService.usuario = usuario;
 
     const beneficiarioServiceSpy = { consultarBeneficiarioPorId: jest.fn() };
-    beneficiarioServiceSpy.consultarBeneficiarioPorId.and.returnValue(of())
+    beneficiarioServiceSpy.consultarBeneficiarioPorId.mockReturnValue(of())
 
     const sessaoServiceSpy = { getMatriculaFuncional: jest.fn(), usuario: jest.fn() };   
 

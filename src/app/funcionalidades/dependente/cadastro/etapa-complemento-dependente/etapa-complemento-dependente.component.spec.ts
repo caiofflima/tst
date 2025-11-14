@@ -31,14 +31,14 @@ describe('EtapaComplementoDependenteComponent', () => {
   const medicamentoServiceSpy = { getMedicamento: jest.fn() };
   const medicamentoPatologiaPedidoServiceSpy = { getMedicamentoPatologiaPedido: jest.fn() };
   const siascFluxoServiceSpy = { getFluxo: jest.fn(), consultarPermissoesFluxoPorPedido: jest.fn() };
-  siascFluxoServiceSpy.consultarPermissoesFluxoPorPedido.and.returnValue(of({}))
+  siascFluxoServiceSpy.consultarPermissoesFluxoPorPedido.mockReturnValue(of({}))
   const documentoPedidoServiceSpy = { getDocumentoPedido: jest.fn() };
   documentoPedidoServiceSpy.avisoSituacaoPedido = of({});
   const sessaoServiceSpy = { getUsuario: jest.fn() };
   const atendimentoServiceSpy = { get: jest.fn() };
-  atendimentoServiceSpy.get.and.returnValue(of({}))
+  atendimentoServiceSpy.get.mockReturnValue(of({}))
   const tipoDeficienciaServiceSpy = { consultarTodos: jest.fn() };
-  tipoDeficienciaServiceSpy.consultarTodos.and.returnValue(of({}));
+  tipoDeficienciaServiceSpy.consultarTodos.mockReturnValue(of({}));
   const motivoSolicitacaoServiceSpy = { consultarTodos: jest.fn() };
   const inscricaoDependenteServiceSpy = { consultarTodos: jest.fn() };
 

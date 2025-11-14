@@ -14,12 +14,12 @@ describe('PerfilUsuarioExternoBuscarComponent', () => {
   beforeEach(() => {
     const messageServiceSpy = { showDangerMsg: jest.fn() };
     const comboServiceSpy = { consultarComboPerfisPrestadoresExternos: jest.fn(), consultarComboTiposAuditor: jest.fn() };
-    comboServiceSpy.consultarComboPerfisPrestadoresExternos.and.returnValue(of());
-    comboServiceSpy.consultarComboTiposAuditor.and.returnValue(of());
+    comboServiceSpy.consultarComboPerfisPrestadoresExternos.mockReturnValue(of());
+    comboServiceSpy.consultarComboTiposAuditor.mockReturnValue(of());
     const prestadorExternoServiceSpy = { get: jest.fn(), consultarUsuarioExternoPorFiltro: jest.fn() };
     prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro = of({})
     const perfilUsuarioExternoServiceSpy = { consultarComboPerfisPrestadoresExternos: jest.fn(), consultarComboTiposAuditor: jest.fn(), consultarPorFiltro: jest.fn(), removerCredenciais: jest.fn() };
-    perfilUsuarioExternoServiceSpy.consultarPorFiltro.and.returnValue(of());
+    perfilUsuarioExternoServiceSpy.consultarPorFiltro.mockReturnValue(of());
     
     const dataSpy = { storage: jest.fn() };
 

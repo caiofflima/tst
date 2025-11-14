@@ -59,12 +59,12 @@ describe('EmailSituacaoFormComponent', () => {
     fixture = TestBed.createComponent(EmailSituacaoFormComponent);
     component = fixture.componentInstance;
 
-    comboServiceSpy.consultarComboTipoBeneficiarioPorTipoProcesso.and.returnValue(of([]));
-    comboServiceSpy.consultarTipoDestinatario.and.returnValue(of([]));
+    comboServiceSpy.consultarComboTipoBeneficiarioPorTipoProcesso.mockReturnValue(of([]));
+    comboServiceSpy.consultarTipoDestinatario.mockReturnValue(of([]));
 
-    tipoProcessoServiceSpy.consultarTodos.and.returnValue(of([]));
+    tipoProcessoServiceSpy.consultarTodos.mockReturnValue(of([]));
 
-    emailServiceSpy.get.and.returnValue(of({}));
+    emailServiceSpy.get.mockReturnValue(of({}));
 
     fixture.detectChanges();
   });

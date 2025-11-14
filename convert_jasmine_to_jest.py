@@ -7,11 +7,10 @@ import re
 from pathlib import Path
 
 def convert_jasmine_to_jest(content):
-    """Convert jasmine.createSpyObj to Jest format"""
+    """Convert Jasmine syntax to Jest format"""
 
-    # Pattern: const spy = jasmine.createSpyObj('ServiceName', ['method1', 'method2']);
+    # 1. Pattern: const spy = jasmine.createSpyObj('ServiceName', ['method1', 'method2']);
     # Convert to: const spy = { method1: jest.fn(), method2: jest.fn() };
-
     pattern = r"const\s+(\w+)\s*=\s*jasmine\.createSpyObj\s*\(\s*['\"](\w+)['\"]\s*,\s*\[(.*?)\]\s*\)"
 
     def replace_spy(match):
@@ -28,6 +27,18 @@ def convert_jasmine_to_jest(content):
         return f"const {var_name} = {{ {jest_methods} }}"
 
     content = re.sub(pattern, replace_spy, content, flags=re.MULTILINE)
+
+    # 2. Convert .and.returnValue() to .mockReturnValue()
+    content = re.sub(r'\.and\.returnValue\(', '.mockReturnValue(', content)
+
+    # 3. Convert .and.callFake() to .mockImplementation()
+    content = re.sub(r'\.and\.callFake\(', '.mockImplementation(', content)
+
+    # 4. Convert .and.stub() to .mockImplementation(() => {})
+    content = re.sub(r'\.and\.stub\(\)', '.mockImplementation(() => {})', content)
+
+    # 5. Convert spyOn to jest.spyOn
+    content = re.sub(r'\bspyOn\(', 'jest.spyOn(', content)
 
     return content
 

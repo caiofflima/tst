@@ -78,7 +78,7 @@ describe('AnexoService', () => {
     const anexo = { id: 1, nome: 'test.pdf' };
     const dummyFile = new Blob(['dummy content'], { type: 'application/pdf' });
 
-    spyOn(service, 'obterArquivo').and.returnValue(of(dummyFile));
+    jest.spyOn(service, 'obterArquivo').mockReturnValue(of(dummyFile));
 
     service.realizarDownloadAnexo(anexo);
 

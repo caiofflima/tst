@@ -11,7 +11,7 @@ describe('PerfilUsuarioExternoFormComponent', () => {
   const messageServiceSpy = { showDangerMsg: jest.fn(), fromResourceBundle: jest.fn() };
 
   const perfilUsuarioExternoServiceSpy = { consultarComboPerfisPrestadoresExternos: jest.fn(), consultarComboTiposAuditor: jest.fn(), consultarPorFiltro: jest.fn(), removerCredenciais: jest.fn() };
-  perfilUsuarioExternoServiceSpy.consultarPorFiltro.and.returnValue(of());
+  perfilUsuarioExternoServiceSpy.consultarPorFiltro.mockReturnValue(of());
     const prestadorExternoServiceSpy = { get: jest.fn(), consultarUsuarioExternoPorFiltro: jest.fn() };
     prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro = of({})
   const dataSpy = { storage: jest.fn() };

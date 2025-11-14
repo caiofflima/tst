@@ -11,7 +11,7 @@ describe('ListarProcedimentosComReembolsoComponent', () => {
 
   beforeEach(() => {
     const procedimentoServiceSpy = { listarProcedimentosComReembolso: jest.fn() };
-    procedimentoServiceSpy.listarProcedimentosComReembolso.and.returnValue(of());
+    procedimentoServiceSpy.listarProcedimentosComReembolso.mockReturnValue(of());
     const prestadorExternoServiceSpy = { get: jest.fn(), consultarUsuarioExternoPorFiltro: jest.fn() };
     prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro = of({})
 

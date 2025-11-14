@@ -20,10 +20,10 @@ describe('ParametrizacaoDocumentosHomeComponent', () => {
   const documentoServiceSpy = { get: jest.fn() };
   const prestadorExternoServiceSpy = { get: jest.fn(), consultarUsuarioExternoPorFiltro: jest.fn() };
   prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro = of({})
-  empresaPrestadorExternoServiceSpy.consultarFiliais.and.returnValue(of({}));
-  comboServiceSpy.consultarComboUF.and.returnValue(of({}));
-  tipoDocumentoServiceSpy.consultarTodos.and.returnValue(of({}));
-  documentoServiceSpy.get.and.returnValue(of({}));
+  empresaPrestadorExternoServiceSpy.consultarFiliais.mockReturnValue(of({}));
+  comboServiceSpy.consultarComboUF.mockReturnValue(of({}));
+  tipoDocumentoServiceSpy.consultarTodos.mockReturnValue(of({}));
+  documentoServiceSpy.get.mockReturnValue(of({}));
 
   activatedRouteSpy.snapshot = {
     params:{

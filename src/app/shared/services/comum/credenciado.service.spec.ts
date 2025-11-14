@@ -54,7 +54,7 @@ describe('CredenciadoService', () => {
     const mockCredenciados: Credenciado[] = [];
     const mockResponse = {};
 
-    exportacaoServiceSpy.exportarPDF.and.returnValue(of(mockResponse));
+    exportacaoServiceSpy.exportarPDF.mockReturnValue(of(mockResponse));
 
     service.exportarPDF(mockCredenciados).subscribe((response) => {
       expect(response).toEqual(mockResponse);

@@ -15,7 +15,7 @@ describe('AscDependentesCardComponent', () => {
   const tipoDependenteServiceSpy = { init: jest.fn() };
   const BeneficiarioServiceSpy = { init: jest.fn() };
   const tipoDeficienciaServiceSpy = { consultarTodos: jest.fn() };
-  tipoDeficienciaServiceSpy.consultarTodos.and.returnValue(of([]));
+  tipoDeficienciaServiceSpy.consultarTodos.mockReturnValue(of([]));
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({

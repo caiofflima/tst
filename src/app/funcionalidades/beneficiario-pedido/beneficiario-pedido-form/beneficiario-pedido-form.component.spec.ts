@@ -28,10 +28,10 @@ describe('BeneficiarioPedidoFormComponent', () => {
   const comboServiceSpy = { consultarComboUF: jest.fn(), consultarComboPerfil: jest.fn() };
   const prestadorExternoServiceSpy = { get: jest.fn(), consultarUsuarioExternoPorFiltro: jest.fn() };
   prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro = of({})
-  comboServiceSpy.consultarComboPerfil.and.returnValue(of({}));
+  comboServiceSpy.consultarComboPerfil.mockReturnValue(of({}));
 
    const perfilMinimoServiceSpy = { consultarTodos: jest.fn() };
-   perfilMinimoServiceSpy.consultarTodos.and.returnValue(of([]));
+   perfilMinimoServiceSpy.consultarTodos.mockReturnValue(of([]));
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
