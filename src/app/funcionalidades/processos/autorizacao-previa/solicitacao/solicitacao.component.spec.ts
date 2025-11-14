@@ -113,7 +113,7 @@ describe('SolicitacaoComponent', () => {
     component = fixture.componentInstance;
     component.checkRestart = new Subject<void>();
     SessaoService.usuario = {} as Usuario;
-    jest.spyOn(SessaoService, 'getMatriculaFuncional').mockReturnValue('C000123');
+    jest.jest.spyOn(SessaoService, 'getMatriculaFuncional').mockReturnValue('C000123');
     fixture.detectChanges();
 
   });

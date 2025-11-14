@@ -115,7 +115,7 @@ describe('AscDocumentoCardComponent', () => {
     it('deve atribuir pedido', () => {
         component.processo = mockPedido;
         const result = component.processo;
-        expect(result).toEqual(jasmine.objectContaining({id:1}));
+        expect(result).toEqual(expect.objectContaining({id:1}));
     });
 
     it('deve verificar se está editando', () => {

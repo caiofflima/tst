@@ -40,6 +40,14 @@ def convert_jasmine_to_jest(content):
     # 5. Convert spyOn to jest.spyOn
     content = re.sub(r'\bspyOn\(', 'jest.spyOn(', content)
 
+    # 6. Convert jasmine matchers to expect matchers
+    content = re.sub(r'jasmine\.any\(', 'expect.any(', content)
+    content = re.sub(r'jasmine\.anything\(\)', 'expect.anything()', content)
+    content = re.sub(r'jasmine\.objectContaining\(', 'expect.objectContaining(', content)
+    content = re.sub(r'jasmine\.arrayContaining\(', 'expect.arrayContaining(', content)
+    content = re.sub(r'jasmine\.stringMatching\(', 'expect.stringMatching(', content)
+    content = re.sub(r'jasmine\.stringContaining\(', 'expect.stringContaining(', content)
+
     return content
 
 def process_file(file_path):

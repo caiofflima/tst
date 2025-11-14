@@ -90,7 +90,7 @@ describe('ExtratoIRPFDetalharComponent', () => {
   });
 
   it('deve chamar carregarBeneficiario no ngOnInit', () => {
-    jest.spyOn(component, 'carregarBeneficiario').and.callThrough(); // Espiona o método
+    jest.jest.spyOn(component, 'carregarBeneficiario').and.callThrough(); // Espiona o método
     component.ngOnInit(); // Chama ngOnInit
     expect(component.carregarBeneficiario).toHaveBeenCalledWith('12345678900'); // Verifica se o método foi chamado com a matrícula correta
   });

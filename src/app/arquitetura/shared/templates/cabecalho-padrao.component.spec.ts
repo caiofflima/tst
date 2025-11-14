@@ -122,7 +122,7 @@ describe('CabecalhoPadraoComponent', () => {
     });
 
     it('isIntranet deve retornar true quando o realm é intranet', () => {
-        jest.jest.spyOn(KeycloakService, 'getRealm').mockReturnValue('intranet');
+        jest.jest.jest.spyOn(KeycloakService, 'getRealm').mockReturnValue('intranet');
 
         const resultado = component.isIntranet();
 
@@ -130,7 +130,7 @@ describe('CabecalhoPadraoComponent', () => {
     });
 
     it('isIntranet deve retornar false quando o realm não é intranet', () => {
-        jest.jest.spyOn(KeycloakService, 'getRealm').mockReturnValue('external');
+        jest.jest.jest.spyOn(KeycloakService, 'getRealm').mockReturnValue('external');
 
         const resultado = component.isIntranet();
 
@@ -138,7 +138,7 @@ describe('CabecalhoPadraoComponent', () => {
     });
 
     it('isIntranet deve ser case-insensitive', () => {
-        jest.jest.spyOn(KeycloakService, 'getRealm').mockReturnValue('INTRANET');
+        jest.jest.jest.spyOn(KeycloakService, 'getRealm').mockReturnValue('INTRANET');
 
         const resultado = component.isIntranet();
 

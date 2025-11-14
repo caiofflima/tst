@@ -108,7 +108,7 @@ describe('ProcedimentoPedidoService', () => {
   });
 
   it('should emit valorNotaFiscal', () => {
-    jest.spyOn(service.pedidoListenerValorNotaFiscal, 'emit');
+    jest.jest.spyOn(service.pedidoListenerValorNotaFiscal, 'emit');
     const valor = 'test';
     service.setValorNotaFiscal(valor);
     expect(service.pedidoListenerValorNotaFiscal.emit).toHaveBeenCalledWith(valor);
