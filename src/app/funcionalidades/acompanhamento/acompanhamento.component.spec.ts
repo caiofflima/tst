@@ -78,7 +78,7 @@ describe('AcompanhamentoComponent', () => {
     });
 
     it('goToTop deve chamar window.scrollTo com 0, 0', () => {
-        const scrollToSpy = jest.jest.jest.spyOn(window, 'scrollTo').mockImplementation();
+        const scrollToSpy = jest.jest.jest.jest.spyOn(window, 'scrollTo').mockImplementation();
 
         component.goToTop();
 
@@ -153,7 +153,7 @@ describe('AcompanhamentoComponent', () => {
     });
 
     it('pedidoProcedimentosAtualizados deve receber array de PedidoProcedimento', () => {
-        const consoleSpy = jest.jest.jest.spyOn(console, 'log').mockImplementation();
+        const consoleSpy = jest.jest.jest.jest.spyOn(console, 'log').mockImplementation();
         const mockProcedimentos: PedidoProcedimento[] = [
             { id: 1 } as PedidoProcedimento,
             { id: 2 } as PedidoProcedimento

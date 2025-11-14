@@ -8,9 +8,9 @@ import { ExportacaoXLSService } from './exportacao/xls/exportacao-xls.service';
 
 describe('ExportacaoService', () => {
   let service: ExportacaoService;
-  let csvServiceSpy: jasmine.SpyObj<ExportacaoCSVService>;
-  let pdfServiceSpy: jasmine.SpyObj<ExportacaoPDFService>;
-  let xlsServiceSpy: jasmine.SpyObj<ExportacaoXLSService>;
+  let csvServiceSpy: jest.Mocked<ExportacaoCSVService>;
+  let pdfServiceSpy: jest.Mocked<ExportacaoPDFService>;
+  let xlsServiceSpy: jest.Mocked<ExportacaoXLSService>;
 
   beforeEach(() => {
     const csvSpy = { exportar: jest.fn() };
@@ -27,9 +27,9 @@ describe('ExportacaoService', () => {
     });
 
     service = TestBed.inject(ExportacaoService);
-    csvServiceSpy = TestBed.inject(ExportacaoCSVService) as jasmine.SpyObj<ExportacaoCSVService>;
-    pdfServiceSpy = TestBed.inject(ExportacaoPDFService) as jasmine.SpyObj<ExportacaoPDFService>;
-    xlsServiceSpy = TestBed.inject(ExportacaoXLSService) as jasmine.SpyObj<ExportacaoXLSService>;
+    csvServiceSpy = TestBed.inject(ExportacaoCSVService) as jest.Mocked<ExportacaoCSVService>;
+    pdfServiceSpy = TestBed.inject(ExportacaoPDFService) as jest.Mocked<ExportacaoPDFService>;
+    xlsServiceSpy = TestBed.inject(ExportacaoXLSService) as jest.Mocked<ExportacaoXLSService>;
   });
 
   it('should be created', () => {

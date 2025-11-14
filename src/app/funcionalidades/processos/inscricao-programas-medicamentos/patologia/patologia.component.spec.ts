@@ -27,7 +27,7 @@ describe('PatologiaComponent', () => {
   const tipoDocumentoServiceSpy = { consultarTodos: jest.fn() };
   const documentoServiceSpy = { get: jest.fn() };
   const prazoTratamentoServiceSpy = { consultarPorFiltro: jest.fn() };
-  const tipoBeneficiarioServiceSpy = jasmine.createSpyObj('DocumentoServ   ice',['get']);
+  const tipoBeneficiarioServiceSpy = { get: jest.fn() };
   const situacaoProcessoServiceSpy = { consultarTodasTransicoesManuais: jest.fn() };
   const patologiaServiceSpy = { consultarDTOPorId: jest.fn() };
   const tipoProcessoServiceSpy = { get: jest.fn() };
@@ -132,7 +132,7 @@ describe('PatologiaComponent', () => {
     component = fixture.componentInstance;
     component.checkRestart = new Subject<void>()
     SessaoService.usuario = {} as Usuario;
-    jest.jest.spyOn(SessaoService, 'getMatriculaFuncional').mockReturnValue('C000123');
+    jest.jest.jest.spyOn(SessaoService, 'getMatriculaFuncional').mockReturnValue('C000123');
     fixture.detectChanges();
 
   });

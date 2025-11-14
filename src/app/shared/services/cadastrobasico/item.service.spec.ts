@@ -6,7 +6,7 @@ import { Item } from '../../../../app/shared/models/item';
 
 describe('ItemService', () => {
   let service: ItemService;
-  let routerSpy: jasmine.SpyObj<Router>;
+  let routerSpy: jest.Mocked<Router>;
   const routerSpyObj = { navigate: jest.fn() };
   const itemStorageSpy = { gravar: jest.fn(), ler: jest.fn(), limpar: jest.fn() };
   
@@ -20,7 +20,7 @@ describe('ItemService', () => {
     });
 
     service = TestBed.inject(ItemService);
-    routerSpy = TestBed.inject(Router) as jasmine.SpyObj<Router>;
+    routerSpy = TestBed.inject(Router) as jest.Mocked<Router>;
 
   });
 

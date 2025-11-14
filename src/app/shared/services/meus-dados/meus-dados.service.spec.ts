@@ -10,9 +10,9 @@ import { PrestadorExternoService } from '../services';
 
 describe('MeusDadosService', () => {
   let service: MeusDadosService;
-  let beneficiarioServiceSpy: jasmine.SpyObj<BeneficiarioService>;
-  let exportacaoServiceSpy: jasmine.SpyObj<ExportacaoService>;
-  let cartaoIdServiceSpy: jasmine.SpyObj<CartaoIdentificacaoService>;
+  let beneficiarioServiceSpy: jest.Mocked<BeneficiarioService>;
+  let exportacaoServiceSpy: jest.Mocked<ExportacaoService>;
+  let cartaoIdServiceSpy: jest.Mocked<CartaoIdentificacaoService>;
   const prestadorExternoServiceSpy = { get: jest.fn(), consultarUsuarioExternoPorFiltro: jest.fn() };
   prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro = of({})
 
@@ -34,9 +34,9 @@ describe('MeusDadosService', () => {
     });
 
     service = TestBed.inject(MeusDadosService);
-    beneficiarioServiceSpy = TestBed.inject(BeneficiarioService) as jasmine.SpyObj<BeneficiarioService>;
-    exportacaoServiceSpy = TestBed.inject(ExportacaoService) as jasmine.SpyObj<ExportacaoService>;
-    cartaoIdServiceSpy = TestBed.inject(CartaoIdentificacaoService) as jasmine.SpyObj<CartaoIdentificacaoService>;
+    beneficiarioServiceSpy = TestBed.inject(BeneficiarioService) as jest.Mocked<BeneficiarioService>;
+    exportacaoServiceSpy = TestBed.inject(ExportacaoService) as jest.Mocked<ExportacaoService>;
+    cartaoIdServiceSpy = TestBed.inject(CartaoIdentificacaoService) as jest.Mocked<CartaoIdentificacaoService>;
   });
 
   it('should be created', () => {

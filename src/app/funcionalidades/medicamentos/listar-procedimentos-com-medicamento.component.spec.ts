@@ -7,12 +7,12 @@ import { of } from 'rxjs';
 describe('ListarProcedimentosComReembolsoComponent', () => {
   let component: ListarProcedimentosComReembolsoComponent;
   let fixture: ComponentFixture<ListarProcedimentosComReembolsoComponent>;
-  let messageServiceSpy = jasmine.createSpyObj('MessageService',['get']);
-  let tipoDeficienciaServiceSpy = jasmine.createSpyObj('TipoDeficienciaService',['get']);
-  let comboServiceSpy = jasmine.createSpyObj('ComboService',['get']);
-  let documentoTipoProcessoServiceSpy = jasmine.createSpyObj('DocumentoTipoProcessoService',['get']);
-  let duvidasServiceSpy = jasmine.createSpyObj('DuvidasService',['get']);
-  let procedimentoServiceSpy = jasmine.createSpyObj('ProcedimentoService',['listarProcedimentosComReembolso']);
+  let messageServiceSpy = { get: jest.fn() };
+  let tipoDeficienciaServiceSpy = { get: jest.fn() };
+  let comboServiceSpy = { get: jest.fn() };
+  let documentoTipoProcessoServiceSpy = { get: jest.fn() };
+  let duvidasServiceSpy = { get: jest.fn() };
+  let procedimentoServiceSpy = { listarProcedimentosComReembolso: jest.fn() };
   procedimentoServiceSpy.listarProcedimentosComReembolso.mockReturnValue(of([]));
 
   beforeEach(async(() => {

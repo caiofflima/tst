@@ -11,7 +11,7 @@ describe('AscDocumentosRequeridosPedidoComponent', () => {
 
   beforeEach(async () => {
     const messageServiceSpy = { showDangerMsg: jest.fn() };
-    jest.jest.spyOn(SessaoService, 'getMatriculaFuncional').mockReturnValue('C000123');
+    jest.jest.jest.spyOn(SessaoService, 'getMatriculaFuncional').mockReturnValue('C000123');
 
     await TestBed.configureTestingModule({
       declarations: [ AscDocumentosRequeridosPedidoComponent ],

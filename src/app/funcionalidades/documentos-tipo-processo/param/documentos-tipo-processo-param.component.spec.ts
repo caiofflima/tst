@@ -18,7 +18,7 @@ describe('DocumentosTipoProcessoParamComponent', () => {
   let mockMessageService: any;
   let mockComboService: any;
   let mockTipoDeficienciaService: any;
-  let mockDocumentoTipoProcessoService = jasmine.createSpyObj('DocumentoTipoProcessoService',['getTitle'])
+  let mockDocumentoTipoProcessoService = { getTitle: jest.fn() }
   let mockDuvidasService: any;
 
   beforeEach(async () => {
@@ -72,7 +72,7 @@ describe('DocumentosTipoProcessoParamComponent', () => {
   });
 
   it('deve inicializar os combos ao ngOnInit', () => {
-    jest.jest.spyOn(component, 'inicializarCombos').and.callThrough(); // Espiona o método
+    jest.jest.jest.spyOn(component, 'inicializarCombos').and.callThrough(); // Espiona o método
     component.ngOnInit(); // Chama ngOnInit
     expect(component.inicializarCombos).toHaveBeenCalled(); // Verifica se inicializarCombos foi chamado
   });

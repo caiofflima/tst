@@ -60,7 +60,7 @@ describe('CustomCardDocumentoComponent', () => {
 
     it('removerDocumento deve emitir evento removerArquivo', () => {
         const arquivo = { name: 'teste.pdf', size: 1024 };
-        const emitSpy = jest.jest.jest.spyOn(component.removerArquivo, 'emit');
+        const emitSpy = jest.jest.jest.jest.spyOn(component.removerArquivo, 'emit');
 
         component.removerDocumento(arquivo);
 
@@ -80,7 +80,7 @@ describe('CustomCardDocumentoComponent', () => {
     });
 
     it('arquivosSelecionados deve logar no console', () => {
-        const consoleSpy = jest.jest.jest.spyOn(console, 'log').mockImplementation();
+        const consoleSpy = jest.jest.jest.jest.spyOn(console, 'log').mockImplementation();
         const param: ArquivoParam = {
             files: new Set<File>(),
             param: { id: 1 }
@@ -93,7 +93,7 @@ describe('CustomCardDocumentoComponent', () => {
     });
 
     it('deve permitir múltiplas chamadas de removerDocumento', () => {
-        const emitSpy = jest.jest.jest.spyOn(component.removerArquivo, 'emit');
+        const emitSpy = jest.jest.jest.jest.spyOn(component.removerArquivo, 'emit');
         const arquivo1 = { name: 'file1.pdf' };
         const arquivo2 = { name: 'file2.pdf' };
 

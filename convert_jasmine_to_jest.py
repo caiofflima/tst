@@ -48,6 +48,19 @@ def convert_jasmine_to_jest(content):
     content = re.sub(r'jasmine\.stringMatching\(', 'expect.stringMatching(', content)
     content = re.sub(r'jasmine\.stringContaining\(', 'expect.stringContaining(', content)
 
+    # 7. Convert jasmine.SpyObj<T> to jest.Mocked<T>
+    content = re.sub(r'jasmine\.SpyObj<', 'jest.Mocked<', content)
+
+    # 8. Handle jasmine.createSpyObj with bad formatting (spaces in service name)
+    # Example: jasmine.createSpyObj('DocumentoServ   ice',['get'])
+    pattern2 = r"jasmine\.createSpyObj\s*\(\s*['\"][\w\s]+['\"]\s*,\s*\[(.*?)\]\s*\)"
+    def replace_spy2(match):
+        methods_str = match.group(1)
+        methods = re.findall(r"['\"](\w+)['\"]", methods_str)
+        jest_methods = ', '.join([f"{method}: jest.fn()" for method in methods])
+        return f"{{ {jest_methods} }}"
+    content = re.sub(pattern2, replace_spy2, content)
+
     return content
 
 def process_file(file_path):
