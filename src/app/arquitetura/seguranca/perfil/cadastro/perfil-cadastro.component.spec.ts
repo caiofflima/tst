@@ -211,7 +211,7 @@ describe('PerfilCadastroComponent', () => {
         perfilService.put.mockReturnValue(of(perfilAtualizado));
 
         paramsSubject.next({});
-        component.perfil = { id: 1, codigo: 'TESTE', descricao: 'Teste' } as Perfil;
+        component.perfil = { id: 1, codigo: 'TESTE_ALT', descricao: 'Teste Alterado' } as Perfil;
         component.formulario.patchValue({
             nome: 'TESTE_ALT',
             descricao: 'Teste Alterado'

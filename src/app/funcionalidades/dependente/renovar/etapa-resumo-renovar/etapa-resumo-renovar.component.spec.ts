@@ -39,9 +39,9 @@ describe('EtapaResumoRenovarComponent', () => {
   });
 
   beforeEach(() => {
+    SessaoService.usuario = usuario;
     fixture = TestBed.createComponent(EtapaResumoRenovarComponent);
     component = fixture.componentInstance;
-    SessaoService.usuario = usuario;
     fixture.detectChanges();
   });
 
