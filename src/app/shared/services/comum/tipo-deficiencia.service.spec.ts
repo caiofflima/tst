@@ -23,8 +23,7 @@ describe('TipoDeficienciaService', () => {
         {provide: PrestadorExternoService, useValue: prestadorExternoServiceSpy },
 
       ]
-    }));
-
+    });
     service = TestBed.inject(TipoDeficienciaService);
     httpMock = TestBed.inject(HttpTestingController);
   });

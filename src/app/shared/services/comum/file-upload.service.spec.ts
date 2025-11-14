@@ -48,7 +48,7 @@ describe('FileUploadService', () => {
     it('should call configurarFormDataComArquivos if files are provided', () => {
       const formData = new FormData();
       const files = [new File([''], 'filename')];
-      spyOn<any>(FileUploadService, 'configurarFormDataComArquivos').and.callThrough();
+      jest.spyOn<any>(FileUploadService, 'configurarFormDataComArquivos');
 
       service.realizarUpload(formData, files).subscribe();
 

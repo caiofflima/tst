@@ -22,8 +22,7 @@ describe('TrilhaAuditoriaService', () => {
         {provide: PrestadorExternoService, useValue: prestadorExternoServiceSpy },
 
       ]
-    }));
-
+    });
     service = TestBed.inject(TrilhaAuditoriaService);
     httpMock = TestBed.inject(HttpTestingController);
   });

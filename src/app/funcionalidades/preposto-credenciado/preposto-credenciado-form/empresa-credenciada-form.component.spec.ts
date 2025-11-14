@@ -30,16 +30,14 @@ describe('EmpresaCredenciadaFormComponent', () => {
   const sIASCFluxoServiceSpy = { get: jest.fn() };
   const autorizacaoPreviaServiceSpy = { get: jest.fn() };
 
-  empresaPrestadorExternoServiceSpy.consultarFiliais.mockReturnValue(of({}));
-  prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro .mockReturnValue(of({}));
-
-  comboServiceSpy.consultarComboUF.mockReturnValue(of({}));
-  tipoDocumentoServiceSpy.consultarTodos.mockReturnValue(of({}));
-  documentoServiceSpy.get.mockReturnValue(of({}));
-  prazoTratamentoServiceSpy.consultarPorFiltro.mockReturnValue(of({}));
-  situacaoProcessoServiceSpy.consultarTodasTransicoesManuais.mockReturnValue(of({}));
-  patologiaServiceSpy.consultarDTOPorId.mockReturnValue(of({}));
-
+  empresaPrestadorExternoServiceSpy.consultarFiliais.mockReturnValue(of({});
+  prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro .mockReturnValue(of({});
+  comboServiceSpy.consultarComboUF.mockReturnValue(of({});
+  tipoDocumentoServiceSpy.consultarTodos.mockReturnValue(of({});
+  documentoServiceSpy.get.mockReturnValue(of({});
+  prazoTratamentoServiceSpy.consultarPorFiltro.mockReturnValue(of({});
+  situacaoProcessoServiceSpy.consultarTodasTransicoesManuais.mockReturnValue(of({});
+  patologiaServiceSpy.consultarDTOPorId.mockReturnValue(of({});
   activatedRouteSpy.snapshot = {
     params:{
         id: 1

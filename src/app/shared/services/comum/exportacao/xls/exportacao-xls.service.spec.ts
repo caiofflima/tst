@@ -23,8 +23,7 @@ describe('ExportacaoXLSService', () => {
         {provide: PrestadorExternoService, useValue: prestadorExternoServiceSpy },
 
       ]
-    }));
-
+    });
     service = TestBed.inject(ExportacaoXLSService);
     httpMock = TestBed.inject(HttpTestingController);
   });

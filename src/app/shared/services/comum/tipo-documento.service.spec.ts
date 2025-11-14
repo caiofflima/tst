@@ -24,8 +24,7 @@ describe('TipoDocumentoService', () => {
   {provide: PrestadorExternoService, useValue: prestadorExternoServiceSpy },
 
       ]
-    }));
-
+    });
     service = TestBed.inject(TipoDocumentoService);
     httpMock = TestBed.inject(HttpTestingController);
   });

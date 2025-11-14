@@ -24,8 +24,7 @@ describe('SituacaoPedidoService', () => {
         {provide: PrestadorExternoService, useValue: prestadorExternoServiceSpy },
 
       ]
-    }));
-
+    });
     service = TestBed.inject(SituacaoPedidoService);
     httpMock = TestBed.inject(HttpTestingController);
   });

@@ -28,8 +28,7 @@ describe('ListarProcedimentosComReembolsoComponent', () => {
       ]
     })
     .compileComponents();
-  }));
-
+  });
   beforeEach(() => {
     fixture = TestBed.createComponent(ListarProcedimentosComReembolsoComponent);
     component = fixture.componentInstance;

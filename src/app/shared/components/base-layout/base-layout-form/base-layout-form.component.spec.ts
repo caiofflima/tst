@@ -11,8 +11,7 @@ describe('BaseLayoutFormComponent', () => {
       declarations: [ BaseLayoutFormComponent ]
     })
     .compileComponents();
-  }));
-
+  });
   beforeEach(() => {
     fixture = TestBed.createComponent(BaseLayoutFormComponent);
     component = fixture.componentInstance;

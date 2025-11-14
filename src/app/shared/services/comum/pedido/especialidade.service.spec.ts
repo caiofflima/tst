@@ -24,8 +24,7 @@ describe('EspecialidadeService', () => {
 
         { provide: SessaoService, useValue: sessaoServiceSpy }
       ]
-    }));
-
+    });
     service = TestBed.inject(EspecialidadeService);
     httpMock = TestBed.inject(HttpTestingController);
   });

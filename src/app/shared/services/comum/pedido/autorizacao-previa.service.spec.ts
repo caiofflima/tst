@@ -26,8 +26,7 @@ describe('AutorizacaoPreviaService', () => {
 
         { provide: FileUploadService, useValue: fileUploadServiceSpy },
       ]
-    }));
-
+    });
     service = TestBed.inject(AutorizacaoPreviaService);
     httpMock = TestBed.inject(HttpTestingController);
 

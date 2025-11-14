@@ -39,8 +39,7 @@ describe('ExportacaoService', () => {
   it('should call exportarCSV method of ExportacaoCSVService', () => {
     const endpoint = 'test-endpoint';
     const body = { key: 'value' };
-    csvServiceSpy.exportar.mockReturnValue(of({}));
-
+    csvServiceSpy.exportar.mockReturnValue(of({});
     service.exportarCSV(endpoint, body).subscribe(response => {
       expect(response).toEqual({});
     });
@@ -51,8 +50,7 @@ describe('ExportacaoService', () => {
   it('should call exportarPDF method of ExportacaoPDFService', () => {
     const endpoint = 'test-endpoint';
     const body = { key: 'value' };
-    pdfServiceSpy.exportar.mockReturnValue(of({}));
-
+    pdfServiceSpy.exportar.mockReturnValue(of({});
     service.exportarPDF(endpoint, body).subscribe(response => {
       expect(response).toEqual({});
     });
@@ -63,8 +61,7 @@ describe('ExportacaoService', () => {
   it('should call exportarXLS method of ExportacaoXLSService', () => {
     const endpoint = 'test-endpoint';
     const body = { key: 'value' };
-    xlsServiceSpy.exportar.mockReturnValue(of({}));
-
+    xlsServiceSpy.exportar.mockReturnValue(of({});
     service.exportarXLS(endpoint, body).subscribe(response => {
       expect(response).toEqual({});
     });

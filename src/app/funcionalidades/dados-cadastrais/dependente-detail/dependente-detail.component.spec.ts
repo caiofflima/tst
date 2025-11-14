@@ -72,7 +72,7 @@ describe('DependenteDetailComponent', () => {
   });
 
   it('deve carregar dados do beneficiário ao inicializar', () => {
-    jest.spyOn(component, 'getDadosBeneficiarioCartaoPlano').and.callThrough(); // Espiona o método
+    jest.spyOn(component, 'getDadosBeneficiarioCartaoPlano'); // Espiona o método
     component.ngOnInit(); // Chama ngOnInit
     expect(component.getDadosBeneficiarioCartaoPlano).toHaveBeenCalledWith(1); // Verifica se o método foi chamado com o ID correto
   });

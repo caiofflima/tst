@@ -26,7 +26,7 @@ describe('ParametrizacaoDocumentoProcessoFormComponent', () => {
   const prestadorExternoServiceSpy = { get: jest.fn(), consultarUsuarioExternoPorFiltro: jest.fn() };
   prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro.mockReturnValue(of({})
   empresaPrestadorExternoServiceSpy.consultarFiliais.mockReturnValue(of({})));
-  meusDadosServiceSpy.carregarTitular.mockReturnValue(of({}));
+  meusDadosServiceSpy.carregarTitular.mockReturnValue(of({});
   documentoServiceSpy.get.mockReturnValue(of({}))
   tipoDeficienciaServiceSpy.consultarTodos.mockReturnValue(of({}))
   grupoDocumentoServiceSpy.consultarTodos.mockReturnValue(of({}))

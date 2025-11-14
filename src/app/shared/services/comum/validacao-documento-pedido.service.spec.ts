@@ -22,8 +22,7 @@ describe('ValidacaoDocumentoPedidoService', () => {
         {provide: PrestadorExternoService, useValue: prestadorExternoServiceSpy },
 
       ]
-    }));
-
+    });
     service = TestBed.inject(ValidacaoDocumentoPedidoService);
     httpMock = TestBed.inject(HttpTestingController);
   });

@@ -11,8 +11,7 @@ describe('BaseLayoutHomeComponent', () => {
       declarations: [ BaseLayoutHomeComponent ]
     })
     .compileComponents();
-  }));
-
+  });
   beforeEach(() => {
     fixture = TestBed.createComponent(BaseLayoutHomeComponent);
     component = fixture.componentInstance;

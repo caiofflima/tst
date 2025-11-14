@@ -23,8 +23,7 @@ describe('EmpresaPrestadorExternoHomeComponent', () => {
   const prestadorExternoServiceSpy = { get: jest.fn(), consultarUsuarioExternoPorFiltro: jest.fn() };
   prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro.mockReturnValue(of({})
   empresaPrestadorExternoServiceSpy.consultarFiliais.mockReturnValue(of({})));
-  comboServiceSpy.consultarComboUF.mockReturnValue(of({}));
-
+  comboServiceSpy.consultarComboUF.mockReturnValue(of({});
   beforeEach(async () => {
 
     await TestBed.configureTestingModule({

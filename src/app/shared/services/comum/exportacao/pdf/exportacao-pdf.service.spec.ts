@@ -23,8 +23,7 @@ describe('ExportacaoPDFService', () => {
         {provide: PrestadorExternoService, useValue: prestadorExternoServiceSpy },
 
       ]
-    }));
-
+    });
     service = TestBed.inject(ExportacaoPDFService);
     httpMock = TestBed.inject(HttpTestingController);
   });
