@@ -92,7 +92,7 @@ describe('AscButtonThirdComponent', () => {
 
         for (let i = 0; i < 5; i++) {
             component.clickButton(new MouseEvent('click'));
-        } as any
+        }
 
         expect(emitSpy).toHaveBeenCalledTimes(5);
     });
