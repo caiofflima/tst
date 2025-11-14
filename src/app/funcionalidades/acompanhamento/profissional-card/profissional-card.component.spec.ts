@@ -7,14 +7,14 @@ describe('ProfissionalCardComponent', () => {
   let component: ProfissionalCardComponent;
   let fixture: ComponentFixture<ProfissionalCardComponent>;
   const prestadorExternoServiceSpy = { get: jest.fn(), consultarUsuarioExternoPorFiltro: jest.fn() };
-  prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro = of({})
+  prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro.mockReturnValue(of({})
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ProfissionalCardComponent],
       providers:[  {provide: PrestadorExternoService, useValue: prestadorExternoServiceSpy },
       ]
-    }).compileComponents();
+    }).compileComponents());
   });
 
   beforeEach(() => {

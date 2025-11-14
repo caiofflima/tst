@@ -12,7 +12,7 @@ describe('EspecialidadeService', () => {
   const messageServiceSpy = { getDescription: jest.fn() };
   const sessaoServiceSpy = { getDescription: jest.fn() };
   const prestadorExternoServiceSpy = { get: jest.fn(), consultarUsuarioExternoPorFiltro: jest.fn() };
-  prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro = of({})
+  prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro.mockReturnValue(of({})
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -24,7 +24,7 @@ describe('EspecialidadeService', () => {
 
         { provide: SessaoService, useValue: sessaoServiceSpy }
       ]
-    });
+    }));
 
     service = TestBed.inject(EspecialidadeService);
     httpMock = TestBed.inject(HttpTestingController);

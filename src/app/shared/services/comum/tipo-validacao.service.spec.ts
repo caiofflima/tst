@@ -12,10 +12,10 @@ describe('TipoValidacaoService', () => {
   const baseUrl = '/siasc-api/api/tipos-validacao';
   const messageServiceSpy = { getDescription: jest.fn() };
   const prestadorExternoServiceSpy = { get: jest.fn(), consultarUsuarioExternoPorFiltro: jest.fn() };
-  prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro = of({})
+  prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro.mockReturnValue(of({})
 
   beforeEach(() => {
-    const spy = { add: jest.fn() };
+    const spy = { add: jest.fn()) };
 
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],

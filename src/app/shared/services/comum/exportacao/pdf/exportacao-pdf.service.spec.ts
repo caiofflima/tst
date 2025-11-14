@@ -12,7 +12,7 @@ describe('ExportacaoPDFService', () => {
   const baseUrl = '/siasc-api/api/exporta/pdf';
   const messageServiceSpy = { getDescription: jest.fn() };
   const prestadorExternoServiceSpy = { get: jest.fn(), consultarUsuarioExternoPorFiltro: jest.fn() };
-  prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro = of({})
+  prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro.mockReturnValue(of({})
 
 
   beforeEach(() => {
@@ -23,7 +23,7 @@ describe('ExportacaoPDFService', () => {
         {provide: PrestadorExternoService, useValue: prestadorExternoServiceSpy },
 
       ]
-    });
+    }));
 
     service = TestBed.inject(ExportacaoPDFService);
     httpMock = TestBed.inject(HttpTestingController);

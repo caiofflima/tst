@@ -65,7 +65,7 @@ describe('RelatorioProcedimentosSolicitadosPorProfissionalListarComponent', () =
   sIASCFluxoServiceSpy.consultarPermissoesFluxoPorPedido.mockReturnValue(of({}));
   tipoProcessoServiceSpy.consultarTiposProcessoAutorizacaoPrevia.mockReturnValue(of({}));
 
-  documentoPedidoServiceSpy.avisoSituacaoPedido = of({});
+  documentoPedidoServiceSpy.avisoSituacaoPedido.mockReturnValue(of({}));
 
   activatedRouteSpy.snapshot = {
     params:{
@@ -76,7 +76,7 @@ describe('RelatorioProcedimentosSolicitadosPorProfissionalListarComponent', () =
     }
   }
 
-  activatedRouteSpy.paramMap = of({});
+  activatedRouteSpy.paramMap.mockReturnValue(of({}));
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({

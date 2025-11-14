@@ -13,8 +13,8 @@ describe('PerfilUsuarioExternoFormComponent', () => {
   const perfilUsuarioExternoServiceSpy = { consultarComboPerfisPrestadoresExternos: jest.fn(), consultarComboTiposAuditor: jest.fn(), consultarPorFiltro: jest.fn(), removerCredenciais: jest.fn() };
   perfilUsuarioExternoServiceSpy.consultarPorFiltro.mockReturnValue(of());
     const prestadorExternoServiceSpy = { get: jest.fn(), consultarUsuarioExternoPorFiltro: jest.fn() };
-    prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro = of({})
-  const dataSpy = { storage: jest.fn() };
+    prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro.mockReturnValue(of({})
+  const dataSpy = { storage: jest.fn()) };
 
   let component: PerfilUsuarioExternoFormComponent;
   let fixture: ComponentFixture<PerfilUsuarioExternoFormComponent>;

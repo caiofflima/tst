@@ -12,7 +12,7 @@ describe('SituacaoProcessoService', () => {
   const baseUrl = '/siasc-api/api/situacoes-processo';
   const messageServiceSpy = { getDescription: jest.fn() };
   const prestadorExternoServiceSpy = { get: jest.fn(), consultarUsuarioExternoPorFiltro: jest.fn() };
-  prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro = of({})
+  prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro.mockReturnValue(of({})
 
 
   beforeEach(() => {
@@ -23,7 +23,7 @@ describe('SituacaoProcessoService', () => {
         {provide: PrestadorExternoService, useValue: prestadorExternoServiceSpy },
 
       ]
-    });
+    }));
 
     service = TestBed.inject(SituacaoProcessoService);
     httpMock = TestBed.inject(HttpTestingController);

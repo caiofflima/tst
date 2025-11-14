@@ -21,8 +21,8 @@ describe('EmpresaPrestadorExternoHomeComponent', () => {
   const locationSpy = { getDescription: jest.fn() };
   const comboServiceSpy = { consultarComboUF: jest.fn() };
   const prestadorExternoServiceSpy = { get: jest.fn(), consultarUsuarioExternoPorFiltro: jest.fn() };
-  prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro = of({})
-  empresaPrestadorExternoServiceSpy.consultarFiliais.mockReturnValue(of({}));
+  prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro.mockReturnValue(of({})
+  empresaPrestadorExternoServiceSpy.consultarFiliais.mockReturnValue(of({})));
   comboServiceSpy.consultarComboUF.mockReturnValue(of({}));
 
   beforeEach(async () => {

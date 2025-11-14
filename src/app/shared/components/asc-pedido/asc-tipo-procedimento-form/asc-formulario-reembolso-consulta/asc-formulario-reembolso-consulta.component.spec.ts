@@ -13,7 +13,7 @@ describe('AscFormularioReembolsoConsultaComponent', () => {
   const procedimentoServiceSpy = { init: jest.fn() };
   const procedimentoPedidoServiceSpy = { pedidoListenerValorNotaFiscal: jest.fn() };
   const autorizacaoPreviaServiceSpy = { consultarPorIdBeneficiarioAndIdProcedimento: jest.fn() };
-  procedimentoPedidoServiceSpy.pedidoListenerValorNotaFiscal = of({valor: 1});
+  procedimentoPedidoServiceSpy.pedidoListenerValorNotaFiscal.mockReturnValue(of({valor: 1}));
 
 
   beforeEach(async () => {

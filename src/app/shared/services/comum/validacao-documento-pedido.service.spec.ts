@@ -12,7 +12,7 @@ describe('ValidacaoDocumentoPedidoService', () => {
   const baseUrl = '/siasc-api/api/validacoes-documento-pedido';
   const messageServiceSpy = { getDescription: jest.fn() };
   const prestadorExternoServiceSpy = { get: jest.fn(), consultarUsuarioExternoPorFiltro: jest.fn() };
-  prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro = of({})
+  prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro.mockReturnValue(of({})
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -22,7 +22,7 @@ describe('ValidacaoDocumentoPedidoService', () => {
         {provide: PrestadorExternoService, useValue: prestadorExternoServiceSpy },
 
       ]
-    });
+    }));
 
     service = TestBed.inject(ValidacaoDocumentoPedidoService);
     httpMock = TestBed.inject(HttpTestingController);

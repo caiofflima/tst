@@ -7,14 +7,14 @@ describe('ProcedimentoPedidoCardComponent', () => {
   let component: ProcedimentoPedidoCardComponent;
   let fixture: ComponentFixture<ProcedimentoPedidoCardComponent>;
   const prestadorExternoServiceSpy = { get: jest.fn(), consultarUsuarioExternoPorFiltro: jest.fn() };
-  prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro = of({})
+  prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro.mockReturnValue(of({})
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ProcedimentoPedidoCardComponent],
       providers:[        {provide: PrestadorExternoService, useValue: prestadorExternoServiceSpy },
       ]
-    }).compileComponents();
+    }).compileComponents());
   });
 
   beforeEach(() => {

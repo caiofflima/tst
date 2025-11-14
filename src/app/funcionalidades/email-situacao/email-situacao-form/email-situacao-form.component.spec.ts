@@ -20,8 +20,8 @@ describe('EmailSituacaoFormComponent', () => {
   const comboServiceSpy = { consultarComboTipoBeneficiarioPorTipoProcesso: jest.fn(), consultarTipoDestinatario: jest.fn() };
   const tipoProcessoServiceSpy = { consultarTodos: jest.fn() };
   const prestadorExternoServiceSpy = { get: jest.fn(), consultarUsuarioExternoPorFiltro: jest.fn() };
-  prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro = of({})
-  const emailServiceSpy = { get: jest.fn(), put: jest.fn(), post: jest.fn(), delete: jest.fn() };
+  prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro.mockReturnValue(of({})
+  const emailServiceSpy = { get: jest.fn(), put: jest.fn(), post: jest.fn(), delete: jest.fn()) };
   const activatedRouteSpy = {
     snapshot: { params: { id: '1' } }
   };

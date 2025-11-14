@@ -17,7 +17,7 @@ describe('ResultadoPesquisaProcessosCredenciadoComponent', () => {
     const sessaoServiceSpy = { getUsuario: jest.fn() };
     const processoServiceSpy = { consultarProcessosNaoConclusivosPorOperadorCredenciado: jest.fn(), consultarRecentesPorOperadorCredenciado: jest.fn() };
     const prestadorExternoServiceSpy = { get: jest.fn(), consultarUsuarioExternoPorFiltro: jest.fn() };
-  prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro = of({})
+  prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro.mockReturnValue(of({})
     await TestBed.configureTestingModule({
       declarations: [ResultadoPesquisaProcessosCredenciadoComponent],
       providers: [
@@ -29,7 +29,7 @@ describe('ResultadoPesquisaProcessosCredenciadoComponent', () => {
         { provide: ProcessoService, useValue: processoServiceSpy },
         { provide: PrestadorExternoService, useValue: prestadorExternoServiceSpy },
       ]
-    }).compileComponents();
+    }).compileComponents());
 
     fixture = TestBed.createComponent(ResultadoPesquisaProcessosCredenciadoComponent);
     component = fixture.componentInstance;

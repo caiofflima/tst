@@ -43,9 +43,9 @@ describe('ValidarProcedimentosComponent', () => {
   const motivoSolicitacaoServiceSpy = { get: jest.fn() };
 
   empresaPrestadorExternoServiceSpy.buscarEmpresas.mockReturnValue(of({}));
-  prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro = of({})
+  prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro.mockReturnValue(of({})
 
-  prestadorExternoServiceSpy.consultarPorFiltro.mockReturnValue(of({}));
+  prestadorExternoServiceSpy.consultarPorFiltro.mockReturnValue(of({})));
   comboServiceSpy.consultarComboPerfisPrestadoresExternos.mockReturnValue(of({}));
   comboServiceSpy.consultarComboTiposAuditor.mockReturnValue(of({}));
   tipoDocumentoServiceSpy.consultarTodos.mockReturnValue(of({}));

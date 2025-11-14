@@ -12,7 +12,7 @@ describe('TipoDocumentoService', () => {
   const baseUrl = '/siasc-api/api/tipo-documento';
   const messageServiceSpy = { getDescription: jest.fn() };
   const prestadorExternoServiceSpy = { get: jest.fn(), consultarUsuarioExternoPorFiltro: jest.fn() };
-  prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro = of({})
+  prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro.mockReturnValue(of({})
 
   beforeEach(() => {
 
@@ -24,7 +24,7 @@ describe('TipoDocumentoService', () => {
   {provide: PrestadorExternoService, useValue: prestadorExternoServiceSpy },
 
       ]
-    });
+    }));
 
     service = TestBed.inject(TipoDocumentoService);
     httpMock = TestBed.inject(HttpTestingController);

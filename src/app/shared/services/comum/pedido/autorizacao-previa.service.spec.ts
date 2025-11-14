@@ -14,7 +14,7 @@ describe('AutorizacaoPreviaService', () => {
   const messageServiceSpy = { getDescription: jest.fn() };
   const fileUploadServiceSpy = { realizarUpload: jest.fn() };
   const prestadorExternoServiceSpy = { get: jest.fn(), consultarUsuarioExternoPorFiltro: jest.fn() };
-  prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro = of({})
+  prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro.mockReturnValue(of({})
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -26,7 +26,7 @@ describe('AutorizacaoPreviaService', () => {
 
         { provide: FileUploadService, useValue: fileUploadServiceSpy },
       ]
-    });
+    }));
 
     service = TestBed.inject(AutorizacaoPreviaService);
     httpMock = TestBed.inject(HttpTestingController);

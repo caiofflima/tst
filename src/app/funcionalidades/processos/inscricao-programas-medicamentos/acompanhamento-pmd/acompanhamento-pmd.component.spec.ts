@@ -51,9 +51,9 @@ describe('AcompanhamentoPmdComponent', () => {
 
   empresaPrestadorExternoServiceSpy.buscarEmpresas.mockReturnValue(of({}));
   prestadorExternoServiceSpy.consultarPorFiltro.mockReturnValue(of({}));
-  prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro = of({})
+  prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro.mockReturnValue(of({})
 
-  comboServiceSpy.consultarComboPerfisPrestadoresExternos.mockReturnValue(of({}));
+  comboServiceSpy.consultarComboPerfisPrestadoresExternos.mockReturnValue(of({})));
   comboServiceSpy.consultarComboTiposAuditor.mockReturnValue(of({}));
   tipoDocumentoServiceSpy.consultarTodos.mockReturnValue(of({}));
   documentoServiceSpy.get.mockReturnValue(of({}));
@@ -63,8 +63,8 @@ describe('AcompanhamentoPmdComponent', () => {
   sIASCFluxoServiceSpy.consultarPermissoesFluxoPorPedido.mockReturnValue(of({}));
   sIASCFluxoServiceSpy.consultarPermissoesFluxoPorPedido.mockReturnValue(of({}));
 
-  documentoPedidoServiceSpy.avisoSituacaoPedido = of({});
-  documentoPedidoServiceSpy.avisoSituacaoPedidoComplementares = of({});
+  documentoPedidoServiceSpy.avisoSituacaoPedido.mockReturnValue(of({}));
+  documentoPedidoServiceSpy.avisoSituacaoPedidoComplementares.mockReturnValue(of({}));
 
   activatedRouteSpy.snapshot = {
     params:{
@@ -74,7 +74,7 @@ describe('AcompanhamentoPmdComponent', () => {
 
     }
   }
-  activatedRouteSpy.paramMap = of({});
+  activatedRouteSpy.paramMap.mockReturnValue(of({}));
  
   beforeEach(async () => {
     await TestBed.configureTestingModule({

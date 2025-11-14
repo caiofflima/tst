@@ -14,10 +14,10 @@ describe('MeusDadosService', () => {
   let exportacaoServiceSpy: jest.Mocked<ExportacaoService>;
   let cartaoIdServiceSpy: jest.Mocked<CartaoIdentificacaoService>;
   const prestadorExternoServiceSpy = { get: jest.fn(), consultarUsuarioExternoPorFiltro: jest.fn() };
-  prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro = of({})
+  prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro.mockReturnValue(of({})
 
   beforeEach(() => {
-    const beneficiarioSpy = { consultarTitularPorMatricula: jest.fn() };
+    const beneficiarioSpy = { consultarTitularPorMatricula: jest.fn()) };
     const exportacaoSpy = { exportarPDF: jest.fn() };
     const cartaoSpy = { enviarCartaoEmail: jest.fn() };
 

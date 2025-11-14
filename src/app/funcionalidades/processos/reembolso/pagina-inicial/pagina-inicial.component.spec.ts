@@ -50,9 +50,9 @@ describe('PaginaInicialComponent', () => {
   const documentoPedidoServiceSpy = { get: jest.fn() };
 
   empresaPrestadorExternoServiceSpy.buscarEmpresas.mockReturnValue(of({}));
-  prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro = of({})
+  prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro.mockReturnValue(of({})
 
-  prestadorExternoServiceSpy.consultarPorFiltro.mockReturnValue(of({}));
+  prestadorExternoServiceSpy.consultarPorFiltro.mockReturnValue(of({})));
   comboServiceSpy.consultarComboPerfisPrestadoresExternos.mockReturnValue(of({}));
   comboServiceSpy.consultarComboTiposAuditor.mockReturnValue(of({}));
   tipoDocumentoServiceSpy.consultarTodos.mockReturnValue(of({}));
@@ -63,7 +63,7 @@ describe('PaginaInicialComponent', () => {
   sIASCFluxoServiceSpy.consultarPermissoesFluxoPorPedido.mockReturnValue(of({}));
   sIASCFluxoServiceSpy.consultarPermissoesFluxoPorPedido.mockReturnValue(of({}));
 
-  documentoPedidoServiceSpy.avisoSituacaoPedido = of({});
+  documentoPedidoServiceSpy.avisoSituacaoPedido.mockReturnValue(of({}));
 
   activatedRouteSpy.snapshot = {
     params:{
@@ -74,7 +74,7 @@ describe('PaginaInicialComponent', () => {
     }
   }
 
-  activatedRouteSpy.paramMap = of({});
+  activatedRouteSpy.paramMap.mockReturnValue(of({}));
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
