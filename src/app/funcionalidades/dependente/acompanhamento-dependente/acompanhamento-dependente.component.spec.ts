@@ -16,12 +16,13 @@ describe('AcompanhamentoDependenteComponent', () => {
   let fixture: ComponentFixture<AcompanhamentoDependenteComponent>;
 
   const messageServiceSpy = { getDescription: jest.fn() };
-  const activatedRouteSpy = { snapshot: jest.fn() };
-  activatedRouteSpy.snapshot = {
-    params: {
-      id: null
+  const activatedRouteSpy = {
+    snapshot: {
+      params: {
+        id: null
+      }
     }
-  }
+  };
   const processoServiceSpy = { getProcesso: jest.fn() };
   const patologiaServiceSpy = { getPatologia: jest.fn() };
   const procedimentoServiceSpy = { getProcedimento: jest.fn() };

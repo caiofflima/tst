@@ -18,12 +18,13 @@ describe('BeneficiarioPedidoListarComponent', () => {
   let fixture: ComponentFixture<BeneficiarioPedidoListarComponent>;
   const messageServiceSpy = { getDescription: jest.fn() };
   const routerSpy = { navigate: jest.fn(), url: jest.fn() };
-  const activatedRouteSpy = { snapshot: jest.fn() };
-  activatedRouteSpy.snapshot = {
-    queryParams: {
-      id: null
+  const activatedRouteSpy = {
+    snapshot: {
+      queryParams: {
+        id: null
+      }
     }
-  }
+  };
   const perfilServiceSpy = { consultarPorNome: jest.fn() };
   const beneficiarioPedidoServiceSpy = { getTitulo: jest.fn(), getBaseURL: jest.fn(), consultarPorFiltro: jest.fn() };
   beneficiarioPedidoServiceSpy.consultarPorFiltro.mockReturnValue(of({}));
