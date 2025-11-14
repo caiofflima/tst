@@ -6,8 +6,12 @@ import { Router } from '@angular/router';
 import { ReciboModel } from '../models/recibo-form.model';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 
-// Mock kendo
-jest.mock('assets/js/kendo/kendo.all.min.js', () => ({}));
+// Mock shared/pdf.ts that imports kendo
+jest.mock('app/shared/pdf', () => ({
+  GerarPDF: {
+    imprimirPdf: jest.fn()
+  }
+}));
 
 describe('ReciboComponent', () => {
     let component: ReciboComponent;
