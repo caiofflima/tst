@@ -11,7 +11,7 @@ describe('RodapePadraoComponent', () => {
     beforeEach(async () => {
         router = {
             url: '/home'
-        } as unknown as jest.Mocked<Router>;
+        } as jest.Mocked<Router>;
 
         await TestBed.configureTestingModule({
             declarations: [RodapePadraoComponent],
@@ -32,7 +32,7 @@ describe('RodapePadraoComponent', () => {
     });
 
     it('isHome deve retornar true quando a URL é /home', () => {
-        jest.spyOn(router, 'url', 'get').mockReturnValue('/home');
+        Object.defineProperty(router, 'url', { value: '/home', writable: true });
 
         const resultado = component.isHome;
 
@@ -40,7 +40,7 @@ describe('RodapePadraoComponent', () => {
     });
 
     it('isHome deve retornar false quando a URL não é /home', () => {
-        jest.spyOn(router, 'url', 'get').mockReturnValue('/perfil');
+        Object.defineProperty(router, 'url', { value: '/perfil', writable: true });
 
         const resultado = component.isHome;
 
@@ -48,7 +48,7 @@ describe('RodapePadraoComponent', () => {
     });
 
     it('isHome deve retornar false para URL vazia', () => {
-        jest.spyOn(router, 'url', 'get').mockReturnValue('');
+        Object.defineProperty(router, 'url', { value: '', writable: true });
 
         const resultado = component.isHome;
 
@@ -56,7 +56,7 @@ describe('RodapePadraoComponent', () => {
     });
 
     it('isHome deve retornar false para URL com /home como parte de outro caminho', () => {
-        jest.spyOn(router, 'url', 'get').mockReturnValue('/home/perfil');
+        Object.defineProperty(router, 'url', { value: '/home/perfil', writable: true });
 
         const resultado = component.isHome;
 
@@ -64,7 +64,7 @@ describe('RodapePadraoComponent', () => {
     });
 
     it('isHome deve ser sensível a maiúsculas e minúsculas', () => {
-        jest.spyOn(router, 'url', 'get').mockReturnValue('/Home');
+        Object.defineProperty(router, 'url', { value: '/Home', writable: true });
 
         const resultado = component.isHome;
 
