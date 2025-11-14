@@ -8,6 +8,17 @@ import { BeneficiarioService, SessaoService } from 'app/shared/services/services
 import { of } from 'rxjs';
 import { Usuario } from 'app/shared/models/entidades';
 
+// Mock pdfMake and vfs_fonts
+jest.mock('pdfmake/build/pdfmake', () => ({
+  vfs: {}
+}));
+
+jest.mock('assets/fonts/vfs_fonts', () => ({
+  pdfMake: { vfs: {} }
+}));
+
+jest.mock('html-to-pdfmake', () => jest.fn());
+
 describe('CartoesDetailComponent', () => {
   let component: CartoesDetailComponent;
   let fixture: ComponentFixture<CartoesDetailComponent>;
