@@ -17,11 +17,11 @@ describe('RenovarDependenteComponent', () => {
   const messageServiceSpy = { getDescription: jest.fn() };
   const activatedRouteSpy = {
     snapshot: {
-    params:{
-      idBeneficiario: 1
+      params: {
+        idBeneficiario: 1
+      }
     }
   };
-  }
   const usuario = {} as Usuario;
   usuario.matriculaFuncional = "C123000";
   

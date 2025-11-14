@@ -20,11 +20,11 @@ describe('EtapaComplementoDependenteComponent', () => {
   const messageServiceSpy = { getDescription: jest.fn() };
   const activatedRouteSpy = {
     snapshot: {
-    params: {
+params: {
       id: null
     }
+    }
   };
-  }
   const processoServiceSpy = { getProcesso: jest.fn() };
   const beneficiarioServiceSpy = { consultarBeneficiarioPorId: jest.fn(), consultarFamiliaPorMatricula: jest.fn() };
   const patologiaServiceSpy = { getPatologia: jest.fn() };

@@ -20,11 +20,11 @@ describe('EtapaTipoDependenteComponent', () => {
   const messageServiceSpy = { getDescription: jest.fn() };
   const activatedRouteSpy = {
     snapshot: {
-    params: {
-      id: null
+      params: {
+        id: null
+      }
     }
   };
-  }
   const processoServiceSpy = { getProcesso: jest.fn() };
   const beneficiarioServiceSpy = { consultarPorMatricula: jest.fn() };
   beneficiarioServiceSpy.consultarPorMatricula.mockReturnValue(of({}));
