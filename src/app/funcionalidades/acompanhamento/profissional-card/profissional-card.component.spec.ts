@@ -14,7 +14,7 @@ describe('ProfissionalCardComponent', () => {
       declarations: [ProfissionalCardComponent],
       providers:[  {provide: PrestadorExternoService, useValue: prestadorExternoServiceSpy },
       ]
-    }).compileComponents());
+    }).compileComponents();
   });
 
   beforeEach(() => {

@@ -27,8 +27,8 @@ describe('CancelarDependenteComponent', () => {
   const beneficiarioServiceSpy = { consultarBeneficiarioPorId: jest.fn(), consultarFamiliaPorMatricula: jest.fn() };
   const inscricaoDependenteServiceSpy = { consultarBeneficiarioPorId: jest.fn() };
   const tipoDeficienciaServiceSpy = { consultarTodos: jest.fn() };
-  beneficiarioServiceSpy.consultarFamiliaPorMatricula.mockReturnValue(of({}))
-  tipoDeficienciaServiceSpy.consultarTodos.mockReturnValue(of({}))
+  beneficiarioServiceSpy.consultarFamiliaPorMatricula.mockReturnValue(of({}));
+  tipoDeficienciaServiceSpy.consultarTodos.mockReturnValue(of({}));
   
 
   const usuario = {} as Usuario;

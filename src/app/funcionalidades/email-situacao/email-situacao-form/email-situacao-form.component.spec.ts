@@ -64,7 +64,7 @@ describe('EmailSituacaoFormComponent', () => {
 
     tipoProcessoServiceSpy.consultarTodos.mockReturnValue(of([]));
 
-    emailServiceSpy.get.mockReturnValue(of({});
+    emailServiceSpy.get.mockReturnValue(of({}));
     fixture.detectChanges();
   });
 

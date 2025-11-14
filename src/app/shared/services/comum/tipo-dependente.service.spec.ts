@@ -13,7 +13,7 @@ describe('TipoDependenteService', () => {
   const baseUrl = '/siasc-api/api/tipos-dependente';
   const messageServiceSpy = { getDescription: jest.fn() };
   const prestadorExternoServiceSpy = { get: jest.fn(), consultarUsuarioExternoPorFiltro: jest.fn() };
-  prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro.mockReturnValue(of({}))
+  prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro.mockReturnValue(of({}));
   const dummyDependents: TipoDependente[] = [
     {} as TipoDependente,
     {} as TipoDependente

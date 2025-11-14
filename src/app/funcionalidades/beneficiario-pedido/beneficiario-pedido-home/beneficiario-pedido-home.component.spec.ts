@@ -40,7 +40,7 @@ describe('BeneficiarioPedidoHomeComponent', () => {
 
         { provide: ComboService, useValue: comboServiceSpy },
       ]
-    }).compileComponents());
+    }).compileComponents();
   });
 
   beforeEach(() => {

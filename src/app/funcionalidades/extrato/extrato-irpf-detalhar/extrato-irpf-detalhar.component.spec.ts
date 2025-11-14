@@ -51,7 +51,7 @@ describe('ExtratoIRPFDetalharComponent', () => {
     };
 
     mockReembolsoSaudeCaixaService = {
-      getComprovanteIRPFPorCPF: jest.fn().mockReturnValue(of({}))
+      getComprovanteIRPFPorCPF: jest.fn().mockReturnValue(of({}));
     };
 
     await TestBed.configureTestingModule({

@@ -29,7 +29,7 @@ describe('ResultadoPesquisaProcessosCredenciadoComponent', () => {
         { provide: ProcessoService, useValue: processoServiceSpy },
         { provide: PrestadorExternoService, useValue: prestadorExternoServiceSpy },
       ]
-    }).compileComponents());
+    }).compileComponents();
 
     fixture = TestBed.createComponent(ResultadoPesquisaProcessosCredenciadoComponent);
     component = fixture.componentInstance;

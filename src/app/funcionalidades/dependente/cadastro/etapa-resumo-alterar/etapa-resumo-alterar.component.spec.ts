@@ -20,7 +20,7 @@ describe('EtapaResumoAlterarComponent', () => {
   const fileUploadServiceSpy = { init: jest.fn() };
   const inscricaoDependenteServiceSpy = { init: jest.fn() };
   const tipoDeficienciaServiceSpy = { consultarTodos: jest.fn() };
-  tipoDeficienciaServiceSpy.consultarTodos.mockReturnValue(of({}))
+  tipoDeficienciaServiceSpy.consultarTodos.mockReturnValue(of({}));
   
 
   const usuario = {} as Usuario;

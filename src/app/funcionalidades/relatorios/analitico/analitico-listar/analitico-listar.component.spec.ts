@@ -53,20 +53,20 @@ describe('RelatorioAnaliticoListarComponent', () => {
   const localidadeServiceSpy = { get: jest.fn() };
   const reembolsoServiceSpy = { get: jest.fn() };
 
-  empresaPrestadorExternoServiceSpy.buscarEmpresas.mockReturnValue(of({});
-  prestadorExternoServiceSpy.consultarPorFiltro.mockReturnValue(of({});
+  empresaPrestadorExternoServiceSpy.buscarEmpresas.mockReturnValue(of({}));
+  prestadorExternoServiceSpy.consultarPorFiltro.mockReturnValue(of({}));
   prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro.mockReturnValue(of({})
 
-  comboServiceSpy.consultarComboPerfisPrestadoresExternos.mockReturnValue(of({})));
-  comboServiceSpy.consultarComboTiposAuditor.mockReturnValue(of({});
-  tipoDocumentoServiceSpy.consultarTodos.mockReturnValue(of({});
-  documentoServiceSpy.get.mockReturnValue(of({});
-  prazoTratamentoServiceSpy.consultarPorFiltro.mockReturnValue(of({});
-  situacaoProcessoServiceSpy.consultarTodasTransicoesManuais.mockReturnValue(of({});
-  patologiaServiceSpy.consultarDTOPorId.mockReturnValue(of({});
-  sIASCFluxoServiceSpy.consultarPermissoesFluxoPorPedido.mockReturnValue(of({});
-  sIASCFluxoServiceSpy.consultarPermissoesFluxoPorPedido.mockReturnValue(of({});
-  documentoPedidoServiceSpy.avisoSituacaoPedido.mockReturnValue(of({});
+  comboServiceSpy.consultarComboPerfisPrestadoresExternos.mockReturnValue(of({}));
+  comboServiceSpy.consultarComboTiposAuditor.mockReturnValue(of({}));
+  tipoDocumentoServiceSpy.consultarTodos.mockReturnValue(of({}));
+  documentoServiceSpy.get.mockReturnValue(of({}));
+  prazoTratamentoServiceSpy.consultarPorFiltro.mockReturnValue(of({}));
+  situacaoProcessoServiceSpy.consultarTodasTransicoesManuais.mockReturnValue(of({}));
+  patologiaServiceSpy.consultarDTOPorId.mockReturnValue(of({}));
+  sIASCFluxoServiceSpy.consultarPermissoesFluxoPorPedido.mockReturnValue(of({}));
+  sIASCFluxoServiceSpy.consultarPermissoesFluxoPorPedido.mockReturnValue(of({}));
+  documentoPedidoServiceSpy.avisoSituacaoPedido.mockReturnValue(of({}));
   activatedRouteSpy.snapshot = {
     params:{
         id: 1
@@ -76,7 +76,7 @@ describe('RelatorioAnaliticoListarComponent', () => {
     }
   }
 
-  activatedRouteSpy.paramMap.mockReturnValue(of({});
+  activatedRouteSpy.paramMap.mockReturnValue(of({}));
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports:[

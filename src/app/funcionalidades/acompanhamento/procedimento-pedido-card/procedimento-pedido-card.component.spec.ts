@@ -14,7 +14,7 @@ describe('ProcedimentoPedidoCardComponent', () => {
       declarations: [ProcedimentoPedidoCardComponent],
       providers:[        {provide: PrestadorExternoService, useValue: prestadorExternoServiceSpy },
       ]
-    }).compileComponents());
+    }).compileComponents();
   });
 
   beforeEach(() => {

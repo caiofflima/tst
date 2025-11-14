@@ -25,12 +25,12 @@ describe('ParametrizacaoDocumentoProcessoFormComponent', () => {
   const caraterSolicitacaoServiceSpy = { consultarTodos: jest.fn() };
   const prestadorExternoServiceSpy = { get: jest.fn(), consultarUsuarioExternoPorFiltro: jest.fn() };
   prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro.mockReturnValue(of({})
-  empresaPrestadorExternoServiceSpy.consultarFiliais.mockReturnValue(of({})));
-  meusDadosServiceSpy.carregarTitular.mockReturnValue(of({});
-  documentoServiceSpy.get.mockReturnValue(of({}))
-  tipoDeficienciaServiceSpy.consultarTodos.mockReturnValue(of({}))
-  grupoDocumentoServiceSpy.consultarTodos.mockReturnValue(of({}))
-  caraterSolicitacaoServiceSpy.consultarTodos.mockReturnValue(of({}))
+  empresaPrestadorExternoServiceSpy.consultarFiliais.mockReturnValue(of({}));
+  meusDadosServiceSpy.carregarTitular.mockReturnValue(of({}));
+  documentoServiceSpy.get.mockReturnValue(of({}));
+  tipoDeficienciaServiceSpy.consultarTodos.mockReturnValue(of({}));
+  grupoDocumentoServiceSpy.consultarTodos.mockReturnValue(of({}));
+  caraterSolicitacaoServiceSpy.consultarTodos.mockReturnValue(of({}));
 
   activatedRouteSpy.snapshot = {
     params: {

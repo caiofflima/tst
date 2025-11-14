@@ -23,14 +23,14 @@ describe('PesquisarProcessoReembolsoFormComponent', () => {
   const situacaoProcessoServiceSpy = { consultarTodasTransicoesManuais: jest.fn() };
   const patologiaServiceSpy = { consultarDTOPorId: jest.fn() };
   const prestadorExternoServiceSpy = { get: jest.fn(), consultarUsuarioExternoPorFiltro: jest.fn() };
-  prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro .mockReturnValue(of({});
-  empresaPrestadorExternoServiceSpy.consultarFiliais.mockReturnValue(of({});
-  comboServiceSpy.consultarComboUF.mockReturnValue(of({});
-  tipoDocumentoServiceSpy.consultarTodos.mockReturnValue(of({});
-  documentoServiceSpy.get.mockReturnValue(of({});
-  prazoTratamentoServiceSpy.consultarPorFiltro.mockReturnValue(of({});
-  situacaoProcessoServiceSpy.consultarTodasTransicoesManuais.mockReturnValue(of({});
-  patologiaServiceSpy.consultarDTOPorId.mockReturnValue(of({});
+  prestadorExternoServiceSpy.consultarUsuarioExternoPorFiltro .mockReturnValue(of({}));
+  empresaPrestadorExternoServiceSpy.consultarFiliais.mockReturnValue(of({}));
+  comboServiceSpy.consultarComboUF.mockReturnValue(of({}));
+  tipoDocumentoServiceSpy.consultarTodos.mockReturnValue(of({}));
+  documentoServiceSpy.get.mockReturnValue(of({}));
+  prazoTratamentoServiceSpy.consultarPorFiltro.mockReturnValue(of({}));
+  situacaoProcessoServiceSpy.consultarTodasTransicoesManuais.mockReturnValue(of({}));
+  patologiaServiceSpy.consultarDTOPorId.mockReturnValue(of({}));
   activatedRouteSpy.snapshot = {
     params:{
         id: 1

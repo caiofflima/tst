@@ -27,20 +27,20 @@ describe('CadastroDependenteComponent', () => {
 
   const processoServiceSpy = { getProcesso: jest.fn() };
   const beneficiarioServiceSpy = { consultarBeneficiarioPorId: jest.fn(), consultarFamiliaPorMatricula: jest.fn(), consultarTodaFamiliaPorMatriculaRenovacao: jest.fn(), consultarTitularPorMatricula: jest.fn() };
-  beneficiarioServiceSpy.consultarFamiliaPorMatricula.mockReturnValue(of({}))
+  beneficiarioServiceSpy.consultarFamiliaPorMatricula.mockReturnValue(of({}));
   beneficiarioServiceSpy.consultarTodaFamiliaPorMatriculaRenovacao.mockReturnValue(of([]))
-  beneficiarioServiceSpy.consultarTitularPorMatricula.mockReturnValue(of({}))
+  beneficiarioServiceSpy.consultarTitularPorMatricula.mockReturnValue(of({}));
   const patologiaServiceSpy = { getPatologia: jest.fn() };
   const procedimentoServiceSpy = { getProcedimento: jest.fn() };
   const medicamentoServiceSpy = { getMedicamento: jest.fn() };
   const medicamentoPatologiaPedidoServiceSpy = { getMedicamentoPatologiaPedido: jest.fn() };
   const siascFluxoServiceSpy = { getFluxo: jest.fn(), consultarPermissoesFluxoPorPedido: jest.fn() };
-  siascFluxoServiceSpy.consultarPermissoesFluxoPorPedido.mockReturnValue(of({}))
+  siascFluxoServiceSpy.consultarPermissoesFluxoPorPedido.mockReturnValue(of({}));
   const documentoPedidoServiceSpy = { getDocumentoPedido: jest.fn() };
-  documentoPedidoServiceSpy.avisoSituacaoPedido.mockReturnValue(of({});
+  documentoPedidoServiceSpy.avisoSituacaoPedido.mockReturnValue(of({}));
   const sessaoServiceSpy = { getUsuario: jest.fn() };
   const atendimentoServiceSpy = { get: jest.fn() };
-  atendimentoServiceSpy.get.mockReturnValue(of({}))
+  atendimentoServiceSpy.get.mockReturnValue(of({}));
 
   const inscricaoDependenteServiceSpy = { setEditMode: jest.fn() };
 

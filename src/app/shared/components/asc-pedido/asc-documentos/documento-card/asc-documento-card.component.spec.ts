@@ -35,26 +35,26 @@ describe('AscDocumentoCardComponent', () => {
     const mockDocumentoTipoProcesso: DocumentoTipoProcesso = {id:1} as DocumentoTipoProcesso ;
 
     const documentoTipoProcessoServiceSpy = { get: jest.fn(), post: jest.fn(), put: jest.fn(), delete: jest.fn() };
-    documentoTipoProcessoServiceSpy.post.mockReturnValue(of({});
-    documentoTipoProcessoServiceSpy.put.mockReturnValue(of({});
+    documentoTipoProcessoServiceSpy.post.mockReturnValue(of({}));
+    documentoTipoProcessoServiceSpy.put.mockReturnValue(of({}));
     const anexoServiceSpy = { get: jest.fn(), post: jest.fn(), put: jest.fn(), delete: jest.fn() };
-    anexoServiceSpy.post.mockReturnValue(of({});
-    anexoServiceSpy.put.mockReturnValue(of({});
+    anexoServiceSpy.post.mockReturnValue(of({}));
+    anexoServiceSpy.put.mockReturnValue(of({}));
     const processoServiceSpy = { get: jest.fn(), post: jest.fn(), put: jest.fn(), delete: jest.fn() };
-    processoServiceSpy.post.mockReturnValue(of({});
-    processoServiceSpy.put.mockReturnValue(of({});
+    processoServiceSpy.post.mockReturnValue(of({}));
+    processoServiceSpy.put.mockReturnValue(of({}));
     const tipoValidacaoServiceSpy = { get: jest.fn(), post: jest.fn(), put: jest.fn(), delete: jest.fn() };
-    tipoValidacaoServiceSpy.post.mockReturnValue(of({});
-    tipoValidacaoServiceSpy.put.mockReturnValue(of({});
-    tipoValidacaoServiceSpy.get.mockReturnValue(of({});
+    tipoValidacaoServiceSpy.post.mockReturnValue(of({}));
+    tipoValidacaoServiceSpy.put.mockReturnValue(of({}));
+    tipoValidacaoServiceSpy.get.mockReturnValue(of({}));
     const validacaoDocumentoPedidoServiceSpy = { get: jest.fn(), post: jest.fn(), put: jest.fn(), delete: jest.fn() };
-    validacaoDocumentoPedidoServiceSpy.post.mockReturnValue(of({});
-    validacaoDocumentoPedidoServiceSpy.put.mockReturnValue(of({});
+    validacaoDocumentoPedidoServiceSpy.post.mockReturnValue(of({}));
+    validacaoDocumentoPedidoServiceSpy.put.mockReturnValue(of({}));
     const documentoPedidoServiceSpy = { get: jest.fn(), post: jest.fn(), put: jest.fn(), delete: jest.fn() };
-    documentoPedidoServiceSpy.post.mockReturnValue(of({});
-    documentoPedidoServiceSpy.put.mockReturnValue(of({});
-    //tipoDocumentoServiceSpy.consultarTodos.mockReturnValue(of({});
-    //documentoServiceSpy.get.mockReturnValue(of({});
+    documentoPedidoServiceSpy.post.mockReturnValue(of({}));
+    documentoPedidoServiceSpy.put.mockReturnValue(of({}));
+    //tipoDocumentoServiceSpy.consultarTodos.mockReturnValue(of({}));
+    //documentoServiceSpy.get.mockReturnValue(of({}));
     beforeEach(async () => {
       await TestBed.configureTestingModule({
         declarations: [AscDocumentoCardComponent,

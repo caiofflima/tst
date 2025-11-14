@@ -28,10 +28,10 @@ describe('AcompanhamentoDependenteComponent', () => {
   const medicamentoServiceSpy = { getMedicamento: jest.fn() };
   const medicamentoPatologiaPedidoServiceSpy = { getMedicamentoPatologiaPedido: jest.fn() };
   const siascFluxoServiceSpy = { getFluxo: jest.fn(), consultarPermissoesFluxoPorPedido: jest.fn() };
-  siascFluxoServiceSpy.consultarPermissoesFluxoPorPedido.mockReturnValue(of({}))
+  siascFluxoServiceSpy.consultarPermissoesFluxoPorPedido.mockReturnValue(of({}));
   const documentoPedidoServiceSpy = { getDocumentoPedido: jest.fn() };
-  documentoPedidoServiceSpy.avisoSituacaoPedido.mockReturnValue(of({});
-  documentoPedidoServiceSpy.avisoSituacaoPedidoComplementares.mockReturnValue(of({});
+  documentoPedidoServiceSpy.avisoSituacaoPedido.mockReturnValue(of({}));
+  documentoPedidoServiceSpy.avisoSituacaoPedidoComplementares.mockReturnValue(of({}));
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [AcompanhamentoDependenteComponent],

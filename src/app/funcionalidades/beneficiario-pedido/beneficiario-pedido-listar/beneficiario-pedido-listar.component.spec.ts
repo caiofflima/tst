@@ -26,7 +26,7 @@ describe('BeneficiarioPedidoListarComponent', () => {
   }
   const perfilServiceSpy = { consultarPorNome: jest.fn() };
   const beneficiarioPedidoServiceSpy = { getTitulo: jest.fn(), getBaseURL: jest.fn(), consultarPorFiltro: jest.fn() };
-  beneficiarioPedidoServiceSpy.consultarPorFiltro.mockReturnValue(of({});
+  beneficiarioPedidoServiceSpy.consultarPorFiltro.mockReturnValue(of({}));
   beneficiarioPedidoServiceSpy.getTitulo.mockReturnValue('Tipo de Beneficiário por Tipo de Pedido');
   beneficiarioPedidoServiceSpy.getBaseURL.mockReturnValue('/manutencao/parametros/tipobeneficiario-tipopedido');
   
