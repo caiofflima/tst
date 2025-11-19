@@ -56,6 +56,7 @@ describe('CartoesDetailComponent', () => {
     const beneficiarioServiceMock = {
       consultarBeneficiarioPorId: jest.fn().mockReturnValue(of(mockBeneficiario)),
       getDadosCartaoBeneficiario: jest.fn().mockReturnValue(of(mockCartao)),
+      consultarFamiliaPorMatricula: jest.fn().mockReturnValue(of([mockBeneficiario])),
     };
 
     const locationMock = {
@@ -376,5 +377,109 @@ describe('CartoesDetailComponent', () => {
 
       expect(pdfMake.createPdf).not.toHaveBeenCalled();
     });
+  });
+
+  describe('carregarListOperator', () => {
+    it('deve carregar a lista de beneficiários e criar options', () => {
+      const mockBeneficiarios = [
+        { id: 1, nome: 'John Doe' } as Beneficiario,
+        { id: 2, nome: 'Jane Smith' } as Beneficiario,
+      ];
+      
+      (beneficiarioService.consultarFamiliaPorMatricula as jest.Mock).mockReturnValue(
+        of(mockBeneficiarios)
+      );
+
+      component.carregarListOperator();
+
+      expect(beneficiarioService.consultarFamiliaPorMatricula).toHaveBeenCalledWith(
+        component.matricula,
+        component.titular
+      );
+      expect(component.beneficiarios).toEqual(mockBeneficiarios);
+      expect(component.options).toEqual([
+        { label: 'John Doe', value: 1 },
+        { label: 'Jane Smith', value: 2 },
+      ]);
+    });
+
+    it('deve lidar com erro ao carregar lista de beneficiários', () => {
+      const errorResponse = { error: 'Erro ao buscar família' };
+      (beneficiarioService.consultarFamiliaPorMatricula as jest.Mock).mockReturnValue(
+        throwError(() => errorResponse)
+      );
+
+      component.carregarListOperator();
+
+      // O HttpUtil.catchErrorAndReturnEmptyObservableByKey trata o erro
+      // então não deve quebrar a execução
+      expect(beneficiarioService.consultarFamiliaPorMatricula).toHaveBeenCalled();
+    });
+  });
+
+  describe('propriedades adicionais', () => {
+    it('deve inicializar beneficiarios como array vazio', () => {
+      expect(component.beneficiarios).toEqual([]);
+    });
+
+    it('deve inicializar options como array vazio', () => {
+      expect(component.options).toEqual([]);
+    });
+
+    it('deve inicializar titular como true', () => {
+      expect(component.titular).toBe(true);
+    });
+
+    it('deve permitir alterar o valor de titular', () => {
+      component.titular = false;
+      expect(component.titular).toBe(false);
+    });
+  });
+
+  describe('integração entre formulário e beneficiários', () => {
+    it('deve atualizar beneficiario quando o valor do dependente mudar', fakeAsync(() => {
+      const mockBeneficiarios = [
+        { id: 1, nome: 'John Doe' } as Beneficiario,
+        { id: 2, nome: 'Jane Smith' } as Beneficiario,
+      ];
+      
+      // Primeiro inicializa o componente
+      fixture.detectChanges();
+      tick();
+
+      // Depois adiciona os beneficiários
+      component.beneficiarios = mockBeneficiarios;
+
+      // Agora altera o valor do formulário
+      component.formularioSolicitacao.patchValue({ dependente: 2 });
+      tick(400);
+
+      expect(component.beneficiario).toEqual(mockBeneficiarios[1]);
+    }));
+
+    it('deve buscar cartão do beneficiário selecionado via formulário', fakeAsync(() => {
+      const mockBeneficiarios = [
+        { id: 1, nome: 'John Doe' } as Beneficiario,
+        { id: 2, nome: 'Jane Smith' } as Beneficiario,
+      ];
+
+      // Limpa as chamadas anteriores para poder contar apenas a nova
+      jest.clearAllMocks();
+
+      // Primeiro inicializa o componente
+      fixture.detectChanges();
+      tick();
+
+      // Depois adiciona os beneficiários
+      component.beneficiarios = mockBeneficiarios;
+
+      const spy = jest.spyOn(beneficiarioService, 'getDadosCartaoBeneficiario');
+
+      // Agora altera o valor do formulário
+      component.formularioSolicitacao.patchValue({ dependente: 2 });
+      tick(400);
+
+      expect(spy).toHaveBeenCalledWith(2);
+    }));
   });
 });
