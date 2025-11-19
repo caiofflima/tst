@@ -1,5 +1,5 @@
 
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Beneficiario } from 'app/shared/models/entidades';
 import { Location } from "@angular/common";
@@ -11,8 +11,13 @@ import { CartaoDTO } from 'app/shared/models/comum/cartao-dto.model';
 import { relativeTimeRounding } from 'moment';
 import { Util } from 'app/arquitetura/shared/util/util';
 import { ActivatedRoute } from '@angular/router';
+import { Observable, tap } from 'rxjs';
+import { HttpUtil } from 'app/shared/util/http-util';
+import { Option } from 'sidsc-components/dsc-select';
+
 const htmlToPdfmake = require("html-to-pdfmake");
 (pdfMake as any).vfs = pdfFonts.pdfMake.vfs;
+
 
 @Component({
     selector: 'app-list-cartoes',
@@ -22,7 +27,11 @@ const htmlToPdfmake = require("html-to-pdfmake");
 export class CartoesDetailComponent implements OnInit {
 
     beneficiario: Beneficiario;
+    beneficiarios: Beneficiario[] = []
     cartao: CartaoDTO = {} as CartaoDTO;
+    options: Option[] = [];
+    @Input()
+        titular = true;
 
 
     @ViewChild('print') printSection: ElementRef;
@@ -34,6 +43,7 @@ export class CartoesDetailComponent implements OnInit {
 
     idBeneficiario: number = null;
 
+
     constructor(
         private messageService: MessageService,
         private location: Location,
@@ -43,10 +53,12 @@ export class CartoesDetailComponent implements OnInit {
     }
 
     ngOnInit() {
+      this.carregarListOperator();
+
         this.idBeneficiario = this.route.snapshot.params['idBeneficiario'];
         if (this.idBeneficiario) {
             this.service.consultarBeneficiarioPorId(this.idBeneficiario).subscribe((beneficiario: Beneficiario) => {
-                console.log("🚀 ~ CartoesDetailComponent ~ this.service.consultarBeneficiarioPorId ~ beneficiario:", beneficiario)
+
                 if (beneficiario) {
                     this.beneficiarioSelecionado(beneficiario);
                     this.formularioSolicitacao.controls['dependente'].setValue(beneficiario.id);
@@ -56,7 +68,12 @@ export class CartoesDetailComponent implements OnInit {
 
                 this.messageService.addMsgDanger(err.error);
             });
-        }
+
+          }
+        this.formularioSolicitacao.get('dependente').valueChanges.subscribe(v=> {
+          this.beneficiario = this.beneficiarios.find(b => b.id === v)
+          this.beneficiarioSelecionado(this.beneficiario)
+        })
     }
 
     get matricula(): string {
@@ -67,17 +84,17 @@ export class CartoesDetailComponent implements OnInit {
         if (texto.length > limite) {
             // Encontrar o primeiro espaço antes do limite
             let posEspaco = texto.lastIndexOf(' ', limite);
-            
+
             // Se não houver espaço antes do limite, quebrar a linha exatamente no limite
             if (posEspaco === -1) {
                 posEspaco = limite;
             }
-            
+
             return texto.substring(0, posEspaco) + '\n' + texto.substring(posEspaco + 1);
         }
         return texto;
     }
-    
+
 
     beneficiarioSelecionado(beneficiario: Beneficiario) {
         this.beneficiario = beneficiario;
@@ -179,7 +196,7 @@ export class CartoesDetailComponent implements OnInit {
                         absolutePosition: { x: xNome  + 80, y: 280 },
                         color: '#005CA9'
                     },
-                    
+
                     {
                         text: 'Válido até',
                         style: 'p5',
@@ -637,7 +654,7 @@ export class CartoesDetailComponent implements OnInit {
                         absolutePosition: { x: xNome  + 80, y: 280 },
                         color: '#005CA9'
                     },
-                    
+
                     {
                         text: 'Válido até',
                         style: 'p5',
@@ -1046,7 +1063,7 @@ export class CartoesDetailComponent implements OnInit {
                 }
                 .blocks-work p span:first-child {
                     color: #54BBAB;
-                   
+
                     font-size: 20px;
                 }
 
@@ -1195,7 +1212,7 @@ export class CartoesDetailComponent implements OnInit {
                 line-height: 10%;
                 color: #005CA9;
             }
-              
+
             .p4-1-print-restrito {
                 text-align: center;
                 height: 17px;
@@ -1326,7 +1343,7 @@ export class CartoesDetailComponent implements OnInit {
             }
 
             .card-costa-p2-print-restrito {
-                
+
                 font-style: normal;
                 font-weight: 400;
                 font-size: 14px;
@@ -1457,7 +1474,7 @@ export class CartoesDetailComponent implements OnInit {
                 }
                 body {
                     font-family: Caixa Std Book, Caixa Std Regular, "Helvetica Neue", sans-serif;
-                    
+
                 }
                 h3 {
                     color: #005DA8;
@@ -1525,14 +1542,14 @@ export class CartoesDetailComponent implements OnInit {
                 }
 
 
-                .cartao-saude{     
+                .cartao-saude{
                     box-sizing: border-box;
                     height: 532px;
                    display: flex;
                    justify-content: space-evenly;
                    margin-left: 10%;
-                   
-                
+
+
                 }
                  .form-group{
                     display: flex;
@@ -1541,7 +1558,7 @@ export class CartoesDetailComponent implements OnInit {
                  }
                 .ng-tns-c11-13{
                     width: 668px;
-                
+
                 }
                  .custom-form-group-input{
                     width: 50%;
@@ -1554,7 +1571,7 @@ export class CartoesDetailComponent implements OnInit {
                   justify-content: space-evenly;
                   margin-left: 10%;
               }
-              
+
               .logo-card-impressao{
                   text-align: center;
                   width: 100%;
@@ -1563,7 +1580,7 @@ export class CartoesDetailComponent implements OnInit {
                   margin-right: auto;
                   display: flex;
               }
-              
+
               .text-card-imp{
                   position: relative;
                   float: left;
@@ -1572,7 +1589,7 @@ export class CartoesDetailComponent implements OnInit {
                   margin-left: 7px;
                   margin-top: -65%;
               }
-              
+
               .p1-print{
                   text-align: center;
                   font-style: normal;
@@ -1581,7 +1598,7 @@ export class CartoesDetailComponent implements OnInit {
                   line-height: 10%;
                   color: #005CA9;
               }
-              
+
               .p1-2-print{
                   height: 31px;
                   font-style: normal;
@@ -1591,7 +1608,7 @@ export class CartoesDetailComponent implements OnInit {
                   color: #005CA9;
                   text-align: center;
               }
-              
+
               .p2-print{
                   text-align: center;
                   font-style: normal;
@@ -1601,7 +1618,7 @@ export class CartoesDetailComponent implements OnInit {
                   color: #005CA9;
                   margin-top: -5%;
               }
-              
+
               .p2-2-print{
                   height: 14px;
                   font-style: normal;
@@ -1612,7 +1629,7 @@ export class CartoesDetailComponent implements OnInit {
                   color: #005CA9;
                   width: 100%;
               }
-              
+
               .p3-print{
                   text-align: center;
                   height: 17px;
@@ -1623,7 +1640,7 @@ export class CartoesDetailComponent implements OnInit {
                   margin-top: 10%;
                   color: #005CA9;
               }
-              
+
               .p3-2-print{
                   text-align: center;
                   height: 17px;
@@ -1633,7 +1650,7 @@ export class CartoesDetailComponent implements OnInit {
                   line-height: 10%;
                   color: #005CA9;
                 }
-              
+
               .p4-11-print{
                   display: flex;
                   justify-content: space-between;
@@ -1647,7 +1664,7 @@ export class CartoesDetailComponent implements OnInit {
                   margin-left: 10px;
                   margin-top: 7%;
               }
-              
+
               .p4-12-print{
                   display: flex;
                   justify-content: space-between;
@@ -1657,7 +1674,7 @@ export class CartoesDetailComponent implements OnInit {
                   margin-left: 10px;
                   margin-top: -1%;
               }
-              
+
               .p4-print{
                   display: flex;
                   justify-content: space-between;
@@ -1670,7 +1687,7 @@ export class CartoesDetailComponent implements OnInit {
                   margin-left: 10px;
                   margin-top: 4%;
               }
-              
+
               .p4-10-print{
                   display: flex;
                   justify-content: space-between;
@@ -1684,7 +1701,7 @@ export class CartoesDetailComponent implements OnInit {
                   width: 100%;
                   margin-top: -3%;
               }
-              
+
               .p4-9-print{
                   display: flex;
                   justify-content: space-between;
@@ -1695,9 +1712,9 @@ export class CartoesDetailComponent implements OnInit {
                   color: #FFFFFF;
                   margin-right: 15px;
                   margin-left: 10px;
-                  margin-top: 5%; 
+                  margin-top: 5%;
               }
-              
+
               .p4-2-print{
                   font-style: normal;
                   font-weight: normal;
@@ -1710,7 +1727,7 @@ export class CartoesDetailComponent implements OnInit {
                   margin-left: 10px;
                   margin-top: -1%;
               }
-              
+
               .p4-3-print{
                   font-style: normal;
                   font-weight: 100;
@@ -1721,7 +1738,7 @@ export class CartoesDetailComponent implements OnInit {
                   margin-left: 10px;
                   margin-top: -2%;
               }
-              
+
               .p4-4-print {
                 font-family: 'Caixa Std Regular';
                 font-style: normal;
@@ -1764,22 +1781,22 @@ export class CartoesDetailComponent implements OnInit {
                 margin-top: 7%;
             }
 
-            .card-costa-p3-print { 
+            .card-costa-p3-print {
                 font-weight: 400 !important;
                 font-size: 16px;
                 line-height: 25%;
-                text-align: center;    
-                color: #F39200;    
+                text-align: center;
+                color: #F39200;
                 margin-top:10%
             }
 
-            .card-costa-p4-print { 
+            .card-costa-p4-print {
                 font: 'Caixa Std Bold';
                 font-style: normal;
                 font-weight: 700;
                 font-size: 22px;
                 line-height: 25%;
-                text-align: center; 
+                text-align: center;
                 color: #005CA9;
             }
 
@@ -1840,7 +1857,7 @@ export class CartoesDetailComponent implements OnInit {
                 color: #FFFFFF;
                 display: flex;
                 justify-content: space-between;
-                margin-right: 2px;    
+                margin-right: 2px;
                 margin-top: -1%;
                 margin-left: 2px;
             }
@@ -1869,8 +1886,8 @@ export class CartoesDetailComponent implements OnInit {
                 margin-left: 2px;
                 margin-top: -5%;
             }
-                
-                
+
+
                 </style>
             </head>
             <body onload="window.print();window.close()">
@@ -1910,4 +1927,13 @@ export class CartoesDetailComponent implements OnInit {
             img.src = url;
         });
     }
+
+    carregarListOperator(){
+       this.service.consultarFamiliaPorMatricula(this.matricula, this.titular).pipe(
+                HttpUtil.catchErrorAndReturnEmptyObservableByKey(this.messageService, 'error')
+            ).subscribe((beneficiarios: Beneficiario[]) => {
+                this.beneficiarios = beneficiarios
+                this.options = beneficiarios.map(b => ({label: b.nome, value: b.id }));
+        })
+      }
 }
