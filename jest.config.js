@@ -33,7 +33,8 @@ module.exports = {
     '^app/(.*)$': '<rootDir>/src/app/$1',
     '^src/(.*)$': '<rootDir>/src/$1',
     '^@env/(.*)$': '<rootDir>/src/environments/$1',
-    '^sidsc-components/(.*)$': '<rootDir>/node_modules/sidsc-components/$1'
+    '^sidsc-components/(.*)$': '<rootDir>/node_modules/sidsc-components/$1',
+    'assets/fonts/vfs_fonts': '<rootDir>/src/__mocks__/vfs_fonts.js'
   },
   transformIgnorePatterns: [
     'node_modules/(?!.*\\.mjs$|@angular|@ngrx|rxjs|tslib|ng-dynamic|primeng|quill)'
