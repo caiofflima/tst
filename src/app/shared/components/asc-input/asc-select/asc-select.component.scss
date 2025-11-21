@@ -36,10 +36,32 @@ $fontFamilyCaixa: "Caixa Std Regular", sans-serif;
   
   * {
     font-family: $fontFamilyCaixa !important;
+    font-size: 16px !important;
   }
   
-  input, button, span, div, label {
+  /* Label/texto selecionado */
+  .select-trigger,
+  .select-value,
+  .select-value-text,
+  button,
+  span {
     font-family: $fontFamilyCaixa !important;
+    font-size: 16px !important;
+    color: $corPreta;
+  }
+  
+  /* Input de busca */
+  input {
+    font-family: $fontFamilyCaixa !important;
+    font-size: 16px !important;
+    color: $corPreta;
+  }
+  
+  /* Opções do dropdown */
+  .select-option,
+  .dsc-select-option {
+    font-family: $fontFamilyCaixa !important;
+    font-size: 16px !important;
     color: $corPreta;
   }
 }

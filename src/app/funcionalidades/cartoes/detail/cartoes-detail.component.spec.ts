@@ -403,10 +403,6 @@ describe('CartoesDetailComponent', () => {
         component.titular
       );
       expect(component.beneficiarios).toEqual(mockBeneficiarios);
-      expect(component.options).toEqual([
-        { label: 'John Doe', value: 1 },
-        { label: 'Jane Smith', value: 2 },
-      ]);
     });
 
     it('deve lidar com erro ao carregar lista de beneficiários', () => {
@@ -426,10 +422,6 @@ describe('CartoesDetailComponent', () => {
   describe('propriedades adicionais', () => {
     it('deve inicializar beneficiarios como array vazio', () => {
       expect(component.beneficiarios).toEqual([]);
-    });
-
-    it('deve inicializar options como array vazio', () => {
-      expect(component.options).toEqual([]);
     });
 
     it('deve inicializar titular como true', () => {

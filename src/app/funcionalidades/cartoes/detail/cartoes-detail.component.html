@@ -21,13 +21,13 @@
 
       <div class="form-group  noPaddingLeft">
         <div class="custom-form-group-input input-content">
-          <dsc-select
-            [label]="'Beneficiário'"
-            [placeholder]="'Selecione uma opção'"
-            [showFilter]="true"
-            [options]="options"
-            formControlName="dependente">
-          </dsc-select>
+          <asc-select-beneficiario
+            label="Beneficiário"
+            [matricula]="matricula"
+            [required]="true"
+            [control]="formularioSolicitacao.get('dependente')"
+            (dadoSelecionado)="beneficiarioSelecionado($event)">
+          </asc-select-beneficiario>
         </div>
       </div>
     </form>
