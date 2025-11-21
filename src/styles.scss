@@ -1,1 +1,39 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* Estilos globais para forçar fonte Caixa Std nos componentes DSC Select */
+::ng-deep dsc-select {
+  font-family: "Caixa Std Regular", sans-serif !important;
+  
+  /* Label do select (texto selecionado) */
+  .dsc-select-label,
+  .select-trigger,
+  .select-value,
+  input,
+  button,
+  span {
+    font-family: "Caixa Std Regular", sans-serif !important;
+  }
+  
+  /* Itens do dropdown */
+  .dsc-select-panel,
+  .dsc-select-options,
+  .dsc-select-option,
+  .select-panel,
+  .select-options,
+  .select-option {
+    font-family: "Caixa Std Regular", sans-serif !important;
+  }
+}
+
+/* Painel de opções do select (pode estar fora do componente) */
+::ng-deep .dsc-select-panel,
+::ng-deep .select-panel,
+::ng-deep .cdk-overlay-pane {
+  .dsc-select-option,
+  .select-option,
+  li,
+  span,
+  div {
+    font-family: "Caixa Std Regular", sans-serif !important;
+  }
+}

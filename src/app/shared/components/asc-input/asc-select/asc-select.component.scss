@@ -1,5 +1,7 @@
 $corPreta: #000;
 $fontFamilyCaixa: "Caixa Std Regular", sans-serif;
+
+/* Estilos para PrimeNG (antigo) */
 ::ng-deep .p-dropdown-panel {
   .p-dropdown-items {
     .p-dropdown-item {
@@ -26,4 +28,18 @@ $fontFamilyCaixa: "Caixa Std Regular", sans-serif;
   font-size: 13px !important;
   font-family: $fontFamilyCaixa !important;
   color: $corPreta !important;
+}
+
+/* Estilos para DSC Select (novo) */
+::ng-deep dsc-select {
+  font-family: $fontFamilyCaixa !important;
+  
+  * {
+    font-family: $fontFamilyCaixa !important;
+  }
+  
+  input, button, span, div, label {
+    font-family: $fontFamilyCaixa !important;
+    color: $corPreta;
+  }
 }

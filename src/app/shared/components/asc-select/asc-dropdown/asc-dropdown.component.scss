@@ -1,3 +1,6 @@
+$fontFamilyCaixa: "Caixa Std Regular", sans-serif;
+$corPreta: #000;
+
 div.custom-form-group-select {
 
   select {
@@ -25,6 +28,20 @@ div.custom-form-group-select {
     border-radius: 3px;
     padding: 12px 8px;
     width: 100%;
+  }
+}
+
+/* Estilos para DSC Select */
+::ng-deep dsc-select {
+  font-family: $fontFamilyCaixa !important;
+  
+  * {
+    font-family: $fontFamilyCaixa !important;
+  }
+  
+  input, button, span, div, label {
+    font-family: $fontFamilyCaixa !important;
+    color: $corPreta;
   }
 }
 
