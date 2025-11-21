@@ -1,8 +1,38 @@
 /* You can add global styles to this file, and also import other style files */
 
-/* Sobrescrever fonte Inter do DSC para Caixa Std */
+/* Sobrescrever fonte Inter do DSC e PrimeNG para Caixa Std */
 * {
-  font-family: "Caixa Std Regular", sans-serif;
+  font-family: "Caixa Std Regular", sans-serif !important;
+}
+
+/* Forçar fonte Caixa Std 16px em todos os componentes PrimeNG */
+::ng-deep .p-dropdown,
+::ng-deep .p-dropdown *,
+::ng-deep .p-dropdown-label,
+::ng-deep .p-dropdown-trigger,
+::ng-deep .p-dropdown-panel,
+::ng-deep .p-dropdown-panel *,
+::ng-deep .p-dropdown-items,
+::ng-deep .p-dropdown-item,
+::ng-deep .p-multiselect,
+::ng-deep .p-multiselect *,
+::ng-deep .p-multiselect-label,
+::ng-deep .p-multiselect-panel,
+::ng-deep .p-multiselect-panel *,
+::ng-deep .p-multiselect-items,
+::ng-deep .p-multiselect-item,
+::ng-deep .p-inputtext,
+::ng-deep .p-inputtext *,
+::ng-deep input.p-inputtext,
+::ng-deep textarea.p-inputtext,
+::ng-deep .p-calendar,
+::ng-deep .p-calendar *,
+::ng-deep .p-calendar input,
+::ng-deep .p-inputnumber,
+::ng-deep .p-inputnumber *,
+::ng-deep .p-inputnumber input {
+  font-family: "Caixa Std Regular", sans-serif !important;
+  font-size: 16px !important;
 }
 
 /* Estilos globais para forçar fonte Caixa Std 16px nos componentes DSC Select */
@@ -102,6 +132,50 @@ body ::ng-deep dsc-select input::placeholder,
 body ::ng-deep dsc-select input::-webkit-input-placeholder,
 body ::ng-deep dsc-select input::-moz-placeholder,
 body ::ng-deep dsc-select input:-ms-input-placeholder {
+  font-family: "Caixa Std Regular", sans-serif !important;
+  font-size: 16px !important;
+}
+
+/* Forçar PrimeNG com alta especificidade */
+body ::ng-deep .p-dropdown,
+body ::ng-deep .p-dropdown *,
+body ::ng-deep .p-dropdown-label,
+body ::ng-deep .p-dropdown-items .p-dropdown-item,
+body ::ng-deep .p-multiselect,
+body ::ng-deep .p-multiselect *,
+body ::ng-deep .p-multiselect-label,
+body ::ng-deep .p-multiselect-items .p-multiselect-item,
+body ::ng-deep .p-inputtext,
+body ::ng-deep input.p-inputtext,
+body ::ng-deep textarea.p-inputtext,
+body ::ng-deep .p-calendar input,
+body ::ng-deep .p-inputnumber input {
+  font-family: "Caixa Std Regular", sans-serif !important;
+  font-size: 16px !important;
+}
+
+/* Labels dos formulários */
+body label.control-label,
+body ::ng-deep label.control-label {
+  font-family: "Caixa Std Regular", sans-serif !important;
+  font-size: 16px !important;
+}
+
+/* Inputs e textareas comuns */
+body input,
+body textarea,
+body select,
+body button,
+body ::ng-deep input,
+body ::ng-deep textarea,
+body ::ng-deep select,
+body ::ng-deep button {
+  font-family: "Caixa Std Regular", sans-serif !important;
+}
+
+/* Form controls */
+body .form-control,
+body ::ng-deep .form-control {
   font-family: "Caixa Std Regular", sans-serif !important;
   font-size: 16px !important;
 }
