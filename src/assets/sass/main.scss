@@ -2696,7 +2696,8 @@ button:focus {
 
 /* Sobrescrever fonte Inter do DSC e PrimeNG para Caixa Std */
 * {
-  font-family: "Caixa Std Regular", sans-serif !important;
+  font-family: "Caixa Std", sans-serif !important;
+  font-size: 16px !important;
 }
 
 /* Forçar fonte Caixa Std 16px em todos os componentes PrimeNG */
@@ -2725,15 +2726,17 @@ button:focus {
 ::ng-deep .p-inputnumber,
 ::ng-deep .p-inputnumber *,
 ::ng-deep .p-inputnumber input {
-  font-family: "Caixa Std Regular", sans-serif !important;
+  font-family: "Caixa Std", sans-serif !important;
   font-size: 16px !important;
+  line-height: 1.5 !important;
 }
 
 /* Estilos globais para forçar fonte Caixa Std 16px nos componentes DSC Select */
 ::ng-deep dsc-select,
 ::ng-deep dsc-select * {
-  font-family: "Caixa Std Regular", sans-serif !important;
+  font-family: "Caixa Std", sans-serif !important;
   font-size: 16px !important;
+  line-height: 1.5 !important;
 }
 
 ::ng-deep dsc-select {
@@ -2747,15 +2750,17 @@ button:focus {
   button,
   span,
   div {
-    font-family: "Caixa Std Regular", sans-serif !important;
+    font-family: "Caixa Std", sans-serif !important;
     font-size: 16px !important;
+    line-height: 1.5 !important;
   }
   
   /* Input (campo de busca/filtro) */
   input,
   input::placeholder {
-    font-family: "Caixa Std Regular", sans-serif !important;
+    font-family: "Caixa Std", sans-serif !important;
     font-size: 16px !important;
+    line-height: 1.5 !important;
   }
   
   /* Itens do dropdown (opções) */
@@ -2767,8 +2772,9 @@ button:focus {
   .select-option,
   .mat-option,
   .mat-option-text {
-    font-family: "Caixa Std Regular", sans-serif !important;
+    font-family: "Caixa Std", sans-serif !important;
     font-size: 16px !important;
+    line-height: 1.5 !important;
   }
 }
 
@@ -2781,8 +2787,9 @@ button:focus {
 ::ng-deep .cdk-overlay-pane *,
 ::ng-deep .mat-select-panel,
 ::ng-deep .mat-select-panel * {
-  font-family: "Caixa Std Regular", sans-serif !important;
+  font-family: "Caixa Std", sans-serif !important;
   font-size: 16px !important;
+  line-height: 1.5 !important;
 }
 
 ::ng-deep .dsc-select-panel,
@@ -2797,16 +2804,18 @@ button:focus {
   span,
   div,
   button {
-    font-family: "Caixa Std Regular", sans-serif !important;
+    font-family: "Caixa Std", sans-serif !important;
     font-size: 16px !important;
+    line-height: 1.5 !important;
   }
 }
 
 /* Label acima do select */
 ::ng-deep label.control-label,
 ::ng-deep label.control-label * {
-  font-family: "Caixa Std Regular", sans-serif !important;
+  font-family: "Caixa Std", sans-serif !important;
   font-size: 16px !important;
+  line-height: 1.5 !important;
 }
 
 /* Forçar sobrescrita da fonte Inter do DSC */
@@ -2817,8 +2826,9 @@ body ::ng-deep dsc-select button,
 body ::ng-deep dsc-select span,
 body ::ng-deep dsc-select div,
 body ::ng-deep dsc-select label {
-  font-family: "Caixa Std Regular", sans-serif !important;
+  font-family: "Caixa Std", sans-serif !important;
   font-size: 16px !important;
+  line-height: 1.5 !important;
 }
 
 /* Forçar no placeholder também */
@@ -2826,8 +2836,9 @@ body ::ng-deep dsc-select input::placeholder,
 body ::ng-deep dsc-select input::-webkit-input-placeholder,
 body ::ng-deep dsc-select input::-moz-placeholder,
 body ::ng-deep dsc-select input:-ms-input-placeholder {
-  font-family: "Caixa Std Regular", sans-serif !important;
+  font-family: "Caixa Std", sans-serif !important;
   font-size: 16px !important;
+  line-height: 1.5 !important;
 }
 
 /* Forçar PrimeNG com alta especificidade */
@@ -2844,15 +2855,17 @@ body ::ng-deep input.p-inputtext,
 body ::ng-deep textarea.p-inputtext,
 body ::ng-deep .p-calendar input,
 body ::ng-deep .p-inputnumber input {
-  font-family: "Caixa Std Regular", sans-serif !important;
+  font-family: "Caixa Std", sans-serif !important;
   font-size: 16px !important;
+  line-height: 1.5 !important;
 }
 
 /* Labels dos formulários */
 body label.control-label,
 body ::ng-deep label.control-label {
-  font-family: "Caixa Std Regular", sans-serif !important;
+  font-family: "Caixa Std", sans-serif !important;
   font-size: 16px !important;
+  line-height: 1.5 !important;
 }
 
 /* Inputs e textareas comuns */
@@ -2864,12 +2877,15 @@ body ::ng-deep input,
 body ::ng-deep textarea,
 body ::ng-deep select,
 body ::ng-deep button {
-  font-family: "Caixa Std Regular", sans-serif !important;
+  font-family: "Caixa Std", sans-serif !important;
+  font-size: 16px !important;
+  line-height: 1.5 !important;
 }
 
 /* Form controls */
 body .form-control,
 body ::ng-deep .form-control {
-  font-family: "Caixa Std Regular", sans-serif !important;
+  font-family: "Caixa Std", sans-serif !important;
   font-size: 16px !important;
+  line-height: 1.5 !important;
 }
