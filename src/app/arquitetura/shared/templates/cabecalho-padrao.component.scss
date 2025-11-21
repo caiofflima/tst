@@ -1293,14 +1293,7 @@ table {
   text-overflow: ellipsis;
 }
 
-@media only screen and (max-device-width: 900px) {
-  #menu-horizontal {
-    display: none;
-  }
-  #menu-vertical {
-    display: inline-block !important;
-  }
-}
+// Menu horizontal removido - agora usa sidebar lateral
 
 .confidencial {
   background: #0077db;
@@ -1329,5 +1322,180 @@ table {
 @media screen and (min-width: 901px) and (max-width: 1200px) {
   .confidencial .sub-container {
     margin-left: -2.5% !important;
+  }
+}
+
+// ============================================
+// SIDEBAR MENU LATERAL ESQUERDO
+// ============================================
+
+#sidebar-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 280px;
+  background: linear-gradient(180deg, #005ca9 0%, #0073d1 100%);
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
+  z-index: 9999;
+  transition: transform 0.3s ease-in-out;
+  overflow-y: auto;
+  padding-top: 80px; // Espaço para o cabeçalho
+
+  &.sidebar-collapsed {
+    transform: translateX(-280px);
+  }
+
+  .sidebar-toggle {
+    position: absolute;
+    top: 20px;
+    right: -40px;
+    width: 40px;
+    height: 40px;
+    background: #005ca9;
+    border-radius: 0 8px 8px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+
+    &:hover {
+      background: #0073d1;
+      right: -42px;
+    }
+
+    em {
+      color: #fff;
+      font-size: 20px;
+    }
+  }
+
+  .sidebar-content {
+    padding: 20px 0;
+  }
+}
+
+// Overlay para fechar ao clicar fora
+#sidebar-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 9998;
+  transition: opacity 0.3s ease;
+
+  &.active {
+    display: block;
+  }
+}
+
+// Estilos do PanelMenu no sidebar
+:host ::ng-deep .menucx-sidebar {
+  background: transparent !important;
+  border: none !important;
+
+  .p-panelmenu-header {
+    background: transparent !important;
+    border: none !important;
+    margin-bottom: 5px;
+
+    a {
+      background: rgba(255, 255, 255, 0.1) !important;
+      color: #fff !important;
+      font-family: "Caixa Std", sans-serif !important;
+      font-size: 16px !important;
+      padding: 12px 15px !important;
+      border-radius: 4px;
+      transition: all 0.2s ease;
+      text-decoration: none !important;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.2) !important;
+        text-decoration: none !important;
+      }
+
+      .p-menuitem-text {
+        color: #fff !important;
+        text-decoration: none !important;
+      }
+
+      .p-menuitem-icon {
+        color: #fff !important;
+      }
+    }
+
+    &.p-highlight a {
+      background: rgba(255, 255, 255, 0.25) !important;
+    }
+  }
+
+  .p-panelmenu-content {
+    background: rgba(0, 0, 0, 0.1) !important;
+    border: none !important;
+    padding: 5px 10px !important;
+
+    .p-menuitem {
+      margin-bottom: 3px;
+
+      a {
+        color: #fff !important;
+        font-family: "Caixa Std", sans-serif !important;
+        font-size: 14px !important;
+        padding: 10px 15px !important;
+        border-radius: 4px;
+        transition: all 0.2s ease;
+        text-decoration: none !important;
+
+        &:hover {
+          background: rgba(255, 255, 255, 0.15) !important;
+          text-decoration: none !important;
+        }
+
+        .p-menuitem-text {
+          color: #fff !important;
+          text-decoration: none !important;
+        }
+
+        .p-menuitem-icon {
+          color: #fff !important;
+        }
+      }
+
+      &.p-menuitem-active a {
+        background: rgba(255, 255, 255, 0.2) !important;
+      }
+    }
+  }
+
+  // Remover sublinhados
+  a,
+  a:hover,
+  a:focus,
+  a:active {
+    text-decoration: none !important;
+  }
+}
+
+// Ajustar conteúdo principal quando sidebar estiver aberto
+body:has(#sidebar-menu:not(.sidebar-collapsed)) {
+  .container {
+    margin-left: 280px;
+    transition: margin-left 0.3s ease;
+  }
+}
+
+// Responsividade
+@media (max-width: 900px) {
+  #sidebar-menu {
+    width: 240px;
+
+    &.sidebar-collapsed {
+      transform: translateX(-240px);
+    }
   }
 }

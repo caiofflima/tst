@@ -2889,3 +2889,30 @@ body ::ng-deep .form-control {
   font-size: 16px !important;
   line-height: 1.5 !important;
 }
+
+// ============================================
+// SIDEBAR MENU - REMOVER SUBLINHADOS
+// ============================================
+
+/* Remover sublinhados de todos os links do menu sidebar */
+::ng-deep #sidebar-menu a,
+::ng-deep #sidebar-menu a:hover,
+::ng-deep #sidebar-menu a:focus,
+::ng-deep #sidebar-menu a:active,
+::ng-deep #sidebar-menu a:visited,
+::ng-deep .menucx-sidebar a,
+::ng-deep .menucx-sidebar a:hover,
+::ng-deep .menucx-sidebar a:focus,
+::ng-deep .menucx-sidebar a:active,
+::ng-deep .menucx-sidebar a:visited,
+::ng-deep .p-panelmenu a,
+::ng-deep .p-panelmenu a:hover,
+::ng-deep .p-panelmenu a:focus {
+  text-decoration: none !important;
+}
+
+/* Garantir que submenu fecha ao clicar fora */
+::ng-deep .p-panelmenu .p-panelmenu-content {
+  overflow: hidden !important;
+  transition: max-height 0.3s ease !important;
+}
