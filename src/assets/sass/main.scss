@@ -2889,3 +2889,33 @@ body ::ng-deep .form-control {
   font-size: 16px !important;
   line-height: 1.5 !important;
 }
+
+// ============================================
+// MENU - REMOVER SUBLINHADOS E HOVER
+// ============================================
+
+/* Remover sublinhados de todos os links do menu */
+::ng-deep .menucx a,
+::ng-deep .menucx a:hover,
+::ng-deep .menucx a:focus,
+::ng-deep .menucx a:active,
+::ng-deep .menucx a:visited,
+::ng-deep .p-menubar a,
+::ng-deep .p-menubar a:hover,
+::ng-deep .p-menubar a:focus,
+::ng-deep .p-menubar a:active,
+::ng-deep .p-menubar a:visited,
+::ng-deep .p-menuitem-link,
+::ng-deep .p-menuitem-link:hover,
+::ng-deep .p-menuitem-link:focus {
+  text-decoration: none !important;
+}
+
+/* Garantir que menu fecha ao tirar o mouse - autoDisplay false */
+::ng-deep .p-menubar .p-menubar-root-list > .p-menuitem {
+  &:not(:hover) {
+    .p-submenu-list {
+      display: none !important;
+    }
+  }
+}

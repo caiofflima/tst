@@ -282,6 +282,15 @@ body {
     border: 0;
     padding: 0;
 
+    // Remover sublinhados de todos os links
+    a,
+    a:hover,
+    a:focus,
+    a:active,
+    a:visited {
+      text-decoration: none !important;
+    }
+
     p-menubarsub {
       li {
         border-radius: 0 !important;
@@ -289,6 +298,8 @@ body {
         white-space: nowrap;
 
         a {
+          text-decoration: none !important;
+          
           span:nth-of-type(2)::before {
             content: "\f078";
             font-size: 12px;
@@ -305,6 +316,7 @@ body {
         align-items: center;
         justify-content: space-between;
         gap: 4px;
+        text-decoration: none !important;
       }
 
       .p-menubar-root-list {
@@ -317,6 +329,7 @@ body {
               padding-right: 0px;
               a.p-menuitem-link{
                 font-size: 16px !important;
+                text-decoration: none !important;
               }
             }
           }
@@ -339,10 +352,13 @@ body {
 
         .p-menuitem-link {
           padding: 0.25em;
+          text-decoration: none !important;
+          
           span.p-menuitem-text {
-            font-family:"Caixa Std Regular", sans-serif !important;
+            font-family:"Caixa Std", sans-serif !important;
             color: #000 !important;
             font-size: 16px;
+            text-decoration: none !important;
           }
           .p-icon-wrapper {
             svg {
@@ -356,16 +372,22 @@ body {
         }
         .p-menuitem-link-active{
           background: #004680 !important;
+          text-decoration: none !important;
+          
           span.p-menuitem-text {
             color: white !important;
             font-size: 16px;
+            text-decoration: none !important;
           }
         }
         .p-menuitem-link:hover {
           background-color: #0073d1 !important;
+          text-decoration: none !important;
+          
           span.p-menuitem-text {
             color: white !important;
             font-size: 16px;
+            text-decoration: none !important;
           }
           .p-icon-wrapper {
             svg {
@@ -382,7 +404,7 @@ body {
               a.p-element{
                 padding: 0.5em;
                 border-radius: 3px;
-
+                text-decoration: none !important;
               }
             }
           }
@@ -432,6 +454,7 @@ body {
             a {
               padding: 0.5em;
               white-space: nowrap;
+              text-decoration: none !important;
 
               span:nth-of-type(2)::before {
                 content: "\f054";
@@ -442,6 +465,8 @@ body {
             ul {
               li {
                 a {
+                  text-decoration: none !important;
+                  
                   span:nth-of-type(2)::before {
                     content: "";
                   }
