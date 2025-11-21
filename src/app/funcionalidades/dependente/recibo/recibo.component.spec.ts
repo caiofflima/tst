@@ -66,11 +66,11 @@ describe('ReciboComponent', () => {
 
         component.pedido = pedido;
 
-        expect(component.pedido).toEqual(pedido);
+    expect(component.pedido).toEqual(pedido);
     });
 
-    it('navegarParaMeusProcessos deve navegar para meus-dados/pedidos', async () => {
-        await component.navegarParaMeusProcessos();
+    it('navegarParaMeusProcessos deve navegar para meus-dados/pedidos', () => {
+    component.navegarParaMeusProcessos();
 
         expect(router.navigate).toHaveBeenCalledWith(['meus-dados', 'pedidos']);
     });

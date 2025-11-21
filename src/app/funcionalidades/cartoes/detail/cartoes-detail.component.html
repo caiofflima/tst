@@ -17,20 +17,20 @@
     </div>
 
     <p class="title-section">Cartões</p>
+    <form [formGroup]="formularioSolicitacao">
 
-    <div class="form-group col-md-6 noPaddingLeft">
-      <div class="custom-form-group-input">
-        <asc-select-beneficiario
-          [uppercase]="true"
-          selectId="beneficiario"
-          [matricula]="matricula"
-          label="Beneficiário"
-          [required]="true"
-          [control]="formularioSolicitacao.get('dependente')"
-          (dadoSelecionado)="beneficiarioSelecionado($event)"
-        ></asc-select-beneficiario>
+      <div class="form-group  noPaddingLeft">
+        <div class="custom-form-group-input input-content">
+          <dsc-select
+            [label]="'Beneficiário'"
+            [placeholder]="'Selecione uma opção'"
+            [showFilter]="true"
+            [options]="options"
+            formControlName="dependente">
+          </dsc-select>
+        </div>
       </div>
-    </div>
+    </form>
 
     <div class="print-card hidden" id="print-section" #print>
       <div
@@ -416,7 +416,7 @@
         <i class="fa fa-print" aria-hidden="true"></i> Imprimir
       </button>
       <button class="btn-pdf" (click)="gerarPDF(cartao.restrito)">
-        <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+        <i class="fa-regular fa-file-pdf" aria-hidden="true"></i>
         Gerar PDF
       </button>
     </div>

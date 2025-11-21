@@ -8,7 +8,7 @@ import {ComposicaoPedidoModule} from "app/shared/components/pedido/composicao-pe
 import {DirectivesModule} from "app/arquitetura/shared/directives/directives.module";
 import {TabsModule} from "ngx-bootstrap/tabs";
 import {ComponentModule} from "app/shared/components/component.module";
-import { NgxMaskModule } from 'ngx-mask';
+import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
 import {NgxPaginationModule} from "ngx-pagination";
 import {TableModule,} from "primeng/table";
 import {SharedModule,} from "primeng/api";
@@ -31,6 +31,7 @@ import {AscButtonsModule} from "../../shared/components/asc-buttons/asc-buttons.
 import { ReembolsoDetailComponent } from "./detail/reembolso-detail.component";
 import { ReembolsoRoutingModule } from "./reembolso.routing.module";
 import {AscModalModule} from "../../shared/components/asc-modal/asc-modal.module";
+import { DscCaixaModule } from 'app/shared/dsc-caixa/dsc-caixa.module';
 
 @NgModule({
     imports: [
@@ -50,7 +51,7 @@ import {AscModalModule} from "../../shared/components/asc-modal/asc-modal.module
         TabsModule.forRoot(),
         TemplatesModule,
         ComposicaoPedidoModule,
-        NgxMaskModule,
+        NgxMaskDirective, NgxMaskPipe,
         TableModule,
         SharedModule,
         PipeModule,
@@ -63,7 +64,8 @@ import {AscModalModule} from "../../shared/components/asc-modal/asc-modal.module
         AscMultiSelectModule,
         AscButtonsModule,
         AccordionModule,
-        AscModalModule
+        AscModalModule,
+        DscCaixaModule
     ],
     declarations: [
         ReembolsoDetailComponent

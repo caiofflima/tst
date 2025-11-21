@@ -5,7 +5,7 @@ import {RouterModule} from '@angular/router';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {TemplatesModule} from 'app/arquitetura/shared/templates/templates.module';
 import {NgxPaginationModule} from 'ngx-pagination';
-import { NgxMaskModule } from 'ngx-mask';
+import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
 import {TableModule} from 'primeng/table';
 import {DropdownModule} from 'primeng/dropdown';
 import {FieldsetModule} from 'primeng/fieldset';
@@ -29,7 +29,7 @@ import {AscSelectModule} from "../../shared/components/asc-select/asc-select.mod
     ReactiveFormsModule,
     TemplatesModule,
     NgxPaginationModule,
-    NgxMaskModule,
+    NgxMaskDirective, NgxMaskPipe,
     TableModule,
     AscMessageErrorModule,
     FieldsetModule,

@@ -5,7 +5,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {TemplatesModule} from "../../arquitetura/shared/templates/templates.module";
 import {DirectivesModule} from "../../arquitetura/shared/directives/directives.module";
 import {TabsModule} from "ngx-bootstrap/tabs";
-import { NgxMaskModule } from 'ngx-mask';
+import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
 import {RelatorioAnaliticoRoutingModule} from "./analitico/relatorio-analitico.routing.module";
 import {
     RelatorioControlePrazosProcessosRoutingModule
@@ -50,6 +50,7 @@ import {PrimeNGModule} from "app/shared/primeng.module";
 import {AscMessageErrorModule} from "../../shared/components/message-error/asc-message-error.module";
 import {ComponentModule} from "../../shared/components/component.module";
 import {ProgressSpinnerModule} from "primeng/progressspinner";
+import { TableModule } from "primeng/table";
 
 @NgModule({
     imports: [
@@ -61,11 +62,12 @@ import {ProgressSpinnerModule} from "primeng/progressspinner";
         RouterModule,
         TabsModule.forRoot(),
         TemplatesModule,
-        NgxMaskModule,
+        NgxMaskDirective, NgxMaskPipe,
         PipeModule,
         AscMultiSelectModule,
         AscMessageErrorModule,
-        PrimeNGModule
+        PrimeNGModule,
+        TableModule
     ],
     declarations: [
         RelatorioAnaliticoListarComponent
@@ -84,13 +86,14 @@ export class RelatorioAnaliticoModule {
         RouterModule,
         TabsModule.forRoot(),
         TemplatesModule,
-        NgxMaskModule,
+        NgxMaskDirective, NgxMaskPipe,
         PipeModule,
         AscMultiSelectModule,
         AscMessageErrorModule,
         PrimeNGModule,
         ComponentModule,
-        ProgressSpinnerModule
+        ProgressSpinnerModule,
+        TableModule
     ],
     declarations: [
         RelatorioControlePrazosProcessosListarComponent,
@@ -110,12 +113,13 @@ export class RelatorioControlePrazosModule {
         RouterModule,
         TabsModule.forRoot(),
         TemplatesModule,
-        NgxMaskModule,
+        NgxMaskDirective, NgxMaskPipe,
         PipeModule,
         AscMultiSelectModule,
         AscMessageErrorModule,
         PrimeNGModule,
-        ComponentModule
+        ComponentModule,
+        TableModule
     ],
     declarations: [
         RelatorioJuntaMedicaOdontologicaListarComponent,
@@ -136,13 +140,14 @@ export class RelatorioJuntaMedicaOdontologicaModule {
         RouterModule,
         TabsModule.forRoot(),
         TemplatesModule,
-        NgxMaskModule,
+        NgxMaskDirective, NgxMaskPipe,
         PipeModule,
         AscMultiSelectModule,
         AscMessageErrorModule,
         PrimeNGModule,
         ComponentModule,
-        ProgressSpinnerModule
+        ProgressSpinnerModule,
+        TableModule
     ],
     declarations: [
         RelatorioProcedimentosSolicitadosPorProfissionalListarComponent,
@@ -163,13 +168,14 @@ export class RelatorioProcedimentosSolicitadosPorProfissionalModule {
         RouterModule,
         TabsModule.forRoot(),
         TemplatesModule,
-        NgxMaskModule,
+        NgxMaskDirective, NgxMaskPipe,
         PipeModule,
         AscMultiSelectModule,
         AscMessageErrorModule,
         PrimeNGModule,
         ComponentModule,
-        ProgressSpinnerModule
+        ProgressSpinnerModule,
+        TableModule
     ],
     declarations: [
         RelatorioTempoMedioProcessosListarComponent,

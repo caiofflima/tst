@@ -10,6 +10,7 @@ import { ExtratoIRPFComponent } from "./extrato-irpf/extrato-irpf.component";
 import { ExtratoIRPFDetalharComponent } from "./extrato-irpf-detalhar/extrato-irpf-detalhar.component";
 import { ExtratoRoutingModule } from "./extrato.routing.module";
 import {PipeModule} from 'app/shared/pipes/pipe.module';
+import { DscCaixaModule } from 'app/shared/dsc-caixa/dsc-caixa.module';
 
 @NgModule({
     imports: [
@@ -22,7 +23,8 @@ import {PipeModule} from 'app/shared/pipes/pipe.module';
         DirectivesModule.forRoot(),
         AscMessageErrorModule,
         ExtratoRoutingModule,
-        PipeModule
+        PipeModule,
+        DscCaixaModule
     ],
     declarations: [
         ExtratoIRPFComponent,

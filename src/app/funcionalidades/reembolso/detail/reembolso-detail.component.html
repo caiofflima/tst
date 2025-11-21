@@ -1,3 +1,4 @@
+
 <section class="mainSection">
   <div class="container">
     <div class="col-md-12 breadcrumb-header">
@@ -32,11 +33,17 @@
               </div>
             </div>
             <div class="flex-1 d-flex flex-column gap-6">
-              <label class="control-label">Ano</label>
+              <!-- <label class="control-label">Ano</label>
               <p-dropdown  class="noBorderDropdownTrigger form-control2 selectAno" [options]="anos" [(ngModel)]="anoLancamento"
                 [ngModelOptions]="{standalone: true}" optionLabel="label"
                 (onChange)="buscarLancamentosByAno($event.value.value)">
-              </p-dropdown>
+              </p-dropdown> -->
+              <dsc-select
+                [label]="'Ano'"
+                [placeholder]="anoLancamento"
+                [options]="optionsAnos"
+                (selectionChange)="buscarLancamentosByAno($event.value)">
+              </dsc-select>
             </div>
           </div>
 
@@ -70,11 +77,19 @@
               </div>
             </div>
             <div class="flex-1 d-flex flex-column gap-6">
+              <!--
               <label class="control-label">Ano</label>
               <p-dropdown class="noBorderDropdownTrigger form-control2 selectAno" [options]="anos" [(ngModel)]="anoReembolso"
               [ngModelOptions]="{standalone: true}" optionLabel="label"
               (onChange)="buscarReembolsosResumoPorAno($event.value.value)">
-            </p-dropdown>
+              </p-dropdown>
+              -->
+              <dsc-select
+                [label]="'Ano'"
+                [placeholder]="anoReembolso.value"
+                [options]="optionsAnos"
+                (selectionChange)="buscarReembolsosResumoPorAno($event.value)">
+              </dsc-select>
             </div>
           </div>
           <div *ngFor="let lancamento of lancamentosReembolso; let i = index" class="inline-resultado">

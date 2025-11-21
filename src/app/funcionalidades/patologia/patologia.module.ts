@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { NgxMaskModule } from 'ngx-mask';
+import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
 // Aplicação
 import { TemplatesModule } from 'app/arquitetura/shared/templates/templates.module';
 
@@ -36,7 +36,7 @@ import { ComponentModule } from 'app/shared/components/component.module';
         ReactiveFormsModule,
         TemplatesModule,
         NgxPaginationModule,
-        NgxMaskModule,
+        NgxMaskDirective, NgxMaskPipe,
         TableModule,
         AscMessageErrorModule,
         FieldsetModule,

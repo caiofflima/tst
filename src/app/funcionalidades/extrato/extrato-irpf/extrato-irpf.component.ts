@@ -7,6 +7,8 @@ import { BaseComponent } from "../../../shared/components/base.component";
 import { MessageService } from "../../../shared/components/messages/message.service";
 import {SessaoService} from 'app/shared/services/services';
 import {Location} from "@angular/common";
+import { Option } from 'sidsc-components/dsc-select';
+
 @Component({
   selector: 'asc-extrato-irpf',
   templateUrl: './extrato-irpf.component.html',
@@ -21,7 +23,8 @@ export class ExtratoIRPFComponent extends BaseComponent implements OnInit {
   anoCorrente = null;
   anoLancamento = null;
   limiteUltimosCincoAnos: number = 4;
-
+  
+  optionsAnos: Option[] = [];
 
   readonly formularioExtratoIRPF = this.formBuilder.group({
     anoBase: this.anoBase,
@@ -52,12 +55,22 @@ export class ExtratoIRPFComponent extends BaseComponent implements OnInit {
         this.anos.push({value: this.anoCorrente - i, label: String(this.anoCorrente - i) });
     }
     this.anoLancamento =  this.anos.find(obj => obj.value === this.anoCorrente);
+
+    this.optionsAnos = this.anos.map(ano => {
+      return {
+      value: ano.value, label: ano.label
+    }});
+
+  }
+
+  onChange(valor: any){
+    this.anoLancamento = valor;
   }
 
   gerarExtrato(): void {
     this.route.navigate(['meus-dados/financeiro/extrato-irpf/detalhar'], {
       queryParams: {
-        anoBase: this.anoLancamento.value || '',
+        anoBase: this.anoLancamento || '',
         mtr: SessaoService.getMatriculaFuncional() || ''
       }
     }).then();

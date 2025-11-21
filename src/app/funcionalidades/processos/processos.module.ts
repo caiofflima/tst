@@ -7,7 +7,7 @@ import {ComposicaoPedidoModule} from "../../../app/shared/components/pedido/comp
 import {DirectivesModule} from "../../../app/arquitetura/shared/directives/directives.module";
 import {TabsModule} from "ngx-bootstrap/tabs";
 import {ComponentModule} from "../../../app/shared/components/component.module";
-import { NgxMaskModule } from 'ngx-mask';
+import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
 import {NgxPaginationModule} from "ngx-pagination";
 import {TableModule} from "primeng/table";
 import {SharedModule} from "primeng/api";
@@ -56,7 +56,7 @@ import {
         // TabsModule.forRoot(),
         TemplatesModule,
         ComposicaoPedidoModule,
-        NgxMaskModule,
+        NgxMaskDirective, NgxMaskPipe,
         TableModule,
         SharedModule,
         PipeModule,

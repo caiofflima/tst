@@ -5,7 +5,7 @@ import {ReactiveFormsModule, FormsModule} from "@angular/forms";
 import {TemplatesModule} from "../../arquitetura/shared/templates/templates.module";
 import {DirectivesModule} from "../../arquitetura/shared/directives/directives.module";
 import {TabsModule} from "ngx-bootstrap/tabs";
-import { NgxMaskModule } from 'ngx-mask';
+import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
 import {PesquisarProcessosRoutingModule} from "./pesquisar-processos.routing.module";
 import {NgxPaginationModule} from "ngx-pagination";
 import {TableModule,} from "primeng/table";
@@ -42,7 +42,7 @@ import {PipeModule} from "../../shared/pipes/pipe.module";
 		RouterModule,
 		TabsModule.forRoot(),
 		TemplatesModule,
-		NgxMaskModule,
+		NgxMaskDirective, NgxMaskPipe,
 		TableModule,
 		PaginatorModule,
 		SharedModule,

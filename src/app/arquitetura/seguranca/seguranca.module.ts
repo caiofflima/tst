@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { NgxMaskModule } from 'ngx-mask';
+import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { DirectivesModule } from '../shared/directives/directives.module';
 import { TemplatesModule } from '../shared/templates/templates.module';
@@ -23,7 +23,7 @@ import { ComponentModule } from 'app/shared/components/component.module';
 		RouterModule,
 		FormsModule,
 		ReactiveFormsModule,
-		NgxMaskModule,
+		NgxMaskDirective, NgxMaskPipe,
 		NgxPaginationModule,
 		DirectivesModule.forRoot(),
 		TemplatesModule,

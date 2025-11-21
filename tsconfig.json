@@ -38,8 +38,6 @@
     "strictTemplates": true
   },
   "exclude": [
-    "**/*.spec.ts",
-    "src/test.ts",
     "node_modules/@types/glob"
   ]
 }

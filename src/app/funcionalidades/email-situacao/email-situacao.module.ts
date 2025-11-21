@@ -5,7 +5,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {TemplatesModule} from 'app/arquitetura/shared/templates/templates.module';
 import {DirectivesModule} from 'app/arquitetura/shared/directives/directives.module';
 import {TabsModule} from 'ngx-bootstrap/tabs';
-import { NgxMaskModule } from 'ngx-mask';
+import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
 import {NgxPaginationModule} from 'ngx-pagination';
 import {AutoCompleteModule} from 'primeng/autocomplete';
 import {CalendarModule} from 'primeng/calendar';
@@ -56,7 +56,7 @@ import {AscButtonsModule} from "../../shared/components/asc-buttons/asc-buttons.
         RouterModule,
         TabsModule.forRoot(),
         TemplatesModule,
-        NgxMaskModule,
+        NgxMaskDirective, NgxMaskPipe,
         AscMultiSelectModule,
         AscMessageErrorModule,
         PipeModule,

@@ -12,18 +12,21 @@
     </div>
 
     <p class="title-section">Declaração de Portabilidade</p>
+    <form [formGroup]="formularioSolicitacao" novalidate>
+      <div class="form-group noPaddingLeft">
+        <div class="custom-form-group-input">
+          <dsc-select
+              [label]="'Beneficiário'"
+              [placeholder]="'Selecione uma opção'"
+              [showFilter]="true"
+              [options]="options"
+              formControlName="dependente">
+            </dsc-select>
 
-    <div class="form-group col-md-6 noPaddingLeft">
-      <div class="custom-form-group-input">
-        <asc-select-beneficiario-ativo-cancelado
-          selectId="beneficiario" [matricula]="matricula"
-          [uppercase]="true"
-          label="Beneficiário" [required]="true"
-          [control]="formularioSolicitacao.get('dependente')"
-          (dadoSelecionado)="beneficiarioSelecionado($event)"
-        ></asc-select-beneficiario-ativo-cancelado>
+        </div>
       </div>
-    </div>
+    </form>
+
 
     <div *ngIf="dadosPortabilidade" #print>
 

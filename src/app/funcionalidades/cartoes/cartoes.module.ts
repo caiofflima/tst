@@ -7,7 +7,7 @@ import {ComposicaoPedidoModule} from "app/shared/components/pedido/composicao-pe
 import {DirectivesModule} from "app/arquitetura/shared/directives/directives.module";
 import {TabsModule} from "ngx-bootstrap/tabs";
 import {ComponentModule} from "app/shared/components/component.module";
-import { NgxMaskModule } from 'ngx-mask';
+import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
 import {NgxPaginationModule} from "ngx-pagination";
 import {SharedModule} from "primeng/api";
 import {TableModule} from "primeng/table";
@@ -27,7 +27,7 @@ import {AscMultiSelectModule} from "../../shared/components/multiselect/asc-mult
 import {AscButtonsModule} from "../../shared/components/asc-buttons/asc-buttons.module";
 import { CartoesDetailComponent } from "./detail/cartoes-detail.component";
 import { CartoesRoutingModule } from "./cartoes.routing.module";
-
+import { DscSelectComponent } from "sidsc-components/dsc-select";
 @NgModule({
     imports: [
         CommonModule,
@@ -46,7 +46,7 @@ import { CartoesRoutingModule } from "./cartoes.routing.module";
         TabsModule.forRoot(),
         TemplatesModule,
         ComposicaoPedidoModule,
-        NgxMaskModule,
+        NgxMaskDirective, NgxMaskPipe,
         TableModule,
         SharedModule,
         PipeModule,
@@ -57,7 +57,8 @@ import { CartoesRoutingModule } from "./cartoes.routing.module";
         PaginatorModule,
         MultiSelectModule,
         AscMultiSelectModule,
-        AscButtonsModule
+        AscButtonsModule,
+        DscSelectComponent
     ],
     declarations: [
         CartoesDetailComponent

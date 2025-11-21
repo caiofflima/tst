@@ -28,13 +28,19 @@
         <p>&nbsp;</p>
         <div class="row pl-0 col-xs-2">
           <p class="info-p texto-ano-base"><b>Ano Base</b></p>
-              <p-dropdown 
+              <!--<p-dropdown 
                 class="form-control2 selectAno" 
                 [options]="anos" 
                 [(ngModel)]="anoLancamento" 
                 [ngModelOptions]="{standalone: true}" 
                 optionLabel="label">
-              </p-dropdown>
+              </p-dropdown>-->
+
+            <dsc-select
+              [placeholder]="anoLancamento.value"
+              [options]="optionsAnos" 
+              (selectionChange)="onChange($event.value)">
+            </dsc-select>
         </div>
         <br><br><br><br>
         <div class="pagina-inicial-botoes">

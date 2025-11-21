@@ -69,7 +69,7 @@ describe('CartoesDetailComponent', () => {
       },
     };
 
-    await TestBed.configureTestingModule({
+    TestBed.configureTestingModule({
       imports: [FormsModule, ReactiveFormsModule],
       declarations: [CartoesDetailComponent],
       providers: [
@@ -79,7 +79,13 @@ describe('CartoesDetailComponent', () => {
         { provide: ActivatedRoute, useValue: activatedRouteMock },
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
-    }).compileComponents();
+    });
+    TestBed.overrideTemplate(CartoesDetailComponent, `
+      <form [formGroup]="formularioSolicitacao">
+        <input formControlName="dependente" />
+      </form>
+    `);
+    await TestBed.compileComponents();
 
     fixture = TestBed.createComponent(CartoesDetailComponent);
     component = fixture.componentInstance;

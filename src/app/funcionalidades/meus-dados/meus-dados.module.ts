@@ -2,7 +2,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgxMaskModule } from 'ngx-mask';
+import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
 
 import { TemplatesModule } from 'app/arquitetura/shared/templates/templates.module';
 import { NgxPaginationModule } from 'ngx-pagination';
@@ -19,7 +19,7 @@ import { SiascTableModule } from 'app/shared/components/table/table.module';
 		ReactiveFormsModule,
 		TemplatesModule,
 		NgxPaginationModule,
-		NgxMaskModule,
+		NgxMaskDirective, NgxMaskPipe,
 		MeusDadosRoutingModule,
 		SiascTableModule
 	],

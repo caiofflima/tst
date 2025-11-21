@@ -9,6 +9,8 @@ import * as pdfMake from "pdfmake/build/pdfmake";
 import * as pdfFonts from "assets/fonts/vfs_fonts";
 import { ActivatedRoute } from '@angular/router';
 import { PortabilidadeDTO } from 'app/shared/models/comum/portabilidade-dto.model';
+import { Option } from 'sidsc-components/dsc-select';
+import { HttpUtil } from 'app/shared/util/http-util';
 const htmlToPdfmake = require("html-to-pdfmake");
 (pdfMake as any).vfs = pdfFonts.pdfMake.vfs;
 
@@ -20,6 +22,8 @@ const htmlToPdfmake = require("html-to-pdfmake");
 export class PortabilidadeDetailComponent implements OnInit {
 
     beneficiario: Beneficiario;
+    beneficiarios: Beneficiario[] = []
+    options: Option[] = [];
     dadosPortabilidade: PortabilidadeDTO = null;
     tituloCarta: string;
     textoCarta: string;
@@ -28,7 +32,7 @@ export class PortabilidadeDetailComponent implements OnInit {
     @ViewChild('print') printSection: ElementRef;
 
     readonly formularioSolicitacao = new FormGroup({
- 
+
         dependente: new FormControl(null, Validators.required)
     });
 
@@ -39,7 +43,7 @@ export class PortabilidadeDetailComponent implements OnInit {
         private location: Location,
         private route: ActivatedRoute,
         private service: BeneficiarioService) {
-        
+
     }
 
     ngOnInit() {
@@ -59,12 +63,18 @@ export class PortabilidadeDetailComponent implements OnInit {
       this.tituloCarta = 'DECLARAÇÃO DE PORTABILIDADE/ PERMANÊNCIA';
       this.textoCarta = '';
       this.dataPorExtenso = '';
+      this.carregarListOperator()
+
+      this.formularioSolicitacao.get('dependente').valueChanges.subscribe(v=> {
+          this.beneficiario = this.beneficiarios.find(b => b.id === v)
+          this.beneficiarioSelecionado(this.beneficiario)
+        })
     }
 
     get matricula(): string {
         return SessaoService.getMatriculaFuncional();
     }
-    
+
     beneficiarioSelecionado(beneficiario: Beneficiario) {
         this.beneficiario = beneficiario;
         this.service.getDadosCartaPortabilidadeBeneficiario(this.beneficiario.id)
@@ -80,8 +90,8 @@ export class PortabilidadeDetailComponent implements OnInit {
                 this.messageService.addMsgDanger(err.error);
         });
     }
- 
-    getCartaDePermanencia_Titular(nomeBeneficiario: string, cpfBeneficiario: string, dtNascBeneficiario: string, sexoBeneficiario: string, 
+
+    getCartaDePermanencia_Titular(nomeBeneficiario: string, cpfBeneficiario: string, dtNascBeneficiario: string, sexoBeneficiario: string,
       dtAdesao: Date, dtValidadeCartao: Date, dtValidadePlano: Date): string {
         const texto = 'Declaramos para os devidos fins que '+nomeBeneficiario.toUpperCase()+', CPF '+this.formatarCPF(cpfBeneficiario)+', '+
         this.formatarTextoCartaPorSexo(sexoBeneficiario, 'nascido(a)')+' em ' +this.formatarDataNascimento(dtNascBeneficiario)+', ' + ' é '+
@@ -95,7 +105,7 @@ export class PortabilidadeDetailComponent implements OnInit {
       'temporária. Declaramos ainda que '+this.formatarTextoCartaPorSexo(sexoBeneficiario, 'o(a)') +'  '+this.formatarTextoCartaPorSexo(sexoBeneficiario, 'beneficiário(a)')+' '+
       'está '+this.formatarTextoCartaPorSexo(sexoBeneficiario, 'vinculado(a)') +' ao Saúde CAIXA desde '+
        this.formatarData(dtAdesao)+', último cartão vigente até '+this.formatarData(dtValidadeCartao)+', '+
-      'não sendo possível sua manutenção junto ao plano de saúde por perda da condição de titularidade no plano em ' +this.formatarData(dtValidadePlano)+ '.\n'+ 
+      'não sendo possível sua manutenção junto ao plano de saúde por perda da condição de titularidade no plano em ' +this.formatarData(dtValidadePlano)+ '.\n'+
       'Declaramos para os devidos fins que até a presente data, não há registro de internação '+this.formatarTextoCartaPorSexo(sexoBeneficiario, 'do(a)')+' '+
        this.formatarTextoCartaPorSexo(sexoBeneficiario, 'beneficiário(a)')+ '.\n' +this.formatarTextoCartaPorSexo(sexoBeneficiario, 'O(A)')+
       ' titular do plano Saúde CAIXA tem mensalidade calculada de 3,5% sobre sua Remuneração Base (RB), '+
@@ -112,26 +122,26 @@ export class PortabilidadeDetailComponent implements OnInit {
 
     getCartaDePermanencia_Dependente(nomeBeneficiario: string, cpfBeneficiario: string, dtNascBeneficiario: string,
       nomeTitular: string, cpfTitular: string, sexoTitular: string, sexoBeneficiario: string, dtAdesao: Date, dtValidadeCartao: Date, dtValidadePlano: Date): string {
-        const texto = 'Declaramos para os devidos fins que '+nomeBeneficiario.toUpperCase()+', CPF '+this.formatarCPF(cpfBeneficiario)+', '+this.formatarTextoCartaPorSexo(sexoBeneficiario, 'nascido(a)')+' em '+this.formatarDataNascimento(dtNascBeneficiario)+' '+ 
-        'é '+this.formatarTextoCartaPorSexo(sexoBeneficiario, 'beneficiário(a)')+' dependente '+this.formatarTextoCartaPorSexo(sexoTitular, 'do(a)')+' '+ 
-        'titular '+nomeTitular.toUpperCase()+', CPF '+this.formatarCPF(cpfTitular)+', do plano de saúde oferecido '+ 
-        'pela CAIXA ECONÔMICA FEDERAL,  denominado Saúde CAIXA, plano coletivo por adesão, registrado sob '+ 
-      'o nº 31.292-4 na ANS - Agência Nacional de Saúde Suplementar, ativo com comercialização suspensa, '+ 
-      'plano antigo cadastrado sob o número de produto único nº 31.292-4, adaptado à Lei dos Planos de '+ 
-      'Saúde (Lei 9.656/1998), com abrangência nacional e cobertura Médica/Ambulatorial/Hospitalar com '+ 
-      'Obstetrícia; Fonoaudiologia; Terapia Ocupacional; Serviço Social; Odontologia; Fisioterapia, '+  
-      'Psicologia e Home Care, com acomodação em apartamento individual com banheiro privativo. '+  
-      'Não foi exigido o cumprimento do período de carência ou de cobertura parcial temporária. '+  
-      'Declaramos ainda que '+this.formatarTextoCartaPorSexo(sexoBeneficiario, 'o(a)') +' '+this.formatarTextoCartaPorSexo(sexoBeneficiario, 'beneficiário(a)')+' '+ 
-      'está '+this.formatarTextoCartaPorSexo(sexoBeneficiario, 'vinculado(a)') +' ao Saúde CAIXA desde '+this.formatarData(dtAdesao)+', último cartão '+  
-      'vigente até '+this.formatarData(dtValidadeCartao)+', não sendo possível sua renovação junto ao plano de saúde por perda da '+  
-      'condição de dependência.\n '+this.formatarTextoCartaPorSexo(sexoTitular, 'O(A)')+ ' titular do plano Saúde CAIXA tem mensalidade calculada de 3,5% sobre '+ 
-      'sua Remuneração Base (RB), inclusive sobre o 13º salário, bem como cobrança de R$ 480,00 por dependente '+ 
-      'direto e indireto cadastrado, sendo que a soma da mensalidade '+this.formatarTextoCartaPorSexo(sexoTitular, 'do(a)') +' titular com a(s) mensalidade(s) do(s) '+ 
-      'dependente(s) direto(s) não pode ultrapassar, no mês de referência, o teto de 7% da RB '+this.formatarTextoCartaPorSexo(sexoTitular, 'do(a)') +' titular, não havendo '+  
-      'teto de cobrança no mês de referência, no caso de mensalidade de dependente indireto. Ademais, há '+  
-      'coparticipação de 30% sobre as despesas com utilização, limitada ao valor total anual de R$ 3.600,00 '+ 
-      '(três mil e seiscentos reais) para titular e seus dependentes.\n O Saúde CAIXA declara que as '+  
+        const texto = 'Declaramos para os devidos fins que '+nomeBeneficiario.toUpperCase()+', CPF '+this.formatarCPF(cpfBeneficiario)+', '+this.formatarTextoCartaPorSexo(sexoBeneficiario, 'nascido(a)')+' em '+this.formatarDataNascimento(dtNascBeneficiario)+' '+
+        'é '+this.formatarTextoCartaPorSexo(sexoBeneficiario, 'beneficiário(a)')+' dependente '+this.formatarTextoCartaPorSexo(sexoTitular, 'do(a)')+' '+
+        'titular '+nomeTitular.toUpperCase()+', CPF '+this.formatarCPF(cpfTitular)+', do plano de saúde oferecido '+
+        'pela CAIXA ECONÔMICA FEDERAL,  denominado Saúde CAIXA, plano coletivo por adesão, registrado sob '+
+      'o nº 31.292-4 na ANS - Agência Nacional de Saúde Suplementar, ativo com comercialização suspensa, '+
+      'plano antigo cadastrado sob o número de produto único nº 31.292-4, adaptado à Lei dos Planos de '+
+      'Saúde (Lei 9.656/1998), com abrangência nacional e cobertura Médica/Ambulatorial/Hospitalar com '+
+      'Obstetrícia; Fonoaudiologia; Terapia Ocupacional; Serviço Social; Odontologia; Fisioterapia, '+
+      'Psicologia e Home Care, com acomodação em apartamento individual com banheiro privativo. '+
+      'Não foi exigido o cumprimento do período de carência ou de cobertura parcial temporária. '+
+      'Declaramos ainda que '+this.formatarTextoCartaPorSexo(sexoBeneficiario, 'o(a)') +' '+this.formatarTextoCartaPorSexo(sexoBeneficiario, 'beneficiário(a)')+' '+
+      'está '+this.formatarTextoCartaPorSexo(sexoBeneficiario, 'vinculado(a)') +' ao Saúde CAIXA desde '+this.formatarData(dtAdesao)+', último cartão '+
+      'vigente até '+this.formatarData(dtValidadeCartao)+', não sendo possível sua renovação junto ao plano de saúde por perda da '+
+      'condição de dependência.\n '+this.formatarTextoCartaPorSexo(sexoTitular, 'O(A)')+ ' titular do plano Saúde CAIXA tem mensalidade calculada de 3,5% sobre '+
+      'sua Remuneração Base (RB), inclusive sobre o 13º salário, bem como cobrança de R$ 480,00 por dependente '+
+      'direto e indireto cadastrado, sendo que a soma da mensalidade '+this.formatarTextoCartaPorSexo(sexoTitular, 'do(a)') +' titular com a(s) mensalidade(s) do(s) '+
+      'dependente(s) direto(s) não pode ultrapassar, no mês de referência, o teto de 7% da RB '+this.formatarTextoCartaPorSexo(sexoTitular, 'do(a)') +' titular, não havendo '+
+      'teto de cobrança no mês de referência, no caso de mensalidade de dependente indireto. Ademais, há '+
+      'coparticipação de 30% sobre as despesas com utilização, limitada ao valor total anual de R$ 3.600,00 '+
+      '(três mil e seiscentos reais) para titular e seus dependentes.\n O Saúde CAIXA declara que as '+
       'contribuições mensais devidas até a data de exclusão '+this.formatarTextoCartaPorSexo(sexoTitular, 'do(a)') +' titular e dependentes constam adimplidas.';
       return texto;
     }
@@ -147,13 +157,13 @@ export class PortabilidadeDetailComponent implements OnInit {
       'Obstetrícia; Fonoaudiologia; Terapia Ocupacional; Serviço Social; Odontologia; Fisioterapia, Psicologia '+
       'e Home Care, com acomodação em apartamento individual com banheiro privativo. Não foi exigido o '+
       'cumprimento do período de carência ou de cobertura parcial temporária. Declaramos ainda que ' +this.formatarTextoCartaPorSexo(sexoBeneficiario, 'o(a)') +' '+this.formatarTextoCartaPorSexo(sexoBeneficiario, 'beneficiário(a)') +' '+
-      'está '+this.formatarTextoCartaPorSexo(sexoBeneficiario, 'vinculado(a)') +' ao Saúde CAIXA desde '+this.formatarData(dtAdesao)+', último cartão vigente até '+this.formatarData(dtValidadeCartao)+', '+ 
-      'não sendo possível sua renovação junto ao plano de saúde por perda da condição de dependência.\n '+  
+      'está '+this.formatarTextoCartaPorSexo(sexoBeneficiario, 'vinculado(a)') +' ao Saúde CAIXA desde '+this.formatarData(dtAdesao)+', último cartão vigente até '+this.formatarData(dtValidadeCartao)+', '+
+      'não sendo possível sua renovação junto ao plano de saúde por perda da condição de dependência.\n '+
       'Declaramos para os devidos fins que até a presente data, não há registro de internação '+this.formatarTextoCartaPorSexo(sexoBeneficiario, 'do(a)') +' '+this.formatarTextoCartaPorSexo(sexoBeneficiario, 'beneficiário(a)')+'.\n '
       +this.formatarTextoCartaPorSexo(sexoTitular, 'O(A)')+ ' titular do plano Saúde CAIXA tem mensalidade calculada de 11,67% sobre sua Remuneração Base (RB), '+
       'inclusive sobre o 13º salário, bem como cobrança de R$ 480,00 por dependente direto e indireto '+
-      'cadastrado, sendo que a soma da mensalidade '+this.formatarTextoCartaPorSexo(sexoTitular, 'do(a)') +' titular com a(s) mensalidade(s) do(s) dependente(s) '+ 
-      'direto(s) não pode ultrapassar, no mês de referência, o teto de 23,33% da RB '+this.formatarTextoCartaPorSexo(sexoTitular, 'do(a)') +' titular, não havendo '+ 
+      'cadastrado, sendo que a soma da mensalidade '+this.formatarTextoCartaPorSexo(sexoTitular, 'do(a)') +' titular com a(s) mensalidade(s) do(s) dependente(s) '+
+      'direto(s) não pode ultrapassar, no mês de referência, o teto de 23,33% da RB '+this.formatarTextoCartaPorSexo(sexoTitular, 'do(a)') +' titular, não havendo '+
       'teto de cobrança no mês de referência, no caso de mensalidade de dependente indireto. Ademais, há '+
       'coparticipação de 30% sobre as despesas com utilização, limitada ao valor total anual de '+
       'R$ 12.000,00 (doze mil reais) para titular e seus dependentes.\n '+
@@ -239,7 +249,7 @@ export class PortabilidadeDetailComponent implements OnInit {
       let dataFormatada = '';
 
       const textoValido = " (data não informada)";
-      
+
       if(data) {
 
         const strData = data.toString();
@@ -251,9 +261,9 @@ export class PortabilidadeDetailComponent implements OnInit {
 
         const mesAjustado = mes < 10? `0${mes}`: mes;
         const diaAjustado = dia < 10? `0${dia}`: dia;
- 
+
         dataFormatada = `${diaAjustado}/${mesAjustado}/${ano}`;
-      } 
+      }
 
       if(dataFormatada == "01/01/2000") {
         return textoValido;
@@ -264,15 +274,15 @@ export class PortabilidadeDetailComponent implements OnInit {
     formatarDataNascimento(strData:string):string{
       let dataFormatada = '';
       const dataArray = strData.split("-");
-  
+
       const textoValido = " (data não informada)";
-  
+
       const strAno = parseInt(dataArray[0]);
       const strMes = parseInt(dataArray[1])-1;
       const srtDia = parseInt(dataArray[2]);
-      
+
       const dataValida: Date = new Date(strAno, strMes, srtDia);
-  
+
       if(dataValida) {
         const ano = dataValida.getFullYear();
         const mes = dataValida.getMonth() + 1;
@@ -283,17 +293,17 @@ export class PortabilidadeDetailComponent implements OnInit {
 
         dataFormatada = `${diaAjustado}/${mesAjustado}/${ano}`;
       }
-  
+
       if(dataFormatada == "01/01/2000") {
       return textoValido;
       }
       return dataFormatada;
     }
-  
+
     formatarTextoAnosDeBeneficio(dtValidadeCartao: Date): string  {
       const hoje = new Date().toDateString();
       let dtComparacao: any;
-      
+
       if(dtValidadeCartao !== null) {
         dtComparacao = new Date(dtValidadeCartao).toDateString();
       }
@@ -308,12 +318,12 @@ export class PortabilidadeDetailComponent implements OnInit {
         dtInicial = new Date(dtValidadePlano);
         dtFinal = new Date(dtAdesao);
       }
-      
+
       let anos = dtInicial.getFullYear() - dtFinal.getFullYear();
       const mesAtual = dtInicial.getMonth();
       const mesComparacao = dtFinal.getMonth();
 
-      if(mesComparacao > mesAtual || mesComparacao === mesAtual && 
+      if(mesComparacao > mesAtual || mesComparacao === mesAtual &&
         dtInicial.getDate() < dtFinal.getDate()) {
           anos--;
       }
@@ -331,12 +341,12 @@ export class PortabilidadeDetailComponent implements OnInit {
         case formatoDesejado == 'dia': {
           const dia = dataValida.getDate();
           const diaAjustado = dia < 10? `0${dia}`: dia;
-          return diaAjustado;        
+          return diaAjustado;
         }
         case formatoDesejado == 'mes': {
           const mes = dataValida.getMonth() + 1;
-          const meses = ['janeiro', 'fevereiro', 'março', 'abril', 
-                         'maio', 'junho', 'julho', 'agosto', 
+          const meses = ['janeiro', 'fevereiro', 'março', 'abril',
+                         'maio', 'junho', 'julho', 'agosto',
                          'setembro', 'outubro', 'novembro', 'dezembro'];
           const mesAjustado = meses[mes - 1];
 
@@ -351,7 +361,7 @@ export class PortabilidadeDetailComponent implements OnInit {
         }
       }
     }
-    
+
     formatarCPF(cpf: string): any{
       let cpfFormatado: any;
       if(cpf) {
@@ -378,17 +388,17 @@ export class PortabilidadeDetailComponent implements OnInit {
         let dtValidadeCartao = this.dadosPortabilidade.dtValidadeCartao;
         let dtValidadePlano = this.dadosPortabilidade.dtValidadePlano;
 
-        if(tipoContrato == tipoContratoTitular) {         
+        if(tipoContrato == tipoContratoTitular) {
           if (beneficiarioEhTitular == 'Sim') {
-            this.textoCarta = this.getCusteioIntegralCartaDePermanencia_Titular(nomebeneficiario, cpfBeneficiario, 
+            this.textoCarta = this.getCusteioIntegralCartaDePermanencia_Titular(nomebeneficiario, cpfBeneficiario,
               dtNascBeneficiario, sexoBeneficiario, dtAdesao, dtValidadeCartao, dtValidadePlano);
           } else {
-            this.textoCarta = this.getCusteioIntegralCartaDePermanencia_Dependente(nomebeneficiario, cpfBeneficiario, 
+            this.textoCarta = this.getCusteioIntegralCartaDePermanencia_Dependente(nomebeneficiario, cpfBeneficiario,
               dtNascBeneficiario, nomeTitular, cpfTitular, sexoTitular, sexoBeneficiario, dtAdesao, dtValidadeCartao, dtValidadePlano);
-          }      
+          }
         } else {
           if (beneficiarioEhTitular == 'Sim') {
-            this.textoCarta = this.getCartaDePermanencia_Titular(nomebeneficiario, cpfBeneficiario, 
+            this.textoCarta = this.getCartaDePermanencia_Titular(nomebeneficiario, cpfBeneficiario,
               dtNascBeneficiario, sexoBeneficiario, dtAdesao, dtValidadeCartao, dtValidadePlano);
           } else {
           this.textoCarta = this.getCartaDePermanencia_Dependente(nomebeneficiario, cpfBeneficiario,
@@ -435,25 +445,25 @@ export class PortabilidadeDetailComponent implements OnInit {
         pdfMake.fonts = {
           Roboto: {
             normal: 'roboto.regular.ttf',
-            bold:'CAIXAStd-Book.ttf',            
+            bold:'CAIXAStd-Book.ttf',
             italics: 'CAIXAStd-Book.ttf',
             bolditalics: 'CAIXAStd-Book.ttf'
           },
 
           Inter: {
             normal: 'Inter-Bold.ttf',
-            bold:'Inter-Bold.ttf',            
+            bold:'Inter-Bold.ttf',
             italics: 'Inter-Bold.ttf',
             bolditalics: 'Inter-Bold.ttf.ttf'
           },
 
           CAIXAStd: {
             normal: 'CAIXAStd-Book.ttf',
-            bold:'CAIXAStd-Regular.ttf',            
+            bold:'CAIXAStd-Regular.ttf',
             italics: 'CAIXAStd-Regular.ttf',
             bolditalics: 'CAIXAStd-Regular.ttf'
           }
-        
+
         }
 
         const documentDefinition = { content: [
@@ -465,7 +475,7 @@ export class PortabilidadeDetailComponent implements OnInit {
              },
 
              { text: 'DECLARAÇÃO DE PORTABILIDADE/ PERMANÊNCIA',
-               aligment: 'center', 
+               aligment: 'center',
                style: 'p2',
                tocItem: true,
                absolutePosition: {x:153, y:110},
@@ -483,7 +493,7 @@ export class PortabilidadeDetailComponent implements OnInit {
 
               { text: this.dataPorExtenso,
                 style: 'p1',
-                tocItem: true, 
+                tocItem: true,
                 absolutePosition: {x:40, y:665},
                 color: '#000000'
               },
@@ -494,7 +504,7 @@ export class PortabilidadeDetailComponent implements OnInit {
                 height: 90,
                 absolutePosition: {x:240, y:650}
                },
-  
+
                {
                 image: await this.getBase64ImageFromURL("../assets/images/rodape-carta.png"),
                 width: 440,
@@ -518,10 +528,10 @@ export class PortabilidadeDetailComponent implements OnInit {
               },
 
             }
-        };      
-    
+        };
+
         pdfMake.createPdf(documentDefinition, null, null,  pdfFonts.pdfMake.vfs).download("declaracao_de_portabilidade.pdf");
-         
+
     }
 
     voltar() {
@@ -532,25 +542,35 @@ export class PortabilidadeDetailComponent implements OnInit {
         return new Promise((resolve, reject) => {
           let img = new Image();
           img.setAttribute("crossOrigin", "anonymous");
-        
+
           img.onload = () => {
             let canvas = document.createElement("canvas");
             canvas.width = img.width;
             canvas.height = img.height;
-        
+
             let ctx = canvas.getContext("2d");
             ctx!.drawImage(img, 0, 0);
-        
+
             let dataURL = canvas.toDataURL("image/png");
-        
+
             resolve(dataURL);
           };
-        
+
           img.onerror = error => {
             reject(error);
           };
-        
+
           img.src = url;
         });
     }
+
+    carregarListOperator(){
+           this.service.consultarBeneficiarioETitularContratoPorMatricula(this.matricula).pipe(
+                    HttpUtil.catchErrorAndReturnEmptyObservableByKey(this.messageService, 'error')
+                ).subscribe((beneficiarios: Beneficiario[]) => {
+                    this.beneficiarios = beneficiarios
+                    this.options = beneficiarios.map(b => ({label: b.nome, value: b.id }));
+
+            })
+          }
 }

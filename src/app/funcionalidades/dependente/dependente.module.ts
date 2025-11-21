@@ -17,7 +17,7 @@ import {InputTextModule} from "primeng/inputtext";
 import {DialogModule} from "primeng/dialog";
 import {MessageModule as PrimeMessageModule} from "primeng/message";
 import {OverlayPanelModule} from "primeng/overlaypanel";
-import { NgxMaskModule } from 'ngx-mask';
+import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
 import {CdkStepperModule} from '@angular/cdk/stepper';
 import {AscStepperModule} from '../../shared/components/asc-stepper/asc-stepper.module';
 import {ComponentModule} from '../../shared/components/component.module';
@@ -37,7 +37,7 @@ import {AscCardModule} from "../../shared/components/asc-card/asc-card.module";
 @NgModule({
     imports: [
         CommonModule,
-        NgxMaskModule,
+        NgxMaskDirective, NgxMaskPipe,
         AscStepperModule,
         CdkStepperModule,
         ComponentModule,

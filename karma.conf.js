@@ -26,7 +26,6 @@ module.exports = function(config) {
           },
       },
       exclude: [
-          '**/*.spec.ts'  // Ignora todos os arquivos com extensão .spec.ts
       ],
       client: {
           jasmine: {

@@ -7,7 +7,7 @@ import {ComposicaoPedidoModule} from "app/shared/components/pedido/composicao-pe
 import {DirectivesModule} from "app/arquitetura/shared/directives/directives.module";
 import {TabsModule} from "ngx-bootstrap/tabs";
 import {ComponentModule} from "app/shared/components/component.module";
-import { NgxMaskModule } from 'ngx-mask';
+import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
 import {NgxPaginationModule} from "ngx-pagination";
 import {TableModule,} from "primeng/table";
 import {SharedModule,} from "primeng/api";
@@ -28,6 +28,7 @@ import {AscMultiSelectModule} from "../../shared/components/multiselect/asc-mult
 import {AscButtonsModule} from "../../shared/components/asc-buttons/asc-buttons.module";
 import { PortabilidadeDetailComponent } from "./detail/portabilidade-detail.component";
 import { PortabilidadeRoutingModule } from "./portabilidade.routing.module";
+import { DscCaixaModule } from "app/shared/dsc-caixa/dsc-caixa.module";
 
 @NgModule({
     imports: [
@@ -47,7 +48,7 @@ import { PortabilidadeRoutingModule } from "./portabilidade.routing.module";
         TabsModule.forRoot(),
         TemplatesModule,
         ComposicaoPedidoModule,
-        NgxMaskModule,
+        NgxMaskDirective, NgxMaskPipe,
         TableModule,
         SharedModule,
         PipeModule,
@@ -58,7 +59,8 @@ import { PortabilidadeRoutingModule } from "./portabilidade.routing.module";
         PaginatorModule,
         MultiSelectModule,
         AscMultiSelectModule,
-        AscButtonsModule
+        AscButtonsModule,
+        DscCaixaModule
     ],
     declarations: [
         PortabilidadeDetailComponent

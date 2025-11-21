@@ -17,6 +17,7 @@ import {
 
 import {MensagemPedidoService} from "app/shared/services/comum/mensagem-enviada.service";
 import { HandleBeneficiariosDTO } from 'app/shared/models/comum/handle-beneficiarios-dto.model';
+import { Option } from 'sidsc-components/dsc-select';
 
 @Component({
     selector: 'app-reembolso',
@@ -40,6 +41,7 @@ export class ReembolsoDetailComponent implements OnInit {
     anoCorrente = null;
     cpfUsuario = null;
     limiteAnos: number = 4;
+    optionsAnos: Option[] = [];
 
     listaReembolsos: ReembolsoDTO[] = [];
     listaReembolsosResumo: ReembolsoResumoDTO[] = [];
@@ -129,6 +131,11 @@ export class ReembolsoDetailComponent implements OnInit {
         }
         this.anoLancamento = this.anos.find(obj => obj.value === this.anoCorrente);
         this.anoReembolso = this.anos.find(obj => obj.value === this.anoCorrente);
+        
+        this.optionsAnos = this.anos.map(ano => {
+            return {
+            value: ano.value, label: ano.label
+        }})
     }
 
     consultarBeneficiarioPorMatricula(matricula: string) {
@@ -206,6 +213,7 @@ export class ReembolsoDetailComponent implements OnInit {
     ]
     buscarReembolsosResumoPorAno(ano: number) {
         this.lancamentoSelecionando = null;
+        this.anoCorrente = ano;
         if (this.cpfUsuario) {
             this.reembolsoSaudeCaixaService.getReembolsosResumoPorAno(this.cpfUsuario, ano).subscribe(res => {
                 //console.log('Reembolso resumo');
@@ -226,6 +234,8 @@ export class ReembolsoDetailComponent implements OnInit {
 
     buscarLancamentosByAno(ano: number) {
         this.lancamentoSelecionando = null;
+        this.anoLancamento = ano;
+
         if (this.cpfUsuario) {
             this.reembolsoSaudeCaixaService.getLancamentosDoAnoPorCPF(this.cpfUsuario, ano).subscribe(res => {
                 this.lancamentos = res;

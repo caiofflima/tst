@@ -64,7 +64,7 @@ import { AscSelectTiposOcorenciaComponent } from './asc-input/asc-select/asc-sel
 import { AscSelectSituacaoProcessoOcorrenciaComponent } from './asc-input/asc-select/asc-select-situacao-processo-ocorrencia';
 import {TableModule} from 'primeng/table';
 import { AscListagemAnexosComponent } from './listagem-anexos/listagem-anexos.component';
-import { NgxMaskModule } from 'ngx-mask';
+import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
 import { AscSelectFinalidadeAdesaoComponent } from './asc-input/asc-select/asc-select-finalidade-adesao.component';
 import { BaseLayoutFormComponent } from './base-layout/base-layout-form/base-layout-form.component';
 import { PopoverModule } from 'ngx-bootstrap/popover';
@@ -83,7 +83,7 @@ import { AscListagemComponent } from './asc-listagem/asc-listagem.component';
         DirectivesModule.forRoot(),
         AscMultiSelectModule,
         PrimeNGModule,
-        // NgxMaskModule,
+        NgxMaskDirective, NgxMaskPipe,
         InputTextModule,
         AscModalModule,
         PopoverModule.forRoot()
