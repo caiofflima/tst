@@ -39,7 +39,6 @@ export class CabecalhoPadraoComponent implements OnInit, OnDestroy {
     usuarioSouCaixaDTO: UsuarioSouCaixaDTO;
     usarioTitular: string;
     beneficiario: any;
-    sidebarExpanded: boolean = false;
 
     readonly REALM_INTRANET = 'intranet';
 
@@ -268,13 +267,5 @@ export class CabecalhoPadraoComponent implements OnInit, OnDestroy {
             descricao: desc,
         }
         return situacao;
-    }
-
-    toggleSidebar(): void {
-        this.sidebarExpanded = !this.sidebarExpanded;
-    }
-
-    closeSidebar(): void {
-        this.sidebarExpanded = false;
     }
 }
