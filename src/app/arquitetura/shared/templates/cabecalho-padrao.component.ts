@@ -70,6 +70,7 @@ export class CabecalhoPadraoComponent implements OnInit, OnDestroy {
         });
 
         this.montarMenuDinamico();
+        this.configurarFechamentoMenu();
         this.pesquisarFuncao();
         this.matricula
         if (SessaoService.usuario.menu && SessaoService.usuario.menu.map(m => m.label).filter( m => m.includes('Atendimento'))) {
@@ -267,5 +268,26 @@ export class CabecalhoPadraoComponent implements OnInit, OnDestroy {
             descricao: desc,
         }
         return situacao;
+    }
+
+    private configurarFechamentoMenu(): void {
+        setTimeout(() => {
+            // Fechar submenu ao tirar o mouse do item pai
+            jQuery('.p-menuitem').on('mouseleave', function() {
+                jQuery(this).removeClass('p-menuitem-active');
+                jQuery(this).find('.p-submenu-list').hide();
+            });
+
+            // Manter aberto quando mouse está sobre o submenu
+            jQuery('.p-submenu-list').on('mouseenter', function() {
+                jQuery(this).parent().addClass('p-menuitem-active');
+                jQuery(this).show();
+            });
+
+            jQuery('.p-submenu-list').on('mouseleave', function() {
+                jQuery(this).parent().removeClass('p-menuitem-active');
+                jQuery(this).hide();
+            });
+        }, 500);
     }
 }

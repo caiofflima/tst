@@ -319,6 +319,14 @@ body {
         text-decoration: none !important;
       }
 
+      // Corrigir alinhamento das subopções
+      .p-submenu-list {
+        li {
+          margin-left: 0 !important;
+          padding-left: 0 !important;
+        }
+      }
+
       .p-menubar-root-list {
         li{
           border-right: 1px solid #b3c7cb !important;

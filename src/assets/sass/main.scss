@@ -2918,4 +2918,20 @@ body ::ng-deep .form-control {
       display: none !important;
     }
   }
+
+  // Manter aberto quando mouse está sobre submenu
+  &:hover .p-submenu-list,
+  .p-submenu-list:hover {
+    display: block !important;
+  }
+}
+
+/* Corrigir alinhamento das subopções - remover margem extra */
+::ng-deep .p-submenu-list li {
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+}
+
+::ng-deep .p-submenu-list li + li {
+  margin-left: 0 !important;
 }
