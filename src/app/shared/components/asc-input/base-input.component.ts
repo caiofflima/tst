@@ -174,6 +174,14 @@ export abstract class BaseSelectComponent<T> extends BaseInputComponent implemen
 
     selectItems: SelectItem[];
 
+    get dscSelectItems(): any[] {
+        return (this.selectItems || []).map(item => ({
+            label: item.label || '',
+            value: item.value,
+            disabled: item.disabled
+        }));
+    }
+
     showProgressBar = false;
     protected labelPadrao: (si: T) => string;
     protected valuePadrao: (si: T) => any;

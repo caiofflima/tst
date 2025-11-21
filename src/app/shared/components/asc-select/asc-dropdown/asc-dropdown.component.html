@@ -3,13 +3,12 @@
 <dsc-select 
   [formControl]="control" 
   [disabled]="showProgressBar || disabled" 
-  [inputId]="selectId" 
   [id]="id || null"
-  [options]="options"
-  [searchable]="true"
+  [options]="dscOptions"
+  filter="true"
   [tabIndex]="index"
   [required]="required" 
-  (selectionChange)="onChange($event)"
+  (onChange)="onChange($event)"
   size="standard"
   [placeholder]="placeholder || bundle('MHSPH')"
 >

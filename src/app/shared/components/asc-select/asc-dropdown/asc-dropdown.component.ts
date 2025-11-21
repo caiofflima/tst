@@ -44,6 +44,14 @@ export class AscDropdownComponent implements OnInit, OnDestroy {
 
     options: SelectItem[] = [{label: this.placeholder || this.bundle('MHSPH'), value: null}];
 
+    get dscOptions(): any[] {
+        return (this.options || []).map(item => ({
+            label: item.label || '',
+            value: item.value,
+            disabled: item.disabled
+        }));
+    }
+
     private readonly unsubscribeSubject = new Subject<void>();
 
     constructor(
