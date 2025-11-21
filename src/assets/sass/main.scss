@@ -2911,21 +2911,6 @@ body ::ng-deep .form-control {
   text-decoration: none !important;
 }
 
-/* Garantir que menu fecha ao tirar o mouse - autoDisplay false */
-::ng-deep .p-menubar .p-menubar-root-list > .p-menuitem {
-  &:not(:hover) {
-    .p-submenu-list {
-      display: none !important;
-    }
-  }
-
-  // Manter aberto quando mouse está sobre submenu
-  &:hover .p-submenu-list,
-  .p-submenu-list:hover {
-    display: block !important;
-  }
-}
-
 /* Corrigir alinhamento das subopções - remover margem extra */
 ::ng-deep .p-submenu-list li {
   margin-left: 0 !important;
