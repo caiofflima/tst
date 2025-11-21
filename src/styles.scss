@@ -1,22 +1,35 @@
 /* You can add global styles to this file, and also import other style files */
 
+/* Sobrescrever fonte Inter do DSC para Caixa Std */
+* {
+  font-family: "Caixa Std Regular", sans-serif;
+}
+
 /* Estilos globais para forçar fonte Caixa Std 16px nos componentes DSC Select */
-::ng-deep dsc-select {
+::ng-deep dsc-select,
+::ng-deep dsc-select * {
   font-family: "Caixa Std Regular", sans-serif !important;
-  
+  font-size: 16px !important;
+}
+
+::ng-deep dsc-select {
   /* Label do select (texto selecionado visível) */
   .dsc-select-label,
   .select-trigger,
   .select-value,
   .select-value-text,
+  .mat-select-value,
+  .mat-select-value-text,
   button,
-  span {
+  span,
+  div {
     font-family: "Caixa Std Regular", sans-serif !important;
     font-size: 16px !important;
   }
   
   /* Input (campo de busca/filtro) */
-  input {
+  input,
+  input::placeholder {
     font-family: "Caixa Std Regular", sans-serif !important;
     font-size: 16px !important;
   }
@@ -27,7 +40,9 @@
   .dsc-select-option,
   .select-panel,
   .select-options,
-  .select-option {
+  .select-option,
+  .mat-option,
+  .mat-option-text {
     font-family: "Caixa Std Regular", sans-serif !important;
     font-size: 16px !important;
   }
@@ -35,20 +50,58 @@
 
 /* Painel de opções do select (pode estar fora do componente) */
 ::ng-deep .dsc-select-panel,
+::ng-deep .dsc-select-panel *,
 ::ng-deep .select-panel,
-::ng-deep .cdk-overlay-pane {
+::ng-deep .select-panel *,
+::ng-deep .cdk-overlay-pane,
+::ng-deep .cdk-overlay-pane *,
+::ng-deep .mat-select-panel,
+::ng-deep .mat-select-panel * {
+  font-family: "Caixa Std Regular", sans-serif !important;
+  font-size: 16px !important;
+}
+
+::ng-deep .dsc-select-panel,
+::ng-deep .select-panel,
+::ng-deep .cdk-overlay-pane,
+::ng-deep .mat-select-panel {
   .dsc-select-option,
   .select-option,
+  .mat-option,
+  .mat-option-text,
   li,
   span,
-  div {
+  div,
+  button {
     font-family: "Caixa Std Regular", sans-serif !important;
     font-size: 16px !important;
   }
 }
 
 /* Label acima do select */
-::ng-deep label.control-label {
+::ng-deep label.control-label,
+::ng-deep label.control-label * {
+  font-family: "Caixa Std Regular", sans-serif !important;
+  font-size: 16px !important;
+}
+
+/* Forçar sobrescrita da fonte Inter do DSC */
+body ::ng-deep dsc-select,
+body ::ng-deep dsc-select *,
+body ::ng-deep dsc-select input,
+body ::ng-deep dsc-select button,
+body ::ng-deep dsc-select span,
+body ::ng-deep dsc-select div,
+body ::ng-deep dsc-select label {
+  font-family: "Caixa Std Regular", sans-serif !important;
+  font-size: 16px !important;
+}
+
+/* Forçar no placeholder também */
+body ::ng-deep dsc-select input::placeholder,
+body ::ng-deep dsc-select input::-webkit-input-placeholder,
+body ::ng-deep dsc-select input::-moz-placeholder,
+body ::ng-deep dsc-select input:-ms-input-placeholder {
   font-family: "Caixa Std Regular", sans-serif !important;
   font-size: 16px !important;
 }
