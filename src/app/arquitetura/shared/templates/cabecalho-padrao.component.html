@@ -98,10 +98,20 @@
 
     </div>
   </div>
-  <div id="menu-vertical" style="display:none;">
-    <p-panelMenu styleClass="menucx"  [model]="items"></p-panelMenu>
-  </div>
 </div>
+
+<!-- Sidebar Menu Lateral Esquerdo -->
+<div id="sidebar-menu" class="sidebar-collapsed">
+  <div class="sidebar-toggle" (click)="toggleSidebar()">
+    <em class="fas" [ngClass]="sidebarExpanded ? 'fa-chevron-left' : 'fa-bars'"></em>
+  </div>
+  <nav class="sidebar-content">
+    <p-panelMenu styleClass="menucx-sidebar" [model]="items"></p-panelMenu>
+  </nav>
+</div>
+
+<!-- Overlay para fechar sidebar ao clicar fora -->
+<div id="sidebar-overlay" [class.active]="sidebarExpanded" (click)="closeSidebar()"></div>
 
 <!-- Modal Idle -->
 <div class="modal fade modal-idle" role="dialog">
