@@ -16,6 +16,7 @@ import {
     AscSelectMedicamentoApresentacaoComponent
 } from "./asc-select-medicamento-apresentacao/asc-select-medicamento-apresentacao.component";
 import {AscSelectTipoOcorrenciaComponent} from "./asc-select-tipo-ocorrencia/asc-select-tipo-ocorrencia.component";
+import { DscSelectComponent } from 'sidsc-components/dsc-select';
 
 @NgModule({
     imports: [
@@ -24,6 +25,7 @@ import {AscSelectTipoOcorrenciaComponent} from "./asc-select-tipo-ocorrencia/asc
         FormsModule,
         DropdownModule,
         ProgressBarModule,
+        DscSelectComponent
     ],
     declarations: [
         AscSelectProcedimentoComponent,

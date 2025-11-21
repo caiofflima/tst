@@ -70,6 +70,7 @@ import { BaseLayoutFormComponent } from './base-layout/base-layout-form/base-lay
 import { PopoverModule } from 'ngx-bootstrap/popover';
 import { BaseLayoutHomeComponent } from './base-layout/base-layout-home/base-layout-home.component';
 import { AscListagemComponent } from './asc-listagem/asc-listagem.component';
+import { DscSelectComponent } from 'sidsc-components/dsc-select';
 
 
 
@@ -86,7 +87,8 @@ import { AscListagemComponent } from './asc-listagem/asc-listagem.component';
         NgxMaskDirective, NgxMaskPipe,
         InputTextModule,
         AscModalModule,
-        PopoverModule.forRoot()
+        PopoverModule.forRoot(),
+        DscSelectComponent
     ],
     declarations: [
         DatalistComponent,

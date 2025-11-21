@@ -1,13 +1,19 @@
 <label *ngIf="label" class="control-label label-class" [for]="id || null"
        [class.obrigatorio]="required !== null && required !== false">{{label}}</label>
-<p-dropdown [formControl]="control" [disabled]="showProgressBar || disabled" [inputId]="selectId" [id]="id || null"
-            [options]="options" class="form-control2 custom-border"
-            [filter]="true" #dropdownElement [tabindex]="index"
-            [filterBy]="filterBy" [required]="required" (onChange)="onChange($event)">
-  <ng-template let-item pTemplate="item">
-    <div class="ui-helper-clearfix" [innerHTML]="item?.description || item?.label"></div>
-  </ng-template>
-</p-dropdown>
+<dsc-select 
+  [formControl]="control" 
+  [disabled]="showProgressBar || disabled" 
+  [inputId]="selectId" 
+  [id]="id || null"
+  [options]="options"
+  [searchable]="true"
+  [tabIndex]="index"
+  [required]="required" 
+  (selectionChange)="onChange($event)"
+  size="standard"
+  [placeholder]="placeholder || bundle('MHSPH')"
+>
+</dsc-select>
 <p-progressBar mode="indeterminate" *ngIf="showProgressBar" [style]="{'height': '6px'}"></p-progressBar>
 
 <div *ngIf="mostarMsgErro()" class="error-form">

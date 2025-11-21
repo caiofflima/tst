@@ -7,45 +7,39 @@
 >
   {{ label }}
 </label>
-<p-dropdown
+<dsc-select
   *ngIf="!multiple"
   [attr.title]="hint"
-  emptyMessage="Nenhum resultado encontrado"
   [formControl]="control"
   [id]="id"
   [inputId]="selectId"
-  [tabindex]="index"
+  [tabIndex]="index"
   [disabled]="disabled"
   [options]="selectItems"
   [required]="required"
-  class="form-control2 custom-border"
-  [style]="compStyle"
-  [filter]="true"
+  [ngStyle]="compStyle"
+  [searchable]="true"
   [placeholder]="this.placeholder || this.bundle('MHSPH')"
-  (onChange)="changeAction($event)"
+  (selectionChange)="changeAction($event)"
+  size="standard"
+  emptyMessage="Nenhum resultado encontrado"
 >
-  <ng-template let-item pTemplate="item">
-    <div class="ui-helper-clearfix {{ itemClass }}" style="max-width: 100%">
-      {{ item.label }}
-    </div>
-  </ng-template>
-</p-dropdown>
-<p-multiSelect
+</dsc-select>
+<dsc-select
   *ngIf="multiple"
   [options]="selectItems"
   [formControl]="control"
-  optionLabel="label"
-  class="form-control2"
-  defaultLabel="Selecione as opções"
   [required]="required"
   [attr.title]="hint"
-  [maxSelectedLabels]="maxSelectedLabels"
-  selectedItemsLabel="{0} itens selecionados"
-  [style]="compStyle"
-  (onChange)="changeAction($event)"
-  [tabindex]="index"
+  [ngStyle]="compStyle"
+  (selectionChange)="changeAction($event)"
+  [tabIndex]="index"
   [disabled]="disabled"
-></p-multiSelect>
+  [multiple]="true"
+  size="standard"
+  [placeholder]="'Selecione as opções'"
+>
+</dsc-select>
 <p-progressBar
   mode="indeterminate"
   *ngIf="showProgressBar"
