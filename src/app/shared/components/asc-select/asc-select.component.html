@@ -1,0 +1,11 @@
+<dsc-select
+  [label]="required ? label + ' *' : label"
+  [placeholder]="placeholder"
+  [options]="options"
+  [disabled]="disabled"
+  [multiple]="multiple"
+  [showFilter]="showFilter"
+  [(ngModel)]="value"
+  (selectionChange)="onSelectionChange($event)"
+>
+</dsc-select>

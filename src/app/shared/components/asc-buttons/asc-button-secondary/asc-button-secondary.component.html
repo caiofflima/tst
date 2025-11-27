@@ -1,4 +1,8 @@
-<button (click)="clickButton($event)" [attr.id]="buttonId" [disabled]="disabled" [routerLink]="routerLink"
-        class="back-btn" type="button">
+<dsc-button
+  [disabled]="disabled"
+  (click)="clickButton($event)"
+  [routerLink]="routerLink"
+  variant="secondary"
+>
   {{title}}
-</button>
+</dsc-button>

@@ -1,35 +1,14 @@
-<div class="calendar">
-  <label
-    *ngIf="label"
-    [attr.for]="inputId"
-    class="control-label label-class"
-    [class.obrigatorio]="required !== null && required !== false"
-    >{{ label }}</label
-  >
-  <p-calendar
-    #dateCalendar
-    [inputId]="inputId"
-    class="form-control2 to-left {{ className }}"
-    placeholder="{{ placeholder }}"
-    [formControl]="control"
-    [yearNavigator]="yearNavigator"
-    (onSelect)="onSelect($event)"
-    [disabled]="disabled"
-    [locale]="pt"
-    dateFormat="{{ dateFormat }}"
-    [monthNavigator]="monthNavigator"
-    [required]="required"
-    yearRange="1900:2100"
-    [showIcon]="true"
-    [tabindex]="index"
-    [readonlyInput]="readonlyInput"
-  ></p-calendar>
-  <div
-    *ngIf="control.invalid && (control.dirty || control.touched)"
-    class="error-form"
-    [ngStyle]="compStyle"
-  >
-    <div *ngIf="control.errors.required">{{ requiredMsg }}</div>
-    <div *ngFor="let e of errors">{{ e.msgErro }}</div>
-  </div>
-</div>
+<dsc-datepicker
+  [label]="required !== null && required !== false ? label + ' *' : label"
+  [formControl]="control"
+  [placeholder]="placeholder"
+  [disabled]="disabled"
+  [ngStyle]="compStyle"
+>
+</dsc-datepicker>
+
+<asc-input-error
+  [control]="control"
+  [requiredMsg]="requiredMsg"
+  [style]="compStyle"
+></asc-input-error>

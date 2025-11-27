@@ -16,6 +16,8 @@ import {
     AscSelectMedicamentoApresentacaoComponent
 } from "./asc-select-medicamento-apresentacao/asc-select-medicamento-apresentacao.component";
 import {AscSelectTipoOcorrenciaComponent} from "./asc-select-tipo-ocorrencia/asc-select-tipo-ocorrencia.component";
+import {AscSelectComponent} from "./asc-select.component";
+import {DscCaixaModule} from "../../dsc-caixa/dsc-caixa.module";
 
 @NgModule({
     imports: [
@@ -24,8 +26,10 @@ import {AscSelectTipoOcorrenciaComponent} from "./asc-select-tipo-ocorrencia/asc
         FormsModule,
         DropdownModule,
         ProgressBarModule,
+        DscCaixaModule
     ],
     declarations: [
+        AscSelectComponent,
         AscSelectProcedimentoComponent,
         AscDropdownComponent,
         AscGrausProcedimentoComponent,
@@ -37,6 +41,7 @@ import {AscSelectTipoOcorrenciaComponent} from "./asc-select-tipo-ocorrencia/asc
         AscSelectTipoOcorrenciaComponent
     ],
     exports: [
+        AscSelectComponent,
         AscSelectProcedimentoComponent,
         AscGrausProcedimentoComponent,
         AscSelectAutorizacaoPreviaComponent,

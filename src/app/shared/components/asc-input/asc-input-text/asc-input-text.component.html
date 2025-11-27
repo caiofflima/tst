@@ -1,88 +1,19 @@
-<label
-  *ngIf="label"
-  [attr.for]="inputId"
-  class="control-label"
-  [class.obrigatorio]="required !== null && required !== false"
->
-  {{ label }}
-</label>
-<!-- [mask]="mask" -->
-<input
-  *ngIf="maskName && !somenteNumeros"
-  [attr.id]="inputId"
-  [ngStyle]="compStyle"
-  pInputText
-  [type]="type"
+<dsc-input
+  [label]="required !== null && required !== false ? label + ' *' : label"
+  type="text"
   [formControl]="control"
-  name="{{ name }}"
-  [required]="required"
-  class="form-control"
-  title="{{ hint }}"
-  [attr.maxlength]="maxlength"
-  (change)="changeAction($event)"
-  autocomplete="autocomplete"
-  [tabIndex]="index"
-  placeholder="{{ placeholder }}"
-  (keyup)="keyUpAction($event)"
+  [placeholder]="placeholder"
+  [maxlength]="maxlength"
+  [disabled]="disabled"
+  [ngStyle]="compStyle"
   (blur)="blurAction($event)"
-/>
-
-<input
-  *ngIf="!maskName && !somenteNumeros"
-  [attr.id]="inputId"
-  [ngStyle]="compStyle"
-  pInputText
-  [type]="type"
-  [formControl]="control"
-  name="{{ name }}"
-  class="form-control"
-  title="{{ hint }}"
-  placeholder="{{ placeholder }}"
-  [attr.maxlength]="maxlength"
-  [required]="required"
   (keyup)="keyUpAction($event)"
-  (change)="changeAction($event)"
-  autocomplete="autocomplete"
-  [tabIndex]="index"
   (keydown)="keyDownAction($event)"
-  (drop)="dropAction($event)"
-  (blur)="blurAction($event)"
-/>
-
-<input
-  *ngIf="!maskName && somenteNumeros"
-  [attr.id]="inputId"
-  [ngStyle]="compStyle"
-  pInputText
-  [type]="type"
-  [formControl]="control"
-  name="{{ name }}"
-  class="form-control"
-  title="{{ hint }}"
-  [attr.maxlength]="maxlength"
-  placeholder="{{ placeholder }}"
-  (keyup)="keyUpAction($event)"
-  (paste)="onPaste($event)"
-  [required]="required"
-  (dragenter)="eventPreventDefaultOnDrag($event)"
-  (dragover)="eventPreventDefaultOnDrag($event)"
-  (drag)="eventPreventDefaultOnDrag($event)"
-  (change)="changeAction($event)"
-  autocomplete="autocomplete"
-  ascOnlyNumber
-  [tabIndex]="index"
-  (keydown)="keyDownAction($event)"
-  (drop)="dropAction($event)"
-  (blur)="blurAction($event)"
-/>
-
-<div
-  *ngIf="control?.invalid && (control?.dirty || control?.touched)"
-  [ngStyle]="compStyle"
-  class="error-form"
 >
-  <div *ngIf="control?.errors?.cpf">{{ bundle("MA009", "CPF") }}</div>
-  <div *ngIf="control?.errors?.email">{{ bundle("MA019") }}</div>
-  <div *ngIf="control?.errors?.required">{{ requiredMsg }}</div>
-  <div *ngFor="let e of errors">{{ e.msgErro }}</div>
-</div>
+</dsc-input>
+
+<asc-input-error
+  [control]="control"
+  [requiredMsg]="requiredMsg"
+  [style]="compStyle"
+></asc-input-error>

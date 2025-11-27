@@ -5,12 +5,14 @@ import {ProgressSpinnerModule} from "primeng/progressspinner";
 import {AscButtonSecondaryComponent} from "./asc-button-secondary/asc-button-secondary.component";
 import {AscButtonThirdComponent} from "./asc-button-third/asc-button-third.component";
 import {RouterModule} from "@angular/router";
+import {DscCaixaModule} from "../../dsc-caixa/dsc-caixa.module";
 
 @NgModule({
   imports: [
     CommonModule,
     ProgressSpinnerModule,
-    RouterModule
+    RouterModule,
+    DscCaixaModule
   ],
   declarations: [
     AscButtonPrimaryComponent,
