@@ -1,10 +1,10 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {AscSelectProcedimentoComponent} from './asc-select-procedimento/asc-select-procedimento.component';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {AscDropdownComponent} from './asc-dropdown/asc-dropdown.component';
+import {ReactiveFormsModule, FormsModule} from '@angular/forms';
 import {DropdownModule} from 'primeng/dropdown';
 import {ProgressBarModule} from 'primeng/progressbar';
+import {AscSelectProcedimentoComponent} from './asc-select-procedimento/asc-select-procedimento.component';
+import {AscDropdownComponent} from './asc-dropdown/asc-dropdown.component';
 import {AscGrausProcedimentoComponent} from './asc-graus-procedimento/asc-graus-procedimento.component';
 import {
     AscSelectAutorizacaoPreviaComponent
@@ -16,7 +16,7 @@ import {
     AscSelectMedicamentoApresentacaoComponent
 } from "./asc-select-medicamento-apresentacao/asc-select-medicamento-apresentacao.component";
 import {AscSelectTipoOcorrenciaComponent} from "./asc-select-tipo-ocorrencia/asc-select-tipo-ocorrencia.component";
-import {AscSelectComponent} from "./asc-select.component";
+// import removed – AscSelectComponent does not exist in this folder
 import {DscCaixaModule} from "../../dsc-caixa/dsc-caixa.module";
 
 @NgModule({
@@ -29,7 +29,6 @@ import {DscCaixaModule} from "../../dsc-caixa/dsc-caixa.module";
         DscCaixaModule
     ],
     declarations: [
-        AscSelectComponent,
         AscSelectProcedimentoComponent,
         AscDropdownComponent,
         AscGrausProcedimentoComponent,
@@ -41,7 +40,6 @@ import {DscCaixaModule} from "../../dsc-caixa/dsc-caixa.module";
         AscSelectTipoOcorrenciaComponent
     ],
     exports: [
-        AscSelectComponent,
         AscSelectProcedimentoComponent,
         AscGrausProcedimentoComponent,
         AscSelectAutorizacaoPreviaComponent,
