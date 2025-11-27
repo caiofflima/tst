@@ -25,200 +25,170 @@
     <form [formGroup]="formulario" name="form">
       <p class="info-search-label">Dados do pedido</p>
       <div class="row">
-        <div class="form-row">
-          <div class="col-md-3 noPaddingLeft">
-            <label class="control-label">Pedido</label>
-            <input
-              type="text"
-              id="numeroProcesso"
-              class="form-control"
-              formControlName="idPedido"
-              title="Buscar um processo específico."
-              maxlength="8"
-              (keydown)="constantes.control.somenteNumeros(this.idPedido)"
-              (keyup)="constantes.control.somenteNumeros(this.idPedido)"
-            />
-          </div>
+        <div class="col-md-3">
+          <asc-input-text
+            [control]="formulario.get('idPedido')"
+            inputId="numeroProcesso"
+            label="Pedido"
+            [maxlength]="8"
+            hint="Buscar um processo específico"
+          ></asc-input-text>
+        </div>
 
-          <div class="col-md-3 noPaddingLeft">
-            <label class="control-label">Condição do pedido</label>
-            <p-dropdown
-              id="condicaoProcesso"
-              [options]="listComboCondicaoProcesso"
-              [filter]="true"
-              [placeholder]="this.bundle('MHSPH')"
-              title="Condi&ccedil;&atilde;o do Processo"
-              formControlName="condicaoProcesso"
-              optionLabel="label"
-            ></p-dropdown>
-          </div>
+        <div class="col-md-3">
+          <dsc-select
+            formControlName="condicaoProcesso"
+            label="Condição do pedido"
+            [options]="optionsCondicaoProcesso"
+            [placeholder]="this.bundle('MHSPH')"
+            size="standard"
+          ></dsc-select>
+        </div>
 
-          <div class="col-md-3 noPaddingLeft">
-            <label class="control-label">UF</label>
-            <asc-multiSelect
-              id="uf"
-              [options]="listComboUF"
-              [control]="formulario.get('ufsProcesso')"
-              [selected]="ufsProcessoSelected"
-            ></asc-multiSelect>
-          </div>
+        <div class="col-md-3">
+          <label class="control-label">UF</label>
+          <asc-multiSelect
+            id="uf"
+            [options]="listComboUF"
+            [control]="formulario.get('ufsProcesso')"
+            [selected]="ufsProcessoSelected"
+          ></asc-multiSelect>
+        </div>
 
-          <div class="col-md-4 no-padding">
-            <label class="control-label">Agrupadora</label>
-            <asc-multiSelect
-              id="filial"
-              [options]="listComboFilial"
-              [control]="formulario.get('filiaisProcesso')"
-              [selected]="filiaisProcessoSelected"
-            ></asc-multiSelect>
-          </div>
+        <div class="col-md-3">
+          <label class="control-label">Agrupadora</label>
+          <asc-multiSelect
+            id="filial"
+            [options]="listComboFilial"
+            [control]="formulario.get('filiaisProcesso')"
+            [selected]="filiaisProcessoSelected"
+          ></asc-multiSelect>
         </div>
       </div>
 
       <div class="row">
-        <div class="form-row">
-          <div class="col-md-6 noPaddingLeft">
-            <label class="control-label">Tipo de pedido</label>
-            <asc-multiSelect
-              id="tipoProcesso"
-              [options]="listComboTipoProcesso"
-              (onChange)="onChangeTipoProcesso()"
-              [control]="formulario.get('tiposProcesso')"
-              [selected]="tiposProcessoSelected"
-            ></asc-multiSelect>
-          </div>
+        <div class="col-md-6">
+          <label class="control-label">Tipo de pedido</label>
+          <asc-multiSelect
+            id="tipoProcesso"
+            [options]="listComboTipoProcesso"
+            (onChange)="onChangeTipoProcesso()"
+            [control]="formulario.get('tiposProcesso')"
+            [selected]="tiposProcessoSelected"
+          ></asc-multiSelect>
+        </div>
 
-          <div class="col-md-2 noPaddingLeft">
-            <label class="control-label">UF de atendimento</label>
-            <p-dropdown
-              id="ufA"
-              [options]="listComboUF"
-              [filter]="true"
-              [placeholder]="this.bundle('MHSPH')"
-              title="Filtrar por UF de atendimento."
-              formControlName="ufAtendimento"
-              optionLabel="label"
-              (onChange)="onChangeUFAtendimento()"
-            ></p-dropdown>
-          </div>
+        <div class="col-md-3">
+          <dsc-select
+            formControlName="ufAtendimento"
+            label="UF de atendimento"
+            [options]="optionsUF"
+            [placeholder]="this.bundle('MHSPH')"
+            (selectionChange)="onChangeUFAtendimento()"
+            size="standard"
+          ></dsc-select>
+        </div>
 
-          <div class="col-md-4 no-padding">
-            <label class="control-label">Município de atendimento</label>
-            <p-dropdown
-              id="municipioAtendimento"
-              [options]="listComboMunicipio"
-              [filter]="true"
-              [placeholder]="this.bundle('MHSPH')"
-              title="Filtrar por município de atendimento."
-              formControlName="municipioAtendimento"
-              optionLabel="label"
-            ></p-dropdown>
-          </div>
+        <div class="col-md-3">
+          <dsc-select
+            formControlName="municipioAtendimento"
+            label="Município de atendimento"
+            [options]="optionsMunicipio"
+            [placeholder]="this.bundle('MHSPH')"
+            size="standard"
+          ></dsc-select>
         </div>
       </div>
 
       <div class="row">
-        <div class="form-row">
-          <div class="col-md-6 noPaddingLeft">
-            <label class="control-label">Situação do pedido</label>
-            <asc-multiSelect
-              id="situacaoProcesso"
-              [options]="listComboSituacaoProcesso"
-              [control]="formulario.get('situacoesProcesso')"
-              [selected]="situacoesProcessoSelected"
-            ></asc-multiSelect>
-          </div>
+        <div class="col-md-6">
+          <label class="control-label">Situação do pedido</label>
+          <asc-multiSelect
+            id="situacaoProcesso"
+            [options]="listComboSituacaoProcesso"
+            [control]="formulario.get('situacoesProcesso')"
+            [selected]="situacoesProcessoSelected"
+          ></asc-multiSelect>
+        </div>
 
-          <div class="col-md-2 noPaddingLeft">
-            <label class="control-label">
-              Autorização SIAGS
-              <span class="tooltip-mensagem">
-                <i class="fa fa-exclamation-circle"></i>
-                <p class="tooltiptext is--small">
-                  Filtro aplicável apenas aos tipos de pedido AUTORIZAÇÃO
-                  PRÉVIA.
-                </p>
-              </span>
-            </label>
-            <input
-              type="text"
-              id="autorizacaoPrevia"
-              class="form-control"
-              formControlName="autorizacaoPreviaGstao"
-              title="Buscar por autorização Prévia."
-              maxlength="10"
-              (keydown)="
-                constantes.control.somenteNumeros(this.autorizacaoPreviaGstao)
-              "
-              (keyup)="
-                constantes.control.somenteNumeros(this.autorizacaoPreviaGstao)
-              "
-            />
-          </div>
-          <div class="col-md-3 noPaddingLeft">
-            <label class="control-label">
-              PEG
-              <span class="tooltip-mensagem">
-                <i class="fa fa-exclamation-circle"></i>
-                <p class="tooltiptext is--small">
-                  Filtro aplicável apenas aos tipos de pedido REEMBOLSO.
-                </p>
-              </span>
-            </label>
-            <input
-              type="text"
-              id="autorizacaoReembolso"
-              class="form-control"
-              formControlName="autorizacaoReembolso"
-              title="Buscar por PEG."
-              maxlength="20"
-              (keydown)="
-                constantes.control.somenteNumeros(this.autorizacaoReembolso)
-              "
-              (keyup)="
-                constantes.control.somenteNumeros(this.autorizacaoReembolso)
-              "
-            />
-          </div>
+        <div class="col-md-3">
+          <label class="control-label">
+            Autorização SIAGS
+            <span class="tooltip-mensagem">
+              <i class="fa fa-exclamation-circle"></i>
+              <p class="tooltiptext is--small">
+                Filtro aplicável apenas aos tipos de pedido AUTORIZAÇÃO
+                PRÉVIA.
+              </p>
+            </span>
+          </label>
+          <asc-input-text
+            [control]="formulario.get('autorizacaoPreviaGstao')"
+            inputId="autorizacaoPrevia"
+            [maxlength]="10"
+            hint="Buscar por autorização Prévia"
+          ></asc-input-text>
+        </div>
+
+        <div class="col-md-3">
+          <label class="control-label">
+            PEG
+            <span class="tooltip-mensagem">
+              <i class="fa fa-exclamation-circle"></i>
+              <p class="tooltiptext is--small">
+                Filtro aplicável apenas aos tipos de pedido REEMBOLSO.
+              </p>
+            </span>
+          </label>
+          <asc-input-text
+            [control]="formulario.get('autorizacaoReembolso')"
+            inputId="autorizacaoReembolso"
+            [maxlength]="20"
+            hint="Buscar por PEG"
+          ></asc-input-text>
         </div>
       </div>
 
       <div class="row">
-        <label class="control-label">Período de Abertura do Pedido</label>
-        <div class="form-row">
-          <div class="col-md-3 noPaddingLeft">
-            <asc-input-date
-              [control]="formulario.get('dataAberturaInicio')"
-              inputId="dataAberturaInicio"
-              label="Início"
-            >
-            </asc-input-date>
-          </div>
-          <div class="col-md-3 noPaddingLeft">
-            <asc-input-date
-              [control]="formulario.get('dataAberturaFim')"
-              inputId="dataAberturaFim"
-              label="Fim"
-            >
-            </asc-input-date>
-          </div>
+        <div class="col-md-12">
+          <label class="control-label">Período de Abertura do Pedido</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3">
+          <asc-input-date
+            [control]="formulario.get('dataAberturaInicio')"
+            inputId="dataAberturaInicio"
+            label="Início"
+          >
+          </asc-input-date>
+        </div>
+        <div class="col-md-3">
+          <asc-input-date
+            [control]="formulario.get('dataAberturaFim')"
+            inputId="dataAberturaFim"
+            label="Fim"
+          >
+          </asc-input-date>
+        </div>
 
-          <div class="col-md-6">
-            <label class="control-label">Motivo da Solicitação</label>
+        <div class="col-md-6">
+          <label class="control-label">
+            Motivo da Solicitação
             <span class="tooltip-mensagem">
               <i class="fa fa-exclamation-circle"></i>
               <p class="tooltiptext is--small">
                 Filtro aplicável quando selecionado um Tipo de Pedido
               </p>
             </span>
-            <asc-multiSelect
-              id="motivosSolicitacao"
-              [options]="listaMotivoSolicitacao"
-              [control]="formulario.get('motivosSolicitacao')"
-              [selected]="motivosSolicitacaoSelected"
-            >
-            </asc-multiSelect>
-          </div>
+          </label>
+          <asc-multiSelect
+            id="motivosSolicitacao"
+            [options]="listaMotivoSolicitacao"
+            [control]="formulario.get('motivosSolicitacao')"
+            [selected]="motivosSolicitacaoSelected"
+          >
+          </asc-multiSelect>
         </div>
       </div>
 
@@ -238,72 +208,60 @@
       </div>
 
       <div class="row">
-        <p class="info-search-label">Dados do titular/beneficiário</p>
-        <div class="form-row">
-          <div class="col-md-6 noPaddingLeft">
-            <label class="control-label">Nome do beneficiário</label>
-            <input
-              type="text"
-              oninput="this.value = this.value.toUpperCase();"
-              id="nomeBeneficiario"
-              name="nomeBeneficiario"
-              class="form-control"
-              title="Filtrar pelo nome do beneficiário."
-              formControlName="nomeBeneficiario"
-            />
-          </div>
+        <div class="col-md-12">
+          <p class="info-search-label">Dados do titular/beneficiário</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <asc-input-text
+            [control]="formulario.get('nomeBeneficiario')"
+            inputId="nomeBeneficiario"
+            label="Nome do beneficiário"
+            [uppercase]="true"
+            hint="Filtrar pelo nome do beneficiário"
+          ></asc-input-text>
+        </div>
 
-          <div class="col-md-3 noPaddingLeft">
-            <label class="control-label">Matrícula do titular</label>
-            <p-inputMask
-              id="matriculaTitular"
-              name="matriculaTitular"
-              class="form-control2"
-              mask="999999-9"
-              title="Filtrar pela matrícula do titular."
-              formControlName="matriculaTitular"
-            ></p-inputMask>
-          </div>
+        <div class="col-md-3">
+          <asc-input-text
+            [control]="formulario.get('matriculaTitular')"
+            inputId="matriculaTitular"
+            label="Matrícula do titular"
+            hint="Filtrar pela matrícula do titular"
+          ></asc-input-text>
+        </div>
 
-          <div class="col-md-3 no-padding">
-            <label class="control-label">Código do beneficiário</label>
-            <input
-              type="text"
-              id="codigoBeneficiario"
-              name="codigoBeneficiario"
-              class="form-control"
-              title="Filtrar pelo cartão de identificação do beneficiário."
-              formControlName="codigoBeneficiario"
-              maxlength="12"
-            />
-          </div>
+        <div class="col-md-3">
+          <asc-input-text
+            [control]="formulario.get('codigoBeneficiario')"
+            inputId="codigoBeneficiario"
+            label="Código do beneficiário"
+            [maxlength]="12"
+            hint="Filtrar pelo cartão de identificação do beneficiário"
+          ></asc-input-text>
         </div>
       </div>
 
       <div class="row">
-        <div class="form-row">
-          <div class="col-md-6 noPaddingLeft">
-            <label class="control-label">Tipo de beneficiário</label>
-            <asc-multiSelect
-              id="tipoBeneficiario"
-              [options]="listComboTipoBeneficiario"
-              [control]="formulario.get('tiposBeneficiario')"
-              [selected]="tiposBeneficiarioSelected"
-            ></asc-multiSelect>
-          </div>
+        <div class="col-md-6">
+          <label class="control-label">Tipo de beneficiário</label>
+          <asc-multiSelect
+            id="tipoBeneficiario"
+            [options]="listComboTipoBeneficiario"
+            [control]="formulario.get('tiposBeneficiario')"
+            [selected]="tiposBeneficiarioSelected"
+          ></asc-multiSelect>
+        </div>
 
-          <div class="col-md-6 no-padding">
-            <label class="control-label">Caráter da solicitação</label>
-            <p-dropdown
-              id="idCaraterSolicitacao"
-              [options]="listComboCaraterSolicitacao"
-              [filter]="true"
-              [placeholder]="this.bundle('MHSPH')"
-              title="Filtrar por caráter da solicitação."
-              formControlName="caraterSolicitacao"
-              optionLabel="label"
-            ></p-dropdown>
-          </div>
+        <div class="col-md-6">
+          <dsc-select
+            formControlName="caraterSolicitacao"
+            label="Caráter da solicitação"
+            [options]="optionsCaraterSolicitacao"
+            [placeholder]="this.bundle('MHSPH')"
+            size="standard"
+          ></dsc-select>
         </div>
       </div>
 

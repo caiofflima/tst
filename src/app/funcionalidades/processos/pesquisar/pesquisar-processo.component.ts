@@ -17,6 +17,7 @@ import {BaseComponent} from 'app/shared/components/base.component';
 import {MessageService} from 'app/shared/components/messages/message.service';
 import {FiltroConsultaProcesso} from 'app/shared/models/filtro/filtro-consulta-processo';
 import {PerfilEnum} from "app/shared/enums/perfil.enum";
+import { Option } from 'sidsc-components/dsc-select';
 
 @Component({
     selector: 'asc-pesquisar-processo',
@@ -37,8 +38,14 @@ export class PesquisarProcessoComponent extends BaseComponent implements OnInit 
     listComboUF: DadoComboDTO[];
     listComboMunicipio: DadoComboDTO[];
     listComboFilial: DadoComboDTO[];
-    listaMotivoSolicitacao: DadoComboDTO[]=[];	
+    listaMotivoSolicitacao: DadoComboDTO[]=[];
     listaGrupoTiposPedido: DadoComboDTO[]=[];
+
+    // Options for DSC components
+    optionsCondicaoProcesso: Option[] = [];
+    optionsUF: Option[] = [];
+    optionsMunicipio: Option[] = [];
+    optionsCaraterSolicitacao: Option[] = [];
 
     total: number = 0;
     rows: number = 10;
@@ -316,7 +323,8 @@ export class PesquisarProcessoComponent extends BaseComponent implements OnInit 
 
     carregarComboUF(){
         this.comboService.consultarComboUF().pipe(take(1)).subscribe(res => {
-            this.listComboUF = res; 
+            this.listComboUF = res;
+            this.optionsUF = this.convertToOptions(res);
             this.carregarComboUFSelected();
         }, err => this.showDangerMsg(err.error));
     }
@@ -403,13 +411,26 @@ export class PesquisarProcessoComponent extends BaseComponent implements OnInit 
     carregarCondicaoProcesso(){
         this.comboService.consultarComboCondicaoProcesso().pipe(take(1)).subscribe(res => {
             this.listComboCondicaoProcesso = res;
+            this.optionsCondicaoProcesso = this.convertToOptions(res);
         }, err => this.showDangerMsg(err.error));
     }
 
     carregarCaraterSolicitacao(){
         this.comboService.consultarComboCaraterSolicitacao().pipe(take(1)).subscribe(res => {
             this.listComboCaraterSolicitacao = res;
+            this.optionsCaraterSolicitacao = this.convertToOptions(res);
         }, err => this.showDangerMsg(err.error));
+    }
+
+    /**
+     * Converts DadoComboDTO array to Option array for DSC components
+     */
+    private convertToOptions(dados: DadoComboDTO[]): Option[] {
+        if (!dados) return [];
+        return dados.map(dado => ({
+            label: dado.label,
+            value: dado.value
+        }));
     }
 
     limparCampos() {
@@ -418,20 +439,30 @@ export class PesquisarProcessoComponent extends BaseComponent implements OnInit 
     }
 
     onChangeUFAtendimento(): void {
-        let ufAtendimento: DadoComboDTO = this.formulario.controls['ufAtendimento'].value;
+        const ufAtendimentoControl = this.formulario.controls['ufAtendimento'];
+        const ufAtendimento = ufAtendimentoControl.value;
 
-        if (ufAtendimento && ufAtendimento.value && ufAtendimento.value > 0) {
+        // Handle both DadoComboDTO (legacy) and direct value from dsc-select
+        const ufValue = ufAtendimento?.value || ufAtendimento;
+
+        if (ufValue && ufValue > 0) {
             this.formulario.controls['municipioAtendimento'].setValue(null);
-            this.comboService.consultarDadosComboMunicipioPorUF(ufAtendimento.value).pipe(take(1)).subscribe(res => {
+
+            this.comboService.consultarDadosComboMunicipioPorUF(ufValue).pipe(take(1)).subscribe(res => {
                 this.listComboMunicipio = res;
-                if (this.formulario.controls['ufAtendimento'] && this.formulario.controls['ufAtendimento'].value) {
-                    this.listComboMunicipio.forEach(m => {
-                        if (m.value == this.filtro.municipioAtendimento.value) {
-                            this.formulario.controls['municipioAtendimento'].setValue(m);
-                        }
-                    });
+                this.optionsMunicipio = this.convertToOptions(res);
+
+                // Restore previous value if exists
+                if (this.filtro?.municipioAtendimento?.value) {
+                    const municipio = res.find(m => m.value === this.filtro.municipioAtendimento.value);
+                    if (municipio) {
+                        this.formulario.controls['municipioAtendimento'].setValue(municipio.value);
+                    }
                 }
             }, err => this.showDangerMsg(err.error));
+        } else {
+            this.optionsMunicipio = [];
+            this.listComboMunicipio = [];
         }
     }
 

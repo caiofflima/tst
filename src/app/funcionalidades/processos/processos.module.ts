@@ -31,6 +31,7 @@ import {PesquisarProcessoComponent} from "./pesquisar/pesquisar-processo.compone
 import {ListaProcessosAnalistaComponent} from "./lista-processos-analista/lista-processos-analista.component";
 import {AscMultiSelectModule} from "../../shared/components/multiselect/asc-multiselect.module";
 import {AscButtonsModule} from "../../shared/components/asc-buttons/asc-buttons.module";
+import {DscCaixaModule} from "../../shared/dsc-caixa/dsc-caixa.module";
 import {
     DetalharAutorizacaoPreviaComponent
 } from "./autorizacao-previa/detalhar-processo/detalhar-autorizacao-previa.component";
@@ -67,7 +68,8 @@ import {
         PaginatorModule,
         MultiSelectModule,
         AscMultiSelectModule,
-        AscButtonsModule
+        AscButtonsModule,
+        DscCaixaModule
     ],
     declarations: [
         ListaProcessosComponent,
