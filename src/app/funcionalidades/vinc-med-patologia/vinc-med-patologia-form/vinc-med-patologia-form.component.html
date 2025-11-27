@@ -47,13 +47,14 @@
         <div class="col-md-6 p-0">
           <label class="control-label obrigatorio" for="patologias">Patologia</label>
           <div *ngIf="!id">
-            <p-dropdown [required]="true"
+            <dsc-select
+              [required]="true"
               [options]="patologias"
-              [filter]="true"
               formControlName="patologia"
-              name="patologias" id="patologias"
-              [placeholder]="this.bundle('MHSPH')">
-            </p-dropdown>
+              [placeholder]="this.bundle('MHSPH')"
+              size="standard"
+            >
+            </dsc-select>
             <asc-message-error
               [control]="patologia" type="required"
               [errorMessage]="bundle('MA007')">

@@ -1,64 +1,243 @@
-h1 {
+// Modern Material Design Layout for Search Page
+
+// Breadcrumb styling
+.breadcrumb-container {
+  padding: 16px 24px;
+  background-color: #f5f5f5;
+  
+  .breadcrumb {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    
+    li {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      color: #616161;
+      
+      a {
+        color: #1976d2;
+        text-decoration: none;
+        transition: color 0.2s;
+        
+        &:hover {
+          color: #1565c0;
+          text-decoration: underline;
+        }
+      }
+      
+      i {
+        font-size: 12px;
+        color: #9e9e9e;
+      }
+    }
+  }
+}
+
+.page-container {
+  padding: 24px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.page-header {
+  margin-bottom: 24px;
+  
+  .page-title {
+    font-size: 28px;
+    font-weight: 500;
+    color: #212121;
+    margin: 0;
+    padding: 0;
     border-bottom: none;
- }
- 
- .text-align-center {
-    text-align: center;
- }
- 
- .text-align-right {
-    text-align: right;
- }
- 
- .margin-left-25 {
-    margin-left: 25px;
- }
- 
- .margin-top-15 {
-    margin-top: 15px;
- }
- 
- .color-darkorange {
-    color: darkorange;
- }
- 
- .ans-box {
-    color: white;
-    background-color: darkblue;
-    padding: 4px 8px 4px 8px;
-    border-radius: 4px;
- }
- 
- .card-box {
-    background-color: #f1f6f7;
-    border-radius: 25px;
-    padding: 40px 40px 20px 40px;
- }
- 
- .input-box {
-    background-color:#f1f6f7;
-    border-radius: 4px;
-    padding: 15px 20px;
- }
- 
- h3 {
-    border: none;
-    padding-bottom: 0px;
   }
- 
-  .no-padding-left {
-    padding-left: 0px;
+}
+
+.search-form {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.section-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  
+  .section-title {
+    font-size: 18px;
+    font-weight: 500;
+    color: #424242;
+    margin: 0 0 4px 0;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #e0e0e0;
   }
- 
-  .detalhe-aprovacao {
-    color:#fff;
-    background-color:#999999;
-    border-radius: 4px;
-    font-size: 10px;
-    padding: 2px 5px;
-    margin-left: 5px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 16px;
+  align-items: start;
+  
+  @media (max-width: 1200px) {
+    grid-template-columns: repeat(8, 1fr);
   }
- 
-  .det-option {
-    color:#999999 !important;
+  
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
   }
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  
+  &--small {
+    grid-column: span 2;
+    
+    @media (max-width: 1200px) {
+      grid-column: span 2;
+    }
+    
+    @media (max-width: 768px) {
+      grid-column: span 1;
+    }
+  }
+  
+  &--medium {
+    grid-column: span 3;
+    
+    @media (max-width: 1200px) {
+      grid-column: span 4;
+    }
+    
+    @media (max-width: 768px) {
+      grid-column: span 1;
+    }
+  }
+  
+  &--large {
+    grid-column: span 6;
+    
+    @media (max-width: 1200px) {
+      grid-column: span 8;
+    }
+    
+    @media (max-width: 768px) {
+      grid-column: span 1;
+    }
+  }
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 16px;
+  padding-top: 24px;
+  border-top: 1px solid #e0e0e0;
+  
+  @media (max-width: 768px) {
+    flex-direction: column-reverse;
+    
+    dsc-button {
+      width: 100%;
+    }
+  }
+}
+
+.button-icon {
+  margin-right: 8px;
+}
+
+// Ensure DSC components render correctly
+::ng-deep {
+  dsc-card {
+    display: block;
+    
+    .card-content {
+      padding: 24px;
+    }
+  }
+  
+  dsc-select,
+  asc-input-text {
+    width: 100%;
+  }
+  
+  dsc-button {
+    min-width: 120px;
+  }
+}
+
+// Legacy support - remove old classes
+h1 {
+  border-bottom: none;
+}
+
+.text-align-center {
+  text-align: center;
+}
+
+.text-align-right {
+  text-align: right;
+}
+
+.margin-left-25 {
+  margin-left: 25px;
+}
+
+.margin-top-15 {
+  margin-top: 15px;
+}
+
+.color-darkorange {
+  color: darkorange;
+}
+
+.ans-box {
+  color: white;
+  background-color: darkblue;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.card-box {
+  background-color: #f1f6f7;
+  border-radius: 25px;
+  padding: 40px 40px 20px 40px;
+}
+
+.input-box {
+  background-color: #f1f6f7;
+  border-radius: 4px;
+  padding: 15px 20px;
+}
+
+h3 {
+  border: none;
+  padding-bottom: 0;
+}
+
+.no-padding-left {
+  padding-left: 0;
+}
+
+.detalhe-aprovacao {
+  color: #fff;
+  background-color: #999999;
+  border-radius: 4px;
+  font-size: 10px;
+  padding: 2px 5px;
+  margin-left: 5px;
+}
+
+.det-option {
+  color: #999999 !important;
+}

@@ -14,6 +14,7 @@ import * as constantes from 'app/shared/constantes';
 import {Pageable} from "../../../shared/components/pageable.model";
 import {ProcessoDTO} from "../../../shared/models/dto/processo";
 import {take} from "rxjs/operators";
+import {Option} from "sidsc-components/dsc-select";
 
 @Component({
     selector: 'app-pesquisar-processos-home',
@@ -26,6 +27,17 @@ export class PesquisarProcessosHomeComponent extends BaseComponent implements On
     formulario: FormGroup;
     filtro: FiltroConsultaProcesso;
 
+    // Combo options for DSC components
+    optionsTipoProcesso: Option[] = [];
+    optionsSituacaoProcesso: Option[] = [];
+    optionsCondicaoProcesso: Option[] = [];
+    optionsTipoBeneficiario: Option[] = [];
+    optionsCaraterSolicitacao: Option[] = [];
+    optionsUF: Option[] = [];
+    optionsMunicipio: Option[] = [];
+    optionsFilial: Option[] = [];
+
+    // Legacy combo lists (for backward compatibility if needed)
     listComboTipoProcesso: DadoComboDTO[];
     listComboSituacaoProcesso: DadoComboDTO[];
     listComboCondicaoProcesso: DadoComboDTO[];
@@ -99,32 +111,49 @@ export class PesquisarProcessosHomeComponent extends BaseComponent implements On
 
         this.comboService.consultarComboTipoProcesso().subscribe(res => {
             this.listComboTipoProcesso = res;
+            this.optionsTipoProcesso = this.convertToOptions(res);
         }, err => this.showDangerMsg(err.error));
 
         this.comboService.consultarComboSituacaoProcesso().subscribe(res => {
             this.listComboSituacaoProcesso = res;
+            this.optionsSituacaoProcesso = this.convertToOptions(res);
         }, err => this.showDangerMsg(err.error));
 
         this.comboService.consultarComboCondicaoProcesso().subscribe(res => {
             this.listComboCondicaoProcesso = res;
+            this.optionsCondicaoProcesso = this.convertToOptions(res);
         }, err => this.showDangerMsg(err.error));
 
         this.comboService.consultarComboTipoBeneficiario().subscribe(res => {
             this.listComboTipoBeneficiario = res;
+            this.optionsTipoBeneficiario = this.convertToOptions(res);
         }, err => this.showDangerMsg(err.error));
 
         this.comboService.consultarComboCaraterSolicitacao().subscribe(res => {
             this.listComboCaraterSolicitacao = res;
+            this.optionsCaraterSolicitacao = this.convertToOptions(res);
         }, err => this.showDangerMsg(err.error));
 
         this.comboService.consultarComboUF().subscribe(res => {
             this.listComboUF = res;
+            this.optionsUF = this.convertToOptions(res);
         }, err => this.showDangerMsg(err.error));
 
         this.comboService.consultarComboFilial().subscribe(res => {
-                this.listComboFilial = res;
-            }, err => this.showDangerMsg(err.error)
-        );
+            this.listComboFilial = res;
+            this.optionsFilial = this.convertToOptions(res);
+        }, err => this.showDangerMsg(err.error));
+    }
+
+    /**
+     * Converts DadoComboDTO array to Option array for DSC components
+     */
+    private convertToOptions(dados: DadoComboDTO[]): Option[] {
+        if (!dados) return [];
+        return dados.map(dado => ({
+            label: dado.label,
+            value: dado.value
+        }));
     }
 
     limparCampos() {
@@ -133,23 +162,30 @@ export class PesquisarProcessosHomeComponent extends BaseComponent implements On
 
 
     onChangeUFAtendimento() {
-        let ufAtendimento: DadoComboDTO = this.formulario.controls['ufAtendimento'].value;
+        const ufAtendimentoControl = this.formulario.controls['ufAtendimento'];
+        const ufAtendimento = ufAtendimentoControl.value;
 
-        if (ufAtendimento && ufAtendimento.value && ufAtendimento.value > 0) {
+        // Handle both DadoComboDTO (legacy) and direct value from dsc-select
+        const ufValue = ufAtendimento?.value || ufAtendimento;
 
+        if (ufValue && ufValue > 0) {
             this.formulario.controls['municipioAtendimento'].setValue(null);
 
-            this.comboService.consultarDadosComboMunicipioPorUF(ufAtendimento.value).subscribe(res => {
+            this.comboService.consultarDadosComboMunicipioPorUF(ufValue).subscribe(res => {
                 this.listComboMunicipio = res;
+                this.optionsMunicipio = this.convertToOptions(res);
 
-                if (this.formulario.controls['ufAtendimento'] != null && this.formulario.controls['ufAtendimento'].value != null) {
-                    for (let i = 0; i < this.listComboMunicipio.length; i++) {
-                        if (this.listComboMunicipio[i].value == this.filtro.municipioAtendimento.value) {
-                            this.formulario.controls['municipioAtendimento'].setValue(this.listComboMunicipio[i]);
-                        }
+                // Restore previous value if exists
+                if (this.filtro?.municipioAtendimento?.value) {
+                    const municipio = res.find(m => m.value === this.filtro.municipioAtendimento.value);
+                    if (municipio) {
+                        this.formulario.controls['municipioAtendimento'].setValue(municipio.value);
                     }
                 }
             }, err => this.showDangerMsg(err.error));
+        } else {
+            this.optionsMunicipio = [];
+            this.listComboMunicipio = [];
         }
     }
 
@@ -179,9 +215,17 @@ export class PesquisarProcessosHomeComponent extends BaseComponent implements On
 
     atualizarComboTiposBeneficiarios(): void {
         this.listComboTipoBeneficiario = [];
-        if ((this.tiposProcesso) && (this.tiposProcesso.value)) {
-            this.comboService.consultarComboTipoBeneficiarioPorTipoProcesso(this.tiposProcesso.value.map(x => x.value)).subscribe(res => {
+        this.optionsTipoBeneficiario = [];
+        
+        if (this.tiposProcesso?.value) {
+            // Handle both array of objects and array of values
+            const tiposValues = Array.isArray(this.tiposProcesso.value)
+                ? this.tiposProcesso.value.map(x => x?.value || x)
+                : [this.tiposProcesso.value?.value || this.tiposProcesso.value];
+
+            this.comboService.consultarComboTipoBeneficiarioPorTipoProcesso(tiposValues).subscribe(res => {
                 this.listComboTipoBeneficiario = res;
+                this.optionsTipoBeneficiario = this.convertToOptions(res);
             }, error => this.messageService.addMsgDanger(error.error));
         }
     }

@@ -21,14 +21,15 @@
     <form novalidate class="col-md-12 p-0">
       <div class="form-row">
         <div class="p-0 col-md-6">
-          <label class="control-label" for="patologias">Patologia</label>
-          <p-dropdown
+          <dsc-select
+            label="Patologia"
             [options]="patologias"
-            [filter]="true"
-            [(ngModel)]="patologia"
+            [value]="patologia"
+            (selectionChange)="patologia = $event"
             name="patologias"
-            id="patologias">
-          </p-dropdown>
+            size="standard"
+          >
+          </dsc-select>
         </div>
 
         <div class="col-md-6">

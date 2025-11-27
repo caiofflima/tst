@@ -8,6 +8,7 @@ import {LocalidadeService} from '../../../../../app/shared/services/comum/locali
 import {SelectItem} from 'primeng/api';
 import * as constantes from '../../../../../app/shared/constantes';
 import {ItensUfStorage} from "../../../../arquitetura/shared/storage/itens-uf-storage";
+import { Option } from 'sidsc-components/dsc-select';
 
 @Component({
     selector: 'asc-profissional-executante',
@@ -25,9 +26,10 @@ export class AscProfissionalExecutanteComponent extends BaseComponent implements
     @Input('novo')
     novo: boolean;
 
-    itensConselhoProfissional: SelectItem[];
+    itensConselhoProfissional: Option[] = [];
     itensLocalidade: SelectItem[];
-    itensUF = new ItensUfStorage().ler();
+    itensUF: Option[] = [];
+    itensUFPrimeNG: SelectItem[] = [];
 
     constructor(
         messageService: MessageService,
@@ -39,6 +41,12 @@ export class AscProfissionalExecutanteComponent extends BaseComponent implements
     }
 
     public ngOnInit(): void {
+        const itensUFStorage = new ItensUfStorage().ler();
+        this.itensUF = itensUFStorage.map(item => ({
+            label: item.label || '',
+            value: item.value
+        }));
+        this.itensUFPrimeNG = itensUFStorage;
         this.carregarItensCombos();
     }
 
@@ -73,7 +81,10 @@ export class AscProfissionalExecutanteComponent extends BaseComponent implements
     public carregarItensCombos(): void {
         this.itensConselhoProfissional = [];
         this.comboService.consultarComboConselhosProfissionais().subscribe(res => {
-            this.itensConselhoProfissional = res;
+            this.itensConselhoProfissional = res.map(item => ({
+                label: item.label || '',
+                value: item.value
+            }));
             if (this.pedido) {
                 this.idConselhoProfissional.setValue(this.pedido.idConselhoProfissional);
             }

@@ -9,6 +9,7 @@ import {TrilhaAuditoriaRoutingModule} from 'app/funcionalidades/trilha-auditoria
 import {ComposicaoPedidoModule} from 'app/shared/components/pedido/composicao-pedido.module';
 import {PipeModule} from 'app/shared/pipes/pipe.module';
 import {PrimeNGModule} from 'app/shared/primeng.module';
+import {DscCaixaModule} from 'app/shared/dsc-caixa/dsc-caixa.module';
 import {
   TrilhaAnexosDocumentosComponent,
   TrilhaAutorizacoesProcedimentosComponent,
@@ -38,7 +39,8 @@ import {
         TrilhaAuditoriaRoutingModule,
         PrimeNGModule,
         ComposicaoPedidoModule,
-        PipeModule
+        PipeModule,
+        DscCaixaModule
     ],
     exports: [
         TrilhaDocumentosComponent

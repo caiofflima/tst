@@ -18,6 +18,7 @@ import {ComponentModule} from 'app/shared/components/component.module';
 import {VincMedPatologiaHomeComponent} from './vinc-med-patologia-home/vinc-med-patologia-home.component';
 import {VincMedPatologiaListarComponent} from './vinc-med-patologia-listar/vinc-med-patologia-listar.component';
 import {VincMedPatologiaFormComponent} from './vinc-med-patologia-form/vinc-med-patologia-form.component';
+import {DscCaixaModule} from "../../shared/dsc-caixa/dsc-caixa.module";
 import {AscSelectModule} from "../../shared/components/asc-select/asc-select.module";
 
 @NgModule({
@@ -37,6 +38,7 @@ import {AscSelectModule} from "../../shared/components/asc-select/asc-select.mod
     PipeModule,
     PrimeNGModule,
     ComponentModule,
+    DscCaixaModule,
     AscSelectModule,
     InputTextareaModule,
     InputTextModule

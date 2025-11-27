@@ -1,160 +1,209 @@
-<!-- Page Header-->
-<div class="col-md-12 breadcrumb-header">
-  <div class="breadcrumb">
-    <a routerLink="/home">Início</a>
-    <em class="fa fa-chevron-right"></em>
-    Administra&ccedil;&atilde;o
-    <em class="fa fa-chevron-right"></em>
-    <a routerLink="/manutencao/consulta/pedidos">Consultar Pedidos</a>
-  </div>
+<div class="breadcrumb-container">
+  <ul class="breadcrumb">
+    <li>
+      <a routerLink="/home">Início</a>
+      <i class="fa fa-angle-right" aria-hidden="true"></i>
+    </li>
+    <li>
+      Administração
+      <i class="fa fa-angle-right" aria-hidden="true"></i>
+    </li>
+    <li>
+      <a routerLink="/manutencao/consulta/pedidos">Consultar Pedidos</a>
+    </li>
+  </ul>
 </div>
 
-<header class="page-header">
-  <div class="container-fluid">
-    <h2 class="no-margin-bottom">Consultar Pedidos</h2>
-  </div>
-</header>
-<!-- Page Header-->
-
-<section class="row container-fluid">
-  <form [formGroup]="formulario" name="form">
-
-    <div class="row col-md-12">
-      <h4>Dados dos Pedidos</h4>
+<div class="page-container">
+  <dsc-card>
+    <div class="page-header">
+      <h1 class="page-title">Consultar Pedidos</h1>
     </div>
 
-    <div class="row col-md-2">
-      <label class="control-label" for="numeroProcesso">Pedido</label>
-      <input type="text" id="numeroProcesso" class="form-control" formControlName="idPedido" title="Buscar um pedido específico."
-             [maxlength]="8"
-             (keydown)="constantes.control.somenteNumeros(this.idPedido)"
-             (keyup)="constantes.control.somenteNumeros(this.idPedido)">
-    </div>
+    <form [formGroup]="formulario" class="search-form">
+      <!-- Dados dos Pedidos -->
+      <div class="section-container">
+        <h2 class="section-title">Dados dos Pedidos</h2>
+        
+        <div class="form-grid">
+          <div class="form-field form-field--small">
+            <asc-input-text
+              inputId="numeroProcesso"
+              label="Pedido"
+              [control]="formulario.get('idPedido')"
+              [maxlength]="8"
+              [somenteNumeros]="true"
+              placeholder="Digite o número"
+              hint="Buscar um pedido específico"
+            ></asc-input-text>
+          </div>
 
-    <div class="row col-xs-4">
-      <label class="control-label" for="tipoProcesso">Tipo de Pedido</label>
-      <asc-multiSelect
-        id="tipoProcesso" [options]="listComboTipoProcesso"
-        [control]="formulario.get('tiposProcesso')"
-      ></asc-multiSelect>
-    </div>
+          <div class="form-field form-field--medium">
+            <dsc-select
+              label="Tipo de Pedido"
+              [options]="optionsTipoProcesso"
+              [formControl]="$any(formulario.get('tiposProcesso'))"
+              [multiple]="true"
+              [showFilter]="true"
+              placeholder="Selecione os tipos"
+            ></dsc-select>
+          </div>
 
-    <div class="row col-xs-4">
-      <label class="control-label" for="situacaoProcesso">Situação do Pedido</label>
-      <asc-multiSelect
-        id="situacaoProcesso" [options]="listComboSituacaoProcesso"
-        [control]="formulario.get('situacoesProcesso')"
-      ></asc-multiSelect>
-    </div>
+          <div class="form-field form-field--medium">
+            <dsc-select
+              label="Situação do Pedido"
+              [options]="optionsSituacaoProcesso"
+              [formControl]="$any(formulario.get('situacoesProcesso'))"
+              [multiple]="true"
+              [showFilter]="true"
+              placeholder="Selecione as situações"
+            ></dsc-select>
+          </div>
 
-    <div class="row col-xs-2">
-      <label class="control-label" for="condicaoProcesso">Condição do Pedido</label>
-      <p-dropdown id="condicaoProcesso" [options]="listComboCondicaoProcesso" [filter]="true"
-                  [placeholder]="this.bundle('MHSPH')" title="Condi&ccedil;&atilde;o do Pedido"
-                  formControlName="condicaoProcesso" optionLabel="label">
-      </p-dropdown>
-    </div>
+          <div class="form-field form-field--medium">
+            <dsc-select
+              label="Condição do Pedido"
+              [options]="optionsCondicaoProcesso"
+              [formControl]="$any(formulario.get('condicaoProcesso'))"
+              [showFilter]="true"
+              [placeholder]="bundle('MHSPH')"
+            ></dsc-select>
+          </div>
 
-    <div class="clearfix"></div>
+          <div class="form-field form-field--small">
+            <dsc-select
+              label="UF"
+              [options]="optionsUF"
+              [formControl]="$any(formulario.get('ufsProcesso'))"
+              [multiple]="true"
+              [showFilter]="true"
+              placeholder="Selecione as UFs"
+            ></dsc-select>
+          </div>
 
-    <div class="row col-xs-2">
-      <label class="control-label" for="uf">UF</label>
-      <asc-multiSelect
-        id="uf" [options]="listComboUF"
-        [control]="formulario.get('ufsProcesso')"
-      ></asc-multiSelect>
-    </div>
+          <div class="form-field form-field--medium">
+            <dsc-select
+              label="Agrupadora"
+              [options]="optionsFilial"
+              [formControl]="$any(formulario.get('filiaisProcesso'))"
+              [multiple]="true"
+              [showFilter]="true"
+              placeholder="Selecione as filiais"
+            ></dsc-select>
+          </div>
 
-    <div class="row col-xs-4">
-      <label class="control-label" for="filial">Agrupadora</label>
-      <asc-multiSelect
-        id="filial" [options]="listComboFilial"
-        [control]="formulario.get('filiaisProcesso')"
-      ></asc-multiSelect>
-    </div>
+          <div class="form-field form-field--small">
+            <dsc-select
+              label="UF de Atendimento"
+              [options]="optionsUF"
+              [formControl]="$any(formulario.get('ufAtendimento'))"
+              [showFilter]="true"
+              [placeholder]="bundle('MHSPH')"
+              (selectionChange)="onChangeUFAtendimento()"
+            ></dsc-select>
+          </div>
 
-    <div class="row col-xs-2">
-      <label class="control-label" for="ufA">UF de Atendimento</label>
-      <p-dropdown
-        id="ufA" [options]="listComboUF" [filter]="true" [placeholder]="this.bundle('MHSPH')"
-        title="Filtrar por UF de atendimento."
-        formControlName="ufAtendimento" optionLabel="label" (onChange)="onChangeUFAtendimento()"
-      ></p-dropdown>
-    </div>
+          <div class="form-field form-field--medium">
+            <dsc-select
+              label="Município de Atendimento"
+              [options]="optionsMunicipio"
+              [formControl]="$any(formulario.get('municipioAtendimento'))"
+              [showFilter]="true"
+              [placeholder]="bundle('MHSPH')"
+            ></dsc-select>
+          </div>
+        </div>
+      </div>
 
-    <div class="row col-xs-4">
-      <label class="control-label" for="municipioAtendimento">Município de Atendimento</label>
-      <p-dropdown
-        id="municipioAtendimento" [options]="listComboMunicipio" [filter]="true"
-        [placeholder]="this.bundle('MHSPH')" title="Filtrar por município de atendimento."
-        formControlName="municipioAtendimento" optionLabel="label"
-      ></p-dropdown>
-    </div>
+      <!-- Dados do Titular/Beneficiários -->
+      <div class="section-container">
+        <h2 class="section-title">Dados do Titular/Beneficiários</h2>
+        
+        <div class="form-grid">
+          <div class="form-field form-field--medium">
+            <dsc-select
+              label="Tipo de Beneficiário"
+              [options]="optionsTipoBeneficiario"
+              [formControl]="$any(formulario.get('tiposBeneficiario'))"
+              [multiple]="true"
+              [showFilter]="true"
+              placeholder="Selecione os tipos"
+            ></dsc-select>
+          </div>
 
-    <div class="clearfix"></div>
+          <div class="form-field form-field--small">
+            <asc-input-text
+              inputId="matriculaTitular"
+              label="Matrícula do Titular"
+              [control]="formulario.get('matriculaTitular')"
+              maskName="matriculaMaskDisk"
+              placeholder="000000-0"
+              hint="Filtrar pela matrícula do titular"
+            ></asc-input-text>
+          </div>
 
-    <div class="row col-md-12">
-      <h4>Dados do Titular/Beneficiários</h4>
-    </div>
+          <div class="form-field form-field--small">
+            <asc-input-text
+              inputId="codigoBeneficiario"
+              label="Código do Beneficiário"
+              [control]="formulario.get('codigoBeneficiario')"
+              [maxlength]="12"
+              placeholder="Digite o código"
+              hint="Filtrar pelo cartão de identificação do beneficiário"
+            ></asc-input-text>
+          </div>
 
-    <div class="row col-xs-2">
-      <label class="control-label" for="tipoBeneficiario">Tipo de Beneficiário</label>
-      <asc-multiSelect
-        id="tipoBeneficiario" [options]="listComboTipoBeneficiario"
-        [control]="formulario.get('tiposBeneficiario')"
-      ></asc-multiSelect>
-    </div>
+          <div class="form-field form-field--large">
+            <asc-input-text
+              inputId="nomeBeneficiario"
+              label="Nome do Beneficiário"
+              [control]="formulario.get('nomeBeneficiario')"
+              somenteLetrasMaiusculas="true"
+              placeholder="Digite o nome"
+              hint="Filtrar pelo nome do beneficiário"
+            ></asc-input-text>
+          </div>
 
-    <div class="row col-md-2">
-      <label class="control-label" for="matriculaTitular">Matrícula do Titular</label>
-      <p-inputMask
-        id="matriculaTitular" name="matriculaTitular" class="form-control2" mask="999999-9"
-        title="Filtrar pela matrícula do titular."
-        formControlName="matriculaTitular"
-      ></p-inputMask>
-    </div>
+          <div class="form-field form-field--medium">
+            <dsc-select
+              label="Caráter da Solicitação"
+              [options]="optionsCaraterSolicitacao"
+              [formControl]="$any(formulario.get('caraterSolicitacao'))"
+              [showFilter]="true"
+              [placeholder]="bundle('MHSPH')"
+            ></dsc-select>
+          </div>
 
-    <div class="row col-md-2">
-      <label class="control-label" for="codigoBeneficiario">Código do Beneficiário</label>
-      <input type="text" id="codigoBeneficiario" name="codigoBeneficiario" class="form-control"
-             title="Filtrar pelo cartão de identificação do beneficiário." formControlName="codigoBeneficiario" [maxlength]="12">
-    </div>
+          <div class="form-field form-field--small">
+            <asc-input-text
+              inputId="matriculaUltimoUsuario"
+              label="Último Usuário"
+              [control]="formulario.get('matriculaUltimoUsuario')"
+              maskName="codigoUsuarioMask"
+              placeholder="A000000"
+              hint="Filtrar por usuário que atualizou o pedido mais recentemente"
+            ></asc-input-text>
+          </div>
+        </div>
+      </div>
 
-    <div class="row col-md-6">
-      <label class="control-label" for="nomeBeneficiario">Nome do Beneficiário</label>
-      <input type="text" id="nomeBeneficiario" name="nomeBeneficiario" class="form-control" title="Filtrar pelo nome do beneficiário."
-             formControlName="nomeBeneficiario" oninput="this.value = this.value.toUpperCase();">
-    </div>
-
-    <div class="clearfix"></div>
-
-    <div class="row col-xs-2">
-      <label class="control-label" for="idCaraterSolicitacao">Caráter da Solicitação</label>
-      <p-dropdown
-        id="idCaraterSolicitacao" [options]="listComboCaraterSolicitacao" [filter]="true"
-        [placeholder]="this.bundle('MHSPH')" title="Filtrar por caráter da solicitação."
-        formControlName="caraterSolicitacao" optionLabel="label"
-      ></p-dropdown>
-    </div>
-
-    <div class="row col-md-2">
-      <label class="control-label" for="matriculaUltimoUsuario">Último Usuário</label>
-      <p-inputMask
-        id="matriculaUltimoUsuario" name="matriculaUltimoUsuario" class="form-control2" mask="a999999"
-        title="Filtrar por usuário que atualizou o pedido mais recentemente." formControlName="matriculaUltimoUsuario"
-      ></p-inputMask>
-    </div>
-
-  </form>
-
-  <div class="clearfix"></div>
-
-  <div class="col-xs-12 barra-botoes">
-    <button id="btnLimparCampos" class="btn back-btn" (click)="limparCampos()">
-      <span class="fa fa-trash fa-fw"></span>Limpar Campos
-    </button>
-    <button class="btn btn-primary" (click)="consultarProcesso()">
-      <span class="fa fa-search fa-fw"></span>Pesquisar Pedidos
-    </button>
-  </div>
-</section>
+      <!-- Action Buttons -->
+      <div class="form-actions">
+        <dsc-button
+          variant="secondary"
+          (click)="limparCampos()"
+        >
+          <span class="fa fa-trash fa-fw button-icon"></span>
+          Limpar Campos
+        </dsc-button>
+        <dsc-button
+          variant="primary"
+          (click)="consultarProcesso()"
+        >
+          <span class="fa fa-search fa-fw button-icon"></span>
+          Pesquisar Pedidos
+        </dsc-button>
+      </div>
+    </form>
+  </dsc-card>
+</div>

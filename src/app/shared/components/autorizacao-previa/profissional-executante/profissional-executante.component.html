@@ -5,20 +5,15 @@
 
   <div class="row col-md-12 coluna-interna">
     <div class="row col-md-4">
-      <label class="control-label obrigatorio" for="idConselhoProfissional"
-        >Conselho Profissional</label
-      >
-      <p-dropdown
-        class="form-control2"
+      <dsc-select
+        label="Conselho Profissional"
         [required]="true"
-        id="idConselhoProfissional"
         [options]="itensConselhoProfissional"
-        [filter]="true"
         formControlName="idConselhoProfissional"
-        title="Conselho profissional do executante."
         [placeholder]="this.bundle('MHSPH')"
+        size="standard"
       >
-      </p-dropdown>
+      </dsc-select>
       <div
         *ngIf="
           idConselhoProfissional.invalid &&
@@ -61,20 +56,15 @@
     </div>
 
     <div class="row col-md-4">
-      <label class="control-label obrigatorio" for="ufConselho"
-        >UF do Conselho</label
-      >
-      <p-dropdown
-        class="form-control2"
+      <dsc-select
+        label="UF do Conselho"
         [required]="true"
-        id="ufConselho"
         [options]="itensUF"
         formControlName="idEstadoConselho"
-        [filter]="true"
         [placeholder]="this.bundle('MHSPH')"
-        title="UF do conselho profissional do executante."
+        size="standard"
       >
-      </p-dropdown>
+      </dsc-select>
       <div
         *ngIf="
           idEstadoConselho.invalid &&
@@ -153,7 +143,7 @@
         [required]="true"
         id="uf"
         formControlName="ufAtendimento"
-        [options]="itensUF"
+        [options]="itensUFPrimeNG"
         [filter]="true"
         [placeholder]="this.bundle('MHSPH')"
         (onChange)="consultarMunicipiosAtendimento()"

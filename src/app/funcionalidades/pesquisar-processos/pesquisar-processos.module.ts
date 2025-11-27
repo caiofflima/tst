@@ -11,18 +11,16 @@ import {NgxPaginationModule} from "ngx-pagination";
 import {TableModule,} from "primeng/table";
 import {SharedModule} from "primeng/api";
 import {TabViewModule} from "primeng/tabview";
-import {DropdownModule} from "primeng/dropdown";
 import {CheckboxModule} from "primeng/checkbox";
-import {InputMaskModule} from "primeng/inputmask";
 import {FileUploadModule} from "primeng/fileupload";
 import {ProgressBarModule} from "primeng/progressbar";
-import {MultiSelectModule} from "primeng/multiselect";
 import {PaginatorModule} from "primeng/paginator";
 
 import {PesquisarProcessosListarComponent} from "./pesquisar-processos-listar/pesquisar-processos-listar.component";
 import {PesquisarProcessosHomeComponent} from "./pesquisar-processos-home/pesquisar-processos-home.component";
-import {AscMultiSelectModule} from "../../shared/components/multiselect/asc-multiselect.module";
 import {PipeModule} from "../../shared/pipes/pipe.module";
+import {ComponentModule} from "../../shared/components/component.module";
+import {DscCaixaModule} from "../../shared/dsc-caixa/dsc-caixa.module";
 
 @NgModule({
 	imports: [
@@ -30,24 +28,23 @@ import {PipeModule} from "../../shared/pipes/pipe.module";
 		PesquisarProcessosRoutingModule,
 		DirectivesModule.forRoot(),
 		FormsModule,
-		DropdownModule,
-		TabViewModule,
-		CheckboxModule,
-		InputMaskModule,
-		FileUploadModule,
-		ProgressBarModule,
-		NgxPaginationModule,
-		MultiSelectModule,
 		ReactiveFormsModule,
 		RouterModule,
 		TabsModule.forRoot(),
+		TabViewModule,
+		CheckboxModule,
+		FileUploadModule,
+		ProgressBarModule,
+		NgxPaginationModule,
 		TemplatesModule,
-		NgxMaskDirective, NgxMaskPipe,
+		NgxMaskDirective, 
+		NgxMaskPipe,
 		TableModule,
 		PaginatorModule,
 		SharedModule,
 		PipeModule,
-    AscMultiSelectModule
+		ComponentModule,
+		DscCaixaModule
 	],
 	declarations: [
 		PesquisarProcessosListarComponent,

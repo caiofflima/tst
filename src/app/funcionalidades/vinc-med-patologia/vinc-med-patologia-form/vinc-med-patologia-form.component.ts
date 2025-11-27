@@ -12,7 +12,7 @@ import {debounceTime, take} from 'rxjs/operators';
 import {SelectItem} from 'primeng/api';
 import {Util} from "../../../arquitetura/shared/util/util";
 import {Location} from "@angular/common";
-
+import { Option } from 'sidsc-components/dsc-select';
 
 import { CheckboxChangeEvent } from 'primeng/checkbox';
 @Component({
@@ -51,7 +51,7 @@ export class VincMedPatologiaFormComponent extends BaseComponent implements OnIn
         historico: this.formBuilder.control(''),
     });
 
-    patologias: SelectItem[] = [];
+    patologias: Option[] = [];
 
     medicamentos: SelectItem[] = [];
 
@@ -160,7 +160,10 @@ export class VincMedPatologiaFormComponent extends BaseComponent implements OnIn
 
     public buscarPatologias(): void {
         this.patologiaService.consultarTodosAtivos().pipe(take(1)).subscribe((res: Patologia[]) => {
-            this.patologias = res.map(ob => ({label: ob.codigo + ' - ' + ob.nome, value: ob.id}));
+            this.patologias = res.map(ob => ({
+                label: ob.codigo + ' - ' + ob.nome,
+                value: ob.id
+            }));
         }, error => this.messageService.addMsgDanger(error));
     }
 

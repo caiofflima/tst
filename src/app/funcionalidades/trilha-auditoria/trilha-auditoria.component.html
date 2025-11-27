@@ -34,15 +34,14 @@
       <form [formGroup]="form">
         <div class="row d-flex p-0 col-md-12">
           <div class="col-md-4 p-0">
-            <label class="control-label" for="modulo">Módulos</label>
-            <p-dropdown
-              id="modulo"
-              class="form-control2"
+            <dsc-select
+              label="Módulos"
               [options]="funcionalidades"
-              placeholder="{{ bundle('MHSPH') }}"
+              [placeholder]="bundle('MHSPH')"
               formControlName="modulo"
+              size="standard"
             >
-            </p-dropdown>
+            </dsc-select>
             <div
               *ngIf="modulo.invalid && (modulo.dirty || modulo.touched)"
               class="error-form"
@@ -52,18 +51,15 @@
           </div>
 
           <div class="col-md-4" *ngIf="showSubModulos">
-            <label class="control-label obrigatorio" for="tabelas"
-              >Sub-módulos</label
-            >
-            <p-dropdown
+            <dsc-select
+              label="Sub-módulos"
               [required]="true"
-              id="tabelas"
-              class="form-control2"
               [options]="tabelas"
-              placeholder="{{ bundle('MHSPH') }}"
+              [placeholder]="bundle('MHSPH')"
               formControlName="subModulo"
+              size="standard"
             >
-            </p-dropdown>
+            </dsc-select>
             <div
               *ngIf="
                 subModulo.invalid && (subModulo.dirty || subModulo.touched)
@@ -107,19 +103,15 @@
 
         <div class="row d-flex p-0 col-md-12" *ngIf="moduloEmails">
           <div class="col-md-6 pl-0">
-            <label class="control-label obrigatorio" for="tipoProcesso"
-              >Tipo de Pedido</label
-            >
-            <p-dropdown
-              id="tipoProcesso"
+            <dsc-select
+              label="Tipo de Pedido"
+              [required]="true"
               [options]="itensTipoProcesso"
-              [filter]="true"
-              class="form-control2"
-              placeholder="{{ bundle('MHSPH') }}"
-              title="Situação do pedido."
+              [placeholder]="bundle('MHSPH')"
               formControlName="idTipoProcesso"
+              size="standard"
             >
-            </p-dropdown>
+            </dsc-select>
 
             <div
               *ngIf="
@@ -135,19 +127,15 @@
           </div>
 
           <div class="col-md-6 pl-0">
-            <label class="control-label obrigatorio" for="situacaoProcesso"
-              >Situação do Pedido</label
-            >
-            <p-dropdown
-              id="situacaoProcesso"
+            <dsc-select
+              label="Situação do Pedido"
+              [required]="true"
               [options]="itensSituacaoProcesso"
-              [filter]="true"
-              class="form-control2"
-              placeholder="{{ bundle('MHSPH') }}"
-              title="Situação do processo."
+              [placeholder]="bundle('MHSPH')"
               formControlName="idSituacaoProcesso"
+              size="standard"
             >
-            </p-dropdown>
+            </dsc-select>
 
             <div
               *ngIf="

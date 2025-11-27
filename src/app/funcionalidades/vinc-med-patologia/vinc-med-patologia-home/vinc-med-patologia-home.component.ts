@@ -10,6 +10,7 @@ import {Patologia} from "../../../shared/models/comum/patologia";
 import {FormControl} from "@angular/forms";
 import {Location} from "@angular/common";
 import {FiltroPatologia} from 'app/shared/models/filtro/filtro-patologia';
+import { Option } from 'sidsc-components/dsc-select';
 
 @Component({
     selector: 'asc-vinc-med-patologia-home',
@@ -20,7 +21,7 @@ export class VincMedPatologiaHomeComponent extends BaseComponent implements OnIn
 
     timeout: any;
     ativos: boolean;
-    patologias: SelectItem[] = [{
+    patologias: Option[] = [{
         value: null,
         label: this.bundle('MHSPH')
     }];
@@ -110,7 +111,10 @@ export class VincMedPatologiaHomeComponent extends BaseComponent implements OnIn
             this.patologias = [{
                 value: null,
                 label: this.bundle('MHSPH')
-            }, ...res.map(p => ({value: p.id, label: p.codigo + ' - ' + p.nome}))]
+            }, ...res.map(p => ({
+                label: p.codigo + ' - ' + p.nome,
+                value: p.id
+            }))]
         );
     }
 
@@ -124,7 +128,10 @@ export class VincMedPatologiaHomeComponent extends BaseComponent implements OnIn
             this.patologias = [{
                 value: null,
                 label: this.bundle('MHSPH')
-            }, ...res.map(p => ({value: p.id, label: p.codigo + ' - ' + p.nome}))]
+            }, ...res.map(p => ({
+                label: p.codigo + ' - ' + p.nome,
+                value: p.id
+            }))]
         );
     }
 
