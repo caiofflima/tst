@@ -11,6 +11,7 @@ import {AscSelectModule} from "../../shared/components/asc-select/asc-select.mod
 import {InputTextareaModule} from "primeng/inputtextarea";
 import {InputTextModule} from "primeng/inputtext";
 import {AscMessageErrorModule} from "../../shared/components/message-error/asc-message-error.module";
+import { DscCaixaModule } from 'app/shared/dsc-caixa/dsc-caixa.module';
 
 @NgModule({
     imports: [
@@ -23,7 +24,8 @@ import {AscMessageErrorModule} from "../../shared/components/message-error/asc-m
         InputTextModule,
         InputTextareaModule,
         ReactiveFormsModule,
-        AscMessageErrorModule
+        AscMessageErrorModule,
+        DscCaixaModule
     ],
   declarations: [
       ParametrizacaoDocumentosHomeComponent,

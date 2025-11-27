@@ -40,10 +40,13 @@
             </div>
             <div class="form-row">
                 <div class="pl-0 col-md-4 mb-15">
-                    <asc-dropdown
+                    <!--asc-dropdown
                             [required]="true" label="Tipo de documento" [items]="tipoDocumentos" [control]="idTipoDocumento"
                             id="idTipoDocumento"
-                    ></asc-dropdown>
+                    ></asc-dropdown-->
+                    <dsc-select
+                        [label]="'Tipo de documento'" [required]="true" formControlName="idTipoDocumento"
+                        [options]="tipoDocumentosOption" name="'idTipoDocumento'" size="large"></dsc-select>
                 </div>
                 <div class="pl-0 col-md-8 mb-15">
                     <asc-input-text label="Link do documento" [control]="enderecoDocumento"
@@ -70,18 +73,22 @@
 
             <div class="form-row">
                 <div class="col-md-1 p-0">
-                    <p-checkbox name="opme" inputId="op" [binary]="true" [formControl]="opme"></p-checkbox>
-                    <label for="op">OPME</label>
+                    <!-- <p-checkbox name="opme" inputId="op" [binary]="true" [formControl]="opme"></p-checkbox> -->
+                    <!--dsc-checkbox formControlName="opme"  variant="highlight" (change)="onChangeInativo($event)" /-->  
+                    <!--asc-checkbox label="opme" formControlName="opme" name="'opme'"></asc-checkbox-->    
+                    <!--label for="op">OPME</label-->
+                    <dsc-checkbox formControlName="opme" label="OPME" variant="highlight" size="large" />              
                 </div>
             </div>
 
             <div *ngIf="id">
                 <div class="form-row">
                     <div class="col-md-2 d-flex al-ic pl-0">
-                        <p-checkbox
+                        <!-- <p-checkbox
                                 formControlName="inativo" [binary]="true" inputId="binary"
                                 (onChange)="onChangeInativo($event)"
-                        ></p-checkbox>
+                        ></p-checkbox> -->
+                        <dsc-checkbox formControlName="inativo"  variant="highlight" (change)="onChangeInativo($event)" size="large" />
                         <label class="control-label" style="margin: 0 0 0 5px!important" for="binary">Inativo</label>
                     </div>
                     <div class="col-md-2 pl-0">

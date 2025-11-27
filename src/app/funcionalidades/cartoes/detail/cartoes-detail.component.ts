@@ -13,6 +13,7 @@ import { Util } from 'app/arquitetura/shared/util/util';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, tap } from 'rxjs';
 import { HttpUtil } from 'app/shared/util/http-util';
+import { Option } from 'sidsc-components/dsc-select';
 
 const htmlToPdfmake = require("html-to-pdfmake");
 (pdfMake as any).vfs = pdfFonts.pdfMake.vfs;
@@ -28,6 +29,7 @@ export class CartoesDetailComponent implements OnInit {
     beneficiario: Beneficiario;
     beneficiarios: Beneficiario[] = []
     cartao: CartaoDTO = {} as CartaoDTO;
+    options: Option[] = [];
     @Input()
         titular = true;
 
@@ -1930,7 +1932,8 @@ export class CartoesDetailComponent implements OnInit {
        this.service.consultarFamiliaPorMatricula(this.matricula, this.titular).pipe(
                 HttpUtil.catchErrorAndReturnEmptyObservableByKey(this.messageService, 'error')
             ).subscribe((beneficiarios: Beneficiario[]) => {
-                this.beneficiarios = beneficiarios;
+                this.beneficiarios = beneficiarios
+                this.options = beneficiarios.map(b => ({label: b.nome, value: b.id }));
         })
       }
 }

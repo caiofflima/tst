@@ -24,23 +24,23 @@
 
       <div class="p-0 col-xs-2" *ngIf="filtroDocumento.idTipoDocumento">
         <label class="control-label" for="tipoDocumento">Tipo de documento</label>&nbsp;<br>
-        <p id="tipoDocumento">{{documento}}</p>
+        <p id="tipoDocumento">{{ documento }}</p>
       </div>
       <div class="p-0 col-xs-2" *ngIf="filtroDocumento.nome">
         <label class="control-label" for="nome">Nome</label>&nbsp;<br>
-        <p id="nome">{{filtroDocumento.nome}}</p>
+        <p id="nome">{{ filtroDocumento.nome }}</p>
       </div>
       <div class="p-0 col-xs-2" *ngIf="filtroDocumento.ativo">
         <label class="control-label" for="ativos">Somente ativos</label>&nbsp;<br>
-        <p id="ativos">{{filtroDocumento.ativo == 'S' ? 'Sim' : 'Não'}}</p>
+        <p id="ativos">{{ gerarTextoSimNao(filtroDocumento.ativo) }}</p>
       </div>
       <div class="p-0 col-xs-2" *ngIf="filtroDocumento.opme">
         <label class="control-label" for="opme">OPME</label>&nbsp;<br>
-        <p id="opme">{{filtroDocumento.opme == 'S' ? 'Sim' : 'Não'}}</p>
+        <p id="opme">{{ gerarTextoSimNao(filtroDocumento.opme) }}</p>
       </div>
       <div class="p-0 col-xs-2" *ngIf="filtroDocumento.link">
         <label class="control-label" for="link">Com link informado</label>&nbsp;<br>
-        <p id="link">{{filtroDocumento.link == 'S' ? 'Sim' : 'Não'}}</p>
+        <p id="link">{{ gerarTextoSimNao(filtroDocumento.link) }}</p>
       </div>
 
       <div class="clearfix"></div>

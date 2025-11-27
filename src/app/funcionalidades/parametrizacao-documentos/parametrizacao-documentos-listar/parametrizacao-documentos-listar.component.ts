@@ -90,6 +90,19 @@ export class ParametrizacaoDocumentosListarComponent extends BaseComponent imple
             !this.filtroDocumento.opme && !this.filtroDocumento.ativo && !this.filtroDocumento.link;
     }
 
+    gerarTextoSimNao(dado:any):string{
+        let retorno:string = '';
+
+        if(dado!=='' && dado!==null && dado!==undefined){
+            if(dado==='S' || dado===true){
+                retorno = "Sim";
+            }else{
+                retorno = "Não";
+            }
+        }
+        return retorno;
+    }
+
     voltar(): void {
         this.location.back();
     }

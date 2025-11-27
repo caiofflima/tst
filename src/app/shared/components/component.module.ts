@@ -22,6 +22,7 @@ import {AscInputCpfCnpjComponent} from './asc-input/asc-input-cpf-cnpj/asc-input
 import {AscInputDateComponent} from './asc-input/asc-input-date/asc-input-date.component';
 import {AscInputTelefone} from './asc-input/asc-input-telefone/asc-input-telefone.component';
 import {AscInputMoney} from './asc-input/asc-input-money/asc-input-money.component';
+import {AscCheckboxComponent} from './asc-checkbox/asc-checkbox.component';
 
 import {
     AscCampoEstaticoComponent,
@@ -70,7 +71,7 @@ import { BaseLayoutFormComponent } from './base-layout/base-layout-form/base-lay
 import { PopoverModule } from 'ngx-bootstrap/popover';
 import { BaseLayoutHomeComponent } from './base-layout/base-layout-home/base-layout-home.component';
 import { AscListagemComponent } from './asc-listagem/asc-listagem.component';
-import { DscSelectComponent } from 'sidsc-components/dsc-select';
+import { DscCaixaModule } from 'app/shared/dsc-caixa/dsc-caixa.module';
 
 
 
@@ -88,7 +89,7 @@ import { DscSelectComponent } from 'sidsc-components/dsc-select';
         InputTextModule,
         AscModalModule,
         PopoverModule.forRoot(),
-        DscSelectComponent
+        DscCaixaModule
     ],
     declarations: [
         DatalistComponent,
@@ -139,8 +140,8 @@ import { DscSelectComponent } from 'sidsc-components/dsc-select';
         AscSelectFinalidadeAdesaoComponent,
         BaseLayoutFormComponent,
         BaseLayoutHomeComponent,
-        AscListagemComponent
-
+        AscListagemComponent,
+        AscCheckboxComponent
     ],
     exports: [
         DatalistComponent,
@@ -190,7 +191,8 @@ import { DscSelectComponent } from 'sidsc-components/dsc-select';
         AscSelectFinalidadeAdesaoComponent,
         BaseLayoutFormComponent,
         BaseLayoutHomeComponent,
-        AscListagemComponent
+        AscListagemComponent,
+        AscCheckboxComponent
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

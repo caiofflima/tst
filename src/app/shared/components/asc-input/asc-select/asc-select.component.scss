@@ -1,13 +1,22 @@
 $corPreta: #000;
 $fontFamilyCaixa: "Caixa Std Regular", sans-serif;
-
-/* Estilos para PrimeNG (antigo) */
 ::ng-deep .p-dropdown-panel {
   .p-dropdown-items {
     .p-dropdown-item {
       color: $corPreta !important;
     }
   }
+}
+
+.control-label{
+  font-family: 'Caixa STD' !important;
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  color: $corPreta !important;
+}
+
+.obrigatorio{
+  color: red !important;
 }
 
 ::ng-deep .p-dropdown-label{
@@ -30,38 +39,7 @@ $fontFamilyCaixa: "Caixa Std Regular", sans-serif;
   color: $corPreta !important;
 }
 
-/* Estilos para DSC Select (novo) */
-::ng-deep dsc-select {
-  font-family: $fontFamilyCaixa !important;
-  
-  * {
-    font-family: $fontFamilyCaixa !important;
-    font-size: 16px !important;
-  }
-  
-  /* Label/texto selecionado */
-  .select-trigger,
-  .select-value,
-  .select-value-text,
-  button,
-  span {
-    font-family: $fontFamilyCaixa !important;
-    font-size: 16px !important;
-    color: $corPreta;
-  }
-  
-  /* Input de busca */
-  input {
-    font-family: $fontFamilyCaixa !important;
-    font-size: 16px !important;
-    color: $corPreta;
-  }
-  
-  /* Opções do dropdown */
-  .select-option,
-  .dsc-select-option {
-    font-family: $fontFamilyCaixa !important;
-    font-size: 16px !important;
-    color: $corPreta;
-  }
+::ng-deep dsc-select .mat-label--standard{
+    font-size: 15px !important;
 }
+

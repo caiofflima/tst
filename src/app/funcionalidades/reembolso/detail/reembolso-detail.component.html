@@ -150,7 +150,7 @@
               selectId="beneficiario" [handle]="handle" label="Beneficiário" [required]="true"
               [uppercase]="true"
               [control]="formularioSolicitacao.get('dependente')"
-              (dadoSelecionado)="beneficiarioSelecionadoLancamento($event, lancamentoSelecionando.mes, anoLancamento.value)">
+              (dadoSelecionado)="beneficiarioSelecionadoLancamento($event, lancamentoSelecionando.mes, anoLancamento)">
             </asc-select-beneficiario-extrato>      
           </div>
 
@@ -228,7 +228,7 @@
             <asc-select-beneficiario-extrato selectId="beneficiario" class="noBorderDropdownTrigger" [handle]="handle" label="Beneficiário" [required]="true"
               [control]="formularioSolicitacao.get('dependente')"
               [uppercase]="true"
-              (dadoSelecionado)="beneficiarioSelecionadoReembolso($event, lancamentoSelecionando.mes, anoLancamento.value)"></asc-select-beneficiario-extrato>  
+              (dadoSelecionado)="beneficiarioSelecionadoReembolso($event, lancamentoSelecionando.mes, anoLancamento)"></asc-select-beneficiario-extrato>  
           </div>
 
           <h1 class="title-blue padding-top">

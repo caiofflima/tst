@@ -18,6 +18,7 @@ import {BehaviorSubject, Observable, Subscription} from 'rxjs';
 import {debounceTime, map, takeUntil, tap} from 'rxjs/operators';
 import {Util} from '../../../arquitetura/shared/util/util';
 import {of} from 'rxjs';
+import { Option } from 'sidsc-components/dsc-select';
 
 @Directive({
     selector: 'asc-input-error'
@@ -173,14 +174,7 @@ export abstract class BaseSelectComponent<T> extends BaseInputComponent implemen
     placeholder: string;
 
     selectItems: SelectItem[];
-
-    get dscSelectItems(): any[] {
-        return (this.selectItems || []).map(item => ({
-            label: item.label || '',
-            value: item.value,
-            disabled: item.disabled
-        }));
-    }
+    options: Option[] = [];
 
     showProgressBar = false;
     protected labelPadrao: (si: T) => string;
@@ -213,8 +207,12 @@ export abstract class BaseSelectComponent<T> extends BaseInputComponent implemen
 
     private _carregarLista(): void {
         this.showProgressBar = true;
-        this.carregarListOperator().subscribe((dados: T[]) => {
+        this.carregarListOperator().subscribe((dados: any[]) => {
             this.gerarSelectItems(dados, this.valuePadrao);
+            this.options = dados.map(item => ({
+                  value: item?.id || '',
+                  label: item?.nome
+              }));
             this.executeEmiter(this.dados, dados)
             this.items = dados;
             this.showProgressBar = false;

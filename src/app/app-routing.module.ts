@@ -373,6 +373,13 @@ const appRoutes: Routes = [
         canActivateChild: [AuthGuard, DadosUsuarioGuard],
         canLoad: [AuthGuard]
     },
+    {
+        path: 'manutencao/parametros/gerenciar-medicamentos',
+        loadChildren: () => import('../app/funcionalidades/parametrizacao-medicamentos/parametrizacao-medicamentos.module').then(x => x.ParametrizacaoMedicamentosModule),
+        canActivate: [AuthGuard, DadosUsuarioGuard],
+        canActivateChild: [AuthGuard, DadosUsuarioGuard],
+        canLoad: [AuthGuard]
+    },
     {path: '', pathMatch: 'full', redirectTo: '/home'},
     {path: '**', component: PaginaNaoEncontradaComponent, canActivate: [AuthGuard]}
 ];

@@ -16,49 +16,55 @@
     <form novalidate>
       <div class="form-row">
         <div class="pl-0 col-md-4 mb-15">
-          <asc-dropdown
-            label="Tipo de documento" [items]="tipoDocumentos" [control]="idTipoDocumento"
-            id="tipoDocumentos" (selected)="tipoSelecionado($event)"
-          ></asc-dropdown>
-        </div>
+          <dsc-select
+            [label]="'Tipo de documento'"  [(ngModel)]="selectedValue" 
+            [options]="tipoDocumentoOption"
+            (selectionChange)="tipoSelecionado($event.value)" name="'idTipoDocumento'" size="large"></dsc-select>
+          </div>
 
         <div class="row col-xs-8 p-0">
-          <label class="control-label" for="doc">Nome do documento</label>&nbsp;<br>
+          <!--label class="control-label" for="doc">Nome do documento</label>&nbsp;<br>
           <input type="text" id="doc" name="nome" [(ngModel)]="filtro.nome"
-                 class="form-control" [maxlength]="150" title="Nome do documento.">
+                 class="form-control" [maxlength]="150" title="Nome do documento."-->
+
+          <dsc-input   [label]="'Nome do documento'"  [(ngModel)]="filtro.nome" [maxlength]="150" name="'nome'"
+          size="large" style="width: 100%;"></dsc-input>
         </div>
       </div>
 
       <div class="form-row">
         <div class="col-md-2 p-0">
-          <p-checkbox name="ativos" inputId="ativos" value="S" [(ngModel)]="filtro.ativo"></p-checkbox>
-          <label for="ativos">Somente ativos</label>
-        </div>
-        <div class="col-md-2 p-0">
-          <p-checkbox name="opmeS" inputId="atOpme" value="S" [(ngModel)]="filtro.opme"></p-checkbox>
-          <label for="atOpme">OPME</label>
-        </div>
-        <div class="col-md-8 p-0">
-          <p-checkbox inputId="atLink" value="S" [(ngModel)]="filtro.link" name="link"></p-checkbox>
-          <label for="atLink">Com link informado</label>
+          <asc-checkbox [valoresTrueOrFalse]="false" label="ativos" [(ngModel)]="filtro.ativo" name="'ativos'"></asc-checkbox>
         </div>
 
+        <div class="col-md-2 p-0">
+          <asc-checkbox [valoresTrueOrFalse]="false" [(ngModel)]="filtro.opme" label="OPME" name="'opmeS'"></asc-checkbox>
+        </div>
+
+        <div class="col-md-8 p-0">
+          <asc-checkbox [valoresTrueOrFalse]="false" label="Com link informado" [(ngModel)]="filtro.link" name="'link'"></asc-checkbox>
+        </div>
       </div>
+
       <div class="col-xs-12 p-0 barra-botoes">
         <button type="button" id="btnLimparCampos" class="btn back-btn" (click)="limparCampos()">
           <span class="fa fa-trash fa-fw"></span>
           Limpar Campos
         </button>
+
         <button type="button" id="btnNovoDocumento" class="btn clean-btn" routerLink="novo">
           <span class="fa fa-plus fa-fw"></span>
           Incluir Documento
         </button>
+
         <button type="submit" id="btnPesquisar" class="btn continue-btn" (click)="pesquisar()">
           <span class="fa fa-search fa-fw"></span>
           Pesquisar
         </button>
       </div>
+
     </form>
+
   </section>
 
 </div>

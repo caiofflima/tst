@@ -1,4 +1,4 @@
-<label
+<!-- <label
   [attr.for]="id"
   [ngStyle]="compStyle"
   class="control-label label-class"
@@ -6,38 +6,68 @@
   [class.obrigatorio]="required !== null && required !== false"
 >
   {{ label }}
-</label>
+</label> -->
 <dsc-select
   *ngIf="!multiple"
-  [attr.title]="hint"
-  [formControl]="control"
-  [id]="id"
-  [tabIndex]="index"
-  [disabled]="disabled"
-  [options]="dscSelectItems"
-  [required]="required"
-  [ngStyle]="compStyle"
-  filter="true"
+  [label]="required !== null && required !== false ? label + ' *' : label"
   [placeholder]="this.placeholder || this.bundle('MHSPH')"
-  (onChange)="changeAction($event)"
-  size="large"
+  [showFilter]="true"
+  [options]="options"
+  (selectionChange)="changeAction($event)"
+  [formControl]="control"
+  [style]="compStyle"
 >
 </dsc-select>
 <dsc-select
   *ngIf="multiple"
-  [options]="dscSelectItems"
+  [label]="label"
+  [placeholder]="'Selecione as opções'"
+  [showFilter]="true"
+  [options]="options"
+  [multiple]="true"
+  (selectionChange)="changeAction($event)"
   [formControl]="control"
+  [style]="compStyle"
+>
+<!-- <p-dropdown
+  *ngIf="!multiple"
+  [attr.title]="hint"
+  emptyMessage="Nenhum resultado encontrado"
+  [formControl]="control"
+  [id]="id"
+  [inputId]="selectId"
+  [tabindex]="index"
+  [disabled]="disabled"
+  [options]="selectItems"
+  [required]="required"
+  class="form-control2 custom-border"
+  [style]="compStyle"
+  [filter]="true"
+  [placeholder]="this.placeholder || this.bundle('MHSPH')"
+  (onChange)="changeAction($event)"
+>
+  <ng-template let-item pTemplate="item">
+    <div class="ui-helper-clearfix {{ itemClass }}" style="max-width: 100%">
+      {{ item.label }}
+    </div>
+  </ng-template>
+</p-dropdown>
+<p-multiSelect
+  *ngIf="multiple"
+  [options]="selectItems"
+  [formControl]="control"
+  optionLabel="label"
+  class="form-control2"
+  defaultLabel="Selecione as opções"
   [required]="required"
   [attr.title]="hint"
-  [ngStyle]="compStyle"
+  [maxSelectedLabels]="maxSelectedLabels"
+  selectedItemsLabel="{0} itens selecionados"
+  [style]="compStyle"
   (onChange)="changeAction($event)"
-  [tabIndex]="index"
+  [tabindex]="index"
   [disabled]="disabled"
-  [multiple]="true"
-  size="large"
-  [placeholder]="'Selecione as opções'"
->
-</dsc-select>
+></p-multiSelect> -->
 <p-progressBar
   mode="indeterminate"
   *ngIf="showProgressBar"

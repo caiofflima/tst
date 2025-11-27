@@ -1,6 +1,3 @@
-$fontFamilyCaixa: "Caixa Std Regular", sans-serif;
-$corPreta: #000;
-
 div.custom-form-group-select {
 
   select {
@@ -28,42 +25,6 @@ div.custom-form-group-select {
     border-radius: 3px;
     padding: 12px 8px;
     width: 100%;
-  }
-}
-
-/* Estilos para DSC Select */
-::ng-deep dsc-select {
-  font-family: $fontFamilyCaixa !important;
-  
-  * {
-    font-family: $fontFamilyCaixa !important;
-    font-size: 16px !important;
-  }
-  
-  /* Label/texto selecionado */
-  .select-trigger,
-  .select-value,
-  .select-value-text,
-  button,
-  span {
-    font-family: $fontFamilyCaixa !important;
-    font-size: 16px !important;
-    color: $corPreta;
-  }
-  
-  /* Input de busca */
-  input {
-    font-family: $fontFamilyCaixa !important;
-    font-size: 16px !important;
-    color: $corPreta;
-  }
-  
-  /* Opções do dropdown */
-  .select-option,
-  .dsc-select-option {
-    font-family: $fontFamilyCaixa !important;
-    font-size: 16px !important;
-    color: $corPreta;
   }
 }
 

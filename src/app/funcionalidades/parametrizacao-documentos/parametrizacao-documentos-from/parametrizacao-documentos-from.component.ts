@@ -2,17 +2,19 @@ import {Component} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {SelectItem} from "primeng/api";
+import {Location} from "@angular/common";
+import { take } from 'rxjs';
+import { CheckboxChangeEvent } from 'primeng/checkbox';
+
 import {TipoDocumentoService} from "../../../shared/services/comum/tipo-documento.service";
 import {Documento} from "../../../shared/models/comum/documento";
 import {AscValidators} from "../../../shared/validators/asc-validators";
 import {BaseComponent} from "../../../shared/components/base.component";
 import {MessageService} from "../../../shared/components/messages/message.service";
 import {DocumentoService} from "../../../shared/services/comum/documento.service";
-import {Location} from "@angular/common";
 import {Util} from "../../../arquitetura/shared/util/util";
-import { take } from 'rxjs';
+import {Option} from 'sidsc-components/dsc-select';
 
-import { CheckboxChangeEvent } from 'primeng/checkbox';
 @Component({
     selector: 'asc-parametrizacao-documentos-from',
     templateUrl: './parametrizacao-documentos-from.component.html',
@@ -47,15 +49,16 @@ export class ParametrizacaoDocumentosFromComponent extends BaseComponent {
     });
 
     tipoDocumentos: SelectItem[];
+    tipoDocumentosOption: Option[]=[];
 
     constructor(
         protected override messageService: MessageService,
-        private activatedRoute: ActivatedRoute,
-        private tipoDocumentoservice: TipoDocumentoService,
-        private documentoService: DocumentoService,
-        private formBuilder: FormBuilder,
-        private router: Router,
-        private location: Location
+        private readonly activatedRoute: ActivatedRoute,
+        private readonly tipoDocumentoservice: TipoDocumentoService,
+        private readonly documentoService: DocumentoService,
+        private readonly formBuilder: FormBuilder,
+        private readonly router: Router,
+        private readonly location: Location
     ) {
         super(messageService);
         this.getTipoDocumento();
@@ -92,6 +95,11 @@ export class ParametrizacaoDocumentosFromComponent extends BaseComponent {
     getTipoDocumento(): void {
         this.tipoDocumentoservice.consultarTodos().subscribe(result => {
             this.tipoDocumentos = result.map(item => ({
+                label: item.nome,
+                value: item.id
+            }));
+
+            this.tipoDocumentosOption = result.map(item => ({
                 label: item.nome,
                 value: item.id
             }));
@@ -139,6 +147,8 @@ export class ParametrizacaoDocumentosFromComponent extends BaseComponent {
     }
 
     public onChangeInativo(event: CheckboxChangeEvent) {
+      console.log('onChangeInativo', event);
+
         if (event.checked) {
             this.dataInativacao.setValue(new Date())
         } else {

@@ -8,6 +8,21 @@ body {
 .container:after {
   display: none !important;
 }
+:host {
+  ::ng-deep .menucx {
+    // ... existing code ...
+  }
+}
+
+:host ::ng-deep .menucx:not(:hover) .p-menubar-root-list .p-menuitem-active > .p-submenu-list {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+
+:host ::ng-deep .menucx:not(:hover) .p-menubar-root-list .p-menuitem-active .p-menuitem-link {
+  background: transparent !important;
+}
 
 .caixax {
   font-size: 26px;
