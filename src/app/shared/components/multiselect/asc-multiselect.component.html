@@ -1,13 +1,10 @@
-<p-multiSelect
-  [options]="options"
+<dsc-select
+  [options]="dscOptions"
   [formControl]="$any(control)"
-  optionLabel="label"
-  class="form-control2 custom-border"
-  defaultLabel="Selecione as opções"
-  [maxSelectedLabels]="limit"
-  selectedItemsLabel="{0} itens selecionados"
-  (onChange)="onChangeCallback($event)"
-  [required]="required"
+  [multiple]="true"
+  [placeholder]="'Selecione as opções'"
+  [showFilter]="true"
+  (selectionChange)="onChangeCallback($event)"
   [disabled]="disabled"
-  [(ngModel)]="selected"
-></p-multiSelect>
+  [size]="size"
+></dsc-select>

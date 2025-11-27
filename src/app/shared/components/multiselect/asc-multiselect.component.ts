@@ -1,5 +1,6 @@
 import {Component, EventEmitter, forwardRef, Input, Output} from '@angular/core';
 import {AbstractControl, ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR} from '@angular/forms';
+import {Option} from 'sidsc-components/dsc-select';
 
 @Component({
     selector: 'asc-multiSelect',
@@ -15,7 +16,26 @@ export class AscMultiSelectComponent implements ControlValueAccessor {
 
     @Output() public onChange: EventEmitter<any> = new EventEmitter();
 
-    @Input('options') options: any;
+    private _options: any;
+    dscOptions: Option[] = [];
+
+    @Input('options')
+    set options(value: any) {
+        this._options = value;
+        if (value && Array.isArray(value)) {
+            // Convert DadoComboDTO[] to Option[]
+            this.dscOptions = value.map((item: any) => ({
+                label: item.label || item.descricao || '',
+                value: item.value || item.id || item
+            }));
+        } else {
+            this.dscOptions = [];
+        }
+    }
+
+    get options(): any {
+        return this._options;
+    }
 
     @Input() _value: any;
 
@@ -31,6 +51,8 @@ export class AscMultiSelectComponent implements ControlValueAccessor {
     @Input()
     disabled: boolean = false;
 
+    @Input()
+    size: 'small' | 'standard' | 'large' = 'standard';
 
     @Input() selected: any;
 

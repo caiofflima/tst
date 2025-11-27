@@ -26,7 +26,9 @@ export class AscInputTextComponent extends BaseInputComponent implements OnInit 
     @Input()
     somenteNumeros: boolean;
     @Input()
-    isSearch: boolean
+    isSearch: boolean;
+    @Input()
+    override size: 'standard' | 'small' | 'large' = 'standard';
     @Output()
     onKeyup: EventEmitter<any>;
     @Output()

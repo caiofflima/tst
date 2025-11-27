@@ -32,6 +32,8 @@ export class AscInputDateComponent extends BaseInputComponent implements OnInit,
     monthNavigator: boolean;
     @Input()
     override required: boolean;
+    @Input()
+    override size: 'standard' | 'small' | 'large' = 'standard';
     @Output() change = new EventEmitter();
     pt: any;
     @Input()
