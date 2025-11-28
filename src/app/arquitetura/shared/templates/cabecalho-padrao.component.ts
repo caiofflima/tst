@@ -279,135 +279,43 @@ export class CabecalhoPadraoComponent implements OnInit, OnDestroy {
             const menuElement = document.querySelector('.menucx');
             if (!menuElement) return;
 
-            // ABORDAGEM AGRESSIVA: Interceptar todos os eventos e controlar manualmente
+            // Abordagem híbrida: deixar PrimeNG controlar abertura, mas forçar fechamento
             
-            // Desabilitar o comportamento padrão do PrimeNG
-            const rootItems = menuElement.querySelectorAll('.p-menubar-root-list > .p-menuitem');
-            
-            rootItems.forEach(rootItem => {
-                const item = rootItem as HTMLElement;
-                const link = item.querySelector('.p-menuitem-link') as HTMLElement;
-                const submenu = item.querySelector('.p-submenu-list') as HTMLElement;
-                
-                if (!submenu) return; // Se não tem submenu, pular
-                
-                // Prevenir o comportamento padrão do PrimeNG
-                if (link) {
-                    link.addEventListener('click', (e) => {
-                        if (submenu) {
-                            e.preventDefault();
-                            e.stopPropagation();
-                        }
-                    }, true);
-                }
-                
-                // Controlar abertura no mouseenter
-                item.addEventListener('mouseenter', () => {
-                    // Fechar outros menus do mesmo nível
-                    rootItems.forEach(otherItem => {
-                        if (otherItem !== item) {
-                            otherItem.classList.remove('p-menuitem-active');
-                            const otherSubmenu = otherItem.querySelector('.p-submenu-list') as HTMLElement;
-                            if (otherSubmenu) {
-                                otherSubmenu.style.display = 'none';
-                            }
-                        }
-                    });
-                    
-                    // Abrir este menu
-                    item.classList.add('p-menuitem-active');
-                    if (submenu) {
-                        submenu.style.display = 'block';
-                        submenu.style.visibility = 'visible';
-                        submenu.style.opacity = '1';
-                    }
-                });
-                
-                // Controlar fechamento no mouseleave
-                item.addEventListener('mouseleave', (e) => {
-                    const relatedTarget = (e as MouseEvent).relatedTarget as HTMLElement;
-                    
-                    // Verificar se o mouse foi para dentro do submenu
-                    if (submenu && submenu.contains(relatedTarget)) {
-                        return; // Não fechar se foi para o submenu
-                    }
-                    
-                    setTimeout(() => {
-                        // Verificar novamente se o mouse está dentro
-                        if (!item.matches(':hover')) {
-                            item.classList.remove('p-menuitem-active');
-                            if (submenu) {
-                                submenu.style.display = 'none';
-                            }
-                        }
-                    }, 100);
-                });
-            });
-            
-            // Controlar submenus aninhados
-            const allSubmenusItems = menuElement.querySelectorAll('.p-submenu-list .p-menuitem');
-            allSubmenusItems.forEach(subItem => {
-                const item = subItem as HTMLElement;
-                const nestedSubmenu = item.querySelector(':scope > .p-submenu-list') as HTMLElement;
-                
-                if (!nestedSubmenu) return;
-                
-                const link = item.querySelector('.p-menuitem-link') as HTMLElement;
-                if (link) {
-                    link.addEventListener('click', (e) => {
-                        if (nestedSubmenu) {
-                            e.preventDefault();
-                            e.stopPropagation();
-                        }
-                    }, true);
-                }
-                
-                item.addEventListener('mouseenter', () => {
-                    // Fechar irmãos
-                    const parent = item.parentElement;
-                    if (parent) {
-                        const siblings = parent.querySelectorAll(':scope > .p-menuitem');
-                        siblings.forEach(sibling => {
-                            if (sibling !== item) {
-                                sibling.classList.remove('p-menuitem-active');
-                                const siblingSubmenu = sibling.querySelector(':scope > .p-submenu-list') as HTMLElement;
-                                if (siblingSubmenu) {
-                                    siblingSubmenu.style.display = 'none';
-                                }
-                            }
-                        });
-                    }
-                    
-                    // Abrir este
-                    item.classList.add('p-menuitem-active');
-                    if (nestedSubmenu) {
-                        nestedSubmenu.style.display = 'block';
-                        nestedSubmenu.style.visibility = 'visible';
-                        nestedSubmenu.style.opacity = '1';
-                    }
-                });
-                
-                item.addEventListener('mouseleave', () => {
-                    setTimeout(() => {
-                        if (!item.matches(':hover')) {
-                            item.classList.remove('p-menuitem-active');
-                            if (nestedSubmenu) {
-                                nestedSubmenu.style.display = 'none';
-                            }
-                        }
-                    }, 100);
-                });
-            });
-            
-            // Fechar tudo ao sair do menu
+            // Forçar fechamento ao sair do menu principal
             menuElement.addEventListener('mouseleave', () => {
                 const allActive = menuElement.querySelectorAll('.p-menuitem-active');
                 allActive.forEach(item => {
                     item.classList.remove('p-menuitem-active');
-                    const submenu = item.querySelector('.p-submenu-list') as HTMLElement;
-                    if (submenu) {
-                        submenu.style.display = 'none';
-                    }
+                });
+            });
+
+            // Para cada item de menu na raiz - apenas controlar fechamento
+            const rootMenuItems = menuElement.querySelectorAll('.p-menubar-root-list > .p-menuitem');
+            rootMenuItems.forEach(item => {
+                const menuItem = item as HTMLElement;
+                
+                // Ao sair, verificar se deve fechar
+                menuItem.addEventListener('mouseleave', () => {
+                    setTimeout(() => {
+                        // Só fechar se realmente saiu (não está mais em hover)
+                        if (!menuItem.matches(':hover')) {
+                            menuItem.classList.remove('p-menuitem-active');
+                        }
+                    }, 150);
+                });
+            });
+
+            // Para submenus aninhados - apenas controlar fechamento
+            const submenuItems = menuElement.querySelectorAll('.p-submenu-list .p-menuitem');
+            submenuItems.forEach(item => {
+                const menuItem = item as HTMLElement;
+                
+                menuItem.addEventListener('mouseleave', () => {
+                    setTimeout(() => {
+                        if (!menuItem.matches(':hover')) {
+                            menuItem.classList.remove('p-menuitem-active');
+                        }
+                    }, 150);
                 });
             });
             

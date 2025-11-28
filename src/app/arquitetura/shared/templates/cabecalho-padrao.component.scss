@@ -14,18 +14,32 @@ body {
   }
 }
 
-// Comportamento de hover corrigido para Angular 16 - Controle via JavaScript
+// Comportamento de hover corrigido para Angular 16 - Híbrido com PrimeNG
 :host ::ng-deep .menucx {
-  // Configuração básica de posicionamento
+  // Garantir abertura imediata no hover
   .p-menubar-root-list {
     > .p-menuitem {
       position: relative;
+      
+      // Mostrar submenu no hover
+      &:hover > .p-submenu-list {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+      }
     }
   }
   
+  // Para submenus aninhados
   .p-submenu-list {
     > .p-menuitem {
       position: relative;
+      
+      &:hover > .p-submenu-list {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+      }
     }
   }
   
