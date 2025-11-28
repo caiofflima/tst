@@ -70,7 +70,7 @@ export abstract class BaseInputComponent extends BaseComponent implements OnInit
     uppercase: boolean = false;
 
     @Input()
-    size: 'small' | 'standard' | 'large' = 'standard';
+    size: 'small' | 'standard' | 'large' = 'large';
 
     get errors(): InputError[] {
         return this._errors.filter(e => this.control && this.control.errors[e.nomeErro]);

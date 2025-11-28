@@ -33,7 +33,7 @@ export class AscInputDateComponent extends BaseInputComponent implements OnInit,
     @Input()
     override required: boolean;
     @Input()
-    override size: 'standard' | 'small' | 'large' = 'standard';
+    override size: 'standard' | 'small' | 'large' = 'large';
     @Output() change = new EventEmitter();
     pt: any;
     @Input()

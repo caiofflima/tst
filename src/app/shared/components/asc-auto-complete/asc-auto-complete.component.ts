@@ -8,7 +8,7 @@ export abstract class AscAutoCompleteComponent<T> extends BaseSelectComponent<T>
     @Input()
     placeHolder: string;
     @Input()
-    override size: 'small' | 'standard' | 'large' = 'standard';
+    override size: 'small' | 'standard' | 'large' = 'large';
     @Input()
     minlength: number;
     @Output()

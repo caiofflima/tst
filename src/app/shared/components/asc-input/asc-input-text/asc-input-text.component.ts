@@ -28,7 +28,7 @@ export class AscInputTextComponent extends BaseInputComponent implements OnInit 
     @Input()
     isSearch: boolean;
     @Input()
-    override size: 'standard' | 'small' | 'large' = 'standard';
+    override size: 'standard' | 'small' | 'large' = 'large';
     @Output()
     onKeyup: EventEmitter<any>;
     @Output()

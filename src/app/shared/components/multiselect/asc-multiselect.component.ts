@@ -55,7 +55,7 @@ export class AscMultiSelectComponent implements ControlValueAccessor {
     disabled: boolean = false;
 
     @Input()
-    size: 'small' | 'standard' | 'large' = 'standard';
+    size: 'small' | 'standard' | 'large' = 'large';
 
     @Input() selected: any;
 
