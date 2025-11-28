@@ -49,6 +49,9 @@ export class AscMultiSelectComponent implements ControlValueAccessor {
     limit: number;
 
     @Input()
+    label: string = '';
+
+    @Input()
     disabled: boolean = false;
 
     @Input()
