@@ -13,20 +13,21 @@
   </div>
 
   <section class="row">
-    <form class="row"  [formGroup]="formulario" name="form">
-      <div class="form-row">
-        <div class="col-md-6 mb-15 pl-0">
-            <label class="control-label">Laboratórios</label>
-            <asc-multiSelect
-                    id="idListaLaboratorios"
-                    [options]="listComboLaboratorios"
-                    [control]="formulario.get('idListaLaboratorios')"
-                    (onChange)="buscarMedicamentos($event)"
-                    [selected]="listComboLaboratoriosSelected"> 
-            ></asc-multiSelect>
+    <form [formGroup]="formulario" name="form">
+      <!-- Grid usando Flexbox/Material layout -->
+      <div style="display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 16px;">
+        <div style="flex: 1; min-width: 300px;">
+          <label class="control-label">Laboratórios</label>
+          <asc-multiSelect
+                  id="idListaLaboratorios"
+                  [options]="listComboLaboratorios"
+                  [control]="formulario.get('idListaLaboratorios')"
+                  (onChange)="buscarMedicamentos($event)"
+                  [selected]="listComboLaboratoriosSelected"> 
+          ></asc-multiSelect>
         </div>
 
-        <div class="col-md-6 mb-15 pl-0">
+        <div style="flex: 1; min-width: 300px;">
           <label class="control-label">Medicamentos</label>
           <asc-multiSelect
                   id="idListaMedicamentos"
@@ -37,30 +38,28 @@
         </div>
       </div>
 
-      <div class="form-row">
-        <div class="col-md-12 pl-0">
-          <label class="control-label" for="apresentacao">Apresentação</label>&nbsp;<br>
+      <div style="display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 16px;">
+        <div style="flex: 1; min-width: 300px;">
+          <label class="control-label" for="apresentacao">Apresentação</label>
           <input type="text" id="apresentacao" name="apresentacao" formControlName="apresentacao"
                  class="form-control" [maxlength]="150" title="Apresentação">
         </div>
 
-        <div class="col-md-12 pl-0">
-          <label class="control-label" for="numeroTuss">Número TUSS</label>&nbsp;<br>
+        <div style="flex: 1; min-width: 300px;">
+          <label class="control-label" for="numeroTuss">Número TUSS</label>
           <input type="number" (input)="limitarTamanho($event)" id="numeroTuss" name="numeroTuss" formControlName="numeroTuss"
                  class="form-control" [maxlength]="10" title="Número Tuss">
         </div>
       </div>
 
-      <div class="form-row">
-        <div class="col-md-2 p-0">
-          <!--p-checkbox  id="ativos" name="ativos" binary="true" label="Somente ativos" 
-          formControlName="ativos" title="Marque para retornar apenas registros ATIVOS."></p-checkbox>-->
+      <div style="display: flex; flex-wrap: wrap; gap: 24px; margin-bottom: 16px; align-items: center;">
+        <div style="display: flex; align-items: center; gap: 8px;">
           <input type="checkbox" id="ativos" name="ativos" formControlName="ativos"
           title="Apresenta somente ativos" [value]="true" >
-          <label for="generico">Ativos</label>
+          <label for="ativos" style="margin: 0;">Ativos</label>
         </div>
 
-        <div class="col-md-2 p-0">
+        <div>
           <asc-checkbox label="Genérico" name="generico" formControlName="generico" [valoresTrueOrFalse]="true"></asc-checkbox>
         </div>
       </div>
