@@ -288,21 +288,63 @@ export class CabecalhoPadraoComponent implements OnInit, OnDestroy {
                 });
             });
 
-            // Para cada item de menu
-            const menuItems = menuElement.querySelectorAll('.p-menuitem');
-            menuItems.forEach(item => {
-                item.addEventListener('mouseleave', (event) => {
-                    const target = event.target as HTMLElement;
-                    const menuItem = target.closest('.p-menuitem');
-                    if (menuItem) {
-                        // Pequeno delay para permitir mover para o submenu
-                        setTimeout(() => {
-                            const isHovered = menuItem.matches(':hover');
-                            if (!isHovered) {
-                                menuItem.classList.remove('p-menuitem-active');
+            // Para cada item de menu na raiz
+            const rootMenuItems = menuElement.querySelectorAll('.p-menubar-root-list > .p-menuitem');
+            rootMenuItems.forEach(item => {
+                const menuItem = item as HTMLElement;
+                
+                // Ao entrar com o mouse, garantir que está pronto para abrir
+                menuItem.addEventListener('mouseenter', () => {
+                    // Remover active de outros itens no mesmo nível
+                    const siblings = menuElement.querySelectorAll('.p-menubar-root-list > .p-menuitem-active');
+                    siblings.forEach(sibling => {
+                        if (sibling !== menuItem) {
+                            sibling.classList.remove('p-menuitem-active');
+                        }
+                    });
+                });
+
+                // Ao sair com o mouse
+                menuItem.addEventListener('mouseleave', (event) => {
+                    const relatedTarget = (event as MouseEvent).relatedTarget as HTMLElement;
+                    
+                    // Verificar se o mouse foi para fora do item e seu submenu
+                    setTimeout(() => {
+                        const isHovered = menuItem.matches(':hover');
+                        const submenuHovered = menuItem.querySelector('.p-submenu-list:hover');
+                        
+                        if (!isHovered && !submenuHovered) {
+                            menuItem.classList.remove('p-menuitem-active');
+                        }
+                    }, 50);
+                });
+            });
+
+            // Para submenus aninhados
+            const submenuItems = menuElement.querySelectorAll('.p-submenu-list .p-menuitem');
+            submenuItems.forEach(item => {
+                const menuItem = item as HTMLElement;
+                
+                menuItem.addEventListener('mouseenter', () => {
+                    // Remover active de itens irmãos
+                    const parent = menuItem.parentElement;
+                    if (parent) {
+                        const siblings = parent.querySelectorAll(':scope > .p-menuitem-active');
+                        siblings.forEach(sibling => {
+                            if (sibling !== menuItem) {
+                                sibling.classList.remove('p-menuitem-active');
                             }
-                        }, 100);
+                        });
                     }
+                });
+                
+                menuItem.addEventListener('mouseleave', () => {
+                    setTimeout(() => {
+                        const isHovered = menuItem.matches(':hover');
+                        if (!isHovered) {
+                            menuItem.classList.remove('p-menuitem-active');
+                        }
+                    }, 50);
                 });
             });
             
