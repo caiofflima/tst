@@ -72,6 +72,10 @@ export class CabecalhoPadraoComponent implements OnInit, OnDestroy {
         this.montarMenuDinamico();
         this.pesquisarFuncao();
         this.matricula
+        
+        // Configurar comportamento de hover para o menu
+        this.setupMenuHoverBehavior();
+        
         if (SessaoService.usuario.menu && SessaoService.usuario.menu.map(m => m.label).filter( m => m.includes('Atendimento'))) {
             this.atendimentoService.get().pipe(take(1)).subscribe((atendimento: any) => {
                 if (atendimento) {
@@ -267,5 +271,40 @@ export class CabecalhoPadraoComponent implements OnInit, OnDestroy {
             descricao: desc,
         }
         return situacao;
+    }
+
+    private setupMenuHoverBehavior(): void {
+        // Aguardar o DOM ser renderizado
+        setTimeout(() => {
+            const menuElement = document.querySelector('.menucx');
+            if (!menuElement) return;
+
+            // Adicionar listeners para fechar menus ao sair
+            menuElement.addEventListener('mouseleave', () => {
+                // Remover todas as classes p-menuitem-active ao sair do menu
+                const activeItems = menuElement.querySelectorAll('.p-menuitem-active');
+                activeItems.forEach(item => {
+                    item.classList.remove('p-menuitem-active');
+                });
+            });
+
+            // Para cada item de menu
+            const menuItems = menuElement.querySelectorAll('.p-menuitem');
+            menuItems.forEach(item => {
+                item.addEventListener('mouseleave', (event) => {
+                    const target = event.target as HTMLElement;
+                    const menuItem = target.closest('.p-menuitem');
+                    if (menuItem) {
+                        // Pequeno delay para permitir mover para o submenu
+                        setTimeout(() => {
+                            const isHovered = menuItem.matches(':hover');
+                            if (!isHovered) {
+                                menuItem.classList.remove('p-menuitem-active');
+                            }
+                        }, 100);
+                    }
+                });
+            });
+        }, 500);
     }
 }

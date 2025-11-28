@@ -16,44 +16,49 @@ body {
 
 // Comportamento de hover corrigido para Angular 16
 :host ::ng-deep .menucx {
-  // Hover behavior para menus de primeiro nível
+  // Garantir que menus fechem quando mouse sai
   .p-menubar-root-list {
     > .p-menuitem {
       position: relative;
       
-      > .p-submenu-list {
+      // Esconder submenu quando não está em hover E não está ativo
+      &:not(:hover):not(.p-menuitem-active) > .p-submenu-list {
         display: none !important;
-        opacity: 0;
-        visibility: hidden;
-        transition: opacity 0.15s ease, visibility 0.15s ease;
-      }
-      
-      &:hover > .p-submenu-list {
-        display: block !important;
-        opacity: 1;
-        visibility: visible;
       }
     }
   }
   
-  // Hover behavior para submenus de segundo e terceiro nível
+  // Para submenus aninhados também
   .p-submenu-list {
-    .p-menuitem {
+    > .p-menuitem {
       position: relative;
       
-      > .p-submenu-list {
+      &:not(:hover):not(.p-menuitem-active) > .p-submenu-list {
         display: none !important;
-        opacity: 0;
-        visibility: hidden;
-        transition: opacity 0.15s ease, visibility 0.15s ease;
-      }
-      
-      &:hover > .p-submenu-list {
-        display: block !important;
-        opacity: 1;
-        visibility: visible;
       }
     }
+  }
+  
+  // FORÇAR posicionamento correto dos submenus aninhados
+  // Submenus de primeiro nível (direto da root) abrem para BAIXO
+  .p-menubar-root-list > .p-menuitem > .p-submenu-list {
+    position: absolute !important;
+    top: 100% !important;
+    left: 0 !important;
+    right: auto !important;
+    bottom: auto !important;
+    transform: none !important;
+  }
+  
+  // Submenus de segundo nível em diante abrem para o LADO
+  .p-submenu-list .p-menuitem > .p-submenu-list {
+    position: absolute !important;
+    top: 0 !important;
+    left: 100% !important;
+    right: auto !important;
+    bottom: auto !important;
+    transform: none !important;
+    margin-top: 0 !important;
   }
 }
 
@@ -451,20 +456,6 @@ body {
             }
           }
         }
-
-        p-menubarsub{
-          .p-submenu-list{
-            background:linear-gradient(to bottom, #f6f7f9 0%, #ebedf0 100%);
-            padding: .5em .75em .25em .75em !important;
-            .p-menuitem{
-              a.p-element{
-                padding: 0.5em;
-                border-radius: 3px;
-                text-decoration: none !important;
-              }
-            }
-          }
-        }
       }
 
       ul {
@@ -504,15 +495,18 @@ body {
         border: none;
         box-shadow: 0 3px 3px 0 #00000047;
         padding: 0.5em 0.75em 0.25em 0.75em !important;
+        background:linear-gradient(to bottom, #f6f7f9 0%, #ebedf0 100%);
 
         > li {
           border-right: 0 solid #b3c7cb !important;
           padding: 0;
+          position: relative;
 
           > a {
             padding: 0.5em;
             white-space: nowrap;
             text-decoration: none !important;
+            border-radius: 3px;
 
             span:nth-of-type(2)::before {
               content: "\f054";
@@ -520,17 +514,32 @@ body {
             }
           }
 
-          // Submenus de segundo nível (abre para o lado)
+          // Submenus de segundo nível (abre para o lado direito, alinhado com o topo)
           > .p-submenu-list {
-            position: absolute;
+            position: absolute !important;
             top: 0 !important;
             left: 100% !important;
-            margin-left: -4px;
+            right: auto !important;
+            bottom: auto !important;
+            margin-left: 0px !important;
+            margin-top: 0px !important;
+            transform: none !important;
             border-radius: 4px;
+            width: auto;
+            z-index: 100;
+            background:linear-gradient(to bottom, #f6f7f9 0%, #ebedf0 100%);
+            box-shadow: 0 3px 3px 0 #00000047;
+            padding: 0.5em 0.75em 0.25em 0.75em !important;
             
             li {
+              position: relative;
+              
               a {
                 text-decoration: none !important;
+                padding: 0.5em;
+                border-radius: 3px;
+                display: block;
+                white-space: nowrap;
                 
                 span:nth-of-type(2)::before {
                   content: "";
