@@ -14,42 +14,18 @@ body {
   }
 }
 
-// Comportamento de hover corrigido para Angular 16
+// Comportamento de hover corrigido para Angular 16 - Controle via JavaScript
 :host ::ng-deep .menucx {
-  // Garantir que menus abram imediatamente no hover
+  // Configuração básica de posicionamento
   .p-menubar-root-list {
     > .p-menuitem {
       position: relative;
-      
-      // Mostrar submenu no hover, independente do estado
-      &:hover > .p-submenu-list {
-        display: block !important;
-        opacity: 1 !important;
-        visibility: visible !important;
-      }
-      
-      // Esconder submenu quando não está em hover E não está ativo
-      &:not(:hover):not(.p-menuitem-active) > .p-submenu-list {
-        display: none !important;
-      }
     }
   }
   
-  // Para submenus aninhados também
   .p-submenu-list {
     > .p-menuitem {
       position: relative;
-      
-      // Mostrar submenu no hover
-      &:hover > .p-submenu-list {
-        display: block !important;
-        opacity: 1 !important;
-        visibility: visible !important;
-      }
-      
-      &:not(:hover):not(.p-menuitem-active) > .p-submenu-list {
-        display: none !important;
-      }
     }
   }
   

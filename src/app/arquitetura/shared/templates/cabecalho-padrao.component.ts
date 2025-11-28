@@ -279,72 +279,135 @@ export class CabecalhoPadraoComponent implements OnInit, OnDestroy {
             const menuElement = document.querySelector('.menucx');
             if (!menuElement) return;
 
-            // Adicionar listeners para fechar menus ao sair
-            menuElement.addEventListener('mouseleave', () => {
-                // Remover todas as classes p-menuitem-active ao sair do menu
-                const activeItems = menuElement.querySelectorAll('.p-menuitem-active');
-                activeItems.forEach(item => {
-                    item.classList.remove('p-menuitem-active');
-                });
-            });
-
-            // Para cada item de menu na raiz
-            const rootMenuItems = menuElement.querySelectorAll('.p-menubar-root-list > .p-menuitem');
-            rootMenuItems.forEach(item => {
-                const menuItem = item as HTMLElement;
+            // ABORDAGEM AGRESSIVA: Interceptar todos os eventos e controlar manualmente
+            
+            // Desabilitar o comportamento padrão do PrimeNG
+            const rootItems = menuElement.querySelectorAll('.p-menubar-root-list > .p-menuitem');
+            
+            rootItems.forEach(rootItem => {
+                const item = rootItem as HTMLElement;
+                const link = item.querySelector('.p-menuitem-link') as HTMLElement;
+                const submenu = item.querySelector('.p-submenu-list') as HTMLElement;
                 
-                // Ao entrar com o mouse, garantir que está pronto para abrir
-                menuItem.addEventListener('mouseenter', () => {
-                    // Remover active de outros itens no mesmo nível
-                    const siblings = menuElement.querySelectorAll('.p-menubar-root-list > .p-menuitem-active');
-                    siblings.forEach(sibling => {
-                        if (sibling !== menuItem) {
-                            sibling.classList.remove('p-menuitem-active');
+                if (!submenu) return; // Se não tem submenu, pular
+                
+                // Prevenir o comportamento padrão do PrimeNG
+                if (link) {
+                    link.addEventListener('click', (e) => {
+                        if (submenu) {
+                            e.preventDefault();
+                            e.stopPropagation();
+                        }
+                    }, true);
+                }
+                
+                // Controlar abertura no mouseenter
+                item.addEventListener('mouseenter', () => {
+                    // Fechar outros menus do mesmo nível
+                    rootItems.forEach(otherItem => {
+                        if (otherItem !== item) {
+                            otherItem.classList.remove('p-menuitem-active');
+                            const otherSubmenu = otherItem.querySelector('.p-submenu-list') as HTMLElement;
+                            if (otherSubmenu) {
+                                otherSubmenu.style.display = 'none';
+                            }
                         }
                     });
-                });
-
-                // Ao sair com o mouse
-                menuItem.addEventListener('mouseleave', (event) => {
-                    const relatedTarget = (event as MouseEvent).relatedTarget as HTMLElement;
                     
-                    // Verificar se o mouse foi para fora do item e seu submenu
-                    setTimeout(() => {
-                        const isHovered = menuItem.matches(':hover');
-                        const submenuHovered = menuItem.querySelector('.p-submenu-list:hover');
-                        
-                        if (!isHovered && !submenuHovered) {
-                            menuItem.classList.remove('p-menuitem-active');
-                        }
-                    }, 50);
-                });
-            });
-
-            // Para submenus aninhados
-            const submenuItems = menuElement.querySelectorAll('.p-submenu-list .p-menuitem');
-            submenuItems.forEach(item => {
-                const menuItem = item as HTMLElement;
-                
-                menuItem.addEventListener('mouseenter', () => {
-                    // Remover active de itens irmãos
-                    const parent = menuItem.parentElement;
-                    if (parent) {
-                        const siblings = parent.querySelectorAll(':scope > .p-menuitem-active');
-                        siblings.forEach(sibling => {
-                            if (sibling !== menuItem) {
-                                sibling.classList.remove('p-menuitem-active');
-                            }
-                        });
+                    // Abrir este menu
+                    item.classList.add('p-menuitem-active');
+                    if (submenu) {
+                        submenu.style.display = 'block';
+                        submenu.style.visibility = 'visible';
+                        submenu.style.opacity = '1';
                     }
                 });
                 
-                menuItem.addEventListener('mouseleave', () => {
+                // Controlar fechamento no mouseleave
+                item.addEventListener('mouseleave', (e) => {
+                    const relatedTarget = (e as MouseEvent).relatedTarget as HTMLElement;
+                    
+                    // Verificar se o mouse foi para dentro do submenu
+                    if (submenu && submenu.contains(relatedTarget)) {
+                        return; // Não fechar se foi para o submenu
+                    }
+                    
                     setTimeout(() => {
-                        const isHovered = menuItem.matches(':hover');
-                        if (!isHovered) {
-                            menuItem.classList.remove('p-menuitem-active');
+                        // Verificar novamente se o mouse está dentro
+                        if (!item.matches(':hover')) {
+                            item.classList.remove('p-menuitem-active');
+                            if (submenu) {
+                                submenu.style.display = 'none';
+                            }
                         }
-                    }, 50);
+                    }, 100);
+                });
+            });
+            
+            // Controlar submenus aninhados
+            const allSubmenusItems = menuElement.querySelectorAll('.p-submenu-list .p-menuitem');
+            allSubmenusItems.forEach(subItem => {
+                const item = subItem as HTMLElement;
+                const nestedSubmenu = item.querySelector(':scope > .p-submenu-list') as HTMLElement;
+                
+                if (!nestedSubmenu) return;
+                
+                const link = item.querySelector('.p-menuitem-link') as HTMLElement;
+                if (link) {
+                    link.addEventListener('click', (e) => {
+                        if (nestedSubmenu) {
+                            e.preventDefault();
+                            e.stopPropagation();
+                        }
+                    }, true);
+                }
+                
+                item.addEventListener('mouseenter', () => {
+                    // Fechar irmãos
+                    const parent = item.parentElement;
+                    if (parent) {
+                        const siblings = parent.querySelectorAll(':scope > .p-menuitem');
+                        siblings.forEach(sibling => {
+                            if (sibling !== item) {
+                                sibling.classList.remove('p-menuitem-active');
+                                const siblingSubmenu = sibling.querySelector(':scope > .p-submenu-list') as HTMLElement;
+                                if (siblingSubmenu) {
+                                    siblingSubmenu.style.display = 'none';
+                                }
+                            }
+                        });
+                    }
+                    
+                    // Abrir este
+                    item.classList.add('p-menuitem-active');
+                    if (nestedSubmenu) {
+                        nestedSubmenu.style.display = 'block';
+                        nestedSubmenu.style.visibility = 'visible';
+                        nestedSubmenu.style.opacity = '1';
+                    }
+                });
+                
+                item.addEventListener('mouseleave', () => {
+                    setTimeout(() => {
+                        if (!item.matches(':hover')) {
+                            item.classList.remove('p-menuitem-active');
+                            if (nestedSubmenu) {
+                                nestedSubmenu.style.display = 'none';
+                            }
+                        }
+                    }, 100);
+                });
+            });
+            
+            // Fechar tudo ao sair do menu
+            menuElement.addEventListener('mouseleave', () => {
+                const allActive = menuElement.querySelectorAll('.p-menuitem-active');
+                allActive.forEach(item => {
+                    item.classList.remove('p-menuitem-active');
+                    const submenu = item.querySelector('.p-submenu-list') as HTMLElement;
+                    if (submenu) {
+                        submenu.style.display = 'none';
+                    }
                 });
             });
             
