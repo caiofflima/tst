@@ -305,6 +305,38 @@ export class CabecalhoPadraoComponent implements OnInit, OnDestroy {
                     }
                 });
             });
+            
+            // Forçar posicionamento correto de submenus aninhados
+            this.fixNestedSubmenuPositioning();
         }, 500);
+    }
+
+    private fixNestedSubmenuPositioning(): void {
+        // Observar mudanças no DOM para reposicionar submenus quando aparecem
+        const observer = new MutationObserver(() => {
+            const nestedSubmenus = document.querySelectorAll('.p-submenu-list .p-submenu-list');
+            nestedSubmenus.forEach((submenu: Element) => {
+                const htmlSubmenu = submenu as HTMLElement;
+                // Forçar posicionamento ao lado, não abaixo
+                htmlSubmenu.style.position = 'absolute';
+                htmlSubmenu.style.top = '0';
+                htmlSubmenu.style.left = '100%';
+                htmlSubmenu.style.right = 'auto';
+                htmlSubmenu.style.bottom = 'auto';
+                htmlSubmenu.style.marginTop = '0';
+                htmlSubmenu.style.marginLeft = '0';
+                htmlSubmenu.style.transform = 'none';
+            });
+        });
+
+        const menuElement = document.querySelector('.menucx');
+        if (menuElement) {
+            observer.observe(menuElement, {
+                childList: true,
+                subtree: true,
+                attributes: true,
+                attributeFilter: ['class', 'style']
+            });
+        }
     }
 }

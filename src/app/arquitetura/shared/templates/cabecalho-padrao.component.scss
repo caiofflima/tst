@@ -51,7 +51,9 @@ body {
   }
   
   // Submenus de segundo nível em diante abrem para o LADO
-  .p-submenu-list .p-menuitem > .p-submenu-list {
+  // Usar seletor mais específico para garantir prioridade
+  .p-menubar-root-list .p-submenu-list .p-menuitem > .p-submenu-list,
+  .p-submenu-list .p-submenu-list {
     position: absolute !important;
     top: 0 !important;
     left: 100% !important;
@@ -59,7 +61,44 @@ body {
     bottom: auto !important;
     transform: none !important;
     margin-top: 0 !important;
+    margin-left: 0 !important;
   }
+  
+  // Garantir que TODOS os submenus dentro de submenus abram ao lado
+  .p-submenu-list {
+    .p-submenu-list {
+      position: absolute !important;
+      top: 0 !important;
+      left: 100% !important;
+      right: auto !important;
+      bottom: auto !important;
+      transform: none !important;
+      margin: 0 !important;
+    }
+  }
+}
+
+// Regra global ultra específica para garantir submenus aninhados
+:host ::ng-deep .menucx .p-submenu-list .p-menuitem .p-submenu-list {
+  position: absolute !important;
+  top: 0 !important;
+  left: 100% !important;
+  right: auto !important;
+  bottom: auto !important;
+  transform: none !important;
+  margin: 0 !important;
+}
+
+// Regra ainda mais específica para forçar posicionamento
+:host ::ng-deep .p-menubar .p-submenu-list .p-submenu-list,
+:host ::ng-deep .menucx ul.p-submenu-list ul.p-submenu-list {
+  position: absolute !important;
+  top: 0 !important;
+  left: 100% !important;
+  right: auto !important;
+  bottom: auto !important;
+  transform: none !important;
+  margin: 0 !important;
 }
 
 .caixax {
