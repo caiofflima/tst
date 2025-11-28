@@ -54,7 +54,7 @@
         <div class="row col-xs-6">
           <br>
           <label class="control-label" for="prestadorExclusivo">
-            <p-checkbox name="prestadorExclusivo"  [binary]="true" formControlName="prestadorExclusivo" inputId="prestadorExclusivo"></p-checkbox>
+            <asc-checkbox name="prestadorExclusivo" formControlName="prestadorExclusivo" [valoresTrueOrFalse]="true"></asc-checkbox>
             Exclusivo para prestador
           </label>
   
@@ -65,11 +65,7 @@
       <div *ngIf="id;" style="padding-top: 10px" class="form-row mb-15 ">
         
             <div class="row col-xs-3">
-              <p-checkbox
-                inputId="inativo" name="inativo" formControlName="inativo" [binary]="true"
-                (onChange)="onChangeInativo($event)"
-              ></p-checkbox>
-              <label class="control-label" for="inativo">Inativo</label>
+              <asc-checkbox label="Inativo" name="inativo" formControlName="inativo" [valoresTrueOrFalse]="true" (ngModelChange)="onChangeInativo($event)"></asc-checkbox>
             </div>
 
             
@@ -106,12 +102,12 @@
           *ngIf="loadingRM"
             class="loading-spinner"
           >
-            <p-progressSpinner
+            <dsc-progress-spinner
               animationDuration=".5s"
               strokeWidth="4"
               [style]="{ width: '100%', height: '100%' }"
             >
-            </p-progressSpinner>
+            </dsc-progress-spinner>
           </span>
         </button>
         <button
@@ -134,12 +130,12 @@
             *ngIf="loading"
             class="loading-spinner"
           >
-            <p-progressSpinner
+            <dsc-progress-spinner
               animationDuration=".5s"
               strokeWidth="4"
               [style]="{ width: '100%', height: '100%' }"
             >
-            </p-progressSpinner>
+            </dsc-progress-spinner>
           </span>
         </button>
       </div>

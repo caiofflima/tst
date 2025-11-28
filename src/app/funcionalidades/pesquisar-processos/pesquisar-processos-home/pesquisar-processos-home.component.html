@@ -39,78 +39,67 @@
           </div>
 
           <div class="form-field form-field--medium">
-            <dsc-select
-              label="Tipo de Pedido"
-              [options]="optionsTipoProcesso"
-              [formControl]="$any(formulario.get('tiposProcesso'))"
-              [multiple]="true"
-              [showFilter]="true"
-              placeholder="Selecione os tipos"
-            ></dsc-select>
+            <asc-dropdown
+  [control]="$any(formulario.get('tiposProcesso'))"
+  [items]="optionsTipoProcesso"
+  placeholder="Selecione os tipos"
+  label="Tipo de Pedido"
+></asc-dropdown>
           </div>
 
           <div class="form-field form-field--medium">
-            <dsc-select
-              label="Situação do Pedido"
-              [options]="optionsSituacaoProcesso"
-              [formControl]="$any(formulario.get('situacoesProcesso'))"
-              [multiple]="true"
-              [showFilter]="true"
-              placeholder="Selecione as situações"
-            ></dsc-select>
+            <asc-dropdown
+  [control]="$any(formulario.get('situacoesProcesso'))"
+  [items]="optionsSituacaoProcesso"
+  placeholder="Selecione as situações"
+  label="Situação do Pedido"
+></asc-dropdown>
           </div>
 
           <div class="form-field form-field--medium">
-            <dsc-select
-              label="Condição do Pedido"
-              [options]="optionsCondicaoProcesso"
-              [formControl]="$any(formulario.get('condicaoProcesso'))"
-              [showFilter]="true"
-              [placeholder]="bundle('MHSPH')"
-            ></dsc-select>
+            <asc-dropdown
+  [control]="$any(formulario.get('condicaoProcesso'))"
+  [items]="optionsCondicaoProcesso"
+  [placeholder]="bundle('MHSPH')"
+  label="Condição do Pedido"
+></asc-dropdown>
           </div>
 
           <div class="form-field form-field--small">
-            <dsc-select
-              label="UF"
-              [options]="optionsUF"
-              [formControl]="$any(formulario.get('ufsProcesso'))"
-              [multiple]="true"
-              [showFilter]="true"
-              placeholder="Selecione as UFs"
-            ></dsc-select>
+            <asc-dropdown
+  [control]="$any(formulario.get('ufsProcesso'))"
+  [items]="optionsUF"
+  placeholder="Selecione as UFs"
+  label="UF"
+></asc-dropdown>
           </div>
 
           <div class="form-field form-field--medium">
-            <dsc-select
-              label="Agrupadora"
-              [options]="optionsFilial"
-              [formControl]="$any(formulario.get('filiaisProcesso'))"
-              [multiple]="true"
-              [showFilter]="true"
-              placeholder="Selecione as filiais"
-            ></dsc-select>
+            <asc-dropdown
+  [control]="$any(formulario.get('filiaisProcesso'))"
+  [items]="optionsFilial"
+  placeholder="Selecione as filiais"
+  label="Agrupadora"
+></asc-dropdown>
           </div>
 
           <div class="form-field form-field--small">
-            <dsc-select
-              label="UF de Atendimento"
-              [options]="optionsUF"
-              [formControl]="$any(formulario.get('ufAtendimento'))"
-              [showFilter]="true"
-              [placeholder]="bundle('MHSPH')"
-              (selectionChange)="onChangeUFAtendimento()"
-            ></dsc-select>
+            <asc-dropdown
+  [control]="$any(formulario.get('ufAtendimento'))"
+  [items]="optionsUF"
+  [placeholder]="bundle('MHSPH')"
+  label="UF de Atendimento"
+  (selected)="onChangeUFAtendimento()"
+></asc-dropdown>
           </div>
 
           <div class="form-field form-field--medium">
-            <dsc-select
-              label="Município de Atendimento"
-              [options]="optionsMunicipio"
-              [formControl]="$any(formulario.get('municipioAtendimento'))"
-              [showFilter]="true"
-              [placeholder]="bundle('MHSPH')"
-            ></dsc-select>
+            <asc-dropdown
+  [control]="$any(formulario.get('municipioAtendimento'))"
+  [items]="optionsMunicipio"
+  [placeholder]="bundle('MHSPH')"
+  label="Município de Atendimento"
+></asc-dropdown>
           </div>
         </div>
       </div>
@@ -121,14 +110,12 @@
         
         <div class="form-grid">
           <div class="form-field form-field--medium">
-            <dsc-select
-              label="Tipo de Beneficiário"
-              [options]="optionsTipoBeneficiario"
-              [formControl]="$any(formulario.get('tiposBeneficiario'))"
-              [multiple]="true"
-              [showFilter]="true"
-              placeholder="Selecione os tipos"
-            ></dsc-select>
+            <asc-dropdown
+  [control]="$any(formulario.get('tiposBeneficiario'))"
+  [items]="optionsTipoBeneficiario"
+  placeholder="Selecione os tipos"
+  label="Tipo de Beneficiário"
+></asc-dropdown>
           </div>
 
           <div class="form-field form-field--small">
@@ -165,13 +152,12 @@
           </div>
 
           <div class="form-field form-field--medium">
-            <dsc-select
-              label="Caráter da Solicitação"
-              [options]="optionsCaraterSolicitacao"
-              [formControl]="$any(formulario.get('caraterSolicitacao'))"
-              [showFilter]="true"
-              [placeholder]="bundle('MHSPH')"
-            ></dsc-select>
+            <asc-dropdown
+  [control]="$any(formulario.get('caraterSolicitacao'))"
+  [items]="optionsCaraterSolicitacao"
+  [placeholder]="bundle('MHSPH')"
+  label="Caráter da Solicitação"
+></asc-dropdown>
           </div>
 
           <div class="form-field form-field--small">

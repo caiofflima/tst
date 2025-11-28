@@ -45,8 +45,7 @@
       </div>
       <div class="form-row">
         <div class="col-md-2 p-0">
-          <p-checkbox name="ativos" inputId="ativos" value="S" [(ngModel)]="filtro.somenteAtivo"></p-checkbox>
-          <label for="ativos">Somente ativos</label>
+          <asc-checkbox label="Somente ativos" name="ativos" [(ngModel)]="filtro.somenteAtivo" [valoresTrueOrFalse]="false"></asc-checkbox>
         </div>
       </div>
 

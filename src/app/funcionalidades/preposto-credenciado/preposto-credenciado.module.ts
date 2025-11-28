@@ -13,6 +13,7 @@ import { ComposicaoPedidoModule } from 'app/shared/components/pedido/composicao-
 import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
 import { PrimeNGModule } from 'app/shared/primeng.module';
 import { PipeModule } from 'app/shared/pipes/pipe.module';
+import { AscSelectModule } from 'app/shared/components/asc-select/asc-select.module';
 
 @NgModule( {
     imports: [
@@ -26,7 +27,8 @@ import { PipeModule } from 'app/shared/pipes/pipe.module';
         ComposicaoPedidoModule,
 		NgxMaskDirective, NgxMaskPipe,
 		PrimeNGModule,
-		PipeModule
+		PipeModule,
+		AscSelectModule
     ],
     declarations: [
         EmpresaCredenciadaHomeComponent,

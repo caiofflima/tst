@@ -1,11 +1,10 @@
 import {AfterViewInit, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
-import {SelectItem} from 'primeng/api';
 import {isNotUndefinedNullOrEmpty} from '../../../constantes';
 import {AbstractControl} from '@angular/forms';
 import {Subject} from 'rxjs';
 import {MessageService} from '../../messages/message.service';
 import {takeUntil, tap} from "rxjs/operators";
-import {Dropdown} from "primeng/dropdown";
+import {Option} from 'sidsc-components/dsc-select';
 
 @Component({
     selector: 'asc-dropdown',
@@ -39,14 +38,14 @@ export class AscDropdownComponent implements OnInit, OnDestroy, AfterViewInit {
     @Output()
     filter = new EventEmitter<string>();
     @ViewChild("dropdownElement")
-    private dropDown: Dropdown;
+    private dropDown: any;
     @Input()
     index: number = null;
 
     private inputFilter: HTMLInputElement;
     private readonly value$ = new EventEmitter<any>()
 
-    options: SelectItem[] = [{label: this.placeholder || this.bundle('MHSPH'), value: null}];
+    options: Option[] = [{label: this.placeholder || this.bundle('MHSPH'), value: null}];
 
     private readonly unsubscribeSubject = new Subject<void>();
 
@@ -57,10 +56,21 @@ export class AscDropdownComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
     @Input()
-    set items(items: SelectItem[]) {
+    set items(items: any[]) {
         this.options = [{label: this.placeholder || this.bundle('MHSPH'), value: null}];
         if (isNotUndefinedNullOrEmpty(items)) {
-            this.options = [...this.options, ...items];
+            // Converter para formato Option se necessário
+            const converted = items.map(item => {
+                if (item.label && item.value !== undefined) {
+                    return item as Option;
+                }
+                // Se for DadoComboDTO ou similar
+                return {
+                    label: item.label || item.descricao || '',
+                    value: item.value !== undefined ? item.value : item.id
+                } as Option;
+            });
+            this.options = [...this.options, ...converted];
         }
     }
 
@@ -70,18 +80,15 @@ export class AscDropdownComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
     ngAfterViewInit() {
-        this.inputFilter = this.dropDown.containerViewChild.nativeElement.querySelector('input.ui-dropdown-filter') as HTMLInputElement;
-        if(!this.inputFilter)
-        return
-        this.inputFilter.onkeyup = this.onFiltro;
-        this.inputFilter.onreset = this.onFiltro;
-
-        this.control.statusChanges.subscribe(() => {
-            if (!this.control.touched) {
-                this.inputFilter.value = "";
-                this.filter.emit("");
-            }
-        })
+        // DSC-SELECT não precisa de manipulação manual do filtro
+        // O componente já tem filtro integrado via showFilter
+        if (this.control) {
+            this.control.statusChanges.subscribe(() => {
+                if (!this.control.touched) {
+                    this.filter.emit("");
+                }
+            });
+        }
     }
 
     private onFiltro = (event: KeyboardEvent): void => {
@@ -113,7 +120,8 @@ export class AscDropdownComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
     onChange(valor: any): void {
-        this.value$.emit(valor.value)
+        // DSC-SELECT emite o valor diretamente, não um objeto {value: ...}
+        this.value$.emit(valor)
     }
 
     private registerOnChangeValue(): void {

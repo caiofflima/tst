@@ -36,16 +36,12 @@
 
       <div class="row col-xs-2">
         <label class="control-label" for="ufA">UF Atendimento</label>
-        <p-dropdown
-          class="form-control2"
-          id="ufA"
-          [options]="listComboUF"
-          [filter]="true"
-          [placeholder]="this.bundle('MHSPH')"
-          title="Filtrar por UF de atendimento."
-          formControlName="ufAtendimento"
-          optionLabel="label"
-        ></p-dropdown>
+        <asc-dropdown
+  [control]="formulario.get('ufAtendimento')"
+  [items]="listComboUF"
+  [placeholder]="this.bundle('MHSPH')"
+  id="ufA"
+></asc-dropdown>
       </div>
 
       <div class="row col-xs-6">
@@ -61,15 +57,12 @@
         <label class="control-label" for="idMotivoSolicitacao"
           >Finalidade</label
         >
-        <p-dropdown
-          class="form-control2"
-          id="idMotivoSolicitacao"
-          [options]="listComboFinalidade"
-          formControlName="idMotivoSolicitacao"
-          [filter]="true"
-          [placeholder]="this.bundle('MHSPH')"
-          title="{{ bundle('MHSPH') }}"
-        ></p-dropdown>
+        <asc-dropdown
+  [control]="formulario.get('idMotivoSolicitacao')"
+  [items]="listComboFinalidade"
+  [placeholder]="this.bundle('MHSPH')"
+  id="idMotivoSolicitacao"
+></asc-dropdown>
       </div>
 
       <div class="row col-xs-6">
@@ -124,13 +117,13 @@
         @fadeInOut
       >
         <span *ngIf="loadingAnalitico">
-          <p-progressSpinner
+          <dsc-progress-spinner
             [style]="{ width: '23px', height: '23px' }"
             animationDuration=".5s"
             fill="#EEEEEE"
             strokeWidth="4"
           >
-          </p-progressSpinner>
+          </dsc-progress-spinner>
         </span>
         <span *ngIf="!loadingAnalitico">
           <span class="fa fa-list-alt fa-fw"></span>Analítico

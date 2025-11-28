@@ -320,15 +320,12 @@
               </div>
               <div class="ui-g-6">
                 <label class="control-label">Tipo deficiência</label>
-                <p-dropdown
-                  class="form-control2"
-                  [options]="tipoDeficiencias"
-                  [placeholder]="this.bundle('MHSPH')"
-                  name="idTipoDeficiencia"
-                  formControlName="idTipoDeficiencia"
-                  optionLabel="descricao"
-                  (onChange)="tipoDeficienciaSelecionado($event)"
-                ></p-dropdown>
+                <asc-dropdown
+  [control]="formularioSolicitacao.get('idTipoDeficiencia')"
+  [items]="tipoDeficiencias"
+  [placeholder]="this.bundle('MHSPH')"
+  (selected)="tipoDeficienciaSelecionado($event)"
+></asc-dropdown>
               </div>
             </div>
             <div class="ui-g">

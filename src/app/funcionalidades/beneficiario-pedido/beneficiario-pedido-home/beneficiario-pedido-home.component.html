@@ -38,13 +38,7 @@
         
         <div class="form-row">
           <div class="col-md-6 mb-15 pl-0">
-            <p-checkbox
-              formControlName="somenteAtivos"
-              label="Somente ativos"
-              [binary]="true"
-              inputId="ativos"
-              (onChange)="onChangeInativo($event)"
-            ></p-checkbox>
+            <asc-checkbox name="ativos" formControlName="somenteAtivos" [valoresTrueOrFalse]="true" (ngModelChange)="onChangeInativo($event)"></asc-checkbox>
           </div>
           
         </div>

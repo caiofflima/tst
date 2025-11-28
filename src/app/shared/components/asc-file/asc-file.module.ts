@@ -5,11 +5,13 @@ import {UploadFileService} from './services/upload-file.service';
 import {FiltrarArquivoPorPipe} from './pipes/filtrar-arquivo-por.pipe';
 import {CustomCardDocumentoComponent} from './custom-card-documento/custom-card-documento.component';
 import {ProgressSpinnerModule} from "primeng/progressspinner";
+import {DscCaixaModule} from 'app/shared/dsc-caixa/dsc-caixa.module';
 
 @NgModule({
   imports: [
     CommonModule,
     ProgressSpinnerModule,
+    DscCaixaModule
   ],
   declarations: [
     AscFileSelectorComponent,

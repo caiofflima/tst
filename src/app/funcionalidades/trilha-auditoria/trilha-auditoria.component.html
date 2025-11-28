@@ -34,14 +34,12 @@
       <form [formGroup]="form">
         <div class="row d-flex p-0 col-md-12">
           <div class="col-md-4 p-0">
-            <dsc-select
-              label="Módulos"
-              [options]="funcionalidades"
-              [placeholder]="bundle('MHSPH')"
-              formControlName="modulo"
-              size="standard"
-            >
-            </dsc-select>
+            <asc-dropdown
+  [control]="form.get('modulo')"
+  [items]="funcionalidades"
+  [placeholder]="bundle('MHSPH')"
+  label="Módulos"
+></asc-dropdown>
             <div
               *ngIf="modulo.invalid && (modulo.dirty || modulo.touched)"
               class="error-form"
@@ -51,15 +49,13 @@
           </div>
 
           <div class="col-md-4" *ngIf="showSubModulos">
-            <dsc-select
-              label="Sub-módulos"
-              [required]="true"
-              [options]="tabelas"
-              [placeholder]="bundle('MHSPH')"
-              formControlName="subModulo"
-              size="standard"
-            >
-            </dsc-select>
+            <asc-dropdown
+  [control]="form.get('subModulo')"
+  [items]="tabelas"
+  [placeholder]="bundle('MHSPH')"
+  label="Sub-módulos"
+  [required]="true"
+></asc-dropdown>
             <div
               *ngIf="
                 subModulo.invalid && (subModulo.dirty || subModulo.touched)
@@ -103,15 +99,13 @@
 
         <div class="row d-flex p-0 col-md-12" *ngIf="moduloEmails">
           <div class="col-md-6 pl-0">
-            <dsc-select
-              label="Tipo de Pedido"
-              [required]="true"
-              [options]="itensTipoProcesso"
-              [placeholder]="bundle('MHSPH')"
-              formControlName="idTipoProcesso"
-              size="standard"
-            >
-            </dsc-select>
+            <asc-dropdown
+  [control]="form.get('idTipoProcesso')"
+  [items]="itensTipoProcesso"
+  [placeholder]="bundle('MHSPH')"
+  label="Tipo de Pedido"
+  [required]="true"
+></asc-dropdown>
 
             <div
               *ngIf="
@@ -127,15 +121,13 @@
           </div>
 
           <div class="col-md-6 pl-0">
-            <dsc-select
-              label="Situação do Pedido"
-              [required]="true"
-              [options]="itensSituacaoProcesso"
-              [placeholder]="bundle('MHSPH')"
-              formControlName="idSituacaoProcesso"
-              size="standard"
-            >
-            </dsc-select>
+            <asc-dropdown
+  [control]="form.get('idSituacaoProcesso')"
+  [items]="itensSituacaoProcesso"
+  [placeholder]="bundle('MHSPH')"
+  label="Situação do Pedido"
+  [required]="true"
+></asc-dropdown>
 
             <div
               *ngIf="

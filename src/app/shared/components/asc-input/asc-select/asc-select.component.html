@@ -18,7 +18,6 @@
   [style]="compStyle"
   [size]="size"
 >
-</dsc-select>
 <dsc-select
   *ngIf="multiple"
   [label]="label"
@@ -31,7 +30,7 @@
   [style]="compStyle"
   [size]="size"
 >
-<!-- <p-dropdown
+<!-- <dsc-select
   *ngIf="!multiple"
   [attr.title]="hint"
   emptyMessage="Nenhum resultado encontrado"
@@ -53,7 +52,6 @@
       {{ item.label }}
     </div>
   </ng-template>
-</p-dropdown>
 <p-multiSelect
   *ngIf="multiple"
   [options]="selectItems"
@@ -70,11 +68,11 @@
   [tabindex]="index"
   [disabled]="disabled"
 ></p-multiSelect> -->
-<p-progressBar
+<dsc-progress-bar
   mode="indeterminate"
   *ngIf="showProgressBar"
   [style]="{ height: '6px' }"
-></p-progressBar>
+></dsc-progress-bar>
 <asc-input-error
   [control]="control"
   [requiredMsg]="requiredMsg"

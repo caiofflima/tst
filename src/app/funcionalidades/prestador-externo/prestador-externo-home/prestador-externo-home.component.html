@@ -40,25 +40,15 @@
       </div>
 
       <div class="row p-0 col-xs-6">
-        <label class="control-label" for="idEmpresa">Empresa</label>
-        <p-dropdown [options]="empresas" [placeholder]="this.bundle('MHSPH')" name="idEmpresa"
-               [(ngModel)]="filtro.idEmpresa"></p-dropdown>
+        <asc-dropdown label="Empresa" [items]="empresas" [(ngModel)]="filtro.idEmpresa" [placeholder]="this.bundle('MHSPH')"></asc-dropdown>
       </div>
 
       <div class="row col-xs-4">
-        <label class="control-label" for="idPerfil">Perfil</label>
-        <p-dropdown [options]="listComboPerfil" [placeholder]="this.bundle('MHSPH')" name="idPerfil"
-        [(ngModel)]="filtro.perfil"></p-dropdown>
+        <asc-dropdown label="Perfil" [items]="listComboPerfil" [(ngModel)]="filtro.perfil" [placeholder]="this.bundle('MHSPH')"></asc-dropdown>
       </div>
 
       <div class="row pl-0 col-xs-4">
-        <p-checkbox
-          name="ativo"
-          [value]="true"
-          [(ngModel)]="filtro.ativo"
-          inputId="ativoS"
-        ></p-checkbox>
-        <label for="ativoS">Somente Ativos</label>
+        <asc-checkbox label="Somente Ativos" name="ativo" [(ngModel)]="filtro.ativo" [valoresTrueOrFalse]="false"></asc-checkbox>
       </div>
     </form>
 

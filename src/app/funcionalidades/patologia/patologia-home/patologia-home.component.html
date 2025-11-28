@@ -65,8 +65,7 @@
 
       <div class="row col-xs-2">
         <br>
-        <p-checkbox name="testoS" value="S" [(ngModel)]="filtro.ativos" inputId="ativoS"></p-checkbox>
-        <label class="control-label" for="ativoS">Somente Ativos</label>
+        <asc-checkbox label="Somente Ativos" name="testoS" [(ngModel)]="filtro.ativos" [valoresTrueOrFalse]="false"></asc-checkbox>
 
       </div>
 

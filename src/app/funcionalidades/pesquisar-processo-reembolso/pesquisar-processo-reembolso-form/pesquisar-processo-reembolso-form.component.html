@@ -83,7 +83,11 @@
         </div>
         <div class="col-md-2 mb-15 pl-0">
           <label class="control-label" for="sexo">Exclusivo para o Sexo</label>
-          <p-dropdown [options]="sexos" id="sexo" name="sexo" formControlName="sexo"></p-dropdown>
+          <asc-dropdown
+  [control]="formulario.get('sexo')"
+  [items]="sexos"
+  id="sexo"
+></asc-dropdown>
         </div>
       </div>
       <div class="form-row">
@@ -122,11 +126,7 @@
       <div *ngIf="id">
         <div class="form-row">
           <div class="col-md-2 d-flex al-ic pl-0">
-            <p-checkbox
-              formControlName="inativo" [binary]="true" inputId="binary"
-              (onChange)="onChangeInativo($event)"
-            ></p-checkbox>
-            <label class="control-label" style="margin: 0 0 0 5px!important" for="binary">Inativo</label>
+            <asc-checkbox label="Inativo" name="binary" formControlName="inativo" [valoresTrueOrFalse]="true" (ngModelChange)="onChangeInativo($event)"></asc-checkbox>
           </div>
           <div class="col-md-2 pl-0">
             <asc-input-date

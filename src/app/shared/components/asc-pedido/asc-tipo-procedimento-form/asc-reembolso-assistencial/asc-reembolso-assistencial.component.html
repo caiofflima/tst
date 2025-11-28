@@ -95,12 +95,12 @@
     <button (click)="adicionarProcedimento(formDirective, $event)" [disabled]="form?.invalid || loading"
             class="custom-btn-confirm" id="adicionarProcedimento">
        <span *ngIf="loading" style="height: 1.6em; width: 4em;">
-          <p-progressSpinner
+          <dsc-progress-spinner
             [style]="{width: '25px', height: '25px'}"
             animationDuration=".5s"
             fill="#EEEEEE"
             strokeWidth="4">
-          </p-progressSpinner>
+          </dsc-progress-spinner>
         </span>
       <span *ngIf="!loading" class="span-btn">{{(isEditing) ? 'Concluir alteração' : 'Adicionar'}}</span>
     </button>

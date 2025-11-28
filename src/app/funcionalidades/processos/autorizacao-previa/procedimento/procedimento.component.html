@@ -58,9 +58,9 @@
   <button class="continue-btn" (click)="onSubmit()"
           [disabled]="!pedidoProcedimentosTabela.length || showProgress || isEditing">
     <span *ngIf="showProgress">
-      <p-progressSpinner
+      <dsc-progress-spinner
         [style]="{width: '25px', height: '25px'}" strokeWidth="4" fill="#EEEEEE"
-        animationDuration=".5s"></p-progressSpinner>
+        animationDuration=".5s"></dsc-progress-spinner>
     </span>
     <div *ngIf="!showProgress">
       Continuar

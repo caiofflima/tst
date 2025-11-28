@@ -29,33 +29,37 @@
     </div>
     <div class="row col-xs-6">
       <label class="control-label" for="empresa">Empresa</label>&nbsp;<br>
-      <p-dropdown id="empresa" [options]="empresas" name="empresa" placeholder="{{bundle('MHSPH')}}" optionField="id"
-                  optionLabel="razaoSocial"
-                  formControlName="empresa" title="{{bundle('MH134')}}"></p-dropdown>
+      <asc-dropdown
+  [control]="form.get('empresa')"
+  [items]="empresas"
+  placeholder="{{bundle('MHSPH')}}"
+  id="empresa"
+></asc-dropdown>
     </div>
     <div class="row col-xs-4">
       <label class="control-label" for="perfil">Perfil</label>&nbsp;<br>
-      <p-dropdown id="perfil" [options]="perfis" placeholder="{{bundle('MHSPH')}}" formControlName="codigoPerfil"
-                  title="{{bundle('MH135')}}"></p-dropdown>
+      <asc-dropdown
+  [control]="form.get('codigoPerfil')"
+  [items]="perfis"
+  placeholder="{{bundle('MHSPH')}}"
+  id="perfil"
+></asc-dropdown>
     </div>
     <div class="row col-xs-4">
       <label class="control-label" for="atuacaoProfissional">Atuação Profissional</label>&nbsp;<br>
-      <p-dropdown id="atuacaoProfissional" [options]="tiposAuditores" placeholder="{{bundle('MHSPH')}}"
-                  formControlName="idTipoAuditor" title="{{bundle('MH136')}}">
-      </p-dropdown>
+      <asc-dropdown
+  [control]="form.get('idTipoAuditor')"
+  [items]="tiposAuditores"
+  placeholder="{{bundle('MHSPH')}}"
+  id="atuacaoProfissional"
+></asc-dropdown>
     </div>
     <div class="row col-xs-6 input-group">
       <div class="col-xs-6">
-        <label class="control-label" for="dataInicio">Data Limite inícial</label>&nbsp;<br>
-        <p-calendar id="dataInicio" formControlName="dataLimiteInicial" [locale]="pt" dateFormat="dd/mm/yy"
-                    [monthNavigator]="true" [yearNavigator]="true"
-                    yearRange="1900:2100" [showIcon]="true" title="{{bundle('MH143')}}"></p-calendar>
+        <asc-input-date label="Data Limite inícial" [control]="form.controls['dataLimiteInicial']"></asc-input-date>
       </div>
       <div class="col-xs-6">
-        <label class="control-label" for="dataFim">Data Limite final</label>&nbsp;<br>
-        <p-calendar id="dataFim" formControlName="dataLimiteFinal" [locale]="pt" dateFormat="dd/mm/yy"
-                    [monthNavigator]="true" [yearNavigator]="true"
-                    yearRange="1900:2100" [showIcon]="true" title="{{bundle('MH143')}}"></p-calendar>
+        <asc-input-date label="Data Limite final" [control]="form.controls['dataLimiteFinal']"></asc-input-date>
       </div>
     </div>
     <div class="col-xs-12 barra-botoes">

@@ -202,14 +202,13 @@
                 ></asc-input-text>
               </div>
               <div class="ui-g-6">
-                <dsc-select
+                <asc-dropdown
                   label="Tipo deficiência"
-                  [options]="tipoDeficiencias"
+                  [items]="tipoDeficiencias"
                   [placeholder]="this.bundle('MHSPH')"
                   formControlName="idTipoDeficiencia"
-                  (selectionChange)="tipoDeficienciaSelecionado($event)"
-                  size="standard"
-                ></dsc-select>
+                  (selected)="tipoDeficienciaSelecionado($event)"
+                ></asc-dropdown>
               </div>
             </div>
             <div class="ui-g">

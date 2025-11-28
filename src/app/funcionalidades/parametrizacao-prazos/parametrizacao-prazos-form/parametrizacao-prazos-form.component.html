@@ -54,18 +54,8 @@
           </p-overlayPanel>
         </div>
         <div class="col-md-6 mb-15">
-          <label class="control-label obrigatorio" for="idTipoBeneficiario">Tipo Beneficiário</label>
           <asc-listagem *ngIf="id" [lista]="listComboTipoBeneficiarioSelecionados"></asc-listagem>  
-          <p-multiSelect
-            id="tiposBeneficiario"
-            [options]="listComboTipoBeneficiario"
-            [formControl]="tiposBeneficiario"
-            [required]="!id"
-            class="form-control2 custom-border"
-            defaultLabel="Selecione as opções"
-            selectedItemsLabel="{0} itens selecionados"
-            [disabled]="id != null"
-          ></p-multiSelect>
+          <asc-multiSelect [options]="listComboTipoBeneficiario" [disabled]="id != null" [required]="true"></asc-multiSelect>
           <div>
             <asc-input-error [control]="tiposBeneficiario" [requiredMsg]="requiredMsg"></asc-input-error>
           </div>
@@ -92,12 +82,7 @@
         </div>
         <div class="row col-xs-2">
           <br>
-          <p-checkbox
-            id="diaUtil"
-            formControlName="diaUtil"
-            [binary]="true"
-            [value]="true">
-          </p-checkbox>
+          <asc-checkbox formControlName="diaUtil" [valoresTrueOrFalse]="true"></asc-checkbox>
           <label>Dias Úteis</label>
         </div>
 
@@ -123,11 +108,7 @@
       </div>
       <div *ngIf="id" style="padding-top: 10px" class="form-row">
         <div class="p-0 col-md-2">
-          <p-checkbox
-            inputId="inativo" name="inativo" formControlName="inativo" [binary]="true"
-            (onChange)="onChangeInativo($event)"
-          ></p-checkbox>
-          <label class="control-label" for="inativo">Inativo</label>
+          <asc-checkbox label="Inativo" name="inativo" formControlName="inativo" [valoresTrueOrFalse]="true" (ngModelChange)="onChangeInativo($event)"></asc-checkbox>
         </div>
         <div class="col-md-2 coluna-interna" *ngIf="inativo.value">
           <label class="control-label" for="dataInativacao">Data da Inativação</label>

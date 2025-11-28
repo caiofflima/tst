@@ -8,14 +8,12 @@
       <label class="control-label obrigatorio" for="situacaoProcesso"
         >Situação</label
       >
-      <p-dropdown
+      <asc-dropdown
         formControlName="situacaoProcesso"
         placeholder="{{ bundle('MHSPH') }}"
-        [options]="itensSituacoesProcesso"
-        [filter]="true"
-        class="form-control2"
+        [items]="itensSituacoesProcesso" class="form-control2"
       >
-      </p-dropdown>
+      </asc-dropdown>
       <div
         *ngIf="
           situacaoProcesso.invalid &&
@@ -33,13 +31,11 @@
       <label class="control-label obrigatorio" for="motivoNegacao"
         >Motivo de Negação</label
       >
-      <p-dropdown
+      <asc-dropdown
         formControlName="idMotivoNegacao"
-        [options]="itensMotivoNegacao"
-        [filter]="true"
-        class="form-control2"
+        [items]="itensMotivoNegacao" class="form-control2"
       >
-      </p-dropdown>
+      </asc-dropdown>
       <div
         *ngIf="
           isIdMotivoNegacaoInvalido() &&

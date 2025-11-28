@@ -17,6 +17,7 @@ import {PipeModule} from "../../../pipes/pipe.module";
 import {AscModalModule} from "../../asc-modal/asc-modal.module";
 import {AscButtonsModule} from "../../asc-buttons/asc-buttons.module";
 import { FormsModule } from '@angular/forms';
+import {DscCaixaModule} from 'app/shared/dsc-caixa/dsc-caixa.module';
 
 @NgModule({
   imports: [
@@ -27,7 +28,8 @@ import { FormsModule } from '@angular/forms';
     PipeModule,
     AscModalModule,
     AscButtonsModule,
-    FormsModule
+    FormsModule,
+    DscCaixaModule
   ],
   declarations: [
     BeneficiarioCardComponent,

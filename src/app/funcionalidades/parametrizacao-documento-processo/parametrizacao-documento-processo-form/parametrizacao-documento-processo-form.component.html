@@ -54,18 +54,8 @@
           ></asc-select-tipo-processo>
         </div>
         <div class="col-md-6 mb-15 pl-0">
-          <label class="control-label obrigatorio" for="tiposBeneficiario">Tipo de Beneficiário</label>
           <asc-listagem *ngIf="id" [lista]="listComboTipoBeneficiarioSelecionados"></asc-listagem>
-          <p-multiSelect
-            id="tiposBeneficiario"
-            [options]="listComboTipoBeneficiario"
-            [formControl]="tiposBeneficiario" 
-            [required]="!id"
-            class="form-control2 custom-border"
-            defaultLabel="Selecione as opções"
-            selectedItemsLabel="{0} itens selecionados"
-            [disabled]="id != null"
-          ></p-multiSelect>
+          <asc-multiSelect [options]="listComboTipoBeneficiario" [disabled]="id != null" [required]="true"></asc-multiSelect>
           <asc-input-error [control]="tiposBeneficiario" [requiredMsg]="requiredMsg"></asc-input-error>
         </div>
       </div>
@@ -81,13 +71,7 @@
         </div>
         <div class="col-md-2 mb-15 pl-0">
           <br>
-          <p-checkbox
-            inputId="obrigatorio"
-            name="obrigatorio"
-            [binary]="true"
-            [formControl]="obrigatorio">
-          </p-checkbox>
-          <label class="control-label" for="obrigatorio">Obrigatórios</label>
+          <asc-checkbox label="Obrigatórios" name="obrigatorio" [valoresTrueOrFalse]="true"></asc-checkbox>
         </div>
         <div class="col-md-6 mb-15 pl-0">
           <asc-dropdown
@@ -106,7 +90,11 @@
         </div>
         <div class="col-md-4 mb-15 pl-0">
           <label class="control-label" for="sexo">Sexo</label>
-          <p-dropdown [options]="sexos" id="sexo" name="sexo" [formControl]="sexo"></p-dropdown>
+          <asc-dropdown
+  [control]="sexo"
+  [items]="sexos"
+  id="sexo"
+></asc-dropdown>
         </div>
         <div class="col-md-4 mb-15 pl-0">
           <asc-dropdown
@@ -159,9 +147,7 @@
       <div *ngIf="id">
         <div class="form-row">
           <div class="col-md-2 d-flex al-ic pl-0">
-            <p-checkbox formControlName="inativo" name="inativo" [binary]="true" inputId="inativo"
-                        (onChange)="onChangeInativo($event)"></p-checkbox>
-            <label class="control-label" style="margin: 0 0 0 5px!important" for="inativo">Inativo</label>
+            <asc-checkbox label="Inativo" name="inativo" formControlName="inativo" [valoresTrueOrFalse]="true" (ngModelChange)="onChangeInativo($event)"></asc-checkbox>
           </div>
           <div class="col-md-2 pl-0">
             <asc-input-date [control]="dataInativacao" [required]="inativo.value"

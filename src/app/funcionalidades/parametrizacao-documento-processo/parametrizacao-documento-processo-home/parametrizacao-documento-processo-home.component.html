@@ -71,20 +71,10 @@
             </div>
             <div class="form-row">
                 <div class="col-md-2 mb-15 pl-0">
-                    <p-checkbox
-                            [binary]="true"
-                            label="Obrigatório"
-                            inputId="obrigatorio"
-                            [formControl]="formulario.get('obrigatorio')">
-                    </p-checkbox>
+                    <asc-checkbox name="obrigatorio" [valoresTrueOrFalse]="true"></asc-checkbox>
                 </div>
                 <div class="col-md-2 p-0">
-                    <p-checkbox
-                            [binary]="true"
-                            label="Somente Ativos"
-                            inputId="somenteAtivos"
-                            [formControl]="formulario.get('somenteAtivos')"
-                    ></p-checkbox>
+                    <asc-checkbox name="somenteAtivos" [valoresTrueOrFalse]="true"></asc-checkbox>
                 </div>
             </div>
 

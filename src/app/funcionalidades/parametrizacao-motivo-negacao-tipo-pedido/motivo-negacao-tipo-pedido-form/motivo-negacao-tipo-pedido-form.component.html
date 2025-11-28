@@ -32,17 +32,7 @@
   
 
     <div class="col-md-6 mb-15 pl-0">
-      <label class="control-label obrigatorio" for="tiposBeneficiario">Tipo de Beneficiário</label>
-      <p-multiSelect
-        id="tiposBeneficiario"
-        [options]="listComboTipoBeneficiario"
-        [formControl]="listaIdTipoBeneficiario"
-        [required]="!atualizar"
-        class="form-control2 custom-border"
-        defaultLabel="Selecione as opções"
-        selectedItemsLabel="{0} itens selecionados"
-        name="listaIdTipoBeneficiario"
-      ></p-multiSelect>
+      <asc-multiSelect [options]="listComboTipoBeneficiario" [required]="true"></asc-multiSelect>
       <asc-input-error [control]="tiposBeneficiario" [requiredMsg]="requiredMsg"></asc-input-error>
     </div>
   </div>
@@ -103,8 +93,7 @@
 
   <div class="form-row inativo-form" *ngIf="atualizar">
     <div class="col-md-3 p-0">
-      <p-checkbox name="ativos" inputId="ativos" [binary]="true" formControlName="inativo"></p-checkbox>
-      <label for="ativos" class="control-label">Inativo</label>
+      <asc-checkbox label="Inativo" name="ativos" formControlName="inativo" [valoresTrueOrFalse]="true"></asc-checkbox>
     </div>
     <div class="col-md-3 pl-0">
       <asc-input-date

@@ -190,14 +190,10 @@
               >Situação</span
             >
             <div class="ui-g-4 no-padding-left">
-              <p-dropdown
-                [(ngModel)]="validacoes[documento.id]"
-                [options]="itensTipoValidacao"
-                class="form-control2"
-                inputId="tipoValidacao-{{ documento.id }}"
-                [placeholder]="this.bundle('MHSPH')"
-              >
-              </p-dropdown>
+              <asc-dropdown
+  [items]="itensTipoValidacao"
+  [placeholder]="this.bundle('MHSPH')"
+></asc-dropdown>
             </div>
             <div class="ui-g-8">
               <asc-button-third

@@ -27,20 +27,26 @@
   <form [formGroup]="formulario">
     <div class="row col-xs-4">
       <label class="control-label obrigatorio" for="perfil">Perfil</label>&nbsp;<br>
-      <p-dropdown id="perfil" [options]="perfis" placeholder="{{bundle('MHSPH')}}" formControlName="perfil" title="{{bundle('MH135')}}"></p-dropdown>
+      <asc-dropdown
+  [control]="formulario.get('perfil')"
+  [items]="perfis"
+  placeholder="{{bundle('MHSPH')}}"
+  id="perfil"
+></asc-dropdown>
       <asc-message-error [control]="formulario.controls['perfil']" type="required"
       [errorMessage]="bundle('MA007')"></asc-message-error>
     </div>
     <div class="row col-xs-4">
       <label class="control-label" for="atuacaoProfissional">Atuação Profissional</label>&nbsp;<br>
-      <p-dropdown id="atuacaoProfissional" [options]="tiposAuditores" placeholder="{{bundle('MHSPH')}}" formControlName="atuacaoProfissional"
-        title="{{bundle('MH136')}}">
-      </p-dropdown>
+      <asc-dropdown
+  [control]="formulario.get('atuacaoProfissional')"
+  [items]="tiposAuditores"
+  placeholder="{{bundle('MHSPH')}}"
+  id="atuacaoProfissional"
+></asc-dropdown>
     </div>
     <div class="row col-xs-4">
-      <label class="control-label obrigatorio" for="dataLimite">Data Limite</label>&nbsp;<br>
-      <p-calendar formControlName="dataLimite" [locale]="pt" dateFormat="dd/mm/yy" [monthNavigator]="true" [yearNavigator]="true"
-          yearRange="1900:2100" [showIcon]="true"></p-calendar>
+      <asc-input-date label="Data Limite" [control]="formulario.controls['dataLimite']" [required]="true"></asc-input-date>
           <asc-message-error [control]="formulario.controls['dataLimite']" type="required"
       [errorMessage]="bundle('MA007')"></asc-message-error>
     </div>

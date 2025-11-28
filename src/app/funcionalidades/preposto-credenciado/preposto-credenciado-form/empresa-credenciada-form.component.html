@@ -81,8 +81,12 @@
         <div class="row col-md-6 coluna-interna">
           <div class="row col-md-10">
             <label class="control-label obrigatorio" for="razaoSocial">GIPES/CEPES</label>
-            <p-dropdown [required]="true" [options]="filiais" [filter]="true" placeholder="{{bundle('MHSPH')}}" name="filial"
-                        formControlName="filial" optionLabel="nome"></p-dropdown>
+            <asc-dropdown
+  [control]="formulario.get('filial')"
+  [items]="filiais"
+  placeholder="{{bundle('MHSPH')}}"
+  [required]="true"
+></asc-dropdown>
             <asc-message-error [control]="formulario.controls['filial']" type="required"
                                [errorMessage]="bundle('MA007')"></asc-message-error>
           </div>

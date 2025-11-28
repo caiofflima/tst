@@ -78,11 +78,7 @@
             <div *ngIf="id">
                 <div class="form-row">
                     <div class="col-md-2 d-flex al-ic pl-0">
-                        <p-checkbox
-                                formControlName="inativo" [binary]="true" inputId="binary"
-                                (onChange)="onChangeInativo($event)"
-                        ></p-checkbox>
-                        <label class="control-label" style="margin: 0 0 0 5px!important" for="binary">Inativo</label>
+                        <asc-checkbox label="Inativo" name="binary" formControlName="inativo" [valoresTrueOrFalse]="true" (ngModelChange)="onChangeInativo($event)"></asc-checkbox>
                     </div>
                     <div class="col-md-2 pl-0">
                         <asc-input-date

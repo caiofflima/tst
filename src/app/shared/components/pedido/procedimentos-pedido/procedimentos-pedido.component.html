@@ -5,22 +5,13 @@
         >Procedimento</label
       >
 
-      <p-dropdown
-        id="procedimento"
-        [options]="itensProcedimento"
-        formControlName="procedimento"
-        [filter]="true"
-        class="form-control2"
-        (onChange)="carregarGrausProcedimento()"
-        [placeholder]="this.bundle('MHSPH')"
-        title="Selecione o procedimento."
-      >
-        <ng-template let-procedimento pTemplate="item">
-          <span class="ui-helper-clearfix" title="{{ procedimento.label }}">{{
-            procedimento.label
-          }}</span>
-        </ng-template>
-      </p-dropdown>
+      <asc-dropdown
+  [control]="formProcedimento.get('procedimento')"
+  [items]="itensProcedimento"
+  [placeholder]="this.bundle('MHSPH')"
+  (selected)="carregarGrausProcedimento()"
+  id="procedimento"
+></asc-dropdown>
       <asc-message-error
         [control]="formProcedimento.controls['procedimento']"
         type="required"
@@ -44,15 +35,11 @@
         >Região Odontológica</label
       >
 
-      <p-dropdown
-        class="form-control2"
-        id="grau"
-        [options]="itensGrauProcedimento"
-        formControlName="grauProcedimento"
-        [filter]="true"
-        [placeholder]="this.bundle('MHSPH')"
-        title="Selecione o grau do procedimento."
-      ></p-dropdown>
+      <asc-dropdown
+  [control]="formProcedimento.controls['grauProcedimento']"
+  [items]="itensGrauProcedimento"
+  [placeholder]="this.bundle('MHSPH')"
+></asc-dropdown>
       <div
         *ngIf="
           isGrauProcedimentoInvalido() &&

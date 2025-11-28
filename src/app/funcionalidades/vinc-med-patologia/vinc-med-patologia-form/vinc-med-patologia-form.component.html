@@ -47,14 +47,12 @@
         <div class="col-md-6 p-0">
           <label class="control-label obrigatorio" for="patologias">Patologia</label>
           <div *ngIf="!id">
-            <dsc-select
-              [required]="true"
-              [options]="patologias"
-              formControlName="patologia"
-              [placeholder]="this.bundle('MHSPH')"
-              size="standard"
-            >
-            </dsc-select>
+            <asc-dropdown
+  [control]="formulario.get('patologia')"
+  [items]="patologias"
+  [placeholder]="this.bundle('MHSPH')"
+  [required]="true"
+></asc-dropdown>
             <asc-message-error
               [control]="patologia" type="required"
               [errorMessage]="bundle('MA007')">
@@ -85,11 +83,10 @@
 
       <div *ngIf="id" style="padding-top: 10px">
         <div class="p-0 col-md-12 ">
-          <p-checkbox
-            inputId="inativo" name="inativo" formControlName="inativo" [binary]="true"
-            (onChange)="onChangeInativo($event)"
-          ></p-checkbox>
-          <label class="control-label" for="inativo">Inativo</label>
+          <asc-checkbox
+            label="Inativo" name="inativo" formControlName="inativo" [valoresTrueOrFalse]="true"
+            (ngModelChange)="onChangeInativo($event)"
+          ></asc-checkbox>
         </div>
         <div class="p-0 col-md-12" *ngIf="inativo.value">
           <div class="col-md-2 coluna-interna">

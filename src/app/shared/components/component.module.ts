@@ -8,6 +8,7 @@ import {AngularMyDatePickerModule} from 'angular-mydatepicker';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {DirectivesModule} from '../../../app/arquitetura/shared/directives/directives.module';
 import {AscMultiSelectModule} from './multiselect/asc-multiselect.module';
+import {AscSelectModule} from './asc-select/asc-select.module';
 import {AscApresentadorComponent} from '../../../app/shared/components/apresentador/apresentador.component';
 import {
     AscApresentadorArquivosComponent
@@ -84,6 +85,7 @@ import { DscCaixaModule } from 'app/shared/dsc-caixa/dsc-caixa.module';
         // AngularMyDatePickerModule.forRoot(),
         DirectivesModule.forRoot(),
         AscMultiSelectModule,
+        AscSelectModule,
         PrimeNGModule,
         NgxMaskDirective, NgxMaskPipe,
         InputTextModule,
@@ -192,7 +194,8 @@ import { DscCaixaModule } from 'app/shared/dsc-caixa/dsc-caixa.module';
         BaseLayoutFormComponent,
         BaseLayoutHomeComponent,
         AscListagemComponent,
-        AscCheckboxComponent
+        AscCheckboxComponent,
+        AscSelectModule
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

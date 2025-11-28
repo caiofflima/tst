@@ -74,22 +74,12 @@
           ></asc-input-text>
         </div>
         <div class="row pl-0 col-md-2">
-          <label class="control-label obrigatorio">
-            Data de Nascimento
-          </label>
-
-          <p-calendar
-            #dtNascimento
-            formControlName="dataNascimento"
-            [locale]="pt"
-            dateFormat="dd/mm/yy"
-            [monthNavigator]="true"
-            [yearNavigator]="true"
-            yearRange="1900:2100"
-            [showIcon]="true"
+          <asc-input-date
+            label="Data de Nascimento"
+            [control]="form.controls['dataNascimento']"
             [required]="true"
             title="{{bundle('MH142')}}">
-          </p-calendar>
+          </asc-input-date>
 
           <asc-message-error
             [control]="form.controls['dataNascimento']"
@@ -138,16 +128,13 @@
                 Empresa
               </label>
 
-              <p-dropdown
-                [required]="true"
-                [options]="empresas"
-                placeholder="{{bundle('MHSPH')}}"
-                name="empresaPrestadorExterno"
-                id="empresaPrestadorExterno"
-                formControlName="empresaPrestadorExterno"
-                optionLabel="razaoSocial"
-                title="{{bundle('MH134')}}">
-              </p-dropdown>
+              <asc-dropdown
+  [control]="form.get('empresaPrestadorExterno')"
+  [items]="empresas"
+  placeholder="{{bundle('MHSPH')}}"
+  [required]="true"
+  id="empresaPrestadorExterno"
+></asc-dropdown>
 
               <asc-message-error
                 [control]="formEmpresaPerfil.controls['empresaPrestadorExterno']"
@@ -162,15 +149,13 @@
                 Perfil
               </label>
 
-              <p-dropdown
-                [required]="true"
-                [options]="perfis"
-                id="perfilPrestadorExterno"
-                placeholder="{{bundle('MHSPH')}}"
-                name="perfilPrestadorExterno"
-                formControlName="perfilPrestadorExterno"
-                title="{{bundle('MH135')}}">
-              </p-dropdown>
+              <asc-dropdown
+  [control]="form.get('perfilPrestadorExterno')"
+  [items]="perfis"
+  placeholder="{{bundle('MHSPH')}}"
+  [required]="true"
+  id="perfilPrestadorExterno"
+></asc-dropdown>
 
               <asc-message-error
                 [control]="formEmpresaPerfil.controls['perfilPrestadorExterno']"
@@ -188,15 +173,13 @@
                 Atuação Profissional
               </label>
 
-              <p-dropdown
-                [required]="true"
-                [options]="tiposAuditores"
-                id="atuacaoPrestadorExterno"
-                placeholder="{{bundle('MHSPH')}}"
-                name="atuacaoPrestadorExterno"
-                formControlName="atuacaoPrestadorExterno"
-                title="{{bundle('MH136')}}">
-              </p-dropdown>
+              <asc-dropdown
+  [control]="form.get('atuacaoPrestadorExterno')"
+  [items]="tiposAuditores"
+  placeholder="{{bundle('MHSPH')}}"
+  [required]="true"
+  id="atuacaoPrestadorExterno"
+></asc-dropdown>
 
               <asc-message-error
                 [control]="formEmpresaPerfil.controls['atuacaoPrestadorExterno']"
@@ -205,25 +188,12 @@
               </asc-message-error>
             </div>
             <div class="row d-flex fx-cl pr-0 col-md-5">
-              <label
-                class="control-label obrigatorio"
-                for="dataLimitePrestadorExterno">
-                Data Limite
-              </label>
-
-              <p-calendar
-                #dtLimitePrestadorExterno
-                id="dataLimitePrestadorExterno"
-                formControlName="dataLimitePrestadorExterno"
-                [locale]="pt"
-                dateFormat="dd/mm/yy"
-                [monthNavigator]="true"
-                [yearNavigator]="true"
-                yearRange="1900:2100"
-                [showIcon]="true"
+              <asc-input-date
+                label="Data Limite"
+                [control]="formEmpresaPerfil.controls['dataLimitePrestadorExterno']"
                 [required]="true"
                 title="{{bundle('MH143')}}">
-              </p-calendar>
+              </asc-input-date>
 
               <asc-message-error
                 [control]="formEmpresaPerfil.controls['dataLimitePrestadorExterno']"

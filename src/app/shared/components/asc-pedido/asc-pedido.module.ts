@@ -27,6 +27,7 @@ import { AscDependentesCardComponent } from './asc-dependentes/asc-dependentes-c
 import {PipeModule} from "../../pipes/pipe.module";
 import { AscDadosContatoCardComponent } from './asc-dados-contato-card/asc-dados-contato-card.component';
 import { AscDadosEnderecoCardComponent } from './asc-dados-endereco-card/asc-dados-endereco-card.component';
+import {DscCaixaModule} from 'app/shared/dsc-caixa/dsc-caixa.module';
 
 @NgModule({
     imports: [
@@ -41,7 +42,8 @@ import { AscDadosEnderecoCardComponent } from './asc-dados-endereco-card/asc-dad
         AscResumoModule,
         AscModalModule,
         AscSelectModule,
-        PipeModule
+        PipeModule,
+        DscCaixaModule
     ],
   declarations: [AscModalOcorrenciaComponent, 
                  AscDependentesCardComponent, 

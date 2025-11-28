@@ -73,11 +73,7 @@
       
       <div *ngIf="beneficiarioPedidoParam; else perfil" style="padding-top: 10px" class="form-row mb-15">
             <div class="p-0 col-md-3">
-              <p-checkbox
-                inputId="inativo" name="inativo" formControlName="inativo" [binary]="true"
-                (onChange)="onChangeInativo($event)"
-              ></p-checkbox>
-              <label class="control-label" for="inativo">Inativo</label>
+              <asc-checkbox label="Inativo" name="inativo" formControlName="inativo" [valoresTrueOrFalse]="true" (ngModelChange)="onChangeInativo($event)"></asc-checkbox>
             </div>
 
             <div class="col-md-3" *ngIf="!inativo.value; else campoDataInativacao">
@@ -118,16 +114,7 @@
 
       <ng-template #perfil>
         <div class="col-md-6 mb-15  pl-0">
-          <label class="control-label" for="idTipoBeneficiario">Perfis permitidos</label>
-          <p-multiSelect
-            id="idPerfil"
-            [options]="listComboPerfil"
-            formControlName="perfis" 
-            [required]="false"W
-            class="form-control2 custom-border"
-            selectedItemsLabel="{0} itens selecionados"
-            defaultLabel="Selecione as opções"
-          ></p-multiSelect>
+          <asc-multiSelect [options]="listComboPerfil" [control]="formulario.controls['perfis']"></asc-multiSelect>
         </div>
       </ng-template>
 
@@ -146,12 +133,12 @@
             [ngStyle]="{ display: showProgress && 'block' }"
             class="loading-spinner"
           >
-            <p-progressSpinner
+            <dsc-progress-spinner
               animationDuration=".5s"
               strokeWidth="4"
               [style]="{ width: '100%', height: '100%' }"
             >
-            </p-progressSpinner>
+            </dsc-progress-spinner>
           </span>
         </button>
         <button
@@ -175,12 +162,12 @@
             [ngStyle]="{ display: showProgress && 'block' }"
             class="loading-spinner"
           >
-            <p-progressSpinner
+            <dsc-progress-spinner
               animationDuration=".5s"
               strokeWidth="4"
               [style]="{ width: '100%', height: '100%' }"
             >
-            </p-progressSpinner>
+            </dsc-progress-spinner>
           </span>
         </button>
       </div>

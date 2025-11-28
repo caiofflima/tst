@@ -124,11 +124,11 @@
 <ng-template #visualizarProfissionalExecutante>
   <section class="c-card conteudo-spacing">
     <div *ngIf="loading" style="margin-bottom: 1.5em">
-      <p-progressBar
+      <dsc-progress-bar
         mode="indeterminate"
         *ngIf="loading"
         [style]="{ height: '6px' }"
-      ></p-progressBar>
+      ></dsc-progress-bar>
     </div>
 
     <div>

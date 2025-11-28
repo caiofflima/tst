@@ -35,17 +35,12 @@
         </div>
 
         <div class="col-xs-4">
-          <label class="control-label" for="ufA">UF Atendimento</label>
-          <p-dropdown
-            class="form-control2"
-            id="ufA"
-            [options]="listComboUF"
-            [filter]="true"
-            [placeholder]="this.bundle('MHSPH')"
-            title="Filtrar por UF de atendimento."
-            formControlName="ufAtendimento"
-            optionLabel="label"
-          ></p-dropdown>
+          <asc-dropdown
+  [control]="formulario.controls['ufAtendimento']"
+  [items]="listComboUF"
+  [placeholder]="this.bundle('MHSPH')"
+  label="UF Atendimento"
+></asc-dropdown>
         </div>
         <div class="col-xs-2 pl-0">
           <asc-input-date

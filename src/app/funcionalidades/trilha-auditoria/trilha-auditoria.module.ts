@@ -10,6 +10,7 @@ import {ComposicaoPedidoModule} from 'app/shared/components/pedido/composicao-pe
 import {PipeModule} from 'app/shared/pipes/pipe.module';
 import {PrimeNGModule} from 'app/shared/primeng.module';
 import {DscCaixaModule} from 'app/shared/dsc-caixa/dsc-caixa.module';
+import {AscSelectModule} from 'app/shared/components/asc-select/asc-select.module';
 import {
   TrilhaAnexosDocumentosComponent,
   TrilhaAutorizacoesProcedimentosComponent,
@@ -40,7 +41,8 @@ import {
         PrimeNGModule,
         ComposicaoPedidoModule,
         PipeModule,
-        DscCaixaModule
+        DscCaixaModule,
+        AscSelectModule
     ],
     exports: [
         TrilhaDocumentosComponent

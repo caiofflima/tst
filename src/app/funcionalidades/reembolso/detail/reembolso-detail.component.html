@@ -34,16 +34,16 @@
             </div>
             <div class="flex-1 d-flex flex-column gap-6">
               <!-- <label class="control-label">Ano</label>
-              <p-dropdown  class="noBorderDropdownTrigger form-control2 selectAno" [options]="anos" [(ngModel)]="anoLancamento"
-                [ngModelOptions]="{standalone: true}" optionLabel="label"
-                (onChange)="buscarLancamentosByAno($event.value.value)">
-              </p-dropdown> -->
-              <dsc-select
-                [label]="'Ano'"
-                [placeholder]="anoLancamento"
-                [options]="optionsAnos"
-                (selectionChange)="buscarLancamentosByAno($event.value)">
-              </dsc-select>
+              <asc-dropdown
+  [items]="anos"
+  (selected)="buscarLancamentosByAno($event.value.value)"
+></asc-dropdown> -->
+              <asc-dropdown
+  [items]="optionsAnos"
+  [placeholder]="anoLancamento"
+  [label]="'Ano'"
+  (selected)="buscarLancamentosByAno($event.value)"
+></asc-dropdown>
             </div>
           </div>
 
@@ -79,17 +79,17 @@
             <div class="flex-1 d-flex flex-column gap-6">
               <!--
               <label class="control-label">Ano</label>
-              <p-dropdown class="noBorderDropdownTrigger form-control2 selectAno" [options]="anos" [(ngModel)]="anoReembolso"
-              [ngModelOptions]="{standalone: true}" optionLabel="label"
-              (onChange)="buscarReembolsosResumoPorAno($event.value.value)">
-              </p-dropdown>
+              <asc-dropdown
+  [items]="anos"
+  (selected)="buscarReembolsosResumoPorAno($event.value.value)"
+></asc-dropdown>
               -->
-              <dsc-select
-                [label]="'Ano'"
-                [placeholder]="anoReembolso.value"
-                [options]="optionsAnos"
-                (selectionChange)="buscarReembolsosResumoPorAno($event.value)">
-              </dsc-select>
+              <asc-dropdown
+  [items]="optionsAnos"
+  [placeholder]="anoReembolso.value"
+  [label]="'Ano'"
+  (selected)="buscarReembolsosResumoPorAno($event.value)"
+></asc-dropdown>
             </div>
           </div>
           <div *ngFor="let lancamento of lancamentosReembolso; let i = index" class="inline-resultado">

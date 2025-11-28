@@ -104,12 +104,10 @@
             *ngIf="!idMotivoNegacao.disabled"
             >Motivo de Negação</label
           >
-          <p-dropdown
+          <asc-dropdown
             id="mtvoNgco"
             formControlName="idMotivoNegacao"
-            [options]="itensMotivoNegacao"
-            [filter]="true"
-            [placeholder]="this.bundle('MHSPH')"
+            [items]="itensMotivoNegacao" [placeholder]="this.bundle('MHSPH')"
             class="form-control2"
           >
             <ng-template let-item pTemplate="item">
@@ -117,7 +115,7 @@
                 item.label
               }}</span>
             </ng-template>
-          </p-dropdown>
+          </asc-dropdown>
           <div
             *ngIf="
               idMotivoNegacao.invalid &&

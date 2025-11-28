@@ -40,14 +40,7 @@
       </div>
       <div class="col-xs-12 selectAll ajusteCheckboxPrime15">
         <fieldset>
-          <p-checkbox
-            inputId="selectAll"
-            class="selectAll-input"
-            [binary]="true"
-            [(ngModel)]="selectAllState"
-            (onChange)="selectAll()"
-          ></p-checkbox>
-          <label for="selectAll">Selecionar Todos</label>
+          <asc-checkbox label="Selecionar Todos" name="selectAll" [(ngModel)]="selectAllState" [valoresTrueOrFalse]="true" (ngModelChange)="selectAll()"></asc-checkbox>
         </fieldset>
         <p *ngIf="idSelecionados.length > 0">
           {{ idSelecionados?.length }} Itens Selecionados
@@ -80,12 +73,7 @@
           header=""
           [style]="{ width: '25px' }"> -->
         <ng-template style="width: 25px" let-row="rowData" pTemplate="content">
-          <p-checkbox
-            [binary]="true"
-            [ngModel]="idSelecionados.includes(row.idPedido)"
-            (onChange)="mudarSelecao(row.idPedido)"
-          >
-          </p-checkbox>
+          <asc-checkbox [valoresTrueOrFalse]="true" (ngModelChange)="mudarSelecao(row.idPedido)"></asc-checkbox>
         </ng-template>
         <!-- </p-column> -->
 

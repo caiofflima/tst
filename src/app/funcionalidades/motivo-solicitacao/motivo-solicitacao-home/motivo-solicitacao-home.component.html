@@ -27,8 +27,7 @@
         </div>
         <div class="row">
           <div class="col-xs-2 p-0">
-            <p-checkbox name="testoS" value="N" [(ngModel)]="filtro.ativos" inputId="ativoS"></p-checkbox>
-            <label  for="ativoS">Somente Ativos</label>
+            <asc-checkbox label="Somente Ativos" name="testoS" [(ngModel)]="filtro.ativos" [valoresTrueOrFalse]="false"></asc-checkbox>
           </div>
 
         </div>

@@ -17,6 +17,7 @@ import {AscButtonsModule} from "../../../shared/components/asc-buttons/asc-butto
 import {MessageModule} from "../../../shared/components/messages/message.module";
 import {AscSelectModule } from "../../../shared/components/asc-select/asc-select.module";
 import {PrimeNGModule} from '../../../shared/primeng.module';
+import {DscCaixaModule} from '../../../shared/dsc-caixa/dsc-caixa.module';
 import {ReciboComponent} from './recibo.component';
 
 @NgModule({
@@ -38,6 +39,7 @@ import {ReciboComponent} from './recibo.component';
     InputTextareaModule,
     InputTextModule,
     ProgressSpinnerModule,
+    DscCaixaModule
   ],
   exports: [
     ReciboComponent,

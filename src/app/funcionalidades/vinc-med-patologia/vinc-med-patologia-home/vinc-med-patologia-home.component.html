@@ -21,15 +21,11 @@
     <form novalidate class="col-md-12 p-0">
       <div class="form-row">
         <div class="p-0 col-md-6">
-          <dsc-select
-            label="Patologia"
-            [options]="patologias"
-            [value]="patologia"
-            (selectionChange)="patologia = $event"
-            name="patologias"
-            size="standard"
-          >
-          </dsc-select>
+          <asc-dropdown
+  [items]="patologias"
+  label="Patologia"
+  (selected)="patologia = $event"
+></asc-dropdown>
         </div>
 
         <div class="col-md-6">
@@ -46,8 +42,7 @@
       </div>
   
       <div class="col-md-12 p-0">
-        <p-checkbox name="sAtivos" [(ngModel)]="ativos" [binary]="true" inputId="sAtivos" id="ativos"></p-checkbox>
-        <label class="control-label" for="ativos">Somente ativos</label>
+        <asc-checkbox label="Somente ativos" name="sAtivos" [(ngModel)]="ativos" [valoresTrueOrFalse]="true"></asc-checkbox>
       </div>
   
       <div class="col-xs-12 barra-botoes">

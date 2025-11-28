@@ -10,6 +10,7 @@ import {AscFormularioReembolsoMedicamentoComponent} from "./asc-formulario-reemb
 import {AscFormularioReembolsoVacinaComponent} from "./asc-formulario-reembolso-vacina/asc-formulario-reembolso-vacina.component";
 import {AscFormularioReembolsoOdontologicoComponent} from "./asc-formulario-reembolso-odontologico/asc-formulario-reembolso-odontologico.component";
 import {ProgressSpinnerModule} from "primeng/progressspinner";
+import {DscCaixaModule} from "../../../dsc-caixa/dsc-caixa.module";
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import {ProgressSpinnerModule} from "primeng/progressspinner";
     AscSelectModule,
     ComponentModule,
     AscButtonsModule,
-    ProgressSpinnerModule
+    ProgressSpinnerModule,
+    DscCaixaModule
   ],
   declarations: [
     AscFormularioReembolsoConsultaComponent,

@@ -377,12 +377,12 @@
     [disabled]="documentoNaoPossuiArquivos || showProgress"
   >
     <span *ngIf="showProgress">
-      <p-progressSpinner
+      <dsc-progress-spinner
         [style]="{ width: '25px', height: '25px' }"
         strokeWidth="4"
         fill="#EEEEEE"
         animationDuration=".5s"
-      ></p-progressSpinner>
+      ></dsc-progress-spinner>
     </span>
     <span *ngIf="!showProgress"> Finalizar </span>
   </button>

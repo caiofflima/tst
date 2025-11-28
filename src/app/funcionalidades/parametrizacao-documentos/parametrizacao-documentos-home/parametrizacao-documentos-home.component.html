@@ -16,10 +16,11 @@
     <form novalidate>
       <div class="form-row">
         <div class="pl-0 col-md-4 mb-15">
-          <dsc-select
-            [label]="'Tipo de documento'"  [(ngModel)]="selectedValue" 
-            [options]="tipoDocumentoOption"
-            (selectionChange)="tipoSelecionado($event.value)" name="'idTipoDocumento'" size="large"></dsc-select>
+          <asc-dropdown
+  [items]="tipoDocumentoOption"
+  [label]="'Tipo de documento'"
+  (selected)="tipoSelecionado($event.value)"
+></asc-dropdown>
           </div>
 
         <div class="row col-xs-8 p-0">

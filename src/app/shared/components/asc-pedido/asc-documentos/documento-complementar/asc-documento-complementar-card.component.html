@@ -3,14 +3,12 @@
   <div class="ui-g">
     <div class="ui-g-12 no-padding">
       <p class="label-campo-card">Documento complementar</p>
-      <p-dropdown
-        [options]="tipoDocumentoComplementar"
+      <asc-dropdown
+        [items]="tipoDocumentoComplementar"
         [(ngModel)]="documentoComplementar"
         (onChange)="onChange($event)"
         [placeholder]="this.bundle('MHSPH')"
-        class="form-control2"
-        [filter]="true"
-        filterBy="filter"
+        class="form-control2" filterBy="filter"
       >
         <ng-template let-item pTemplate="item">
           <div class="ui-helper-clearfix">
@@ -19,7 +17,7 @@
             </div>
           </div>
         </ng-template>
-      </p-dropdown>
+      </asc-dropdown>
     </div>
     <div *ngIf="selected" class="ui-g-12 no-padding margin-16">
       <p class="label-campo-card">Descrição</p>

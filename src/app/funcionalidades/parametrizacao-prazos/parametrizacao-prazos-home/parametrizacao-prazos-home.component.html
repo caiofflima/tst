@@ -55,28 +55,13 @@
       </div>
       <div class="form-row">
         <div class="col-md-6 mb-15 pl-0">
-          <p-checkbox
-            formControlName="somenteAtivos"
-            label="Somente ativos"
-            [binary]="true"
-            inputId="ativos"
-          ></p-checkbox>
+          <asc-checkbox name="ativos" formControlName="somenteAtivos" [valoresTrueOrFalse]="true"></asc-checkbox>
         </div>
         <div class="col-md-6 mb-15 pl-0">
-          <p-checkbox
-            formControlName="mudancaAutomatica"
-            label="Com mudança automática"
-            [binary]="true"
-            inputId="mudancaAutomatica"
-          ></p-checkbox>
+          <asc-checkbox name="mudancaAutomatica" formControlName="mudancaAutomatica" [valoresTrueOrFalse]="true"></asc-checkbox>
         </div>
         <div class="col-md-6 mb-15 pl-0">
-          <p-checkbox
-            formControlName="diasUteis"
-            [binary]="true"
-            label="Com prazo em dias úteis"
-            inputId="diasUteis"
-          ></p-checkbox>
+          <asc-checkbox name="diasUteis" formControlName="diasUteis" [valoresTrueOrFalse]="true"></asc-checkbox>
         </div>
       </div>
       <div class="col-xs-12 barra-botoes">

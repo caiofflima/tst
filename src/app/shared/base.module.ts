@@ -10,6 +10,7 @@ import {TooltipModule} from 'primeng/tooltip';
 import { OverlayPanelModule } from "primeng/overlaypanel";
 import { ProgressSpinnerModule } from "primeng/progressspinner";
 import { AscMessageErrorModule } from "./components/message-error/asc-message-error.module";
+import { DscCaixaModule } from "./dsc-caixa/dsc-caixa.module";
 
 @NgModule({
     declarations: [],
@@ -25,7 +26,8 @@ import { AscMessageErrorModule } from "./components/message-error/asc-message-er
         TooltipModule,
         OverlayPanelModule,
         ProgressSpinnerModule,
-        AscMessageErrorModule
+        AscMessageErrorModule,
+        DscCaixaModule
     ],
     exports: [
         AscMultiSelectModule,
@@ -39,7 +41,8 @@ import { AscMessageErrorModule } from "./components/message-error/asc-message-er
         TooltipModule,
         OverlayPanelModule,
         ProgressSpinnerModule,
-        AscMessageErrorModule
+        AscMessageErrorModule,
+        DscCaixaModule
     ],
   })
 export class BaseModule {}

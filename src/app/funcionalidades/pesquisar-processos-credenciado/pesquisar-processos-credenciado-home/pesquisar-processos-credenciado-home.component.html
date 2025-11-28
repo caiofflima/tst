@@ -29,8 +29,12 @@
       <div class="clearfix"></div>
       <div class="col-md-10">
         <label class="control-label" for="colaborador">Colaborador</label>
-        <p-dropdown id="colaborador" [options]="listColaboradores" [filter]="true"
-                    formControlName="idUsuarioCredenciado" placeholder="{{bundle('MHSPH')}}"></p-dropdown>
+        <asc-dropdown
+  [control]="form.get('idUsuarioCredenciado')"
+  [items]="listColaboradores"
+  placeholder="{{bundle('MHSPH')}}"
+  id="colaborador"
+></asc-dropdown>
       </div>
       <div class="clearfix"></div>
       <div class="col-md-2">
@@ -41,18 +45,10 @@
                (keyup)="constantes.control.somenteNumeros(this.idPedido)">
       </div>
       <div class="col-md-4">
-        <label class="control-label" for="dataInicio">Data Início</label>&nbsp;<br>
-        <p-calendar id="dataInicio" class="form-control2" formControlName="dataInicio" [locale]="pt"
-                    dateFormat="dd/mm/yy" title="{{bundle('MH158')}}"
-                    [monthNavigator]="true" [yearNavigator]="true"
-                    yearRange="1900:2100" [showIcon]="true"></p-calendar>
+        <asc-input-date label="Data Início" [control]="form.controls['dataInicio']"></asc-input-date>
       </div>
       <div class="col-md-4">
-        <label class="control-label" for="dataFim">Data Fim</label>&nbsp;<br>
-        <p-calendar id="dataFim" class="form-control2" formControlName="dataFim" [locale]="pt"
-                    dateFormat="dd/mm/yy" title="{{bundle('MH158')}}"
-                    [monthNavigator]="true" [yearNavigator]="true"
-                    yearRange="1900:2100" [showIcon]="true"></p-calendar>
+        <asc-input-date label="Data Fim" [control]="form.controls['dataFim']"></asc-input-date>
       </div>
       <div class="clearfix"></div>
       <div class="col-md-5">

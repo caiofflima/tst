@@ -32,18 +32,16 @@
             label="Pedido"
             [maxlength]="8"
             hint="Buscar um processo específico"
-            size="standard"
           ></asc-input-text>
         </div>
 
         <div class="col-md-3">
-          <dsc-select
+          <asc-dropdown
             formControlName="condicaoProcesso"
             label="Condição do pedido"
-            [options]="optionsCondicaoProcesso"
+            [items]="optionsCondicaoProcesso"
             [placeholder]="this.bundle('MHSPH')"
-            size="standard"
-          ></dsc-select>
+          ></asc-dropdown>
         </div>
 
         <div class="col-md-3">
@@ -53,7 +51,6 @@
             [options]="listComboUF"
             [control]="formulario.get('ufsProcesso')"
             [selected]="ufsProcessoSelected"
-            size="standard"
           ></asc-multiSelect>
         </div>
 
@@ -64,7 +61,6 @@
             [options]="listComboFilial"
             [control]="formulario.get('filiaisProcesso')"
             [selected]="filiaisProcessoSelected"
-            size="standard"
           ></asc-multiSelect>
         </div>
       </div>
@@ -78,29 +74,26 @@
             (onChange)="onChangeTipoProcesso()"
             [control]="formulario.get('tiposProcesso')"
             [selected]="tiposProcessoSelected"
-            size="standard"
           ></asc-multiSelect>
         </div>
 
         <div class="col-md-3">
-          <dsc-select
+          <asc-dropdown
             formControlName="ufAtendimento"
             label="UF de atendimento"
-            [options]="optionsUF"
+            [items]="optionsUF"
             [placeholder]="this.bundle('MHSPH')"
-            (selectionChange)="onChangeUFAtendimento()"
-            size="standard"
-          ></dsc-select>
+            (selected)="onChangeUFAtendimento()"
+          ></asc-dropdown>
         </div>
 
         <div class="col-md-3">
-          <dsc-select
+          <asc-dropdown
             formControlName="municipioAtendimento"
             label="Município de atendimento"
-            [options]="optionsMunicipio"
+            [items]="optionsMunicipio"
             [placeholder]="this.bundle('MHSPH')"
-            size="standard"
-          ></dsc-select>
+          ></asc-dropdown>
         </div>
       </div>
 
@@ -112,7 +105,6 @@
             [options]="listComboSituacaoProcesso"
             [control]="formulario.get('situacoesProcesso')"
             [selected]="situacoesProcessoSelected"
-            size="standard"
           ></asc-multiSelect>
         </div>
 
@@ -132,7 +124,6 @@
             inputId="autorizacaoPrevia"
             [maxlength]="10"
             hint="Buscar por autorização Prévia"
-            size="standard"
           ></asc-input-text>
         </div>
 
@@ -151,7 +142,6 @@
             inputId="autorizacaoReembolso"
             [maxlength]="20"
             hint="Buscar por PEG"
-            size="standard"
           ></asc-input-text>
         </div>
       </div>
@@ -167,7 +157,6 @@
             [control]="formulario.get('dataAberturaInicio')"
             inputId="dataAberturaInicio"
             label="Início"
-            size="standard"
           >
           </asc-input-date>
         </div>
@@ -176,7 +165,6 @@
             [control]="formulario.get('dataAberturaFim')"
             inputId="dataAberturaFim"
             label="Fim"
-            size="standard"
           >
           </asc-input-date>
         </div>
@@ -196,7 +184,6 @@
             [options]="listaMotivoSolicitacao"
             [control]="formulario.get('motivosSolicitacao')"
             [selected]="motivosSolicitacaoSelected"
-            size="standard"
           >
           </asc-multiSelect>
         </div>
@@ -211,7 +198,6 @@
               [options]="listaGrupoTiposPedido"
               [control]="formulario.get('tiposPedido')"
               [selected]="tiposPedidoSelected"
-              size="standard"
             >
             </asc-multiSelect>
           </div>
@@ -231,7 +217,6 @@
             label="Nome do beneficiário"
             [uppercase]="true"
             hint="Filtrar pelo nome do beneficiário"
-            size="standard"
           ></asc-input-text>
         </div>
 
@@ -241,7 +226,6 @@
             inputId="matriculaTitular"
             label="Matrícula do titular"
             hint="Filtrar pela matrícula do titular"
-            size="standard"
           ></asc-input-text>
         </div>
 
@@ -252,7 +236,6 @@
             label="Código do beneficiário"
             [maxlength]="12"
             hint="Filtrar pelo cartão de identificação do beneficiário"
-            size="standard"
           ></asc-input-text>
         </div>
       </div>
@@ -265,18 +248,16 @@
             [options]="listComboTipoBeneficiario"
             [control]="formulario.get('tiposBeneficiario')"
             [selected]="tiposBeneficiarioSelected"
-            size="standard"
           ></asc-multiSelect>
         </div>
 
         <div class="col-md-6">
-          <dsc-select
+          <asc-dropdown
             formControlName="caraterSolicitacao"
             label="Caráter da solicitação"
-            [options]="optionsCaraterSolicitacao"
+            [items]="optionsCaraterSolicitacao"
             [placeholder]="this.bundle('MHSPH')"
-            size="standard"
-          ></dsc-select>
+          ></asc-dropdown>
         </div>
       </div>
 

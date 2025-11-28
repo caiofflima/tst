@@ -44,9 +44,12 @@
                             [required]="true" label="Tipo de documento" [items]="tipoDocumentos" [control]="idTipoDocumento"
                             id="idTipoDocumento"
                     ></asc-dropdown-->
-                    <dsc-select
-                        [label]="'Tipo de documento'" [required]="true" formControlName="idTipoDocumento"
-                        [options]="tipoDocumentosOption" name="'idTipoDocumento'" size="large"></dsc-select>
+                    <asc-dropdown
+  [control]="formulario.get('idTipoDocumento')"
+  [items]="tipoDocumentosOption"
+  [label]="'Tipo de documento'"
+  [required]="true"
+></asc-dropdown>
                 </div>
                 <div class="pl-0 col-md-8 mb-15">
                     <asc-input-text label="Link do documento" [control]="enderecoDocumento"
@@ -73,7 +76,7 @@
 
             <div class="form-row">
                 <div class="col-md-1 p-0">
-                    <!-- <p-checkbox name="opme" inputId="op" [binary]="true" [formControl]="opme"></p-checkbox> -->
+                    <!-- <asc-checkbox name="opme" [valoresTrueOrFalse]="true"></asc-checkbox> -->
                     <!--dsc-checkbox formControlName="opme"  variant="highlight" (change)="onChangeInativo($event)" /-->  
                     <!--asc-checkbox label="opme" formControlName="opme" name="'opme'"></asc-checkbox-->    
                     <!--label for="op">OPME</label-->
@@ -84,10 +87,7 @@
             <div *ngIf="id">
                 <div class="form-row">
                     <div class="col-md-2 d-flex al-ic pl-0">
-                        <!-- <p-checkbox
-                                formControlName="inativo" [binary]="true" inputId="binary"
-                                (onChange)="onChangeInativo($event)"
-                        ></p-checkbox> -->
+                        <!-- <asc-checkbox name="binary" formControlName="inativo" [valoresTrueOrFalse]="true" (ngModelChange)="onChangeInativo($event)"></asc-checkbox> -->
                         <dsc-checkbox formControlName="inativo"  variant="highlight" (change)="onChangeInativo($event)" size="large" />
                         <label class="control-label" style="margin: 0 0 0 5px!important" for="binary">Inativo</label>
                     </div>

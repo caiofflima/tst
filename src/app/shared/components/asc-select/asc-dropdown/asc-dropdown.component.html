@@ -1,14 +1,16 @@
-<label *ngIf="label" class="control-label label-class" [for]="id || null"
-       [class.obrigatorio]="required !== null && required !== false">{{label}}</label>
-<p-dropdown [formControl]="control" [disabled]="showProgressBar || disabled" [inputId]="selectId" [id]="id || null"
-            [options]="options" class="form-control2 custom-border"
-            [filter]="true" #dropdownElement [tabindex]="index"
-            [filterBy]="filterBy" [required]="required" (onChange)="onChange($event)">
-  <ng-template let-item pTemplate="item">
-    <div class="ui-helper-clearfix" [innerHTML]="item?.description || item?.label"></div>
-  </ng-template>
-</p-dropdown>
-<p-progressBar mode="indeterminate" *ngIf="showProgressBar" [style]="{'height': '6px'}"></p-progressBar>
+<dsc-select
+  [label]="required !== null && required !== false ? (label ? label + ' *' : '') : (label || '')"
+  [formControl]="control"
+  [disabled]="showProgressBar || disabled"
+  [options]="options"
+  [showFilter]="true"
+  [placeholder]="placeholder || bundle('MHSPH')"
+  [required]="required"
+  (selectionChange)="onChange($event)"
+  size="standard"
+  #dropdownElement
+>
+<dsc-progress-bar mode="indeterminate" *ngIf="showProgressBar" [style]="{'height': '6px'}"></dsc-progress-bar>
 
 <div *ngIf="mostarMsgErro()" class="error-form">
   <div *ngIf="control && control.hasError('required')">{{requiredMsg}}</div>

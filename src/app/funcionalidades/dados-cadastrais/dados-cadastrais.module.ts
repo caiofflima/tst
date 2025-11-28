@@ -33,6 +33,7 @@ import { AscFileModule } from "app/shared/components/asc-file/asc-file.module";
 import { InformacoesPedidoDetailComponent } from "./informacoes-pedido-detail/informacoes-pedido-detail.component";
 import { DependenteDetailComponent } from "./dependente-detail/dependente-detail.component";
 import { AscDocumentosModule } from "app/shared/components/asc-pedido/asc-documentos/asc-documentos.module";
+import { DscCaixaModule } from "app/shared/dsc-caixa/dsc-caixa.module";
 
 @NgModule({
     imports: [
@@ -67,6 +68,7 @@ import { AscDocumentosModule } from "app/shared/components/asc-pedido/asc-docume
         AscButtonsModule,
         AscFileModule,
         ProgressSpinnerModule,
+        DscCaixaModule
     ],
     declarations: [
         DadosCadastraisDetailComponent,

@@ -5,15 +5,14 @@
 
   <div class="row col-md-12 coluna-interna">
     <div class="row col-md-4">
-      <dsc-select
+      <asc-dropdown
         label="Conselho Profissional"
         [required]="true"
-        [options]="itensConselhoProfissional"
+        [items]="itensConselhoProfissional"
         formControlName="idConselhoProfissional"
         [placeholder]="this.bundle('MHSPH')"
-        size="standard"
       >
-      </dsc-select>
+      </asc-dropdown>
       <div
         *ngIf="
           idConselhoProfissional.invalid &&
@@ -56,15 +55,14 @@
     </div>
 
     <div class="row col-md-4">
-      <dsc-select
+      <asc-dropdown
         label="UF do Conselho"
         [required]="true"
-        [options]="itensUF"
+        [items]="itensUF"
         formControlName="idEstadoConselho"
         [placeholder]="this.bundle('MHSPH')"
-        size="standard"
       >
-      </dsc-select>
+      </asc-dropdown>
       <div
         *ngIf="
           idEstadoConselho.invalid &&
@@ -138,14 +136,12 @@
 
     <div class="row col-md-4">
       <label class="control-label obrigatorio" for="uf">UF</label>
-      <p-dropdown
+      <asc-dropdown
         class="form-control2"
         [required]="true"
         id="uf"
         formControlName="ufAtendimento"
-        [options]="itensUFPrimeNG"
-        [filter]="true"
-        [placeholder]="this.bundle('MHSPH')"
+        [items]="itensUFPrimeNG" [placeholder]="this.bundle('MHSPH')"
         (onChange)="consultarMunicipiosAtendimento()"
         title="UF do profissional executante."
       >
@@ -154,7 +150,7 @@
             {{ uf.label }}
           </div>
         </ng-template>
-      </p-dropdown>
+      </asc-dropdown>
       <div
         *ngIf="
           ufAtendimento.invalid &&
@@ -170,14 +166,12 @@
 
     <div class="row col-md-8">
       <label class="control-label obrigatorio" for="municipio">Município</label>
-      <p-dropdown
+      <asc-dropdown
         class="form-control2"
         [required]="true"
         id="municipio"
         formControlName="idMunicipioProfissional"
-        [options]="itensLocalidade"
-        [filter]="true"
-        [placeholder]="this.bundle('MHSPH')"
+        [items]="itensLocalidade" [placeholder]="this.bundle('MHSPH')"
         title="Município do profissional executante."
       >
         <ng-template let-item pTemplate="item">
@@ -188,7 +182,7 @@
             <div>{{ item.label }}</div>
           </div>
         </ng-template>
-      </p-dropdown>
+      </asc-dropdown>
       <div
         *ngIf="
           idMunicipioProfissional.invalid &&

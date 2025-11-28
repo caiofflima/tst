@@ -15,13 +15,12 @@
     <form [formGroup]="formularioSolicitacao" novalidate>
       <div class="form-group noPaddingLeft">
         <div class="custom-form-group-input">
-          <!-- <dsc-select
-              [label]="'Beneficiário'"
-              [placeholder]="'Selecione uma opção'"
-              [showFilter]="true"
-              [options]="options"
-              formControlName="dependente">
-            </dsc-select> -->
+          <!-- <asc-dropdown
+  [control]="formularioSolicitacao.get('dependente')"
+  [items]="options"
+  [placeholder]="'Selecione uma opção'"
+  [label]="'Beneficiário'"
+></asc-dropdown> -->
             <asc-select-beneficiario-ativo-cancelado
           selectId="beneficiario" [matricula]="matricula"
           [uppercase]="true"

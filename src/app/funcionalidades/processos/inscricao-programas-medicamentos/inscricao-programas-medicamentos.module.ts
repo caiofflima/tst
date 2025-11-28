@@ -34,6 +34,7 @@ import {AscModalModule} from "../../../shared/components/asc-modal/asc-modal.mod
 import {AscDocumentosModule} from "../../../shared/components/asc-pedido/asc-documentos/asc-documentos.module";
 import {PlaygroundModule} from "../../../shared/playground/playground.module";
 import { AcompanhamentoModule } from '../../acompanhamento/acompanhamento.module';
+import {DscCaixaModule} from "../../../shared/dsc-caixa/dsc-caixa.module";
 
 @NgModule({
     imports: [
@@ -57,7 +58,8 @@ import { AcompanhamentoModule } from '../../acompanhamento/acompanhamento.module
         AscCardAcompanhamentoConteudoModule,
         AscModalModule,
         AscDocumentosModule,
-        PlaygroundModule
+        PlaygroundModule,
+        DscCaixaModule
     ],
     declarations: [
         InscricaoProgramasMendicamentosBaseComponent,

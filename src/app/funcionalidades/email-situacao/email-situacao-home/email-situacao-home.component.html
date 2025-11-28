@@ -55,12 +55,7 @@
       </div>
 
       <div class="row p-0 col-xs-12">
-        <p-checkbox
-          id="somenteAtivos" name="somenteAtivos"
-          [binary]="true"
-          class="control-label"
-          label="Somente ativos" formControlName="somenteAtivos" title="Marque para retornar apenas registros ATIVOS."
-        ></p-checkbox>
+        <asc-checkbox name="somenteAtivos" formControlName="somenteAtivos" [valoresTrueOrFalse]="true"></asc-checkbox>
       </div>
 
       <div class="col-xs-12 barra-botoes">
