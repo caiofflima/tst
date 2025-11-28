@@ -14,14 +14,47 @@ body {
   }
 }
 
-:host ::ng-deep .menucx:not(:hover) .p-menubar-root-list .p-menuitem-active > .p-submenu-list {
-  display: none !important;
-  opacity: 0 !important;
-  visibility: hidden !important;
-}
-
-:host ::ng-deep .menucx:not(:hover) .p-menubar-root-list .p-menuitem-active .p-menuitem-link {
-  background: transparent !important;
+// Comportamento de hover corrigido para Angular 16
+:host ::ng-deep .menucx {
+  // Hover behavior para menus de primeiro nível
+  .p-menubar-root-list {
+    > .p-menuitem {
+      position: relative;
+      
+      > .p-submenu-list {
+        display: none !important;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.15s ease, visibility 0.15s ease;
+      }
+      
+      &:hover > .p-submenu-list {
+        display: block !important;
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+  }
+  
+  // Hover behavior para submenus de segundo e terceiro nível
+  .p-submenu-list {
+    .p-menuitem {
+      position: relative;
+      
+      > .p-submenu-list {
+        display: none !important;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.15s ease, visibility 0.15s ease;
+      }
+      
+      &:hover > .p-submenu-list {
+        display: block !important;
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+  }
 }
 
 .caixax {
@@ -460,47 +493,55 @@ body {
         color: white !important;
       }
 
-      .p-submenu-list {
-        ul {
-          width: auto;
-          z-index: 99;
-          top: 42px;
-          border-radius: 0 0 4px 4px;
-          border: none;
-          box-shadow: 0 3px 3px 0 #00000047;
-          padding: 0.5em 0.75em 0.25em 0.75em !important;
+      // Primeiro nível de submenu (abre para baixo)
+      > .p-submenu-list {
+        position: absolute;
+        width: auto;
+        z-index: 99;
+        top: 100% !important;
+        left: 0 !important;
+        border-radius: 0 0 4px 4px;
+        border: none;
+        box-shadow: 0 3px 3px 0 #00000047;
+        padding: 0.5em 0.75em 0.25em 0.75em !important;
 
-          li {
-            border-right: 0 solid #b3c7cb !important;
-            padding: 0;
+        > li {
+          border-right: 0 solid #b3c7cb !important;
+          padding: 0;
 
-            a {
-              padding: 0.5em;
-              white-space: nowrap;
-              text-decoration: none !important;
+          > a {
+            padding: 0.5em;
+            white-space: nowrap;
+            text-decoration: none !important;
 
-              span:nth-of-type(2)::before {
-                content: "\f054";
-                font-size: 12px;
-              }
+            span:nth-of-type(2)::before {
+              content: "\f054";
+              font-size: 12px;
             }
+          }
 
-            ul {
-              li {
-                a {
-                  text-decoration: none !important;
-                  
-                  span:nth-of-type(2)::before {
-                    content: "";
-                  }
+          // Submenus de segundo nível (abre para o lado)
+          > .p-submenu-list {
+            position: absolute;
+            top: 0 !important;
+            left: 100% !important;
+            margin-left: -4px;
+            border-radius: 4px;
+            
+            li {
+              a {
+                text-decoration: none !important;
+                
+                span:nth-of-type(2)::before {
+                  content: "";
                 }
               }
             }
           }
+        }
 
-          li + li {
-            margin-left: 0;
-          }
+        li + li {
+          margin-left: 0;
         }
       }
     }
