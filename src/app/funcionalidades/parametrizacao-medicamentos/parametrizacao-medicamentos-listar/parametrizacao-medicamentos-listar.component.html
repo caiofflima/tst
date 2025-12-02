@@ -16,38 +16,38 @@
 
   <section class="row">
     <div *ngIf="!isNaoPossuiFiltros()" class="col-md-12">
-      <div class="col-md-12 p-0">
-        <h4>Dados da Pesquisa</h4>
-      </div>
+      <h4>Dados da Pesquisa</h4>
 
-      <div class="col-md-3 p-0" *ngIf="filtroConsultaMedicamento.listaLaboratorios">
-        <label class="control-label" for="listaLaboratorios">Laboratório</label>&nbsp;<br>
-        <p id="listaLaboratorios" style="word-wrap: break-word; white-space: normal;">{{listaLaboratoriosNome}}</p>
-      </div>
+      <div class="row">
+        <div class="col-md-4" *ngIf="listaLaboratoriosNome">
+          <label class="control-label">Laboratório</label>
+          <p style="word-wrap: break-word;">{{listaLaboratoriosNome}}</p>
+        </div>
 
-      <div class="col-md-3 p-0" *ngIf="filtroConsultaMedicamento.listaMedicamentos">
-        <label class="control-label" for="listaMedicamentos">Medicamento</label>&nbsp;<br>
-        <p id="listaMedicamentos" style="word-wrap: break-word; white-space: normal;">{{listaMedicamentosNome}}</p>
-      </div>
+        <div class="col-md-4" *ngIf="listaMedicamentosNome">
+          <label class="control-label">Medicamento</label>
+          <p style="word-wrap: break-word;">{{listaMedicamentosNome}}</p>
+        </div>
 
-      <div class="col-md-2 p-0" *ngIf="filtroConsultaMedicamento.apresentacao">
-        <label class="control-label" for="apresentacao">Apresentação</label>&nbsp;<br>
-        <p id="apresentacao">{{filtroConsultaMedicamento.apresentacao}}</p>
-      </div>
+        <div class="col-md-2" *ngIf="filtroConsultaMedicamento.apresentacao">
+          <label class="control-label">Apresentação</label>
+          <p>{{filtroConsultaMedicamento.apresentacao}}</p>
+        </div>
 
-      <div class="col-md-2 p-0" *ngIf="filtroConsultaMedicamento.numeroTuss">
-        <label class="control-label" for="tuss">Número TUSS</label>&nbsp;<br>
-        <p id="numeroTuss">{{filtroConsultaMedicamento.numeroTuss}}</p>
-      </div>
+        <div class="col-md-2" *ngIf="filtroConsultaMedicamento.numeroTuss">
+          <label class="control-label">Número TUSS</label>
+          <p>{{filtroConsultaMedicamento.numeroTuss}}</p>
+        </div>
 
-      <div class="col-md-1 p-0" *ngIf="filtroConsultaMedicamento.ativos">
-        <label class="control-label" for="ativos">Ativos</label>&nbsp;<br>
-        <p id="ativos">{{filtroConsultaMedicamento.ativos === true ? 'Sim' : 'Não'}}</p>
-      </div>
+        <div class="col-md-2" *ngIf="filtroConsultaMedicamento.ativos !== null">
+          <label class="control-label">Somente Ativos</label>
+          <p>{{filtroConsultaMedicamento.ativos === true ? 'Sim' : 'Não'}}</p>
+        </div>
 
-      <div class="col-md-1 p-0" *ngIf="filtroConsultaMedicamento.generico">
-        <label class="control-label" for="generico">Genérico</label>&nbsp;<br>
-        <p id="generico">{{filtroConsultaMedicamento.generico === true ? 'Sim' : 'Não'}}</p>
+        <div class="col-md-2" *ngIf="filtroConsultaMedicamento.generico !== null">
+          <label class="control-label">Genérico</label>
+          <p>{{filtroConsultaMedicamento.generico === true ? 'Sim' : 'Não'}}</p>
+        </div>
       </div>
     </div>
 

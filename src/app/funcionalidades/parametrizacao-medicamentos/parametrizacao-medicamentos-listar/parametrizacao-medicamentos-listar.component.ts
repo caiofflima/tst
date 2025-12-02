@@ -46,6 +46,7 @@ export class ParametrizacaoMedicamentosListarComponent extends BaseComponent imp
     }
 
     ngOnInit(): void {
+        console.log('=== STORAGE COMPLETO ===', this.data.storage);
         this.montaFiltro();
         this.pesquisar();
     }
@@ -56,21 +57,45 @@ export class ParametrizacaoMedicamentosListarComponent extends BaseComponent imp
 
         if (this.data.storage?.filtroConsultaMedicamento) {
             const storage = this.data.storage.filtroConsultaMedicamento;
+            console.log('=== STORAGE filtroConsultaMedicamento ===', storage);
 
             if (storage.idListaLaboratorios && Array.isArray(storage.idListaLaboratorios)) {
+                console.log('idListaLaboratorios:', storage.idListaLaboratorios);
                 this.listaLaboratoriosNome = storage.idListaLaboratorios
-                    .map(item => item?.label || item)
+                    .map(item => {
+                        console.log('item laboratorio:', item);
+                        if (typeof item === 'object' && item !== null) {
+                            return item.label || item.descricao || item.nome || JSON.stringify(item);
+                        }
+                        return item;
+                    })
                     .join(', ');
+                console.log('listaLaboratoriosNome final:', this.listaLaboratoriosNome);
             }
 
             if (storage.idListaMedicamentos && Array.isArray(storage.idListaMedicamentos)) {
+                console.log('idListaMedicamentos:', storage.idListaMedicamentos);
                 this.listaMedicamentosNome = storage.idListaMedicamentos
-                    .map(item => item?.label || item)
+                    .map(item => {
+                        console.log('item medicamento:', item);
+                        if (typeof item === 'object' && item !== null) {
+                            return item.label || item.descricao || item.nome || JSON.stringify(item);
+                        }
+                        return item;
+                    })
                     .join(', ');
+                console.log('listaMedicamentosNome final:', this.listaMedicamentosNome);
             }
-        } else {
+        }
+
+        if (!this.listaLaboratoriosNome) {
             this.listaLaboratoriosNome = this.activatedRoute.snapshot.queryParams['listaLaboratoriosNome'];
+            console.log('listaLaboratoriosNome do queryParams:', this.listaLaboratoriosNome);
+        }
+
+        if (!this.listaMedicamentosNome) {
             this.listaMedicamentosNome = this.activatedRoute.snapshot.queryParams['listaMedicamentosNome'];
+            console.log('listaMedicamentosNome do queryParams:', this.listaMedicamentosNome);
         }
 
         this.filtroConsultaMedicamento.listaLaboratorios = this.converterListaArray(this.activatedRoute.snapshot.queryParams['listaLaboratorios']);
