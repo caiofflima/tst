@@ -112,7 +112,8 @@ export class DadosCadastraisDetailComponent implements OnInit {
 
     this.getDadosBeneficiario(this.matricula);
     this.gerenciarIndexSelecionado();
- 
+    this.configurarListenerEstado();
+
   }
 
   carregarDocumentos() {
@@ -148,7 +149,17 @@ export class DadosCadastraisDetailComponent implements OnInit {
     ).subscribe((documento: DocumentoTipoProcesso) => {
         this.indexSelecionado = this.documentosCadastrados.findIndex(doc => documento.id === doc.id);
     });
-}
+  }
+
+  private configurarListenerEstado() {
+    this.enderecoForm.get('estado').valueChanges
+      .pipe(takeUntil(this.subjecUnsubscribe))
+      .subscribe(() => {
+        if (this.isEditarEndereco) {
+          this.enderecoForm.patchValue({ municipio: null }, { emitEvent: false });
+        }
+      });
+  }
 
   public getDadosBeneficiario(matricula: string) {
     /*  Retirada do módulo Iniciar Atendimento
@@ -244,11 +255,16 @@ export class DadosCadastraisDetailComponent implements OnInit {
         cep: this.beneficiario.endereco.cep,
         logradouro: this.beneficiario.endereco.logradouro,
         bairro: this.beneficiario.endereco.bairro,
-        municipio: this.beneficiario.endereco.municipio.id,
         estado: this.beneficiario.endereco.estado.id,
         numero: this.beneficiario.endereco.numero,
         complemento: this.beneficiario.endereco.complemento,
       });
+
+      setTimeout(() => {
+        this.enderecoForm.patchValue({
+          municipio: this.beneficiario.endereco.municipio.id,
+        });
+      }, 300);
 
       console.log(this.enderecoForm.value);
     }
@@ -553,29 +569,37 @@ possuiArquivoNaListagem(lista: Arquivo[], file: Arquivo): boolean {
   }
 
   montarEnderecoComMesmoCEP(endereco: EnderecoCorreios): any {
-    let enderecoAtualizado = this.enderecoForm.patchValue({
+    this.enderecoForm.patchValue({
       cep: endereco.cep || '',
       logradouro: this.getLogradouro(endereco),
       bairro: endereco.bairro  || '',
-      municipio: endereco.codigoMunicipioSIAGS  || '',
       estado: endereco.codigoEstadoSIAGS  || '',
       numero: this.beneficiario.endereco.numero,
       complemento: this.beneficiario.endereco.complemento,
     });
-    return enderecoAtualizado;
+
+    setTimeout(() => {
+      this.enderecoForm.patchValue({
+        municipio: endereco.codigoMunicipioSIAGS  || '',
+      });
+    }, 300);
   }
 
   montarEnderecoComCEPDiferentes(endereco: EnderecoCorreios): any{
-    let enderecoAtualizado = this.enderecoForm.patchValue({
+    this.enderecoForm.patchValue({
       cep: endereco.cep || '',
       logradouro: this.getLogradouro(endereco),
       bairro: endereco.bairro  || '',
-      municipio: endereco.codigoMunicipioSIAGS  || '',
       estado: endereco.codigoEstadoSIAGS  || '',
       numero: '',
       complemento: '',
     });
-    return enderecoAtualizado;
+
+    setTimeout(() => {
+      this.enderecoForm.patchValue({
+        municipio: endereco.codigoMunicipioSIAGS  || '',
+      });
+    }, 300);
   }
 
   isFamiliaMulticontrato(familia: string): boolean {

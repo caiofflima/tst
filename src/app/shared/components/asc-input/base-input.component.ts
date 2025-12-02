@@ -213,8 +213,8 @@ export abstract class BaseSelectComponent<T> extends BaseInputComponent implemen
         this.carregarListOperator().subscribe((dados: any[]) => {
             this.gerarSelectItems(dados, this.valuePadrao);
             this.options = dados.map(item => ({
-                  value: item?.id || '',
-                  label: item?.nome
+                  value: this.valuePadrao(item),
+                  label: this.labelPadrao(item)
               }));
             this.executeEmiter(this.dados, dados)
             this.items = dados;
