@@ -206,12 +206,19 @@ export class ParametrizacaoMedicamentosHomeComponent extends BaseComponent imple
 
     private formatarNomeParam(elemento:any):string{
         if (!elemento.value) return null;
+        console.log('formatarNomeParam - elemento.value:', elemento.value);
         return elemento.value.map(v => {
-            if (typeof v === 'object' && v.label !== undefined) {
-                return v.label;
+            console.log('formatarNomeParam - item v:', v);
+            if (typeof v === 'object' && v !== null) {
+                if (v.label !== undefined) {
+                    return v.label;
+                }
+                if (v.descricao !== undefined) {
+                    return v.descricao;
+                }
             }
             return v;
-        }).join(',');
+        }).join(', ');
     }
 
     public voltar(): void {

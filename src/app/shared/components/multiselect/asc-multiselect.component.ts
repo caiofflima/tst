@@ -70,12 +70,16 @@ export class AscMultiSelectComponent implements ControlValueAccessor {
     }
 
     set value(val) {
+        console.log('asc-multiselect set value - recebido:', val);
+        console.log('asc-multiselect set value - dscOptions:', this.dscOptions);
         if (val && Array.isArray(val)) {
             const primeiroItem = val[0];
             if (primeiroItem && typeof primeiroItem !== 'object') {
                 this._value = val.map(value => {
                     const option = this.dscOptions.find(opt => opt.value === value);
-                    return option ? { label: option.label, value: option.value } : { label: '', value: value };
+                    const resultado = option ? { label: option.label, value: option.value } : { label: '', value: value };
+                    console.log('asc-multiselect - mapeando primitivo:', value, '-> resultado:', resultado);
+                    return resultado;
                 });
             } else {
                 this._value = val;
@@ -83,6 +87,7 @@ export class AscMultiSelectComponent implements ControlValueAccessor {
         } else {
             this._value = val;
         }
+        console.log('asc-multiselect set value - _value final:', this._value);
         this._onChange(this._value);
     }
 
@@ -105,11 +110,13 @@ export class AscMultiSelectComponent implements ControlValueAccessor {
     }
 
     onChangeCallback(event: any) {
+        console.log('asc-multiselect onChangeCallback - event:', event);
         if (event && Array.isArray(event)) {
             const objetosCompletos = event.map(value => {
                 const option = this.dscOptions.find(opt => opt.value === value);
                 return option ? { label: option.label, value: option.value } : { label: '', value: value };
             });
+            console.log('asc-multiselect onChangeCallback - objetosCompletos:', objetosCompletos);
             this.onChange.emit(objetosCompletos);
         } else {
             this.onChange.emit(event);
