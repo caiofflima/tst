@@ -1,40 +1,229 @@
-=== PESQUISAR - formulario.value === 
-{idListaLaboratorios: Array(1), idListaMedicamentos: Array(1), apresentacao: null, numeroTuss: null, ativos: null, …}
-parametrizacao-medic…me.component.ts:177 === idListaLaboratorios.value === 
+🚀 ~ RequestInterceptor ~ intercept ~ next: 
+{handle: ƒ}
+request.interceptor.ts:37 🚀 ~ RequestInterceptor ~ intercept ~ req: 
+HttpRequest {url: '/siasc-api/api/combos/medicamentos', body: Array(1), reportProgress: false, withCredentials: true, responseType: 'json', …}
+request.interceptor.ts:87 🚀 ~ RequestInterceptor ~ adicionarTokenNoCabecalho ~ headersArg: 
+HttpHeaders {normalizedNames: Map(0), lazyUpdate: null, headers: Map(0)}
+request.interceptor.ts:45 🚀 ~ RequestInterceptor ~ mergeMap ~ token: 
+request.interceptor.ts:50 🚀 ~ RequestInterceptor ~ mergeMap ~ token: eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJNRmVKNjVfRC14cU55M1Zta01Ib01WS1NjZlA3S21ZazdtVjBJaEsta0F3In0.eyJqdGkiOiIzNWIxOWVmYy1kYTZiLTRkNTMtYmZiNC00YWU1YWQ3ODZiNzAiLCJleHAiOjE3NjQ2OTIzNTIsIm5iZiI6MCwiaWF0IjoxNzY0NjkxNDUyLCJpc3MiOiJodHRwczovL2xvZ2luLmRlcy5jYWl4YS9hdXRoL3JlYWxtcy9pbnRyYW5ldCIsInN1YiI6IjA5ZWYzN2Y0LThlMGYtNDc3OC05M2NiLWIwNDA2MDJkZDdjYiIsInR5cCI6IkJlYXJlciIsImF6cCI6ImNsaS13ZWItYXNjIiwibm9uY2UiOiJlYThmOTBlMi01MzdhLTRmNTUtYjE3Ny1mMmJjNmQzYTYwZTUiLCJhdXRoX3RpbWUiOjE3NjQ2ODYxMzQsInNlc3Npb25fc3RhdGUiOiJiYjA1YzdhNi05YWFjLTQxNmItYTk0My01NDFiMGU5MTc3ZWMiLCJhY3IiOiIwIiwiYWxsb3dlZC1vcmlnaW5zIjpbImh0dHA6Ly8xMC4xMTYuOTUuMTE6ODY4MCIsImh0dHA6Ly8xMC4xMC4yMS44NDo0MjAwIiwiaHR0cHM6Ly9zaWFzYy1mcm9udGVuZC1ub3ZvLWRlcy5hcHBzLm5wcmQuY2FpeGEiLCJodHRwczovL3NpYXNjLWZyb250ZW5kLWRlcy1lc3RlaXJhcy5ucHJkMi5jYWl4YSIsImh0dHBzOi8vc2lhc2MtZnJvbnRlbmQtZGVzLmFwcHMubnByZC5jYWl4YSIsImh0dHA6Ly9sb2NhbGhvc3Q6NDIwMCIsImh0dHA6Ly8xMC4xMC4yMS44NDo4MDgwIiwiaHR0cDovL2xvY2FsaG9zdDo4MDgwIiwiaHR0cDovLzEwLjExNi45NS4xMjo4NjgwIiwiaHR0cDovLzEwLjEwLjIxLjEyODo4MDgwIiwiaHR0cHM6Ly9zaWFzYy1mcm9udGVuZC1pbnRlcm5ldC1kZXMtZXN0ZWlyYXMubnByZDIuY2FpeGEiLCJodHRwOi8vc2lhc2MuZGVzLmNhaXhhIiwiaHR0cDovLzEwLjEwLjIwLjIyMjo4MDgwIiwiaHR0cDovLzEwLjEwLjIwLjE2NDo4MDgwIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJBU0MwMDQiLCJ1bWFfYXV0aG9yaXphdGlvbiIsIkFTQzAwNyIsIkFTQzAwNiIsIkFTQzAwNSJdfSwic2NvcGUiOiJvcGVuaWQiLCJudS1jcGYiOiI4NDI4ODcxMDE5NyIsIm5hbWUiOiJVU0VSIEMwNjA1NDIgQ0VQRU0gQ0VQRU0iLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJjODkxMjgwIiwiZ2l2ZW5fbmFtZSI6IlVTRVIgQzA2MDU0MiBDRVBFTSIsImZhbWlseV9uYW1lIjoiQ0VQRU0ifQ.mTYzu_x3DNonFSWJ-V5CxDw7Dez6hC6WT-agsCQqQLl761Y1eYLM90moPaC3crKQbJxHCzIHtmueSG0nyjDfOckzGrwXPdHHuKiATncLatVRrwd3BIeHa6Y6rbeandUjjqB3vnnPtFX0KOu3d_chJsTFKqBhSMZ1UW_68btEeuocvHuEbj2ybRgs9zXB5zDuqTq2f10sOkhUC67Ck1wEaFrjrIZuXvEzCXLPSnQKZfpVctHqwrt4SWr_9CQtEY7GyAawFQLQvpI_jXe1EUav3x9VSi2457BhOaqEiqR9FcxG6-qgkK0WDEphFhRM8xjgEfFHtfzdacpKNmZV3ZHnHA
+request.interceptor.ts:60 🚀 ~ RequestInterceptor ~ mergeMap ~ handledReq: 
+HttpRequest {url: '/siasc-api/api/combos/medicamentos', body: Array(1), reportProgress: false, withCredentials: true, responseType: 'json', …}
+request.interceptor.ts:143 🚀 ~ RequestInterceptor ~ handleDate ~ next: 
+{handle: ƒ}
+request.interceptor.ts:144 🚀 ~ RequestInterceptor ~ handleDate ~ req: 
+HttpRequest {url: '/siasc-api/api/combos/medicamentos', body: Array(1), reportProgress: false, withCredentials: true, responseType: 'json', …}
+request.interceptor.ts:163 🚀 ~ RequestInterceptor ~ processJsonResponse ~ res: 
+HttpResponse {headers: HttpHeaders, status: 200, statusText: 'OK', url: 'http://localhost:4200/siasc-api/api/combos/medicamentos', ok: true, …}
+parametrizacao-medic…me.component.ts:160 === PESQUISAR CHAMADO ===
+parametrizacao-medic…me.component.ts:163 Laboratorios do formulário: 
 [114]
-parametrizacao-medic…me.component.ts:178 === idListaMedicamentos.value === 
+parametrizacao-medic…me.component.ts:164 Medicamentos do formulário: 
 [12721]
-parametrizacao-medic…me.component.ts:193 === STORAGE sendo salvo === 
-{filtroConsultaMedicamento: {…}}
-filtroConsultaMedicamento
+request.interceptor.ts:36 🚀 ~ RequestInterceptor ~ intercept ~ next: 
+{handle: ƒ}
+request.interceptor.ts:37 🚀 ~ RequestInterceptor ~ intercept ~ req: 
+HttpRequest {url: '/siasc-api/api/medicamentos/filtro-medicamento', body: FiltroConsultaMedicamento, reportProgress: false, withCredentials: true, responseType: 'json', …}
+request.interceptor.ts:87 🚀 ~ RequestInterceptor ~ adicionarTokenNoCabecalho ~ headersArg: 
+HttpHeaders {normalizedNames: Map(0), lazyUpdate: null, headers: Map(0)}
+request.interceptor.ts:45 🚀 ~ RequestInterceptor ~ mergeMap ~ token: 
+request.interceptor.ts:50 🚀 ~ RequestInterceptor ~ mergeMap ~ token: eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJNRmVKNjVfRC14cU55M1Zta01Ib01WS1NjZlA3S21ZazdtVjBJaEsta0F3In0.eyJqdGkiOiIzNWIxOWVmYy1kYTZiLTRkNTMtYmZiNC00YWU1YWQ3ODZiNzAiLCJleHAiOjE3NjQ2OTIzNTIsIm5iZiI6MCwiaWF0IjoxNzY0NjkxNDUyLCJpc3MiOiJodHRwczovL2xvZ2luLmRlcy5jYWl4YS9hdXRoL3JlYWxtcy9pbnRyYW5ldCIsInN1YiI6IjA5ZWYzN2Y0LThlMGYtNDc3OC05M2NiLWIwNDA2MDJkZDdjYiIsInR5cCI6IkJlYXJlciIsImF6cCI6ImNsaS13ZWItYXNjIiwibm9uY2UiOiJlYThmOTBlMi01MzdhLTRmNTUtYjE3Ny1mMmJjNmQzYTYwZTUiLCJhdXRoX3RpbWUiOjE3NjQ2ODYxMzQsInNlc3Npb25fc3RhdGUiOiJiYjA1YzdhNi05YWFjLTQxNmItYTk0My01NDFiMGU5MTc3ZWMiLCJhY3IiOiIwIiwiYWxsb3dlZC1vcmlnaW5zIjpbImh0dHA6Ly8xMC4xMTYuOTUuMTE6ODY4MCIsImh0dHA6Ly8xMC4xMC4yMS44NDo0MjAwIiwiaHR0cHM6Ly9zaWFzYy1mcm9udGVuZC1ub3ZvLWRlcy5hcHBzLm5wcmQuY2FpeGEiLCJodHRwczovL3NpYXNjLWZyb250ZW5kLWRlcy1lc3RlaXJhcy5ucHJkMi5jYWl4YSIsImh0dHBzOi8vc2lhc2MtZnJvbnRlbmQtZGVzLmFwcHMubnByZC5jYWl4YSIsImh0dHA6Ly9sb2NhbGhvc3Q6NDIwMCIsImh0dHA6Ly8xMC4xMC4yMS44NDo4MDgwIiwiaHR0cDovL2xvY2FsaG9zdDo4MDgwIiwiaHR0cDovLzEwLjExNi45NS4xMjo4NjgwIiwiaHR0cDovLzEwLjEwLjIxLjEyODo4MDgwIiwiaHR0cHM6Ly9zaWFzYy1mcm9udGVuZC1pbnRlcm5ldC1kZXMtZXN0ZWlyYXMubnByZDIuY2FpeGEiLCJodHRwOi8vc2lhc2MuZGVzLmNhaXhhIiwiaHR0cDovLzEwLjEwLjIwLjIyMjo4MDgwIiwiaHR0cDovLzEwLjEwLjIwLjE2NDo4MDgwIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJBU0MwMDQiLCJ1bWFfYXV0aG9yaXphdGlvbiIsIkFTQzAwNyIsIkFTQzAwNiIsIkFTQzAwNSJdfSwic2NvcGUiOiJvcGVuaWQiLCJudS1jcGYiOiI4NDI4ODcxMDE5NyIsIm5hbWUiOiJVU0VSIEMwNjA1NDIgQ0VQRU0gQ0VQRU0iLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJjODkxMjgwIiwiZ2l2ZW5fbmFtZSI6IlVTRVIgQzA2MDU0MiBDRVBFTSIsImZhbWlseV9uYW1lIjoiQ0VQRU0ifQ.mTYzu_x3DNonFSWJ-V5CxDw7Dez6hC6WT-agsCQqQLl761Y1eYLM90moPaC3crKQbJxHCzIHtmueSG0nyjDfOckzGrwXPdHHuKiATncLatVRrwd3BIeHa6Y6rbeandUjjqB3vnnPtFX0KOu3d_chJsTFKqBhSMZ1UW_68btEeuocvHuEbj2ybRgs9zXB5zDuqTq2f10sOkhUC67Ck1wEaFrjrIZuXvEzCXLPSnQKZfpVctHqwrt4SWr_9CQtEY7GyAawFQLQvpI_jXe1EUav3x9VSi2457BhOaqEiqR9FcxG6-qgkK0WDEphFhRM8xjgEfFHtfzdacpKNmZV3ZHnHA
+request.interceptor.ts:60 🚀 ~ RequestInterceptor ~ mergeMap ~ handledReq: 
+HttpRequest {url: '/siasc-api/api/medicamentos/filtro-medicamento', body: FiltroConsultaMedicamento, reportProgress: false, withCredentials: true, responseType: 'json', …}
+request.interceptor.ts:143 🚀 ~ RequestInterceptor ~ handleDate ~ next: 
+{handle: ƒ}
+request.interceptor.ts:144 🚀 ~ RequestInterceptor ~ handleDate ~ req: 
+HttpRequest {url: '/siasc-api/api/medicamentos/filtro-medicamento', body: FiltroConsultaMedicamento, reportProgress: false, withCredentials: true, responseType: 'json', …}
+zone.umd.js:1770 [Violation] 'click' handler took 205ms
+:4200/#/manutencao/p…amentosNome=12721:1 Form submission canceled because the form is not connected
+request.interceptor.ts:163 🚀 ~ RequestInterceptor ~ processJsonResponse ~ res: 
+HttpResponse {headers: HttpHeaders, status: 200, statusText: 'OK', url: 'http://localhost:4200/siasc-api/api/medicamentos/filtro-medicamento', ok: true, …}
+parametrizacao-medic…r.component.html:90 Warning: the currency pipe has been changed in Angular v5. The symbolDisplay option (third parameter) is now a string instead of a boolean. The accepted values are "code", "symbol" or "symbol-narrow".
+request.interceptor.ts:36 🚀 ~ RequestInterceptor ~ intercept ~ next: 
+{handle: ƒ}
+request.interceptor.ts:37 🚀 ~ RequestInterceptor ~ intercept ~ req: 
+HttpRequest {url: '/siasc-api/api/combos/laboratorios', body: null, reportProgress: false, withCredentials: true, responseType: 'json', …}
+request.interceptor.ts:87 🚀 ~ RequestInterceptor ~ adicionarTokenNoCabecalho ~ headersArg: 
+HttpHeaders {normalizedNames: Map(0), lazyUpdate: null, headers: Map(0)}
+request.interceptor.ts:45 🚀 ~ RequestInterceptor ~ mergeMap ~ token: 
+request.interceptor.ts:50 🚀 ~ RequestInterceptor ~ mergeMap ~ token: eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJNRmVKNjVfRC14cU55M1Zta01Ib01WS1NjZlA3S21ZazdtVjBJaEsta0F3In0.eyJqdGkiOiIzNWIxOWVmYy1kYTZiLTRkNTMtYmZiNC00YWU1YWQ3ODZiNzAiLCJleHAiOjE3NjQ2OTIzNTIsIm5iZiI6MCwiaWF0IjoxNzY0NjkxNDUyLCJpc3MiOiJodHRwczovL2xvZ2luLmRlcy5jYWl4YS9hdXRoL3JlYWxtcy9pbnRyYW5ldCIsInN1YiI6IjA5ZWYzN2Y0LThlMGYtNDc3OC05M2NiLWIwNDA2MDJkZDdjYiIsInR5cCI6IkJlYXJlciIsImF6cCI6ImNsaS13ZWItYXNjIiwibm9uY2UiOiJlYThmOTBlMi01MzdhLTRmNTUtYjE3Ny1mMmJjNmQzYTYwZTUiLCJhdXRoX3RpbWUiOjE3NjQ2ODYxMzQsInNlc3Npb25fc3RhdGUiOiJiYjA1YzdhNi05YWFjLTQxNmItYTk0My01NDFiMGU5MTc3ZWMiLCJhY3IiOiIwIiwiYWxsb3dlZC1vcmlnaW5zIjpbImh0dHA6Ly8xMC4xMTYuOTUuMTE6ODY4MCIsImh0dHA6Ly8xMC4xMC4yMS44NDo0MjAwIiwiaHR0cHM6Ly9zaWFzYy1mcm9udGVuZC1ub3ZvLWRlcy5hcHBzLm5wcmQuY2FpeGEiLCJodHRwczovL3NpYXNjLWZyb250ZW5kLWRlcy1lc3RlaXJhcy5ucHJkMi5jYWl4YSIsImh0dHBzOi8vc2lhc2MtZnJvbnRlbmQtZGVzLmFwcHMubnByZC5jYWl4YSIsImh0dHA6Ly9sb2NhbGhvc3Q6NDIwMCIsImh0dHA6Ly8xMC4xMC4yMS44NDo4MDgwIiwiaHR0cDovL2xvY2FsaG9zdDo4MDgwIiwiaHR0cDovLzEwLjExNi45NS4xMjo4NjgwIiwiaHR0cDovLzEwLjEwLjIxLjEyODo4MDgwIiwiaHR0cHM6Ly9zaWFzYy1mcm9udGVuZC1pbnRlcm5ldC1kZXMtZXN0ZWlyYXMubnByZDIuY2FpeGEiLCJodHRwOi8vc2lhc2MuZGVzLmNhaXhhIiwiaHR0cDovLzEwLjEwLjIwLjIyMjo4MDgwIiwiaHR0cDovLzEwLjEwLjIwLjE2NDo4MDgwIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJBU0MwMDQiLCJ1bWFfYXV0aG9yaXphdGlvbiIsIkFTQzAwNyIsIkFTQzAwNiIsIkFTQzAwNSJdfSwic2NvcGUiOiJvcGVuaWQiLCJudS1jcGYiOiI4NDI4ODcxMDE5NyIsIm5hbWUiOiJVU0VSIEMwNjA1NDIgQ0VQRU0gQ0VQRU0iLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJjODkxMjgwIiwiZ2l2ZW5fbmFtZSI6IlVTRVIgQzA2MDU0MiBDRVBFTSIsImZhbWlseV9uYW1lIjoiQ0VQRU0ifQ.mTYzu_x3DNonFSWJ-V5CxDw7Dez6hC6WT-agsCQqQLl761Y1eYLM90moPaC3crKQbJxHCzIHtmueSG0nyjDfOckzGrwXPdHHuKiATncLatVRrwd3BIeHa6Y6rbeandUjjqB3vnnPtFX0KOu3d_chJsTFKqBhSMZ1UW_68btEeuocvHuEbj2ybRgs9zXB5zDuqTq2f10sOkhUC67Ck1wEaFrjrIZuXvEzCXLPSnQKZfpVctHqwrt4SWr_9CQtEY7GyAawFQLQvpI_jXe1EUav3x9VSi2457BhOaqEiqR9FcxG6-qgkK0WDEphFhRM8xjgEfFHtfzdacpKNmZV3ZHnHA
+request.interceptor.ts:60 🚀 ~ RequestInterceptor ~ mergeMap ~ handledReq: 
+HttpRequest {url: '/siasc-api/api/combos/laboratorios', body: null, reportProgress: false, withCredentials: true, responseType: 'json', …}
+request.interceptor.ts:143 🚀 ~ RequestInterceptor ~ handleDate ~ next: 
+{handle: ƒ}
+request.interceptor.ts:144 🚀 ~ RequestInterceptor ~ handleDate ~ req: 
+HttpRequest {url: '/siasc-api/api/combos/laboratorios', body: null, reportProgress: false, withCredentials: true, responseType: 'json', …}
+core.mjs:10614 ERROR RuntimeError: NG01050: formControlName must be used with a parent formGroup directive.  You'll want to add a formGroup
+      directive and pass it an existing FormGroup instance (you can create one in your class).
+
+    Example:
+
+    
+  <div [formGroup]="myGroup">
+    <input formControlName="firstName">
+  </div>
+
+  In your class:
+
+  this.myGroup = new FormGroup({
+      firstName: new FormControl()
+  });
+    at controlParentException (forms.mjs:1416:12)
+    at FormControlName._checkParentType (forms.mjs:5364:23)
+    at FormControlName._setUpControl (forms.mjs:5369:14)
+    at FormControlName.ngOnChanges (forms.mjs:5315:18)
+    at FormControlName.rememberChangeHistoryAndInvokeOnChangesHook (core.mjs:3032:14)
+    at callHookInternal (core.mjs:4024:14)
+    at callHook (core.mjs:4055:9)
+    at callHooks (core.mjs:4006:17)
+    at executeInitAndCheckHooks (core.mjs:3956:9)
+    at selectIndexInternal (core.mjs:11780:17)
+parametrizacao-medic….component.html:102 ERROR RuntimeError: NG01050: formControlName must be used with a parent formGroup directive.  You'll want to add a formGroup
+      directive and pass it an existing FormGroup instance (you can create one in your class).
+
+    Example:
+
+    
+  <div [formGroup]="myGroup">
+    <input formControlName="firstName">
+  </div>
+
+  In your class:
+
+  this.myGroup = new FormGroup({
+      firstName: new FormControl()
+  });
+    at controlParentException (forms.mjs:1416:12)
+    at FormControlName._checkParentType (forms.mjs:5364:23)
+    at FormControlName._setUpControl (forms.mjs:5369:14)
+    at FormControlName.ngOnChanges (forms.mjs:5315:18)
+    at FormControlName.rememberChangeHistoryAndInvokeOnChangesHook (core.mjs:3032:14)
+    at callHookInternal (core.mjs:4024:14)
+    at callHook (core.mjs:4055:9)
+    at callHooks (core.mjs:4006:17)
+    at executeInitAndCheckHooks (core.mjs:3956:9)
+    at selectIndexInternal (core.mjs:11780:17)
+node_modules\pace-js\pace.min.js:6 ERROR RuntimeError: NG01050: formControlName must be used with a parent formGroup directive.  You'll want to add a formGroup
+      directive and pass it an existing FormGroup instance (you can create one in your class).
+
+    Example:
+
+    
+  <div [formGroup]="myGroup">
+    <input formControlName="firstName">
+  </div>
+
+  In your class:
+
+  this.myGroup = new FormGroup({
+      firstName: new FormControl()
+  });
+    at controlParentException (forms.mjs:1416:12)
+    at FormControlName._checkParentType (forms.mjs:5364:23)
+    at FormControlName._setUpControl (forms.mjs:5369:14)
+    at FormControlName.ngOnChanges (forms.mjs:5315:18)
+    at FormControlName.rememberChangeHistoryAndInvokeOnChangesHook (core.mjs:3032:14)
+    at callHookInternal (core.mjs:4024:14)
+    at callHook (core.mjs:4055:9)
+    at callHooks (core.mjs:4006:17)
+    at executeInitAndCheckHooks (core.mjs:3956:9)
+    at selectIndexInternal (core.mjs:11780:17)
+node_modules\pace-js\pace.min.js:6 ERROR RuntimeError: NG01050: formControlName must be used with a parent formGroup directive.  You'll want to add a formGroup
+      directive and pass it an existing FormGroup instance (you can create one in your class).
+
+    Example:
+
+    
+  <div [formGroup]="myGroup">
+    <input formControlName="firstName">
+  </div>
+
+  In your class:
+
+  this.myGroup = new FormGroup({
+      firstName: new FormControl()
+  });
+    at controlParentException (forms.mjs:1416:12)
+    at FormControlName._checkParentType (forms.mjs:5364:23)
+    at FormControlName._setUpControl (forms.mjs:5369:14)
+    at FormControlName.ngOnChanges (forms.mjs:5315:18)
+    at FormControlName.rememberChangeHistoryAndInvokeOnChangesHook (core.mjs:3032:14)
+    at callHookInternal (core.mjs:4024:14)
+    at callHook (core.mjs:4055:9)
+    at callHooks (core.mjs:4006:17)
+    at executeInitAndCheckHooks (core.mjs:3956:9)
+    at refreshView (core.mjs:13513:21)
+2
+asc-multiselect.component.html:2 
+  It looks like you're using the disabled attribute with a reactive form directive. If you set disabled to true
+  when you set up this control in your component class, the disabled attribute will actually be set in the DOM for
+  you. We recommend using this approach to avoid 'changed after checked' errors.
+
+  Example:
+  // Specify the `disabled` property at control creation time:
+  form = new FormGroup({
+    first: new FormControl({value: 'Nancy', disabled: true}, Validators.required),
+    last: new FormControl('Drew', Validators.required)
+  });
+
+  // Controls can also be enabled/disabled after creation:
+  form.get('first')?.enable();
+  form.get('last')?.disable();
+zone.umd.js:2419 [Violation] 'setTimeout' handler took 64ms
+request.interceptor.ts:163 🚀 ~ RequestInterceptor ~ processJsonResponse ~ res: 
+HttpResponse {headers: HttpHeaders, status: 200, statusText: 'OK', url: 'http://localhost:4200/siasc-api/api/combos/laboratorios', ok: true, …}
+parametrizacao-medic…ome.component.ts:79 === RESTAURANDO LABORATORIOS ===
+parametrizacao-medic…ome.component.ts:80 Storage idListaLaboratorios: 
+[{…}]
+request.interceptor.ts:36 🚀 ~ RequestInterceptor ~ intercept ~ next: 
+{handle: ƒ}
+request.interceptor.ts:37 🚀 ~ RequestInterceptor ~ intercept ~ req: 
+HttpRequest {url: '/siasc-api/api/combos/medicamentos', body: Array(1), reportProgress: false, withCredentials: true, responseType: 'json', …}
+request.interceptor.ts:87 🚀 ~ RequestInterceptor ~ adicionarTokenNoCabecalho ~ headersArg: 
+HttpHeaders {normalizedNames: Map(0), lazyUpdate: null, headers: Map(0)}
+request.interceptor.ts:45 🚀 ~ RequestInterceptor ~ mergeMap ~ token: 
+request.interceptor.ts:50 🚀 ~ RequestInterceptor ~ mergeMap ~ token: eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJNRmVKNjVfRC14cU55M1Zta01Ib01WS1NjZlA3S21ZazdtVjBJaEsta0F3In0.eyJqdGkiOiIzNWIxOWVmYy1kYTZiLTRkNTMtYmZiNC00YWU1YWQ3ODZiNzAiLCJleHAiOjE3NjQ2OTIzNTIsIm5iZiI6MCwiaWF0IjoxNzY0NjkxNDUyLCJpc3MiOiJodHRwczovL2xvZ2luLmRlcy5jYWl4YS9hdXRoL3JlYWxtcy9pbnRyYW5ldCIsInN1YiI6IjA5ZWYzN2Y0LThlMGYtNDc3OC05M2NiLWIwNDA2MDJkZDdjYiIsInR5cCI6IkJlYXJlciIsImF6cCI6ImNsaS13ZWItYXNjIiwibm9uY2UiOiJlYThmOTBlMi01MzdhLTRmNTUtYjE3Ny1mMmJjNmQzYTYwZTUiLCJhdXRoX3RpbWUiOjE3NjQ2ODYxMzQsInNlc3Npb25fc3RhdGUiOiJiYjA1YzdhNi05YWFjLTQxNmItYTk0My01NDFiMGU5MTc3ZWMiLCJhY3IiOiIwIiwiYWxsb3dlZC1vcmlnaW5zIjpbImh0dHA6Ly8xMC4xMTYuOTUuMTE6ODY4MCIsImh0dHA6Ly8xMC4xMC4yMS44NDo0MjAwIiwiaHR0cHM6Ly9zaWFzYy1mcm9udGVuZC1ub3ZvLWRlcy5hcHBzLm5wcmQuY2FpeGEiLCJodHRwczovL3NpYXNjLWZyb250ZW5kLWRlcy1lc3RlaXJhcy5ucHJkMi5jYWl4YSIsImh0dHBzOi8vc2lhc2MtZnJvbnRlbmQtZGVzLmFwcHMubnByZC5jYWl4YSIsImh0dHA6Ly9sb2NhbGhvc3Q6NDIwMCIsImh0dHA6Ly8xMC4xMC4yMS44NDo4MDgwIiwiaHR0cDovL2xvY2FsaG9zdDo4MDgwIiwiaHR0cDovLzEwLjExNi45NS4xMjo4NjgwIiwiaHR0cDovLzEwLjEwLjIxLjEyODo4MDgwIiwiaHR0cHM6Ly9zaWFzYy1mcm9udGVuZC1pbnRlcm5ldC1kZXMtZXN0ZWlyYXMubnByZDIuY2FpeGEiLCJodHRwOi8vc2lhc2MuZGVzLmNhaXhhIiwiaHR0cDovLzEwLjEwLjIwLjIyMjo4MDgwIiwiaHR0cDovLzEwLjEwLjIwLjE2NDo4MDgwIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJBU0MwMDQiLCJ1bWFfYXV0aG9yaXphdGlvbiIsIkFTQzAwNyIsIkFTQzAwNiIsIkFTQzAwNSJdfSwic2NvcGUiOiJvcGVuaWQiLCJudS1jcGYiOiI4NDI4ODcxMDE5NyIsIm5hbWUiOiJVU0VSIEMwNjA1NDIgQ0VQRU0gQ0VQRU0iLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJjODkxMjgwIiwiZ2l2ZW5fbmFtZSI6IlVTRVIgQzA2MDU0MiBDRVBFTSIsImZhbWlseV9uYW1lIjoiQ0VQRU0ifQ.mTYzu_x3DNonFSWJ-V5CxDw7Dez6hC6WT-agsCQqQLl761Y1eYLM90moPaC3crKQbJxHCzIHtmueSG0nyjDfOckzGrwXPdHHuKiATncLatVRrwd3BIeHa6Y6rbeandUjjqB3vnnPtFX0KOu3d_chJsTFKqBhSMZ1UW_68btEeuocvHuEbj2ybRgs9zXB5zDuqTq2f10sOkhUC67Ck1wEaFrjrIZuXvEzCXLPSnQKZfpVctHqwrt4SWr_9CQtEY7GyAawFQLQvpI_jXe1EUav3x9VSi2457BhOaqEiqR9FcxG6-qgkK0WDEphFhRM8xjgEfFHtfzdacpKNmZV3ZHnHA
+request.interceptor.ts:60 🚀 ~ RequestInterceptor ~ mergeMap ~ handledReq: 
+HttpRequest {url: '/siasc-api/api/combos/medicamentos', body: Array(1), reportProgress: false, withCredentials: true, responseType: 'json', …}
+request.interceptor.ts:143 🚀 ~ RequestInterceptor ~ handleDate ~ next: 
+{handle: ƒ}
+request.interceptor.ts:144 🚀 ~ RequestInterceptor ~ handleDate ~ req: 
+HttpRequest {url: '/siasc-api/api/combos/medicamentos', body: Array(1), reportProgress: false, withCredentials: true, responseType: 'json', …}
+zone.umd.js:1770 [Violation] 'load' handler took 474ms
+request.interceptor.ts:163 🚀 ~ RequestInterceptor ~ processJsonResponse ~ res: 
+HttpResponse {headers: HttpHeaders, status: 200, statusText: 'OK', url: 'http://localhost:4200/siasc-api/api/combos/medicamentos', ok: true, …}
+parametrizacao-medic…ome.component.ts:98 === RESTAURANDO MEDICAMENTOS ===
+parametrizacao-medic…ome.component.ts:99 Storage idListaMedicamentos: 
+[{…}]
+0
 : 
-apresentacao
+{label: 'DEPAKOTE', value: 12721}
+length
 : 
-null
-ativos
-: 
-null
-generico
-: 
-null
-idListaLaboratorios
-: 
-[114]
-idListaMedicamentos
-: 
-[12721]
-listaLaboratorios
-: 
-"114"
-listaMedicamentos
-: 
-"12721"
-numeroTuss
-: 
-null
+1
 [[Prototype]]
 : 
-Object
+Array(0)
+parametrizacao-medic…ome.component.ts:87 === SETANDO NO FORMCONTROL ===
+parametrizacao-medic…ome.component.ts:89 FormControl value após setValue: 
+[{…}]
+0
+: 
+{label: 'ABBOTT', value: 114}
+length
+: 
+1
 [[Prototype]]
 : 
-Object
+Array(0)
+parametrizacao-medic…me.component.ts:101 === SETANDO MEDICAMENTOS NO FORMCONTROL ===
+parametrizacao-medic…me.component.ts:103 FormControl value após setValue: 
+[{…}]
+0
+: 
+{label: 'DEPAKOTE', value: 12721}
+length
+: 
+1
+[[Prototype]]
+: 
+Array(0)
