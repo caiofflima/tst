@@ -76,17 +76,12 @@ export class ParametrizacaoMedicamentosHomeComponent extends BaseComponent imple
 
     private preencherComboLaboratoriosSelecionados():void{
         if(this.isStorageCarregado() && this.filtroConsultaMedicamento.idListaLaboratorios){
-            console.log('=== RESTAURANDO LABORATORIOS ===');
-            console.log('Storage idListaLaboratorios:', this.filtroConsultaMedicamento.idListaLaboratorios);
-
             const valores = this.filtroConsultaMedicamento.idListaLaboratorios.map(v =>
                 typeof v === 'object' ? v.value : v
             );
 
             setTimeout(() => {
-                console.log('=== SETANDO NO FORMCONTROL ===');
-                this.formulario.get('idListaLaboratorios').setValue(this.filtroConsultaMedicamento.idListaLaboratorios);
-                console.log('FormControl value após setValue:', this.formulario.get('idListaLaboratorios').value);
+                this.formulario.get('idListaLaboratorios').setValue(valores);
             }, 100);
 
             this.preencherComboMedicamento(valores);
@@ -95,12 +90,12 @@ export class ParametrizacaoMedicamentosHomeComponent extends BaseComponent imple
 
     private preencherComboMedicamentosSelecionados():void{
         if(this.isStorageCarregado() && this.filtroConsultaMedicamento.idListaMedicamentos){
-            console.log('=== RESTAURANDO MEDICAMENTOS ===');
-            console.log('Storage idListaMedicamentos:', this.filtroConsultaMedicamento.idListaMedicamentos);
+            const valores = this.filtroConsultaMedicamento.idListaMedicamentos.map(v =>
+                typeof v === 'object' ? v.value : v
+            );
+
             setTimeout(() => {
-                console.log('=== SETANDO MEDICAMENTOS NO FORMCONTROL ===');
-                this.formulario.get('idListaMedicamentos').setValue(this.filtroConsultaMedicamento.idListaMedicamentos);
-                console.log('FormControl value após setValue:', this.formulario.get('idListaMedicamentos').value);
+                this.formulario.get('idListaMedicamentos').setValue(valores);
             }, 200);
         }
     }
@@ -157,11 +152,8 @@ export class ParametrizacaoMedicamentosHomeComponent extends BaseComponent imple
     }
 
     pesquisar(): void {
-        console.log('=== PESQUISAR CHAMADO ===');
         const laboratorios = this.formulario.get('idListaLaboratorios').value;
         const medicamentos = this.formulario.get('idListaMedicamentos').value;
-        console.log('Laboratorios do formulário:', laboratorios);
-        console.log('Medicamentos do formulário:', medicamentos);
 
         const laboratoriosCompletos = (laboratorios && laboratorios.length > 0) ? laboratorios.map(val => {
             const numVal = typeof val === 'object' ? val.value : val;
