@@ -8,6 +8,7 @@ import {BaseComponent} from "../../../shared/components/base.component";
 import { FiltroConsultaMedicamento } from 'app/shared/models/filtro/filtro-consulta-medicamento';
 import { Medicamento } from 'app/shared/models/entidades';
 import { MedicamentoService } from 'app/shared/services/services';
+import { Data } from 'app/shared/providers/data';
 
 class ResultadoPesquisaMedicamento {
     id: string;
@@ -39,6 +40,7 @@ export class ParametrizacaoMedicamentosListarComponent extends BaseComponent imp
         private readonly activatedRoute: ActivatedRoute,
         private readonly location: Location,
         private readonly medicamentoService: MedicamentoService,
+        private readonly data: Data
     ) {
         super(messageService);
     }
@@ -52,9 +54,25 @@ export class ParametrizacaoMedicamentosListarComponent extends BaseComponent imp
 
         this.filtroConsultaMedicamento.id = this.activatedRoute.snapshot.queryParams['id'];
 
-        this.listaLaboratoriosNome = this.activatedRoute.snapshot.queryParams['listaLaboratoriosNome'];
-        this.listaMedicamentosNome = this.activatedRoute.snapshot.queryParams['listaMedicamentosNome'];
-        
+        if (this.data.storage?.filtroConsultaMedicamento) {
+            const storage = this.data.storage.filtroConsultaMedicamento;
+
+            if (storage.idListaLaboratorios && Array.isArray(storage.idListaLaboratorios)) {
+                this.listaLaboratoriosNome = storage.idListaLaboratorios
+                    .map(item => item?.label || item)
+                    .join(', ');
+            }
+
+            if (storage.idListaMedicamentos && Array.isArray(storage.idListaMedicamentos)) {
+                this.listaMedicamentosNome = storage.idListaMedicamentos
+                    .map(item => item?.label || item)
+                    .join(', ');
+            }
+        } else {
+            this.listaLaboratoriosNome = this.activatedRoute.snapshot.queryParams['listaLaboratoriosNome'];
+            this.listaMedicamentosNome = this.activatedRoute.snapshot.queryParams['listaMedicamentosNome'];
+        }
+
         this.filtroConsultaMedicamento.listaLaboratorios = this.converterListaArray(this.activatedRoute.snapshot.queryParams['listaLaboratorios']);
         this.filtroConsultaMedicamento.listaMedicamentos = this.converterListaArray(this.activatedRoute.snapshot.queryParams['listaMedicamentos']);
         this.filtroConsultaMedicamento.apresentacao = this.activatedRoute.snapshot.queryParams['apresentacao'];
