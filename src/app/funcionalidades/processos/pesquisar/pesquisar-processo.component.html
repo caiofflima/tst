@@ -83,23 +83,22 @@
         </div>
 
         <div class="col-md-3">
-          <asc-dropdown
-            formControlName="ufAtendimento"
+          <asc-select-uf
+            id="asc-select-uf-pesquisar-processo"
             label="UF de atendimento"
-            [items]="optionsUF"
-            [placeholder]="this.bundle('MHSPH')"
+            [control]="formulario.get('ufAtendimento')"
             size="large"
-          ></asc-dropdown>
+          ></asc-select-uf>
         </div>
 
         <div class="col-md-3">
-          <asc-dropdown
-            formControlName="municipioAtendimento"
+          <asc-select-municipio
+            id="asc-select-municipio-pesquisar-processo"
             label="Município de atendimento"
-            [items]="optionsMunicipio"
-            [placeholder]="this.bundle('MHSPH')"
+            [parametro]="{ idMunicipio: formulario.get('ufAtendimento').value }"
+            [control]="formulario.get('municipioAtendimento')"
             size="large"
-          ></asc-dropdown>
+          ></asc-select-municipio>
         </div>
       </div>
 

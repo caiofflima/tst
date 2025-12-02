@@ -36,7 +36,6 @@ export class PesquisarProcessoComponent extends BaseComponent implements OnInit 
     listComboTipoBeneficiario: DadoComboDTO[];
     listComboCaraterSolicitacao: DadoComboDTO[];
     listComboUF: DadoComboDTO[];
-    listComboMunicipio: DadoComboDTO[];
     listComboFilial: DadoComboDTO[];
     listaMotivoSolicitacao: DadoComboDTO[]=[];
     listaGrupoTiposPedido: DadoComboDTO[]=[];
@@ -44,7 +43,6 @@ export class PesquisarProcessoComponent extends BaseComponent implements OnInit 
     // Options for DSC components
     optionsCondicaoProcesso: Option[] = [];
     optionsUF: Option[] = [];
-    optionsMunicipio: Option[] = [];
     optionsCaraterSolicitacao: Option[] = [];
 
     total: number = 0;
@@ -119,11 +117,6 @@ export class PesquisarProcessoComponent extends BaseComponent implements OnInit 
         if (!this.carregandoConsulta) {
             this.preencherCamposDeBusca();
             this.inicializarCombos();
-            this.configurarListenerUFAtendimento();
-
-            if (this.formulario.controls['ufAtendimento'] && this.formulario.controls['ufAtendimento'].value) {
-                this.onChangeUFAtendimento();
-            }
 
             this.tiposProcesso.valueChanges
                 .pipe(debounceTime(300))
@@ -431,49 +424,14 @@ export class PesquisarProcessoComponent extends BaseComponent implements OnInit 
     private convertToOptions(dados: DadoComboDTO[]): Option[] {
         if (!dados) return [];
         return dados.map(dado => ({
-            label: dado.label,
-            value: dado.value
+            label: dado.label || dado.descricao || '',
+            value: dado.value !== undefined ? dado.value : dado.id
         }));
     }
 
     limparCampos() {
         this.listaMotivoSolicitacao = null;
         this.formulario.reset();
-    }
-
-    private configurarListenerUFAtendimento(): void {
-        this.formulario.get('ufAtendimento').valueChanges.subscribe((ufValue) => {
-            this.formulario.patchValue({ municipioAtendimento: null }, { emitEvent: false });
-            this.optionsMunicipio = [];
-
-            if (ufValue && ufValue > 0) {
-                this.comboService.consultarDadosComboMunicipioPorUF(ufValue).pipe(take(1)).subscribe(res => {
-                    this.listComboMunicipio = res;
-                    this.optionsMunicipio = this.convertToOptions(res);
-                }, err => this.showDangerMsg(err.error));
-            } else {
-                this.listComboMunicipio = [];
-            }
-        });
-    }
-
-    onChangeUFAtendimento(): void {
-        const ufAtendimentoControl = this.formulario.controls['ufAtendimento'];
-        const ufAtendimento = ufAtendimentoControl.value;
-
-        const ufValue = ufAtendimento?.value || ufAtendimento;
-
-        this.formulario.controls['municipioAtendimento'].setValue(null);
-        this.optionsMunicipio = [];
-
-        if (ufValue && ufValue > 0) {
-            this.comboService.consultarDadosComboMunicipioPorUF(ufValue).pipe(take(1)).subscribe(res => {
-                this.listComboMunicipio = res;
-                this.optionsMunicipio = this.convertToOptions(res);
-            }, err => this.showDangerMsg(err.error));
-        } else {
-            this.listComboMunicipio = [];
-        }
     }
 
     consultarProcesso() {
