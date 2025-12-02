@@ -163,12 +163,6 @@ export class ParametrizacaoMedicamentosHomeComponent extends BaseComponent imple
     }
 
     pesquisar(): void {
-        console.log('=== VALORES DO FORMULARIO ===');
-        console.log('apresentacao:', this.formulario.get('apresentacao').value);
-        console.log('numeroTuss:', this.formulario.get('numeroTuss').value);
-        console.log('ativos:', this.formulario.get('ativos').value);
-        console.log('generico:', this.formulario.get('generico').value);
-
         const laboratorios = this.formulario.get('idListaLaboratorios').value;
         const medicamentos = this.formulario.get('idListaMedicamentos').value;
 
