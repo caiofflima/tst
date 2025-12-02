@@ -25,7 +25,7 @@ export class VincMedPatologiaHomeComponent extends BaseComponent implements OnIn
         value: null,
         label: this.bundle('MHSPH')
     }];
-    patologia: number = null;
+    patologiaControl = new FormControl();
     medicamentos: Option[] = [];
     medicamento = new FormControl();
     termoBusca: string = '';
@@ -39,13 +39,13 @@ export class VincMedPatologiaHomeComponent extends BaseComponent implements OnIn
         private readonly data: Data
     ) {
         super(messageService);
-        this.buscarMedicamentosComFiltro();
         this.restaurarFiltros();
     }
 
     ngOnInit() {
         if (!this.data.storage?.vincMedPatologiaFiltros) {
             this.ativos = false;
+            this.medicamentos = [];
         }
         this.buscarPatologias();
     }
@@ -54,12 +54,21 @@ export class VincMedPatologiaHomeComponent extends BaseComponent implements OnIn
         if (this.data.storage?.vincMedPatologiaFiltros) {
             const filtros = this.data.storage.vincMedPatologiaFiltros;
             this.ativos = filtros.ativos || false;
-            this.patologia = filtros.patologia;
-            if (filtros.medicamento) {
-                this.medicamento.setValue(filtros.medicamento);
+
+            if (filtros.patologia) {
+                setTimeout(() => {
+                    this.patologiaControl.setValue(filtros.patologia);
+                }, 100);
             }
-            if (filtros.medicamentosOptions) {
+
+            if (filtros.medicamentosOptions && filtros.medicamentosOptions.length > 0) {
                 this.medicamentos = filtros.medicamentosOptions;
+
+                if (filtros.medicamento) {
+                    setTimeout(() => {
+                        this.medicamento.setValue(filtros.medicamento);
+                    }, 100);
+                }
             }
         }
     }
@@ -153,8 +162,9 @@ export class VincMedPatologiaHomeComponent extends BaseComponent implements OnIn
 
     limparCampos() {
         this.ativos = false;
-        this.patologia = null;
+        this.patologiaControl.reset();
         this.medicamento.reset();
+        this.medicamentos = [];
     }
 
     public nova() {
@@ -214,7 +224,7 @@ export class VincMedPatologiaHomeComponent extends BaseComponent implements OnIn
     pesquisar(): void {
         this.data.storage = {
             vincMedPatologiaFiltros: {
-                patologia: this.patologia,
+                patologia: this.patologiaControl.value,
                 medicamento: this.medicamento.value,
                 ativos: this.ativos,
                 medicamentosOptions: this.medicamentos
@@ -223,7 +233,7 @@ export class VincMedPatologiaHomeComponent extends BaseComponent implements OnIn
 
         this.router.navigate(['/manutencao/vinc-med-patologia/listar'], {
             queryParams: {
-                patologia: this.patologia || '',
+                patologia: this.patologiaControl.value || '',
                 medicamento: this.medicamento.value || '',
                 ativos: this.ativos
             }

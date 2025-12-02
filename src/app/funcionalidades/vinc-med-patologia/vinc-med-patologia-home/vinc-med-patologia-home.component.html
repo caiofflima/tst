@@ -23,8 +23,8 @@
         <div class="p-0 col-md-6">
           <asc-dropdown
   [items]="patologias"
+  [control]="patologiaControl"
   label="Patologia"
-  (selected)="patologia = $event?.value || $event"
 ></asc-dropdown>
         </div>
 
