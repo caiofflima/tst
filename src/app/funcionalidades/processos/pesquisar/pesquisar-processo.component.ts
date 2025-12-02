@@ -425,7 +425,7 @@ export class PesquisarProcessoComponent extends BaseComponent implements OnInit 
         if (!dados) return [];
         return dados.map(dado => ({
             label: dado.label || dado.descricao || '',
-            value: dado.value !== undefined ? dado.value : dado.id
+            value: dado.value
         }));
     }
 
