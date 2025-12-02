@@ -21,28 +21,26 @@
 
     <section class="row">
         <form [formGroup]="formulario" name="form">
-            <!-- Informações do registro (somente edição) -->
-            <div *ngIf="id" style="display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 24px; padding: 16px; background: #f5f5f5; border-radius: 4px;">
-                <div style="flex: 1; min-width: 200px;">
+            <div class="form-row">
+                <div *ngIf="id" class="col-md-4 pl-0">
                     <label class="control-label" for="id">ID</label>
                     <p class="marginBottom" id="id">{{id}}</p>
                 </div>
 
-                <div style="flex: 1; min-width: 200px;">
+                <div *ngIf="id" class="col-md-4">
                     <label class="control-label" for="dataCadastramento">Cadastramento</label>
                     <p class="marginBottom"
                        id="dataCadastramento">{{medicamento?.dataCadastramento |date:'dd/MM/yyyy HH:mm:ss'}}</p>
                 </div>
 
-                <div style="flex: 1; min-width: 200px;">
+                <div *ngIf="id" class="col-md-4">
                     <label class="control-label" for="codigoUsuarioCadastramento">Usuário</label>
                     <p class="marginBottom" id="codigoUsuarioCadastramento">{{medicamento?.codigoUsuarioCadastramento}}</p>
                 </div>
             </div>
 
-            <!-- Laboratório -->
-            <div style="display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 16px;">
-                <div style="flex: 1; min-width: 300px;">
+            <div class="form-row">
+                <div class="col-md-6 mb-15 pl-0">
                     <asc-dropdown [required]="true"
                     [items]="listComboLaboratorios"
                     label="Laboratório"
@@ -51,52 +49,49 @@
                 </div>
             </div>
 
-            <!-- Código e Nome do medicamento -->
-            <div style="display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 16px;">
-                <div style="flex: 1; min-width: 250px;">
+            <div class="form-row">
+                <div class="col-md-6 pl-0">
                     <asc-input-text label="Código do medicamento" [required]="true" id="coMedicamento" name="coMedicamento" 
                     [control]="coMedicamento" hint="Código do medicamento" [maxlength]="6"></asc-input-text>
                 </div>
 
-                <div style="flex: 2; min-width: 300px;">
+                <div class="col-md-12 pl-0">
                     <asc-input-text label="Nome do medicamento" hint="Nome do medicamento" [required]="true" id="nome" 
                     name="nome" [control]="nome"  [maxlength]="150"></asc-input-text>
                 </div>
             </div>
 
-            <!-- Apresentação -->
-            <div style="display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 16px;">
-                <div style="flex: 0 0 200px; min-width: 150px;">
+            <div class="form-row">
+                <div class="col-md-4 pl-0">
                     <asc-input-text label="Código Apresentação"  hint="Código Apresentação" [required]="true" 
                     id="codigoApresentacao" name="codigoApresentacao" [control]="codigoApresentacao" [maxlength]="4"></asc-input-text>
                 </div>
 
-                <div style="flex: 1; min-width: 300px;">
+                <div class="col-md-8 pl-0">
                 <asc-input-text label="Apresentação" [required]="true" hint="Apresentação" [maxlength]="150"
                 id="descricaoApresentacao" name="descricaoApresentacao" [control]="descricaoApresentacao" ></asc-input-text>
                 </div>               
             </div>
 
-            <!-- Valores e Quantidade -->
-            <div style="display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 16px;">
-                <div style="flex: 1; min-width: 180px;">
+            <div class="form-row">
+                <div class="col-md-3 pl-0">
                   <asc-input-money-type [control]="formulario.get('valor')" inputId="valor"
                   [required]="true" label="Valor">
                   </asc-input-money-type>
                 </div>
 
-                <div style="flex: 1; min-width: 180px;">
+                <div class="col-md-3">
                     <asc-input-text label="Quantidade Fracionada" hint="Quantidade Fracionada"  [required]="true" 
                     id="qtdFracionado" name="qtdFracionado" [somenteNumeros]="true" [control]="qtdFracionado" [maxlength]="5"></asc-input-text>
                 </div>
 
-                <div style="flex: 1; min-width: 180px;">
+                <div class="col-md-3">
                   <asc-input-money-type [control]="formulario.get('valorFracionado')" inputId="valorFracionado"
                   [required]="true" label="Valor Fracionado">
                   </asc-input-money-type>
                 </div>
 
-                <div style="flex: 1; min-width: 150px;">
+                <div class="col-md-3">
                     <asc-input-text [control]="formulario.get('percentualAliquota')" inputId="percentualAliquota"
                     [required]="true" label="Alíquota"  ascOnlyNumber [maxlength]="6"
                     (keydown)="onPercentChange()" (keyup)="onPercentChange()"  (focus)="onPercentChange()">
@@ -104,46 +99,44 @@
                 </div>
             </div>
 
-            <!-- Código de Barras -->
-            <div style="display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 16px;">    
-                <div style="flex: 1; min-width: 300px; max-width: 600px;">
+            <div class="form-row">    
+                <div class="col-md-12 pl-0">
                     <asc-input-text label="Código de Barras" hint="Código de Barras" [somenteNumeros]="true" 
                     id="codigoBarraAnvisa" name="codigoBarraAnvisa" [control]="codigoBarraAnvisa"  [maxlength]="15"></asc-input-text>
                 </div>
             </div>
 
-            <!-- Números TISS, TUSS e Edição -->
-            <div style="display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 16px;">    
-                <div style="flex: 1; min-width: 200px;">
+            <div class="form-row">    
+            
+                <div class="col-md-9 pl-0">
                     <asc-input-text label="Número TISS"  hint="Número TISS" [somenteNumeros]="true"
                     id="numeroTiss" name="numeroTiss" [control]="numeroTiss" [maxlength]="10" [required]="true"></asc-input-text>
                 </div>
                      
-                <div style="flex: 1; min-width: 200px;">
+                <div class="col-md-9 pl-0">
                     <asc-input-text label="Número TUSS" hint="Número TUSS" [somenteNumeros]="true" 
                     id="numeroTuss" name="numeroTuss" [control]="numeroTuss" [maxlength]="10"></asc-input-text>
                 </div>
               
-                <div style="flex: 1; min-width: 200px;">
+                <div class="col-md-9 pl-0">
                     <asc-input-text label="Nº Última Edição" hint="Nº Última Edição"  [somenteNumeros]="true" 
                     id="numeroUltimaEdicao" name="numeroUltimaEdicao" [control]="numeroUltimaEdicao" [maxlength]="3"></asc-input-text>
                 </div>
             </div>
 
-            <!-- Checkboxes e Data de Inativação -->
-            <div style="display: flex; flex-wrap: wrap; gap: 24px; margin-bottom: 24px; align-items: center;">
-                <div style="display: flex; align-items: center;">
+            <div class="form-row">
+                <div class="col-md-2 d-flex al-ic pl-0">
                     <asc-checkbox label="Genérico" name="binary" formControlName="generico" [valoresTrueOrFalse]="true" (ngModelChange)="onChangeInativo($event)"></asc-checkbox>
                 </div>
 
-                <div style="display: flex; align-items: center;">
+                <div class="col-md-2 d-flex al-ic">
                     <asc-checkbox label="Inativo" name="binary" formControlName="inativo" [valoresTrueOrFalse]="true" (ngModelChange)="onChangeInativo($event)"></asc-checkbox>
                 </div>
               
-                <div *ngIf="inativo.value" style="flex: 1; min-width: 250px;">
+                <div class="col-md-2 pl-0">
                     <asc-input-date
                             [control]="dataInativacao" [required]="inativo.value"
-                            [disabled]="!inativo.value" inputId="dataInativacao" label="Data da Inativação"
+                            [disabled]="!inativo.value" *ngIf="inativo.value" inputId="dataInativacao" label="Data da Inativação"
                     ></asc-input-date>
                     <asc-message-error
                             [control]="dataInativacao" type="dataIgualAtualMaior"

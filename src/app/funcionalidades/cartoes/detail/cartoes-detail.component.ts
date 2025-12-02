@@ -394,7 +394,7 @@ export class CartoesDetailComponent implements OnInit {
                     },
 
                     {
-                        text: '0800 095 060 94',
+                        text: '0800 095 60 94',
                         style: 'p4C',
                         absolutePosition: { x: 385 + 80, y: 320 },
                         color: '#005CA9'
@@ -809,7 +809,7 @@ export class CartoesDetailComponent implements OnInit {
                     },
 
                     {
-                        text: '0800 095 060 94',
+                        text: '0800 095 60 94',
                         style: 'p4C',
                         absolutePosition: { x: 385 + 80, y: 320 },
                         color: '#005CA9'

@@ -13,6 +13,8 @@
                 <div class="col-md-6 mb-15 pl-0">
                     <label class="control-label">Tipo de Pedido *</label>
                     <asc-multiSelect
+                            [label]="'Tipo de Pedido *'"
+                            size="standard"
                             id="tiposProcesso"
                             [required]="true"
                             [options]="listComboTipoProcesso"
@@ -25,6 +27,8 @@
                 <div class="col-md-6 mb-15 pl-0">
                     <label class="control-label">Tipo de Beneficiário *</label>
                     <asc-multiSelect
+                            [label]="'Tipo de Beneficiário *'"
+                            size="large"
                             id="tiposBeneficiarios"
                             [required]="true"
                             [options]="listComboTipoBeneficiario"

@@ -77,38 +77,20 @@
                     <p>{{ beneficiario?.nome | uppercase }}</p>
                   </div>
 
-                  <div
-                    class="form-group col-md-6 noPaddingLeft box-form__group"
-                  >
-                    <div class="custom-form-group-input">
-                      <label class="control-label"
-                        >Telefone <small>Opcional</small></label
-                      >
-                      <div class="custom-size">
-                        <asc-input-telefone
-                          [control]="dadosPessoaisForm.get('telefone')"
-                          inputId="telefone"
-                          label=""
-                        ></asc-input-telefone>
-                      </div>
-                    </div>
+                  <div class="form-group col-md-12 noPaddingLeft box-form__group">
+                    <asc-input-telefone
+                      [control]="dadosPessoaisForm.get('telefone')"
+                      inputId="telefone"
+                      label="Telefone"
+                    ></asc-input-telefone>
                   </div>
 
-                  <div
-                    class="form-group col-md-6 noPaddingLeft box-form__group"
-                  >
-                    <div class="custom-form-group-input">
-                      <label class="control-label"
-                        >E-mail <small>Opcional</small></label
-                      >
-                      <div class="custom-size">
-                        <asc-input-text
-                          [control]="dadosPessoaisForm.get('email')"
-                          inputId="email"
-                          label=""
-                        ></asc-input-text>
-                      </div>
-                    </div>
+                  <div class="form-group col-md-12 noPaddingLeft box-form__group">
+                    <asc-input-text
+                      [control]="dadosPessoaisForm.get('email')"
+                      inputId="email"
+                      label="E-mail"
+                    ></asc-input-text>
                   </div>
                 </div>
                 <div class="box-form__controls">
@@ -135,8 +117,7 @@
                         animationDuration=".5s"
                         strokeWidth="4"
                         [style]="{ width: '100%', height: '100%' }"
-                      >
-                      </dsc-progress-spinner>
+                      ></dsc-progress-spinner>
                     </span>
 
                     <span> Enviar Solicitação </span>
@@ -146,6 +127,7 @@
             </div>
           </div>
         </div>
+
         <div class="box-infos">
           <div class="box-infos__header">
             <h5>
@@ -202,194 +184,75 @@
             <div class="is--active" *ngIf="isEditarEndereco">
               <form [formGroup]="enderecoForm" class="form-container box-form">
                 <div class="box-form__groups">
-                  <div
-                    class="form-group col-md-6 noPaddingLeft box-form__group is--cep"
-                  >
-                    <div class="custom-form-group-input">
-                      <label class="control-label">CEP </label>
-                      <div class="custom-size form__input">
-                        <asc-input-text
-                          [control]="enderecoForm.get('cep')"
-                          maskName="cepMask"
-                          inputId="cep"
-                          label=""
-                        ></asc-input-text>
-                        <span class="reset-input">
-                          <button type="button" (click)="getEnderecoByCEP()">
-                            <i class="fa fa-sync"></i>
-                          </button>
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div
-                    class="form-group col-md-6 noPaddingLeft box-form__group is--logradouro"
-                  >
-                    <div class="custom-form-group-input">
-                      <label class="control-label">Logradouro</label>
-                      <div class="custom-size form__input">
-                        <asc-input-text
-                          [control]="enderecoForm.get('logradouro')"
-                          inputId="logradouro"
-                          label=""
-                        ></asc-input-text>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div
-                    class="form-group col-md-6 noPaddingLeft box-form__group is--numero"
-                  >
-                    <div class="custom-form-group-input">
-                      <label class="control-label">Número</label>
-                      <div class="custom-size form__input">
-                        <asc-input-text
-                          [control]="enderecoForm.get('numero')"
-                          inputId="numero"
-                          label=""
-                        ></asc-input-text>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div
-                    class="form-group col-md-6 noPaddingLeft box-form__group is--bairro"
-                  >
-                    <div class="custom-form-group-input">
-                      <label class="control-label">Bairro</label>
-                      <div class="custom-size form__input">
-                        <asc-input-text
-                          [control]="enderecoForm.get('bairro')"
-                          inputId="bairro"
-                          label=""
-                        ></asc-input-text>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div
-                    class="form-group col-md-6 noPaddingLeft box-form__group is--municipio"
-                  >
-                    <div class="custom-form-group-input">
-                      <div class="col-md-12 mb-15 p-0">
-                        <asc-select-uf
-                          id="asc-select-uf-dados-cadastrais-details"
-                          label="Estado"
-                          [control]="enderecoForm.get('estado')"
-                          [index]="4"
-                        >
-                        </asc-select-uf>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div
-                    class="form-group col-md-6 noPaddingLeft box-form__group is--municipio"
-                  >
-                    <div class="custom-form-group-input">
-                      <div class="col-md-12 mb-15 p-0">
-                        <asc-select-municipio
-                          id="asc-select-municipio-dados-cadastrais-details"
-                          label="Município"
-                          [parametro]="{
-                            idMunicipio: enderecoForm.get('estado').value
-                          }"
-                          [index]="5"
-                          [control]="enderecoForm.get('municipio')"
-                          [required]="enderecoForm.get('estado').value"
-                        >
-                        </asc-select-municipio>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div
-                    class="form-group col-md-6 noPaddingLeft box-form__group is--complemento"
-                  >
-                    <div class="custom-form-group-input">
-                      <label class="control-label">Complemento</label
-                      ><small> - Opcional</small>
-                      <div class="custom-size form__input">
-                        <asc-input-text
-                          [control]="enderecoForm.get('complemento')"
-                          inputId="complemento"
-                          label=""
-                        ></asc-input-text>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  style="display: block"
-                  class="custom-card docsMP box-form__group is--file"
-                >
-                  <div
-                    id="container-asc-documento-card-dados-cadastrais-detail"
-                  >
-                    <asc-documento-card
-                      id="asc-documento-card-dados-cadastrais-detail"
-                      [documentos]="documentosCadastrados"
-                      (arquivosSelecionados)="arquivosSelecionados($event)"
-                      (documentosTipoProcessoSelecionados)="
-                        watchDocumentos($event)
-                      "
-                      (documentoTipoProcessoSelecionado)="
-                        selecionarTipoDocumento($event)
-                      "
-                    ></asc-documento-card>
-                  </div>
-                  <!-- <form [formGroup]="documentoForm" class="form-container">
-                  <div class="form-columns" style="width: 30%">
-                      <input
-                          type="file"
-                          #file
-                          style="display: none"
-                          (change)="onFilesAdded()"
-                          (click)="$event.target.value = null"
-                          multiple
-                      />
-
-                      <button id="anexar"
-                          mat-raised-button
-                          color="primary"
-                          class="add-files-btn"
-                          matTooltip="clique aqui para inserir documentos"
-                          (click)="addFiles()">
-                          Anexar Arquivo
+                  <div class="form-group col-md-12 noPaddingLeft box-form__group is--cep">
+                    <div class="form__input">
+                      <asc-input-text
+                        [control]="enderecoForm.get('cep')"
+                        maskName="cepMask"
+                        inputId="cep"
+                        label="CEP"
+                      ></asc-input-text>
+                      <button class="reset-input" type="button" (click)="getEnderecoByCEP()">
+                        <i class="fa fa-sync"></i>
                       </button>
+                    </div>
                   </div>
-              </form>
 
-              <br />
+                  <div class="form-group col-md-6 noPaddingLeft box-form__group is--logradouro">
+                    <asc-input-text
+                      [control]="enderecoForm.get('logradouro')"
+                      inputId="logradouro"
+                      label="Logradouro"
+                    ></asc-input-text>
+                  </div>
 
-              <div class="form-columns" style="width: 80%">
-                <table *ngIf="anexos['length'] > 0" cellspacing="2" cellpadding="2">
+                  <div class="form-group col-md-6 noPaddingLeft box-form__group is--numero">
+                    <asc-input-text
+                      [control]="enderecoForm.get('numero')"
+                      inputId="numero"
+                      label="Número"
+                    ></asc-input-text>
+                  </div>
 
-                    <tr>
-                        <th scope="col" style="text-align: left;">#</th>
-                        <th scope="col" style="text-align: left;"><b>Documento</b></th>
-                        <th scope="col"></th>
-                    </tr>
+                  <div class="form-group col-md-6 noPaddingLeft box-form__group is--bairro">
+                    <asc-input-text
+                      [control]="enderecoForm.get('bairro')"
+                      inputId="bairro"
+                      label="Bairro"
+                    ></asc-input-text>
+                  </div>
 
-                    <tr *ngFor="let documento of anexos; let a=[index]">
-                        <td style="text-align: left;">{{a+1}}</td>
-                        <td style="text-align: left;"><span *ngIf="documento.name">{{documento.name}}</span> </td>
+                  <div class="form-group col-md-6 noPaddingLeft box-form__group is--municipio">
+                    <div class="col-md-12 mb-15 p-0">
+                      <asc-select-uf
+                        id="asc-select-uf-dados-cadastrais-details"
+                        label="Estado"
+                        [control]="enderecoForm.get('estado')"
+                        [index]="4"
+                      ></asc-select-uf>
+                    </div>
+                  </div>
 
-                        <td style="text-align: left;">
-                            <div fxFlex fxLayoutAlign="end center" style="padding: 8px">
-                                <button id="excluirDocumento"
-                                    mat-icon-button
-                                    type="button"
-                                    color="warn"
-                                    matTooltip="Excluir arquivo"
-                                    (click)="excluirDocumentos(documento)">
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
-                </table>
-            </div>-->
+                  <div class="form-group col-md-6 noPaddingLeft box-form__group is--municipio">
+                    <div class="col-md-12 mb-15 p-0">
+                      <asc-select-municipio
+                        id="asc-select-municipio-dados-cadastrais-details"
+                        label="Município"
+                        [parametro]="{ idMunicipio: enderecoForm.get('estado').value }"
+                        [index]="5"
+                        [control]="enderecoForm.get('municipio')"
+                        [required]="enderecoForm.get('estado').value"
+                      ></asc-select-municipio>
+                    </div>
+                  </div>
+
+                  <div class="form-group col-md-6 noPaddingLeft box-form__group is--complemento">
+                    <asc-input-text
+                      [control]="enderecoForm.get('complemento')"
+                      inputId="complemento"
+                      label="Complemento"
+                    ></asc-input-text>
+                  </div>
                 </div>
                 <div class="box-form__controls">
                   <button

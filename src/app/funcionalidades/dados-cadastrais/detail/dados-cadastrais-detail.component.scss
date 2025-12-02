@@ -1,1 +1,32 @@
 @import "../../../../assets/sass/funcionalidades/dados-cadastrais";
+
+.is--cep .form__input {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.is--cep .form__input > asc-input-text {
+  flex: 1 1 auto;
+}
+
+.is--cep .reset-input {
+  position: static !important;
+  flex: 0 0 auto;
+  width: 24px;
+  height: 24px;
+  margin-left: 8px;
+  padding: 0;
+  border: 1px solid #b3c7cb;
+  border-radius: 4px;
+  background: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.is--cep .reset-input i {
+  font-size: 12px;
+  line-height: 1;
+}

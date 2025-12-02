@@ -1,36 +1,4 @@
-// Layout responsivo usando Flexbox (Material Design inspirado)
-
-.form-grid {
+.form-row {
   display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-  margin-bottom: 16px;
-}
-
-.form-field {
-  flex: 1;
-  min-width: 300px;
-}
-
-.form-field-small {
-  flex: 1;
-  min-width: 180px;
-}
-
-.form-field-half {
-  flex: 1;
-  min-width: 250px;
-}
-
-.form-field-full {
-  flex: 1 1 100%;
-}
-
-// Responsividade
-@media (max-width: 768px) {
-  .form-field,
-  .form-field-small,
-  .form-field-half {
-    flex-basis: 100%;
-  }
+  margin-bottom: 10px;
 }
