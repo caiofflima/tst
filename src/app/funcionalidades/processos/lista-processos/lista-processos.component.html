@@ -19,12 +19,21 @@
 
     <div class="container-search-section" style="padding: 0 2em">
       <p class="info-search-label">Selecione o pedido que deseja acompanhar</p>
-      <div style="display: flex; align-items: center; gap: 0;">
-        <asc-input-button
-          [control]="filtroRapido"
+      <div class="search-input-group">
+        <input
+          type="text"
+          class="search-input"
+          [formControl]="filtroRapido"
           (keyup)="filtroEvent()"
-          style="flex: 0 0 auto;"
-        ></asc-input-button>
+          placeholder="Pesquisar..."
+        />
+        <button
+          type="button"
+          class="search-button"
+          (click)="filtroEvent()"
+        >
+          <i class="fa fa-search"></i>
+        </button>
       </div>
     </div>
     <div *ngIf="isLoading">
