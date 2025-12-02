@@ -119,6 +119,7 @@ export class PesquisarProcessoComponent extends BaseComponent implements OnInit 
         if (!this.carregandoConsulta) {
             this.preencherCamposDeBusca();
             this.inicializarCombos();
+            this.configurarListenerUFAtendimento();
 
             if (this.formulario.controls['ufAtendimento'] && this.formulario.controls['ufAtendimento'].value) {
                 this.onChangeUFAtendimento();
@@ -230,9 +231,11 @@ export class PesquisarProcessoComponent extends BaseComponent implements OnInit 
         let lista:number[] = [];
         if(this.formulario.controls['tiposProcesso'] && this.formulario.controls['tiposProcesso'].value)
         {
-            return this.formulario.controls['tiposProcesso'].value.map(item=>item.value);
+            return this.formulario.controls['tiposProcesso'].value.map(item =>
+                typeof item === 'object' ? item.value : item
+            );
         }
-        else 
+        else
             return lista;
     }
 
@@ -240,9 +243,11 @@ export class PesquisarProcessoComponent extends BaseComponent implements OnInit 
         let lista:number[] = [];
         if(this.formulario.controls['tiposPedido'] && this.formulario.controls['tiposPedido'].value)
         {
-            return this.formulario.controls['tiposPedido'].value.map(item=>item.value);
+            return this.formulario.controls['tiposPedido'].value.map(item =>
+                typeof item === 'object' ? item.value : item
+            );
         }
-        else 
+        else
             return lista;
     }
 
@@ -432,6 +437,13 @@ export class PesquisarProcessoComponent extends BaseComponent implements OnInit 
     limparCampos() {
         this.listaMotivoSolicitacao = null;
         this.formulario.reset();
+    }
+
+    private configurarListenerUFAtendimento(): void {
+        this.formulario.get('ufAtendimento').valueChanges.subscribe(() => {
+            this.formulario.patchValue({ municipioAtendimento: null }, { emitEvent: false });
+            this.optionsMunicipio = [];
+        });
     }
 
     onChangeUFAtendimento(): void {
