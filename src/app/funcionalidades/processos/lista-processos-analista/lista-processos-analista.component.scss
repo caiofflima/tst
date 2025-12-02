@@ -74,6 +74,28 @@ h3 {
   align-items: center;
   padding: 0 2em;
   margin-top: 2em;
+
+  asc-input-button {
+    ::ng-deep {
+      .ui-inputgroup {
+        display: inline-flex;
+        align-items: stretch;
+
+        input {
+          border-top-right-radius: 0 !important;
+          border-bottom-right-radius: 0 !important;
+          margin: 0 !important;
+        }
+
+        button {
+          border-top-left-radius: 0 !important;
+          border-bottom-left-radius: 0 !important;
+          margin: 0 !important;
+          margin-left: -1px !important;
+        }
+      }
+    }
+  }
 }
 
 .info-search-label {
