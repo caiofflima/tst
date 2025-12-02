@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container"> 
   <div class="col-md-12 breadcrumb-header">
     <ul class="breadcrumb">
       <li><span (click)="voltar()" class="voltar"><i class="fa fa-arrow-left" aria-hidden="true"></i>Voltar</span></li>
@@ -8,61 +8,64 @@
       <em class="fa fa-chevron-right"></em> Medicamentos
     </ul>
   </div>
+
   <div class="title-type">
     <h1 class="titulo-pagina">Medicamentos</h1>
   </div>
 
-  <section class="row">
-    <form class="row"  [formGroup]="formulario" name="form">
-      <div class="form-row">
-        <div class="col-md-6 mb-15 pl-0">
-            <label class="control-label">Laboratórios</label>
+  <section>
+    <form> 
+      <div>
+        <div class="row">
+          <div class="col-md-6">
+            <!--label class="control-label">Laboratórios</label-->
             <asc-multiSelect
                     id="idListaLaboratorios"
                     [options]="listComboLaboratorios"
                     [control]="formulario.get('idListaLaboratorios')"
                     (onChange)="buscarMedicamentos($event)"
-                    [selected]="listComboLaboratoriosSelected"> 
+                    [selected]="listComboLaboratoriosSelected" label="Laboratórios"> 
             ></asc-multiSelect>
+          </div>
+
+          <div class="col-md-6">
+              <!--label class="control-label">Medicamentos</label-->
+              <asc-multiSelect
+              id="idListaMedicamentos"
+              [options]="listComboMedicamentos"
+              [control]="formulario.get('idListaMedicamentos')"
+              [selected]="listComboMedicamentosSelected" label="Medicamentos"> 
+                ></asc-multiSelect>
+          </div>
         </div>
 
-        <div class="col-md-6 mb-15 pl-0">
-          <label class="control-label">Medicamentos</label>
-          <asc-multiSelect
-                  id="idListaMedicamentos"
-                  [options]="listComboMedicamentos"
-                  [control]="formulario.get('idListaMedicamentos')"
-                  [selected]="listComboMedicamentosSelected"> 
-          ></asc-multiSelect>
-        </div>
-      </div>
+        <div class="row">
+          <div class="col-md-6">
+            <label class="control-label" for="apresentacao">Apresentação</label>&nbsp;<br>
+            <input type="text" id="apresentacao" name="apresentacao" formControlName="apresentacao"
+                  class="form-control" [maxlength]="150" title="Apresentação">
+          </div>
 
-      <div class="form-row">
-        <div class="col-md-12 pl-0">
-          <label class="control-label" for="apresentacao">Apresentação</label>&nbsp;<br>
-          <input type="text" id="apresentacao" name="apresentacao" formControlName="apresentacao"
-                 class="form-control" [maxlength]="150" title="Apresentação">
+          <div class="col-md-6">
+            <label class="control-label" for="numeroTuss">Número TUSS</label>&nbsp;<br>
+            <input type="number" (input)="limitarTamanho($event)" id="numeroTuss" name="numeroTuss" formControlName="numeroTuss"
+                  class="form-control" [maxlength]="10" title="Número Tuss">
+          </div>
         </div>
 
-        <div class="col-md-12 pl-0">
-          <label class="control-label" for="numeroTuss">Número TUSS</label>&nbsp;<br>
-          <input type="number" (input)="limitarTamanho($event)" id="numeroTuss" name="numeroTuss" formControlName="numeroTuss"
-                 class="form-control" [maxlength]="10" title="Número Tuss">
-        </div>
-      </div>
-
-      <div class="form-row">
-        <div class="col-md-2 p-0">
-          <!--p-checkbox  id="ativos" name="ativos" binary="true" label="Somente ativos" 
-          formControlName="ativos" title="Marque para retornar apenas registros ATIVOS."></p-checkbox>-->
-          <input type="checkbox" id="ativos" name="ativos" formControlName="ativos"
-          title="Apresenta somente ativos" [value]="true" >
-          <label for="generico">Ativos</label>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="col-md-2 p-0">
+              <asc-checkbox label="Ativos" name="generico" formControlName="ativos" [valoresTrueOrFalse]="true"></asc-checkbox>
+          </div>
+          </div>  
+          <div class="col-md-6">
+            <div class="col-md-2 p-0">
+              <asc-checkbox label="Genérico" name="generico" formControlName="generico" [valoresTrueOrFalse]="true"></asc-checkbox>
+            </div>
+          </div>
         </div>
 
-        <div class="col-md-2 p-0">
-          <asc-checkbox label="Genérico" name="generico" formControlName="generico" [valoresTrueOrFalse]="true"></asc-checkbox>
-        </div>
       </div>
 
       <div class="col-xs-12 p-0 barra-botoes">
@@ -79,7 +82,7 @@
           Pesquisar
         </button>
       </div>
+
     </form>
   </section>
-
 </div>

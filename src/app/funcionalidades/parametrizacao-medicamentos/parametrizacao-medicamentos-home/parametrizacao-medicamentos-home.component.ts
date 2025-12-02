@@ -136,9 +136,13 @@ export class ParametrizacaoMedicamentosHomeComponent extends BaseComponent imple
     }
 
     public buscarMedicamentos(evento:any){
+        console.log("Buscar medicamentos ----------------------- ");
+        console.log(this.formulario.get('idListaLaboratorios').value);
         if(this.formulario.get('idListaLaboratorios').value){ 
-            let lista  = this.formulario.get('idListaLaboratorios').value.map(v => v.value);
-    
+            //let lista  = this.formulario.get('idListaLaboratorios').value.map(v => v.value);
+            let lista  = this.formulario.get('idListaLaboratorios').value;
+            console.log("listalistalistalistalista Buscar medicamentos ----------------------- ");
+        console.log(lista);
             if(lista && lista.length>0){
                 this.comboService.consultarComboMedicamentos(lista).pipe(
                     take<DadoComboDTO[]>(1)
@@ -191,10 +195,12 @@ export class ParametrizacaoMedicamentosHomeComponent extends BaseComponent imple
     }
 
     private formatarValorParam(elemento:any):string{
+        console.log(elemento.value.map(v => v.value).join(',') );
         return elemento.value?elemento.value.map(v => v.value).join(',') : null;
     }
 
     private formatarNomeParam(elemento:any):string{
+        console.log(elemento.value.map(v => v.label).join(','));
         return elemento.value?elemento.value.map(v => v.label).join(',') : null;
     }
 
