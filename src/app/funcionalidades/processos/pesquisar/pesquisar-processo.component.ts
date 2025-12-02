@@ -273,22 +273,16 @@ export class PesquisarProcessoComponent extends BaseComponent implements OnInit 
     }
 
     carregarComboMotivosSolicitacao(){
-        console.log('=== carregarComboMotivosSolicitacao ===');
         const tiposPedido = this.listarTiposPedidoSelecionados();
         const gruposTipos = this.listarGruposTiposPedidoSelecionados();
-        console.log('tiposPedido selecionados:', tiposPedido);
-        console.log('gruposTipos selecionados:', gruposTipos);
 
         if(tiposPedido.length > 0 || gruposTipos.length > 0){
-            console.log('Chamando API com tipos:', tiposPedido);
             this.comboService.consultarComboTipoPedidoPorTipoProcesso(tiposPedido).pipe(
                 take<DadoComboDTO[]>(1)
             ).subscribe(res => {
-                console.log('Motivos carregados:', res);
                 this.listaMotivoSolicitacao = res;
             }, err => this.showDangerMsg(err.error));
         }else{
-            console.log('Limpando listaMotivoSolicitacao');
             this.listaMotivoSolicitacao = [];
         }
     }
@@ -313,18 +307,12 @@ export class PesquisarProcessoComponent extends BaseComponent implements OnInit 
     }
 
     onChangeTipoProcesso(): void {
-        console.log('=== onChangeTipoProcesso CHAMADO ===');
-        console.log('tiposProcesso value:', this.formulario.controls['tiposProcesso'].value);
-        console.log('tiposPedido value:', this.formulario.controls['tiposPedido'].value);
-
         if(this.hasTipoProcessoGrupo(this.formulario.controls['tiposProcesso'].value)
             || this.hasTipoProcessoGrupo(this.formulario.controls['tiposPedido'].value)){
 
-            console.log('Tem tipos selecionados, carregando motivos...');
             this.carregarComboMotivosSolicitacao();
 
         }else{
-            console.log('Não tem tipos selecionados, limpando motivos');
             this.listaMotivoSolicitacao = [];
         }
     }
@@ -454,34 +442,36 @@ export class PesquisarProcessoComponent extends BaseComponent implements OnInit 
     }
 
     private configurarListenerUFAtendimento(): void {
-        this.formulario.get('ufAtendimento').valueChanges.subscribe(() => {
+        this.formulario.get('ufAtendimento').valueChanges.subscribe((ufValue) => {
             this.formulario.patchValue({ municipioAtendimento: null }, { emitEvent: false });
             this.optionsMunicipio = [];
+
+            if (ufValue && ufValue > 0) {
+                this.comboService.consultarDadosComboMunicipioPorUF(ufValue).pipe(take(1)).subscribe(res => {
+                    this.listComboMunicipio = res;
+                    this.optionsMunicipio = this.convertToOptions(res);
+                }, err => this.showDangerMsg(err.error));
+            } else {
+                this.listComboMunicipio = [];
+            }
         });
     }
 
     onChangeUFAtendimento(): void {
-        console.log('=== onChangeUFAtendimento CHAMADO ===');
         const ufAtendimentoControl = this.formulario.controls['ufAtendimento'];
         const ufAtendimento = ufAtendimentoControl.value;
-        console.log('ufAtendimento valor:', ufAtendimento);
 
         const ufValue = ufAtendimento?.value || ufAtendimento;
-        console.log('ufValue extraído:', ufValue);
 
         this.formulario.controls['municipioAtendimento'].setValue(null);
         this.optionsMunicipio = [];
 
         if (ufValue && ufValue > 0) {
-            console.log('Carregando municípios para UF:', ufValue);
             this.comboService.consultarDadosComboMunicipioPorUF(ufValue).pipe(take(1)).subscribe(res => {
-                console.log('Municípios carregados:', res);
                 this.listComboMunicipio = res;
                 this.optionsMunicipio = this.convertToOptions(res);
-                console.log('optionsMunicipio:', this.optionsMunicipio);
             }, err => this.showDangerMsg(err.error));
         } else {
-            console.log('ufValue inválido, limpando municípios');
             this.listComboMunicipio = [];
         }
     }
