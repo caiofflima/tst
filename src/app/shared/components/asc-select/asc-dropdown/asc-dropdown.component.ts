@@ -42,6 +42,9 @@ export class AscDropdownComponent implements OnInit, OnDestroy, AfterViewInit {
     @Input()
     index: number = null;
 
+    @Input()
+    enableBackendFilter: boolean = false;
+
     private inputFilter: HTMLInputElement;
     private readonly value$ = new EventEmitter<any>()
 
@@ -80,14 +83,29 @@ export class AscDropdownComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
     ngAfterViewInit() {
-        // DSC-SELECT não precisa de manipulação manual do filtro
-        // O componente já tem filtro integrado via showFilter
         if (this.control) {
             this.control.statusChanges.subscribe(() => {
                 if (!this.control.touched) {
                     this.filter.emit("");
                 }
             });
+        }
+
+        if (this.enableBackendFilter) {
+            setTimeout(() => {
+                if (this.id) {
+                    const container = document.getElementById(this.id);
+                    if (container) {
+                        const filterInput = container.querySelector('input[type="text"]');
+                        if (filterInput) {
+                            filterInput.addEventListener('input', (event: any) => {
+                                const value = event.target?.value || '';
+                                this.filter.emit(value);
+                            });
+                        }
+                    }
+                }
+            }, 500);
         }
     }
 

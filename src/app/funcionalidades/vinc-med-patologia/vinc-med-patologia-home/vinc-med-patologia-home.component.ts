@@ -191,8 +191,8 @@ export class VincMedPatologiaHomeComponent extends BaseComponent implements OnIn
             clearTimeout(this.timeout);
             this.timeout = setTimeout(() => {
               this.consultarMedicamentoPorNome(event);
-            }, 100);           
-        } else {
+            }, 300);
+        } else if (!event || event.length === 0) {
             this.medicamentos = [];
         }
     }

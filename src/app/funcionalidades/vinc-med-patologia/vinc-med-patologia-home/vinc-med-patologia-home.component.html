@@ -31,11 +31,12 @@
         <div class="col-md-6">
           <label class="control-label" for="Medicamento">Medicamento</label>
           <asc-dropdown
-            [items]="medicamentos" 
-            [control]="medicamento" 
+            [items]="medicamentos"
+            [control]="medicamento"
+            [enableBackendFilter]="true"
             (filter)="filtroMedicamento($event)"
             (select)="medicamentos"
-            id="Medicamento" 
+            id="Medicamento"
             filterBy="filtering">
           </asc-dropdown>
         </div>
