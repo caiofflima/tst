@@ -267,16 +267,12 @@ export class PesquisarProcessoComponent extends BaseComponent implements OnInit 
         }
     }
 
-    carregarComboMotivosSolicitacao(){ 
-        //console.log("carregarComboMotivosSolicitacao() this.listarTiposPedidoSelecionados() =============");
-        //console.log(this.listarTiposPedidoSelecionados()) 
+    carregarComboMotivosSolicitacao(){
         if(this.listarTiposPedidoSelecionados().length > 0 || this.listarGruposTiposPedidoSelecionados().length > 0){
-            //this.comboService.consultarComboFinalidadePorTipoProcesso(this.listarTiposPedidoSelecionados()).pipe(
             this.comboService.consultarComboTipoPedidoPorTipoProcesso(this.listarTiposPedidoSelecionados()).pipe(
                 take<DadoComboDTO[]>(1)
             ).subscribe(res => {
                 this.listaMotivoSolicitacao = res;
-                //this.carregarMotivosSelected();
             }, err => this.showDangerMsg(err.error));
         }else{
             this.listaMotivoSolicitacao = [];
@@ -442,26 +438,17 @@ export class PesquisarProcessoComponent extends BaseComponent implements OnInit 
         const ufAtendimentoControl = this.formulario.controls['ufAtendimento'];
         const ufAtendimento = ufAtendimentoControl.value;
 
-        // Handle both DadoComboDTO (legacy) and direct value from dsc-select
         const ufValue = ufAtendimento?.value || ufAtendimento;
 
-        if (ufValue && ufValue > 0) {
-            this.formulario.controls['municipioAtendimento'].setValue(null);
+        this.formulario.controls['municipioAtendimento'].setValue(null);
+        this.optionsMunicipio = [];
 
+        if (ufValue && ufValue > 0) {
             this.comboService.consultarDadosComboMunicipioPorUF(ufValue).pipe(take(1)).subscribe(res => {
                 this.listComboMunicipio = res;
                 this.optionsMunicipio = this.convertToOptions(res);
-
-                // Restore previous value if exists
-                if (this.filtro?.municipioAtendimento?.value) {
-                    const municipio = res.find(m => m.value === this.filtro.municipioAtendimento.value);
-                    if (municipio) {
-                        this.formulario.controls['municipioAtendimento'].setValue(municipio.value);
-                    }
-                }
             }, err => this.showDangerMsg(err.error));
         } else {
-            this.optionsMunicipio = [];
             this.listComboMunicipio = [];
         }
     }

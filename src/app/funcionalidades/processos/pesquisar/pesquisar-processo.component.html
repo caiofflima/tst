@@ -172,19 +172,17 @@
         </div>
       </div>
 
-      <div class="row" [hidden]="true">
-        <div class="form-row">
-          <div class="col-md-6 noPaddingLeft">
-            <asc-multiSelect
-              id="tiposPedido"
-              label="Grupo de Pedido"
-              [options]="listaGrupoTiposPedido"
-              [control]="formulario.get('tiposPedido')"
-              [selected]="tiposPedidoSelected"
-              size="large"
-            >
-            </asc-multiSelect>
-          </div>
+      <div class="row">
+        <div class="col-md-6">
+          <asc-multiSelect
+            id="tiposPedido"
+            label="Grupo de Pedido"
+            [options]="listaGrupoTiposPedido"
+            [control]="formulario.get('tiposPedido')"
+            [selected]="tiposPedidoSelected"
+            size="large"
+          >
+          </asc-multiSelect>
         </div>
       </div>
 
