@@ -173,12 +173,24 @@ export class ParametrizacaoMedicamentosHomeComponent extends BaseComponent imple
     }
 
     pesquisar(): void {
+        console.log('=== PESQUISAR - formulario.value ===', this.formulario.value);
+        console.log('=== idListaLaboratorios.value ===', this.formulario.get('idListaLaboratorios').value);
+        console.log('=== idListaMedicamentos.value ===', this.formulario.get('idListaMedicamentos').value);
+
+        const laboratorios = this.formulario.get('idListaLaboratorios').value;
+        const medicamentos = this.formulario.get('idListaMedicamentos').value;
 
         this.data.storage = {
-            filtroConsultaMedicamento: {...this.formulario.value, 
-                listaLaboratorios: this.formatarValorParam(this.formulario.get('idListaLaboratorios')), 
-                listaMedicamentos: this.formatarValorParam(this.formulario.get('idListaMedicamentos'))}
+            filtroConsultaMedicamento: {
+                ...this.formulario.value,
+                idListaLaboratorios: laboratorios,
+                idListaMedicamentos: medicamentos,
+                listaLaboratorios: this.formatarValorParam(this.formulario.get('idListaLaboratorios')),
+                listaMedicamentos: this.formatarValorParam(this.formulario.get('idListaMedicamentos'))
+            }
         };
+
+        console.log('=== STORAGE sendo salvo ===', this.data.storage);
 
         this.route.navigate(['manutencao/parametros/gerenciar-medicamentos/buscar'], {
             queryParams: {
