@@ -45,6 +45,9 @@ export class AscDropdownComponent implements OnInit, OnDestroy, AfterViewInit {
     @Input()
     enableBackendFilter: boolean = false;
 
+    @Input()
+    size: 'small' | 'standard' | 'large' = 'large';
+
     private inputFilter: HTMLInputElement;
     private readonly value$ = new EventEmitter<any>()
 

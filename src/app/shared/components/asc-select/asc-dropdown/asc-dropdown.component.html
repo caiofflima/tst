@@ -7,7 +7,7 @@
   [placeholder]="placeholder || bundle('MHSPH')"
   [required]="required"
   (selectionChange)="onChange($event)"
-  size="large"
+  [size]="size"
   #dropdownElement
 >
 <dsc-progress-bar mode="indeterminate" *ngIf="showProgressBar" [style]="{'height': '6px'}"></dsc-progress-bar>

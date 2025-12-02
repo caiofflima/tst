@@ -32,6 +32,7 @@
             label="Pedido"
             [maxlength]="8"
             hint="Buscar um processo específico"
+            size="large"
           ></asc-input-text>
         </div>
 
@@ -41,39 +42,43 @@
             label="Condição do pedido"
             [items]="optionsCondicaoProcesso"
             [placeholder]="this.bundle('MHSPH')"
+            size="large"
           ></asc-dropdown>
         </div>
 
         <div class="col-md-3">
-          <label class="control-label">UF</label>
           <asc-multiSelect
             id="uf"
+            label="UF"
             [options]="listComboUF"
             [control]="formulario.get('ufsProcesso')"
             [selected]="ufsProcessoSelected"
+            size="large"
           ></asc-multiSelect>
         </div>
 
         <div class="col-md-3">
-          <label class="control-label">Agrupadora</label>
           <asc-multiSelect
             id="filial"
+            label="Agrupadora"
             [options]="listComboFilial"
             [control]="formulario.get('filiaisProcesso')"
             [selected]="filiaisProcessoSelected"
+            size="large"
           ></asc-multiSelect>
         </div>
       </div>
 
       <div class="row">
         <div class="col-md-6">
-          <label class="control-label">Tipo de pedido</label>
           <asc-multiSelect
             id="tipoProcesso"
+            label="Tipo de pedido"
             [options]="listComboTipoProcesso"
             (onChange)="onChangeTipoProcesso()"
             [control]="formulario.get('tiposProcesso')"
             [selected]="tiposProcessoSelected"
+            size="large"
           ></asc-multiSelect>
         </div>
 
@@ -84,6 +89,7 @@
             [items]="optionsUF"
             [placeholder]="this.bundle('MHSPH')"
             (selected)="onChangeUFAtendimento()"
+            size="large"
           ></asc-dropdown>
         </div>
 
@@ -93,70 +99,53 @@
             label="Município de atendimento"
             [items]="optionsMunicipio"
             [placeholder]="this.bundle('MHSPH')"
+            size="large"
           ></asc-dropdown>
         </div>
       </div>
 
       <div class="row">
         <div class="col-md-6">
-          <label class="control-label">Situação do pedido</label>
           <asc-multiSelect
             id="situacaoProcesso"
+            label="Situação do pedido"
             [options]="listComboSituacaoProcesso"
             [control]="formulario.get('situacoesProcesso')"
             [selected]="situacoesProcessoSelected"
+            size="large"
           ></asc-multiSelect>
         </div>
 
         <div class="col-md-3">
-          <label class="control-label">
-            Autorização SIAGS
-            <span class="tooltip-mensagem">
-              <i class="fa fa-exclamation-circle"></i>
-              <p class="tooltiptext is--small">
-                Filtro aplicável apenas aos tipos de pedido AUTORIZAÇÃO
-                PRÉVIA.
-              </p>
-            </span>
-          </label>
           <asc-input-text
             [control]="formulario.get('autorizacaoPreviaGstao')"
             inputId="autorizacaoPrevia"
+            label="Autorização SIAGS"
             [maxlength]="10"
-            hint="Buscar por autorização Prévia"
+            hint="Filtro aplicável apenas aos tipos de pedido AUTORIZAÇÃO PRÉVIA"
+            size="large"
           ></asc-input-text>
         </div>
 
         <div class="col-md-3">
-          <label class="control-label">
-            PEG
-            <span class="tooltip-mensagem">
-              <i class="fa fa-exclamation-circle"></i>
-              <p class="tooltiptext is--small">
-                Filtro aplicável apenas aos tipos de pedido REEMBOLSO.
-              </p>
-            </span>
-          </label>
           <asc-input-text
             [control]="formulario.get('autorizacaoReembolso')"
             inputId="autorizacaoReembolso"
+            label="PEG"
             [maxlength]="20"
-            hint="Buscar por PEG"
+            hint="Filtro aplicável apenas aos tipos de pedido REEMBOLSO"
+            size="large"
           ></asc-input-text>
         </div>
       </div>
 
-      <div class="row">
-        <div class="col-md-12">
-          <label class="control-label">Período de Abertura do Pedido</label>
-        </div>
-      </div>
       <div class="row">
         <div class="col-md-3">
           <asc-input-date
             [control]="formulario.get('dataAberturaInicio')"
             inputId="dataAberturaInicio"
-            label="Início"
+            label="Período de Abertura - Início"
+            size="large"
           >
           </asc-input-date>
         </div>
@@ -164,26 +153,20 @@
           <asc-input-date
             [control]="formulario.get('dataAberturaFim')"
             inputId="dataAberturaFim"
-            label="Fim"
+            label="Período de Abertura - Fim"
+            size="large"
           >
           </asc-input-date>
         </div>
 
         <div class="col-md-6">
-          <label class="control-label">
-            Motivo da Solicitação
-            <span class="tooltip-mensagem">
-              <i class="fa fa-exclamation-circle"></i>
-              <p class="tooltiptext is--small">
-                Filtro aplicável quando selecionado um Tipo de Pedido
-              </p>
-            </span>
-          </label>
           <asc-multiSelect
             id="motivosSolicitacao"
+            label="Motivo da Solicitação"
             [options]="listaMotivoSolicitacao"
             [control]="formulario.get('motivosSolicitacao')"
             [selected]="motivosSolicitacaoSelected"
+            size="large"
           >
           </asc-multiSelect>
         </div>
@@ -192,12 +175,13 @@
       <div class="row" [hidden]="true">
         <div class="form-row">
           <div class="col-md-6 noPaddingLeft">
-            <label class="control-label">Grupo de Pedido</label>
             <asc-multiSelect
               id="tiposPedido"
+              label="Grupo de Pedido"
               [options]="listaGrupoTiposPedido"
               [control]="formulario.get('tiposPedido')"
               [selected]="tiposPedidoSelected"
+              size="large"
             >
             </asc-multiSelect>
           </div>
@@ -217,6 +201,7 @@
             label="Nome do beneficiário"
             [uppercase]="true"
             hint="Filtrar pelo nome do beneficiário"
+            size="large"
           ></asc-input-text>
         </div>
 
@@ -226,6 +211,7 @@
             inputId="matriculaTitular"
             label="Matrícula do titular"
             hint="Filtrar pela matrícula do titular"
+            size="large"
           ></asc-input-text>
         </div>
 
@@ -236,18 +222,20 @@
             label="Código do beneficiário"
             [maxlength]="12"
             hint="Filtrar pelo cartão de identificação do beneficiário"
+            size="large"
           ></asc-input-text>
         </div>
       </div>
 
       <div class="row">
         <div class="col-md-6">
-          <label class="control-label">Tipo de beneficiário</label>
           <asc-multiSelect
             id="tipoBeneficiario"
+            label="Tipo de beneficiário"
             [options]="listComboTipoBeneficiario"
             [control]="formulario.get('tiposBeneficiario')"
             [selected]="tiposBeneficiarioSelected"
+            size="large"
           ></asc-multiSelect>
         </div>
 
@@ -257,6 +245,7 @@
             label="Caráter da solicitação"
             [items]="optionsCaraterSolicitacao"
             [placeholder]="this.bundle('MHSPH')"
+            size="large"
           ></asc-dropdown>
         </div>
       </div>
