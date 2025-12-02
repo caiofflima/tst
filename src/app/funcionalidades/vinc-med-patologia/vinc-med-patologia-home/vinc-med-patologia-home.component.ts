@@ -1,5 +1,4 @@
 import {debounceTime, distinctUntilChanged, take} from 'rxjs/operators';
-import {SelectItem} from 'primeng/api';
 import {MedicamentoService} from '../../../shared/services/comum/pedido/medicamento.service';
 import {BaseComponent} from 'app/shared/components/base.component';
 import {Component, OnInit} from '@angular/core';
@@ -11,6 +10,7 @@ import {FormControl} from "@angular/forms";
 import {Location} from "@angular/common";
 import {FiltroPatologia} from 'app/shared/models/filtro/filtro-patologia';
 import { Option } from 'sidsc-components/dsc-select';
+import { Data } from 'app/shared/providers/data';
 
 @Component({
     selector: 'asc-vinc-med-patologia-home',
@@ -26,7 +26,7 @@ export class VincMedPatologiaHomeComponent extends BaseComponent implements OnIn
         label: this.bundle('MHSPH')
     }];
     patologia: number = null;
-    medicamentos: SelectItem[];
+    medicamentos: Option[] = [];
     medicamento = new FormControl();
     termoBusca: string = '';
 
@@ -35,17 +35,33 @@ export class VincMedPatologiaHomeComponent extends BaseComponent implements OnIn
         private readonly patologiaService: PatologiaService,
         private readonly medicamentoService: MedicamentoService,
         private readonly router: Router,
-        private readonly location: Location
+        private readonly location: Location,
+        private readonly data: Data
     ) {
         super(messageService);
-        //this.buscarMedicamentos();
         this.buscarMedicamentosComFiltro();
+        this.restaurarFiltros();
     }
 
     ngOnInit() {
-        this.ativos = false;
-        //this.buscarRegistros();
+        if (!this.data.storage?.vincMedPatologiaFiltros) {
+            this.ativos = false;
+        }
         this.buscarPatologias();
+    }
+
+    private restaurarFiltros() {
+        if (this.data.storage?.vincMedPatologiaFiltros) {
+            const filtros = this.data.storage.vincMedPatologiaFiltros;
+            this.ativos = filtros.ativos || false;
+            this.patologia = filtros.patologia;
+            if (filtros.medicamento) {
+                this.medicamento.setValue(filtros.medicamento);
+            }
+            if (filtros.medicamentosOptions) {
+                this.medicamentos = filtros.medicamentosOptions;
+            }
+        }
     }
 
     public buscarMedicamentos(): void {
@@ -193,6 +209,25 @@ export class VincMedPatologiaHomeComponent extends BaseComponent implements OnIn
 
     voltar(): void {
         this.location.back();
+    }
+
+    pesquisar(): void {
+        this.data.storage = {
+            vincMedPatologiaFiltros: {
+                patologia: this.patologia,
+                medicamento: this.medicamento.value,
+                ativos: this.ativos,
+                medicamentosOptions: this.medicamentos
+            }
+        };
+
+        this.router.navigate(['/manutencao/vinc-med-patologia/listar'], {
+            queryParams: {
+                patologia: this.patologia || '',
+                medicamento: this.medicamento.value || '',
+                ativos: this.ativos
+            }
+        });
     }
 
     formatarNumeroTiss(numeroTiss: number): string {

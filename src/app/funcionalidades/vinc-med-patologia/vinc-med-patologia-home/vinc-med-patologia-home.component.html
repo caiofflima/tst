@@ -24,7 +24,7 @@
           <asc-dropdown
   [items]="patologias"
   label="Patologia"
-  (selected)="patologia = $event"
+  (selected)="patologia = $event?.value || $event"
 ></asc-dropdown>
         </div>
 
@@ -52,11 +52,7 @@
         <button class="btn clean-btn" (click)="nova()">
           <span class="fa fa-plus fa-fw"></span>Incluir Medicamento por Patologia
         </button>
-        <button class="btn continue-btn" routerLink="listar" [queryParams]="{
-          patologia: patologia || '',
-          medicamento: medicamento.value || '',
-          ativos: ativos
-        }">
+        <button class="btn continue-btn" (click)="pesquisar()">
         <span class="fa fa-search fa-fw"></span>Pesquisar
       </button>
       </div>
