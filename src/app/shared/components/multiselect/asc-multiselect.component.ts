@@ -70,24 +70,23 @@ export class AscMultiSelectComponent implements ControlValueAccessor {
     }
 
     set value(val) {
-        console.log('asc-multiselect set value - recebido:', val);
-        console.log('asc-multiselect set value - dscOptions:', this.dscOptions);
         if (val && Array.isArray(val)) {
             const primeiroItem = val[0];
             if (primeiroItem && typeof primeiroItem !== 'object') {
-                this._value = val.map(value => {
+                const objetosCompletos = val.map(value => {
                     const option = this.dscOptions.find(opt => opt.value === value);
                     const resultado = option ? { label: option.label, value: option.value } : { label: '', value: value };
-                    console.log('asc-multiselect - mapeando primitivo:', value, '-> resultado:', resultado);
                     return resultado;
                 });
+                this._value = objetosCompletos;
+                this._onChange(objetosCompletos);
+                return;
             } else {
                 this._value = val;
             }
         } else {
             this._value = val;
         }
-        console.log('asc-multiselect set value - _value final:', this._value);
         this._onChange(this._value);
     }
 
@@ -110,13 +109,14 @@ export class AscMultiSelectComponent implements ControlValueAccessor {
     }
 
     onChangeCallback(event: any) {
-        console.log('asc-multiselect onChangeCallback - event:', event);
         if (event && Array.isArray(event)) {
             const objetosCompletos = event.map(value => {
                 const option = this.dscOptions.find(opt => opt.value === value);
                 return option ? { label: option.label, value: option.value } : { label: '', value: value };
             });
-            console.log('asc-multiselect onChangeCallback - objetosCompletos:', objetosCompletos);
+
+            this._value = objetosCompletos;
+            this._onChange(objetosCompletos);
             this.onChange.emit(objetosCompletos);
         } else {
             this.onChange.emit(event);

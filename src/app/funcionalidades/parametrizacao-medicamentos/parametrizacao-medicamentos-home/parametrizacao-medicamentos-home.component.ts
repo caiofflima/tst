@@ -136,19 +136,14 @@ export class ParametrizacaoMedicamentosHomeComponent extends BaseComponent imple
     }
 
     public buscarMedicamentos(evento:any){
-        console.log("Buscar medicamentos ----------------------- ");
-        console.log(this.formulario.get('idListaLaboratorios').value);
-        if(this.formulario.get('idListaLaboratorios').value){ 
-            //let lista  = this.formulario.get('idListaLaboratorios').value.map(v => v.value);
+        if(this.formulario.get('idListaLaboratorios').value){
             let lista  = this.formulario.get('idListaLaboratorios').value;
-            console.log("listalistalistalistalista Buscar medicamentos ----------------------- ");
-        console.log(lista);
             if(lista && lista.length>0){
                 this.comboService.consultarComboMedicamentos(lista).pipe(
                     take<DadoComboDTO[]>(1)
                 ).subscribe(res => {
                     this.listComboMedicamentos = res;
-                    
+
                 }, err => this.showDangerMsg(err.error));
             }else{
                 this.listComboMedicamentos = null;
@@ -173,24 +168,30 @@ export class ParametrizacaoMedicamentosHomeComponent extends BaseComponent imple
     }
 
     pesquisar(): void {
-        console.log('=== PESQUISAR - formulario.value ===', this.formulario.value);
-        console.log('=== idListaLaboratorios.value ===', this.formulario.get('idListaLaboratorios').value);
-        console.log('=== idListaMedicamentos.value ===', this.formulario.get('idListaMedicamentos').value);
-
         const laboratorios = this.formulario.get('idListaLaboratorios').value;
         const medicamentos = this.formulario.get('idListaMedicamentos').value;
+
+        const laboratoriosCompletos = laboratorios ? laboratorios.map(val => {
+            const numVal = typeof val === 'object' ? val.value : val;
+            const item = this.listComboLaboratorios.find(lab => Number(lab.value) === Number(numVal));
+            return item ? { label: item.label || item.descricao, value: item.value } : { label: '', value: numVal };
+        }) : [];
+
+        const medicamentosCompletos = medicamentos ? medicamentos.map(val => {
+            const numVal = typeof val === 'object' ? val.value : val;
+            const item = this.listComboMedicamentos.find(med => Number(med.value) === Number(numVal));
+            return item ? { label: item.label || item.descricao, value: item.value } : { label: '', value: numVal };
+        }) : [];
 
         this.data.storage = {
             filtroConsultaMedicamento: {
                 ...this.formulario.value,
-                idListaLaboratorios: laboratorios,
-                idListaMedicamentos: medicamentos,
+                idListaLaboratorios: laboratoriosCompletos,
+                idListaMedicamentos: medicamentosCompletos,
                 listaLaboratorios: this.formatarValorParam(this.formulario.get('idListaLaboratorios')),
                 listaMedicamentos: this.formatarValorParam(this.formulario.get('idListaMedicamentos'))
             }
         };
-
-        console.log('=== STORAGE sendo salvo ===', this.data.storage);
 
         this.route.navigate(['manutencao/parametros/gerenciar-medicamentos/buscar'], {
             queryParams: {
@@ -218,9 +219,7 @@ export class ParametrizacaoMedicamentosHomeComponent extends BaseComponent imple
 
     private formatarNomeParam(elemento:any):string{
         if (!elemento.value) return null;
-        console.log('formatarNomeParam - elemento.value:', elemento.value);
         return elemento.value.map(v => {
-            console.log('formatarNomeParam - item v:', v);
             if (typeof v === 'object' && v !== null) {
                 if (v.label !== undefined) {
                     return v.label;
