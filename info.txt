@@ -1,0 +1,40 @@
+=== PESQUISAR - formulario.value === 
+{idListaLaboratorios: Array(1), idListaMedicamentos: Array(1), apresentacao: null, numeroTuss: null, ativos: null, …}
+parametrizacao-medic…me.component.ts:177 === idListaLaboratorios.value === 
+[114]
+parametrizacao-medic…me.component.ts:178 === idListaMedicamentos.value === 
+[12721]
+parametrizacao-medic…me.component.ts:193 === STORAGE sendo salvo === 
+{filtroConsultaMedicamento: {…}}
+filtroConsultaMedicamento
+: 
+apresentacao
+: 
+null
+ativos
+: 
+null
+generico
+: 
+null
+idListaLaboratorios
+: 
+[114]
+idListaMedicamentos
+: 
+[12721]
+listaLaboratorios
+: 
+"114"
+listaMedicamentos
+: 
+"12721"
+numeroTuss
+: 
+null
+[[Prototype]]
+: 
+Object
+[[Prototype]]
+: 
+Object
