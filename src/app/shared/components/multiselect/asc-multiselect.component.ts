@@ -70,7 +70,19 @@ export class AscMultiSelectComponent implements ControlValueAccessor {
     }
 
     set value(val) {
-        this._value = val;
+        if (val && Array.isArray(val)) {
+            const primeiroItem = val[0];
+            if (primeiroItem && typeof primeiroItem !== 'object') {
+                this._value = val.map(value => {
+                    const option = this.dscOptions.find(opt => opt.value === value);
+                    return option ? { label: option.label, value: option.value } : { label: '', value: value };
+                });
+            } else {
+                this._value = val;
+            }
+        } else {
+            this._value = val;
+        }
         this._onChange(this._value);
     }
 
@@ -93,7 +105,15 @@ export class AscMultiSelectComponent implements ControlValueAccessor {
     }
 
     onChangeCallback(event: any) {
-        this.onChange.emit(event);
+        if (event && Array.isArray(event)) {
+            const objetosCompletos = event.map(value => {
+                const option = this.dscOptions.find(opt => opt.value === value);
+                return option ? { label: option.label, value: option.value } : { label: '', value: value };
+            });
+            this.onChange.emit(objetosCompletos);
+        } else {
+            this.onChange.emit(event);
+        }
     }
 
 }

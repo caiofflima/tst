@@ -120,8 +120,16 @@ export class AscDropdownComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
     onChange(valor: any): void {
-        // DSC-SELECT emite o valor diretamente, não um objeto {value: ...}
-        this.value$.emit(valor)
+        if (valor !== null && valor !== undefined) {
+            const option = this.options.find(opt => opt.value === valor);
+            if (option) {
+                this.value$.emit({ label: option.label, value: option.value });
+            } else {
+                this.value$.emit(valor);
+            }
+        } else {
+            this.value$.emit(valor);
+        }
     }
 
     private registerOnChangeValue(): void {
