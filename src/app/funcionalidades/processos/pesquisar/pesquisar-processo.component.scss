@@ -150,37 +150,4 @@
   align-items: center;
   gap: 16px;
   margin-top: 24px;
-
-  asc-button-primary {
-    ::ng-deep {
-      dsc-button {
-        button {
-          em {
-            margin-right: 8px;
-          }
-        }
-      }
-    }
-  }
-}
-
-.container-search-section {
-  asc-input-button {
-    ::ng-deep .ui-inputgroup {
-      display: flex;
-      align-items: stretch;
-
-      .form-control {
-        flex: 1;
-        border-top-right-radius: 0;
-        border-bottom-right-radius: 0;
-      }
-
-      .custom-input-btn {
-        margin-left: 0 !important;
-        border-top-left-radius: 0;
-        border-bottom-left-radius: 0;
-      }
-    }
-  }
 }

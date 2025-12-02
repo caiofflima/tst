@@ -256,13 +256,15 @@
           <em class="fa fa-trash fa-fw"></em>
           Limpar pesquisa
         </button>
-        <asc-button-primary
+        <button
+          type="button"
           [disabled]="carregandoConsulta"
-          [showProgress]="carregandoConsulta"
-          (onClick)="consultarProcesso()"
-          title="Pesquisar"
-          faIcon="fa fa-search fa-fw"
-        ></asc-button-primary>
+          class="btn-cts"
+          (click)="consultarProcesso()"
+        >
+          <em class="fa fa-search fa-fw"></em>
+          Pesquisar
+        </button>
       </div>
     </form>
   </div>

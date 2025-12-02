@@ -77,27 +77,13 @@ h3 {
 .container-search-section {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   padding: 0 2em;
   margin-top: 2em;
 
   asc-input-button {
-    ::ng-deep .ui-inputgroup {
-      display: flex;
-      align-items: stretch;
-
-      .form-control {
-        flex: 1;
-        border-top-right-radius: 0;
-        border-bottom-right-radius: 0;
-      }
-
-      .custom-input-btn {
-        margin-left: 0 !important;
-        border-top-left-radius: 0;
-        border-bottom-left-radius: 0;
-      }
-    }
+    display: flex;
+    align-items: center;
   }
 }
 
