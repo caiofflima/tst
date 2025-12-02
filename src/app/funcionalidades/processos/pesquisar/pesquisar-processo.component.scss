@@ -151,3 +151,20 @@
   gap: 16px;
   margin-top: 24px;
 }
+
+.btn-primary-orange {
+  background-color: #f39200;
+  border-color: #f39200;
+  color: #fff;
+
+  &:hover:not(:disabled) {
+    background-color: #d67e00;
+    border-color: #d67e00;
+  }
+
+  &:disabled {
+    background-color: #dadada;
+    border-color: #dadada;
+    cursor: not-allowed;
+  }
+}

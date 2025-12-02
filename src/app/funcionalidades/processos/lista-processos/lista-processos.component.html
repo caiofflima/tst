@@ -18,11 +18,17 @@
     <p class="title-section">Meus pedidos</p>
 
     <div class="container-search-section" style="padding: 0 0 0 2em">
-      <p class="info-search-label">Selecione o pedido que deseja acompanhar</p>
-      <asc-input-button
-        [control]="filtroRapido"
-        (keyup)="filtroEvent()"
-      ></asc-input-button>
+      <div class="row" style="width: 100%; align-items: center; margin: 0;">
+        <div class="col-md-6" style="display: flex; align-items: center;">
+          <p class="info-search-label" style="margin: 0;">Selecione o pedido que deseja acompanhar</p>
+        </div>
+        <div class="col-md-6" style="display: flex; justify-content: flex-end;">
+          <asc-input-button
+            [control]="filtroRapido"
+            (keyup)="filtroEvent()"
+          ></asc-input-button>
+        </div>
+      </div>
     </div>
     <div *ngIf="isLoading">
       <div
