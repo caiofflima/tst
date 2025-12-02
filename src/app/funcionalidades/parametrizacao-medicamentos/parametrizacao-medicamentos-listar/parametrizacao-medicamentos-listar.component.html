@@ -15,39 +15,41 @@
   </div>
 
   <section class="row">
-    <div *ngIf="!isNaoPossuiFiltros()">
+    <div *ngIf="!isNaoPossuiFiltros()" class="col-md-12">
       <div class="p-0 col-md-12">
         <h4>Dados da Pesquisa</h4>
       </div>
 
       <div class="clearfix"></div>
 
-      <div class="p-0 col-xs-2" *ngIf="filtroConsultaMedicamento.listaLaboratorios">
+      <div class="p-0 col-md-6" *ngIf="filtroConsultaMedicamento.listaLaboratorios">
         <label class="control-label" for="listaLaboratorios">Laboratório</label>&nbsp;<br>
-        <p id="listaLaboratorios">{{listaLaboratoriosNome}}</p>
+        <p id="listaLaboratorios" style="word-wrap: break-word;">{{listaLaboratoriosNome}}</p>
       </div>
 
-      <div class="p-0 col-xs-2" *ngIf="filtroConsultaMedicamento.listaMedicamentos">
+      <div class="p-0 col-md-6" *ngIf="filtroConsultaMedicamento.listaMedicamentos">
         <label class="control-label" for="listaMedicamentos">Nome do medicamento</label>&nbsp;<br>
-        <p id="listaMedicamentos">{{listaMedicamentosNome}}</p>
+        <p id="listaMedicamentos" style="word-wrap: break-word;">{{listaMedicamentosNome}}</p>
       </div>
 
-      <div class="p-0 col-xs-2" *ngIf="filtroConsultaMedicamento.apresentacao">
+      <div class="clearfix"></div>
+
+      <div class="p-0 col-md-4" *ngIf="filtroConsultaMedicamento.apresentacao">
         <label class="control-label" for="apresentacao">Apresentação</label>&nbsp;<br>
         <p id="apresentacao">{{filtroConsultaMedicamento.apresentacao}}</p>
       </div>
 
-      <div class="p-0 col-xs-2" *ngIf="filtroConsultaMedicamento.numeroTuss">
+      <div class="p-0 col-md-4" *ngIf="filtroConsultaMedicamento.numeroTuss">
         <label class="control-label" for="tuss">Número TUSS</label>&nbsp;<br>
         <p id="numeroTuss">{{filtroConsultaMedicamento.numeroTuss}}</p>
       </div>
 
-      <div class="p-0 col-xs-2" *ngIf="filtroConsultaMedicamento.ativos">
+      <div class="p-0 col-md-2" *ngIf="filtroConsultaMedicamento.ativos">
         <label class="control-label" for="ativos">Somente ativos</label>&nbsp;<br>
         <p id="ativos">{{filtroConsultaMedicamento.ativos === true ? 'Sim' : 'Não'}}</p>
       </div>
 
-      <div class="p-0 col-xs-2" *ngIf="filtroConsultaMedicamento.generico">
+      <div class="p-0 col-md-2" *ngIf="filtroConsultaMedicamento.generico">
         <label class="control-label" for="generico">Genérico</label>&nbsp;<br>
         <p id="generico">{{filtroConsultaMedicamento.generico === true ? 'Sim' : 'Não'}}</p>
       </div>
