@@ -429,6 +429,12 @@ export class PesquisarProcessoComponent extends BaseComponent implements OnInit 
         }));
     }
 
+    get ufAtendimentoId(): number {
+        const ufValue = this.formulario.get('ufAtendimento')?.value;
+        if (!ufValue) return null;
+        return typeof ufValue === 'object' ? ufValue.value : ufValue;
+    }
+
     limparCampos() {
         this.listaMotivoSolicitacao = null;
         this.formulario.reset();
