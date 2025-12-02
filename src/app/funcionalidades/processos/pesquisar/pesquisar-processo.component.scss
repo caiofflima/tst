@@ -150,6 +150,18 @@
   align-items: center;
   gap: 16px;
   margin-top: 24px;
+
+  asc-button-primary {
+    ::ng-deep {
+      dsc-button {
+        button {
+          em {
+            margin-right: 8px;
+          }
+        }
+      }
+    }
+  }
 }
 
 .container-search-section {
