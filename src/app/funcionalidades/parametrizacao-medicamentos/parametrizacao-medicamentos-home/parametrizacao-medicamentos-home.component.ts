@@ -42,8 +42,8 @@ export class ParametrizacaoMedicamentosHomeComponent extends BaseComponent imple
         }
 
         this.formulario = this.formBuilder.group({
-            'idListaLaboratorios': [this.filtroConsultaMedicamento.idListaLaboratorios],
-            'idListaMedicamentos': [this.filtroConsultaMedicamento.idListaMedicamentos],
+            'idListaLaboratorios': [null],
+            'idListaMedicamentos': [null],
             'apresentacao': [this.filtroConsultaMedicamento.apresentacao],
             'numeroTuss': [this.filtroConsultaMedicamento.numeroTuss],
             'ativos': [this.filtroConsultaMedicamento.ativos],
@@ -53,16 +53,6 @@ export class ParametrizacaoMedicamentosHomeComponent extends BaseComponent imple
 
     ngOnInit(): void {
         this.inicializarCombos();
-        if(this.isStorageCarregado()){
-            setTimeout(() => {
-                this.formulario.patchValue({
-                    apresentacao: this.filtroConsultaMedicamento.apresentacao,
-                    numeroTuss: this.filtroConsultaMedicamento.numeroTuss,
-                    ativos: this.filtroConsultaMedicamento.ativos,
-                    generico: this.filtroConsultaMedicamento.generico
-                });
-            }, 300);
-        }
     }
 
     private isStorageCarregado():boolean{
@@ -85,66 +75,33 @@ export class ParametrizacaoMedicamentosHomeComponent extends BaseComponent imple
     }
 
     private preencherComboLaboratoriosSelecionados():void{
-        if(this.isStorageCarregado()){
-            if(this.listComboLaboratorios && this.filtroConsultaMedicamento.idListaLaboratorios){
-                let lista:DadoComboDTO[]=[];
+        if(this.isStorageCarregado() && this.filtroConsultaMedicamento.idListaLaboratorios){
+            console.log('=== RESTAURANDO LABORATORIOS ===');
+            console.log('Storage idListaLaboratorios:', this.filtroConsultaMedicamento.idListaLaboratorios);
 
-                this.filtroConsultaMedicamento.idListaLaboratorios.forEach(item => {
-                    const valorItem = typeof item === 'object' ? item.value : item;
-                    let temp = this.listComboLaboratorios.find(d=> Number(d.value) === Number(valorItem));
-                    if(temp){
-                        lista.push(temp);
-                    }
-                });
+            const valores = this.filtroConsultaMedicamento.idListaLaboratorios.map(v =>
+                typeof v === 'object' ? v.value : v
+            );
 
-                if(lista!==null && lista.length>0){
-                    this.listComboLaboratoriosSelected= lista;
+            setTimeout(() => {
+                console.log('=== SETANDO NO FORMCONTROL ===');
+                this.formulario.get('idListaLaboratorios').setValue(this.filtroConsultaMedicamento.idListaLaboratorios);
+                console.log('FormControl value após setValue:', this.formulario.get('idListaLaboratorios').value);
+            }, 100);
 
-                    setTimeout(() => {
-                        this.formulario.patchValue({
-                            idListaLaboratorios: this.filtroConsultaMedicamento.idListaLaboratorios
-                        });
-                    }, 100);
-
-                    if(this.listComboLaboratoriosSelected){
-                        const valores = this.filtroConsultaMedicamento.idListaLaboratorios.map(v =>
-                            typeof v === 'object' ? v.value : v
-                        );
-                        this.preencherComboMedicamento(valores);
-                    }
-
-                }else{
-                    this.listComboLaboratoriosSelected = [];
-                }
-            }
+            this.preencherComboMedicamento(valores);
         }
     }
 
     private preencherComboMedicamentosSelecionados():void{
-        if(this.isStorageCarregado()){
-
-            if(this.listComboMedicamentos && this.filtroConsultaMedicamento.idListaMedicamentos){
-                let lista:DadoComboDTO[]=[];
-                this.filtroConsultaMedicamento.idListaMedicamentos.forEach(item => {
-                    const valorItem = typeof item === 'object' ? item.value : item;
-                    let temp = this.listComboMedicamentos.find(d=> Number(d.value) === Number(valorItem));
-                    if(temp){
-                        lista.push(temp);
-                    }
-                });
-
-                if(lista!==null && lista.length>0){
-                    this.listComboMedicamentosSelected= lista;
-
-                    setTimeout(() => {
-                        this.formulario.patchValue({
-                            idListaMedicamentos: this.filtroConsultaMedicamento.idListaMedicamentos
-                        });
-                    }, 200);
-                }else{
-                    this.listComboMedicamentosSelected = [];
-                }
-            }
+        if(this.isStorageCarregado() && this.filtroConsultaMedicamento.idListaMedicamentos){
+            console.log('=== RESTAURANDO MEDICAMENTOS ===');
+            console.log('Storage idListaMedicamentos:', this.filtroConsultaMedicamento.idListaMedicamentos);
+            setTimeout(() => {
+                console.log('=== SETANDO MEDICAMENTOS NO FORMCONTROL ===');
+                this.formulario.get('idListaMedicamentos').setValue(this.filtroConsultaMedicamento.idListaMedicamentos);
+                console.log('FormControl value após setValue:', this.formulario.get('idListaMedicamentos').value);
+            }, 200);
         }
     }
 
@@ -200,20 +157,23 @@ export class ParametrizacaoMedicamentosHomeComponent extends BaseComponent imple
     }
 
     pesquisar(): void {
+        console.log('=== PESQUISAR CHAMADO ===');
         const laboratorios = this.formulario.get('idListaLaboratorios').value;
         const medicamentos = this.formulario.get('idListaMedicamentos').value;
+        console.log('Laboratorios do formulário:', laboratorios);
+        console.log('Medicamentos do formulário:', medicamentos);
 
-        const laboratoriosCompletos = laboratorios ? laboratorios.map(val => {
+        const laboratoriosCompletos = (laboratorios && laboratorios.length > 0) ? laboratorios.map(val => {
             const numVal = typeof val === 'object' ? val.value : val;
             const item = this.listComboLaboratorios.find(lab => Number(lab.value) === Number(numVal));
             return item ? { label: item.label || item.descricao, value: item.value } : { label: '', value: numVal };
-        }) : [];
+        }) : null;
 
-        const medicamentosCompletos = medicamentos ? medicamentos.map(val => {
+        const medicamentosCompletos = (medicamentos && medicamentos.length > 0) ? medicamentos.map(val => {
             const numVal = typeof val === 'object' ? val.value : val;
-            const item = this.listComboMedicamentos.find(med => Number(med.value) === Number(numVal));
+            const item = this.listComboMedicamentos?.find(med => Number(med.value) === Number(numVal));
             return item ? { label: item.label || item.descricao, value: item.value } : { label: '', value: numVal };
-        }) : [];
+        }) : null;
 
         this.data.storage = {
             filtroConsultaMedicamento: {
