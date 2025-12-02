@@ -53,6 +53,16 @@ export class ParametrizacaoMedicamentosHomeComponent extends BaseComponent imple
 
     ngOnInit(): void {
         this.inicializarCombos();
+        if(this.isStorageCarregado()){
+            setTimeout(() => {
+                this.formulario.patchValue({
+                    apresentacao: this.filtroConsultaMedicamento.apresentacao,
+                    numeroTuss: this.filtroConsultaMedicamento.numeroTuss,
+                    ativos: this.filtroConsultaMedicamento.ativos,
+                    generico: this.filtroConsultaMedicamento.generico
+                });
+            }, 300);
+        }
     }
 
     private isStorageCarregado():boolean{
@@ -75,44 +85,65 @@ export class ParametrizacaoMedicamentosHomeComponent extends BaseComponent imple
     }
 
     private preencherComboLaboratoriosSelecionados():void{
-        if(this.isStorageCarregado()){ 
+        if(this.isStorageCarregado()){
             if(this.listComboLaboratorios && this.filtroConsultaMedicamento.idListaLaboratorios){
                 let lista:DadoComboDTO[]=[];
 
                 this.filtroConsultaMedicamento.idListaLaboratorios.forEach(item => {
-                    let temp = this.listComboLaboratorios.find(d=> Number(d.value) === Number(item.value));
-                    lista.push(temp);
+                    const valorItem = typeof item === 'object' ? item.value : item;
+                    let temp = this.listComboLaboratorios.find(d=> Number(d.value) === Number(valorItem));
+                    if(temp){
+                        lista.push(temp);
+                    }
                 });
 
                 if(lista!==null && lista.length>0){
                     this.listComboLaboratoriosSelected= lista;
 
+                    setTimeout(() => {
+                        this.formulario.patchValue({
+                            idListaLaboratorios: this.filtroConsultaMedicamento.idListaLaboratorios
+                        });
+                    }, 100);
+
                     if(this.listComboLaboratoriosSelected){
-                        this.preencherComboMedicamento(this.filtroConsultaMedicamento.idListaLaboratorios.map(v => v.value));
+                        const valores = this.filtroConsultaMedicamento.idListaLaboratorios.map(v =>
+                            typeof v === 'object' ? v.value : v
+                        );
+                        this.preencherComboMedicamento(valores);
                     }
-                    
+
                 }else{
                     this.listComboLaboratoriosSelected = [];
-                }	
+                }
             }
         }
     }
 
     private preencherComboMedicamentosSelecionados():void{
-        if(this.isStorageCarregado()){ 
+        if(this.isStorageCarregado()){
 
-            if(this.listComboLaboratorios && this.filtroConsultaMedicamento.idListaMedicamentos){
+            if(this.listComboMedicamentos && this.filtroConsultaMedicamento.idListaMedicamentos){
                 let lista:DadoComboDTO[]=[];
                 this.filtroConsultaMedicamento.idListaMedicamentos.forEach(item => {
-                    let temp = this.listComboMedicamentos.find(d=> Number(d.value) === Number(item.value));
-                    lista.push(temp);
+                    const valorItem = typeof item === 'object' ? item.value : item;
+                    let temp = this.listComboMedicamentos.find(d=> Number(d.value) === Number(valorItem));
+                    if(temp){
+                        lista.push(temp);
+                    }
                 });
 
                 if(lista!==null && lista.length>0){
                     this.listComboMedicamentosSelected= lista;
+
+                    setTimeout(() => {
+                        this.formulario.patchValue({
+                            idListaMedicamentos: this.filtroConsultaMedicamento.idListaMedicamentos
+                        });
+                    }, 200);
                 }else{
                     this.listComboMedicamentosSelected = [];
-                }	
+                }
             }
         }
     }
@@ -161,6 +192,7 @@ export class ParametrizacaoMedicamentosHomeComponent extends BaseComponent imple
 
     public limparCampos(): void {
         this.filtroConsultaMedicamento = new FiltroConsultaMedicamento();
+        this.data.storage = null;
         this.formulario.reset();
         this.formulario.markAsPristine();
         this.formulario.markAsUntouched();
