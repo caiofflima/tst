@@ -46,12 +46,12 @@ export class ParametrizacaoDocumentoProcessoListarComponent extends BaseComponen
         this.retornaValorFiltro();
     }
 
-    private retornaValorFiltro(): void { 
+    private retornaValorFiltro(): void {
         this.filtro.id = this.id;
         this.filtro.sexo = ArrayUtil.get<string>(this.route.snapshot.queryParams['sexo']);
-        this.filtro.obrigatorio = this.route.snapshot.queryParams['obrigatorio'];
+        this.filtro.obrigatorio = this.obterParametroBooleano(this.route.snapshot.queryParams['obrigatorio']);
         this.filtro.documentos = this.route.snapshot.queryParams['documentos'];
-        this.filtro.somenteAtivos = this.route.snapshot.queryParams['somenteAtivos'];
+        this.filtro.somenteAtivos = this.obterParametroBooleano(this.route.snapshot.queryParams['somenteAtivos']);
         this.filtro.estadoCivil = NumberUtil.getArray(this.route.snapshot.queryParams['estadoCivil']);
         this.filtro.tiposProcesso = NumberUtil.getArray(this.route.snapshot.queryParams['tiposProcesso']);
         this.filtro.tiposBeneficiario = NumberUtil.getArray(this.route.snapshot.queryParams['tiposBeneficiario']);
@@ -62,6 +62,19 @@ export class ParametrizacaoDocumentoProcessoListarComponent extends BaseComponen
         this.descricaoTiposProcesso = this.route.snapshot.queryParams['descricaoTiposProcesso'] || 'Todas';
         this.descricaoTiposBeneficiario = this.route.snapshot.queryParams['descricaoTiposBeneficiario'] || 'Todas';
         this.descricaoMotivosDeSolicitacao = this.route.snapshot.queryParams['descricaoMotivosDeSolicitacao'] || 'Todas';
+    }
+
+    private obterParametroBooleano(valor: any): boolean {
+        if (valor === null || valor === undefined) {
+            return null;
+        }
+        if (valor === 'true' || valor === true) {
+            return true;
+        }
+        if (valor === 'false' || valor === false) {
+            return false;
+        }
+        return null;
     }
 
     ngOnInit(): void {

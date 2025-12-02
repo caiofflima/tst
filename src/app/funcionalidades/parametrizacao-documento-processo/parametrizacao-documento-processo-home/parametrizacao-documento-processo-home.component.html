@@ -16,7 +16,7 @@
     </div>
 
     <section class="row">
-        <form novalidate>
+        <form [formGroup]="formulario" novalidate>
             <div class="form-row">
                 <div class="col-md-6 mb-15 pl-0">
                     <label class="control-label">Tipo de Pedido</label>
@@ -71,10 +71,10 @@
             </div>
             <div class="form-row">
                 <div class="col-md-2 mb-15 pl-0">
-                    <asc-checkbox name="obrigatorio" [valoresTrueOrFalse]="true"></asc-checkbox>
+                    <asc-checkbox formControlName="obrigatorio" name="obrigatorio" [valoresTrueOrFalse]="true"></asc-checkbox>
                 </div>
                 <div class="col-md-2 p-0">
-                    <asc-checkbox name="somenteAtivos" [valoresTrueOrFalse]="true"></asc-checkbox>
+                    <asc-checkbox formControlName="somenteAtivos" name="somenteAtivos" [valoresTrueOrFalse]="true"></asc-checkbox>
                 </div>
             </div>
 
