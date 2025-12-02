@@ -106,10 +106,14 @@ export class ParametrizacaoMedicamentosListarComponent extends BaseComponent imp
         return Array.isArray(lista) ? lista.map(d=>parseInt(d, 10)) : lista.split(",").map(x=>Number(x.trim()));
     }
 
-    private obterParametroBooleano(valor:string): boolean {
-        if(valor!==null && valor){
+    private obterParametroBooleano(valor:any): boolean {
+        if(valor === null || valor === undefined){
+            return null;
+        }
+        if(valor === 'true' || valor === true){
             return true;
-        }else if(valor!==null&& !valor){
+        }
+        if(valor === 'false' || valor === false){
             return false;
         }
         return null;

@@ -75,16 +75,27 @@ export class ParametrizacaoMedicamentosHomeComponent extends BaseComponent imple
     }
 
     private preencherComboLaboratoriosSelecionados():void{
-        if(this.isStorageCarregado() && this.filtroConsultaMedicamento.idListaLaboratorios){
-            const valores = this.filtroConsultaMedicamento.idListaLaboratorios.map(v =>
-                typeof v === 'object' ? v.value : v
-            );
-
+        if(this.isStorageCarregado()){
             setTimeout(() => {
-                this.formulario.get('idListaLaboratorios').setValue(valores);
-            }, 100);
+                this.formulario.patchValue({
+                    apresentacao: this.filtroConsultaMedicamento.apresentacao,
+                    numeroTuss: this.filtroConsultaMedicamento.numeroTuss,
+                    ativos: this.filtroConsultaMedicamento.ativos,
+                    generico: this.filtroConsultaMedicamento.generico
+                });
+            }, 50);
 
-            this.preencherComboMedicamento(valores);
+            if(this.filtroConsultaMedicamento.idListaLaboratorios){
+                const valores = this.filtroConsultaMedicamento.idListaLaboratorios.map(v =>
+                    typeof v === 'object' ? v.value : v
+                );
+
+                setTimeout(() => {
+                    this.formulario.get('idListaLaboratorios').setValue(valores);
+                }, 100);
+
+                this.preencherComboMedicamento(valores);
+            }
         }
     }
 
@@ -152,6 +163,12 @@ export class ParametrizacaoMedicamentosHomeComponent extends BaseComponent imple
     }
 
     pesquisar(): void {
+        console.log('=== VALORES DO FORMULARIO ===');
+        console.log('apresentacao:', this.formulario.get('apresentacao').value);
+        console.log('numeroTuss:', this.formulario.get('numeroTuss').value);
+        console.log('ativos:', this.formulario.get('ativos').value);
+        console.log('generico:', this.formulario.get('generico').value);
+
         const laboratorios = this.formulario.get('idListaLaboratorios').value;
         const medicamentos = this.formulario.get('idListaMedicamentos').value;
 
@@ -183,10 +200,10 @@ export class ParametrizacaoMedicamentosHomeComponent extends BaseComponent imple
                 listaLaboratoriosNome: this.formatarNomeParam(this.formulario.get('idListaLaboratorios')),
                 listaMedicamentos: this.formatarValorParam(this.formulario.get('idListaMedicamentos')),
                 listaMedicamentosNome: this.formatarNomeParam(this.formulario.get('idListaMedicamentos')),
-                apresentacao: this.formulario.get('apresentacao').value?this.formulario.get('apresentacao').value:null,
-                numeroTuss: this.formulario.get('numeroTuss').value?this.formulario.get('numeroTuss').value:null,
-                ativos: this.formulario.get('ativos').value?this.formulario.get('ativos').value:null,
-                generico: this.formulario.get('generico').value?this.formulario.get('generico').value:null
+                apresentacao: this.formulario.get('apresentacao').value || null,
+                numeroTuss: this.formulario.get('numeroTuss').value || null,
+                ativos: this.formulario.get('ativos').value !== null ? this.formulario.get('ativos').value : null,
+                generico: this.formulario.get('generico').value !== null ? this.formulario.get('generico').value : null
             }
         }).then();
     }
