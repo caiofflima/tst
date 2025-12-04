@@ -41,8 +41,8 @@ export class EmailSituacaoFormComponent extends BaseComponent implements OnInit 
     tiposBeneficiario = this.formBuilder.control(null)
     tiposDestinatario = this.formBuilder.control(null)
     nomeRemetente = this.formBuilder.control(null)
-    emailRemetente = this.formBuilder.control(null)
-    copiaPara = this.formBuilder.control(null)
+    emailRemetente = this.formBuilder.control(null, AscValidators.email())
+    copiaPara = this.formBuilder.control(null, AscValidators.email())
     assunto = this.formBuilder.control(null)
     texto = this.formBuilder.control(null)
     inativo = this.formBuilder.control(false);

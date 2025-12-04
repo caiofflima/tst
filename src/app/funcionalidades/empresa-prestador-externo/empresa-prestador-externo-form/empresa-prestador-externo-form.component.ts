@@ -62,7 +62,7 @@ export class EmpresaPrestadorExternoFormComponent extends BaseComponent implemen
     cnpj = this.formBuilder.control(null, [Validators.required, AscValidators.cnpj]);
     razaoSocial = this.formBuilder.control(null, [Validators.required]);
     contrato = this.formBuilder.control(null)
-    email = this.formBuilder.control(null);
+    email = this.formBuilder.control(null, [AscValidators.email()]);
 
     private inicializarFormulario() {
         this.formulario = this.formBuilder.group({
