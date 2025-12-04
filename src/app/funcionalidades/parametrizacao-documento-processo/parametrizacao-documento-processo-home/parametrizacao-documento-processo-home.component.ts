@@ -66,20 +66,6 @@ export class ParametrizacaoDocumentoProcessoHomeComponent extends BaseComponent 
         private readonly data: Data
     ) {
         super(messageService);
-
-        if (this.isStorageCarregado()) {
-            const filtro = this.data.storage.filtroDocumentoProcesso;
-            this.formulario = this.formBuilder.group({
-                sexo: [filtro.sexo],
-                documentos: [filtro.documentos],
-                obrigatorio: [filtro.obrigatorio],
-                estadoCivil: [filtro.estadoCivil],
-                somenteAtivos: [filtro.somenteAtivos],
-                tiposProcesso: [filtro.tiposProcesso],
-                tiposBeneficiario: [filtro.tiposBeneficiario],
-                motivosDeSolicitacao: [filtro.motivosDeSolicitacao]
-            });
-        }
     }
 
     private isStorageCarregado(): boolean {
@@ -90,6 +76,7 @@ export class ParametrizacaoDocumentoProcessoHomeComponent extends BaseComponent 
         this.getSexo();
         this.inicializarCombos();
         this.preencherCamposSelecionados();
+        this.data.storage = {}; 
     }
 
     private preencherCamposSelecionados(): void {
@@ -102,42 +89,28 @@ export class ParametrizacaoDocumentoProcessoHomeComponent extends BaseComponent 
                 });
             }, 50);
 
-            if (filtro.sexo) {
-                setTimeout(() => {
-                    this.formulario.get('sexo').setValue(filtro.sexo);
-                }, 100);
-            }
+            this.preencherCamposSelecionadosPorCampo(filtro, "sexo");
 
-            if (filtro.documentos) {
-                setTimeout(() => {
-                    this.formulario.get('documentos').setValue(filtro.documentos);
-                }, 100);
-            }
+            this.preencherCamposSelecionadosPorCampo(filtro, "documentos");
 
-            if (filtro.estadoCivil) {
-                setTimeout(() => {
-                    this.formulario.get('estadoCivil').setValue(filtro.estadoCivil);
-                }, 100);
-            }
+            this.preencherCamposSelecionadosPorCampo(filtro, "estadoCivil");
 
-            if (filtro.tiposProcesso) {
-                setTimeout(() => {
-                    this.formulario.get('tiposProcesso').setValue(filtro.tiposProcesso);
-                }, 100);
-            }
+            this.preencherCamposSelecionadosPorCampo(filtro, "tiposProcesso");
 
-            if (filtro.tiposBeneficiario) {
-                setTimeout(() => {
-                    this.formulario.get('tiposBeneficiario').setValue(filtro.tiposBeneficiario);
-                }, 100);
-            }
+            this.preencherCamposSelecionadosPorCampo(filtro, "tiposBeneficiario");
 
-            if (filtro.motivosDeSolicitacao) {
-                setTimeout(() => {
-                    this.formulario.get('motivosDeSolicitacao').setValue(filtro.motivosDeSolicitacao);
-                }, 100);
-            }
+            this.preencherCamposSelecionadosPorCampo(filtro, "motivosDeSolicitacao");
         }
+    }
+
+    private preencherCamposSelecionadosPorCampo(filtro:any, nomeCampo:any):void{
+        const lista = filtro[nomeCampo];
+        if(!lista){
+            return;
+        }
+        const valores = lista.map(v => typeof v === 'object' ? v.value : v);
+
+        setTimeout(() => {  this.formulario.get(nomeCampo)?.setValue(valores);}, 200);
     }
 
     public novoPrazo(): void {
@@ -155,96 +128,100 @@ export class ParametrizacaoDocumentoProcessoHomeComponent extends BaseComponent 
     }
 
     public pesquisar(): void {
-        const sexoValues = this.formulario.get('sexo').value;
-        const documentosValues = this.formulario.get('documentos').value;
-        const estadoCivilValues = this.formulario.get('estadoCivil').value;
-        const tiposProcessoValues = this.formulario.get('tiposProcesso').value;
-        const tiposBeneficiarioValues = this.formulario.get('tiposBeneficiario').value;
-        const motivosDeSolicitacaoValues = this.formulario.get('motivosDeSolicitacao').value;
-
-        // Criar objetos completos com label e value
-        const sexoCompleto = (sexoValues && sexoValues.length > 0) ? sexoValues.map(val => {
-            const valStr = typeof val === 'object' ? val.value : val;
-            const item = this.sexos.find(s => s.value === valStr);
-            return item ? { label: item.label, value: item.value } : { label: '', value: valStr };
-        }) : null;
-
-        const documentosCompleto = (documentosValues && documentosValues.length > 0) ? documentosValues.map(val => {
-            const numVal = typeof val === 'object' ? val.value : val;
-            const item = this.listComboTipoDocumento?.find(d => Number(d.value) === Number(numVal));
-            return item ? { label: item.label || item.descricao, value: item.value } : { label: '', value: numVal };
-        }) : null;
-
-        const estadoCivilCompleto = (estadoCivilValues && estadoCivilValues.length > 0) ? estadoCivilValues.map(val => {
-            const numVal = typeof val === 'object' ? val.value : val;
-            const item = this.listComboEtadoCivil?.find(e => Number(e.value) === Number(numVal));
-            return item ? { label: item.label || item.descricao, value: item.value } : { label: '', value: numVal };
-        }) : null;
-
-        const tiposProcessoCompleto = (tiposProcessoValues && tiposProcessoValues.length > 0) ? tiposProcessoValues.map(val => {
-            const numVal = typeof val === 'object' ? val.value : val;
-            const item = this.listComboTipoProcesso?.find(t => Number(t.value) === Number(numVal));
-            return item ? { label: item.label || item.descricao, value: item.value } : { label: '', value: numVal };
-        }) : null;
-
-        const tiposBeneficiarioCompleto = (tiposBeneficiarioValues && tiposBeneficiarioValues.length > 0) ? tiposBeneficiarioValues.map(val => {
-            const numVal = typeof val === 'object' ? val.value : val;
-            const item = this.listComboTipoBeneficiario?.find(t => Number(t.value) === Number(numVal));
-            return item ? { label: item.label || item.descricao, value: item.value } : { label: '', value: numVal };
-        }) : null;
-
-        const motivosDeSolicitacaoCompleto = (motivosDeSolicitacaoValues && motivosDeSolicitacaoValues.length > 0) ? motivosDeSolicitacaoValues.map(val => {
-            const numVal = typeof val === 'object' ? val.value : val;
-            const item = this.listComboMotivoDeSolicitacao?.find(m => Number(m.value) === Number(numVal));
-            return item ? { label: item.label || item.descricao, value: item.value } : { label: '', value: numVal };
-        }) : null;
-
-        // Extrair apenas os valores para queryParams
-        const sexo = sexoCompleto ? sexoCompleto.map(s => s.value).join(',') : null;
-        const documentos = documentosCompleto ? documentosCompleto.map(d => d.value).join(',') : null;
-        const estadoCivil = estadoCivilCompleto ? estadoCivilCompleto.map(e => e.value).join(',') : null;
-        const tiposProcesso = tiposProcessoCompleto ? tiposProcessoCompleto.map(t => t.value).join(',') : null;
-        const tiposBeneficiario = tiposBeneficiarioCompleto ? tiposBeneficiarioCompleto.map(t => t.value).join(',') : null;
-        const motivosDeSolicitacao = motivosDeSolicitacaoCompleto ? motivosDeSolicitacaoCompleto.map(m => m.value).join(',') : null;
-
-        // Extrair descrições
-        const descricaoSexo = sexoCompleto ? sexoCompleto.map(s => s.label).join(', ') : null;
-        const descricaoDocumentos = documentosCompleto ? documentosCompleto.map(d => d.label).join(', ') : null;
-        const descricaoEstadoCivil = estadoCivilCompleto ? estadoCivilCompleto.map(e => e.label).join(', ') : null;
-        const descricaoTiposProcesso = tiposProcessoCompleto ? tiposProcessoCompleto.map(t => t.label).join(', ') : null;
-        const descricaoTiposBeneficiario = tiposBeneficiarioCompleto ? tiposBeneficiarioCompleto.map(t => t.label).join(', ') : null;
-        const descricaoMotivosDeSolicitacao = motivosDeSolicitacaoCompleto ? motivosDeSolicitacaoCompleto.map(m => m.label).join(', ') : null;
-
+        this.data.storage = {};
+        const dadosCompletos = this.prepararDadosCompletos();
+        this.salvarStorage(dadosCompletos);
+        this.navegarComFiltros(dadosCompletos);
+    }
+    
+    private prepararDadosCompletos() {
+        return {
+            sexo: this.completarItens('sexo', this.sexos),
+            documentos: this.completarItens('documentos', this.listComboTipoDocumento),
+            estadoCivil: this.completarItens('estadoCivil', this.listComboEtadoCivil),
+            tiposProcesso: this.completarItens('tiposProcesso', this.listComboTipoProcesso),
+            tiposBeneficiario: this.completarItens('tiposBeneficiario', this.listComboTipoBeneficiario),
+            motivosDeSolicitacao: this.completarItens('motivosDeSolicitacao', this.listComboMotivoDeSolicitacao)
+        };
+    }
+    
+    private completarItens(campo: string, lista: any[]): any[] | null {
+        const valores = this.formulario.get(campo).value;
+        if (!valores?.length) return null;
+    
+        return valores.map(val => this.montarItem(val, lista));
+    }
+    
+    private montarItem(valor: any, lista: any[]): any {
+        const numVal = typeof valor === 'object' ? valor.value : valor;
+        const item = lista?.find(i => this.compararValores(i.value, numVal));
+        
+        return item 
+            ? { label: item.label || item.descricao, value: item.value }
+            : { label: '', value: numVal };
+    }
+    
+    private compararValores(val1: any, val2: any): boolean {
+        return Number(val1) === Number(val2);
+    }
+    
+    private salvarStorage(dados: any): void {
         this.data.storage = {
             filtroDocumentoProcesso: {
                 ...this.formulario.value,
-                sexo: sexoCompleto,
-                documentos: documentosCompleto,
-                estadoCivil: estadoCivilCompleto,
-                tiposProcesso: tiposProcessoCompleto,
-                tiposBeneficiario: tiposBeneficiarioCompleto,
-                motivosDeSolicitacao: motivosDeSolicitacaoCompleto
+                ...dados
             }
         };
-
+    }
+    
+    private navegarComFiltros(dados: any): void {
         this.router.navigate(['/manutencao/parametros/documento-pedido/buscar'], {
-            queryParams: {
-                sexo,
-                documentos,
-                estadoCivil,
-                tiposProcesso,
-                tiposBeneficiario,
-                motivosDeSolicitacao,
-                descricaoSexo,
-                descricaoDocumentos,
-                descricaoEstadoCivil,
-                descricaoTiposProcesso,
-                descricaoTiposBeneficiario,
-                descricaoMotivosDeSolicitacao,
-                obrigatorio: this.formulario.get('obrigatorio').value !== null ? this.formulario.get('obrigatorio').value : null,
-                somenteAtivos: this.formulario.get('somenteAtivos').value !== null ? this.formulario.get('somenteAtivos').value : null
-            }
-        }).then();
+            queryParams: this.construirQueryParams(dados)
+        });
+    }
+    
+    private construirQueryParams(dados: any): any {
+        return {
+            ...this.extrairValores(dados),
+            ...this.extrairDescricoes(dados),
+            obrigatorio: this.getValorOuNull('obrigatorio'),
+            somenteAtivos: this.getValorOuNull('somenteAtivos')
+        };
+    }
+    
+    private extrairValores(dados: any): any {
+        return {
+            sexo: this.joinValores(dados.sexo),
+            documentos: this.joinValores(dados.documentos),
+            estadoCivil: this.joinValores(dados.estadoCivil),
+            tiposProcesso: this.joinValores(dados.tiposProcesso),
+            tiposBeneficiario: this.joinValores(dados.tiposBeneficiario),
+            motivosDeSolicitacao: this.joinValores(dados.motivosDeSolicitacao)
+        };
+    }
+    
+    private extrairDescricoes(dados: any): any {
+        return {
+            descricaoSexo: this.joinLabels(dados.sexo),
+            descricaoDocumentos: this.joinLabels(dados.documentos),
+            descricaoEstadoCivil: this.joinLabels(dados.estadoCivil),
+            descricaoTiposProcesso: this.joinLabels(dados.tiposProcesso),
+            descricaoTiposBeneficiario: this.joinLabels(dados.tiposBeneficiario),
+            descricaoMotivosDeSolicitacao: this.joinLabels(dados.motivosDeSolicitacao)
+        };
+    }
+    
+    private joinValores(items: any[]): string | null {
+        return items ? items.map(i => i.value).join(',') : null;
+    }
+    
+    private joinLabels(items: any[]): string | null {
+        return items ? items.map(i => i.label).join(', ') : null;
+    }
+    
+    private getValorOuNull(campo: string): any {
+        const valor = this.formulario.get(campo).value;
+        return valor !== null ? valor : null;
     }
 
     public limparCampos(): void {

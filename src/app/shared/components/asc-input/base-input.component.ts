@@ -219,7 +219,7 @@ export abstract class BaseSelectComponent<T> extends BaseInputComponent implemen
             this.executeEmiter(this.dados, dados)
             this.items = dados;
             this.showProgressBar = false;
-            console.log('_carregarLista',this.items)
+            //console.log('_carregarLista',this.items)
             if (this.control.value) {
                 if(this.items && this.items.length > 0){
                     const valor = this.items.find((item: { id: number, value?: any }) => item.id == this.control.value || item.value == this.control.value);
@@ -235,7 +235,7 @@ export abstract class BaseSelectComponent<T> extends BaseInputComponent implemen
     }
 
     protected gerarSelectItems(list: T[], itemValue?: (i: T) => any, itemLabel?: (i: T) => string): void {
-        console.log('gerar select items ',list,itemValue,itemLabel)
+        //console.log('gerar select items ',list,itemValue,itemLabel)
         let toLabel = itemLabel ? itemLabel : this.labelPadrao;
         let toValue = itemValue ? itemValue : this.valuePadrao;
         if (!this.multiple) {

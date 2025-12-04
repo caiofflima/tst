@@ -41,24 +41,18 @@
 
       </div>
       
-      
-        <div class="row col-xs-6">
+      <div class="row">
+        <div class=" col-md-12">
           <asc-input-text
             label="Descrição" [required]="true" id="descricao" name="descricao" [control]="formulario.get('nome')"
             hint="Descrição do Motivo" [maxlength]="150"
           ></asc-input-text>
         </div>
-  
-        
-  
-        <div class="row col-xs-6">
-          <br>
-          <label class="control-label" for="prestadorExclusivo">
-            <asc-checkbox name="prestadorExclusivo" formControlName="prestadorExclusivo" [valoresTrueOrFalse]="true"></asc-checkbox>
-            Exclusivo para prestador
-          </label>
-  
+
+        <div class="pl-0 col-md-5">
+           <asc-checkbox label="Exclusivo para prestador" name="prestadorExclusivo" formControlName="prestadorExclusivo" [valoresTrueOrFalse]="true"></asc-checkbox>
         </div>
+      </div>
 
       <div class="col-xs-12"></div>
 
@@ -67,18 +61,16 @@
             <div class="row col-xs-3">
               <asc-checkbox label="Inativo" name="inativo" formControlName="inativo" [valoresTrueOrFalse]="true" (ngModelChange)="onChangeInativo($event)"></asc-checkbox>
             </div>
-
-            
               
-              <div class="col-xs-3 pl-0">
-                <asc-input-date
-                        [control]="dataInativacao" [required]="inativo.value"
-                        [disabled]="!inativo.value" inputId="dataInativacao" label="Data da Inativação"
-                ></asc-input-date>
-                <asc-message-error
-                        [control]="dataInativacao" type="dataIgualAtualMaior"
-                        errorMessage="Data de Inativação deve ser igual ou superior a data atual!"
-                ></asc-message-error>
+            <div class="col-xs-3 pl-0">
+              <asc-input-date
+                      [control]="dataInativacao" [required]="inativo.value"
+                      [disabled]="!inativo.value" inputId="dataInativacao" label="Data da Inativação"
+              ></asc-input-date>
+              <asc-message-error
+                      [control]="dataInativacao" type="dataIgualAtualMaior"
+                      errorMessage="Data de Inativação deve ser igual ou superior a data atual!"
+              ></asc-message-error>
             </div>
             
             

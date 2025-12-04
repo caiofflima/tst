@@ -39,7 +39,7 @@
 
         <div class="col-md-6 mb-15 pl-0">
           <asc-listagem *ngIf="motivoSolicitacaoTipoPedidoBeneficiariosDTO" [lista]="montarLista()"></asc-listagem>
-          <asc-multiSelect [options]="listComboTipoBeneficiario" [required]="true"></asc-multiSelect>
+          <asc-multiSelect label="Tipo Beneficiário" [options]="listComboTipoBeneficiario" [required]="true"></asc-multiSelect>
           <asc-input-error [control]="tiposBeneficiario" [requiredMsg]="requiredMsg"></asc-input-error>
         </div>
       </div>
@@ -55,12 +55,13 @@
         </div>
 
         <div class="col-md-4 mb-15 pl-0">
-          <label class="control-label" for="sexo">Sexo</label>
+          <!--label class="control-label" for="sexo">Sexo</label-->
           <asc-dropdown
-  [control]="sexo"
-  [items]="sexos"
-  id="sexo"
-></asc-dropdown>
+            label="Sexo"
+            [control]="sexo"
+            [items]="sexos"
+            id="sexo"
+          ></asc-dropdown>
         </div>
       </div>
 

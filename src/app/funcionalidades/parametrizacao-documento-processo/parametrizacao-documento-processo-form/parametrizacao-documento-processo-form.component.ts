@@ -100,7 +100,7 @@ export class ParametrizacaoDocumentoProcessoFormComponent extends BaseComponent 
         if (this.tiposProcesso.value) {
             this.comboService.consultarComboTipoBeneficiarioPorTipoProcesso([this.tiposProcesso.value]).pipe(
                 take<DadoComboDTO[]>(1)
-            ).subscribe(res => {console.log(res);
+            ).subscribe(res => { 
                 this.listComboTipoBeneficiario = res
                 this.listComboTipoBeneficiarioSelecionados = this.listComboTipoBeneficiario.filter(l => 
                                                                     this.documentoTipoProcesso.tiposBeneficiario 
@@ -212,6 +212,7 @@ export class ParametrizacaoDocumentoProcessoFormComponent extends BaseComponent 
         documentoTipoProcesso.valorRendaMaxima = NumberUtil.convertStringToNumber(documentoTipoProcesso.valorRendaMaxima);
         documentoTipoProcesso.idTipoProcesso = this.tiposProcesso.value;
         documentoTipoProcesso.tiposBeneficiario = this.tiposBeneficiario.value;
+
         
         if (this.id) {
             this.serviceDocumentoProcesso.put(documentoTipoProcesso).pipe(
@@ -269,5 +270,13 @@ export class ParametrizacaoDocumentoProcessoFormComponent extends BaseComponent 
 
     public voltar(): void {
         this.location.back();
+    }
+
+    isSalvar():boolean{
+
+        if((this.idDocumento.value ) || (this.tiposBeneficiario.value && this.tiposBeneficiario.value?.length>0)){
+            return true;
+        } 
+        return false;
     }
 }

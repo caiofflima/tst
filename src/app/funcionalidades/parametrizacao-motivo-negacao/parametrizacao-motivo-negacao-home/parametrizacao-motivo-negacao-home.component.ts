@@ -16,11 +16,14 @@ import { ComboService, SituacaoProcessoService } from 'app/shared/services/servi
 })
 export class ParametrizacaoMotivoNegacaoHomeComponent extends BaseComponent implements OnInit {
 
+    filtro: FiltroConsultaMotivoNegacao;
     situacaoPedidos: SelectItem[];
     situacaoPedido: SituacaoProcesso;
-    filtro: FiltroConsultaMotivoNegacao;
     idSituacaoPedidoCombo = new FormControl(null);
     icNiveisNegacaoCombo = new FormControl(null);
+    tituloNegacao = new FormControl(null);
+    motivoNegacao = new FormControl(null);
+    
     idSituacaoPedido: number;
     nomeSituacaoPedido: string;
     icNivelNegacao: string;

@@ -15,7 +15,7 @@
   <section class="row">
     <form novalidate>
       <div class="form-row">
-        <div class="col-md-2 mb-15 pl-0">
+        <div class="col-md-3 mb-15 pl-0">
           <asc-dropdown 
               [items]="icNiveisNegacao"
               label="Nível de Negação"
@@ -23,28 +23,35 @@
               [control]="icNiveisNegacaoCombo"
             ></asc-dropdown>
         </div>
+
         <div class="col-md-7 mb-15 pl-0" *ngIf="mostrarComboSituacaoDoPedido()">
           <asc-dropdown
             label="Situação do Pedido" [items]="situacaoPedidos" [control]="idSituacaoPedidoCombo"
             id="idSituacaoPedidoCombo" (selected)="tipoSelecionado($event)"
           ></asc-dropdown>
         </div>
-        <div class="col-md-3 mb-15 pl-0">
-          <label class="control-label" for="tituloNegacao">Título da Negação</label>&nbsp;<br>
-          <input type="text" id="tituloNegacao" name="tituloNegacao" [(ngModel)]="filtro.tituloNegacao"
-                 class="form-control" [maxlength]="150" title="Titulo da Negação.">
+
+        <div class="col-md-4 mb-15 pl-0">
+          <!--label class="control-label" for="tituloNegacao">Título da Negação</label>&nbsp;<br-->
+          <!--input type="text" id="tituloNegacao" name="tituloNegacao" [(ngModel)]="filtro.tituloNegacao"
+                 class="form-control" [maxlength]="150" title="Titulo da Negação."-->
+          <asc-input-text  label="Titulo da Negação." [(ngModel)]="filtro.tituloNegacao"
+          [control]="tituloNegacao"></asc-input-text>
         </div>
       </div>
 
       <div class="form-row">
         <div class="col-md-12 pl-0">
-          <label class="control-label" for="motivoNegacao">Motivo da Negação</label>&nbsp;<br>
+          <!--label class="control-label" for="motivoNegacao">Motivo da Negação</label>&nbsp;<br>
           <input type="text" id="motivoNegacao" name="motivoNegacao" [(ngModel)]="filtro.motivoNegacao"
-                 class="form-control" [maxlength]="150" title="Motivo da Negação.">
+                 class="form-control" [maxlength]="150" title="Motivo da Negação."-->
+
+          <asc-input-text  label="Motivo da Negação." [(ngModel)]="filtro.motivoNegacao"
+          [control]="motivoNegacao"></asc-input-text>
         </div>
       </div>
       <div class="form-row">
-        <div class="col-md-2 p-0">
+        <div class="col-md-3 p-0">
           <asc-checkbox label="Somente ativos" name="ativos" [(ngModel)]="filtro.somenteAtivo" [valoresTrueOrFalse]="false"></asc-checkbox>
         </div>
       </div>

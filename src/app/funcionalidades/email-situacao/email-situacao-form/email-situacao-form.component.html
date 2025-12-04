@@ -37,6 +37,7 @@
           <p class="marginBottom" id="contrato">{{email.codigoUsuarioCadastramento}}</p>
         </div>
       </div>
+
       <div class="row">
         <div class="pl-0 col-xs-6">
           <asc-select-situacao-processo-ocorrencia
@@ -48,50 +49,47 @@
             [disabled]="!isNaNOrNull(id)">
           </asc-select-situacao-processo-ocorrencia>
         </div>
+
         <div class="p-0 col-xs-6">
-          <label class="control-label obrigatorio" for="tipoProcesso">Tipo de pedido</label>
+          <!--label class="control-label obrigatorio" for="tipoProcesso">Tipo de pedido</label-->
           <asc-multiSelect
             [options]="listComboTipoProcesso"
             [control]="tiposProcesso"
             (onChange)="onChangeTipoProcesso()"
             id="tipoProcesso"
             [required]="true"
-            [disabled]="!isNaNOrNull(id)">
+            [disabled]="!isNaNOrNull(id)"
+            label="Tipo de pedido">
           </asc-multiSelect>
-          <asc-message-error
-            [control]="tiposProcesso" type="required"
-            [errorMessage]="bundle('MA005')"
-          ></asc-message-error>
+          <asc-message-error [control]="tiposProcesso" type="required" [errorMessage]="bundle('MA005')" ></asc-message-error>
         </div>
       </div>
+
       <div class="row">
         <div class="pl-0 col-xs-6">
-          <label class="control-label obrigatorio" for="tiposBeneficiario">Tipo Beneficiário</label>
+          <!--label class="control-label obrigatorio" for="tiposBeneficiario">Tipo Beneficiário</label-->
           <asc-listagem *ngIf="id" [lista]="listComboTipoBeneficiarioSelecionado"></asc-listagem>
           <asc-multiSelect
+            label="Tipo Beneficiário"
             [options]="listComboTipoBeneficiario"
             [control]="formulario.get('tiposBeneficiario')"
             id="tiposBeneficiario"
             [required]="true"
             [disabled]="!isNaNOrNull(id)">
           </asc-multiSelect>
-          <asc-message-error
-            [control]="formulario.controls['tiposBeneficiario']" type="required"
-            [errorMessage]="bundle('MA005')"
-          ></asc-message-error>
+          <asc-message-error [control]="formulario.controls['tiposBeneficiario']" type="required" [errorMessage]="bundle('MA005')" ></asc-message-error>
         </div>
         <div class="p-0 col-xs-6">
-          <label class="control-label obrigatorio" for="tipoDestinatario">Destinatário(s)</label>
+          <!--label class="control-label obrigatorio" for="tipoDestinatario">Destinatário(s)</label-->
           <asc-multiSelect
+            label="Destinatário(s)"
             [options]="listComboTipoDestinatario"
             [control]="formulario.get('tiposDestinatario')" _value=""
             id="tipoDestinatario"
             [required]="true"
           ></asc-multiSelect>
-          <asc-message-error
-            [control]="formulario.controls['tiposDestinatario']" type="required"
-            [errorMessage]="bundle('MA005')"
-          ></asc-message-error>
+          <asc-message-error [control]="formulario.controls['tiposDestinatario']" type="required" 
+          [errorMessage]="bundle('MA005')" ></asc-message-error>
         </div>
       </div>
 

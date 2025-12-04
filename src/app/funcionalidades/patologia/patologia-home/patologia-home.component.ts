@@ -15,9 +15,9 @@ import {Location} from "@angular/common";
 })
 export class PatologiaHomeComponent extends BaseComponent implements OnInit {
 
-    evento = new FormControl(null)
-    percReembolso = new FormControl(null)
-
+    evento = new FormControl(null);
+    percReembolso = new FormControl(null);
+    nome = new FormControl(null);
     filtro: FiltroPatologia;
 
     categories: any[] = [

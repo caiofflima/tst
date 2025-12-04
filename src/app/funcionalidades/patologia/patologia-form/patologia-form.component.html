@@ -81,13 +81,14 @@
             [errorMessage]="bundle('MA009','Percentual')">
           </asc-message-error>
         </div>
-        <div class="col-md-2 mb-15 pl-0">
-          <label class="control-label" for="sexo">Exclusivo para o Sexo</label>
+        <div class="col-md-4 mb-15 pl-0">
+          <!--label class="control-label" for="sexo">Exclusivo para o Sexo</label-->
           <asc-dropdown
-  [control]="formulario.get('sexo')"
-  [items]="sexos"
-  id="sexo"
-></asc-dropdown>
+            label="Exclusivo para o Sexo"
+            [control]="formulario.get('sexo')"
+            [items]="sexos"
+            id="sexo"
+          ></asc-dropdown>
         </div>
       </div>
       <div class="form-row">

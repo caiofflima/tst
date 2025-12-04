@@ -22,15 +22,16 @@
       <div class="form-row">
         <div class="p-0 col-md-6">
           <asc-dropdown
-  [items]="patologias"
-  [control]="patologiaControl"
-  label="Patologia"
-></asc-dropdown>
+            [items]="patologias"
+            [control]="patologiaControl"
+            label="Patologia"
+          ></asc-dropdown>
         </div>
 
         <div class="col-md-6">
-          <label class="control-label" for="Medicamento">Medicamento</label>
+          <!--label class="control-label" for="Medicamento">Medicamento</label-->
           <asc-dropdown
+            label="Medicamento"
             [items]="medicamentos"
             [control]="medicamento"
             [enableBackendFilter]="true"

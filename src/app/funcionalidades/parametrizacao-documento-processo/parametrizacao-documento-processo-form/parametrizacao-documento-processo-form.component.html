@@ -43,7 +43,7 @@
         </div>
       </div>
       <div class="form-row">
-        <div class="col-md-6 mb-15 pl-0">
+        <div class="col-md-7 mb-15 pl-0">
           <asc-select-tipo-processo
             label="Tipo de pedido"
             (onChange)="onChangeProcesso()"
@@ -52,11 +52,12 @@
             [required]="!id"
             [disabled]="id != null"
           ></asc-select-tipo-processo>
-        </div>
-        <div class="col-md-6 mb-15 pl-0">
-          <asc-listagem *ngIf="id" [lista]="listComboTipoBeneficiarioSelecionados"></asc-listagem>
-          <asc-multiSelect [options]="listComboTipoBeneficiario" [disabled]="id != null" [required]="true"></asc-multiSelect>
-          <asc-input-error [control]="tiposBeneficiario" [requiredMsg]="requiredMsg"></asc-input-error>
+        </div><asc-listagem *ngIf="id" [lista]="listComboTipoBeneficiarioSelecionados"></asc-listagem>
+        <div class="col-md-8 mb-15 pl-0">
+          
+          <asc-multiSelect [options]="listComboTipoBeneficiario" [disabled]="id != null" [required]="true"
+          label="Tipo de Beneficiário" [control]="tiposBeneficiario" ></asc-multiSelect>
+          <asc-input-error [requiredMsg]="requiredMsg"></asc-input-error>
         </div>
       </div>
       <div class="form-row">
@@ -69,9 +70,9 @@
             [disabled]="id != null"
           ></asc-dropdown>
         </div>
-        <div class="col-md-2 mb-15 pl-0">
+        <div class="col-md-3 mb-15 pl-0">
           <br>
-          <asc-checkbox label="Obrigatórios" name="obrigatorio" [valoresTrueOrFalse]="true"></asc-checkbox>
+          <asc-checkbox label="Obrigatórios" name="obrigatorio" formControlName="obrigatorio" [valoresTrueOrFalse]="true"></asc-checkbox>
         </div>
         <div class="col-md-6 mb-15 pl-0">
           <asc-dropdown
@@ -89,14 +90,15 @@
           </asc-select-estado-civil>
         </div>
         <div class="col-md-4 mb-15 pl-0">
-          <label class="control-label" for="sexo">Sexo</label>
+          <!--label class="control-label" for="sexo">Sexo</label-->
           <asc-dropdown
-  [control]="sexo"
-  [items]="sexos"
-  id="sexo"
-></asc-dropdown>
+            label="Sexo"
+            [control]="sexo"
+            [items]="sexos"
+            id="sexo"
+          ></asc-dropdown>
         </div>
-        <div class="col-md-4 mb-15 pl-0">
+        <div class="col-md-7 mb-15 pl-0">
           <asc-dropdown
             [items]="tipoDeficiencias"
             label="Tipo deficiência"
@@ -115,7 +117,7 @@
             label="Idade máxima" [somenteNumeros]="true" [maxlength]="3" [control]="idadeMaxima">
           </asc-input-text>
         </div>
-        <div class="col-md-4 mb-15 pl-0">
+        <div class="col-md-7 mb-15 pl-0">
           <asc-dropdown
             [items]="caraterSolicitacao"
             label="Caráter solicitação"
@@ -136,7 +138,7 @@
             [control]="valorRendaMaxima"
           ></asc-input-money-type>
         </div>
-        <div class="col-md-4 mb-15 pl-0">
+        <div class="col-md-7 mb-15 pl-0">
           <asc-select-finalidade
             label="Motivo solicitação"
             [control]="idMotivoSolicitacao"
@@ -149,7 +151,7 @@
           <div class="col-md-2 d-flex al-ic pl-0">
             <asc-checkbox label="Inativo" name="inativo" formControlName="inativo" [valoresTrueOrFalse]="true" (ngModelChange)="onChangeInativo($event)"></asc-checkbox>
           </div>
-          <div class="col-md-2 pl-0">
+          <div class="col-md-3 pl-0">
             <asc-input-date [control]="dataInativacao" [required]="inativo.value"
                             [disabled]="!inativo.value" inputId="dataInativacao" label="Data da Inativação"
             ></asc-input-date>
@@ -176,7 +178,8 @@
                 id="btnFormLimparCampos" *ngIf="!id">
           <span class="fa fa-trash fa-fw"></span>Limpar Campos
         </button>
-        <button [disabled]="!idDocumento.value || !tiposBeneficiario.value"
+
+        <button [disabled]="!isSalvar()"
                 class="btn continue-btn"
                 id="btnFormSalvar" (click)="salvar()">
           Salvar

@@ -39,11 +39,12 @@
   (selected)="buscarLancamentosByAno($event.value.value)"
 ></asc-dropdown> -->
               <asc-dropdown
-  [items]="optionsAnos"
-  [placeholder]="anoLancamento"
-  [label]="'Ano'"
-  (selected)="buscarLancamentosByAno($event.value)"
-></asc-dropdown>
+                [items]="optionsAnos"
+                [placeholder]="anoLancamento"
+                [label]="'Ano'"
+                (selected)="buscarLancamentosByAno($event.value)"
+                [control]="selectAno"
+              ></asc-dropdown>
             </div>
           </div>
 

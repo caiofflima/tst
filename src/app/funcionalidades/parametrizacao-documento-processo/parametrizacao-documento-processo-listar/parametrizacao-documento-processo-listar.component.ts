@@ -50,12 +50,12 @@ export class ParametrizacaoDocumentoProcessoListarComponent extends BaseComponen
         this.filtro.id = this.id;
         this.filtro.sexo = ArrayUtil.get<string>(this.route.snapshot.queryParams['sexo']);
         this.filtro.obrigatorio = this.obterParametroBooleano(this.route.snapshot.queryParams['obrigatorio']);
-        this.filtro.documentos = this.route.snapshot.queryParams['documentos'];
+        this.filtro.documentos = NumberUtil.getArrayBySymbol(this.route.snapshot.queryParams['documentos'], ",");
         this.filtro.somenteAtivos = this.obterParametroBooleano(this.route.snapshot.queryParams['somenteAtivos']);
-        this.filtro.estadoCivil = NumberUtil.getArray(this.route.snapshot.queryParams['estadoCivil']);
-        this.filtro.tiposProcesso = NumberUtil.getArray(this.route.snapshot.queryParams['tiposProcesso']);
-        this.filtro.tiposBeneficiario = NumberUtil.getArray(this.route.snapshot.queryParams['tiposBeneficiario']);
-        this.filtro.motivosDeSolicitacao = NumberUtil.getArray(this.route.snapshot.queryParams['motivosDeSolicitacao']);
+        this.filtro.estadoCivil = NumberUtil.getArrayBySymbol(this.route.snapshot.queryParams['estadoCivil'], ",");
+        this.filtro.tiposProcesso = NumberUtil.getArrayBySymbol(this.route.snapshot.queryParams['tiposProcesso'], ",");
+        this.filtro.tiposBeneficiario = NumberUtil.getArrayBySymbol(this.route.snapshot.queryParams['tiposBeneficiario'], ",");
+        this.filtro.motivosDeSolicitacao = NumberUtil.getArrayBySymbol(this.route.snapshot.queryParams['motivosDeSolicitacao'], ",");
         this.descricaoSexo = this.route.snapshot.queryParams['descricaoSexo'] || 'Todas';
         this.descricaoDocumentos = this.route.snapshot.queryParams['descricaoDocumentos'] || 'Todas';
         this.descricaoEstadoCivil = this.route.snapshot.queryParams['descricaoEstadoCivil'] || 'Todas';
@@ -83,7 +83,6 @@ export class ParametrizacaoDocumentoProcessoListarComponent extends BaseComponen
 
     public pesquisaInicial(): void {
         this.loading = true;
-
         this.serviceDocumentoProcesso.consultarPorFiltro(this.filtro, null, null).pipe(
             take<Pageable<DocumentoTipoProcesso>>(1)
         ).subscribe(res => {

@@ -20,16 +20,17 @@
   <section class="row">
     <form novalidate>
       <div class="form-row">
-        <div class="pl-0 col-xs-12  mb-15">
-          <label class="control-label" for="descricao">Descrição</label>&nbsp;<br>
+        <div class="pl-0 col-md-12  mb-15">
+          <!--label class="control-label" for="descricao">Descrição</label>&nbsp;<br>
           <input type="text" id="descricao" name="descricao" [(ngModel)]="filtro.nome"
-                 class="form-control" [maxlength]="150" title="Nome do Motivo.">
+                 class="form-control" [maxlength]="150" title="Nome do Motivo."-->
+          <asc-input-text  label="Descrição" [(ngModel)]="filtro.nome"></asc-input-text>
         </div>
+
         <div class="row">
-          <div class="col-xs-2 p-0">
+          <div class="col-md-3 p-0">
             <asc-checkbox label="Somente Ativos" name="testoS" [(ngModel)]="filtro.ativos" [valoresTrueOrFalse]="false"></asc-checkbox>
           </div>
-
         </div>
 
       </div>

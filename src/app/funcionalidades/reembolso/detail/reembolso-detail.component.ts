@@ -73,6 +73,7 @@ export class ReembolsoDetailComponent implements OnInit {
     });
 
     exibirReembolso: boolean = false;
+    selectAno = new FormControl(null);
 
     constructor(private messageService: MessageService,
         private reembolsoSaudeCaixaService: ReembolsoSaudeCaixaService,
@@ -385,9 +386,9 @@ export class ReembolsoDetailComponent implements OnInit {
            
             // console.log(this.mensalidadeExtrato);
             // console.log(this.coparticipacaoExtrato);
-             console.log("getLancamentoPorCpfMesAno(" + cpf + ", " + mes + ", " + ano + ") { [ extratos ] ");
-             console.log(this.extratos);
-             console.log("[ FIM ] this.extratos ++++++++++++++++++++");
+            //  console.log("getLancamentoPorCpfMesAno(" + cpf + ", " + mes + ", " + ano + ") { [ extratos ] ");
+            //  console.log(this.extratos);
+            //  console.log("[ FIM ] this.extratos ++++++++++++++++++++");
         }, (err) => {
             console.log("[ERRO] getLancamentoPorCpfMesAno(" + cpf + ", " + mes + ", " + ano + ") {");
             console.log(err.message);

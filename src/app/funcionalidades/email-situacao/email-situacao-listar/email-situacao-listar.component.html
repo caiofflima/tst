@@ -46,7 +46,7 @@
 
       <div class="col-xs-6">
         <label class="control-label">Somente Ativos</label>
-        <p>{{filtro.somenteAtivos ? "Sim" : "Não"}}</p>
+        <p>{{filtro.somenteAtivos===true ? "Sim" : "Não"}}</p>
       </div>
     </div>
     <div class="row" *ngIf="filtro.palavraChave">

@@ -27,16 +27,19 @@
         </p>
         <p>&nbsp;</p>
         <div class="row pl-0 col-xs-2">
-          <p class="info-p texto-ano-base"><b>Ano Base</b></p>
+          <!--p class="info-p texto-ano-base"><b>Ano Base</b></p-->
               <!--<asc-dropdown
   [items]="anos"
 ></asc-dropdown>-->
 
-            <asc-dropdown
-  [items]="optionsAnos"
-  [placeholder]="anoLancamento.value"
-  (selected)="onChange($event.value)"
-></asc-dropdown>
+        <asc-dropdown
+          [items]="optionsAnos"
+          [placeholder]="anoLancamento.value"
+          (selected)="onChange($event.value)" 
+          label="Ano Base"
+          [control]="selectAno"
+        ></asc-dropdown>
+
         </div>
         <br><br><br><br>
         <div class="pagina-inicial-botoes">

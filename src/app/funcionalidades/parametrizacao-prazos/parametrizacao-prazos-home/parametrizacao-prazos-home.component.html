@@ -19,16 +19,18 @@
     <form [formGroup]="formulario" name="form">
       <div class="form-row">
         <div class="col-md-6 mb-15 pl-0">
-          <label class="control-label">Tipo de Pedido</label>
+          <!--label class="control-label">Tipo de Pedido</label-->
           <asc-multiSelect
+            label="Tipo de Pedido"
             id="tiposProcesso"
             [options]="listComboTipoProcesso"
             [control]="formulario.get('tiposProcesso')"
           ></asc-multiSelect>
         </div>
         <div class="col-md-6 mb-15 pl-0">
-          <label class="control-label">Tipo de Beneficiário</label>
+          <!--label class="control-label">Tipo de Beneficiário</label-->
           <asc-multiSelect
+            label="Tipo de Beneficiário"
             id="tiposBeneficiario"
             [options]="listComboTipoBeneficiario"
             [control]="formulario.get('tiposBeneficiario')"
@@ -37,8 +39,9 @@
       </div>
       <div class="form-row row">
         <div class="col-md-6 mb-15 pl-0">
-          <label class="control-label">Situação do Pedido</label>
+          <!--label class="control-label">Situação do Pedido</label-->
           <asc-multiSelect
+            label="Situação do Pedido"
             id="situacaoProcesso"
             [options]="listComboSituacaoProcesso"
             [control]="formulario.get('situacoesProcesso')"
@@ -53,17 +56,19 @@
           ></asc-input-text>
         </div>
       </div>
+
       <div class="form-row">
         <div class="col-md-6 mb-15 pl-0">
-          <asc-checkbox name="ativos" formControlName="somenteAtivos" [valoresTrueOrFalse]="true"></asc-checkbox>
+          <asc-checkbox label="Ativos" name="ativos" formControlName="somenteAtivos" [valoresTrueOrFalse]="true"></asc-checkbox>
         </div>
         <div class="col-md-6 mb-15 pl-0">
-          <asc-checkbox name="mudancaAutomatica" formControlName="mudancaAutomatica" [valoresTrueOrFalse]="true"></asc-checkbox>
+          <asc-checkbox label="Mudança Automática" name="mudancaAutomatica" formControlName="mudancaAutomatica" [valoresTrueOrFalse]="true"></asc-checkbox>
         </div>
         <div class="col-md-6 mb-15 pl-0">
-          <asc-checkbox name="diasUteis" formControlName="diasUteis" [valoresTrueOrFalse]="true"></asc-checkbox>
+          <asc-checkbox label="Dias Úteis" name="diasUteis" formControlName="diasUteis" [valoresTrueOrFalse]="true"></asc-checkbox>
         </div>
       </div>
+
       <div class="col-xs-12 barra-botoes">
         <button
           type="button"

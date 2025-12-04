@@ -23,7 +23,7 @@ export class ExtratoIRPFComponent extends BaseComponent implements OnInit {
   anoCorrente = null;
   anoLancamento = null;
   limiteUltimosCincoAnos: number = 4;
-  
+  selectAno = new FormControl(null);
   optionsAnos: Option[] = [];
 
   readonly formularioExtratoIRPF = this.formBuilder.group({
@@ -68,12 +68,20 @@ export class ExtratoIRPFComponent extends BaseComponent implements OnInit {
   }
 
   gerarExtrato(): void {
+
     this.route.navigate(['meus-dados/financeiro/extrato-irpf/detalhar'], {
       queryParams: {
-        anoBase: this.anoLancamento || '',
+        anoBase: this.getAno(),
         mtr: SessaoService.getMatriculaFuncional() || ''
       }
     }).then();
+  }
+
+  getAno():any{
+    if(this.selectAno && this.selectAno.value){
+      return this.selectAno.value;
+    }
+    return this.anoCorrente;
   }
 
 }

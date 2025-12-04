@@ -1,12 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { EmailSituacaoListarComponent } from './email-situacao-listar.component';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { NO_ERRORS_SCHEMA, ChangeDetectorRef } from '@angular/core';
 import { Location } from '@angular/common';
-import { ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { of } from 'rxjs';
+
+import { EmailSituacaoListarComponent } from './email-situacao-listar.component';
 import { MessageService } from 'app/shared/components/messages/message.service';
 import { EmailService } from 'app/shared/services/comum/email.service';
-import { of } from 'rxjs';
 
 describe('EmailSituacaoListarComponent', () => {
   let component: EmailSituacaoListarComponent;

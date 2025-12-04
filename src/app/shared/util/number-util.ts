@@ -15,6 +15,24 @@ export class NumberUtil {
         return null;
     }
 
+    static getArrayBySymbol(lista: any, simbolo: string): number[] {
+
+        if(lista===null || lista===undefined){
+            return lista;
+        }
+
+        if (Array.isArray(lista)) {
+            return lista;
+        }
+
+        let listaConvertida: number[] = (lista ?? "")
+            .split(simbolo)
+            .map(x=>Number(x))
+            .filter(n=>!isNaN(n));
+
+        return listaConvertida;
+    }
+
 
     static isDecimal(value: any): boolean {
         if (Number.isNaN(value)) throw new Error(`The params should be a number ${value}`);

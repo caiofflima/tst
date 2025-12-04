@@ -128,8 +128,6 @@ export class ParametrizacaoDocumentosHomeComponent extends BaseComponent impleme
     }
 
     tipoSelecionado(tipo: any) {
-        console.log("tipo ------------------------------------");
-        console.log(tipo);
         this.documento = tipo.nome;
         this.idTipoDocumentoSelecionado = tipo.id;
     }

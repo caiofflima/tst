@@ -20,42 +20,45 @@
   <section class="row">
     <form [formGroup]="formulario" name="form">
 
-      <div class="row p-0 col-xs-6">
-        <label class="control-label" for="situacaoProcesso">Ocorrência</label>
-        <asc-multiSelect
-          id="situacaoProcesso" [limit]="2" [options]="listComboSituacaoProcesso"
-          [control]="formulario.get('situacoesProcesso')"
-        ></asc-multiSelect>
+      <div class="row">
+
+        <div class=" p-0 col-md-6">
+          <!--label class="control-label" for="situacaoProcesso">Ocorrência</label-->
+          <asc-multiSelect
+            id="situacaoProcesso" [limit]="2" [options]="listComboSituacaoProcesso"
+            [control]="formulario.get('situacoesProcesso')" label="Ocorrência"
+          ></asc-multiSelect>
+        </div>
+
+        <div class="col-md-6">
+          <!--label class="control-label" for="tipoProcesso">Tipo de Pedido</label-->
+          <asc-multiSelect
+            id="tipoProcesso" [limit]="6" [options]="listComboTipoProcesso"
+            [control]="formulario.get('tiposProcesso')"
+            (onChange)="onChangeTipoProcesso()" label="Tipo de Pedido"
+          ></asc-multiSelect>
+        </div>
       </div>
 
-      <div class="row col-xs-6">
-        <label class="control-label" for="tipoProcesso">Tipo de Pedido</label>
-        <asc-multiSelect
-          id="tipoProcesso" [limit]="6" [options]="listComboTipoProcesso"
-          [control]="formulario.get('tiposProcesso')"
-          (onChange)="onChangeTipoProcesso()"
-        ></asc-multiSelect>
-      </div>
+      <div class="row">
+        <div class=" p-0 col-md-6">
+          <!--label class="control-label" for="tipoBeneficiario">Tipo de Beneficiário</label-->
+          <asc-multiSelect
+            id="tipoBeneficiario" [limit]="3" [options]="listComboTipoBeneficiario"
+            [control]="formulario.get('tiposBeneficiario')" label="Tipo de Beneficiário"
+          ></asc-multiSelect>
+        </div>
 
-      <div class="row p-0 col-xs-6">
-        <label class="control-label" for="tipoBeneficiario">Tipo de Beneficiário</label>
-        <asc-multiSelect
-          id="tipoBeneficiario" [limit]="3" [options]="listComboTipoBeneficiario"
-          [control]="formulario.get('tiposBeneficiario')"
-        ></asc-multiSelect>
-      </div>
-
-      <div class="row col-xs-6">
-        <label class="control-label" for="palavraChave">Palavra-chave</label>
-        <input
-          type="text" id="palavraChave" name="palavraChave"
-          class="form-control"
-          title="Filtrar por palavra-chave."
-          formControlName="palavraChave">
+        <div class=" col-md-6">
+          <!--label class="control-label" for="palavraChave">Palavra-chave</label-->
+          <asc-input-text  title="Filtrar por palavra-chave." label="Palavra-chave"
+            [control]="formulario.get('palavraChave')"></asc-input-text>
+        </div>
       </div>
 
       <div class="row p-0 col-xs-12">
-        <asc-checkbox name="somenteAtivos" formControlName="somenteAtivos" [valoresTrueOrFalse]="true"></asc-checkbox>
+        <asc-checkbox name="somenteAtivos" formControlName="somenteAtivos" [valoresTrueOrFalse]="true"
+        label="Ativos"></asc-checkbox>
       </div>
 
       <div class="col-xs-12 barra-botoes">

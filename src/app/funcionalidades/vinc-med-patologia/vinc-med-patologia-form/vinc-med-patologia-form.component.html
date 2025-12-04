@@ -45,18 +45,16 @@
       <div class="p-0 form-row col-md-12">
 
         <div class="col-md-6 p-0">
-          <label class="control-label obrigatorio" for="patologias">Patologia</label>
+          <!--label class="control-label obrigatorio" for="patologias">Patologia</label-->
           <div *ngIf="!id">
             <asc-dropdown
-  [control]="formulario.get('patologia')"
-  [items]="patologias"
-  [placeholder]="this.bundle('MHSPH')"
-  [required]="true"
-></asc-dropdown>
-            <asc-message-error
-              [control]="patologia" type="required"
-              [errorMessage]="bundle('MA007')">
-            </asc-message-error>
+              label="Patologia"
+              [control]="formulario.get('patologia')"
+              [items]="patologias"
+              [placeholder]="this.bundle('MHSPH')"
+              [required]="true"
+            ></asc-dropdown>
+            <asc-message-error [control]="patologia" type="required" [errorMessage]="bundle('MA007')"></asc-message-error>
           </div>
           <div *ngIf="id">
             <input type="text" class="form-control" [readonly]="true" [value]="nomePatologia">
@@ -64,9 +62,10 @@
         </div>
 
         <div class="col-md-6 pr-0">
-          <label class="control-label obrigatorio" for="Medicamentos">Medicamento</label>
+          <!--label class="control-label obrigatorio" for="Medicamentos">Medicamento</label-->
           <div *ngIf="!id">
             <asc-dropdown
+              label="Medicamento"
               [items]="medicamentos" 
               (filter)="filtroMedicamento($event)" 
               [control]="medicamento"

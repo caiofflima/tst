@@ -29,15 +29,15 @@
             name="idTipoProcesso"
       ></asc-dropdown>
     </div>
-  
 
     <div class="col-md-6 mb-15 pl-0">
-      <asc-multiSelect [options]="listComboTipoBeneficiario" [required]="true"></asc-multiSelect>
+      <asc-multiSelect label="Tipos Beneficiário" [options]="listComboTipoBeneficiario" [required]="true"></asc-multiSelect>
       <asc-input-error [control]="tiposBeneficiario" [requiredMsg]="requiredMsg"></asc-input-error>
     </div>
   </div>
+
   <div class="form-row">
-    <div class="col-md-3 mb-15 pl-0" >
+    <div class="col-md-4 mb-15 pl-0" >
       <asc-dropdown
         [items]="icNiveisNegacao"
         label="Nível de Negação"
@@ -59,6 +59,7 @@
         [disabled]="atualizar != null"
         ></asc-dropdown>
     </div>
+
     <div class="col-md-9 mb-15 pl-0" *ngIf=" icNiveisNegacaoCombo.value == 'D'">
       <asc-dropdown *ngIf="icNiveisNegacaoCombo.value"
         [items]="listaComboMotivoNegacao"
@@ -85,11 +86,6 @@
           ></asc-dropdown>
       </div>    
     </div>
-
-    
-  
-  
-  
 
   <div class="form-row inativo-form" *ngIf="atualizar">
     <div class="col-md-3 p-0">

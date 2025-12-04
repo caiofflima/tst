@@ -21,19 +21,21 @@
       <form novalidate>
           <div class="form-row">
               <div class="col-md-6 mb-15 pl-0">
-                  <label class="control-label">Tipo de Pedido</label>
+                  <!--label class="control-label">Tipo de Pedido</label-->
                   <asc-multiSelect
-                          id="tiposProcesso"
-                          [options]="listComboTipoProcesso"
-                          [control]="formulario.get('tiposProcesso')"
+                        label="Tipo de Pedido"
+                        id="tiposProcesso"
+                        [options]="listComboTipoProcesso"
+                        [control]="formulario.get('tiposProcesso')"
                   ></asc-multiSelect>
               </div>
               <div class="col-md-6 mb-15 pl-0">
-                  <label class="control-label">Tipo de Beneficiário</label>
+                  <!--label class="control-label">Tipo de Beneficiário</label-->
                   <asc-multiSelect
-                          id="tiposBeneficiarios"
-                          [options]="listComboTipoBeneficiario"
-                          [control]="formulario.get('tiposBeneficiario')"
+                    label="Tipo de Beneficiário"
+                    id="tiposBeneficiarios"
+                    [options]="listComboTipoBeneficiario"
+                    [control]="formulario.get('tiposBeneficiario')"
                   ></asc-multiSelect>
               </div>
           </div>
@@ -49,33 +51,33 @@
                     ></asc-dropdown>
               </div>
               <div class="col-md-6 mb-15 pl-0" *ngIf="icNiveisNegacaoCombo.value">
-                  <label class="control-label">Motivo de Negação</label>
+                  <!--label class="control-label">Motivo de Negação</label-->
                   <asc-multiSelect
-                          id="motivosDeNegacao"
-                          [options]="listComboMotivoNegacao"
-                          [control]="formulario.get('motivosDeNegacao')"
+                        label="Motivo de Negação"
+                        id="motivosDeNegacao"
+                        [options]="listComboMotivoNegacao"
+                        [control]="formulario.get('motivosDeNegacao')"
                   ></asc-multiSelect>
               </div>    
         </div>
 
         <div class="form-row">
-            <div class="col-md-2 p-0">
+            <div class="col-md-3 p-0">
               <asc-checkbox label="Somente ativos" name="ativos" [(ngModel)]="somenteAtivos" [valoresTrueOrFalse]="true"></asc-checkbox>
             </div>
         </div>
-          
 
-          <div class="col-xs-12 barra-botoes">
-              <button (click)="limparCampos()" type="button" id="btnLimparCampos" class="btn back-btn">
-                  <span class="fa fa-trash fa-fw"></span>Limpar Campos
-              </button>
-              <button type="button" id="btnNovaPatologia" class="btn clean-btn" (click)="novo()">
-                  <span class="fa fa-plus fa-fw"></span>Incluir {{ baseTitulo }}
-              </button>
-              <button (click)="pesquisar()" type="submit" id="btnPesquisar" class="btn continue-btn">
-                  <span class="fa fa-search fa-fw"></span>Pesquisar
-              </button>
-          </div>
+        <div class="col-xs-12 barra-botoes">
+            <button (click)="limparCampos()" type="button" id="btnLimparCampos" class="btn back-btn">
+                <span class="fa fa-trash fa-fw"></span>Limpar Campos
+            </button>
+            <button type="button" id="btnNovaPatologia" class="btn clean-btn" (click)="novo()">
+                <span class="fa fa-plus fa-fw"></span>Incluir {{ baseTitulo }}
+            </button>
+            <button (click)="pesquisar()" type="submit" id="btnPesquisar" class="btn continue-btn">
+                <span class="fa fa-search fa-fw"></span>Pesquisar
+            </button>
+        </div>
 
       </form>
   </section>

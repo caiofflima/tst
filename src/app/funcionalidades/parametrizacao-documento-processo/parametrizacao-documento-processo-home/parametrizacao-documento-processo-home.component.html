@@ -19,62 +19,70 @@
         <form [formGroup]="formulario" novalidate>
             <div class="form-row">
                 <div class="col-md-6 mb-15 pl-0">
-                    <label class="control-label">Tipo de Pedido</label>
+                    <!--<label class="control-label">Tipo de Pedido</label-->
                     <asc-multiSelect
                             id="tiposProcesso"
                             [options]="listComboTipoProcesso"
                             [control]="formulario.get('tiposProcesso')"
+                            label="Tipo de Pedido"
                     ></asc-multiSelect>
                 </div>
-                <div class="col-md-3 mb-15 pl-0">
-                    <label class="control-label">Tipo de Beneficiário</label>
+                <div class="col-md-4 mb-15 pl-0">
+                    <!--<label class="control-label">Tipo de Beneficiário</label-->
                     <asc-multiSelect
                             id="tiposBeneficiarios"
                             [options]="listComboTipoBeneficiario"
                             [control]="formulario.get('tiposBeneficiario')"
+                            label="Tipo de Beneficiário"
                     ></asc-multiSelect>
                 </div>
-                <div class="col-md-3 mb-15 pl-0">
-                    <label class="control-label">Motivo de Solicitação</label>
+                <div class="col-md-4 mb-15 pl-0">
+                    <!--<label class="control-label">Motivo de Solicitação</label-->
                     <asc-multiSelect
                             id="motivoDeSolicitacao"
                             [options]="listComboMotivoDeSolicitacao"
                             [control]="formulario.get('motivosDeSolicitacao')"
+                            label="Motivo de Solicitação"
                     ></asc-multiSelect>
                 </div>
             </div>
             <div class="form-row">
                 <div class="col-md-6 mb-15 pl-0">
-                    <label class="control-label">Documentos</label>
+                    <!--<label class="control-label">Documentos</label-->
                     <asc-multiSelect
                             id="documentos"
                             [options]="listComboTipoDocumento"
                             [control]="formulario.get('documentos')"
+                            label="Documentos"
                     ></asc-multiSelect>
                 </div>
-                <div class="col-md-3 mb-15 pl-0">
-                    <label class="control-label">Estado Civil</label>
+                <div class="col-md-4 mb-15 pl-0">
+                    <!--<label class="control-label">Estado Civil</label-->
                     <asc-multiSelect
                             id="estadoCivil"
                             [options]="listComboEtadoCivil"
                             [control]="formulario.get('estadoCivil')"
+                            label="Estado Civil"
                     ></asc-multiSelect>
                 </div>
-                <div class="col-md-3 mb-15 pl-0">
-                    <label class="control-label">Sexo</label>
+                <div class="col-md-4 mb-15 pl-0">
+                    <!--<label class="control-label">Sexo</label-->
                     <asc-multiSelect
                             id="sexo"
                             [options]="sexos"
                             [control]="formulario.get('sexo')"
+                            label="Sexo"
                     ></asc-multiSelect>
                 </div>
             </div>
             <div class="form-row">
                 <div class="col-md-2 mb-15 pl-0">
-                    <asc-checkbox formControlName="obrigatorio" name="obrigatorio" [valoresTrueOrFalse]="true"></asc-checkbox>
+                    <asc-checkbox formControlName="obrigatorio" name="obrigatorio" 
+                    [valoresTrueOrFalse]="true" label="Obrigatório"></asc-checkbox>
                 </div>
                 <div class="col-md-2 p-0">
-                    <asc-checkbox formControlName="somenteAtivos" name="somenteAtivos" [valoresTrueOrFalse]="true"></asc-checkbox>
+                    <asc-checkbox formControlName="somenteAtivos" name="somenteAtivos" 
+                    [valoresTrueOrFalse]="true" label="Ativos"></asc-checkbox>
                 </div>
             </div>
 

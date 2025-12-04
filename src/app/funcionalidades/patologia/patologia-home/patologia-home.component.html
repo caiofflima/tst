@@ -19,56 +19,61 @@
 
   <section class="row">
     <form novalidate>
+      <div class="row">
+        <div class=" p-0 col-md-2">
+          <!--label class="control-label" for="codigo">CID-10</label>&nbsp;<br>
+            ----------------------- VERIFICAR O USO DO NGMODEL-----------------------
+          <input type="text" id="codigo" name="codigo" [(ngModel)]="filtro.codigo" [maxlength]="5"
+                class="form-control" title="Código da Patologia no CID-10"-->
+          <asc-input-text label="CID-10" [maxlength]="5" hint="Código da Patologia no CID-10"> </asc-input-text>       
+        </div>
 
-      <div class="row p-0 col-xs-2">
-        <label class="control-label" for="codigo">CID-10</label>&nbsp;<br>
-        <input type="text" id="codigo" name="codigo" [(ngModel)]="filtro.codigo" [maxlength]="5"
-               class="form-control" title="Código da Patologia no CID-10">
+        <div class=" col-md-8">
+          <!--label class="control-label" for="descricao">Descrição</label>&nbsp;<br>
+            ----------------------- VERIFICAR O USO DO NGMODEL-----------------------
+          <input type="text" id="descricao" name="descricao" [(ngModel)]="filtro.nome"
+                class="form-control" [maxlength]="150" title="Nome da Patologia."-->
+          <asc-input-text label="Descrição" [maxlength]="5" hint="Nome da Patologia"></asc-input-text>  
+        </div>
+
+        <div class=" p-0 col-md-2">
+          <asc-input-text label="Código Evento" id="codigoEvento" name="codigoEvento" [control]="evento"
+            [somenteNumeros]="true" [maxlength]="8" hint="Código do Evento">
+          </asc-input-text>
+        </div>
       </div>
 
-      <div class="row col-xs-8">
-        <label class="control-label" for="descricao">Descrição</label>&nbsp;<br>
-        <input type="text" id="descricao" name="descricao" [(ngModel)]="filtro.nome"
-               class="form-control" [maxlength]="150" title="Nome da Patologia.">
+      <div class="row"> 
+        <div class=" p-0 col-md-4">
+          <label class="control-label" for="perReembolso">Percentual Reembolso</label>&nbsp;<br>
+          <input type="number" id="perReembolso" name="perReembolso" [(ngModel)]="filtro.percReembolso"
+                class="form-control" [maxlength]="5" title="Percentual Reembolso" step="0.01">
+          <!--asc-input-text label="Percentual Reembolso" id="perReembolso" name="perReembolso"  step="0.01"
+          [somenteNumeros]="true" [maxlength]="5" hint="Percentual Reembolso"></asc-input-text-->
+        </div>
+
+        <div class=" col-md-4">
+          <label class="control-label">Compõe Teto?</label>&nbsp;<br>
+          <p-radioButton name="testoS" value="S" [(ngModel)]="filtro.teto" inputId="textoS"></p-radioButton>
+          <label for="textoS">Sim</label>
+
+          <p-radioButton name="textoN" value="N" [(ngModel)]="filtro.teto" inputId="textoN"></p-radioButton>
+          <label for="textoN">Não</label>
+        </div>
+
+        <div class=" p-0 col-md-4">
+          <label class="control-label">Calcula PF?</label>&nbsp;<br>
+          <p-radioButton name="pfS" value="S" [(ngModel)]="filtro.pf" inputId="pfS"></p-radioButton>
+          <label for="pfS">Sim</label>
+
+          <p-radioButton name="pfS" value="N" [(ngModel)]="filtro.pf" inputId="pfN"></p-radioButton>
+          <label for="pfN">Não</label>
+        </div>
+
+        <div class="pl-0 col-md-3">
+          <asc-checkbox label="Somente Ativos" name="testoS" [(ngModel)]="filtro.ativos" [valoresTrueOrFalse]="false"></asc-checkbox>
+        </div>
       </div>
-
-      <div class="row p-0 col-xs-2">
-        <asc-input-text
-          label="Código Evento" id="codigoEvento" name="codigoEvento" [control]="evento"
-          [somenteNumeros]="true" [maxlength]="8" hint="Código do Evento">
-        </asc-input-text>
-      </div>
-
-      <div class="row p-0 col-xs-2">
-        <label class="control-label" for="perReembolso">Percentual Reembolso</label>&nbsp;<br>
-        <input type="number" id="perReembolso" name="perReembolso" [(ngModel)]="filtro.percReembolso"
-               class="form-control" [maxlength]="5" title="Percentual Reembolso" step="0.01">
-      </div>
-
-      <div class="row col-xs-2">
-        <label class="control-label">Compõe Teto?</label>&nbsp;<br>
-        <p-radioButton name="testoS" value="S" [(ngModel)]="filtro.teto" inputId="textoS"></p-radioButton>
-        <label for="textoS">Sim</label>
-
-        <p-radioButton name="textoN" value="N" [(ngModel)]="filtro.teto" inputId="textoN"></p-radioButton>
-        <label for="textoN">Não</label>
-      </div>
-
-      <div class="row p-0 col-xs-2">
-        <label class="control-label">Calcula PF?</label>&nbsp;<br>
-        <p-radioButton name="pfS" value="S" [(ngModel)]="filtro.pf" inputId="pfS"></p-radioButton>
-        <label for="pfS">Sim</label>
-
-        <p-radioButton name="pfS" value="N" [(ngModel)]="filtro.pf" inputId="pfN"></p-radioButton>
-        <label for="pfN">Não</label>
-      </div>
-
-      <div class="row col-xs-2">
-        <br>
-        <asc-checkbox label="Somente Ativos" name="testoS" [(ngModel)]="filtro.ativos" [valoresTrueOrFalse]="false"></asc-checkbox>
-
-      </div>
-
       <div class="col-xs-12 p-0 barra-botoes">
         <button type="button" id="btnLimparCampos" class="btn back-btn" (click)="limparCampos()">
           <span class="fa fa-trash fa-fw"></span>Limpar Campos

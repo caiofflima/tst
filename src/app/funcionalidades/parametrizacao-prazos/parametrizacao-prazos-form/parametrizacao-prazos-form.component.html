@@ -55,7 +55,7 @@
         </div>
         <div class="col-md-6 mb-15">
           <asc-listagem *ngIf="id" [lista]="listComboTipoBeneficiarioSelecionados"></asc-listagem>  
-          <asc-multiSelect [options]="listComboTipoBeneficiario" [disabled]="id != null" [required]="true"></asc-multiSelect>
+          <asc-multiSelect label="Tipo Beneficiário" [options]="listComboTipoBeneficiario" [disabled]="id != null" [required]="true"></asc-multiSelect>
           <div>
             <asc-input-error [control]="tiposBeneficiario" [requiredMsg]="requiredMsg"></asc-input-error>
           </div>
@@ -82,15 +82,16 @@
         </div>
         <div class="row col-xs-2">
           <br>
-          <asc-checkbox formControlName="diaUtil" [valoresTrueOrFalse]="true"></asc-checkbox>
-          <label>Dias Úteis</label>
+          <asc-checkbox label="Dias Úteis" formControlName="diaUtil" [valoresTrueOrFalse]="true"></asc-checkbox>
+          <!--label>Dias Úteis</label-->
         </div>
 
       </div>
       <div class="form-row">
         <div class="col-md-6 mb-15 pl-0">
-          <label class="control-label">Mudança Automática</label>
+          <!--label class="control-label">Mudança Automática</label-->
           <asc-dropdown
+            label="Mudança Automática"
             [items]="itensSituacoesProcesso"
             [control]="idMudancaAutomatica"
             class="form-control2">

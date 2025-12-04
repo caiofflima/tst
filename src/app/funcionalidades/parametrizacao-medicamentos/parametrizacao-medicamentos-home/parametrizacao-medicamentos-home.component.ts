@@ -163,43 +163,72 @@ export class ParametrizacaoMedicamentosHomeComponent extends BaseComponent imple
     }
 
     pesquisar(): void {
-        const laboratorios = this.formulario.get('idListaLaboratorios').value;
-        const medicamentos = this.formulario.get('idListaMedicamentos').value;
-
-        const laboratoriosCompletos = (laboratorios && laboratorios.length > 0) ? laboratorios.map(val => {
-            const numVal = typeof val === 'object' ? val.value : val;
-            const item = this.listComboLaboratorios.find(lab => Number(lab.value) === Number(numVal));
-            return item ? { label: item.label || item.descricao, value: item.value } : { label: '', value: numVal };
-        }) : null;
-
-        const medicamentosCompletos = (medicamentos && medicamentos.length > 0) ? medicamentos.map(val => {
-            const numVal = typeof val === 'object' ? val.value : val;
-            const item = this.listComboMedicamentos?.find(med => Number(med.value) === Number(numVal));
-            return item ? { label: item.label || item.descricao, value: item.value } : { label: '', value: numVal };
-        }) : null;
-
+        const dadosCompletos = this.obterDadosCompletos();
+        this.persistirDados(dadosCompletos);
+        this.navegarComFiltros();
+    }
+    
+    private obterDadosCompletos() {
+        return {
+            laboratorios: this.completarItens('idListaLaboratorios', this.listComboLaboratorios),
+            medicamentos: this.completarItens('idListaMedicamentos', this.listComboMedicamentos)
+        };
+    }
+    
+    private completarItens(campo: string, listaReferencia: any[]): any[] | null {
+        const valores = this.formulario.get(campo).value;
+        if (!valores?.length) return null;
+    
+        return valores.map(val => this.montarItemCompleto(val, listaReferencia));
+    }
+    
+    private montarItemCompleto(valor: any, lista: any[]): any {
+        const numVal = typeof valor === 'object' ? valor.value : valor;
+        const encontrado = lista?.find(item => Number(item.value) === Number(numVal));
+        
+        return encontrado
+            ? { label: encontrado.label || encontrado.descricao, value: encontrado.value }
+            : { label: '', value: numVal };
+    }
+    
+    private persistirDados(dados: any): void {
         this.data.storage = {
             filtroConsultaMedicamento: {
                 ...this.formulario.value,
-                idListaLaboratorios: laboratoriosCompletos,
-                idListaMedicamentos: medicamentosCompletos,
-                listaLaboratorios: this.formatarValorParam(this.formulario.get('idListaLaboratorios')),
-                listaMedicamentos: this.formatarValorParam(this.formulario.get('idListaMedicamentos'))
+                idListaLaboratorios: dados.laboratorios,
+                idListaMedicamentos: dados.medicamentos,
+                listaLaboratorios: this.formatarValorParam(this.getControl('idListaLaboratorios')),
+                listaMedicamentos: this.formatarValorParam(this.getControl('idListaMedicamentos'))
             }
         };
-
-        this.route.navigate(['manutencao/parametros/gerenciar-medicamentos/buscar'], {
-            queryParams: {
-                listaLaboratorios: this.formatarValorParam(this.formulario.get('idListaLaboratorios')),
-                listaLaboratoriosNome: this.formatarNomeParam(this.formulario.get('idListaLaboratorios')),
-                listaMedicamentos: this.formatarValorParam(this.formulario.get('idListaMedicamentos')),
-                listaMedicamentosNome: this.formatarNomeParam(this.formulario.get('idListaMedicamentos')),
-                apresentacao: this.formulario.get('apresentacao').value || null,
-                numeroTuss: this.formulario.get('numeroTuss').value || null,
-                ativos: this.formulario.get('ativos').value !== null ? this.formulario.get('ativos').value : null,
-                generico: this.formulario.get('generico').value !== null ? this.formulario.get('generico').value : null
-            }
-        }).then();
+    }
+    
+    private navegarComFiltros(): void {
+        this.route.navigate(
+            ['manutencao/parametros/gerenciar-medicamentos/buscar'],
+            { queryParams: this.montarQueryParams() }
+        );
+    }
+    
+    private montarQueryParams(): any {
+        return {
+            listaLaboratorios: this.formatarValorParam(this.getControl('idListaLaboratorios')),
+            listaLaboratoriosNome: this.formatarNomeParam(this.getControl('idListaLaboratorios')),
+            listaMedicamentos: this.formatarValorParam(this.getControl('idListaMedicamentos')),
+            listaMedicamentosNome: this.formatarNomeParam(this.getControl('idListaMedicamentos')),
+            apresentacao: this.getControlValue('apresentacao') ?? null,
+            numeroTuss: this.getControlValue('numeroTuss') ?? null,
+            ativos: this.getControlValue('ativos') ?? null,
+            generico: this.getControlValue('generico') ?? null
+        };
+    }
+    
+    private getControl(campo: string) {
+        return this.formulario.get(campo);
+    }
+    
+    private getControlValue(campo: string): any {
+        return this.formulario.get(campo).value;
     }
 
     private formatarValorParam(elemento:any):string{

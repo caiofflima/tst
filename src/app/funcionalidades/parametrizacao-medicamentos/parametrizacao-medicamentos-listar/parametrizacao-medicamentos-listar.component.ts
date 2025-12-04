@@ -49,53 +49,88 @@ export class ParametrizacaoMedicamentosListarComponent extends BaseComponent imp
         this.montaFiltro();
         this.pesquisar();
     }
+    
     private montaFiltro(): FiltroConsultaMedicamento {
         this.filtroConsultaMedicamento = new FiltroConsultaMedicamento();
-
-        this.filtroConsultaMedicamento.id = this.activatedRoute.snapshot.queryParams['id'];
-
-        if (this.data.storage?.filtroConsultaMedicamento) {
-            const storage = this.data.storage.filtroConsultaMedicamento;
-
-            if (storage.idListaLaboratorios && Array.isArray(storage.idListaLaboratorios)) {
-                this.listaLaboratoriosNome = storage.idListaLaboratorios
-                    .map(item => {
-                        if (typeof item === 'object' && item !== null) {
-                            return item.label || item.descricao || item.nome || JSON.stringify(item);
-                        }
-                        return item;
-                    })
-                    .join(', ');
-            }
-
-            if (storage.idListaMedicamentos && Array.isArray(storage.idListaMedicamentos)) {
-                this.listaMedicamentosNome = storage.idListaMedicamentos
-                    .map(item => {
-                        if (typeof item === 'object' && item !== null) {
-                            return item.label || item.descricao || item.nome || JSON.stringify(item);
-                        }
-                        return item;
-                    })
-                    .join(', ');
-            }
-        }
-
-        if (!this.listaLaboratoriosNome) {
-            this.listaLaboratoriosNome = this.activatedRoute.snapshot.queryParams['listaLaboratoriosNome'];
-        }
-
-        if (!this.listaMedicamentosNome) {
-            this.listaMedicamentosNome = this.activatedRoute.snapshot.queryParams['listaMedicamentosNome'];
-        }
-
-        this.filtroConsultaMedicamento.listaLaboratorios = this.converterListaArray(this.activatedRoute.snapshot.queryParams['listaLaboratorios']);
-        this.filtroConsultaMedicamento.listaMedicamentos = this.converterListaArray(this.activatedRoute.snapshot.queryParams['listaMedicamentos']);
-        this.filtroConsultaMedicamento.apresentacao = this.activatedRoute.snapshot.queryParams['apresentacao'];
-        this.filtroConsultaMedicamento.numeroTuss = this.activatedRoute.snapshot.queryParams['numeroTuss']?Number(this.activatedRoute.snapshot.queryParams['numeroTuss']):null;
-        this.filtroConsultaMedicamento.ativos = this.obterParametroBooleano(this.activatedRoute.snapshot.queryParams['ativos']);
-        this.filtroConsultaMedicamento.generico = this.obterParametroBooleano(this.activatedRoute.snapshot.queryParams['generico']);
-
+        
+        const queryParams = this.activatedRoute.snapshot.queryParams;
+        this.filtroConsultaMedicamento.id = queryParams['id'];
+        
+        this.processarStorageData();
+        this.definirNomesLaboratorios(queryParams);
+        this.definirNomesMedicamentos(queryParams);
+        this.preencherFiltrosBasicos(queryParams);
+        
         return this.filtroConsultaMedicamento;
+    }
+    
+    private processarStorageData(): void {
+        const storage = this.data.storage?.filtroConsultaMedicamento;
+        if (!storage) {
+            return;
+        }
+    
+        this.processarLaboratoriosStorage(storage);
+        this.processarMedicamentosStorage(storage);
+    }
+    
+    private processarLaboratoriosStorage(storage: any): void {
+        if (!this.isArrayValido(storage.idListaLaboratorios)) {
+            return;
+        }
+    
+        this.listaLaboratoriosNome = this.extrairNomesDeArray(storage.idListaLaboratorios);
+    }
+    
+    private processarMedicamentosStorage(storage: any): void {
+        if (!this.isArrayValido(storage.idListaMedicamentos)) {
+            return;
+        }
+    
+        this.listaMedicamentosNome = this.extrairNomesDeArray(storage.idListaMedicamentos);
+    }
+    
+    private extrairNomesDeArray(items: any[]): string {
+        return items
+            .map(item => this.extrairNomeDoItem(item))
+            .join(', ');
+    }
+    
+    private extrairNomeDoItem(item: any): string {
+        if (typeof item !== 'object' || item === null) {
+            return item;
+        }
+    
+        return item.label || item.descricao || item.nome || JSON.stringify(item);
+    }
+    
+    private definirNomesLaboratorios(queryParams: any): void {
+        if (!this.listaLaboratoriosNome) {
+            this.listaLaboratoriosNome = queryParams['listaLaboratoriosNome'];
+        }
+    }
+    
+    private definirNomesMedicamentos(queryParams: any): void {
+        if (!this.listaMedicamentosNome) {
+            this.listaMedicamentosNome = queryParams['listaMedicamentosNome'];
+        }
+    }
+    
+    private preencherFiltrosBasicos(queryParams: any): void {
+        this.filtroConsultaMedicamento.listaLaboratorios = this.converterListaArray(queryParams['listaLaboratorios']);
+        this.filtroConsultaMedicamento.listaMedicamentos = this.converterListaArray(queryParams['listaMedicamentos']);
+        this.filtroConsultaMedicamento.apresentacao = queryParams['apresentacao'];
+        this.filtroConsultaMedicamento.numeroTuss = this.converterNumeroTuss(queryParams['numeroTuss']);
+        this.filtroConsultaMedicamento.ativos = this.obterParametroBooleano(queryParams['ativos']);
+        this.filtroConsultaMedicamento.generico = this.obterParametroBooleano(queryParams['generico']);
+    }
+    
+    private converterNumeroTuss(numeroTuss: string): number | null {
+        return numeroTuss ? Number(numeroTuss) : null;
+    }
+    
+    private isArrayValido(array: any): boolean {
+        return array && Array.isArray(array);
     }
 
     private converterListaArray(lista:any):number[]{
