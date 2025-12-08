@@ -5,7 +5,7 @@
   [required]="required"
   (selected)="updateValue($event)"
   (filter)="filter($event, params.idTipoProcesso)"
-  [items]="data"
+  [items]="(dados$ | async)"
   filterBy="filtering"
   [control]="control"
   [value]="innerValue"
