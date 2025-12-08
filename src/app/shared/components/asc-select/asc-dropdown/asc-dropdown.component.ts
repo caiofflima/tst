@@ -186,9 +186,8 @@ export class AscDropdownComponent implements OnInit, OnDestroy, AfterViewInit {
         if (!this.control) {
             return;
         }
-        if (this.disabled && !this.control.disabled) {
-            this.control.disable({emitEvent: false});
-        } else if (!this.disabled && this.control.disabled) {
+
+        if (this.control.disabled) {
             this.control.enable({emitEvent: false});
         }
     }
