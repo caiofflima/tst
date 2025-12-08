@@ -43,6 +43,7 @@ export class ProcedimentoFormComponent extends BaseComponent implements OnInit, 
     @Input() beneficiario: Beneficiario;
 
     isToShowForm = false;
+    isToShowQtdSolicitada = false;
     grauSelecionadoAsObject: GrauProcedimento;
     procedimentoAsObject: Procedimento;
 
@@ -77,15 +78,32 @@ export class ProcedimentoFormComponent extends BaseComponent implements OnInit, 
     ngOnInit() {
         this.atualizarGrauProcimentoComBaseNoIdProcedimento();
         this.exibirFormulario();
+        this.exibirQuantidadeSolicitada();
         this.bloquearBotaoAdicionarProcedimentoQuandoGrauProcedimentoInvalido();
+    }
+
+    private exibirQuantidadeSolicitada() {
+        this.idGrauProcedimento.valueChanges.pipe(
+            takeUntil(this.subjectUnsubscription)
+        ).subscribe((idGrauProcedimento: number) => {
+            if (idGrauProcedimento && idGrauProcedimento > 0) {
+                this.isToShowQtdSolicitada = true;
+            } else {
+                this.isToShowQtdSolicitada = false;
+            }
+        });
     }
 
     private exibirFormulario() {
         this.idProcedimento.valueChanges.pipe(
             takeUntil(this.subjectUnsubscription)
-        ).subscribe(() => {
-            this.isToShowForm = true;
-            this.cleanControIdGrauProcedimentoFromControl();
+        ).subscribe((idProcedimento: number) => {
+            if (idProcedimento && idProcedimento > 0) {
+                this.isToShowForm = true;
+                this.cleanControIdGrauProcedimentoFromControl();
+            } else {
+                this.isToShowForm = false;
+            }
         });
     }
 
@@ -179,6 +197,7 @@ export class ProcedimentoFormComponent extends BaseComponent implements OnInit, 
                     }else{
                         this.pedidoProcedimentoForm.emit(pedidoProcedimento);
                         this.isToShowForm = false;
+                        this.isToShowQtdSolicitada = false;
                         this.isEditing = false;
                         this.isEditingForm.emit(this.isEditing)
                         formDirective.resetForm();
@@ -253,6 +272,7 @@ export class ProcedimentoFormComponent extends BaseComponent implements OnInit, 
 
     clickButtonCancelarProcedimento(formDirective: FormGroupDirective) {
         this.isToShowForm = false;
+        this.isToShowQtdSolicitada = false;
         formDirective.resetForm();
         this.resetarFormCompleto();
         this.isEditing = false;
@@ -262,6 +282,7 @@ export class ProcedimentoFormComponent extends BaseComponent implements OnInit, 
 
     private resetarFormCompleto() {
         this.isToShowForm = false;
+        this.isToShowQtdSolicitada = false;
         this.procedimentoAsObject = null;
         this.grauSelecionadoAsObject = null;
         this.parametrosSelectGrauProcedimento = { idProcedimento: null };
