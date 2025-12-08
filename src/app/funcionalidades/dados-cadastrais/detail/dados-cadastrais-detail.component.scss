@@ -2,6 +2,10 @@
 
 .box-form__groups {
   .row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -8px;
+    margin-right: -8px;
     margin-bottom: 0;
   }
 
@@ -9,6 +13,28 @@
     padding-left: 8px;
     padding-right: 8px;
     margin-bottom: 16px;
+  }
+
+  [class*="col-"] {
+    position: relative;
+    width: 100%;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  .col-md-2 {
+    flex: 0 0 16.666667%;
+    max-width: 16.666667%;
+  }
+
+  .col-md-3 {
+    flex: 0 0 25%;
+    max-width: 25%;
+  }
+
+  .col-md-7 {
+    flex: 0 0 58.333333%;
+    max-width: 58.333333%;
   }
 }
 
