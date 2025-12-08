@@ -1333,6 +1333,8 @@ a.ui-state-active {
 }
 
 .barra-botoes {
+  display: flex;
+  flex-wrap: wrap;
   justify-content: flex-end;
   align-items: baseline;
   padding: 15px 10px;

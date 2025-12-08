@@ -129,10 +129,4 @@ export class NavegacaoTitularHomeComponent implements OnInit, OnDestroy {
         this.contratos = [];
     }
 
-    get matriculaPreview(): string {
-        const raw = (this.formulario.get('matricula')?.value || '').toString().replace(/\D/g, '');
-        const padded = (raw + '_______').slice(0, 7);
-        return `${padded.substring(0, 6)}-${padded.substring(6, 7)}`;
-    }
-
 }
