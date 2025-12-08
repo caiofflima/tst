@@ -114,3 +114,12 @@ $input-width: 35rem;
 .dropdown-above-modal {
   z-index: 100001 !important;
 }
+
+:host.readonly-mode {
+  pointer-events: none;
+  opacity: 0.6;
+
+  ::ng-deep dsc-select {
+    pointer-events: none;
+  }
+}

@@ -10,6 +10,9 @@ import {Option} from 'sidsc-components/dsc-select';
     selector: 'asc-dropdown',
     templateUrl: './asc-dropdown.component.html',
     styleUrls: ['./asc-dropdown.component.scss'],
+    host: {
+        '[class.readonly-mode]': 'readonly'
+    }
 })
 export class AscDropdownComponent implements OnInit, OnDestroy, AfterViewInit {
 

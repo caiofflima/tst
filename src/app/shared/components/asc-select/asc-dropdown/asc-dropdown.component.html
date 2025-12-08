@@ -9,6 +9,7 @@
   [id]="id"
   (selectionChange)="onChange($event)"
   [size]="size"
+  [attr.readonly]="readonly ? true : null"
   #dropdownElement
 >
 <dsc-progress-bar mode="indeterminate" *ngIf="showProgressBar" [style]="{'height': '6px'}"></dsc-progress-bar>
