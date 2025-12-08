@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewEncapsulation} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, ViewEncapsulation} from '@angular/core';
 import {AscSelectComponentProcedimentosParams} from '../../../../shared/components/asc-select/models/asc-select-component-procedimentos.params';
 import {TipoAcaoProcedimentoEngine} from '../../../../shared/components/asc-select/models/tipo-acao-procedimento-engine';
 import {Procedimento} from '../../../../shared/models/comum/procedimento';
@@ -27,7 +27,7 @@ import {Beneficiario} from "../../../../shared/models/entidades";
     styleUrls: ['./procedimento-form.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class ProcedimentoFormComponent extends BaseComponent implements OnInit, OnDestroy {
+export class ProcedimentoFormComponent extends BaseComponent implements OnInit, OnDestroy, OnChanges {
 
     @Input() inResumo = false;
     @Input() parametroSelectProcedimento: AscSelectComponentProcedimentosParams = {};
@@ -78,6 +78,13 @@ export class ProcedimentoFormComponent extends BaseComponent implements OnInit, 
         this.bloquearBotaoAdicionarProcedimentoQuandoGrauProcedimentoInvalido();
     }
 
+    ngOnChanges(changes: SimpleChanges): void {
+        // Se trocar o tipo de processo ou parâmetros, limpar o formulário para evitar estados cruzados
+        if (changes['parametroSelectProcedimento'] && !changes['parametroSelectProcedimento'].firstChange) {
+            this.resetarFormCompleto();
+        }
+    }
+
     private atualizarGrauProcimentoComBaseNoIdProcedimento() {
         this.idProcedimento.valueChanges.pipe(
             takeUntil(this.subjectUnsubscription)
@@ -105,13 +112,16 @@ export class ProcedimentoFormComponent extends BaseComponent implements OnInit, 
 
     procedimentoSelecionando(procedimento?: Procedimento) {
         if(isUndefinedNullOrEmpty(procedimento)){
-            this.resetarForm()
+            this.resetarFormCompleto();
         }
         this.procedimentoAsObject = procedimento;
         this.procedimento.emit(procedimento);
 
         // Garante recarga dos graus vinculados ao procedimento selecionado
         if (procedimento && procedimento.id) {
+            this.idProcedimento.setValue(procedimento.id);
+            this.idProcedimento.markAsDirty();
+            this.idProcedimento.markAsTouched();
             this.parametrosSelectGrauProcedimento = { idProcedimento: procedimento.id };
             this.idGrauProcedimento.reset();
             this.idGrauProcedimento.markAsPristine();
@@ -229,9 +239,22 @@ export class ProcedimentoFormComponent extends BaseComponent implements OnInit, 
 
     clickButtonCancelarProcedimento(formDirective: FormGroupDirective) {
         formDirective.resetForm();
-        this.resetarForm();
+        this.resetarFormCompleto();
         this.isEditing = false;
         this.isEditingForm.emit(this.isEditing)
         this.cancelarProcedimento.emit();
+    }
+
+    private resetarFormCompleto() {
+        this.procedimentoAsObject = null;
+        this.grauSelecionadoAsObject = null;
+        this.parametrosSelectGrauProcedimento = { idProcedimento: null };
+        this.idProcedimento.reset();
+        this.idProcedimento.markAsPristine();
+        this.idProcedimento.markAsUntouched();
+        this.idGrauProcedimento.reset();
+        this.idGrauProcedimento.markAsPristine();
+        this.idGrauProcedimento.markAsUntouched();
+        this.resetarForm();
     }
 }

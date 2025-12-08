@@ -52,7 +52,7 @@
   </div>
 </div>
 <div class="footer">
-  <button class="back-btn" cdkStepperPrevious [disabled]="isEditing">
+  <button class="back-btn" cdkStepperPrevious [disabled]="isEditing" (click)="resetarProcedimento()">
       Voltar
   </button>
   <button class="continue-btn" (click)="onSubmit()"

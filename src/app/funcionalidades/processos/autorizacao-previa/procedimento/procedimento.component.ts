@@ -203,6 +203,15 @@ export class ProcedimentoComponent implements OnInit, OnDestroy {
         this.resetarForm();
     }
 
+    resetarProcedimento() {
+        this.isEditing = false;
+        this.isShowTable = false;
+        this.pedidoProcedimentoForm = {};
+        this.pedidoProcedimentosTabela = [];
+        this.parametroSelectProcedimento = {...this.parametroSelectProcedimento};
+        this.pedidoProcedimentoVersao++;
+    }
+
     isTipoProcessoOdontologico() {
         return this.parametroSelectProcedimento.idTipoProcesso === TipoProcessoEnum.AUTORIZACAO_PREVIA_ODONTOLOGICA;
     }
