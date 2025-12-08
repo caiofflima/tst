@@ -499,9 +499,19 @@ possuiArquivoNaListagem(lista: Arquivo[], file: Arquivo): boolean {
  }
 
  getEnderecoByCEP() {
-    this.integracaoCorreiosService.getEnderecoByCEP(this.enderecoForm.value.cep).subscribe((endereco: EnderecoCorreios) => {
+    const cep = this.enderecoForm.value.cep?.replace(/\D/g, '');
+    console.log('CEP digitado:', this.enderecoForm.value.cep);
+    console.log('CEP limpo:', cep);
+
+    if (!cep || cep.length !== 8) {
+      this.messageService.addMsgDanger('CEP inválido. Digite um CEP válido com 8 dígitos.');
+      return;
+    }
+
+    this.integracaoCorreiosService.getEnderecoByCEP(cep).subscribe((endereco: EnderecoCorreios) => {
+      console.log('Resposta do serviço:', endereco);
       if (endereco) {
-        if(this.enderecoForm.value.cep === this.beneficiario.endereco.cep) {
+        if(cep === this.beneficiario.endereco.cep?.replace(/\D/g, '')) {
           this.montarEnderecoComMesmoCEP(endereco);
         } else {
           this.montarEnderecoComCEPDiferentes(endereco);
@@ -511,8 +521,8 @@ possuiArquivoNaListagem(lista: Arquivo[], file: Arquivo): boolean {
       }
     },
     (err) => {
-      this.messageService.addMsgDanger(err.error);
-      console.log(err);
+      console.error('Erro ao buscar CEP:', err);
+      this.messageService.addMsgDanger(err.error || 'Erro ao buscar endereço. Tente novamente.');
       this.showProgress = false;
     }
     );
