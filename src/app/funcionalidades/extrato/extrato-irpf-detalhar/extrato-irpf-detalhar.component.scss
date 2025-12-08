@@ -375,6 +375,12 @@ tr{
   font-family: 'Caixa Std Bold';  
 }
 
+td{
+  border-bottom: 1px solid #4E6178!important;
+  font-family: 'Caixa Std Bold';  
+  font-size: 16px;
+}
+
 ::ng-deep .ui-tabview .ui-tabview-nav {
   background: transparent!important;
 }
