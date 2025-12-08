@@ -41,6 +41,11 @@ export class AscSelectProcedimentoComponent extends BaseSelectControlValueAcesso
         super(messageService);
     }
 
+    override updateValue(value: any) {
+        console.log('asc-select-procedimento updateValue chamado com:', value);
+        super.updateValue(value);
+    }
+
     override definirServico(): (params: AscSelectComponentProcedimentosParams) => Observable<Procedimento[]> {
         return (params: AscSelectComponentProcedimentosParams) => {
             if (isUndefinedNullOrEmpty(this.tipoAcaoService)) {

@@ -4,11 +4,10 @@
   [label]="label"
   [required]="required"
   (selected)="updateValue($event)"
-  (filter)="filter($event, params.idTipoProcesso)"
   [items]="(dados$ | async)"
   filterBy="filtering"
   [control]="control"
-  [value]="innerValue"
+  [value]="value"
   [showProgressBar]="showProgressBar"
   [placeholder]="isProcessoLazy(params.idTipoProcesso) ? 'Selecione uma opção. Informe o nome ou parte do nome do procedimento para carregar a lista...' : null"
 ></asc-dropdown>
