@@ -50,7 +50,6 @@ export class AscGrausProcedimentoComponent extends BaseSelectControlValueAcessor
       return grausProcedimentos.map(grauProcedimento => ({
         label: grauProcedimento.nome,
         value: grauProcedimento.id,
-        filtering: `${grauProcedimento.id} ${grauProcedimento.nome}`,
       })) as SelectItem[];
     }
     return []

@@ -109,6 +109,15 @@ export class ProcedimentoFormComponent extends BaseComponent implements OnInit, 
         }
         this.procedimentoAsObject = procedimento;
         this.procedimento.emit(procedimento);
+
+        // Garante recarga dos graus vinculados ao procedimento selecionado
+        if (procedimento && procedimento.id) {
+            this.parametrosSelectGrauProcedimento = { idProcedimento: procedimento.id };
+            this.idGrauProcedimento.reset();
+            this.idGrauProcedimento.markAsPristine();
+            this.idGrauProcedimento.markAsUntouched();
+            this.grauSelecionadoAsObject = null;
+        }
     }
 
     grauProcedimentoSelecionado(grauProcedimentoSelecionado?: GrauProcedimento) {

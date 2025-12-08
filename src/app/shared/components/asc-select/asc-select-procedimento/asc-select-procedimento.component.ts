@@ -80,10 +80,6 @@ export class AscSelectProcedimentoComponent extends BaseSelectControlValueAcesso
         if (this.isProcessoLazy(tipo)) {
             this.params.texto = valor;
             this.paramsEmitter.next(this.params);
-        } else {
-            // Para processos não-lazy, ainda assim atualizar texto e emitir params
-            this.params = {...this.params, texto: valor};
-            this.paramsEmitter.next(this.params);
         }
     }
 
