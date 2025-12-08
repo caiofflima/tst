@@ -1,5 +1,12 @@
 @import "../../../../assets/sass/funcionalidades/dados-cadastrais";
 
+.box-form__groups {
+  .box-form__group {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+
 .is--cep .form__input {
   display: flex;
   align-items: flex-end;
