@@ -30,3 +30,23 @@
   font-size: 12px;
   line-height: 1;
 }
+
+.box-form__groups {
+  .box-form__group {
+    .campo-opcional-wrapper {
+      margin-bottom: 8px;
+
+      .label-com-opcional {
+        display: inline-block;
+        font-family: "Caixa STD", Roboto, "Helvetica Neue", sans-serif;
+        font-size: 11.25px;
+        color: #22292E;
+
+        .texto-opcional {
+          opacity: 0.5;
+          margin-left: 4px;
+        }
+      }
+    }
+  }
+}
