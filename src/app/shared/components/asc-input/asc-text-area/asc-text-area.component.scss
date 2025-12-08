@@ -1,6 +1,14 @@
+$fontFamily: 'Caixa Std Regular', sans-serif !important;
 textarea {
     resize:vertical;
     min-height: 50px;
+    font-family: $fontFamily
+}
+
+textarea {
+  .form-control {
+    font-family: $fontFamily
+  }
 }
 
 

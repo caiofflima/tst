@@ -210,7 +210,8 @@ export abstract class BaseSelectComponent<T> extends BaseInputComponent implemen
 
     private _carregarLista(): void {
         this.showProgressBar = true;
-        this.carregarListOperator().subscribe((dados: any[]) => {
+        this.carregarListOperator().subscribe({
+          next: (dados: any[]) => {
             this.gerarSelectItems(dados, this.valuePadrao);
             this.options = dados.map(item => ({
                   value: this.valuePadrao(item),
@@ -228,9 +229,10 @@ export abstract class BaseSelectComponent<T> extends BaseInputComponent implemen
                     }
                 }
             }
-        }, error => {
+        }, error: error => {
             this.showProgressBar = false;
             this.messageService.addMsgDanger(error.error)
+        }
         });
     }
 

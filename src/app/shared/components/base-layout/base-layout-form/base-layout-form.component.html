@@ -30,7 +30,9 @@
 
   <section class="row">
     <ng-content select="[slot='form']"></ng-content>
-
+    
+    <div class="row col-md-6"></div>
+    
     <div class="form-row">
       <div class="col-xs-12 barra-botoes" *ngIf="tipo == 'form'">
         <button class="btn back-btn" (click)="voltar()" id="btnFormVoltar">

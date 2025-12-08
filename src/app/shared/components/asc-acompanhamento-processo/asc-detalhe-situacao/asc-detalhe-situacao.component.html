@@ -1,15 +1,6 @@
-<asc-modal
-  class="classeAnexo()"
-  [openModal]="show"
-  (closeModal)="fecharModal()"
->
-  <asc-modal-header> Detalhe da ocorrência </asc-modal-header>
-  <asc-modal-body
-    class="mdl-body-custom"
-    style="padding-bottom: 16px !important; max-height: 70vh; overflow-y: auto"
-  >
-    <section>
-      <div>
+<ng-template #templateForm let-form>
+  <section class="content">
+      <div class="row">
         <div class="col-md-6 no-padding" style="float: left !important">
           <p class="titulo-card">{{ situacaoPedido?.tipoOcorrencia?.nome }}</p>
         </div>
@@ -31,22 +22,25 @@
           </span>
         </div>
       </div>
-      <div *ngIf="situacaoPedido?.situacaoProcesso">
+      <div *ngIf="situacaoPedido?.situacaoProcesso" class="row">
         <div class="col-md-12 no-padding">
           <label>Situação</label>
           <p>{{ situacaoPedido?.situacaoProcesso.nome }}</p>
         </div>
       </div>
-      <div class="col-md-12 no-padding" style="padding-bottom: 16px !important">
-        <label>Histórico</label>
-        <br />
-        <div class="text-area-container txt-area2" style="width: 100%">
-          <asc-text-area
-            [rows]="20"
-            aria-readonly="true"
-            [readonly]="true"
-            [innerHTML]="situacaoPedido?.descricaoHistorico | campoVazioHifen"
-          ></asc-text-area>
+      <div class="row">
+
+        <div class="col-md-12 no-padding" style="padding-bottom: 16px !important">
+          <label>Histórico</label>
+          <br />
+          <div class="text-area-container txt-area2" style="width: 100%">
+            <asc-text-area
+              [rows]="20"
+              aria-readonly="true"
+              [readonly]="true"
+              [innerHTML]="situacaoPedido?.descricaoHistorico | campoVazioHifen"
+            ></asc-text-area>
+          </div>
         </div>
       </div>
       <div *ngIf="documentos" class="subtitulo">Anexos</div>
@@ -63,26 +57,37 @@
         >
         </asc-documento-card>
       </div>
+
+      <hr />
+
+      <div class="fl-sb-btn">
+      <div *ngIf="situacaoPedido?.countMensagens == 0"></div>
+      <dsc-button label="Fechar" variant="secondary-outlined" (click)="fecharModal()" />
+
+      <dsc-button iconPrefix="forward_to_inbox" label="Ver mensagens" variant="secondary" *ngIf="situacaoPedido?.countMensagens > 0" (click)="clickVerMensagem($event, modalMensagemPedidoComponent)"/>
+
+    </div>
+
     </section>
+</ng-template>
+<!-- <asc-modal
+  class="classeAnexo()"
+  [openModal]="show"
+  (closeModal)="fecharModal()"
+>
+  <asc-modal-header> Detalhe da ocorrência </asc-modal-header>
+  <asc-modal-body
+    class="mdl-body-custom"
+    style="padding-bottom: 16px !important; max-height: 70vh; overflow-y: auto"
+  >
+
   </asc-modal-body>
 
   <asc-modal-footer class="mdl-footer-custom">
-    <div class="fl-sb-btn">
-      <div *ngIf="situacaoPedido?.countMensagens == 0"></div>
-      <button (click)="fecharModal()" class="btn-cts btn-outline-closed">
-        <span>Fechar</span>
-      </button>
-      <button
-        class="btn-cts btn-send"
-        (click)="clickVerMensagem($event, modalMensagemPedidoComponent)"
-        *ngIf="situacaoPedido?.countMensagens > 0"
-      >
-        <svg class="icon-re-send"></svg>
-        <span>Ver mensagens</span>
-      </button>
-    </div>
+
   </asc-modal-footer>
 </asc-modal>
+-->
 
 <asc-modal-visualizar-documento
   #modalVisualizarDocumentoComponent

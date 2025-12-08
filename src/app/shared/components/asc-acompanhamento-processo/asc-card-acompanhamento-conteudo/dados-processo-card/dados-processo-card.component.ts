@@ -31,7 +31,7 @@ export class DadosProcessoCardComponent extends AscComponenteAutorizadoMessage i
 
     private _processo: Pedido;
     private _pedidoAux = new Pedido();
-    
+    private noCaraterSolicitacao: any;
     private readonly processo$ = new EventEmitter<Pedido>();
 
     tituloPeg = 'Número da Autorização - SIAGS';
@@ -87,8 +87,8 @@ export class DadosProcessoCardComponent extends AscComponenteAutorizadoMessage i
     }
 
     deveApresentarDataOcorrencia(){
-        return this.processo 
-            && (this.processo.idMotivoSolicitacao == MotivoSolicitacaoEnum.DISSOLUCAO_DE_CASAL_CAIXA 
+        return this.processo
+            && (this.processo.idMotivoSolicitacao == MotivoSolicitacaoEnum.DISSOLUCAO_DE_CASAL_CAIXA
             || (this.processo.idMotivoSolicitacao == MotivoSolicitacaoEnum.SEPARACAO_OU_DIVORCIO
                 || this.processo.idMotivoSolicitacao == MotivoSolicitacaoEnum.FALECIMENTO));
     }
@@ -147,7 +147,7 @@ export class DadosProcessoCardComponent extends AscComponenteAutorizadoMessage i
             ).subscribe(numero => {
                 this.numeroPeg = numero;
                 this.obterDataValidadePorNumberoAutorizacao();
-            }); 
+            });
     }
 
     private extrairCaraterSolicitacao(processo): void {
@@ -183,6 +183,8 @@ export class DadosProcessoCardComponent extends AscComponenteAutorizadoMessage i
     }
 
     public onSubmit() {
+      console.log('onSubmit', this._processo.idTipoProcesso);
+
         //inscricao de programas em medicamentos
         if (this._processo.idTipoProcesso === 5) {
             this.salvaDadosProcessoInscricaoProgramas();
@@ -245,7 +247,7 @@ export class DadosProcessoCardComponent extends AscComponenteAutorizadoMessage i
         return {
             idCaraterSolicitacao: this.idCaraterSolicitacaoSelecionadaControl.value,
             idPedido: this._processo.id,
-            noCaraterSolicitacao: jQuery('#caraterSolcitacaoProg :selected').text(),
+            noCaraterSolicitacao: this.noCaraterSolicitacao.nome,
         }
     }
 
@@ -269,5 +271,9 @@ export class DadosProcessoCardComponent extends AscComponenteAutorizadoMessage i
             return this._pedidoAux.verificarEhTitularEPedidoEmAnalise(this.titular, this.processo, situacao);
         }
         return false;
+    }
+
+    dadoSelecionado(event){
+        this.noCaraterSolicitacao = event
     }
 }

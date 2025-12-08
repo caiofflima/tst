@@ -1,6 +1,16 @@
 @import"/src/assets/sass/_mixins.scss";
 @import"/src/assets/sass/_colors.scss";
 
+$fontFamily: 'Caixa Std Regular', sans-serif !important;
+td, textarea, input{
+  font-family: $fontFamily
+}
+
+.txt-area{
+  font-family: $fontFamily
+}
+
+
 
 .ui-dialog.ui-widget .ui-dialog-titlebar {
   padding: 1em 1.5em;
