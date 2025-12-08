@@ -91,6 +91,13 @@ export abstract class BaseSelectControlValueAcessor<T extends Entity, P, O> impl
                 this.control.setValue(null);
                 this.dadoSelecionado.emit(null);
             }
+
+            // Propaga para o formulário (ControlValueAccessor)
+            this.onChangeCallback(this.innerValue);
+            if (this.control && this.control.value !== this.innerValue) {
+                this.control.setValue(this.innerValue);
+                this.control.updateValueAndValidity();
+            }
         }
     }
 
