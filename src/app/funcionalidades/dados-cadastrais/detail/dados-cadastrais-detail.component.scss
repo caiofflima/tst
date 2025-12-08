@@ -32,15 +32,17 @@
 }
 
 .campo-opcional-wrapper {
-  position: relative;
+  margin-bottom: 8px;
 
-  .texto-opcional {
-    position: absolute;
-    top: 2px;
-    left: 70px;
-    opacity: 0.5;
-    font-size: 14px;
-    pointer-events: none;
-    z-index: 1;
+  .label-com-opcional {
+    display: inline-block;
+    font-family: 'Caixa STD', sans-serif;
+    font-size: 11.25px;
+    color: rgba(0, 0, 0, 0.6);
+
+    .texto-opcional {
+      opacity: 0.5;
+      margin-left: 4px;
+    }
   }
 }
