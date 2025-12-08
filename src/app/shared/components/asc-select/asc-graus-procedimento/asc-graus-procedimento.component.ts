@@ -52,12 +52,20 @@ export class AscGrausProcedimentoComponent extends BaseSelectControlValueAcessor
 
   transformarObjetosParaSelectItems(grausProcedimentos: GrauProcedimento[]): SelectItem[] {
     if (isNotUndefinedNullOrEmpty(grausProcedimentos)) {
-      return grausProcedimentos.map(grauProcedimento => ({
-        label: grauProcedimento.nome,
-        value: grauProcedimento.id,
-      })) as SelectItem[];
+      return grausProcedimentos.map(grauProcedimento => {
+        const normalizedId = this.normalizeId(grauProcedimento?.id);
+        return {
+          label: grauProcedimento.nome,
+          value: normalizedId,
+        };
+      }) as SelectItem[];
     }
     return []
+  }
+
+  protected override predicateToFindItemSelected() {
+    return (data: GrauProcedimento | any) =>
+      data && this.normalizeId(data.id) === this.normalizeId(this.innerValue);
   }
 
   /**
@@ -69,9 +77,16 @@ export class AscGrausProcedimentoComponent extends BaseSelectControlValueAcessor
       ? (value as any).value
       : value;
 
-    // Converte strings numéricas para number para permitir matching com o id do backend
-    return (typeof extracted === 'string' && extracted.trim() !== '' && !isNaN(+extracted))
-      ? +extracted
-      : extracted;
+    return this.normalizeId(extracted);
+  }
+
+  private normalizeId(value: any) {
+    if (value === null || value === undefined) {
+      return value;
+    }
+    if (typeof value === 'string' && value.trim() !== '' && !isNaN(+value)) {
+      return +value;
+    }
+    return value;
   }
 }
