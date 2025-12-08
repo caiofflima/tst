@@ -42,7 +42,7 @@ export class AscGrausProcedimentoComponent extends BaseSelectControlValueAcessor
   }
 
   override filtrarPor(param: AscSelectGrausProcedimentoParams): boolean {
-    return isNotUndefinedNullOrEmpty(param);
+    return isNotUndefinedNullOrEmpty(param) && isNotUndefinedNullOrEmpty(param.idProcedimento);
   }
 
   transformarObjetosParaSelectItems(grausProcedimentos: GrauProcedimento[]): SelectItem[] {

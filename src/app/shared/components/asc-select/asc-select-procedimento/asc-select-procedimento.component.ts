@@ -22,18 +22,15 @@ type TipoAcaoComBackend = TipoAcaoService<ProcedimentoService, TipoAcaoDoService
         provide: NG_VALUE_ACCESSOR,
         useExisting: forwardRef(() => AscSelectProcedimentoComponent),
         multi: true,
-    }],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    }]
 })
-export class AscSelectProcedimentoComponent extends BaseSelectControlValueAcessor<Procedimento, AscSelectComponentProcedimentosParams, TipoAcaoComBackend> implements AfterViewInit {
+export class AscSelectProcedimentoComponent extends BaseSelectControlValueAcessor<Procedimento, AscSelectComponentProcedimentosParams, TipoAcaoComBackend> {
 
     @Input()
     selectId: string;
 
     @Input()
     style: string = null;
-
-    data: SelectItem[];
 
     texto: string = null;
 
@@ -42,16 +39,6 @@ export class AscSelectProcedimentoComponent extends BaseSelectControlValueAcesso
         protected override readonly messageService: MessageService,
     ) {
         super(messageService);
-        this.resetOnChange = false;
-    }
-
-    ngAfterViewInit() {
-        this.dados$.subscribe((processos: SelectItem[]) => {
-            if (processos && processos.length > 1) {
-
-                this.data = processos;
-            }
-        });
     }
 
     override definirServico(): (params: AscSelectComponentProcedimentosParams) => Observable<Procedimento[]> {
