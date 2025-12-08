@@ -76,6 +76,10 @@ export class AscDropdownComponent implements OnInit, OnDestroy, AfterViewInit {
 
     onChange(valor: any): void {
         const emitValue = this.getEmitValue(valor);
+        if (this.control) {
+            this.control.markAsDirty();
+            this.control.markAsTouched();
+        }
         this.value$.emit(emitValue);
     }
 
