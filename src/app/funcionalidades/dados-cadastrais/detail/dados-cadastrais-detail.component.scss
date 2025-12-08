@@ -31,10 +31,16 @@
   line-height: 1;
 }
 
-.label-with-opcional {
-  ::ng-deep label::after {
-    content: " - Opcional";
+.campo-opcional-wrapper {
+  position: relative;
+
+  .texto-opcional {
+    position: absolute;
+    top: 2px;
+    left: 70px;
     opacity: 0.5;
-    margin-left: 4px;
+    font-size: 14px;
+    pointer-events: none;
+    z-index: 1;
   }
 }
