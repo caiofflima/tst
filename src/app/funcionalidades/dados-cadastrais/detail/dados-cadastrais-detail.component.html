@@ -189,8 +189,8 @@
             </div>
             <div class="is--active" *ngIf="isEditarEndereco">
               <form [formGroup]="enderecoForm" class="form-container box-form">
-                <div class="box-form__groups endereco-form">
-                  <div class="form-group col-md-4 box-form__group is--cep">
+                <div class="box-form__groups">
+                  <div class="form-group col-md-12 box-form__group is--cep">
                     <div class="form__input">
                       <asc-input-text
                         [control]="enderecoForm.get('cep')"
@@ -204,7 +204,7 @@
                     </div>
                   </div>
 
-                  <div class="form-group col-md-5 box-form__group is--logradouro">
+                  <div class="form-group col-md-8 box-form__group is--logradouro">
                     <asc-input-text
                       [control]="enderecoForm.get('logradouro')"
                       inputId="logradouro"
@@ -212,7 +212,7 @@
                     ></asc-input-text>
                   </div>
 
-                  <div class="form-group col-md-3 box-form__group is--numero">
+                  <div class="form-group col-md-4 box-form__group is--numero">
                     <asc-input-text
                       [control]="enderecoForm.get('numero')"
                       inputId="numero"
@@ -220,7 +220,7 @@
                     ></asc-input-text>
                   </div>
 
-                  <div class="form-group col-md-4 box-form__group is--bairro">
+                  <div class="form-group col-md-6 box-form__group is--bairro">
                     <asc-input-text
                       [control]="enderecoForm.get('bairro')"
                       inputId="bairro"
@@ -228,27 +228,31 @@
                     ></asc-input-text>
                   </div>
 
-                  <div class="form-group col-md-4 box-form__group is--estado">
-                    <asc-select-uf
-                      id="asc-select-uf-dados-cadastrais-details"
-                      label="Estado"
-                      [control]="enderecoForm.get('estado')"
-                      [index]="4"
-                    ></asc-select-uf>
+                  <div class="form-group col-md-6 box-form__group is--municipio">
+                    <div class="col-md-12 mb-15 p-0">
+                      <asc-select-uf
+                        id="asc-select-uf-dados-cadastrais-details"
+                        label="Estado"
+                        [control]="enderecoForm.get('estado')"
+                        [index]="4"
+                      ></asc-select-uf>
+                    </div>
                   </div>
 
-                  <div class="form-group col-md-4 box-form__group is--municipio">
-                    <asc-select-municipio
-                      id="asc-select-municipio-dados-cadastrais-details"
-                      label="Município"
-                      [parametro]="{ idMunicipio: enderecoForm.get('estado').value }"
-                      [index]="5"
-                      [control]="enderecoForm.get('municipio')"
-                      [required]="enderecoForm.get('estado').value"
-                    ></asc-select-municipio>
+                  <div class="form-group col-md-6 box-form__group is--municipio">
+                    <div class="col-md-12 mb-15 p-0">
+                      <asc-select-municipio
+                        id="asc-select-municipio-dados-cadastrais-details"
+                        label="Município"
+                        [parametro]="{ idMunicipio: enderecoForm.get('estado').value }"
+                        [index]="5"
+                        [control]="enderecoForm.get('municipio')"
+                        [required]="enderecoForm.get('estado').value"
+                      ></asc-select-municipio>
+                    </div>
                   </div>
 
-                  <div class="form-group col-md-12 box-form__group is--complemento">
+                  <div class="form-group col-md-6 box-form__group is--complemento">
                     <asc-input-text
                       [control]="enderecoForm.get('complemento')"
                       inputId="complemento"
