@@ -31,16 +31,10 @@
   line-height: 1;
 }
 
-.campo-com-label-opcional {
-  width: 100%;
-}
-
-.label-custom {
-  display: inline-block;
-  margin-bottom: 8px;
-}
-
-.label-opcional {
-  opacity: 0.5;
-  margin-left: 4px;
+.label-with-opcional {
+  ::ng-deep label::after {
+    content: " - Opcional";
+    opacity: 0.5;
+    margin-left: 4px;
+  }
 }

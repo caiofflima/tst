@@ -77,30 +77,20 @@
                     <p>{{ beneficiario?.nome | uppercase }}</p>
                   </div>
 
-                  <div class="form-group col-md-12 noPaddingLeft box-form__group">
-                    <div class="campo-com-label-opcional">
-                      <label class="label-custom">
-                        Telefone <span class="label-opcional">- Opcional</span>
-                      </label>
-                      <asc-input-telefone
-                        [control]="dadosPessoaisForm.get('telefone')"
-                        inputId="telefone"
-                        [label]="''"
-                      ></asc-input-telefone>
-                    </div>
+                  <div class="form-group col-md-12 noPaddingLeft box-form__group label-with-opcional">
+                    <asc-input-telefone
+                      [control]="dadosPessoaisForm.get('telefone')"
+                      inputId="telefone"
+                      label="Telefone"
+                    ></asc-input-telefone>
                   </div>
 
-                  <div class="form-group col-md-12 noPaddingLeft box-form__group">
-                    <div class="campo-com-label-opcional">
-                      <label class="label-custom">
-                        E-mail <span class="label-opcional">- Opcional</span>
-                      </label>
-                      <asc-input-text
-                        [control]="dadosPessoaisForm.get('email')"
-                        inputId="email"
-                        [label]="''"
-                      ></asc-input-text>
-                    </div>
+                  <div class="form-group col-md-12 noPaddingLeft box-form__group label-with-opcional">
+                    <asc-input-text
+                      [control]="dadosPessoaisForm.get('email')"
+                      inputId="email"
+                      label="E-mail"
+                    ></asc-input-text>
                   </div>
                 </div>
                 <div class="box-form__controls">
