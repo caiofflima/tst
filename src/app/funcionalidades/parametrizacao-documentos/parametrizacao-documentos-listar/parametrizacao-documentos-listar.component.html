@@ -14,35 +14,35 @@
     <h1 class="titulo-pagina">Documentos – Resultado</h1>
   </div>
 
-  <section class="row">
+  <section>
     <div *ngIf="!isNaoPossuiFiltros()">
       <div class="p-0 col-md-12">
         <h4>Dados da Pesquisa</h4>
       </div>
 
       <div class="clearfix"></div>
-
-      <div class="p-0 col-xs-2" *ngIf="filtroDocumento.idTipoDocumento">
-        <label class="control-label" for="tipoDocumento">Tipo de documento</label>&nbsp;<br>
-        <p id="tipoDocumento">{{ documento }}</p>
+      <div class="row"> 
+        <div class="p-0 col-md-3" *ngIf="filtroDocumento.idTipoDocumento">
+          <label class="control-label" for="tipoDocumento">Tipo de documento</label>&nbsp;<br>
+          <p id="tipoDocumento">{{ documento }}</p>
+        </div>
+        <div class="p-0 col-md-3" *ngIf="filtroDocumento.nome">
+          <label class="control-label" for="nome">Nome</label>&nbsp;<br>
+          <p id="nome">{{ filtroDocumento.nome }}</p>
+        </div>
+        <div class="p-0 col-md-3" *ngIf="filtroDocumento.ativo">
+          <label class="control-label" for="ativos">Somente ativos</label>&nbsp;<br>
+          <p id="ativos">{{ gerarTextoSimNao(filtroDocumento.ativo) }}</p>
+        </div>
+        <div class="p-0 col-md-3" *ngIf="filtroDocumento.opme">
+          <label class="control-label" for="opme">OPME</label>&nbsp;<br>
+          <p id="opme">{{ gerarTextoSimNao(filtroDocumento.opme) }}</p>
+        </div>
+        <div class="p-0 col-md-3" *ngIf="filtroDocumento.link">
+          <label class="control-label" for="link">Com link informado</label>&nbsp;<br>
+          <p id="link">{{ gerarTextoSimNao(filtroDocumento.link) }}</p>
+        </div>
       </div>
-      <div class="p-0 col-xs-2" *ngIf="filtroDocumento.nome">
-        <label class="control-label" for="nome">Nome</label>&nbsp;<br>
-        <p id="nome">{{ filtroDocumento.nome }}</p>
-      </div>
-      <div class="p-0 col-xs-2" *ngIf="filtroDocumento.ativo">
-        <label class="control-label" for="ativos">Somente ativos</label>&nbsp;<br>
-        <p id="ativos">{{ gerarTextoSimNao(filtroDocumento.ativo) }}</p>
-      </div>
-      <div class="p-0 col-xs-2" *ngIf="filtroDocumento.opme">
-        <label class="control-label" for="opme">OPME</label>&nbsp;<br>
-        <p id="opme">{{ gerarTextoSimNao(filtroDocumento.opme) }}</p>
-      </div>
-      <div class="p-0 col-xs-2" *ngIf="filtroDocumento.link">
-        <label class="control-label" for="link">Com link informado</label>&nbsp;<br>
-        <p id="link">{{ gerarTextoSimNao(filtroDocumento.link) }}</p>
-      </div>
-
       <div class="clearfix"></div>
     </div>
 
@@ -53,7 +53,7 @@
     <div class="clearfix"></div>
 
     <div class="p-0 col-md-12">
-      <div class="col-xs-3 search-inp p-0" style="margin: 5px 0 8px; border-bottom: 0 none">
+      <div class="col-md-3 search-inp p-0" style="margin: 5px 0 8px; border-bottom: 0 none">
         <input #gb type="text" class="form-control filtro-caixa" pInputText size="50"
                placeholder="Digite para filtrar resultado">
         <em class="fas fa-search"></em>

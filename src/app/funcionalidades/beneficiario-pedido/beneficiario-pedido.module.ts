@@ -4,6 +4,7 @@ import { BeneficiarioPedidoRoutingModule } from './beneficiario-pedido.routing.m
 import { BeneficiarioPedidoListarComponent } from './beneficiario-pedido-listar/beneficiario-pedido-listar.component';
 import { BeneficiarioPedidoFormComponent } from './beneficiario-pedido-form/beneficiario-pedido-form.component';
 import { BaseModule } from 'app/shared/base.module';
+import { BeneficiarioPedidoService, PerfilMinimoService } from 'app/shared/services/services';
 
 @NgModule({
     imports: [
@@ -14,6 +15,10 @@ import { BaseModule } from 'app/shared/base.module';
         BeneficiarioPedidoHomeComponent,
         BeneficiarioPedidoListarComponent,
         BeneficiarioPedidoFormComponent
+    ],
+    providers: [
+      BeneficiarioPedidoService,
+      PerfilMinimoService
     ]
 })
 export class BeneficiarioPedidoModule { }

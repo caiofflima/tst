@@ -35,7 +35,7 @@ export const regExp = {
 };
 
 export const control = {
-  numeroMaiorQueZero: function (cntrlField: AbstractControl): void {
+  numeroMaiorQueZero: function (cntrlField: AbstractControl): void { 
     if (cntrlField && cntrlField.value) {
       let nro = somenteNumeros(cntrlField.value);
       if (nro.length == 1 && nro == '0') {
@@ -285,7 +285,7 @@ export const tipoProcesso = {
 };
 
 export function somenteNumeros(value: string): string {
-  return value ? value.replace(/[\D]+/g, '') : '';
+  return value ? String(value).replace(/[\D]+/g, '') : '';
 }
 
 export function somenteAlfaNumericos(value: string): string {

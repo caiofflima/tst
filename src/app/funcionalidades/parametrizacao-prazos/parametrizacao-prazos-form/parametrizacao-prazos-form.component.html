@@ -40,9 +40,9 @@
       <div class="form-row padding-top">
         <div class="col-md-6 mb-15 pl-0">
           <asc-select-tipo-processo
-            [control]="idTipoProcesso"
             id="idTipoProcesso"
             label="Tipo de pedido"
+            [control]="idTipoProcesso"
             [required]="true"
             [disabled]="id != null"
             (onChange)="carregarSituacaoProcesso()"
@@ -53,9 +53,10 @@
             <div [innerHTML]="hintBeneficiarios"></div>
           </p-overlayPanel>
         </div>
+        <asc-listagem *ngIf="id" [lista]="listComboTipoBeneficiarioSelecionados"></asc-listagem> 
         <div class="col-md-6 mb-15">
-          <asc-listagem *ngIf="id" [lista]="listComboTipoBeneficiarioSelecionados"></asc-listagem>  
-          <asc-multiSelect label="Tipo Beneficiário" [options]="listComboTipoBeneficiario" [disabled]="id != null" [required]="true"></asc-multiSelect>
+          <asc-multiSelect label="Tipo Beneficiário" [options]="listComboTipoBeneficiario" [disabled]="id != null" 
+            [required]="true" [control]="tiposBeneficiario"></asc-multiSelect>
           <div>
             <asc-input-error [control]="tiposBeneficiario" [requiredMsg]="requiredMsg"></asc-input-error>
           </div>
@@ -76,8 +77,8 @@
             [control]="prazo"
             [somenteNumeros]="true"
             [maxlength]="3"
-            (keyup)="constantes.control.numeroMaiorQueZero(this.prazo)"
-             (keydown)="constantes.control.numeroMaiorQueZero(this.prazo)"
+            (keyup)="constantes.control.numeroMaiorQueZero(formulario.get('prazo'))"
+             (keydown)="constantes.control.numeroMaiorQueZero(formulario.get('prazo'))"
           ></asc-input-text>
         </div>
         <div class="row col-xs-2">
@@ -111,12 +112,10 @@
         <div class="p-0 col-md-2">
           <asc-checkbox label="Inativo" name="inativo" formControlName="inativo" [valoresTrueOrFalse]="true" (ngModelChange)="onChangeInativo($event)"></asc-checkbox>
         </div>
-        <div class="col-md-2 coluna-interna" *ngIf="inativo.value">
-          <label class="control-label" for="dataInativacao">Data da Inativação</label>
-          <asc-input-date
-            [control]="dataInativacao" inputId="dataInativacao"
-            label="" id="dataInativacao"
-          ></asc-input-date>
+        <div class="col-md-3 coluna-interna" *ngIf="inativo.value">
+          <!--label class="control-label" for="dataInativacao">Data da Inativação</label-->
+          <asc-input-date label="Data da Inativação"
+            [control]="dataInativacao" inputId="dataInativacao" id="dataInativacao"></asc-input-date>
           <div *ngIf="formulario.hasError('inativoMatch')" class="error-form">
             <div>Campo obrigatório não informado.</div>
           </div>
@@ -143,7 +142,7 @@
         </button>
         <button
           class="btn continue-btn" (click)="salvar()"
-          [disabled]="!formulario.valid || !tiposBeneficiario.value"
+          [disabled]="!validarFormulario()"
           id="btnFormSalvar">
           Salvar
         </button>

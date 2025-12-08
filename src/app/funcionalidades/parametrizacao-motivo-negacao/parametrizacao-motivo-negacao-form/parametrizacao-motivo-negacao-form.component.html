@@ -38,11 +38,12 @@
                     <p class="marginBottom" id="codigoUsuarioCadastramento">{{motivoNegacao?.codigoUsuarioCadastramento}}</p>
                 </div>
             </div>
+
             <div class="form-row">
                 <div class="pl-0 col-md-2 mb-15">
                     <asc-dropdown
-                    [items]="icNiveisNegacao"
                     label="Nível de Negação"
+                    [items]="icNiveisNegacao"        
                     [required]="true"
                     (selected)="nivelNegacaoSelecionado($event)"
                     [control]="icNiveisNegacaoCombo"
@@ -51,24 +52,26 @@
                 </div>
                 <div class="pl-0 col-md-7 mb-15" *ngIf="isShowComboSituacao">
                     <asc-dropdown
-                        label="Situação do Pedido" [items]="situacaoPedidos" [required]="true" [control]="idSituacaoPedidoCombo"
+                        label="Situação do Pedido" 
+                        [items]="situacaoPedidos" 
+                        [required]="true" 
+                        [control]="idSituacaoPedidoCombo"
                         id="idSituacaoPedidoCombo"
                         [disabled]="!!id"
                     ></asc-dropdown>
                 </div>
                 <div class="pl-0 col-md-3 mb-15">
-                    <asc-input-text label="Título de Negação" [required]="true" [control]="tituloNegacao"
-                    ></asc-input-text>
+                    <asc-input-text label="Título de Negação" [required]="true" [control]="tituloNegacao"></asc-input-text>
                 </div>
             </div>
             <div class="form-row">
                 <div class="col-md-12 pl-0">
                     <asc-text-area
+                        label="Motivo de Negação"
                         inputId="descricaoHistoricoNegacao"
                         [control]="descricaoHistoricoNegacao"
                         [rows]="5"
                         [cols]="103"
-                        label="Motivo de Negação"
                         [required]="true"
                     ></asc-text-area>
                       <!-- </div> -->

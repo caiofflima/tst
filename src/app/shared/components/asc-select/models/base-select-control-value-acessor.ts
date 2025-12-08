@@ -8,6 +8,7 @@ import {MessageService} from "../../../services/services";
 import {SelectItem} from "primeng/api";
 import {of} from "rxjs";
 import {HttpUtil} from "../../../util/http-util";
+import { Option } from 'sidsc-components/dsc-select';
 
 
 @Directive()
@@ -49,6 +50,7 @@ export abstract class BaseSelectControlValueAcessor<T extends Entity, P, O> impl
 
     innerValue: any;
     showProgressBar = false;
+
     readonly dados$ = this.paramsEmitter.pipe(
         debounceTime(100),
         filter((param: P) => this.filtrarPor(param)),
@@ -143,7 +145,7 @@ export abstract class BaseSelectControlValueAcessor<T extends Entity, P, O> impl
     set parametros(params: P) {
         console.log('this.params', this.params);
         console.log('params', params);
-        
+
         if (JSON.stringify(this.params) !== JSON.stringify(params)) {
             this.params = params;
             setTimeout(() => this.paramsEmitter.next(params), 0);
@@ -178,6 +180,7 @@ export abstract class BaseSelectControlValueAcessor<T extends Entity, P, O> impl
     }
 
     abstract transformarObjetosParaSelectItems(data: T[]): SelectItem[];
+
 
     private adicionarDados(data: T[]) {
         if (data && data.length) {

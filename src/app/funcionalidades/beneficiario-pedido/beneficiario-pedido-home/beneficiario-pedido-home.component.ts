@@ -8,7 +8,8 @@ import {Router} from "@angular/router";
 import {take} from "rxjs/operators";
 import {Location} from "@angular/common";
 import { BeneficiarioPedidoService } from 'app/shared/services/services';
-
+import { Data } from "../../../shared/providers/data";
+ 
 import { CheckboxChangeEvent } from 'primeng/checkbox';
 @Component({
     selector: 'asc-beneficiario-pedido-home',
@@ -35,7 +36,8 @@ export class BeneficiarioPedidoHomeComponent extends BaseComponent implements On
         private readonly router: Router,
         private readonly formBuilder: FormBuilder,
         private readonly comboService: ComboService,
-        private readonly beneficiarioPedidoService: BeneficiarioPedidoService
+        private readonly beneficiarioPedidoService: BeneficiarioPedidoService,
+        private readonly data:Data 
     ) {
         super(messageService);
     }
@@ -44,6 +46,7 @@ export class BeneficiarioPedidoHomeComponent extends BaseComponent implements On
         this.titulo = this.beneficiarioPedidoService.getTitulo()
         this.baseURL = this.beneficiarioPedidoService.getBaseURL()
         this.inicializarCombos();
+        this.carregarDadosArmazenados();
     }
 
     inicializarCombos(): void {
@@ -60,29 +63,93 @@ export class BeneficiarioPedidoHomeComponent extends BaseComponent implements On
         ).subscribe(res => this.listComboSituacaoProcesso = res, err => this.showDangerMsg(err.error));
     }
 
+    private carregarDadosArmazenados():void{
 
+        if (this.isStorageCarregado()) {
+          const filtro = this.data.storage.dadosArmazenados;
+        
+          setTimeout(() => {
+              this.preencherCamposSelecionadosPorCampo(filtro, "tiposProcesso");
+    
+              this.preencherCamposSelecionadosPorCampo(filtro, "tiposBeneficiario");
+
+              this.formulario.get('somenteAtivos').setValue(filtro.somenteAtivos);
+          }, 50);
+        }
+      }
+
+    private preencherCamposSelecionadosPorCampo(filtro:any, nomeCampo:any):void{
+        const lista = filtro[nomeCampo];
+        if(!lista){
+            return;
+        } 
+
+        //const valores = lista.map(v => typeof v === 'object' ? v.value : v);
+        
+        setTimeout(() => {  this.formulario.get(nomeCampo)?.setValue(lista);}, 200);
+    }
     novoPrazo(): void {
         this.router.navigate([`${this.baseURL}/novo`]);
     }
 
     pesquisar(): void {
-        
-        const tiposProcesso = this.formulario.get('tiposProcesso').value ? this.formulario.get('tiposProcesso').value.map(v => v.value) : null;
-        const tiposBeneficiario = this.formulario.get('tiposBeneficiario').value ? this.formulario.get('tiposBeneficiario').value.map(v => v.value) : null;
-        const descricaoTiposProcesso = this.formulario.get('tiposProcesso').value ? this.formulario.get('tiposProcesso').value.map(v => v.label).join(', ') : null;
-        const descricaoTiposBeneficiario = this.formulario.get('tiposBeneficiario').value ? this.formulario.get('tiposBeneficiario').value.map(v => v.label).join(', ') : null;
+        this.limparStorage();
+        let dadosArmazenados = this.prepararDados();
+        this.salvarStorage(dadosArmazenados);
+
         this.router.navigate([`${this.baseURL}/buscar`], {
-            queryParams: {
-                tiposProcesso,
-                tiposBeneficiario,
-                descricaoTiposProcesso,
-                descricaoTiposBeneficiario,
-                somenteAtivos: this.formulario.get('somenteAtivos').value
-            }
+            queryParams: { ...dadosArmazenados }
         }).then();
     }
 
+    prepararDados():any{
+        const tiposProcesso = this.getListaFormulario(this.formulario.get('tiposProcesso').value, this.listComboTipoProcesso, true, false);
+        const tiposBeneficiario = this.getListaFormulario(this.formulario.get('tiposBeneficiario').value, this.listComboTipoBeneficiario, true, false);
+        const descricaoTiposProcesso = this.getListaFormulario(this.formulario.get('tiposProcesso').value, this.listComboTipoProcesso, false, true);
+        const descricaoTiposBeneficiario = this.getListaFormulario(this.formulario.get('tiposBeneficiario').value, this.listComboTipoBeneficiario, false, true);
+     
+        return {
+            tiposProcesso,
+            tiposBeneficiario,
+            descricaoTiposProcesso,
+            descricaoTiposBeneficiario,
+            somenteAtivos: this.formulario.get('somenteAtivos').value
+        };
+    }
+
+    private getListaFormulario(formulario:any, combo: DadoComboDTO[], value:boolean, label:boolean):any{
+        let retorno;
+        if(formulario && formulario.length>0 && combo){
+            const listaSelecionada = new Set(formulario.map(x=>Number(x)));
+            retorno = combo.filter( item =>{ 
+                return listaSelecionada.has(item?.value)
+            });
+            if(label){
+                retorno = retorno.map(v => v.label); 
+            }else if(value){
+                retorno = retorno.map(v => v.value);
+            }
+        }else{
+            retorno = null;
+        };
+    
+        return retorno;
+      }
+
+      private isStorageCarregado(): boolean {
+        return ((this.data.storage) && (this.data.storage.dadosArmazenados));
+      }
+
+      private salvarStorage(dadosArmazenados:any){
+        this.data.storage = { dadosArmazenados } ;
+      }
+    
+      private limparStorage(){
+        this.data.storage = {};
+      }
+
     limparCampos(): void {
+        this.limparStorage();
         this.formulario.reset();
         this.formulario.markAsPristine();
         this.formulario.markAsUntouched();

@@ -209,4 +209,9 @@ export class RelatorioProcedimentosSolicitadosPorProfissionalHomeComponent exten
     public voltar(): void {
         this.location.back();
     }
+
+    validaFormulario(): boolean {
+        return this.formulario.get('dataInicio').value !== null &&
+            this.formulario.get('dataFim').value !== null;
+    }
 }

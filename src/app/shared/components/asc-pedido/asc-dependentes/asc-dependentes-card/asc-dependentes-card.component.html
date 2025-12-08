@@ -257,19 +257,19 @@
                             (dados)="municipios($event)">
                     </asc-select-municipio>
                 </p>
-                
+
             </div>
-            
+
             <div class="ui-g-8 padding">
                 <div *ngIf="!modoEdicao || !permissoes?.analisar">
                     <label class="label-campo-card">E-mail</label>
                     <p>{{dependente?.emailDependente | campoVazioHifen }}</p>
                 </div>
                 <p *ngIf="modoEdicao && permissoes?.analisar">
-                        <asc-input-text 
-                          [control]="emailDependente" 
-                          inputId="emailDependente" 
-                          label="E-mail"> 
+                        <asc-input-text
+                          [control]="emailDependente"
+                          inputId="emailDependente"
+                          label="E-mail">
                         </asc-input-text>
                 </p>
             </div>

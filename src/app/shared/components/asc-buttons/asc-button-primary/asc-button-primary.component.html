@@ -1,14 +1,13 @@
 <dsc-button
-  [disabled]="disabled || showProgress"
+  *ngIf="!showProgress; else loading"
+  [disabled]="disabled"
   (click)="clickButton($event)"
-  [ngStyle]="styleButton"
->
-  <span *ngIf="showProgress">
-    <dsc-progress-spinner></dsc-progress-spinner>
-  </span>
-  <span *ngIf="!showProgress">
-    <em *ngIf="faIcon" [class]="faIcon"></em>
-    {{title}}
-  </span>
-</dsc-button>
+  [label]="showProgress ? '' : title"
+  [iconPrefix]="faIcon"
+/>
+ <ng-template #loading>
+   <button class="btn-loading" disabled >
+     <dsc-progress-spinner [indeterminate]="true" [size]="20" />
+   </button>
+ </ng-template>
 

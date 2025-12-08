@@ -17,80 +17,97 @@
     <h1 class="titulo-pagina">Pedidos de Reembolso</h1>
   </div>
 
-  <section class="row">
-    <form class="row"  [formGroup]="formulario" name="form">
-      <div class="row p-0 col-xs-4">
-        <label class="control-label">Pedido</label>
-        <input
-          type="text"
-          id="processo"
-          name="processo"
-          class="form-control"
-          formControlName="processo"
-          title="Buscar um processo específico."
+  <div class="main-section">
+    <form  [formGroup]="formulario" name="form">
+      <div class="row">
+     
+      <div class="col-md-6">
+        <asc-input-text
+          [control]="formulario.get('processo')"
+          inputId="processo"
+          label="Pedido"
           [maxlength]="8"
+          hint="Buscar um processo específico"
           (keydown)="constantes.control.somenteNumeros(processo)"
-          (keyup)="constantes.control.somenteNumeros(processo)">
+          (keyup)="constantes.control.somenteNumeros(processo)"
+          size="large">
+        </asc-input-text>
       </div>
 
-      <div class="row col-xs-4" >
-        <label class="control-label">Tipo de Pedido</label>
+      <div class="col-md-3">
         <asc-multiSelect
           id="tipoProcesso"
+          label="Tipo de Pedido"
           [options]="listComboTipoProcesso"
           [control]="formulario.get('tipoProcesso')"
-          [selected]="tipoProcessoSelected">
+          [selected]="tipoProcessoSelected"
+          size="large">
         </asc-multiSelect>
       </div>
 
-      <div class="row col-xs-4" >
-        <label class="control-label">UF</label>
+      <div class="col-md-3">
         <asc-multiSelect
           id="ufsProcesso"
+          label="UF"
           [options]="listComboUF"
           [control]="formulario.get('ufsProcesso')"
-          [selected]="ufsProcessoSelected">
+          [selected]="ufsProcessoSelected"
+          size="large">
         </asc-multiSelect>
       </div>
-      
-    <div class="row p-0 col-xs-12"> 
-      <label class="control-label">Período</label> </div>
-      <div class="row p-0 col-xs-2">
-          <asc-input-date
-          inputId="dataInicio"
-          [control]="formulario.get('dataInicio')"
-          label="Início" [required]="true">
-        </asc-input-date>
-      </div>
 
-      <div class="row col-xs-2">
-          <asc-input-date [required]="true"
-          inputId="dataFim"
-          [control]="formulario.get('dataFim')"
-          label="Fim">
-        </asc-input-date>
-      </div>
-
-    <div class="row col-xs-6" >
-      <label class="control-label">Empresa de Auditoria</label>
-      <asc-multiSelect
-        id="empresasAuditoria"
-        [options]="listEmpresas"
-        [control]="formulario.get('empresasAuditoria')"
-        [selected]="empresasAuditoriaSelected">
-      </asc-multiSelect>
     </div>
 
-      <div class="col-xs-12 p-0 barra-botoes">
-        <button type="button" id="btnLimparCampos" class="btn back-btn" (click)="limparCampos()">
-          <span class="fa fa-trash fa-fw"></span>Limpar Pesquisa
-        </button>
-
-        <button type="submit" id="btnPesquisar" class="btn continue-btn" (click)="pesquisar()">
-          <span class="fa fa-search fa-fw"></span>Pesquisar
-        </button>
+    <div class="row">
+      <div class="col-md-6">
+        <label class="control-label">Período</label> 
       </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-3">
+        <asc-input-date
+          [control]="formulario.get('dataInicio')"
+          inputId="dataInicio"
+          label="Início"
+          size="large"
+          [required]="true">
+        </asc-input-date>
+      </div>
+
+      <div class="col-md-3">
+        <asc-input-date
+          [control]="formulario.get('dataFim')"
+          inputId="dataFim"
+          label="Fim"
+          size="large"
+          [required]="true">
+        </asc-input-date>
+      </div>
+
+      <div  class="col-md-6">
+        <asc-multiSelect
+          id="empresasAuditoria"
+          label="Empresa de Auditoria"
+          [options]="listEmpresas"
+          [control]="formulario.get('empresasAuditoria')"
+          [selected]="empresasAuditoriaSelected"
+          size="large">
+        </asc-multiSelect>
+      </div>
+
+    </div>
+
+    <div class="col-xs-12 p-0 barra-botoes">
+      <button type="button" id="btnLimparCampos" class="btn back-btn" (click)="limparCampos()">
+        <span class="fa fa-trash fa-fw"></span>Limpar Pesquisa
+      </button>
+
+      <button type="submit" id="btnPesquisar" class="btn continue-btn" (click)="pesquisar()">
+        <span class="fa fa-search fa-fw"></span>Pesquisar
+      </button>
+    </div>
     </form>
-  </section>
+  </div>
 
 </div>

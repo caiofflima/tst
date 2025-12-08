@@ -26,21 +26,20 @@
 
       <div class="clearfix"></div>
 
-      <div class="row">
-        <div class="p-0 col-xs-3" *ngIf="descricaoTiposProcesso">
+      <div class="row col-md-12">
+        <div class="p-0 col-md-3" *ngIf="descricaoTiposProcesso">
           <label class="control-label" for="tipoProcesso">Tipo Pedido</label>&nbsp;<br>
           <p id="tipoProcesso">{{descricaoTiposProcesso}}</p>
         </div>
-        <div class="p-0 col-xs-3" *ngIf="descricaoTiposBeneficiario">
+        <div class="p-0 col-md-3" *ngIf="descricaoTiposBeneficiario">
           <label class="control-label" for="tipoBeneficiario">Tipo de Beneficiário</label>&nbsp;<br>
           <p id="tipoBeneficiario">{{descricaoTiposBeneficiario}}</p>
         </div>
 
-        <div class="p-0 col-xs-3">
+        <div class="p-0 col-md-3">
           <label class="control-label" for="somenteAtivos">Somente ativos</label>&nbsp;<br>
           <p id="somenteAtivos">{{somenteAtivos ? "Sim" : "Não"}}</p>
         </div>
-
       </div>
 
       <div class="clearfix"></div>

@@ -74,13 +74,14 @@
         [processo]="processo"
       ></asc-beneficiario-card>
 
-      <button
-        (click)="goToTop()"
-        class="btn-to-top"
-        *ngIf="possuiDocumentosCondicionados && recebendoDocumentacaoTitular"
-      >
-        Retornar ao topo
-      </button>
+      <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+          <dsc-button *ngIf="possuiDocumentosCondicionados && recebendoDocumentacaoTitular" (click)="goToTop()" label="Retornar ao topo" variant="secondary-outlined" />
+        </div>
+
+      </div>
     </div>
 
     <div @fadeInOut class="c-card conteudo-spacing">
@@ -95,7 +96,13 @@
         >
           Cancelar processo
         </button>
-        <button (click)="goToTop()" class="btn-to-top">Retornar ao topo</button>
+          <div class="row">
+          <div class="col-md-4"></div>
+          <div class="col-md-4"></div>
+          <div class="col-md-4">
+            <dsc-button (click)="goToTop()" label="Retornar ao topo" variant="secondary-outlined" />
+          </div>
+      </div>
       </div>
     </div>
 
@@ -127,16 +134,36 @@
         class="footer-btns-card"
         style="padding-top: 1em !important"
       >
-        <button
+        <div class="row" style="margin-top: 2px">
+        <div class="col-md-4"></div>
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+          <dsc-button
+            class="pull-right"
+            style="margin-right: -21px"
+            (click)="showDocumentoComplementar(true)"
+            @fadeInOut
+            label="Adicionar documento complementar"
+            variant="secondary"
+            iconPrefix="add" />
+        </div>
+      </div>
+        <!-- <button
           (click)="showDocumentoComplementar(true)"
           @fadeInOut
           class="btn-small btn-card-novo"
         >
           <span class="fa fa-plus fa-fw"></span
           ><span> Adicionar documento complementar</span>
-        </button>
+        </button> -->
       </div>
-      <button (click)="goToTop()" class="btn-to-top">Retornar ao topo</button>
+      <div class="row" style="margin-top: 2px">
+        <div class="col-md-4"></div>
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+          <dsc-button (click)="goToTop()" label="Retornar ao topo" variant="secondary-outlined" />
+        </div>
+      </div>
     </div>
 
     <div
@@ -155,7 +182,14 @@
         [possuiDocumentosObrigatorios]="possuiDocumentosObrigatorios"
         [processo]="processo"
       ></asc-documento-complementar-card>
-      <button (click)="goToTop()" class="btn-to-top">Retornar ao topo</button>
+      <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+          <dsc-button (click)="goToTop()" label="Retornar ao topo" variant="secondary-outlined" />
+        </div>
+
+      </div>
     </div>
 
     <div
@@ -171,7 +205,14 @@
         [permissoes]="permissoes"
         [processo]="processo"
       ></asc-documentos-condicionados>
-      <button (click)="goToTop()" class="btn-to-top">Retornar ao topo</button>
+      <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+          <dsc-button (click)="goToTop()" label="Retornar ao topo" variant="secondary-outlined" />
+        </div>
+
+      </div>
     </div>
 
     <div
@@ -185,7 +226,14 @@
         (onSituacoesInvalidas)="onSituacaoInvalida()"
         [processo]="processo"
       ></asc-mudanca-situacao-card-pl>
-      <button (click)="goToTop()" class="btn-to-top">Retornar ao topo</button>
+      <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+          <dsc-button (click)="goToTop()" label="Retornar ao topo" variant="secondary-outlined" />
+        </div>
+
+      </div>
     </div>
   </div>
 </asc-acompanhamento-processo-base>

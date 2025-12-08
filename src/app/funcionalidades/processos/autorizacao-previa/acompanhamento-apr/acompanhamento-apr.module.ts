@@ -9,6 +9,7 @@ import { AscPedidoModule } from "../../../../shared/components/asc-pedido/asc-pe
 import { PlaygroundModule } from '../../../../shared/playground/playground.module';
 import { AscCardModule } from "../../../../shared/components/asc-card/asc-card.module";
 import {AscDocumentosModule} from "../../../../../app/shared/components/asc-pedido/asc-documentos/asc-documentos.module";
+import { ArquivoEnvioDadoService } from 'app/shared/services/services';
 
 @NgModule({
   imports: [
@@ -22,7 +23,10 @@ import {AscDocumentosModule} from "../../../../../app/shared/components/asc-pedi
     AscDocumentosModule
   ],
   declarations: [AcompanhamentoAprComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  providers: [
+    ArquivoEnvioDadoService
+  ]
 })
 export class AcompanhamentoAprModule {
 }

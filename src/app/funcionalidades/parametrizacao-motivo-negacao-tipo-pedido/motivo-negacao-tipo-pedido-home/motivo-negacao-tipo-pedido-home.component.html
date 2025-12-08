@@ -46,7 +46,7 @@
                     [items]="icNiveisNegacao"
                     label="Nível de Negação"
                     [control]="icNiveisNegacaoCombo"
-                    (selected)="buscarPorNivelNegacao($event)"
+                    (selected)="buscarPorNivelNegacao($event.value)"
                     name="icNivelNegacao"
                     ></asc-dropdown>
               </div>
@@ -61,10 +61,8 @@
               </div>    
         </div>
 
-        <div class="form-row">
-            <div class="col-md-3 p-0">
+        <div class="form-row col-md-3 p-0">
               <asc-checkbox label="Somente ativos" name="ativos" [(ngModel)]="somenteAtivos" [valoresTrueOrFalse]="true"></asc-checkbox>
-            </div>
         </div>
 
         <div class="col-xs-12 barra-botoes">

@@ -32,7 +32,7 @@
         <label class="control-label" for="documento">Motivo de Negação</label>&nbsp;<br>
         <p id="documento">{{ listaMotivoNegacao }}</p>
       </div>
-      <div class="p-0 col-xs-3" *ngIf="listaTipoProcesso">
+      <div class="p-0 col-xs-2" *ngIf="listaTipoProcesso">
         <label class="control-label" for="tipoProcesso">Tipo Pedido</label>&nbsp;<br>
         <p id="tipoProcesso">{{ listaTipoProcesso }}</p>
       </div>
@@ -40,9 +40,13 @@
         <label class="control-label" for="tipoBeneficiario">Tipo de Beneficiário</label>&nbsp;<br>
         <p id="tipoBeneficiario">{{ listaTipoBeneficiario }}</p>
       </div>
-      <div class="p-0 col-xs-3" >
+      <div class="p-0 col-xs-2" >
         <label class="control-label" for="tipoBeneficiario">Somente Ativos</label>&nbsp;<br>
         <p id="tipoBeneficiario">{{ somenteAtivos ? 'SIM' : 'NÃO' }}</p>
+      </div>
+      <div class="p-0 col-xs-2" *ngIf="listaIcNivelNegacao">
+        <label class="control-label" for="icNivelNegacao">Nível de Negação</label>&nbsp;<br>
+        <p id="icNivelNegacao">{{listaIcNivelNegacao === 'S' ? 'PEDIDO' : 'PROCEDIMENTO'}}</p>
       </div>
 
     </div>

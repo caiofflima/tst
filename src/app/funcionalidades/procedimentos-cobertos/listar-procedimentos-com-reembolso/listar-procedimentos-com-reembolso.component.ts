@@ -6,6 +6,7 @@ import { BundleUtil } from 'app/arquitetura/shared/util/bundle-util';
 import { ProcedimentoReembolso } from 'app/shared/models/comum/ProcedimentoReembolso';
 import { Procedimento } from 'app/shared/models/entidades';
 import { MessageService, ProcedimentoService } from 'app/shared/services/services';
+import { DscTableColumn, DscTableColumnBuilder } from 'sidsc-components/dsc-table';
 
 @Component({
   selector: 'asc-listar-procedimentos-com-reembolso',
@@ -17,11 +18,21 @@ import { MessageService, ProcedimentoService } from 'app/shared/services/service
 })
 export class ListarProcedimentosComReembolsoComponent implements OnInit {
   listaProcedimentos: ProcedimentoReembolso[];
+  procedimentos: ProcedimentoReembolso[];
   procedimento: Procedimento;
   loading = false;
   rowCounter: number = 10;
   tituloPagina = 'Tabela Reembolso'
   registrosSelecionados: any[] = [];
+  private _filtro: string = ''
+
+  get filtro(): string {
+    return this._filtro;
+  }
+  set filtro(value: string) {
+    this._filtro = value;
+    this.filtrarLista(value)
+  }
 
   constructor(
     private readonly procedimentoService: ProcedimentoService,
@@ -29,7 +40,7 @@ export class ListarProcedimentosComReembolsoComponent implements OnInit {
     private messageService: MessageService,
     public duvidasService: DuvidasService,
     private titleService: Title
-  ) { 
+  ) {
 
   }
 
@@ -37,20 +48,24 @@ export class ListarProcedimentosComReembolsoComponent implements OnInit {
     this.carregarProcedimentosReembolso();
     const title = `${this.titleService.getTitle()} - Tabela Reembolso`
     this.titleService.setTitle(title)
-    
+
   }
 
   carregarProcedimentosReembolso() {
     this.loading = true;
     this.procedimentoService.listarProcedimentosComReembolso()
-    .subscribe((procedimentos : ProcedimentoReembolso[]) => {
-    this.listaProcedimentos = procedimentos
-    .filter((prod, i, arr) => arr.findIndex(t =>t.estruturaNumerica === prod.estruturaNumerica)===i);   
-    this.loading = false;
-  }, error => {
-      this.loading = false;
-      this.messageService.addMsgDanger(error.message);
-  })
+    .subscribe({
+      next: (procedimentos : ProcedimentoReembolso[]) => {
+        this.listaProcedimentos = procedimentos
+                .filter((prod, i, arr) => arr.findIndex(t =>t.estruturaNumerica === prod.estruturaNumerica)===i);
+        this.procedimentos = this.listaProcedimentos;
+        this.loading = false;
+      }
+      , error: error => {
+        this.loading = false;
+        this.messageService.addMsgDanger(error.message);
+      }
+    })
   }
 
   voltar(): void {
@@ -75,8 +90,8 @@ export class ListarProcedimentosComReembolsoComponent implements OnInit {
 
   exportToCSV(data: any[], fileName: string, columnNames: string[], ordemColumnNames: string[]){
 
-    const formatData = data.map(dt => ({...dt, 
-      descricao: String(dt.descricao).replace(';','').replace('.;',''), 
+    const formatData = data.map(dt => ({...dt,
+      descricao: String(dt.descricao).replace(';','').replace('.;',''),
       vlrReembolso: dt.vlrReembolso.toLocaleString('pt-br', {minimumFractionDigits: 2}),
       permitidoDepRestrito: this.getSimNao(dt.permitidoDepRestrito),
       preveInstrumentador: this.getSimNao(dt.preveInstrumentador),
@@ -120,6 +135,25 @@ export class ListarProcedimentosComReembolsoComponent implements OnInit {
     }
     return value
   }
+
+
+
+  filtrarLista(filtro: string) {
+
+    const filterValue = filtro
+    if( filterValue != ''){
+
+      this.procedimentos = this.listaProcedimentos.filter(procedimento =>
+        String(procedimento.estruturaNumerica).toLowerCase().includes(filterValue) ||
+        procedimento.descricao.toLowerCase().includes(filterValue)
+      );
+
+    }else{
+      this.procedimentos = this.listaProcedimentos;
+    }
+
+  }
+
 
 
 

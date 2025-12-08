@@ -162,7 +162,7 @@ label.disabled, label.disabled:hover {
   background-color: #E5E5E5;
   cursor: not-allowed;
 }
-
+$primary: #005ca9;
 div.custom-card-footer {
   padding-top: 10px;
   display: flex;
@@ -173,9 +173,9 @@ div.custom-card-footer {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #41A495;
+    background-color: $primary;
     border-radius: 3px;
-    border: 1px solid #36877B;
+    border: 1px solid $primary;
     padding: 8px 12px;
     cursor: pointer;
     transition: 250ms ease-in-out;

@@ -40,9 +40,9 @@
       <div class="form-row padding-top">
         <div class="col-md-6 mb-15 pl-0">
           <asc-select-tipo-processo
+            label="Tipo de pedido"
             [control]="idTipoProcesso"
             id="idTipoProcesso"
-            label="Tipo de pedido"
             [required]="true"
             [disabled]="beneficiarioPedidoParam != null"
             (dadoSelecionado)="onChangeTipoProcesso($event)"
@@ -50,15 +50,16 @@
         </div>
        
         <div class="col-md-6 mb-15">
-          <label class="control-label" [class.obrigatorio]="!beneficiarioPedidoParam" for="idTipoBeneficiario">Tipo Beneficiário</label>
+          <!--label class="control-label" [class.obrigatorio]="!beneficiarioPedidoParam" for="idTipoBeneficiario">Tipo Beneficiário</label-->
           <div *ngIf="beneficiarioPedidoParam">
-              <input type="text" class="form-control" formControlName="nomeBeneficario">
+              <asc-input-text label="Tipo Beneficiário"  [control]="nomeTipoBeneficiario"></asc-input-text>
           </div>
           <div *ngIf="!beneficiarioPedidoParam">
             
             <asc-multiSelect
+              label="Tipo Beneficiário"
               id="idTipoBeneficiario"
-              [required]="!beneficiarioPedidoParam"
+              [required]="true"
               [options]="listComboTipoBeneficiario"
               [control]="getCampoTiposBeneficiario"
               [loading]="loadinTipoBeneficiario"
@@ -81,12 +82,13 @@
             </div>
 
             <ng-template #campoDataInativacao>
-              <div class="col-md-3" >
-                <label class="control-label" for="dataInativacao">Data da Inativação</label>
+              <div class="col-md-4" >
+                <!--label class="control-label" for="dataInativacao">Data da Inativação</label-->
                 <asc-input-date
+                  label="Data da Inativação"
                   [control]="dataInativacao" 
                   inputId="dataInativacao"
-                  label="" id="dataInativacao"
+                  id="dataInativacao"
                 ></asc-input-date>
                 <div *ngIf="formulario.hasError('inativoMatch')" class="error-form">
                   <div>Campo obrigatório não informado.</div>
@@ -96,13 +98,14 @@
             </ng-template>
 
             <div class="col-md-6 pr-0">
-              <label class="control-label" for="tiposBeneficiarios">Tipos de Beneficiários Associados {{ beneficiarioPedidoParam ? 'Ativos' : '' }}</label>
+              <!--label class="control-label" for="tiposBeneficiarios">Tipos de Beneficiários Associados {{ beneficiarioPedidoParam ? 'Ativos' : '' }}</label-->
               <div *ngIf="beneficiarioPedidoParam && listComboTipoBeneficiario">
                 <asc-dropdown
+                  label="Tipos de Beneficiários Associados {{ beneficiarioPedidoParam ? 'Ativos' : '' }}"
                   [items]="listComboTipoBeneficiario" 
                   [control]="tiposBeneficiario"
                   id="tiposBeneficiarios"
-                  [placeholder]="listComboTipoBeneficiario.length + ' selecionados'">
+                  [placeholder]="(formulario.get('tiposBeneficiario').value?formulario.get('tiposBeneficiario').value.length:0) + ' selecionados'">
                 </asc-dropdown>
               </div>
             </div>
@@ -114,7 +117,7 @@
 
       <ng-template #perfil>
         <div class="col-md-6 mb-15  pl-0">
-          <asc-multiSelect [options]="listComboPerfil" [control]="formulario.controls['perfis']"></asc-multiSelect>
+          <asc-multiSelect label="Perfis" [options]="listComboPerfil" [control]="formulario.controls['perfis']"></asc-multiSelect>
         </div>
       </ng-template>
 

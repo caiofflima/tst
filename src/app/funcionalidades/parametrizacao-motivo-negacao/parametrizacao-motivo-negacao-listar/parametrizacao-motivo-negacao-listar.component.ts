@@ -79,8 +79,6 @@ export class ParametrizacaoMotivoNegacaoListarComponent extends BaseComponent im
         });
     }
 
-
-
     isNaoPossuiFiltros(): boolean {
         const filtros = [
             this.filtroMotivoNegacao.idSituacaoPedido,

@@ -31,6 +31,7 @@ import { ProcedimentosCobertosParamComponent } from "./param/procedimentos-cober
 import { ProcedimentosCobertosResultComponent } from "./result/procedimentos-cobertos-result.component";
 import { ProcedimentosCobertosRoutingModule } from "./procedimentos-cobertos.routing.module";
 import { ListarProcedimentosComReembolsoComponent } from "./listar-procedimentos-com-reembolso/listar-procedimentos-com-reembolso.component";
+import { DscCaixaModule } from "app/shared/dsc-caixa/dsc-caixa.module";
 
 @NgModule({
     imports: [
@@ -63,7 +64,8 @@ import { ListarProcedimentosComReembolsoComponent } from "./listar-procedimentos
         AscMultiSelectModule,
         AscButtonsModule,
         AscFileModule,
-        AscSelectModule
+        AscSelectModule,
+        DscCaixaModule
     ],
     declarations: [
         ProcedimentosCobertosParamComponent,

@@ -48,7 +48,6 @@ export class MotivoNegacaoTipoPedidoListarComponent extends BaseComponent{
     this.listaTipoBeneficiario = this.activatedRoute.snapshot.queryParams['listaTipoBeneficiario'] || 'Todas'
     this.somenteAtivos = this.activatedRoute.snapshot.queryParams['somenteAtivos'] == 'true'
 
-
     this.baseURL = this.service.getBaseURL()
     this.baseTitulo = this.service.getTitulo()
 

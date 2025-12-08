@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { AscDocumentosModule } from "./asc-documentos/asc-documentos.module";
 import { AscDocumentoCardComponent } from "./asc-documentos/documento-card/asc-documento-card.component";
 import { CdkStepperModule } from "@angular/cdk/stepper";
-import { ReactiveFormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { ComponentModule } from "../component.module";
 import { InputMaskModule } from "primeng/inputmask";
 import { RouterModule } from "@angular/router";
@@ -34,6 +34,7 @@ import {DscCaixaModule} from 'app/shared/dsc-caixa/dsc-caixa.module';
         CommonModule,
         AscDocumentosModule,
         CdkStepperModule,
+        FormsModule,
         ReactiveFormsModule,
         ComponentModule,
         InputMaskModule,
@@ -45,8 +46,8 @@ import {DscCaixaModule} from 'app/shared/dsc-caixa/dsc-caixa.module';
         PipeModule,
         DscCaixaModule
     ],
-  declarations: [AscModalOcorrenciaComponent, 
-                 AscDependentesCardComponent, 
+  declarations: [AscModalOcorrenciaComponent,
+                 AscDependentesCardComponent,
                  AscDadosContatoCardComponent,
                  AscDadosEnderecoCardComponent
                 ],

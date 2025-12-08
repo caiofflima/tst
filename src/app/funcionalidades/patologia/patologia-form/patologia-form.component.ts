@@ -29,9 +29,6 @@ export class PatologiaFormComponent extends BaseComponent {
     evento = this.formBuilder.control(null);
 
     sexos: SelectItem[] = [{
-        label: 'Selecione uma opção',
-        value: null
-    }, {
         label: 'Masculino',
         value: 'M'
     }, {

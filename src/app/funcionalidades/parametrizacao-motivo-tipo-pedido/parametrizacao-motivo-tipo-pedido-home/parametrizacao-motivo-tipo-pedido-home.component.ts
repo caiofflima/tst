@@ -10,7 +10,8 @@ import {ComboService} from "../../../shared/services/comum/combo.service";
 import {MessageService} from "../../../shared/components/messages/message.service";
 import {TipoDeficienciaService} from '../../../shared/services/comum/tipo-deficiencia.service';
 import {MotivoSolicitacaoService} from "../../../shared/services/comum/motivo-solicitacao.service";
-
+import { Data } from "../../../shared/providers/data";
+ 
 @Component({
     selector: 'asc-parametrizacao-motivo-tipo-pedido-home',
     templateUrl: './parametrizacao-motivo-tipo-pedido-home.component.html',
@@ -38,7 +39,6 @@ export class ParametrizacaoMotivoTipoPedidoHomeComponent extends BaseComponent i
         idTipoDeficiencia: [null]
     });
 
- 
     constructor(
         private readonly router: Router,
         private readonly location: Location,
@@ -46,7 +46,8 @@ export class ParametrizacaoMotivoTipoPedidoHomeComponent extends BaseComponent i
         private readonly formBuilder: FormBuilder,
         private readonly comboService: ComboService,
         private readonly tipoDeficienciaService: TipoDeficienciaService,
-        private readonly motivoSolicitacaoService: MotivoSolicitacaoService
+        private readonly motivoSolicitacaoService: MotivoSolicitacaoService,
+        private readonly data:Data
     ) {
         super(messageService);
     }
@@ -55,7 +56,40 @@ export class ParametrizacaoMotivoTipoPedidoHomeComponent extends BaseComponent i
         this.getSexo();
         this.inicializarCombos();
         this.getTipoDeficiencia();
+        this.carregarDados();
     }
+
+    private carregarDados():void{
+
+        if (this.isStorageCarregado()) {
+          const filtro = this.data.storage.dadosArmazenadosParamMotivo;
+          setTimeout(() => {
+            this.formulario.patchValue({
+                somenteAtivos: filtro.somenteAtivos
+            });
+            this.preencherCamposSelecionadosPorCampo(filtro, "listaMotivoSolicitacao", "idMotivoSolicitacao");
+            this.preencherCamposSelecionadosPorCampo(filtro, "sexos", "sexo");
+            this.preencherCamposSelecionadosPorCampo(filtro, "tipoDeficiencias", "idTipoDeficiencia");
+            this.preencherCamposSelecionadosPorCampo(filtro, "listComboTipoBeneficiario", "tiposBeneficiario");
+            this.preencherCamposSelecionadosPorCampo(filtro, "listComboTipoProcesso", "tiposProcesso");
+
+          }, 50);
+        }
+      }
+
+    private isStorageCarregado(): boolean {
+        return ((this.data.storage) && (this.data.storage.dadosArmazenadosParamMotivo));
+    }
+
+    private preencherCamposSelecionadosPorCampo(filtro:any, nomeCampo:any, nomeCampoFormulario:any):void{
+        const lista = filtro[nomeCampoFormulario];
+        if(!lista){
+            return;
+        }
+        //const valores = lista.map(v => typeof v === 'object' ? v.value : v);
+        
+        setTimeout(() => {  this.formulario.get(nomeCampoFormulario)?.setValue(lista);}, 200);
+        }
 
     public inicializarCombos(): void {
         this.carregarBeneficiarios();
@@ -115,37 +149,72 @@ export class ParametrizacaoMotivoTipoPedidoHomeComponent extends BaseComponent i
     }
 
     public pesquisar(): void {
-        const idMotivoSolicitacao = this.formulario.get('idMotivoSolicitacao').value ? this.formulario.get('idMotivoSolicitacao').value.map(v => v.value) : null;
-        const sexo = this.formulario.get('sexo').value ? this.formulario.get('sexo').value.map(v => v.value) : null;
-        const idTipoDeficiencia = this.formulario.get('idTipoDeficiencia').value ? this.formulario.get('idTipoDeficiencia').value.map(v => v.value) : null;
-        const tiposBeneficiario = this.formulario.get('tiposBeneficiario').value ? this.formulario.get('tiposBeneficiario').value.map(v => v.value) : null;
-        const tiposProcesso = this.formulario.get('tiposProcesso').value ? this.formulario.get('tiposProcesso').value.map(v => v.value) : null;
-
-        const descricaoSexo = this.formulario.get('sexo').value ? this.formulario.get('sexo').value.map(v => v.label).join(', ') : null;
-        const descricaoMotivoSolicitacao = this.formulario.get('idMotivoSolicitacao').value ? this.formulario.get('idMotivoSolicitacao').value.map(v => v.label).join(', ') : null;
-        const descricaoTipoDeficiencia = this.formulario.get('idTipoDeficiencia').value ? this.formulario.get('idTipoDeficiencia').value.map(v => v.label).join(', ') : null;
-        const descricaoTiposProcesso = this.formulario.get('tiposProcesso').value ? this.formulario.get('tiposProcesso').value.map(v => v.label).join(', ') : null;
-        const descricaoTiposBeneficiario = this.formulario.get('tiposBeneficiario').value ? this.formulario.get('tiposBeneficiario').value.map(v => v.label).join(', ') : null;
-
-
+        this.limparStorage();
+        let dadosArmazenadosParamMotivo = this.prepararDados();
+        this.salvarStorage(dadosArmazenadosParamMotivo);
+console.log(dadosArmazenadosParamMotivo);
         this.router.navigate(['/manutencao/parametros/motivo-tipo-pedido/buscar'], {
-            queryParams: {
-                tiposProcesso,
-                idMotivoSolicitacao,
-                tiposBeneficiario,
-                sexo,
-                idTipoDeficiencia,
-                somenteAtivos: this.formulario.get('somenteAtivos').value,
-                descricaoSexo,
-                descricaoMotivoSolicitacao,
-                descricaoTipoDeficiencia,
-                descricaoTiposProcesso,
-                descricaoTiposBeneficiario
-            }
+            queryParams: { ...dadosArmazenadosParamMotivo }
         }).then();
     }
 
+    prepararDados():any{
+        const idMotivoSolicitacao = this.getListaFormulario(this.formulario.get('idMotivoSolicitacao').value, this.listaMotivoSolicitacao, true, false);
+        const sexo = this.getListaFormulario(this.formulario.get('sexo').value, this.sexos, true, false);
+        const idTipoDeficiencia = this.getListaFormulario(this.formulario.get('idTipoDeficiencia').value, this.tipoDeficiencias, true, false);
+        const tiposBeneficiario = this.getListaFormulario(this.formulario.get('tiposBeneficiario').value, this.listComboTipoBeneficiario, true, false);
+        const tiposProcesso = this.getListaFormulario(this.formulario.get('tiposProcesso').value, this.listComboTipoProcesso, true, false);
+
+        const descricaoMotivoSolicitacao = this.getListaFormulario(this.formulario.get('idMotivoSolicitacao').value, this.listaMotivoSolicitacao, false, true);
+        const descricaoSexo = this.getListaFormulario(this.formulario.get('sexo').value, this.sexos, false, true);
+        const descricaoTipoDeficiencia = this.getListaFormulario(this.formulario.get('idTipoDeficiencia').value, this.tipoDeficiencias, false, true);
+        const descricaoTiposBeneficiario = this.getListaFormulario(this.formulario.get('tiposBeneficiario').value, this.listComboTipoBeneficiario, false, true);
+        const descricaoTiposProcesso = this.getListaFormulario(this.formulario.get('tiposProcesso').value, this.listComboTipoProcesso, false, true);
+
+        return {
+            tiposProcesso,
+            idMotivoSolicitacao,
+            tiposBeneficiario,
+            sexo,
+            idTipoDeficiencia,
+            somenteAtivos: this.formulario.get('somenteAtivos').value,
+            descricaoSexo,
+            descricaoMotivoSolicitacao,
+            descricaoTipoDeficiencia,
+            descricaoTiposProcesso,
+            descricaoTiposBeneficiario
+        }
+    }
+
+    private getListaFormulario(formulario:any, combo: any[], value:boolean, label:boolean):any{
+        let retorno;
+        if(formulario && formulario.length>0 && combo){
+            const listaSelecionada = new Set(formulario.map(x=>isNaN(Number(x))?String(x):Number(x)));
+            retorno = combo.filter( item =>{ 
+                return listaSelecionada.has(item?.value)
+            });
+            if(label){
+                retorno = retorno.map(v => v.label); 
+            }else if(value){
+                retorno = retorno.map(v => v.value);
+            }
+        }else{
+            retorno = null;
+        };
+    
+        return retorno;
+      }
+
+    salvarStorage(dadosArmazenadosParamMotivo:any):void{
+        this.data.storage = { dadosArmazenadosParamMotivo };
+    }
+
+    limparStorage(){
+        this.data.storage = {};
+    }
+
     public limparCampos(): void {
+        this.limparStorage();
         this.formulario.reset();
         this.formulario.markAsPristine();
         this.formulario.markAsUntouched();

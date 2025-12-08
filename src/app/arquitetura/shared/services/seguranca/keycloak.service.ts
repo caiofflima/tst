@@ -7,10 +7,10 @@ export class KeycloakService {
     static accessTokenLifespan: number = 5;
 
     static init(aimRealm: string, idCliente: string, urlServidorAutorizacao: string): Promise<any> {
-        console.log("🚀 ~ KeycloakService ~ init ~ urlServidorAutorizacao:", urlServidorAutorizacao)
-        console.log("🚀 ~ KeycloakService ~ init ~ idCliente:", idCliente)
-        console.log("🚀 ~ KeycloakService ~ init ~ aimRealm:", aimRealm)
-        console.log("🚀 ~ KeycloakService ~ init ~ aimRealm:", aimRealm)
+        //console.log("🚀 ~ KeycloakService ~ init ~ urlServidorAutorizacao:", urlServidorAutorizacao)
+        //console.log("🚀 ~ KeycloakService ~ init ~ idCliente:", idCliente)
+        //console.log("🚀 ~ KeycloakService ~ init ~ aimRealm:", aimRealm)
+        //console.log("🚀 ~ KeycloakService ~ init ~ aimRealm:", aimRealm)
         const keycloakAuth: any = new Keycloak({
             url: urlServidorAutorizacao,
             realm: aimRealm,
@@ -19,7 +19,7 @@ export class KeycloakService {
 
         KeycloakService.auth.loggedIn = false;
 
-        console.log("🚀 ~ KeycloakService ~ init ~ keycloakAuth:", keycloakAuth)
+        //console.log("🚀 ~ KeycloakService ~ init ~ keycloakAuth:", keycloakAuth)
         return new Promise((resolve, reject) => {
             keycloakAuth.init({
                 onLoad: 'login-required',

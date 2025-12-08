@@ -96,7 +96,7 @@ export class ListaProcessosComponent extends BaseComponent {
     this.isLoading = true;
     Loading.start();
   }
-  
+
   public filtrar(): void {
     const listaFiltrada = this.dados.filter(this.filtrarLista);
 
@@ -199,6 +199,8 @@ export class ListaProcessosComponent extends BaseComponent {
       row.idPedido,
       row.idTipoProcesso
     );
+    console.log('detalharProcesso url:', url);
+
     await this.router.navigateByUrl(url);
   }
 
@@ -276,7 +278,7 @@ export class ListaProcessosComponent extends BaseComponent {
         () => {
           this.isLoading = false;
         }
-      ); 
+      );
     }
   }
 

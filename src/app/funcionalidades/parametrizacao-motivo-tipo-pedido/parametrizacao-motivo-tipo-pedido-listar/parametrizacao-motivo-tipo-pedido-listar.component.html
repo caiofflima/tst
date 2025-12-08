@@ -47,9 +47,9 @@
         <label class="control-label" for="sexo">Sexo</label>&nbsp;<br>
         <p id="sexo">{{ descricaoSexo }}</p>
       </div>
-      <div class="p-0 col-xs-3">
+      <div class="p-0 col-xs-3" *ngIf="filtro.somenteAtivos"> 
         <label class="control-label" for="somenteAtivos">Somente Ativos</label>&nbsp;<br>
-        <p id="somenteAtivos">{{ filtro.somenteAtivos ? "Sim" : "Não" }}</p>
+        <p id="somenteAtivos">{{ filtro.somenteAtivos===true||filtro.somenteAtivos==='true'? "Sim" : "Não" }}</p>
       </div>
     </div>
 

@@ -21,10 +21,7 @@ export class VincMedPatologiaHomeComponent extends BaseComponent implements OnIn
 
     timeout: any;
     ativos: boolean;
-    patologias: Option[] = [{
-        value: null,
-        label: this.bundle('MHSPH')
-    }];
+    patologias: Option[] = [];
     patologiaControl = new FormControl();
     medicamentos: Option[] = [];
     medicamento = new FormControl();
@@ -133,10 +130,7 @@ export class VincMedPatologiaHomeComponent extends BaseComponent implements OnIn
         this.patologiaService.consultarTodos().pipe(
             take<Patologia[]>(1)
         ).subscribe(res =>
-            this.patologias = [{
-                value: null,
-                label: this.bundle('MHSPH')
-            }, ...res.map(p => ({
+            this.patologias = [ ...res.map(p => ({
                 label: p.codigo + ' - ' + p.nome,
                 value: p.id
             }))]

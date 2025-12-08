@@ -28,10 +28,7 @@ export class PesquisarProcessoReembolsoFormComponent extends BaseComponent {
     nome = this.formBuilder.control(null, [Validators.required, Validators.maxLength(150)]);
     evento = this.formBuilder.control(null);
 
-    sexos: SelectItem[] = [{
-        label: 'Selecione uma opção',
-        value: null
-    }, {
+    sexos: SelectItem[] = [ {
         label: 'Masculino',
         value: 'M'
     }, {

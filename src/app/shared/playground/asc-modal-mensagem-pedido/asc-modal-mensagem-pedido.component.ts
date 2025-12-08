@@ -1,4 +1,4 @@
-import {Component, Input, ViewChild} from '@angular/core';
+import {Component, Input, TemplateRef, ViewChild} from '@angular/core';
 import {ModalExibicao} from "../../components/asc-modal/modal-exibicao";
 import {MensagemPedidoDTO} from "../../models/dto/mensagem-pedido";
 import {InfoExibicao} from "../../components/asc-modal/models/info-exibicao";
@@ -11,6 +11,8 @@ import {AscModalNavegacaoComponent} from "../../components/asc-modal/asc-modal-n
 import {AscModalComponent} from "../../components/asc-modal/asc-modal/asc-modal.component";
 import {ActivatedRoute} from "@angular/router";
 import { SituacaoProcesso } from '../../../../app/shared/models/entidades';
+import { MatDialogRef } from '@angular/material/dialog';
+import { DscDialogService } from 'sidsc-components/dsc-dialog';
 
 @Component({
     selector: 'asc-modal-mensagem-pedido',
@@ -19,27 +21,46 @@ import { SituacaoProcesso } from '../../../../app/shared/models/entidades';
 })
 export class AscModalMensagemPedidoComponent extends ModalExibicao<MensagemPedidoDTO> {
 
-    @ViewChild("modalMensagem")
-    modalMensagem: AscModalNavegacaoComponent;
 
-    @Input()
-    customStyleProperties: any;
+    @Input() customStyleProperties: any;
     mensagem: any;
     emailEncaminhar: string = '';
 
-    @Input()
-    mostrarBotoes:boolean=true;
+    @Input() mostrarBotoes:boolean=true;
 
     isTipoOcorrenciaObservacao: boolean = false;
 
     emailsCopia = null;
 
+    @ViewChild('modalMensagem', { static: true }) private modalMensagem!: TemplateRef<any>;
+    @ViewChild('modalMensagemEmail', { static: true }) private modalMensagemEmail!: TemplateRef<any>;
+
+    return: any;
+
+    dialogRef2?: MatDialogRef<any>;
+    dialogMsgEmail?: MatDialogRef<any>;
+
     constructor(
         private readonly service: MensagemPedidoService,
         protected override readonly messageService: MessageService,
-        private readonly activatedRoute: ActivatedRoute
+        private readonly activatedRoute: ActivatedRoute,
+        private _dialogService: DscDialogService,
     ) {
         super(messageService);
+        this.infoExibicao$.subscribe(() => {
+          this.dialogRef2 = this._dialogService.confirm({
+            data: {
+              title: {
+                text: 'Mensagens Enviadas',
+                showCloseButton: true,
+                highlightVariant: true
+              },
+              template: this.modalMensagem,
+            }
+          });
+        });
+
+
     }
 
     protected configurarExibicao(item: MensagemPedidoDTO): void {
@@ -67,7 +88,7 @@ export class AscModalMensagemPedidoComponent extends ModalExibicao<MensagemPedid
     }
 
 
-    clickEnviarMensagem(msnRetorno: string, mensagem: MensagemPedidoDTO, modal: AscModalComponent = null): void {
+    clickEnviarMensagem(msnRetorno: string, mensagem: MensagemPedidoDTO, modal: MatDialogRef<any> = null): void {
         let email: string = this.emailEncaminhar.trim();
 
         if (email == '') {
@@ -82,19 +103,20 @@ export class AscModalMensagemPedidoComponent extends ModalExibicao<MensagemPedid
     }
 
     clickReenviarMensagem(msnRetorno: string, mensagem: MensagemPedidoDTO): void {
-        this.reenviar(mensagem, msnRetorno);
+        this.reenviar(mensagem, msnRetorno, null, this.dialogRef2);
     }
 
-    fechar(): void { 
+    fechar(): void {
         this.emailsCopia = null;
     }
 
     abrirModal(modalMensagem: AscModalNavegacaoComponent, modalEncaminhar: AscModalComponent) {
         this.emailEncaminhar = '';
         modalEncaminhar.abrir();
-    }
 
-    private reenviar(mensagem: MensagemPedidoDTO, msnRetorno: string, emailDestinatario?: string, modal: AscModalComponent = null) {
+  }
+
+    private reenviar(mensagem: MensagemPedidoDTO, msnRetorno: string, emailDestinatario?: string, modal: MatDialogRef<any> = null) {
 
         if (emailDestinatario) {
             mensagem.emailDistintoReenvio = emailDestinatario;
@@ -103,9 +125,9 @@ export class AscModalMensagemPedidoComponent extends ModalExibicao<MensagemPedid
         this.service.reenviarMensagemPedido(mensagem).subscribe(
             () => {
                 this.messageService.addConfirmOk(msnRetorno);
-                this.modalMensagem.fecharModal();
+
                 if (modal) {
-                    modal.fechar();
+                    modal.close();
                 }
 
             },
@@ -119,5 +141,31 @@ export class AscModalMensagemPedidoComponent extends ModalExibicao<MensagemPedid
         let urlAtiva = this.activatedRoute.snapshot['_routerState'].url;
         return urlAtiva.includes("acompanhamento");
     }
+
+  closeDialog() {
+    if (this.dialogRef2) {
+      this.dialogRef2.close();
+    }
+  }
+
+  closeDialogMsgModal() {
+    if (this.dialogMsgEmail) {
+      this.dialogMsgEmail.close();
+    }
+  }
+
+  abrirModalMensagemEmail(){
+    this.dialogMsgEmail = this._dialogService.confirm({
+      data: {
+        title: {
+          text: 'Encaminhar Mensagem',
+          showCloseButton: true,
+          highlightVariant: true
+        },
+        template: this.modalMensagemEmail,
+      },
+    });
+    this.closeDialog()
+  }
 
 }

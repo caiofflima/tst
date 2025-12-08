@@ -1,4 +1,4 @@
-import { AfterContentInit, Component, EventEmitter, Input, Output } from '@angular/core';
+import { AfterContentInit, Component, EventEmitter, Input, Output, TemplateRef, ViewChild } from '@angular/core';
 import { DetalheOcorrenciaModel } from "../models/detalhe-ocorrencia.model";
 import { Pedido } from "../../../models/comum/pedido";
 import { AscModalMensagemPedidoComponent } from "../../../playground/asc-modal-mensagem-pedido/asc-modal-mensagem-pedido.component";
@@ -21,7 +21,10 @@ import { ActivatedRoute } from "@angular/router";
 import { DocumentoPedidoDTO } from 'app/shared/models/dto/documento-pedido';
 import { ProcessoService } from "app/shared/services/comum/processo.service";
 import { Subscription } from 'rxjs';
- 
+import { DscDialogService } from 'sidsc-components/dsc-dialog';
+import { MatDialogRef } from '@angular/material/dialog';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+
 
 @Component({
   selector: 'asc-card-detalhe-ocorrencia',
@@ -53,7 +56,7 @@ export class AscCardDetalheOcorrenciaComponent extends AscComponenteAutorizado i
   private _processoPedido: Pedido;
   ultimaSituacao: SituacaoPedido;
   documentos: DocumentoTipoProcesso[];
-  
+
   private _documentoLista: any = {SIM: [], NAO: []};
   mostrarBordaDocumentosObrigatorios: boolean;
   mostrarBordaDocumentosComplementares: boolean;
@@ -71,12 +74,23 @@ export class AscCardDetalheOcorrenciaComponent extends AscComponenteAutorizado i
   set sit(value: any){
     this._sit = value;
   }
-  
+
   mostraOuOcultaBotao: boolean = false;
 
   private subscriptions: Subscription[] = [];
 
   EM_PROCESSAMENTO_SIST_SAUDE:number = 38;
+
+  dialogRef2?: MatDialogRef<any>;
+  @ViewChild('templateForm', { static: true }) private templateForm!: TemplateRef<any>;
+
+  form = new FormGroup({
+    cpf: new FormControl('', [Validators.required]),
+    nome: new FormControl('', [Validators.required, Validators.minLength(5)]),
+    tipoOcorrencia: new FormControl()
+  })
+
+  return: any;
 
   constructor(
     private readonly fluxoService: SIASCFluxoService,
@@ -86,7 +100,8 @@ export class AscCardDetalheOcorrenciaComponent extends AscComponenteAutorizado i
     protected readonly messageService: MessageService,
     private readonly documentoPedidoService: DocumentoPedidoService,
     private readonly activatedRoute: ActivatedRoute,
-    private readonly processoService: ProcessoService
+    private readonly processoService: ProcessoService,
+    private _dialogService: DscDialogService
   ) {
     super();
   }
@@ -114,14 +129,14 @@ export class AscCardDetalheOcorrenciaComponent extends AscComponenteAutorizado i
       if(this.documentos && this.documentos.length){
         console.log( this.documentos.length);
       }
-      
+
       console.log( this.ultimaSituacao.idSituacaoProcesso + " === "+this.EM_PROCESSAMENTO_SIST_SAUDE );
-  
+
     }
 
     if(localStorage.getItem('arquivoEnvioDado')){
       console.log( JSON.parse(localStorage.getItem('arquivoEnvioDado')) ) ;
-    }    
+    }
 
     if(this.ultimaSituacao && this.ultimaSituacao.idSituacaoProcesso && this.ultimaSituacao.idSituacaoProcesso === this.EM_PROCESSAMENTO_SIST_SAUDE){
       if(localStorage.getItem('arquivoEnvioDado')){
@@ -158,7 +173,7 @@ export class AscCardDetalheOcorrenciaComponent extends AscComponenteAutorizado i
     this.mostrarBordaDocumentosObrigatorios !== false &&
     this.mostrarBordaDocumentosComplementares !== false;
   }
-  
+
   override ngOnDestroy() {
     this.subscriptions.forEach((sub) => sub.unsubscribe());
   }
@@ -181,29 +196,29 @@ export class AscCardDetalheOcorrenciaComponent extends AscComponenteAutorizado i
                                             return new Date(atual.dataHoraCadastramento) > new Date(maisRecente.dataHoraCadastramento) ? atual : maisRecente;
                                           })
                                           :  {dataHoraCadastramento: null,valido: null}
-  
+
               return {
                 ...anexoMaisRecente,
                 complementar: d.complementar
               };
             });
-  
+
             this.documentoLista = {
-               ...this.documentoLista, 
+               ...this.documentoLista,
                [docs[0].complementar]: anexos
             }
             //console.log('ouvindoMudanca documentoLista',this.documentoLista);
-            
+
           }
         }else {
           const penultimaSituacao = this.documentoPedidoService.getSituacaoPedido();
           this.sit = penultimaSituacao;
         }
-        
+
         setTimeout(() => {
-          this.deveMostrarBotaoLiberarPedido();  
+          this.deveMostrarBotaoLiberarPedido();
         }, 1000);
-        
+
       });
   }
 
@@ -223,7 +238,7 @@ export class AscCardDetalheOcorrenciaComponent extends AscComponenteAutorizado i
         this.historicoProcessoService.consultarUltimaMudanca(processoPedido.id, !permissao.analisar).pipe(
           take<SituacaoPedido>(1)
         ).subscribe(situacao => {
-          
+
           this.ultimaSituacao = situacao;
           this.verificarDocumentosEIncluirNaList();
 
@@ -372,6 +387,23 @@ export class AscCardDetalheOcorrenciaComponent extends AscComponenteAutorizado i
   }
 
   clickNovaOcorrencia(processoPedido: Pedido, modalOcorrencia: AscModalOcorrenciaComponent): void {
+    // const dialogRef2 = this._dialogService.confirm({
+    //     data: {
+    //       title: {
+    //         text: 'Nova ocorrência',
+    //         highlightVariant: true
+    //       },
+    //       template: this.templateForm,
+    //       context: this.form,
+    //       actionButton: {
+    //         type: 'button',
+    //         cancelText: 'Cancelar',
+    //         confirmText: 'Salvar',
+    //         confirmDisabled: this.form.invalid,
+    //         confirmFunction: (result: any) => this.return = JSON.stringify(result)
+    //       }
+    //     }
+    //   });
     modalOcorrencia.processo = processoPedido;
     modalOcorrencia.show();
     modalOcorrencia.onUpdate.subscribe(situacaoPedido => {
@@ -396,32 +428,32 @@ export class AscCardDetalheOcorrenciaComponent extends AscComponenteAutorizado i
     const situacaoValida =
       this.ultimaSituacao &&
       this.ultimaSituacao.idSituacaoProcesso === StatusProcessoEnum.RECEBENDO_DOCUMENTACAO_TITULAR;
-  
+
     // Verifica os estados dos avisos (null é tratado como válido, false é inválido)
     const estadoObrigatorios = this.documentoPedidoService.getAvisoSituacaoPedidoState();
     const estadoComplementares = this.documentoPedidoService.getAvisoSituacaoPedidoComplementaresState();
-  
+
     // O botão será exibido apenas se a situação for válida e nenhum dos estados for `false`
     this.mostraOuOcultaBotao = situacaoValida && estadoObrigatorios !== false && estadoComplementares !== false;
-  } 
-  
+  }
+
 
   todosDocumentosAnexados() {
     if (!this.sit || !this.sit.dataCadastramento) {
       return false;
     }
-  
+
     return this.todosDocumentosAnexadosPorTipo(this.documentoLista.NAO) &&
            this.todosDocumentosAnexadosPorTipo(this.documentoLista.SIM);
   }
-  
+
   todosDocumentosAnexadosPorTipo(tipoDocumento) {
     if (!this.sit || !this.sit.dataCadastramento) {
       return false;
     }
-  
+
     return this.verificarValidade(tipoDocumento);
-  } 
+  }
 
   verificarValidade(array: any[]){
     const valida = doc => {
@@ -457,6 +489,10 @@ export class AscCardDetalheOcorrenciaComponent extends AscComponenteAutorizado i
       }, error => this.messageService.showDangerMsg(error.error));
 
     }, 5000);
+  }
+
+  get tipoOcorrencia() {
+    return this.form.get('tipoOcorrencia')
   }
 
 }

@@ -119,7 +119,12 @@ export class ParametrizacaoPrazosFormComponent extends BaseComponent {
     }
 
     get listComboTipoBeneficiarioSelecionados(): DadoComboDTO[] {
-        return this.tiposBeneficiario.value || [];
+        if(this.listComboTipoBeneficiario && this.tiposBeneficiario.value){
+            const valores = this.listComboTipoBeneficiario.filter(x => Number(x.value) === Number(this.tiposBeneficiario.value));
+ 
+            return valores || [];
+        }
+        return [];
     }
 
     public limparCampos(): void {
@@ -153,6 +158,19 @@ export class ParametrizacaoPrazosFormComponent extends BaseComponent {
         this.location.back();
     }
 
+    validarFormulario():boolean{
+        return this.validarCamposFormulario();
+    }
+
+    validarCamposFormulario(): boolean {
+        if(this.idSituacaoProcesso.value 
+            && this.idTipoProcesso.value 
+            && this.prazo.value 
+            && this.tiposBeneficiario.value){
+                return true;
+        }
+        return false;
+    }
 
     public salvar(): void {
         let prazoTratamento: PrazoTratamento = {

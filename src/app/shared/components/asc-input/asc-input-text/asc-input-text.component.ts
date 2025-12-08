@@ -163,7 +163,7 @@ export class AscCampoEstaticoComponent {
     @Input()
     id: string;
     @Input()
-    label: string;
+    label: string = "";
     @Input()
     value: string;
     @Input()

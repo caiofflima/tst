@@ -29,9 +29,6 @@ import { CheckboxChangeEvent } from 'primeng/checkbox';
 export class ParametrizacaoDocumentoProcessoFormComponent extends BaseComponent {
 
     sexos: SelectItem[] = [{
-        label: 'Selecione uma opção',
-        value: null
-    }, {
         label: 'Masculino',
         value: 'M'
     }, {
@@ -68,7 +65,7 @@ export class ParametrizacaoDocumentoProcessoFormComponent extends BaseComponent 
     valorRendaMaxima = this.formBuilder.control(null);
     codigoUsuarioCadastramento = this.formBuilder.control(null);
     dataInativacao = this.formBuilder.control(null, AscValidators.dataIgualAtualMaior);
-    requiredMsg: string; 
+    requiredMsg: string;
 
     constructor(
         override readonly messageService: MessageService,
@@ -100,11 +97,11 @@ export class ParametrizacaoDocumentoProcessoFormComponent extends BaseComponent 
         if (this.tiposProcesso.value) {
             this.comboService.consultarComboTipoBeneficiarioPorTipoProcesso([this.tiposProcesso.value]).pipe(
                 take<DadoComboDTO[]>(1)
-            ).subscribe(res => { 
+            ).subscribe(res => {
                 this.listComboTipoBeneficiario = res
-                this.listComboTipoBeneficiarioSelecionados = this.listComboTipoBeneficiario.filter(l => 
-                                                                    this.documentoTipoProcesso.tiposBeneficiario 
-                                                                    && this.documentoTipoProcesso.tiposBeneficiario.includes(l.value) 
+                this.listComboTipoBeneficiarioSelecionados = this.listComboTipoBeneficiario.filter(l =>
+                                                                    this.documentoTipoProcesso.tiposBeneficiario
+                                                                    && this.documentoTipoProcesso.tiposBeneficiario.includes(l.value)
                                                                     )
             }, err => this.showDangerMsg(err.error));
         }
@@ -133,7 +130,7 @@ export class ParametrizacaoDocumentoProcessoFormComponent extends BaseComponent 
 
                 this.tiposProcesso.setValue(this.documentoTipoProcesso.idTipoProcesso);
                 this.tiposBeneficiario.setValue(this.documentoTipoProcesso.tiposBeneficiario.map(x => Number(x)));
-                
+
                 this.retornaListaDocumento();
                 this.retornaListaTipoDeficiencia();
                 this.retornaListaDeGrupoDocumento();
@@ -213,7 +210,7 @@ export class ParametrizacaoDocumentoProcessoFormComponent extends BaseComponent 
         documentoTipoProcesso.idTipoProcesso = this.tiposProcesso.value;
         documentoTipoProcesso.tiposBeneficiario = this.tiposBeneficiario.value;
 
-        
+
         if (this.id) {
             this.serviceDocumentoProcesso.put(documentoTipoProcesso).pipe(
                 take<DocumentoTipoProcesso>(1)).subscribe(res => {
@@ -276,7 +273,7 @@ export class ParametrizacaoDocumentoProcessoFormComponent extends BaseComponent 
 
         if((this.idDocumento.value ) || (this.tiposBeneficiario.value && this.tiposBeneficiario.value?.length>0)){
             return true;
-        } 
+        }
         return false;
     }
 }

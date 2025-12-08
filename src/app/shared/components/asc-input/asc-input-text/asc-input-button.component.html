@@ -1,13 +1,23 @@
-<label
+<!-- <label
   [ngStyle]="compStyle"
   class="control-label label-class"
   for="{{ inputId }}"
 >
   {{ label }}
-</label>
+</label> -->
 <div class="ui-inputgroup relative">
   <!--  [mask]="mask" -->
-  <input
+     <dsc-input
+     [label]="label"
+     *ngIf="maskName"
+      [labelHint]="hint"
+      [placeholder]="placeholder"
+      [labelHintTooltip]="hint"
+      [formControl]="control"
+      [iconPrefix]="'search'"
+    ></dsc-input>
+
+  <!-- <input
     *ngIf="maskName"
     [formControl]="control"
     [ngStyle]="compStyle"
@@ -20,8 +30,8 @@
     maxlength="{{ maxlength }}"
     placeholder="{{ placeholder }}"
     (keyup)="keyUpAction($event)"
-  />
-  <input
+  /> -->
+  <!-- <input
     *ngIf="!maskName"
     [formControl]="control"
     [ngStyle]="compStyle"
@@ -35,16 +45,26 @@
     (keyup)="keyUpAction($event)"
     (keydown)="keyDownAction($event)"
     (drop)="dropAction($event)"
-  />
-  <button
+  /> -->
+  <dsc-input
+  *ngIf="!maskName"
+  [labelHint]="hint"
+  [placeholder]="placeholder"
+  [labelHintTooltip]="hint"
+  [formControl]="control"
+  [iconPrefix]="'search'"
+  [label]="label"
+  >
+</dsc-input>
+  <!-- <button
     pButton
     type="button"
     icon="fa fa-search"
     class="custom-input-btn"
     (click)="doClick($event)"
     style="margin: 0"
-  ></button>
-</div>
+  ></button> -->
+
 <div
   *ngIf="control.invalid && (control.dirty || control.touched)"
   [ngStyle]="compStyle"

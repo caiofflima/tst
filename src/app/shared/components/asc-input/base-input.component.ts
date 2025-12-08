@@ -239,7 +239,7 @@ export abstract class BaseSelectComponent<T> extends BaseInputComponent implemen
         let toLabel = itemLabel ? itemLabel : this.labelPadrao;
         let toValue = itemValue ? itemValue : this.valuePadrao;
         if (!this.multiple) {
-            this.selectItems = [{label: this.placeholder || 'Selecione uma opção', value: null}];
+            this.selectItems = [];
         } else {
             this.selectItems = [];
         }

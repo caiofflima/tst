@@ -17,19 +17,19 @@
       <div class="form-row">
         <div class="pl-0 col-md-4 mb-15">
           <asc-dropdown
-  [items]="tipoDocumentoOption"
-  [label]="'Tipo de documento'"
-  (selected)="tipoSelecionado($event.value)"
-></asc-dropdown>
+            [label]="'Tipo de documento'"
+            [control]="tipoDocumento"
+            [items]="tipoDocumentoOption"
+            (selected)="tipoSelecionado($event.value)"
+          ></asc-dropdown>
           </div>
-
         <div class="row col-xs-8 p-0">
           <!--label class="control-label" for="doc">Nome do documento</label>&nbsp;<br>
           <input type="text" id="doc" name="nome" [(ngModel)]="filtro.nome"
                  class="form-control" [maxlength]="150" title="Nome do documento."-->
-
-          <dsc-input   [label]="'Nome do documento'"  [(ngModel)]="filtro.nome" [maxlength]="150" name="'nome'"
-          size="large" style="width: 100%;"></dsc-input>
+          <!--dsc-input   [label]="'Nome do documento'"  [(ngModel)]="filtro.nome" [maxlength]="150" name="'nome'"
+          size="large" style="width: 100%;"></dsc-input-->
+          <asc-input-text label="Nome do documento"  [control]="nomeDocumento"></asc-input-text>
         </div>
       </div>
 

@@ -35,6 +35,17 @@ export class ParametrizacaoDocumentoProcessoHomeComponent extends BaseComponent 
         motivosDeSolicitacao: [null]
     });
 
+    constructor(
+        private readonly router: Router,
+        private readonly location: Location,
+        override readonly messageService: MessageService,
+        private readonly formBuilder: FormBuilder,
+        private readonly comboService: ComboService,
+        private readonly data: Data
+    ) {
+        super(messageService);
+    }
+
     public inicializarCombos(): void {
         this.comboService.consultarComboTipoBeneficiario().pipe(
             take<DadoComboDTO[]>(1)
@@ -55,17 +66,6 @@ export class ParametrizacaoDocumentoProcessoHomeComponent extends BaseComponent 
         this.comboService.consultarComboFinalidade().pipe(
             take<DadoComboDTO[]>(1)
         ).subscribe(res => this.listComboMotivoDeSolicitacao = res, err => this.showDangerMsg(err.error));
-    }
-
-    constructor(
-        private readonly router: Router,
-        private readonly location: Location,
-        override readonly messageService: MessageService,
-        private readonly formBuilder: FormBuilder,
-        private readonly comboService: ComboService,
-        private readonly data: Data
-    ) {
-        super(messageService);
     }
 
     private isStorageCarregado(): boolean {

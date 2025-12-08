@@ -33,8 +33,8 @@ export class RequestInterceptor implements HttpInterceptor {
     }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): any {
-        console.log("🚀 ~ RequestInterceptor ~ intercept ~ next:", next)
-        console.log("🚀 ~ RequestInterceptor ~ intercept ~ req:", req)
+        // console.log("🚀 ~ RequestInterceptor ~ intercept ~ next:", next)
+        // console.log("🚀 ~ RequestInterceptor ~ intercept ~ req:", req)
         if (req.url.includes('/' + ConfiguracaoSegurancaService.CONFIGURACAO_SEGURANCA_SERVICE_URL)) {
             return this.handleDate(req, next);
         }
@@ -42,12 +42,12 @@ export class RequestInterceptor implements HttpInterceptor {
         return this.adicionarTokenNoCabecalho(req.headers).pipe(
             mergeMap(() => {
                 let token: string = '';
-                console.log("🚀 ~ RequestInterceptor ~ mergeMap ~ token:", token)
+                // console.log("🚀 ~ RequestInterceptor ~ mergeMap ~ token:", token)
                 let handledReq: HttpRequest<any>;
 
                 if (this.getSessaoService().getToken()) {
                     token = this.getSessaoService().getToken().token;
-                    console.log("🚀 ~ RequestInterceptor ~ mergeMap ~ token:", token)
+                    // console.log("🚀 ~ RequestInterceptor ~ mergeMap ~ token:", token)
 
                     handledReq = req.clone({
                         headers: req.headers
@@ -56,8 +56,8 @@ export class RequestInterceptor implements HttpInterceptor {
                 } else {
                     handledReq = req;
                 }
-                
-                console.log("🚀 ~ RequestInterceptor ~ mergeMap ~ handledReq:", handledReq)
+
+                // console.log("🚀 ~ RequestInterceptor ~ mergeMap ~ handledReq:", handledReq)
                 return this.handleDate(handledReq, next).pipe(tap(
                     (event: HttpEvent<any>) => {
                         if (event instanceof HttpResponse) {
@@ -84,7 +84,7 @@ export class RequestInterceptor implements HttpInterceptor {
     }
 
     private adicionarTokenNoCabecalho(headersArg?: HttpHeaders): Observable<any> {
-        console.log("🚀 ~ RequestInterceptor ~ adicionarTokenNoCabecalho ~ headersArg:", headersArg)
+        // console.log("🚀 ~ RequestInterceptor ~ adicionarTokenNoCabecalho ~ headersArg:", headersArg)
         return of(async (observer: any) => {
             let headers = headersArg;
             if (!headers) {
@@ -140,8 +140,8 @@ export class RequestInterceptor implements HttpInterceptor {
     }
 
     public handleDate(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        console.log("🚀 ~ RequestInterceptor ~ handleDate ~ next:", next)
-        console.log("🚀 ~ RequestInterceptor ~ handleDate ~ req:", req)
+        // console.log("🚀 ~ RequestInterceptor ~ handleDate ~ next:", next)
+        // console.log("🚀 ~ RequestInterceptor ~ handleDate ~ req:", req)
         if (req.responseType !== 'json') {
             return next.handle(req);
         }
@@ -160,7 +160,7 @@ export class RequestInterceptor implements HttpInterceptor {
     }
 
     private processJsonResponse(res: HttpResponse<string>): HttpResponse<any> {
-        console.log("🚀 ~ RequestInterceptor ~ processJsonResponse ~ res:", res)
+        // console.log("🚀 ~ RequestInterceptor ~ processJsonResponse ~ res:", res)
         let body = res.body;
 
         if (typeof body === 'string') {

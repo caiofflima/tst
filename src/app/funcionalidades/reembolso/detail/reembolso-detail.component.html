@@ -86,11 +86,12 @@
 ></asc-dropdown>
               -->
               <asc-dropdown
-  [items]="optionsAnos"
-  [placeholder]="anoReembolso.value"
-  [label]="'Ano'"
-  (selected)="buscarReembolsosResumoPorAno($event.value)"
-></asc-dropdown>
+              [items]="optionsAnos"
+              [placeholder]="anoReembolso.value"
+              [label]="'Ano'"
+              (selected)="buscarReembolsosResumoPorAno($event.value)"
+              [control]="selectAno"
+            ></asc-dropdown>
             </div>
           </div>
           <div *ngFor="let lancamento of lancamentosReembolso; let i = index" class="inline-resultado">

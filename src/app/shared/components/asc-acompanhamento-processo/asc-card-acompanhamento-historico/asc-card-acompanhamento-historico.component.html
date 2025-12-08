@@ -30,13 +30,13 @@
     <p class="card-hist-header">{{ situacaoPedido?.situacaoProcesso?.nome }}</p>
   </div>
   <div class="fl-sb c-card-historico-footer">
-    <button
-      class="detalhar"
+    <dsc-button
+      label="detalhar"
+      variant="secondary-outlined"
       *ngIf="permissoes?.acessar"
       (click)="clickShowDetalhe()"
-    >
-      <span>detalhar</span>
-    </button>
+       />
+
     <svg
       class="icon-msg-action"
       style="cursor: pointer"

@@ -18,6 +18,9 @@ export class ParametrizacaoDocumentosHomeComponent extends BaseComponent impleme
     tipoDocumentoOption: Option[] = [];
     filtro: FiltroConsultaDocumento = new FiltroConsultaDocumento();
     idTipoDocumento = new FormControl(null);
+    nomeDocumento = new FormControl(null);
+    tipoDocumento = new FormControl(null);
+
     documento: string;
     idTipoDocumentoSelecionado: any;
     selectedOption: Option;
@@ -58,7 +61,12 @@ export class ParametrizacaoDocumentosHomeComponent extends BaseComponent impleme
                 this.selectedValue = this.selectedOption.value;
                 this.documento = documentoStorage.documento;
                 this.idTipoDocumentoSelecionado = documentoStorage.idTipoDocumento;
+
+                this.tipoDocumento.setValue(this.selectedValue);
             }
+
+            if(documentoStorage.nome)
+                this.nomeDocumento.setValue(documentoStorage.nome);
 
             if(documentoStorage.ativo)
                 this.filtro.ativo = documentoStorage.ativo;
@@ -87,7 +95,7 @@ export class ParametrizacaoDocumentosHomeComponent extends BaseComponent impleme
             documento: this.documento || '',
             //idTipoDocumento: this.idTipoDocumento.value ? this.idTipoDocumento.value.id : '',
             idTipoDocumento: this.idTipoDocumentoSelecionado ?? '', 
-            nome: this.filtro.nome || '',
+            nome: this.nomeDocumento.value || '',
             opme: this.filtro.opme ?? '',
             ativo: this.filtro.ativo ?? '',
             link: this.filtro.link ?? ''
@@ -100,7 +108,7 @@ export class ParametrizacaoDocumentosHomeComponent extends BaseComponent impleme
                 documento: this.documento || '',
                 //idTipoDocumento: this.idTipoDocumento.value ? this.idTipoDocumento.value.id : '',
                 idTipoDocumento: this.idTipoDocumentoSelecionado ?? '', 
-                nome: this.filtro.nome || '',
+                nome: this.nomeDocumento.value || '',
                 opme: this.ajustarCampo(this.filtro.opme),
                 ativo: this.ajustarCampo(this.filtro.ativo),
                 link: this.ajustarCampo(this.filtro.link)
@@ -124,6 +132,8 @@ export class ParametrizacaoDocumentosHomeComponent extends BaseComponent impleme
         this.selectedValue = null;
         this.documento = null;
         this.idTipoDocumentoSelecionado = null;
+        this.tipoDocumento.reset();
+        this.nomeDocumento.reset();
         localStorage.clear();
     }
 

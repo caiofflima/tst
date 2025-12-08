@@ -26,6 +26,7 @@ import {AcompanhamentoDependenteModule} from '../acompanhamento-dependente/acomp
 import {EtapaResumoCancelarComponent} from './etapa-resumo-cancelar/etapa-resumo-cancelar.component'
 import {PipeModule} from "../../../shared/pipes/pipe.module";
 import {AscCardModule} from "../../../shared/components/asc-card/asc-card.module";
+import { ArquivoEnvioDadoService } from 'app/shared/services/services';
 
 @NgModule({
     imports: [
@@ -57,6 +58,9 @@ import {AscCardModule} from "../../../shared/components/asc-card/asc-card.module
     CancelarDependenteComponent,
     EtapaMotivoDependenteComponent,
     EtapaResumoCancelarComponent
+  ],
+  providers: [
+    ArquivoEnvioDadoService
   ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

@@ -102,6 +102,15 @@ $input-width: 35rem;
     flex-grow: 1;
   }
 }
+.dropdown-above-modal {
+  z-index: 9999 !important;
+}
 
+// Se estiver dentro de um mat-dialog
+::ng-deep .mat-mdc-dialog-container {
+  z-index: 1000;
+}
 
-
+.dropdown-above-modal {
+  z-index: 100001 !important;
+}

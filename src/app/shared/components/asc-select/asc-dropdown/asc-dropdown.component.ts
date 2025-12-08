@@ -36,7 +36,7 @@ export class AscDropdownComponent implements OnInit, OnDestroy, AfterViewInit {
     private readonly value$ = new EventEmitter<any>();
     private readonly unsubscribeSubject = new Subject<void>();
 
-    options: Option[] = [{label: this.placeholder || this.bundle('MHSPH'), value: null}];
+    options: Option[] = [];
 
     constructor(private readonly messageService: MessageService) {
         this.requiredMsg = 'MA007';
@@ -45,7 +45,7 @@ export class AscDropdownComponent implements OnInit, OnDestroy, AfterViewInit {
     @Input()
     set items(items: any[]) {
         this.options = [{label: this.placeholder || this.bundle('MHSPH'), value: null}];
-        
+
         if (isNotUndefinedNullOrEmpty(items)) {
             const converted = this.convertItemsToOptions(items);
             this.options = [...this.options, ...converted];
@@ -104,7 +104,7 @@ export class AscDropdownComponent implements OnInit, OnDestroy, AfterViewInit {
         if (item.label && item.value !== undefined) {
             return item as Option;
         }
-        
+
         return {
             label: item.label || item.descricao || '',
             value: item.value !== undefined ? item.value : item.id
@@ -133,7 +133,7 @@ export class AscDropdownComponent implements OnInit, OnDestroy, AfterViewInit {
 
     private attachFilterListener(): void {
         const filterInput = this.getFilterInput();
-        
+
         if (filterInput) {
             filterInput.addEventListener('input', (event: Event) => {
                 const value = (event.target as HTMLInputElement)?.value || '';

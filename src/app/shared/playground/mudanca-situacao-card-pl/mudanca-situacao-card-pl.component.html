@@ -16,8 +16,8 @@
     <div *ngIf="(isProcessoReembolso || isProcessoAutorizacao) && isExibeCampoAutorizacaoOuReembolso" class="col-md-12 mb-15 no-padding-left">
       <asc-input-text
         [control]="fcAutorizacao" inputId="idAutorizacao" label="{{isProcessoReembolso ? 'Número do PEG' : 'Número da autorização'}}"
-        [required]="(isProcessoReembolso || isProcessoAutorizacao) && isExibeCampoAutorizacaoOuReembolso" 
-        autocomplete="off" 
+        [required]="(isProcessoReembolso || isProcessoAutorizacao) && isExibeCampoAutorizacaoOuReembolso"
+        autocomplete="off"
         [index]="1"
         (onBlur)="obterDataValidacaoPorNumeroAutorizacao()"
         [maxlength]="20">
@@ -28,7 +28,7 @@
         <p>{{dataValidade | date: 'dd/MM/yyyy'}}</p>
       </div>
 
-    </div> 
+    </div>
 
     <div class="ui-g-6 ui-md-6 ui-sm-6 no-padding margin-16 modificate-custom-grid">
       <div class="container-group-label-select">
@@ -60,7 +60,7 @@
       </label>
 
       <div class="ht-txt-area">
-        <textarea 
+        <textarea
           id="historicoSituacao"
           [required]="dadosSituacao?.requerJustificativa === 'SIM'"
           [disabled]="loading"
@@ -98,21 +98,25 @@
   </div>
 
   <div class="footer-btns-card" style="padding-top: 1em !important;">
-    <button
-      class="btn-cts back-btn"
-      (click)="limpaCampos()"
-      [disabled]="loading">
-      Limpar campos
-    </button>
+    <div class="row">
+        <dsc-button
+          class="col-md-3"
+          label="Limpar campos"
+          variant="secondary-outlined"
+            (click)="limpaCampos()"
+            [disabled]="loading"
+          />
+          <asc-button-primary
+            title="Alterar Situação"
+            @fadeInOut
+            [showProgress]="loading"
+            [disabled]="loading || isHabilitaBotaoPorNumeroAutorizacao"
+            (onClick)="atualizarSituacaoProcesso()">
+          </asc-button-primary>
 
-    <asc-button-primary
-      title="Alterar Situação"
-      @fadeInOut
-      style="padding-left: .5em;"
-      [showProgress]="loading"
-      [disabled]="loading || isHabilitaBotaoPorNumeroAutorizacao"
-      (onClick)="atualizarSituacaoProcesso()">
-    </asc-button-primary>
+
+
+    </div>
   </div>
 </section>
 

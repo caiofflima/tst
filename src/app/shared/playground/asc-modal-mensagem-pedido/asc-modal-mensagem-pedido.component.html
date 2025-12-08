@@ -1,14 +1,5 @@
-<asc-modal-navegacao
-  #modalMensagem
-  class="mdl-custom"
-  tituloModal="Mensagens Enviadas"
-  [modoRotacao]="false"
-  [infoExibicao]="infoExibicao"
-  (infoExibicaoAtual$)="exibirItemAtual($event)"
-  (onFechar$)="fechar()"
-  [closeBottomLeft]="customStyleProperties?.closeBottomLeft">
-  <asc-viewport class="mdl-view-custom">
-    <div>
+<ng-template #modalMensagem let-form>
+  <div>
       <div class="space-btw m-10">
         <p class="modal-title-prime" id="titulo">{{ isTipoOcorrenciaObservacao ? 'Observação' : 'Mudança de Situação'}}</p>
         <div class="dp-fl" *ngIf="!tituloAcompanhamento">
@@ -60,44 +51,80 @@
         <asc-text-area [rows]="10" aria-readonly="true" [innerHTML]="mensagem?.textoEmailEnviado"></asc-text-area>
       </div>
     </div>
-  </asc-viewport>
+    <hr />
+  <div class="row">
+    <div class="col-md-6">
+      <div class="row">
+        <dsc-button
+          class="col-md-6"
+          label="Fechar"
+          variant="secondary-outlined"
+          (click)="closeDialog()"
+        />
+        <div class="col-md-6"></div>
 
-  <asc-modal-acoes>
-    <div class="fl-sb-btn" *ngIf="(mostrarBotoes)">
-      <button (click)="modalMensagem.fecharModal(); abrirModal(modalMensagem, modalMensagemEmail)"
-              class="btn-cts btn-send">
-        <svg class="icon-re-send"></svg>
-        <span>Encaminhar</span>
-      </button>
-      <button class="btn-cts btn-send" (click)="clickReenviarMensagem('Mensagem reenviada!', mensagem)">
-        <svg class="icon-ree-send"></svg>
-        <span>Reenviar</span>
-      </button>
-    </div>
-  </asc-modal-acoes>
-
-</asc-modal-navegacao>
-
-<asc-modal #modalMensagemEmail class="modal-custom">
-  <asc-modal-header>Encaminhar Mensagem</asc-modal-header>
-  <asc-modal-body class="mdl-body-custom">
-    <div class="row">
-      <div class="form-group">
-        <h4>Digite um e-mail distinto para o qual deseja enviar esta mensagem</h4>
-        <input type="email" [(ngModel)]="emailEncaminhar" class="form-control">
       </div>
     </div>
-  </asc-modal-body>
+    <div class="col-md-6">
+      <div class="row">
+        <dsc-button
+            class="col-md-6"
+            label="Encaminhar"
+            variant="secondary"
+            iconPrefix="forward_to_inbox"
+            (click)="abrirModalMensagemEmail()"
+          />
+        <dsc-button
+            class="col-md-6"
+            label="Reenviar"
+            variant="secondary"
+            iconPrefix="forward_to_inbox"
+            (click)="clickReenviarMensagem('Mensagem reenviada!', mensagem )"
+          />
 
-  <asc-modal-footer>
-    <div class="fl-sb-btn">
-      <button class="btn-cts btn-outline-closed" (click)="modalMensagemEmail.fechar()">
-        <span>Cancelar</span>
-      </button>
-      <button class="btn-cts btn-send" (click)="clickEnviarMensagem('Mensagem enviada!', mensagem, modalMensagemEmail)">
-        <svg class="icon-re-send" aria-hidden="true"></svg>
-        <span>Encaminhar</span>
-      </button>
+      </div>
     </div>
-  </asc-modal-footer>
-</asc-modal>
+  </div>
+</ng-template>
+
+<ng-template #modalMensagemEmail let-form>
+
+      <div class="space-btw m-10">
+        <div class="row">
+          <h4>Digite um e-mail distinto para o qual deseja enviar esta mensagem</h4>
+          <input type="email" [(ngModel)]="emailEncaminhar" class="form-control col-md-12">
+        </div>
+      </div>
+      <hr />
+    <div class="row">
+
+      <div class="col-md-6">
+        <div class="row">
+          <dsc-button
+            class="col-md-6"
+            label="Fechar"
+            variant="secondary-outlined"
+            (click)="closeDialogMsgModal()"
+          />
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="row">
+          <div class="col-md-6">
+
+          </div>
+          <div class="col-md-6 pull-right">
+
+            <dsc-button
+                style="margin-right: 0;"
+                label="Encaminhar"
+                variant="secondary"
+                iconPrefix="forward_to_inbox"
+                (click)="clickEnviarMensagem('Mensagem enviada!', mensagem, dialogMsgEmail)"
+              />
+          </div>
+        </div>
+    </div>
+    </div>
+</ng-template>

@@ -18,44 +18,52 @@
     <h1 class="titulo-pagina">Junta Médica/Odontológica</h1>
   </div>
 
-  <section class="row">
+  <div class="main-section">
     <form [formGroup]="formulario" name="form">
       <div class="row pl-0 col-md-12">
-        <h4>Dados dos Pedidos</h4>
+        <p class="info-search-label">Dados do pedido</p>
       </div>
 
       <div class="row">
-        <div class="col-xs-4 pl-0">
-          <label class="control-label" for="filial">Agrupadora</label>
+
+        <div class="col-md-3">
           <asc-multiSelect
             id="filial"
+            label="Agrupadora"
             [options]="listComboFilial"
             [control]="formulario.get('filiaisProcesso')"
-          ></asc-multiSelect>
+            size="large">
+          </asc-multiSelect>
         </div>
 
-        <div class="col-xs-4">
+        <div class="col-md-3">
           <asc-dropdown
-  [control]="formulario.controls['ufAtendimento']"
-  [items]="listComboUF"
-  [placeholder]="this.bundle('MHSPH')"
-  label="UF Atendimento"
-></asc-dropdown>
+            [control]="formulario.controls['ufAtendimento']"
+            label="UF Atendimento"
+            [items]="listComboUF"
+            [placeholder]="this.bundle('MHSPH')"
+            size="large"
+          ></asc-dropdown>
         </div>
-        <div class="col-xs-2 pl-0">
+
+        <div class="col-md-3">
           <asc-input-date
-            [required]="true"
             [control]="formulario.get('dataInicio')"
+            inputId="dataInicio"
             label="Data Início"
-          ></asc-input-date>
+            size="large">
+          </asc-input-date>
         </div>
-        <div class="col-xs-2">
+
+        <div class="col-md-3">
           <asc-input-date
-            [required]="true"
             [control]="formulario.get('dataFim')"
+            inputId="dataFim"
             label="Data Fim"
-          ></asc-input-date>
+            size="large">
+          </asc-input-date>
         </div>
+
       </div>
     </form>
 
@@ -202,5 +210,5 @@
         </div>
       </div>
     </div>
-  </section>
+  </div>
 </div>

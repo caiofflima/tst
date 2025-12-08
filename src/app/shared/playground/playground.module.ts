@@ -18,6 +18,7 @@ import { ProcedimentoPedidoCardPlComponent } from './procedimento-pedido-card-pl
 import { PipeModule } from "../pipes/pipe.module";
 import { AscAutorizacaoPreviaComponentsModule } from "../components/asc-pedido/asc-autorizacao-previa-components/asc-autorizacao-previa-components.module";
 import {AscSelectModule} from "../components/asc-select/asc-select.module";
+import { DscCaixaModule } from '../dsc-caixa/dsc-caixa.module';
 
 @NgModule({
     imports: [
@@ -33,12 +34,13 @@ import {AscSelectModule} from "../components/asc-select/asc-select.module";
         PipeModule,
         AscAutorizacaoPreviaComponentsModule,
         ReactiveFormsModule,
-        AscSelectModule
+        AscSelectModule,
+        DscCaixaModule
     ],
-  declarations: [ConsultaProcessoPlComponent, StatusIconManagerComponent, CardListagemProcessoPlComponent, 
+  declarations: [ConsultaProcessoPlComponent, StatusIconManagerComponent, CardListagemProcessoPlComponent,
     MudancaSituacaoCardPlComponent, AscModalMensagemPedidoComponent, ProcedimentoPedidoCardPlComponent,
     AscModalCoparticipacaoComponent],
-  exports: [ConsultaProcessoPlComponent, CardListagemProcessoPlComponent, MudancaSituacaoCardPlComponent, 
+  exports: [ConsultaProcessoPlComponent, CardListagemProcessoPlComponent, MudancaSituacaoCardPlComponent,
     AscModalMensagemPedidoComponent, ProcedimentoPedidoCardPlComponent, AscModalCoparticipacaoComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

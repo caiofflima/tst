@@ -51,7 +51,6 @@
               label="Patologia"
               [control]="formulario.get('patologia')"
               [items]="patologias"
-              [placeholder]="this.bundle('MHSPH')"
               [required]="true"
             ></asc-dropdown>
             <asc-message-error [control]="patologia" type="required" [errorMessage]="bundle('MA007')"></asc-message-error>

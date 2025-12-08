@@ -12,12 +12,12 @@
     <div class="form-row">
       <div class="row">
         <div class="col-md-6 no-padding-left" @fadeInOut>
+          <label class="control-label">Beneficiário *</label><br />
           <asc-select-beneficiario
             [uppercase]="true"
             selectId="beneficiario"
             [matricula]="matricula"
-            label="Beneficiário"
-            [required]="true"
+            label=""
             [control]="formularioSolicitacao.get('dependente')"
             [titular]="false"
             (dadoSelecionado)="beneficiarioSelecionado($event)"
@@ -87,11 +87,11 @@
             *ngIf="formularioSolicitacao.get('dependente').valid"
             @fadeInOut
           >
+          <label class="control-label">Motivo do Cancelamento *</label><br />
             <asc-select-finalidade
               [uppercase]="true"
               selectId="motivoCancelamento"
-              label="Motivo do cancelamento"
-              [required]="true"
+              label=""
               [idTipoProcessoAndIdBeneficiario]="{
                 idTipoProcesso: TIPO_PROCESSO,
                 idBeneficiario: idBeneficiario

@@ -26,10 +26,7 @@ import { CheckboxChangeEvent } from 'primeng/checkbox';
 })
 export class ParametrizacaoMotivoTipoPedidoFormComponent extends BaseComponent {
 
-    sexos: SelectItem[] = [{
-        label: 'Selecione uma opção',
-        value: null
-    }, {
+    sexos: SelectItem[] = [ {
         label: 'Masculino',
         value: 'M'
     }, {
@@ -55,7 +52,7 @@ export class ParametrizacaoMotivoTipoPedidoFormComponent extends BaseComponent {
     dataCadastramento = this.formBuilder.control(null);
     codigoUsuarioCadastramento = this.formBuilder.control(null);
     dataInativacao = this.formBuilder.control(null, AscValidators.dataIgualAtualMaior);
-    requiredMsg: string; 
+    requiredMsg: string;
     motivoSolicitacaoTipoPedidoDTO: MotivoSolicitacaoTipoPedidoDTO;
     motivoSolicitacaoTipoPedidoIncluirDTO: MotivoSolicitacaoTipoPedidoIncluirDTO;
     motivoSolicitacaoTipoPedidoBeneficiariosDTO: MotivoSolicitacaoTipoPedidoBeneficiariosDTO = null;
@@ -83,7 +80,7 @@ export class ParametrizacaoMotivoTipoPedidoFormComponent extends BaseComponent {
         if(this.motivoSolicitacaoTipoPedidoBeneficiariosDTO !== null && this.motivoSolicitacaoTipoPedidoBeneficiariosDTO !== undefined){
             this.isEdicao = true;
         }
-        
+
         this.retornaListaTipoDeficiencia();
         this.consultarEstadoInicial();
         this.requiredMsg = this.bundle('MA007');
@@ -112,10 +109,10 @@ export class ParametrizacaoMotivoTipoPedidoFormComponent extends BaseComponent {
     }
 
     carregarFormDados():void{
-        if(this.motivoSolicitacaoTipoPedidoBeneficiariosDTO){ 
+        if(this.motivoSolicitacaoTipoPedidoBeneficiariosDTO){
             this.motivoSolicitacaoTipoPedidoDTO = this.motivoSolicitacaoTipoPedidoBeneficiariosDTO;
             this.motivoSolicitacaoTipoPedidoDTO.dataInativacao = Util.getDate(this.motivoSolicitacaoTipoPedidoBeneficiariosDTO.dataInativacao);
-           
+
             for (let key in this.motivoSolicitacaoTipoPedidoBeneficiariosDTO) {
                 if (this.formulario.get(key) != undefined) {
                     this.formulario.get(key).setValue(this.motivoSolicitacaoTipoPedidoBeneficiariosDTO[key]);
@@ -133,25 +130,25 @@ export class ParametrizacaoMotivoTipoPedidoFormComponent extends BaseComponent {
     }
 
     motivoSolicitacaoTipoPedidoBeneficiariosDTOToForm():void{
-            this.idMotivoSolicitacao.setValue(this.motivoSolicitacaoTipoPedidoBeneficiariosDTO.idMotivoSolicitacao);  
+            this.idMotivoSolicitacao.setValue(this.motivoSolicitacaoTipoPedidoBeneficiariosDTO.idMotivoSolicitacao);
             this.inativo.setValue(this.motivoSolicitacaoTipoPedidoBeneficiariosDTO.inativo === 'SIM');
             this.sexo.setValue(this.getSiglaSexo(this.motivoSolicitacaoTipoPedidoBeneficiariosDTO.sexo));
-            this.idTipoDeficiencia.setValue(this.motivoSolicitacaoTipoPedidoBeneficiariosDTO.tipoDeficiencia);     
+            this.idTipoDeficiencia.setValue(this.motivoSolicitacaoTipoPedidoBeneficiariosDTO.tipoDeficiencia);
             this.tiposProcesso.setValue(this.motivoSolicitacaoTipoPedidoBeneficiariosDTO.idTipoProcesso);
             this.tiposBeneficiario.setValue(this.motivoSolicitacaoTipoPedidoBeneficiariosDTO.idsTipoBeneficiario.map(x => Number(x)));
-          
+
     }
 
     iniciarDadosParaAtualizacao():void{
          if (this.id !== null && this.id !== undefined) {
-            
+
              this.serviceMotivoSolicitacaoTipoPedido.consultarPorId(this.id).pipe(
                  take<MotivoSolicitacaoTipoPedidoDTO>(1)
              ).subscribe(motivoSolicitacaoTipoPedidoDTO => {
                 //console.log(motivoSolicitacaoTipoPedidoDTO)
                  this.motivoSolicitacaoTipoPedidoDTO = motivoSolicitacaoTipoPedidoDTO;
                  this.motivoSolicitacaoTipoPedidoDTO.dataInativacao = Util.getDate(motivoSolicitacaoTipoPedidoDTO.dataInativacao);
-                
+
                  for (let key in this.motivoSolicitacaoTipoPedidoDTO) {
                     if (this.formulario.get(key) != undefined) {
                         this.formulario.get(key).setValue(this.motivoSolicitacaoTipoPedidoDTO[key]);
@@ -165,7 +162,7 @@ export class ParametrizacaoMotivoTipoPedidoFormComponent extends BaseComponent {
                 let idsBeneficiarios = [];
                 idsBeneficiarios.push(this.motivoSolicitacaoTipoPedidoDTO.idTipoBeneficiario)
                 this.tiposBeneficiario.setValue(idsBeneficiarios.map(x => Number(x)));
-                 
+
                 //Algumas vezes não carrega a combobox de beneficiarios, esta parte força a carga.
                 if(!this.listComboTipoBeneficiario || this.listComboTipoBeneficiario.length === 0)
                 {
@@ -325,7 +322,7 @@ export class ParametrizacaoMotivoTipoPedidoFormComponent extends BaseComponent {
 
     public montarLista(): SelectItem[] {
         let idsSelecionados: SelectItem[]=[];
-  
+
         //let textoId:string[] = this.motivoSolicitacaoTipoPedidoBeneficiariosDTO.tiposBeneficiario.split(",");
         this.motivoSolicitacaoTipoPedidoBeneficiariosDTO.idsTipoBeneficiario.map((id, index) => {
             idsSelecionados.push({

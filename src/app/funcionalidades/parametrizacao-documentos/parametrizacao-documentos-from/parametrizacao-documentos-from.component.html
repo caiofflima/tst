@@ -45,32 +45,28 @@
                             id="idTipoDocumento"
                     ></asc-dropdown-->
                     <asc-dropdown
-  [control]="formulario.get('idTipoDocumento')"
-  [items]="tipoDocumentosOption"
-  [label]="'Tipo de documento'"
-  [required]="true"
-></asc-dropdown>
+                        [label]="'Tipo de documento'"
+                        [control]="formulario.get('idTipoDocumento')"
+                        [items]="tipoDocumentosOption"
+                        [required]="true"
+                    ></asc-dropdown>
                 </div>
                 <div class="pl-0 col-md-8 mb-15">
-                    <asc-input-text label="Link do documento" [control]="enderecoDocumento"
-                    ></asc-input-text>
+                    <asc-input-text label="Link do documento" [control]="enderecoDocumento"></asc-input-text>
                 </div>
             </div>
             <div class="form-row">
                 <div class="pl-0 col-md-12">
-                    <asc-input-text
-                            [required]="true" label="Nome do documento" id="doc" name="doc" [control]="nome"
-                    ></asc-input-text>
+                    <asc-input-text [required]="true" label="Nome do documento" id="doc" name="doc" 
+                    [control]="nome"></asc-input-text>
                 </div>
             </div>
 
             <div class="form-row">
                 <div class="col-md-12 pl-0">
                     <label class="control-label" for="descricao">Descrição</label>
-                    <textarea
-                            [rows]="5" [cols]="103" pInputTextarea name="descricao"
-                            id="descricao" class="form-control" [formControl]="descricao"
-                    ></textarea>
+                    <textarea  [rows]="5" [cols]="103" pInputTextarea name="descricao"
+                            id="descricao" class="form-control" [formControl]="descricao"></textarea>
                 </div>
             </div>
 

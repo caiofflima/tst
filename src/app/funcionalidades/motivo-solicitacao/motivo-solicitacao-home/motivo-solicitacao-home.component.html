@@ -24,7 +24,7 @@
           <!--label class="control-label" for="descricao">Descrição</label>&nbsp;<br>
           <input type="text" id="descricao" name="descricao" [(ngModel)]="filtro.nome"
                  class="form-control" [maxlength]="150" title="Nome do Motivo."-->
-          <asc-input-text  label="Descrição" [(ngModel)]="filtro.nome"></asc-input-text>
+          <asc-input-text  label="Descrição" [control]="descricao"></asc-input-text>
         </div>
 
         <div class="row">

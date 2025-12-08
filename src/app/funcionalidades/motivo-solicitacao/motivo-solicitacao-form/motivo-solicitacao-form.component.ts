@@ -65,7 +65,6 @@ export class MotivoSolicitacaoFormComponent extends BaseComponent {
     }
   }
 
-  
   get nome (){
       return this.formulario.get('nome')
   }
@@ -96,19 +95,6 @@ export class MotivoSolicitacaoFormComponent extends BaseComponent {
       } 
   }
 
-  
-
-  public limparCampos(): void {
-      this.formulario.reset();
-      this.formulario.markAsPristine();
-      this.formulario.markAsUntouched();
-      this.formulario.updateValueAndValidity();
-  }
-
-  public restaurarCampos(): void {
-      this.consultarDados();
-  }
-
   public excluir(): void {
       this.messageService.addConfirmYesNo(this.bundle("MA021"), () => {
           this.loadingRM = true
@@ -126,10 +112,6 @@ export class MotivoSolicitacaoFormComponent extends BaseComponent {
       });
   }
 
-  public voltar(): void {
-      this.location.back();
-  }
-
   public salvar(): void {
       this.loading = true;
       this.loadingScreen()
@@ -142,7 +124,7 @@ export class MotivoSolicitacaoFormComponent extends BaseComponent {
           dataInativacao: this.dataInativacao.value,
          
       };
-      
+      console.log(motivoSolicitacao);
       
       const queryParams = {
         codigo: this.id
@@ -170,7 +152,6 @@ export class MotivoSolicitacaoFormComponent extends BaseComponent {
           });
       }
   }
-
 
   public onChangeInativo(event: CheckboxChangeEvent) {
       if (event.checked) {
@@ -203,5 +184,20 @@ export class MotivoSolicitacaoFormComponent extends BaseComponent {
               })
           ).subscribe()
   }
+
+    public voltar(): void {
+        this.location.back();
+    }
+
+    public limparCampos(): void {
+        this.formulario.reset();
+        this.formulario.markAsPristine();
+        this.formulario.markAsUntouched();
+        this.formulario.updateValueAndValidity();
+    }
+
+    public restaurarCampos(): void {
+        this.consultarDados();
+    }
 
 }

@@ -35,6 +35,7 @@ import {AscDocumentosModule} from "../../../shared/components/asc-pedido/asc-doc
 import {PlaygroundModule} from "../../../shared/playground/playground.module";
 import { AcompanhamentoModule } from '../../acompanhamento/acompanhamento.module';
 import {DscCaixaModule} from "../../../shared/dsc-caixa/dsc-caixa.module";
+import { ArquivoEnvioDadoService } from 'app/shared/services/comum/arquivoEnvioDado.service';
 
 @NgModule({
     imports: [
@@ -72,6 +73,9 @@ import {DscCaixaModule} from "../../../shared/dsc-caixa/dsc-caixa.module";
     ],
     exports: [
         ResumoComponent
+    ],
+    providers: [
+      ArquivoEnvioDadoService
     ]
 })
 export class InscricaoProgramasMedicamentosModule {

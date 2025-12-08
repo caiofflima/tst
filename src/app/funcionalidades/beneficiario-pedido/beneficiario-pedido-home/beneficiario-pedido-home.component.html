@@ -19,16 +19,18 @@
       <form [formGroup]="formulario" name="form">
         <div class="form-row">
           <div class="col-md-6 mb-15 pl-0">
-            <label class="control-label">Tipo de Pedido</label>
+            <!--label class="control-label">Tipo de Pedido</label-->
             <asc-multiSelect
+              label="Tipo de Pedido"
               id="tiposProcesso"
               [options]="listComboTipoProcesso"
               [control]="formulario.get('tiposProcesso')"
             ></asc-multiSelect>
           </div>
           <div class="col-md-6 mb-15 pl-0">
-            <label class="control-label">Tipo de Beneficiário</label>
+            <!--label class="control-label">Tipo de Beneficiário</label-->
             <asc-multiSelect
+              label="Tipo de Beneficiário"
               id="tiposBeneficiario"
               [options]="listComboTipoBeneficiario"
               [control]="formulario.get('tiposBeneficiario')"
@@ -38,7 +40,7 @@
         
         <div class="form-row">
           <div class="col-md-6 mb-15 pl-0">
-            <asc-checkbox name="ativos" formControlName="somenteAtivos" [valoresTrueOrFalse]="true" (ngModelChange)="onChangeInativo($event)"></asc-checkbox>
+            <asc-checkbox label="Ativos" name="ativos" formControlName="somenteAtivos" [valoresTrueOrFalse]="true" (ngModelChange)="onChangeInativo($event)"></asc-checkbox>
           </div>
           
         </div>

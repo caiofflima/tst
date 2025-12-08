@@ -21,29 +21,30 @@
       </div>
 
       <div class="clearfix"></div>
-
-      <div class="p-0 col-xs-2" *ngIf="filtroMotivoNegacao.idSituacaoPedido">
-        <label class="control-label" for="situacaoPedido">Situacao do Pedido</label>&nbsp;<br>
-        <p id="situacaoPedido">{{situacaoPedido}}</p>
+      <div class="row">
+        <div class="p-0 col-md-5" *ngIf="filtroMotivoNegacao.idSituacaoPedido">
+          <label class="control-label" for="situacaoPedido">Situação do Pedido</label>&nbsp;<br>
+          <p id="situacaoPedido">{{situacaoPedido}}</p>
+        </div>
+        <div class="p-0 col-md-5" *ngIf="filtroMotivoNegacao.tituloNegacao">
+          <label class="control-label" for="nome">Título da Negação</label>&nbsp;<br>
+          <p id="nome">{{filtroMotivoNegacao.tituloNegacao}}</p>
+        </div>
+        <div class="p-0 col-md-5" *ngIf="filtroMotivoNegacao.motivoNegacao">
+          <label class="control-label" for="opme">Motivo da Negação</label>&nbsp;<br>
+          <p id="opme">{{filtroMotivoNegacao.motivoNegacao}}</p>
+        </div>
+        <div class="p-0 col-md-5" *ngIf="filtroMotivoNegacao.somenteAtivo">
+          <label class="control-label" for="ativos">Somente ativos</label>&nbsp;<br>
+          <p id="ativos">{{filtroMotivoNegacao.somenteAtivo === 'S' ? 'Sim' : 'Não'}}</p>
+        </div>
+        <div class="p-0 col-md-5" *ngIf="filtroMotivoNegacao.icNivelNegacao">
+          <label class="control-label" for="nivelNegacao">Nível de Negação</label>&nbsp;<br>
+          <p id="nivelNegacao">{{filtroMotivoNegacao.icNivelNegacao === 'S' ? 'PEDIDO' : 'PROCEDIMENTO'}}</p>
+        </div>
       </div>
-      <div class="p-0 col-xs-2" *ngIf="filtroMotivoNegacao.tituloNegacao">
-        <label class="control-label" for="nome">Título da Negação</label>&nbsp;<br>
-        <p id="nome">{{filtroMotivoNegacao.tituloNegacao}}</p>
-      </div>
-      <div class="p-0 col-xs-2" *ngIf="filtroMotivoNegacao.motivoNegacao">
-        <label class="control-label" for="opme">Motivo da Negação</label>&nbsp;<br>
-        <p id="opme">{{filtroMotivoNegacao.motivoNegacao}}</p>
-      </div>
-      <div class="p-0 col-xs-2" *ngIf="filtroMotivoNegacao.somenteAtivo">
-        <label class="control-label" for="ativos">Somente ativos</label>&nbsp;<br>
-        <p id="ativos">{{filtroMotivoNegacao.somenteAtivo === 'S' ? 'Sim' : 'Não'}}</p>
-      </div>
-      <div class="p-0 col-xs-2" *ngIf="filtroMotivoNegacao.icNivelNegacao">
-        <label class="control-label" for="nivelNegacao">Nível de Negação</label>&nbsp;<br>
-        <p id="nivelNegacao">{{filtroMotivoNegacao.icNivelNegacao === 'S' ? 'PEDIDO' : 'PROCEDIMENTO'}}</p>
-      </div>
-
       <div class="clearfix"></div>
+
     </div>
 
     <div class="row p-0 col-md-12">
@@ -53,7 +54,7 @@
     <div class="clearfix"></div>
 
     <div class="p-0 col-md-12">
-      <div class="col-xs-3 search-inp p-0" style="margin: 5px 0 8px; border-bottom: 0 none">
+      <div class="col-md-3 search-inp p-0" style="margin: 5px 0 8px; border-bottom: 0 none">
         <input #gb type="text" class="form-control filtro-caixa" pInputText size="50"
                placeholder="Digite para filtrar resultado">
         <em class="fas fa-search"></em>
@@ -91,7 +92,7 @@
       </p-table>
     </div>
 
-    <div class="p-0 col-xs-12 barra-botoes">
+    <div class="p-0 col-md-12 barra-botoes">
       <button
         class="btn back-btn" routerLink="/manutencao/parametros/motivo-negacao" id="btnFormVoltar">
         <span class="fa fa-reply fa-fw"></span>Voltar

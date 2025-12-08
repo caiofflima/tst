@@ -39,12 +39,13 @@
         }}
       </p>
       <span class="tooltip-mensagem">
-        <button
+        <dsc-button
+          size="large"
+          label="Lista de pedidos"
+          variant="secondary-outlined"
           (click)="handleListaPedidosNavigation()"
-          class="lista-processos"
-        >
-          <span>Lista de pedidos</span>
-        </button>
+        />
+
         <p class="tooltiptext is--small">
           Listar todos os pedidos da<br />família do titular.
         </p>

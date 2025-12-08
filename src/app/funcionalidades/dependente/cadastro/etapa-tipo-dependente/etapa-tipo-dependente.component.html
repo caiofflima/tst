@@ -11,11 +11,11 @@
 
     <div class="form-row">
       <div class="form-group col-md-6 no-padding-left">
+        <label class="control-label">Tipo de beneficiário *</label>
         <asc-select-tipo-dependente
           [uppercase]="true"
-          label="Tipo de beneficiário"
+          label=""
           id="idTipoDependente"
-          [required]="true"
           [titular]="false"
           [inclusao]="true"
           [control]="formularioSolicitacao.get('idTipoDependente')"
@@ -26,13 +26,12 @@
       </div>
 
       <div class="col-md-6 mb-15 no-padding-left" *ngIf="showMatricula">
-        <label class="control-label">Matrícula Titular</label>
+        <label class="control-label">Matrícula Titular *</label>
         <asc-input-text
           [control]="formularioSolicitacao.get('matricula')"
           inputId="matricula"
           label=""
           maskName="matriculaMask"
-          [required]="showMatricula"
         ></asc-input-text>
       </div>
 

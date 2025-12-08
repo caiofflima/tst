@@ -8,6 +8,7 @@ import {TipoOcorrenciaService} from "../../../services/comum/tipo-ocorrencia.ser
 import {MessageService} from "../../../services/services";
 import {SelectItem} from "primeng/api";
 import {NG_VALUE_ACCESSOR} from "@angular/forms";
+import { Option } from 'sidsc-components/dsc-select';
 
 type TipoAcaoComBackend = TipoAcaoService<TipoOcorrenciaService,
     TipoAcaoDoService<any, TipoOcorrencia>>;
@@ -34,7 +35,10 @@ export class AscSelectTipoOcorrenciaComponent
     }
 
     transformarObjetosParaSelectItems(data: TipoOcorrencia[]): SelectItem[] {
-        return data.map(to => ({label: to.nome, value: to}));
+        const dados = data.map(to => ({label: to.nome, value: to}));
+        console.log('transformarObjetosParaSelectItems dados',dados);
+
+        return dados
     }
 
 }

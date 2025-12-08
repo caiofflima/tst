@@ -1,32 +1,29 @@
-<asc-modal
-  class="mdl-custom"
-  [ngClass]="{ 'modal-fade': isModalFaded }"
-  (closeModal)="fecharModal()"
-  #modalComponent
->
-  <asc-modal-header>Nova ocorrência</asc-modal-header>
-  <asc-modal-body class="mdl-body-custom">
-    <section>
-      <form
+<ng-template #modalComponent let-form>
+  <form
         [formGroup]="form"
         style="display: flex; flex-direction: column; height: 100%"
       >
-        <div class="row" style="flex-grow: 1">
-          <div class="form-row">
-            <div class="form-group col-md-4">
-              <asc-select-tipo-ocorrencia
-                label="Tipo de ocorrência"
-                [standalone]="true"
-                [control]="tipoOcorrencia"
-                style="border-left: none !important"
-                [required]
-              >
-              </asc-select-tipo-ocorrencia>
-            </div>
-            <div class="form-group col-md-8">
-              <div class="desc-tipo">
-                <h4>{{ tipoOcorrencia?.value?.nome }}</h4>
-                <p>{{ tipoOcorrencia?.value?.descricao }}</p>
+        <div class="" style="">
+          <div class="">
+            <div class="row">
+
+              <div class="col-md-4">
+                <asc-select-tipo-ocorrencia
+                  label="Tipo de ocorrência"
+                  [standalone]="true"
+                  [control]="tipoOcorrencia"
+                  style="border-left: none !important"
+                  [required]
+                  (change)="change($event)"
+                >
+                </asc-select-tipo-ocorrencia>
+
+              </div>
+              <div class="col-md-8">
+                <div class="desc-tipo" *ngIf="tipoOcorrenciaValue?.value">
+                  <h4>{{ tipoOcorrenciaValue?.value?.nome }}</h4>
+                  <p>{{ tipoOcorrenciaValue?.value?.descricao }}</p>
+                </div>
               </div>
             </div>
 
@@ -83,7 +80,7 @@
             </ng-template>
 
             <!-- Contêiner de rolagem para anexos -->
-            <div class="arquivo-scroll-container">
+             <div class="arquivo-scroll-container">
               <div class="arquivo-card-container">
                 <div
                   *ngFor="let file of files; let i = index"
@@ -147,24 +144,7 @@
           </div>
         </div>
       </form>
-    </section>
-  </asc-modal-body>
-
-  <asc-modal-footer class="mdl-footer-custom">
-    <div class="fl-sb-btn">
-      <button class="btn-cts btn-outline-closed" (click)="hide()">
-        <span>Cancelar</span>
-      </button>
-      <button
-        class="btn-cts btn-popup"
-        (click)="adicionarOcorrencia($event)"
-        [disabled]="form.invalid || isButtonDisabled"
-      >
-        <span>Adicionar</span>
-      </button>
-    </div>
-  </asc-modal-footer>
-</asc-modal>
+</ng-template>
 
 <asc-modal-visualizar-documento
   #modalVisualizarDocumentoComponent

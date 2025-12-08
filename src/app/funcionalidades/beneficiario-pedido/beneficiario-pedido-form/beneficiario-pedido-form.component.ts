@@ -109,13 +109,15 @@ export class BeneficiarioPedidoFormComponent extends BaseComponent {
             this.beneficiarioPedidoService.consultarBeneficiarioPedido(this.beneficiarioPedidoParam).pipe(
                 take<BeneficiarioPedido>(1)
             ).subscribe(beneficiarioPedido => {
-                
+                console.log("-------- consultarDados(): void { beneficiarioPedido");
+                console.log(beneficiarioPedido);
+                console.log("--------------------------------------" + Util.getDate(beneficiarioPedido.dataInativacao));
                 this.beneficiarioPedido = beneficiarioPedido;
                 this.formulario.patchValue( beneficiarioPedido )
                 this.beneficiariosAssociados.setValue(null);
-                this.dataInativacao.setValue(Util.getDate(beneficiarioPedido.dataInativacao));
+    
+                this.dataInativacao.setValue(new Date("02-04-2024"));
                 this.getCampoTiposBeneficiario.setValue( [{value: beneficiarioPedido.idTipoBeneficiario}] )
-           
                 this.inativo.setValue(this.beneficiarioPedido.inativo === 'SIM');
                 this.consultarTiposDeBeneficiariosAssociados();
                 this.consultarPerfis()
@@ -125,6 +127,13 @@ export class BeneficiarioPedidoFormComponent extends BaseComponent {
           
             this.consultarPerfis()
         }
+    }
+
+    dateToISO(d:any):string{
+        const a = d.getFullYear();
+        const m = String(d.getMonth()+1).padEnd(2,"0");
+        const dia = String(d.getDate()).padStart(2, "0");
+        return `${dia}-${m}-${a}`;
     }
 
     removerValidacao(){
@@ -166,19 +175,14 @@ export class BeneficiarioPedidoFormComponent extends BaseComponent {
             take<DadoComboDTO[]>(1)
         ).subscribe(res => {
             this.listComboPerfil = res;
-            if( this.beneficiarioPedidoParam ){
-                
+            if( this.beneficiarioPedidoParam && this.beneficiarioPedidoParam.idPerfilMinimo){
                 const idx = res.findIndex(p => p.value === this.beneficiarioPedidoParam.idPerfilMinimo)
                 
                 this.valuePerfil = [this.listComboPerfil[idx].value]
-                this.getCampoPerfil.setValue( this.valuePerfil )
-                
-            }
-           
+                this.getCampoPerfil.setValue( this.valuePerfil )      
+            } 
         }, err => this.messageService.addMsgDanger(err.error));
     }
-
-    
 
     public limparCampos(): void {
         this.formulario.reset();
@@ -229,11 +233,12 @@ export class BeneficiarioPedidoFormComponent extends BaseComponent {
         
         let beneficiarioPedido: BeneficiarioPedido = {
             idTipoProcesso: this.idTipoProcesso.value,
-            tiposBeneficiario: this.getCampoTiposBeneficiario.value.map(b => b.value),
+            tiposBeneficiario: this.getListaFormulario(this.getCampoTiposBeneficiario.value, this.listComboTipoBeneficiario, true, false),
             inativo: this.inativo.value ? 'SIM' : 'NAO',
             dataInativacao: this.dataInativacao.value,
             idsPerfilMinimo: this.getCampoPerfil.value
         };
+
         const queryParams = {
             tiposProcesso: [this.idTipoProcesso.value],
             descricaoTiposProcesso: [this.tipoProcesso.nome],
@@ -251,7 +256,7 @@ export class BeneficiarioPedidoFormComponent extends BaseComponent {
                 this.showDangerMsg(err.error)
             });
         } else {
-            
+
           this.beneficiarioPedidoService.post(beneficiarioPedido).pipe(take<BeneficiarioPedido>(1)  
             ).subscribe(() => {
                 this.showSuccessMsg(this.bundle("MA038"));
@@ -264,6 +269,24 @@ export class BeneficiarioPedidoFormComponent extends BaseComponent {
         }
     }
 
+    private getListaFormulario(formulario:any, combo: DadoComboDTO[], value:boolean, label:boolean):any{
+        let retorno;
+        if(formulario && formulario.length>0 && combo){
+            const listaSelecionada = new Set(formulario.map(x=>Number(x)));
+            retorno = combo.filter( item =>{ 
+                return listaSelecionada.has(item?.value)
+            });
+            if(label){
+                retorno = retorno.map(v => v.label); 
+            }else if(value){
+                retorno = retorno.map(v => v.value);
+            }
+        }else{
+            retorno = null;
+        };
+
+        return retorno;
+    }
 
     public onChangeInativo(event: CheckboxChangeEvent) {
         if (event.checked) {
