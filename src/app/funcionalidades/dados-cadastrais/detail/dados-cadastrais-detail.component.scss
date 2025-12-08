@@ -62,7 +62,7 @@
 
 .is--cep .form__input {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   gap: 8px;
 }
 
@@ -74,8 +74,9 @@
   position: static !important;
   flex: 0 0 auto;
   width: 48px;
-  height: 40px;
+  height: 56px;
   margin-left: 8px;
+  margin-top: 24px;
   padding: 0;
   border: 1px solid #b3c7cb;
   border-radius: 4px;
@@ -84,11 +85,17 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: #f5f5f5;
+  }
 }
 
 .is--cep .reset-input i {
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1;
+  color: #666;
 }
 
 .box-form__groups {
