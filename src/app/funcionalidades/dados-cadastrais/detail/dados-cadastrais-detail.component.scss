@@ -31,18 +31,20 @@
   line-height: 1;
 }
 
-.campo-opcional-wrapper {
-  margin-bottom: 8px;
+.box-form__group {
+  .campo-opcional-wrapper {
+    margin-bottom: 8px;
 
-  .label-com-opcional {
-    display: inline-block;
-    font-family: 'Caixa STD', sans-serif;
-    font-size: 11.25px;
-    color: rgba(0, 0, 0, 0.6);
+    .label-com-opcional {
+      display: inline-block;
+      font-family: 'Caixa STD', sans-serif;
+      font-size: 11.25px;
+      color: #222292E;
 
-    .texto-opcional {
-      opacity: 0.5;
-      margin-left: 4px;
+      .texto-opcional {
+        opacity: 0.5;
+        margin-left: 4px;
+      }
     }
   }
 }
