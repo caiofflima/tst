@@ -78,6 +78,13 @@ export class ProcedimentoFormComponent extends BaseComponent implements OnInit, 
         this.bloquearBotaoAdicionarProcedimentoQuandoGrauProcedimentoInvalido();
     }
 
+    private cleanControIdGrauProcedimentoFromControl() {
+        const idGrauProcedimento = this.idGrauProcedimento;
+        idGrauProcedimento.reset();
+        idGrauProcedimento.markAsUntouched();
+        idGrauProcedimento.markAsPristine();
+    }
+
     ngOnChanges(changes: SimpleChanges): void {
         // Se trocar o tipo de processo ou parâmetros, limpar o formulário para evitar estados cruzados
         if (changes['parametroSelectProcedimento'] && !changes['parametroSelectProcedimento'].firstChange) {
@@ -90,6 +97,7 @@ export class ProcedimentoFormComponent extends BaseComponent implements OnInit, 
             takeUntil(this.subjectUnsubscription)
         ).subscribe((idProcedimento: number) => {
             this.parametrosSelectGrauProcedimento = {idProcedimento};
+            this.cleanControIdGrauProcedimentoFromControl();
         });
     }
 
@@ -100,58 +108,32 @@ export class ProcedimentoFormComponent extends BaseComponent implements OnInit, 
     }
 
     grauProcedimentoCarregado(grauProcedimento: GrauProcedimento[]) {
-        // Se não houver graus, remove a validação de required do campo
+        const idGrauProcedimentoControl = this.idGrauProcedimento;
+
         if (isUndefinedNullOrEmpty(grauProcedimento)) {
-            this.idGrauProcedimento.clearValidators();
-            this.idGrauProcedimento.updateValueAndValidity();
             this.disableButtonAdicionarProcedimento = false;
+            idGrauProcedimentoControl.clearValidators();
         } else {
-            // Se houver graus, adiciona a validação de required
-            this.idGrauProcedimento.setValidators(Validators.required);
-            this.idGrauProcedimento.updateValueAndValidity();
             this.disableButtonAdicionarProcedimento = true;
-        }
+            idGrauProcedimentoControl.setValidators(Validators.required);
 
-        this.grauSelecionadoAsObject = null;
-
-        // Se já havia um valor selecionado, mantém
-        if (this.idGrauProcedimento.value && grauProcedimento) {
-            const valor = this.idGrauProcedimento.value;
-            this.grauSelecionadoAsObject = grauProcedimento.find(grau => valor === grau.id);
+            // Reatribui o valor do grau ao campo do formulário, se já existir um selecionado
+            const grauSelecionado = this.idGrauProcedimento.value;
+            if (grauSelecionado) {
+                idGrauProcedimentoControl.setValue(grauSelecionado);
+                this.grauSelecionadoAsObject = grauProcedimento.find(grau => grauSelecionado === grau.id);
+            }
         }
+        idGrauProcedimentoControl.updateValueAndValidity();
     }
 
     procedimentoSelecionando(procedimento?: Procedimento) {
-        if(isUndefinedNullOrEmpty(procedimento)){
-            this.resetarFormCompleto();
-            return;
-        }
         this.procedimentoAsObject = procedimento;
         this.procedimento.emit(procedimento);
-
-        // Garante recarga dos graus vinculados ao procedimento selecionado
-        if (procedimento && procedimento.id) {
-            this.idProcedimento.setValue(procedimento.id, { emitEvent: false });
-            this.idProcedimento.markAsDirty();
-            this.idProcedimento.markAsTouched();
-            this.idProcedimento.updateValueAndValidity();
-            this.parametrosSelectGrauProcedimento = { idProcedimento: procedimento.id };
-            this.idGrauProcedimento.reset();
-            this.idGrauProcedimento.clearValidators();
-            this.idGrauProcedimento.setValidators(Validators.required);
-            this.idGrauProcedimento.updateValueAndValidity();
-            this.grauSelecionadoAsObject = null;
-        }
     }
 
     grauProcedimentoSelecionado(grauProcedimentoSelecionado?: GrauProcedimento) {
         this.grauSelecionadoAsObject = grauProcedimentoSelecionado;
-        if (grauProcedimentoSelecionado) {
-            this.idGrauProcedimento.setValue(grauProcedimentoSelecionado.id);
-            this.idGrauProcedimento.markAsDirty();
-            this.idGrauProcedimento.markAsTouched();
-            this.idGrauProcedimento.updateValueAndValidity();
-        }
     }
 
     override ngOnDestroy(): void {
@@ -269,22 +251,6 @@ export class ProcedimentoFormComponent extends BaseComponent implements OnInit, 
         this.procedimentoAsObject = null;
         this.grauSelecionadoAsObject = null;
         this.parametrosSelectGrauProcedimento = { idProcedimento: null };
-
-        // Limpa o campo procedimento completamente
-        this.idProcedimento.reset(null);
-        this.idProcedimento.setValue(null);
-        this.idProcedimento.markAsPristine();
-        this.idProcedimento.markAsUntouched();
-        this.idProcedimento.updateValueAndValidity();
-
-        // Limpa o campo grau procedimento
-        this.idGrauProcedimento.reset(null);
-        this.idGrauProcedimento.setValue(null);
-        this.idGrauProcedimento.markAsPristine();
-        this.idGrauProcedimento.markAsUntouched();
-        this.idGrauProcedimento.clearValidators();
-        this.idGrauProcedimento.updateValueAndValidity();
-
         this.resetarForm();
     }
 }

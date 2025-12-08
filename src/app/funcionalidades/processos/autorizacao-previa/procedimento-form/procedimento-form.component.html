@@ -3,28 +3,23 @@
     <asc-select-procedimento
       [id]="inResumo ? 'idProcedimentoResumo' : 'idProcedimento'"
       (dadoSelecionado)="procedimentoSelecionando($event)"
-      [control]="idProcedimento"
       [parametros]="parametroSelectProcedimento"
       [tipoAcaoService]="CONSULTAR_PROCEDIMENTO_POR_TIPO_PROCESSO"
       formControlName="idProcedimento"
       label="Procedimento"
-      [required]="true"
       style="border-left: none !important;">
     </asc-select-procedimento>
-    <div class="margin-16">
+    <div class="margin-16" *ngIf="idProcedimento.value">
       <asc-graus-procedimento
-        *ngIf="idProcedimento.value && procedimentoAsObject"
         [parametros]="parametrosSelectGrauProcedimento"
-        [control]="idGrauProcedimento"
         (dadosBackend)="grauProcedimentoCarregado($event)"
         (dadoSelecionado)="grauProcedimentoSelecionado($event)"
         formControlName="idGrauProcedimento"
-        [required]="true"
         label="{{ isTipoProcessoOdontologico() ? 'Região odontológica' : 'Grau'}}"
         style="border-left: none !important;">
       </asc-graus-procedimento>
     </div>
-    <div *ngIf="idGrauProcedimento.value && grauSelecionadoAsObject" class="margin-16">
+    <div *ngIf="idGrauProcedimento.value" class="margin-16">
       <asc-input-text
         label="Quantidade solicitada" [required]="true"
         [control]="form.get('qtdSolicitada')"
