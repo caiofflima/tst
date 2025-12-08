@@ -4,6 +4,14 @@
   .box-form__group {
     padding-left: 10px;
     padding-right: 10px;
+
+    asc-input-text,
+    asc-select-uf,
+    asc-select-municipio,
+    asc-input-telefone {
+      width: 100%;
+      display: block;
+    }
   }
 }
 
