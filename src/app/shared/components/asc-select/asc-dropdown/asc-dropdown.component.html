@@ -1,7 +1,7 @@
 <dsc-select
   [label]="required !== null && required !== false ? (label ? label + ' *' : '') : (label || '')"
   [formControl]="control"
-  [disabled]="showProgressBar || disabled"
+  [disabled]="showProgressBar || disabled || readonly"
   [options]="options"
   [showFilter]="true"
   [placeholder]="placeholder || bundle('MHSPH')"

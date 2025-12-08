@@ -34,6 +34,7 @@ export class MotivoNegacaoTipoPedidoFormComponent extends BaseComponent {
   listaComboSituacoesProcesso: SelectItem[]
 
   atualizar: any
+  camposReadonly = false
   idMotivoNegacaoParam: number
   idTipoProcessoParam: number
   idSituacaoProcessoParam: number
@@ -90,7 +91,7 @@ export class MotivoNegacaoTipoPedidoFormComponent extends BaseComponent {
     })
 
     if (this.isAtualizacao()) {
-      this.desabilitarCamposSomenteLeitura();
+      this.camposReadonly = true;
     }
 
     this.formulario.get('inativo').valueChanges.subscribe(v => {
@@ -247,13 +248,6 @@ export class MotivoNegacaoTipoPedidoFormComponent extends BaseComponent {
 
   }
 
-  private desabilitarCamposSomenteLeitura() {
-    this.idTipoProcesso.disable({emitEvent: false});
-    this.icNiveisNegacaoCombo.disable({emitEvent: false});
-    this.campoSituacaoProcesso.disable({emitEvent: false});
-    this.idMotivoNegacao.disable({emitEvent: false});
-  }
-
   private isAtualizacao(): boolean {
     return this.atualizar != null;
   }
@@ -273,7 +267,7 @@ export class MotivoNegacaoTipoPedidoFormComponent extends BaseComponent {
 
   public salvar(): void {
     Loading.start()
-    const dados: MotivoNegacaoTipoPedido = this.formulario.value;
+    const dados: MotivoNegacaoTipoPedido = this.formulario.getRawValue();
     const motivoNegacao = this.listaComboMotivoNegacao.find(l => l.value == dados.idMotivoNegacao)
     const tipoProcesso = this.listaComboTipoProcesso.find(l => l.value == dados.idTipoProcesso)
 
@@ -314,7 +308,7 @@ export class MotivoNegacaoTipoPedidoFormComponent extends BaseComponent {
   }
 
   excluir(){
-    const dados: MotivoNegacaoTipoPedido = this.formulario.value;
+    const dados: MotivoNegacaoTipoPedido = this.formulario.getRawValue();
     const prepararObjeto = new MotivoNegacaoTipoPedido()
     prepararObjeto.idMotivoNegacao = dados.idMotivoNegacao
     prepararObjeto.idTipoProcesso = dados.idTipoProcesso

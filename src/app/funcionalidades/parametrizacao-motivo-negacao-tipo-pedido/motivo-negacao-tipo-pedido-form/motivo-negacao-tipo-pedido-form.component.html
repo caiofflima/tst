@@ -24,7 +24,7 @@
             label="Tipo de Pedido"
             [control]="idTipoProcesso"
             [required]="!atualizar"
-            [disabled]="atualizar != null"
+            [readonly]="camposReadonly"
             (selected)="carregaBeneficiariosPorTipoProcesso()"
             name="idTipoProcesso"
       ></asc-dropdown>
@@ -43,7 +43,7 @@
         label="Nível de Negação"
         [control]="icNiveisNegacaoCombo"
         [required]="true"
-        [disabled]="atualizar != null"
+        [readonly]="camposReadonly"
         (selected)="prepararFiltroParaCarregarMotivoNegacao($event)"
         name="icNiveisNegacao"
         ></asc-dropdown>
@@ -56,7 +56,7 @@
         [control]="campoSituacaoProcesso"
         (selected)="carregarMotivoNegacao()"
         [required]="true"
-        [disabled]="atualizar != null"
+        [readonly]="camposReadonly"
         ></asc-dropdown>
     </div>
 
@@ -66,7 +66,7 @@
         label="Motivo de Negação"
         [control]="idMotivoNegacao"
         [required]="!atualizar"
-        [disabled]="atualizar != null"
+        [readonly]="camposReadonly"
         name="idMotivoNegacao"
         ></asc-dropdown>
     </div>
@@ -81,10 +81,10 @@
           label="Motivo de Negação"
           [control]="idMotivoNegacao"
           [required]="!atualizar"
-          [disabled]="atualizar != null"
+          [readonly]="camposReadonly"
           name="idMotivoNegacao"
           ></asc-dropdown>
-      </div>    
+      </div>
     </div>
 
   <div class="form-row inativo-form" *ngIf="atualizar">

@@ -14,6 +14,7 @@ import {Option} from 'sidsc-components/dsc-select';
 export class AscDropdownComponent implements OnInit, OnDestroy, AfterViewInit {
 
     private _disabled = false;
+    private _readonly = false;
 
     @Input()
     get disabled() {
@@ -23,6 +24,15 @@ export class AscDropdownComponent implements OnInit, OnDestroy, AfterViewInit {
         this._disabled = value;
         this.syncControlDisabledState();
     }
+
+    @Input()
+    get readonly() {
+        return this._readonly;
+    }
+    set readonly(value: boolean) {
+        this._readonly = value;
+    }
+
     @Input() id: string;
     @Input() label: string;
     @Input() requiredMsg: string;
@@ -85,7 +95,7 @@ export class AscDropdownComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
     onChange(valor: any): void {
-        if (this.disabled) {
+        if (this.disabled || this.readonly) {
             return;
         }
 
