@@ -33,8 +33,11 @@
           label="Matrícula Titular"
           [required]="true"
           maskName="matriculaMaskDisk"
-          placeholder="Ex. 123456-7"
+          [somenteNumeros]="true"
+          placeholder="______-_"
+          [maxlength]="8"
           ></asc-input-text>
+        <small class="mask-preview text-muted">Formato: {{ matriculaPreview }}</small>
         </div>
       </div>
 

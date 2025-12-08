@@ -1,6 +1,7 @@
-import {Component, EventEmitter, forwardRef, Input, Output} from '@angular/core';
+import {Component, EventEmitter, forwardRef, Input, OnInit, Output} from '@angular/core';
 import {AbstractControl, ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {Option} from 'sidsc-components/dsc-select';
+import {MessageService} from '../messages/message.service';
 
 @Component({
     selector: 'asc-multiSelect',
@@ -10,9 +11,9 @@ import {Option} from 'sidsc-components/dsc-select';
         provide: NG_VALUE_ACCESSOR,
         useExisting: forwardRef(() => AscMultiSelectComponent),
         multi: true
-    }]
+    }],
 })
-export class AscMultiSelectComponent implements ControlValueAccessor {
+export class AscMultiSelectComponent implements ControlValueAccessor, OnInit {
 
     @Output() public onChange: EventEmitter<any> = new EventEmitter();
 
@@ -40,10 +41,13 @@ export class AscMultiSelectComponent implements ControlValueAccessor {
     @Input() _value: any;
 
     @Input()
-    control: AbstractControl;
+    control: AbstractControl = new FormControl();
 
     @Input('required')
     required: boolean = false;
+
+    @Input()
+    requiredMsg: string = 'MA007';
 
     @Input('limit')
     limit: number;
@@ -61,8 +65,12 @@ export class AscMultiSelectComponent implements ControlValueAccessor {
 
     @Input() loading = false
 
-    constructor() {
+    constructor(private readonly messageService: MessageService) {
         this.limit = 4;
+    }
+
+    ngOnInit(): void {
+        this.requiredMsg = this.bundle(this.requiredMsg);
     }
 
     get value() {
@@ -101,10 +109,14 @@ export class AscMultiSelectComponent implements ControlValueAccessor {
     }
 
     registerOnTouched(_: any): void {
-        // Não usado.
+        this._onTouched = _;
     }
 
     _onChange(_: any) {
+        // Não usado.
+    }
+
+    _onTouched(_: any) {
         // Não usado.
     }
 
@@ -117,10 +129,19 @@ export class AscMultiSelectComponent implements ControlValueAccessor {
 
             this._value = objetosCompletos;
             this._onChange(objetosCompletos);
+            this._onTouched(objetosCompletos);
             this.onChange.emit(objetosCompletos);
         } else {
             this.onChange.emit(event);
         }
+    }
+
+    showRequiredError(): boolean {
+        return !!this.control && this.control.invalid && (this.control.dirty || this.control.touched);
+    }
+
+    bundle(key: string, args?: any): string {
+        return this.messageService.fromResourceBundle(key, args);
     }
 
 }

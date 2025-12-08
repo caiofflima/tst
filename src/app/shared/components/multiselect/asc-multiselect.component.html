@@ -1,11 +1,15 @@
 <dsc-select
-  [label]="label"
+  [label]="required !== null && required !== false ? (label ? label + ' *' : '') : (label || '')"
   [options]="dscOptions"
   [formControl]="$any(control)"
   [multiple]="true"
   [placeholder]="'Selecione as opções'"
   [showFilter]="true"
+  [required]="required"
   (selectionChange)="onChangeCallback($event)"
   [disabled]="disabled"
   [size]="size"
->
+></dsc-select>
+<div *ngIf="showRequiredError()" class="error-form">
+  <div *ngIf="control?.hasError('required')">{{ requiredMsg }}</div>
+</div>
