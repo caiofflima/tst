@@ -13,7 +13,16 @@ import {Option} from 'sidsc-components/dsc-select';
 })
 export class AscDropdownComponent implements OnInit, OnDestroy, AfterViewInit {
 
-    @Input() disabled = false;
+    private _disabled = false;
+
+    @Input()
+    get disabled() {
+        return this._disabled;
+    }
+    set disabled(value: boolean) {
+        this._disabled = value;
+        this.syncControlDisabledState();
+    }
     @Input() id: string;
     @Input() label: string;
     @Input() requiredMsg: string;
@@ -62,6 +71,7 @@ export class AscDropdownComponent implements OnInit, OnDestroy, AfterViewInit {
     ngOnInit(): void {
         this.requiredMsg = this.bundle(this.requiredMsg);
         this.registerOnChangeValue();
+        this.syncControlDisabledState();
     }
 
     ngAfterViewInit(): void {
@@ -75,6 +85,10 @@ export class AscDropdownComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
     onChange(valor: any): void {
+        if (this.disabled) {
+            return;
+        }
+
         const emitValue = this.getEmitValue(valor);
         if (this.control) {
             // Ensure form control reflects the selected value
@@ -166,6 +180,17 @@ export class AscDropdownComponent implements OnInit, OnDestroy, AfterViewInit {
 
         const option = this.options.find(opt => opt.value === valor);
         return option ? { label: option.label, value: option.value } : valor;
+    }
+
+    private syncControlDisabledState(): void {
+        if (!this.control) {
+            return;
+        }
+        if (this.disabled && !this.control.disabled) {
+            this.control.disable({emitEvent: false});
+        } else if (!this.disabled && this.control.disabled) {
+            this.control.enable({emitEvent: false});
+        }
     }
 
     private registerOnChangeValue(): void {
