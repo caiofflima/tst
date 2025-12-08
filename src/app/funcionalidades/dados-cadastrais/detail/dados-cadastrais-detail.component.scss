@@ -7,6 +7,13 @@
   .box-form__group {
     padding-left: 4px;
     padding-right: 4px;
+    max-width: none !important;
+
+    &.col-md-2,
+    &.col-md-3,
+    &.col-md-7 {
+      max-width: none !important;
+    }
 
     ::ng-deep {
       asc-input-text,
@@ -33,6 +40,20 @@
 
       input,
       select {
+        max-width: none !important;
+      }
+    }
+  }
+}
+
+@media (min-width: 960px) {
+  .box-form__groups {
+    .box-form__group {
+      max-width: none !important;
+
+      &.col-md-2,
+      &.col-md-3,
+      &.col-md-7 {
         max-width: none !important;
       }
     }
