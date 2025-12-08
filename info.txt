@@ -1,5 +1,7 @@
-CEP digitado: 38057610
+dados-cadastrais-detail.component.ts:503 CEP digitado: 38057610
 dados-cadastrais-detail.component.ts:504 CEP limpo: 38057610
+integracao-correios.service.ts:23 URL da requisição: /siasc-api/api/correios/cep/38057610
+integracao-correios.service.ts:25 Resposta completa da API: null
 dados-cadastrais-detail.component.ts:512 Resposta do serviço: null
 message.service.ts:173 antes chamada addmsgapplication Endereço não encontrado para o cep informado. alert-danger undefined
 message.service.ts:132 antes chamada emitter
