@@ -13,7 +13,7 @@
     </asc-select-procedimento>
     <div class="margin-16">
       <asc-graus-procedimento
-        *ngIf="idProcedimento.dirty"
+        *ngIf="idProcedimento.value && procedimentoAsObject"
         [parametros]="parametrosSelectGrauProcedimento"
         [control]="idGrauProcedimento"
         (dadosBackend)="grauProcedimentoCarregado($event)"
@@ -24,7 +24,7 @@
         style="border-left: none !important;">
       </asc-graus-procedimento>
     </div>
-    <div *ngIf="idGrauProcedimento.dirty" class="margin-16">
+    <div *ngIf="idGrauProcedimento.value && grauSelecionadoAsObject" class="margin-16">
       <asc-input-text
         label="Quantidade solicitada" [required]="true"
         [control]="form.get('qtdSolicitada')"

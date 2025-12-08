@@ -100,11 +100,22 @@ export class ProcedimentoFormComponent extends BaseComponent implements OnInit, 
     }
 
     grauProcedimentoCarregado(grauProcedimento: GrauProcedimento[]) {
-        this.disableButtonAdicionarProcedimento = !isUndefinedNullOrEmpty(grauProcedimento);
-        this.idGrauProcedimento.updateValueAndValidity();
+        // Se não houver graus, remove a validação de required do campo
+        if (isUndefinedNullOrEmpty(grauProcedimento)) {
+            this.idGrauProcedimento.clearValidators();
+            this.idGrauProcedimento.updateValueAndValidity();
+            this.disableButtonAdicionarProcedimento = false;
+        } else {
+            // Se houver graus, adiciona a validação de required
+            this.idGrauProcedimento.setValidators(Validators.required);
+            this.idGrauProcedimento.updateValueAndValidity();
+            this.disableButtonAdicionarProcedimento = true;
+        }
+
         this.grauSelecionadoAsObject = null;
 
-        if (this.idGrauProcedimento.value) {
+        // Se já havia um valor selecionado, mantém
+        if (this.idGrauProcedimento.value && grauProcedimento) {
             const valor = this.idGrauProcedimento.value;
             this.grauSelecionadoAsObject = grauProcedimento.find(grau => valor === grau.id);
         }
@@ -113,25 +124,34 @@ export class ProcedimentoFormComponent extends BaseComponent implements OnInit, 
     procedimentoSelecionando(procedimento?: Procedimento) {
         if(isUndefinedNullOrEmpty(procedimento)){
             this.resetarFormCompleto();
+            return;
         }
         this.procedimentoAsObject = procedimento;
         this.procedimento.emit(procedimento);
 
         // Garante recarga dos graus vinculados ao procedimento selecionado
         if (procedimento && procedimento.id) {
-            this.idProcedimento.setValue(procedimento.id);
+            this.idProcedimento.setValue(procedimento.id, { emitEvent: false });
             this.idProcedimento.markAsDirty();
             this.idProcedimento.markAsTouched();
+            this.idProcedimento.updateValueAndValidity();
             this.parametrosSelectGrauProcedimento = { idProcedimento: procedimento.id };
             this.idGrauProcedimento.reset();
-            this.idGrauProcedimento.markAsPristine();
-            this.idGrauProcedimento.markAsUntouched();
+            this.idGrauProcedimento.clearValidators();
+            this.idGrauProcedimento.setValidators(Validators.required);
+            this.idGrauProcedimento.updateValueAndValidity();
             this.grauSelecionadoAsObject = null;
         }
     }
 
     grauProcedimentoSelecionado(grauProcedimentoSelecionado?: GrauProcedimento) {
         this.grauSelecionadoAsObject = grauProcedimentoSelecionado;
+        if (grauProcedimentoSelecionado) {
+            this.idGrauProcedimento.setValue(grauProcedimentoSelecionado.id);
+            this.idGrauProcedimento.markAsDirty();
+            this.idGrauProcedimento.markAsTouched();
+            this.idGrauProcedimento.updateValueAndValidity();
+        }
     }
 
     override ngOnDestroy(): void {
@@ -249,12 +269,22 @@ export class ProcedimentoFormComponent extends BaseComponent implements OnInit, 
         this.procedimentoAsObject = null;
         this.grauSelecionadoAsObject = null;
         this.parametrosSelectGrauProcedimento = { idProcedimento: null };
-        this.idProcedimento.reset();
+
+        // Limpa o campo procedimento completamente
+        this.idProcedimento.reset(null);
+        this.idProcedimento.setValue(null);
         this.idProcedimento.markAsPristine();
         this.idProcedimento.markAsUntouched();
-        this.idGrauProcedimento.reset();
+        this.idProcedimento.updateValueAndValidity();
+
+        // Limpa o campo grau procedimento
+        this.idGrauProcedimento.reset(null);
+        this.idGrauProcedimento.setValue(null);
         this.idGrauProcedimento.markAsPristine();
         this.idGrauProcedimento.markAsUntouched();
+        this.idGrauProcedimento.clearValidators();
+        this.idGrauProcedimento.updateValueAndValidity();
+
         this.resetarForm();
     }
 }
