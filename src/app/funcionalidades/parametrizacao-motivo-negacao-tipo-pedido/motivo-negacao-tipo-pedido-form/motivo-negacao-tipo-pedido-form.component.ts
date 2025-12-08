@@ -89,6 +89,10 @@ export class MotivoNegacaoTipoPedidoFormComponent extends BaseComponent {
       inativo:  [null]
     })
 
+    if (this.isAtualizacao()) {
+      this.desabilitarCamposSomenteLeitura();
+    }
+
     this.formulario.get('inativo').valueChanges.subscribe(v => {
       const dataInativacaoControl = this.formulario.get('dataInativacao')
       if( v ){
@@ -170,7 +174,7 @@ export class MotivoNegacaoTipoPedidoFormComponent extends BaseComponent {
           this.listaComboTipoProcesso = res
           if( this.atualizar ){
             const tipoProcesso = this.listaComboTipoProcesso.find( tp => tp.value == this.idTipoProcessoParam )
-            this.idTipoProcesso.setValue( tipoProcesso.value )
+            this.idTipoProcesso.setValue( tipoProcesso.value, {emitEvent: false} )
             setTimeout(() => {
               this.carregaBeneficiariosPorTipoProcesso()
             }, 300);
@@ -214,7 +218,7 @@ export class MotivoNegacaoTipoPedidoFormComponent extends BaseComponent {
               Loading.stop()
               this.listaComboMotivoNegacao = resp.map(r => ({value: r.id, label: r.titulo, descricao: r.descricaoHistorico}))
               if( this.idMotivoNegacaoParam ){
-                this.idMotivoNegacao.setValue( this.listaComboMotivoNegacao.find( l => l.value === this.idMotivoNegacaoParam ).value )
+                this.idMotivoNegacao.setValue( this.listaComboMotivoNegacao.find( l => l.value === this.idMotivoNegacaoParam ).value, {emitEvent: false} )
               }
             }, err => this.showDangerMsg(err.error))
   }
@@ -241,6 +245,17 @@ export class MotivoNegacaoTipoPedidoFormComponent extends BaseComponent {
           }
         })
 
+  }
+
+  private desabilitarCamposSomenteLeitura() {
+    this.idTipoProcesso.disable({emitEvent: false});
+    this.icNiveisNegacaoCombo.disable({emitEvent: false});
+    this.campoSituacaoProcesso.disable({emitEvent: false});
+    this.idMotivoNegacao.disable({emitEvent: false});
+  }
+
+  private isAtualizacao(): boolean {
+    return this.atualizar != null;
   }
 
   voltar(){
