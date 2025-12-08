@@ -42,8 +42,12 @@ export class AscSelectProcedimentoComponent extends BaseSelectControlValueAcesso
     }
 
     override updateValue(value: any) {
-        console.log('asc-select-procedimento updateValue chamado com:', value);
-        super.updateValue(value);
+        const normalizedValue = value && typeof value === 'object' && 'value' in value
+            ? (value as any).value
+            : value;
+
+        console.log('asc-select-procedimento updateValue chamado com:', normalizedValue);
+        super.updateValue(normalizedValue);
     }
 
     override definirServico(): (params: AscSelectComponentProcedimentosParams) => Observable<Procedimento[]> {
