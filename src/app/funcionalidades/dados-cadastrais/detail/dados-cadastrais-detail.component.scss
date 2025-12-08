@@ -5,12 +5,20 @@
     padding-left: 10px;
     padding-right: 10px;
 
-    asc-input-text,
-    asc-select-uf,
-    asc-select-municipio,
-    asc-input-telefone {
-      width: 100%;
-      display: block;
+    ::ng-deep {
+      asc-input-text,
+      asc-select-uf,
+      asc-select-municipio,
+      asc-input-telefone {
+        width: 100% !important;
+        display: block !important;
+      }
+
+      dsc-input,
+      dsc-select,
+      dsc-input-phone {
+        width: 100% !important;
+      }
     }
   }
 }
