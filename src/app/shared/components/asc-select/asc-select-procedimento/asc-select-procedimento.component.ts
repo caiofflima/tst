@@ -45,7 +45,6 @@ export class AscSelectProcedimentoComponent extends BaseSelectControlValueAcesso
         const normalizedValue = value && typeof value === 'object' && 'value' in value
             ? (value as any).value
             : value;
-
         console.log('asc-select-procedimento updateValue chamado com:', normalizedValue);
         super.updateValue(normalizedValue);
     }

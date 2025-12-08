@@ -32,6 +32,11 @@ export class AscGrausProcedimentoComponent extends BaseSelectControlValueAcessor
     super(messageService);
   }
 
+  override updateValue(value: any) {
+    const normalizedValue = this.normalizeValue(value);
+    super.updateValue(normalizedValue);
+  }
+
   override definirServico(): (params: AscSelectGrausProcedimentoParams) => Observable<GrauProcedimento[]> {
     return (params: AscSelectGrausProcedimentoParams) => {
       if (isNotUndefinedNullOrEmpty(params) && isNotUndefinedNullOrEmpty(params.idProcedimento)) {
@@ -55,4 +60,18 @@ export class AscGrausProcedimentoComponent extends BaseSelectControlValueAcessor
     return []
   }
 
+  /**
+   * Normaliza o valor recebido do dsc-select (pode vir como objeto ou string numérica)
+   * para o tipo esperado pelo form/control (id numérico).
+   */
+  private normalizeValue(value: any) {
+    const extracted = value && typeof value === 'object' && 'value' in value
+      ? (value as any).value
+      : value;
+
+    // Converte strings numéricas para number para permitir matching com o id do backend
+    return (typeof extracted === 'string' && extracted.trim() !== '' && !isNaN(+extracted))
+      ? +extracted
+      : extracted;
+  }
 }
