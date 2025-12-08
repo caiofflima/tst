@@ -41,7 +41,8 @@ export class ProcedimentoFormComponent extends BaseComponent implements OnInit, 
     @Output() readonly isEditingForm = new EventEmitter<boolean>();
 
     @Input() beneficiario: Beneficiario;
-    
+
+    isToShowForm = false;
     grauSelecionadoAsObject: GrauProcedimento;
     procedimentoAsObject: Procedimento;
 
@@ -75,7 +76,17 @@ export class ProcedimentoFormComponent extends BaseComponent implements OnInit, 
 
     ngOnInit() {
         this.atualizarGrauProcimentoComBaseNoIdProcedimento();
+        this.exibirFormulario();
         this.bloquearBotaoAdicionarProcedimentoQuandoGrauProcedimentoInvalido();
+    }
+
+    private exibirFormulario() {
+        this.idProcedimento.valueChanges.pipe(
+            takeUntil(this.subjectUnsubscription)
+        ).subscribe(() => {
+            this.isToShowForm = true;
+            this.cleanControIdGrauProcedimentoFromControl();
+        });
     }
 
     private cleanControIdGrauProcedimentoFromControl() {
@@ -97,7 +108,6 @@ export class ProcedimentoFormComponent extends BaseComponent implements OnInit, 
             takeUntil(this.subjectUnsubscription)
         ).subscribe((idProcedimento: number) => {
             this.parametrosSelectGrauProcedimento = {idProcedimento};
-            this.cleanControIdGrauProcedimentoFromControl();
         });
     }
 
@@ -168,6 +178,7 @@ export class ProcedimentoFormComponent extends BaseComponent implements OnInit, 
                         this.messageService.addMsgDanger("Procedimento incompatível com a idade do(a) beneficiário(a).");
                     }else{
                         this.pedidoProcedimentoForm.emit(pedidoProcedimento);
+                        this.isToShowForm = false;
                         this.isEditing = false;
                         this.isEditingForm.emit(this.isEditing)
                         formDirective.resetForm();
@@ -226,6 +237,7 @@ export class ProcedimentoFormComponent extends BaseComponent implements OnInit, 
             });
 
             this.parametrosSelectGrauProcedimento = {idProcedimento: pedidoProcedimento.idProcedimento}
+            this.isToShowForm = true;
             this.isEditing = isNotUndefinedOrNull(pedidoProcedimento.index);
             this.isEditingForm.emit(this.isEditing);
         }
@@ -240,6 +252,7 @@ export class ProcedimentoFormComponent extends BaseComponent implements OnInit, 
     }
 
     clickButtonCancelarProcedimento(formDirective: FormGroupDirective) {
+        this.isToShowForm = false;
         formDirective.resetForm();
         this.resetarFormCompleto();
         this.isEditing = false;
@@ -248,6 +261,7 @@ export class ProcedimentoFormComponent extends BaseComponent implements OnInit, 
     }
 
     private resetarFormCompleto() {
+        this.isToShowForm = false;
         this.procedimentoAsObject = null;
         this.grauSelecionadoAsObject = null;
         this.parametrosSelectGrauProcedimento = { idProcedimento: null };
