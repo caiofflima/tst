@@ -81,16 +81,18 @@
                     <asc-input-telefone
                       [control]="dadosPessoaisForm.get('telefone')"
                       inputId="telefone"
-                      label="Telefone"
+                      [label]="'Telefone'"
                     ></asc-input-telefone>
+                    <span class="label-opcional">- Opcional</span>
                   </div>
 
                   <div class="form-group col-md-12 noPaddingLeft box-form__group">
                     <asc-input-text
                       [control]="dadosPessoaisForm.get('email')"
                       inputId="email"
-                      label="E-mail"
+                      [label]="'E-mail'"
                     ></asc-input-text>
+                    <span class="label-opcional">- Opcional</span>
                   </div>
                 </div>
                 <div class="box-form__controls">
