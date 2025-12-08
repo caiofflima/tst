@@ -1,7 +1,8 @@
 <form #formDirective="ngForm" [formGroup]="form">
   <div class="custom-left-grid">
     <asc-select-procedimento
-      [id]="inResumo ? 'idProcedimentoResumo' : 'idProcedimento'"
+      selectId="procedimento"
+      [required]="true"
       (dadoSelecionado)="procedimentoSelecionando($event)"
       [control]="form.get('idProcedimento')"
       [parametros]="parametroSelectProcedimento"
@@ -12,6 +13,8 @@
     </asc-select-procedimento>
     <div class="margin-16" *ngIf="isToShowForm">
       <asc-graus-procedimento
+        selectId="grauProcedimento"
+        [required]="true"
         [parametros]="parametrosSelectGrauProcedimento"
         [control]="form.get('idGrauProcedimento')"
         (dadosBackend)="grauProcedimentoCarregado($event)"

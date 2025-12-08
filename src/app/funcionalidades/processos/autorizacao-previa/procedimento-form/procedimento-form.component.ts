@@ -156,8 +156,10 @@ export class ProcedimentoFormComponent extends BaseComponent implements OnInit, 
     }
 
     procedimentoSelecionando(procedimento?: Procedimento) {
-        this.procedimentoAsObject = procedimento;
-        this.procedimento.emit(procedimento);
+        if (this.procedimentoAsObject !== procedimento) {
+            this.procedimentoAsObject = procedimento;
+            this.procedimento.emit(procedimento);
+        }
     }
 
     grauProcedimentoSelecionado(grauProcedimentoSelecionado?: GrauProcedimento) {
