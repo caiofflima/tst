@@ -1,8 +1,10 @@
-import { tipoProcesso } from './../../../shared/constantes';
+import { SelectItem } from 'primeng/api';
+import { take } from 'rxjs/operators';
 import { Location } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+
 import { BaseComponent } from 'app/shared/components/base.component';
 import { Loading } from 'app/shared/components/loading/loading-modal.component';
 import { MotivoNegacaoTipoPedido } from 'app/shared/models/comum/motivo-negacao-tipo-pedido';
@@ -10,16 +12,15 @@ import { DadoComboDTO } from 'app/shared/models/dtos';
 import { MotivoNegacao } from 'app/shared/models/entidades';
 import { FiltroConsultaMotivoNegacao } from 'app/shared/models/filtro/filtro-consulta-motivo-negacao';
 import { MotivoNegacaoTipoPedidoService } from 'app/shared/services/comum/motivo-negacao-tipo-pedido.service';
-import { ComboService, MessageService, MotivoNegacaoService, SituacaoProcessoService } from 'app/shared/services/services';
+import { ComboService, MessageService, MotivoNegacaoService } from 'app/shared/services/services';
 import { AscValidators } from 'app/shared/validators/asc-validators';
-import { SelectItem } from 'primeng/api';
-import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'asc-motivo-negacao-tipo-pedido-form',
   templateUrl: './motivo-negacao-tipo-pedido-form.component.html',
   styleUrls: ['./motivo-negacao-tipo-pedido-form.component.scss']
 })
+
 export class MotivoNegacaoTipoPedidoFormComponent extends BaseComponent {
   idMotivoNegacao = this.formBuilder.control(null, [Validators.required]);
   listaIdTipoBeneficiario = this.formBuilder.control(null, [Validators.required]);
@@ -50,7 +51,7 @@ export class MotivoNegacaoTipoPedidoFormComponent extends BaseComponent {
   inativo: boolean
   dataInativacao = this.formBuilder.control(null);
   constructor(
-    private formBuilder: FormBuilder,
+    private readonly formBuilder: FormBuilder,
     protected override readonly messageService: MessageService,
     private comboService: ComboService,
     private service: MotivoNegacaoTipoPedidoService,
@@ -76,12 +77,8 @@ export class MotivoNegacaoTipoPedidoFormComponent extends BaseComponent {
       this.dataInativacao.setValue( dadosDoParametro.dataInativacao )
       this.idSituacaoProcessoParam = dadosDoParametro.situacaoProcesso
       this.inativo = dadosDoParametro.dataInativacao != null
-      
-      
-      
     }
-    
-    
+
     this.formulario = this.formBuilder.group({
       listaIdTipoBeneficiario: this.listaIdTipoBeneficiario,
       idMotivoNegacao: this.idMotivoNegacao,
@@ -230,12 +227,8 @@ export class MotivoNegacaoTipoPedidoFormComponent extends BaseComponent {
     dto.listaIdMotivoNegacao = [ this.idMotivoNegacao.value ]
     dto.listaIdTipoProcesso = [ this.idTipoProcesso.value ]
 
-    this.service
-        .obterListaDeDados( dto )
-        .pipe( 
-          take(1)
-        ).subscribe((resp: MotivoNegacaoTipoPedido[])=>{
-          Loading.stop()
+    this.service.obterListaDeDados( dto ).pipe(take(1)).subscribe((resp: MotivoNegacaoTipoPedido[])=>{
+          Loading.stop(); 
           if( resp ){
             this.listComboTipoBeneficiario = this.listaTodosComboTipoBeneficiario.filter(b => {
               return resp[0].listaIdTipoBeneficiario.findIndex(r => r  == b.value) == -1;
@@ -319,7 +312,6 @@ export class MotivoNegacaoTipoPedidoFormComponent extends BaseComponent {
           }, err => this.showDangerMsg(err.error)
       );
     });
-
   }
 
   restaurarCampos(){
@@ -346,5 +338,4 @@ export class MotivoNegacaoTipoPedidoFormComponent extends BaseComponent {
         })
   }
 
-  
 }

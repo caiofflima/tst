@@ -111,12 +111,13 @@ export class BeneficiarioPedidoFormComponent extends BaseComponent {
             ).subscribe(beneficiarioPedido => {
                 console.log("-------- consultarDados(): void { beneficiarioPedido");
                 console.log(beneficiarioPedido);
+                console.log(typeof beneficiarioPedido.dataInativacao);
                 console.log("--------------------------------------" + Util.getDate(beneficiarioPedido.dataInativacao));
                 this.beneficiarioPedido = beneficiarioPedido;
                 this.formulario.patchValue( beneficiarioPedido )
                 this.beneficiariosAssociados.setValue(null);
     
-                this.dataInativacao.setValue(new Date("02-04-2024"));
+                this.dataInativacao.setValue(beneficiarioPedido.dataCadastramento);
                 this.getCampoTiposBeneficiario.setValue( [{value: beneficiarioPedido.idTipoBeneficiario}] )
                 this.inativo.setValue(this.beneficiarioPedido.inativo === 'SIM');
                 this.consultarTiposDeBeneficiariosAssociados();
@@ -294,10 +295,14 @@ export class BeneficiarioPedidoFormComponent extends BaseComponent {
             this.dataInativacao.setValidators(Validators.required);
         } else {
             this.dataInativacao.clearValidators();
-            this.dataInativacao.setValue(null);
             this.dataInativacao.markAsPristine();
             this.dataInativacao.markAsUntouched();
             this.dataInativacao.updateValueAndValidity();
+            if(this.beneficiarioPedido.dataInativacao){
+                this.dataInativacao.setValue(this.beneficiarioPedido.dataInativacao);
+            }else{
+                this.dataInativacao.setValue(null);
+            }    
         }
     }
 

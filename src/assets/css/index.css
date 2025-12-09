@@ -143,3 +143,10 @@ div.ajusteCheckboxPrime15{
     font-weight: bold;
     font-style: normal;
 }
+
+.p-accordion-content{
+    border: none !important;
+}
+.p-accordion-header-link {
+    border: none !important;
+}

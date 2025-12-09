@@ -31,7 +31,7 @@
     </div>
 
     <div class="col-md-6 mb-15 pl-0">
-      <asc-multiSelect label="Tipos Beneficiário" [options]="listComboTipoBeneficiario" [required]="true"></asc-multiSelect>
+      <asc-multiSelect label="Tipos Beneficiário" [control]="tiposBeneficiario" [options]="listComboTipoBeneficiario" [required]="true"></asc-multiSelect>
       <asc-input-error [control]="tiposBeneficiario" [requiredMsg]="requiredMsg"></asc-input-error>
     </div>
   </div>
@@ -91,7 +91,7 @@
     <div class="col-md-3 p-0">
       <asc-checkbox label="Inativo" name="ativos" formControlName="inativo" [valoresTrueOrFalse]="true"></asc-checkbox>
     </div>
-    <div class="col-md-3 pl-0">
+    <div class="col-md-5 pl-0">
       <asc-input-date
               [control]="dataInativacao" 
               [required]="formulario.get('inativo').value"
