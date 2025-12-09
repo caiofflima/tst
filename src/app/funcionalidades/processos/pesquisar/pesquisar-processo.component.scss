@@ -156,6 +156,10 @@
     border-color: #f39200;
     color: #fff;
 
+    em, .fa {
+      color: #fff;
+    }
+
     &:hover:not(:disabled) {
       background-color: #d67e00;
       border-color: #d67e00;

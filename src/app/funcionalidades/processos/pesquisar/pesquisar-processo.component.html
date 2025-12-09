@@ -163,24 +163,29 @@
 
       <!-- Linha 5: Data Início (2/5), Data Fim (2/5), UF Atendimento (1/5), Município (2/5) -->
       <div class="row">
-        <div class="col-md-3">
-          <asc-input-date
-            [control]="formulario.get('dataAberturaInicio')"
-            inputId="dataAberturaInicio"
-            label="Período de Abertura - Início"
-            size="large"
-          >
-          </asc-input-date>
-        </div>
+        <div class="col-md-6">
+          <label class="control-label">Período de Abertura</label>
+          <div class="row">
+            <div class="col-md-6">
+              <asc-input-date
+                [control]="formulario.get('dataAberturaInicio')"
+                inputId="dataAberturaInicio"
+                label="Início"
+                size="large"
+              >
+              </asc-input-date>
+            </div>
 
-        <div class="col-md-3">
-          <asc-input-date
-            [control]="formulario.get('dataAberturaFim')"
-            inputId="dataAberturaFim"
-            label="Período de Abertura - Fim"
-            size="large"
-          >
-          </asc-input-date>
+            <div class="col-md-6">
+              <asc-input-date
+                [control]="formulario.get('dataAberturaFim')"
+                inputId="dataAberturaFim"
+                label="Fim"
+                size="large"
+              >
+              </asc-input-date>
+            </div>
+          </div>
         </div>
 
         <div class="col-md-2">
