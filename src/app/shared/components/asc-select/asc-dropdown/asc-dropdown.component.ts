@@ -38,6 +38,7 @@ export class AscDropdownComponent implements OnInit, OnDestroy, AfterViewInit {
 
     @Input() id: string;
     @Input() label: string;
+    @Input() hint: string;
     @Input() requiredMsg: string;
     @Input() control: any;
     @Input() selectId: string;
@@ -83,6 +84,7 @@ export class AscDropdownComponent implements OnInit, OnDestroy, AfterViewInit {
 
     ngOnInit(): void {
         this.requiredMsg = this.bundle(this.requiredMsg);
+        this.hint = this.hint ? this.bundle(this.hint) : null;
         this.registerOnChangeValue();
         this.syncControlDisabledState();
     }

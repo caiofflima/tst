@@ -56,6 +56,9 @@ export class AscMultiSelectComponent implements ControlValueAccessor, OnInit {
     label: string = '';
 
     @Input()
+    hint: string;
+
+    @Input()
     disabled: boolean = false;
 
     @Input()
@@ -71,6 +74,7 @@ export class AscMultiSelectComponent implements ControlValueAccessor, OnInit {
 
     ngOnInit(): void {
         this.requiredMsg = this.bundle(this.requiredMsg);
+        this.hint = this.hint ? this.bundle(this.hint) : null;
     }
 
     get value() {
