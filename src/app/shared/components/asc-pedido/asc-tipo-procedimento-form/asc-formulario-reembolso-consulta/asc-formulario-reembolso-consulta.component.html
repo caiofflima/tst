@@ -3,143 +3,135 @@
   [formGroup]="formConsulta"
   style="min-width: 48em"
 >
-  <div class="ui-g">
-    <div class="ui-g-12 no-padding-left no-padding-right relative">
-      <asc-select-procedimento
-        selectId="procedimento"
-        [required]="true"
-        (dadoSelecionado)="procedimentoSelecionado($event)"
-        @fadeInOut
-        [control]="formConsulta.get('idProcedimento')"
-        [label]="'Procedimento'"
-        [parametros]="parametroSelectProcedimento"
-        [tipoAcaoService]="CONSULTAR_PROCEDIMENTO_POR_TIPO_PROCESSO"
-        formControlName="idProcedimento"
-        style="border-left: none !important"
-      >
-      </asc-select-procedimento>
-    </div>
-  </div>
-
-  <!-- Linha 1: Especialidade (1/2), Valor Unitário (1/2) -->
-  <div class="ui-g">
-    <div
-      *ngIf="mostrarCampo('idEspecialidade')"
-      @fadeInOut
-      class="ui-g-12 ui-md-6 no-padding-left"
-    >
-      <asc-select-especialidade
-        selectId="especialidade"
-        (dadoSelecionado)="especialidadeSelecionado($event)"
-        (dadosBackend)="especialidadesSelecionados($event)"
-        *ngIf="showFieldEspecialidade"
-        [required]="true"
-        [control]="formConsulta.get('idEspecialidade')"
-        [parametros]="especialidadeParams"
-        formControlName="idEspecialidade"
-        label="Especialidade"
-        style="border-left: none !important"
-      >
-      </asc-select-especialidade>
-    </div>
-
-    <div
-      *ngIf="mostrarCampo('valorUnitarioPago')"
-      @fadeInOut
-      class="ui-g-12 ui-md-6 no-padding-right"
-    >
-      <asc-input-money-type
-        [control]="formConsulta.get('valorUnitarioPago')"
-        id="valorUnitarioPago"
-        [required]="true"
-        label="Valor unitário pago"
-      >
-        <asc-input-error
-          [msgErro]="'O Valor Unitário Pago deve ser maior do que 0 (zero).'"
-          nomeErro="menorIgualZero"
-        ></asc-input-error>
-      </asc-input-money-type>
-      <div class="error-form" *ngIf="erroValorDocumentoFiscal">
-        {{ bundle("MA083") }}
-      </div>
-    </div>
-  </div>
-
-  <!-- Linha 2: Autorização Prévia (1/2), Data do Atendimento (1/2) -->
-  <div class="ui-g">
-    <div
-      *ngIf="mostrarCampo('idAutorizacaoPrevia')"
-      @fadeInOut
-      class="ui-g-12 ui-md-6 no-padding-left"
-    >
-      <label
-        class="label-campo-card"
-        [class.obrigatorio]="autorizacaoPreviaObrigatorio"
-        >Autorização Prévia
-        <small *ngIf="!autorizacaoPreviaObrigatorio">Opcional</small></label
-      >
-      <div *ngIf="escolherCampoAutorizacaoPrevia == 0; else naoWeb">
-        <asc-select-autorizacao-previa
-          selectId="autorizacaoPrevia"
-          [parametros]="autorizacaoPreviaParams"
-          [control]="form.get('idAutorizacaoPrevia')"
-          (dadoSelecionado)="autorizacaoPreviaSelecionado($event)"
-          (dadosBackend)="autorizacoesPreviasSelecionados($event)"
-          formControlName="idAutorizacaoPrevia"
-          label=""
+  <div class="form-container">
+    <div class="form-row">
+      <div class="form-field-full">
+        <asc-select-procedimento
+          selectId="procedimento"
+          [required]="true"
+          (dadoSelecionado)="procedimentoSelecionado($event)"
+          @fadeInOut
+          [control]="formConsulta.get('idProcedimento')"
+          [label]="'Procedimento'"
+          [parametros]="parametroSelectProcedimento"
+          [tipoAcaoService]="CONSULTAR_PROCEDIMENTO_POR_TIPO_PROCESSO"
+          formControlName="idProcedimento"
           style="border-left: none !important"
         >
-        </asc-select-autorizacao-previa>
+        </asc-select-procedimento>
       </div>
-      <ng-template #naoWeb>
-        <asc-dropdown
-          (selected)="autorizacaoPreviaNaoWebSelecionada($event)"
-          [items]="autorizacoesPrevia"
-          [control]="form.get('idAutorizacaoProcedimento')"
-        ></asc-dropdown>
-      </ng-template>
     </div>
 
-    <div
-      *ngIf="mostrarCampo('dataAtendimento')"
-      @fadeInOut
-      class="ui-g-12 ui-md-6 no-padding-right"
-    >
-      <asc-input-date
-        [required]="true"
-        [control]="formConsulta.get('dataAtendimento')"
-        id="dataAtendimento"
-        label="Data do atendimento"
+    <!-- Linha 1: Especialidade (1/2), Valor Unitário (1/2) -->
+    <div class="form-row">
+      <div
+        *ngIf="mostrarCampo('idEspecialidade')"
+        @fadeInOut
+        class="form-field-half"
       >
-        <asc-input-error
-          [msgErro]="
-            'Data do atendimento deve ser menor ou igual à Data atual.'
-          "
-          nomeErro="dataAtualMenor"
-        ></asc-input-error>
-      </asc-input-date>
+        <asc-select-especialidade
+          selectId="especialidade"
+          (dadoSelecionado)="especialidadeSelecionado($event)"
+          (dadosBackend)="especialidadesSelecionados($event)"
+          *ngIf="showFieldEspecialidade"
+          [required]="true"
+          [control]="formConsulta.get('idEspecialidade')"
+          [parametros]="especialidadeParams"
+          formControlName="idEspecialidade"
+          label="Especialidade"
+          style="border-left: none !important"
+        >
+        </asc-select-especialidade>
+      </div>
+
+      <div
+        *ngIf="mostrarCampo('valorUnitarioPago')"
+        @fadeInOut
+        class="form-field-half"
+      >
+        <asc-input-money-type
+          [control]="formConsulta.get('valorUnitarioPago')"
+          id="valorUnitarioPago"
+          [required]="true"
+          label="Valor unitário pago"
+        >
+          <asc-input-error
+            [msgErro]="'O Valor Unitário Pago deve ser maior do que 0 (zero).'"
+            nomeErro="menorIgualZero"
+          ></asc-input-error>
+        </asc-input-money-type>
+        <div class="error-form" *ngIf="erroValorDocumentoFiscal">
+          {{ bundle("MA083") }}
+        </div>
+      </div>
+    </div>
+
+    <!-- Linha 2: Autorização Prévia (1/2), Data do Atendimento (1/2) -->
+    <div class="form-row">
+      <div
+        *ngIf="mostrarCampo('idAutorizacaoPrevia')"
+        @fadeInOut
+        class="form-field-half"
+      >
+        <label
+          class="label-campo-card"
+          [class.obrigatorio]="autorizacaoPreviaObrigatorio"
+          >Autorização Prévia
+          <small *ngIf="!autorizacaoPreviaObrigatorio">Opcional</small></label
+        >
+        <div *ngIf="escolherCampoAutorizacaoPrevia == 0; else naoWeb">
+          <asc-select-autorizacao-previa
+            selectId="autorizacaoPrevia"
+            [parametros]="autorizacaoPreviaParams"
+            [control]="form.get('idAutorizacaoPrevia')"
+            (dadoSelecionado)="autorizacaoPreviaSelecionado($event)"
+            (dadosBackend)="autorizacoesPreviasSelecionados($event)"
+            formControlName="idAutorizacaoPrevia"
+            label=""
+            style="border-left: none !important"
+          >
+          </asc-select-autorizacao-previa>
+        </div>
+        <ng-template #naoWeb>
+          <asc-dropdown
+            (selected)="autorizacaoPreviaNaoWebSelecionada($event)"
+            [items]="autorizacoesPrevia"
+            [control]="form.get('idAutorizacaoProcedimento')"
+          ></asc-dropdown>
+        </ng-template>
+      </div>
+
+      <div
+        *ngIf="mostrarCampo('dataAtendimento')"
+        @fadeInOut
+        class="form-field-half"
+      >
+        <asc-input-date
+          [required]="true"
+          [control]="formConsulta.get('dataAtendimento')"
+          id="dataAtendimento"
+          label="Data do atendimento"
+        >
+          <asc-input-error
+            [msgErro]="
+              'Data do atendimento deve ser menor ou igual à Data atual.'
+            "
+            nomeErro="dataAtualMenor"
+          ></asc-input-error>
+        </asc-input-date>
+      </div>
     </div>
   </div>
 
   <div *ngIf="isEditing && isToShowButtons" @fadeInOut class="flex-end">
-    <button
-      (click)="adicionarProcedimento(formDirective, $event)"
+    <asc-button-primary
+      buttonId="adicionarProcedimento"
+      [title]="isEditing ? 'Concluir alteração' : 'Adicionar'"
+      [showProgress]="loading"
       [disabled]="formConsulta?.invalid || loading"
-      class="custom-btn-confirm"
-    >
-      <span *ngIf="loading" style="height: 1.6em; width: 4em">
-        <dsc-progress-spinner
-          [style]="{ width: '25px', height: '25px' }"
-          animationDuration=".5s"
-          fill="#EEEEEE"
-          strokeWidth="4"
-        >
-        </dsc-progress-spinner>
-      </span>
-      <span *ngIf="!loading" class="span-btn">{{
-        isEditing ? "Concluir alteração" : "Adicionar"
-      }}</span>
-    </button>
+      (onClick)="adicionarProcedimento(formDirective, $event)"
+      [style-button]="{'background-color': '#41a495', 'border-color': '#369183'}"
+    ></asc-button-primary>
 
     <asc-button-primary
       (onClick)="clickButtonCancelarProcedimento(formDirective, $event)"

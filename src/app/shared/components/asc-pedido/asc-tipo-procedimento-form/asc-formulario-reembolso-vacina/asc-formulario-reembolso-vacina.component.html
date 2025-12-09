@@ -1,87 +1,131 @@
 <form [formGroup]="form" #formDirective="ngForm" style="min-width: 48em">
-
-  <div class="ui-g">
-
-    <div class="ui-g-12 no-padding-left no-padding-right relative">
-
-      <asc-select-procedimento
-        selectId="procedimento"
-        [parametros]="parametroSelectProcedimento"
-        [tipoAcaoService]="CONSULTAR_PROCEDIMENTO_POR_TIPO_PROCESSO"
-        [control]="form.get('idProcedimento')"
-        (dadoSelecionado)="procedimentoSelecionado($event)"
-        formControlName="idProcedimento"
-        style="border-left: none !important;" label="Vacina" [required]="true"
-      ></asc-select-procedimento>
-    </div>
-  </div>
-
-  <!-- Linha 1: Vazio (1/2), Valor Unitário (1/2) -->
-  <div class="ui-g">
-    <div class="ui-g-12 ui-md-6 no-padding-left">
+  <div class="form-container">
+    <div class="form-row">
+      <div class="form-field-full">
+        <asc-select-procedimento
+          selectId="procedimento"
+          [parametros]="parametroSelectProcedimento"
+          [tipoAcaoService]="CONSULTAR_PROCEDIMENTO_POR_TIPO_PROCESSO"
+          [control]="form.get('idProcedimento')"
+          (dadoSelecionado)="procedimentoSelecionado($event)"
+          formControlName="idProcedimento"
+          label="Vacina"
+          style="border-left: none !important"
+          [required]="true"
+        >
+        </asc-select-procedimento>
+      </div>
     </div>
 
-    <div *ngIf="mostrarCampo('valorUnitarioPago')" class="ui-g-12 ui-md-6 no-padding-right">
-      <asc-input-money-type [control]="form.get('valorUnitarioPago')" inputId="valorUnitarioPago"
-                            label="Valor unitário pago" [required]="true">
-        <asc-input-error [msgErro]="'O Valor Unitário Pago deve ser maior do que 0 (zero).'"
-                         nomeErro="min"></asc-input-error>
-      </asc-input-money-type>
-      <div class="error-form" *ngIf="erroValorDocumentoFiscal">{{ bundle('MA083') }}</div>
-    </div>
-  </div>
+    <!-- Linha 1: Vazio (1/2), Valor Unitário (1/2) -->
+    <div class="form-row">
+      <div class="form-field-half">
+      </div>
 
-  <!-- Linha 2: Autorização Prévia (1/2), Data do Atendimento (1/2) -->
-  <div class="ui-g">
-    <div *ngIf="mostrarCampo('idAutorizacaoPrevia')" class="ui-g-12 ui-md-6 no-padding-left">
-      <label class="custom-input-label" [class.obrigatorio]="autorizacaoPreviaObrigatorio">Autorização Prévia <small
-        *ngIf="!autorizacaoPreviaObrigatorio">Opcional</small></label>
-      <asc-select-autorizacao-previa
-        selectId="autorizacaoPrevia"
-        [parametros]="autorizacaoPreviaParams"
-        [control]="form.get('idAutorizacaoPrevia')"
-        (dadoSelecionado)="autorizacaoPreviaSelecionado($event)"
-        (dadosBackend)="autorizacoesPreviasSelecionados($event)"
-        formControlName="idAutorizacaoPrevia" label=""
-        style="border-left: none !important;">
-      </asc-select-autorizacao-previa>
+      <div
+        class="form-field-half"
+        *ngIf="mostrarCampo('valorUnitarioPago')"
+      >
+        <asc-input-money-type
+          [control]="form.get('valorUnitarioPago')"
+          inputId="valorUnitarioPago"
+          label="Valor unitário pago"
+          [required]="true"
+        >
+          <asc-input-error
+            [msgErro]="'O Valor Unitário Pago deve ser maior do que 0 (zero).'"
+            nomeErro="min"
+          >
+          </asc-input-error>
+        </asc-input-money-type>
+        <div class="error-form" *ngIf="erroValorDocumentoFiscal">
+          {{ bundle("MA083") }}
+        </div>
+      </div>
     </div>
 
-    <div *ngIf="mostrarCampo('dataAtendimento')" class="ui-g-12 ui-md-6 no-padding-right">
-      <asc-input-date [control]="form.get('dataAtendimento')" inputId="dataAtendimento" label="Data do atendimento"
-                      [required]="true">
-        <asc-input-error [msgErro]="'Data do atendimento deve ser menor ou igual à Data atual.'"
-                         nomeErro="dataAtualMenor">
-        </asc-input-error>
-      </asc-input-date>
-    </div>
-  </div>
+    <!-- Linha 2: Autorização Prévia (1/2), Data do Atendimento (1/2) -->
+    <div class="form-row">
+      <div
+        class="form-field-half"
+        *ngIf="mostrarCampo('idAutorizacaoPrevia')"
+      >
+        <label
+          class="custom-input-label"
+          [class.obrigatorio]="autorizacaoPreviaObrigatorio"
+          >Autorização Prévia
+          <small *ngIf="!autorizacaoPreviaObrigatorio">Opcional</small></label
+        >
+        <asc-select-autorizacao-previa
+          selectId="autorizacaoPrevia"
+          [parametros]="autorizacaoPreviaParams"
+          [control]="form.get('idAutorizacaoPrevia')"
+          (dadoSelecionado)="autorizacaoPreviaSelecionado($event)"
+          (dadosBackend)="autorizacoesPreviasSelecionados($event)"
+          formControlName="idAutorizacaoPrevia"
+          label=""
+          style="border-left: none !important"
+        >
+        </asc-select-autorizacao-previa>
+      </div>
 
-  <!-- Linha 3: Quantidade Solicitada (1/2 esquerda) -->
-  <div class="ui-g">
-    <div class="ui-g-12 ui-md-6 no-padding-left"
-         *ngIf="mostrarCampo('qtdSolicitada')">
-      <asc-input-text [control]="form.get('qtdSolicitada')" [maxlength]="3" inputId="qtdSolicitada"
-                      [somenteNumeros]="true" label="Quantidade solicitada" [required]="true">
-        <asc-input-error nomeErro="min" [msgErro]="bundle('MA012')"></asc-input-error>
-        <asc-input-error nomeErro="max" [msgErro]="bundle('MA132')"></asc-input-error>
-      </asc-input-text>
+      <div
+        class="form-field-half"
+        *ngIf="mostrarCampo('dataAtendimento')"
+      >
+        <asc-input-date
+          [control]="form.get('dataAtendimento')"
+          inputId="dataAtendimento"
+          label="Data do atendimento"
+          [required]="true"
+        >
+          <asc-input-error
+            [msgErro]="
+              'Data do atendimento deve ser menor ou igual à Data atual.'
+            "
+            nomeErro="dataAtualMenor"
+          >
+          </asc-input-error>
+        </asc-input-date>
+      </div>
+    </div>
+
+    <!-- Linha 3: Quantidade Solicitada (1/2 esquerda) -->
+    <div class="form-row">
+      <div
+        class="form-field-half"
+        *ngIf="mostrarCampo('qtdSolicitada')"
+      >
+        <asc-input-text
+          [control]="form.get('qtdSolicitada')"
+          [maxlength]="3"
+          inputId="qtdSolicitada"
+          [somenteNumeros]="true"
+          label="Quantidade solicitada"
+          [required]="true"
+        >
+          <asc-input-error
+            nomeErro="min"
+            [msgErro]="bundle('MA012')"
+          ></asc-input-error>
+          <asc-input-error
+            nomeErro="max"
+            [msgErro]="bundle('MA132')"
+          ></asc-input-error>
+        </asc-input-text>
+      </div>
     </div>
   </div>
 
   <div *ngIf="isToShowForm && enableAllAction" class=" flex-end">
-    <button (click)="adicionarProcedimento(formDirective, $event)" [disabled]="form?.invalid || loading"
-            class="custom-btn-confirm" id="adicionarProcedimento">
-       <span *ngIf="loading" style="height: 1.6em; width: 4em;">
-          <dsc-progress-spinner
-            [style]="{width: '25px', height: '25px'}"
-            animationDuration=".5s"
-            fill="#EEEEEE"
-            strokeWidth="4">
-          </dsc-progress-spinner>
-        </span>
-      <span *ngIf="!loading" class="span-btn">{{(isEditing) ? 'Concluir alteração' : 'Adicionar'}}</span>
-    </button>
+    <asc-button-primary
+      buttonId="adicionarProcedimento"
+      [title]="isEditing ? 'Concluir alteração' : 'Adicionar'"
+      [showProgress]="loading"
+      [disabled]="form?.invalid || loading"
+      (onClick)="adicionarProcedimento(formDirective, $event)"
+      [style-button]="{'background-color': '#41a495', 'border-color': '#369183'}"
+    ></asc-button-primary>
 
     <asc-button-primary
       buttonId="limpar"
