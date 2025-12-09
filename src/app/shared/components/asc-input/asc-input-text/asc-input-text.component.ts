@@ -10,7 +10,7 @@ import * as allMasks from "../../../util/masks";
 })
 export class AscInputTextComponent extends BaseInputComponent implements OnInit {
     @Input()
-    type = 'text';
+    type: 'text' | 'password' | 'number' = 'text';
     @Input()
     name: string;
     @Input()
