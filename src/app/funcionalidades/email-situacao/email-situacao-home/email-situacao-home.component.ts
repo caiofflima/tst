@@ -51,7 +51,7 @@ export class EmailSituacaoHomeComponent extends BaseComponent implements OnInit 
 
     private preencherCamposSelecionados(): void {
         if (this.isStorageCarregado()) {
-            const filtro = this.data.storage.dadosArmazenados;
+            const filtro = this.data.storage.dadosArmazenadosEmail;
             setTimeout(() => {
                 this.formulario.patchValue({
                     somenteAtivos: filtro.somenteAtivos,
@@ -103,7 +103,7 @@ export class EmailSituacaoHomeComponent extends BaseComponent implements OnInit 
     }
 
     private isStorageCarregado(): boolean {
-        return ((this.data.storage && this.data.storage.dadosArmazenados));
+        return ((this.data.storage && this.data.storage.dadosArmazenadosEmail));
     }
 
     onChangeTipoProcesso(): void {
@@ -124,10 +124,10 @@ export class EmailSituacaoHomeComponent extends BaseComponent implements OnInit 
 
     pesquisarEmails() {
         this.limparStorage();
-        let dadosArmazenados = this.prepararDados();
-        this.salvarStorage(dadosArmazenados);
+        let dadosArmazenadosEmail = this.prepararDados();
+        this.salvarStorage(dadosArmazenadosEmail);
         this.router.navigate(['/manutencao/parametros/email/buscar'], {
-            queryParams: { ...dadosArmazenados }
+            queryParams: { ...dadosArmazenadosEmail }
         });
     }
 
@@ -152,8 +152,8 @@ export class EmailSituacaoHomeComponent extends BaseComponent implements OnInit 
         }
     }
 
-    private salvarStorage(dadosArmazenados:any):void{
-        this.data.storage = { dadosArmazenados };
+    private salvarStorage(dadosArmazenadosEmail:any):void{
+        this.data.storage = { dadosArmazenadosEmail };
     }
 
     private limparStorage(){

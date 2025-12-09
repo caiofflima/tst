@@ -43,13 +43,13 @@ export class ParametrizacaoPrazosHomeComponent extends BaseComponent implements 
 
     ngOnInit() {
         this.inicializarCombos();
-        this.carregarDadosArmazenados();
+        this.carregardadosArmazenadosPrazos();
     }
 
-    private carregarDadosArmazenados():void{
+    private carregardadosArmazenadosPrazos():void{
 
         if (this.isStorageCarregado()) {
-          const filtro = this.data.storage.dadosArmazenados;
+          const filtro = this.data.storage.dadosArmazenadosPrazos;
           setTimeout(() => {
                 this.formulario.patchValue({
                     mudancaAutomatica: filtro.mudancaAutomatica,
@@ -97,11 +97,11 @@ export class ParametrizacaoPrazosHomeComponent extends BaseComponent implements 
 
     pesquisar(): void {
         this.limparStorage();
-        let dadosArmazenados = this.prepararDados();
-        this.gravarStorage(dadosArmazenados);
+        let dadosArmazenadosPrazos = this.prepararDados();
+        this.gravarStorage(dadosArmazenadosPrazos);
 
         this.router.navigate(['/manutencao/parametros/prazos-status/buscar'], {
-            queryParams: { ...dadosArmazenados}
+            queryParams: { ...dadosArmazenadosPrazos}
         }).then();
     }
 
@@ -148,11 +148,11 @@ export class ParametrizacaoPrazosHomeComponent extends BaseComponent implements 
     }
 
     private isStorageCarregado(): boolean {
-        return ((this.data.storage) && (this.data.storage.dadosArmazenados));
+        return ((this.data.storage) && (this.data.storage.dadosArmazenadosPrazos));
     }
 
-    gravarStorage(dadosArmazenados:any):void{
-       this.data.storage = {dadosArmazenados}; 
+    gravarStorage(dadosArmazenadosPrazos:any):void{
+       this.data.storage = {dadosArmazenadosPrazos}; 
     }
 
     limparStorage():void{

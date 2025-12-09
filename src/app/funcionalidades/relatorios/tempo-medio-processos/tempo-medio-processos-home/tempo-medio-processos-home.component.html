@@ -19,64 +19,77 @@
     <h1 class="titulo-pagina">Tempo Médio dos Pedidos</h1>
   </div>
 
-  <section class="row">
+  <div class="main-section">
     <form [formGroup]="formulario" name="form">
-      <div class="row pl-0 col-md-12">
-        <h4>Dados dos Pedidos</h4>
-      </div>
+    
+      <p class="info-search-label">Dados do pedido</p>
 
-      <div class="row pl-0 col-xs-4">
-        <label class="control-label" for="filial">Agrupadora</label>
-        <asc-multiSelect
-          id="filial"
-          [options]="listComboFilial"
-          [control]="formulario.get('filiaisProcesso')"
-        ></asc-multiSelect>
-      </div>
+      <div class="row">
+        <div class="col-md-3">
+          <asc-multiSelect
+            id="filial"
+            label="Agrupadora"
+            [options]="listComboFilial"
+            [control]="formulario.get('filiaisProcesso')"
+            size="large">
+          </asc-multiSelect>
+        </div> 
 
-      <div class="row pl-0 col-xs-2">
-        <label class="control-label" for="ufA">UF Atendimento</label>
-        <asc-dropdown
-  [control]="formulario.get('ufAtendimento')"
-  [items]="listComboUF"
-  [placeholder]="this.bundle('MHSPH')"
-  id="ufA"
-></asc-dropdown>
-      </div>
+        <div class="col-md-3">
+          <asc-dropdown
+            formControlName="ufAtendimento"
+            label="UF Atendimento"
+            [items]="listComboUF"
+            [placeholder]="this.bundle('MHSPH')"
+            size="large">
+          </asc-dropdown>
+        </div>
+    
+        <div class="col-md-6">
+          <asc-multiSelect
+            id="tipoProcesso"
+            label="Tipo de Pedido"
+            [options]="listComboTipoProcesso"
+            [control]="formulario.get('tiposProcesso')"
+            size="large">
+          </asc-multiSelect>
+        </div> 
 
-      <div class="row pl-0 col-xs-6">
-        <label class="control-label" for="tipoProcesso">Tipo de Pedido</label>
-        <asc-multiSelect
-          id="tipoProcesso"
-          [options]="listComboTipoProcesso"
-          [control]="formulario.get('tiposProcesso')"
-        ></asc-multiSelect>
-      </div>
+    </div>
 
-      <div class="row pl-0 col-xs-6">
-        <label class="control-label" for="situacaoProcesso"
-          >Situação do Pedido</label
-        >
+    <div class="row">
+      <div class="col-md-6">
         <asc-multiSelect
           id="situacaoProcesso"
           [options]="listComboSituacaoProcesso"
           [control]="formulario.get('situacoesProcesso')"
-        ></asc-multiSelect>
+          label="Situação do Pedido"
+          size="large">
+        </asc-multiSelect>
       </div>
-      <div class="row pl-0 col-xs-2">
+
+      <div class="col-md-3">
         <asc-input-date
           [required]="true"
           [control]="formulario.get('dataInicio')"
+          inputId="dataInicio"
           label="Data Início"
-        ></asc-input-date>
+          size="large">
+        </asc-input-date>
       </div>
-      <div class="row pl-0 col-xs-2">
+
+      <div class="col-md-3">
         <asc-input-date
           [required]="true"
           [control]="formulario.get('dataFim')"
+          inputId="dataFim"
           label="Data Fim"
-        ></asc-input-date>
+          size="large">
+        </asc-input-date>
       </div>
+
+    </div>
+
     </form>
 
     <div class="col-xs-12 barra-botoes">
@@ -88,15 +101,14 @@
         [disabled]="loadingAnalitico"
         @fadeInOut
       >
-        <span *ngIf="loadingAnalitico">
-          <dsc-progress-spinner
-            [style]="{ width: '23px', height: '23px' }"
-            animationDuration=".5s"
-            fill="#EEEEEE"
-            strokeWidth="4"
-          >
-          </dsc-progress-spinner>
-        </span>
+      <span *ngIf="loadingAnalitico">
+        <dsc-progress-spinner
+          [style]="{ width: '23px', height: '23px' }"
+          animationDuration=".5s"
+          fill="#EEEEEE"
+          strokeWidth="4">
+        </dsc-progress-spinner>
+      </span>
         <span *ngIf="!loadingAnalitico">
           <span class="fa fa-list-alt fa-fw"></span>Analítico
         </span>
@@ -104,23 +116,20 @@
       <button
         id="btnLimparCampos"
         class="btn back-btn"
-        (click)="limparCampos()"
-      >
+        (click)="limparCampos()">
         <span class="fa fa-trash fa-fw"></span>Limpar Campos
       </button>
       <button
         class="btn continue-btn"
         (click)="consultarProcesso()"
-        [disabled]="!formulario.valid"
-      >
+        [disabled]="!validaFormulario()">
         <span class="fa fa-search fa-fw"></span>Pesquisar
       </button>
     </div>
     <div
       *ngIf="exibirResultado"
       class="row pl-0 col-md-12"
-      style="overflow-x: auto"
-    >
+      style="overflow-x: auto">
       <p-table
         [value]="listaProcessos"
         [paginator]="true"
@@ -231,5 +240,5 @@
         </p-footer>
       </p-table>
     </div>
-  </section>
+  </div>
 </div>

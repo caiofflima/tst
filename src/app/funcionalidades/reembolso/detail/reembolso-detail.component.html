@@ -32,18 +32,19 @@
                 Lançamentos por mês
               </div>
             </div>
-            <div class="flex-1 d-flex flex-column gap-6">
+            <div class="flex-1 d-flex flex-column gap-6 col-md-3">
               <!-- <label class="control-label">Ano</label>
               <asc-dropdown
-  [items]="anos"
-  (selected)="buscarLancamentosByAno($event.value.value)"
-></asc-dropdown> -->
+              [items]="anos"
+              (selected)="buscarLancamentosByAno($event.value.value)"
+            ></asc-dropdown> -->
               <asc-dropdown
+                [label]="'Ano'"
                 [items]="optionsAnos"
                 [placeholder]="anoLancamento"
-                [label]="'Ano'"
                 (selected)="buscarLancamentosByAno($event.value)"
                 [control]="selectAno"
+                size="small"
               ></asc-dropdown>
             </div>
           </div>

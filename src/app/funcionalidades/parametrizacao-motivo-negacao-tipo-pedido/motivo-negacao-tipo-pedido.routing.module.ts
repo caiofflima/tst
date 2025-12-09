@@ -30,6 +30,12 @@ const parametrizacaoDocumentoProcessoRoute: Routes = [
         component: MotivoNegacaoTipoPedidoFormComponent,
         canActivate: [AuthGuard, DadosUsuarioGuard],
         canActivateChild: [AuthGuard, DadosUsuarioGuard]
+    },
+    {
+        path: 'editar/:atualizar',
+        component: MotivoNegacaoTipoPedidoFormComponent,
+        canActivate: [AuthGuard, DadosUsuarioGuard],
+        canActivateChild: [AuthGuard, DadosUsuarioGuard]
     }
 ];
 

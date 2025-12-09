@@ -20,20 +20,12 @@
     <div class="container-search-section" style="padding: 0 2em">
       <p class="info-search-label">Selecione o pedido que deseja acompanhar</p>
       <div class="search-input-group">
-        <input
-          type="text"
-          class="search-input"
-          [formControl]="filtroRapido"
-          (keyup)="filtroEvent()"
-          placeholder="Pesquisar..."
-        />
-        <button
-          type="button"
-          class="search-button"
-          (click)="filtroEvent()"
-        >
-          <i class="fa fa-search"></i>
-        </button>
+        <dsc-input
+            [placeholder]="'Pesquisar'"
+            iconSuffix="search"
+            [formControl]="filtroRapido"
+            (keyup)="filtroEvent()"
+             />
       </div>
     </div>
     <div *ngIf="isLoading">

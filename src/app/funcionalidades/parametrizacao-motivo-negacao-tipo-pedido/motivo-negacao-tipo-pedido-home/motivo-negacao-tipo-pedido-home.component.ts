@@ -59,13 +59,13 @@ export class MotivoNegacaoTipoPedidoHomeComponent extends BaseComponent implemen
     this.baseURL = this.service.getBaseURL()
     this.baseTitulo = this.service.getTitulo()
     this.inicializarCombos();
-    this.carregarDadosArmazenados();
+    this.carregardadosArmazenadosNegacaoTpPedido();
   }
 
-  private carregarDadosArmazenados():void{
+  private carregardadosArmazenadosNegacaoTpPedido():void{
 
     if (this.isStorageCarregado()) {
-      const filtro = this.data.storage.dadosArmazenados;
+      const filtro = this.data.storage.dadosArmazenadosNegacaoTpPedido;
       setTimeout(() => {
 
           this.preencherCamposSelecionadosPorCampo(filtro, "listaIdTipoProcesso", "tiposProcesso");
@@ -97,7 +97,7 @@ export class MotivoNegacaoTipoPedidoHomeComponent extends BaseComponent implemen
  }
 
   private isStorageCarregado(): boolean {
-    return ((this.data.storage) && (this.data.storage.dadosArmazenados));
+    return ((this.data.storage) && (this.data.storage.dadosArmazenadosNegacaoTpPedido));
   }
 
   public inicializarCombos(): void {
@@ -181,8 +181,8 @@ export class MotivoNegacaoTipoPedidoHomeComponent extends BaseComponent implemen
     }).then();
   }
 
-  private salvarStorage(dadosArmazenados:any){
-    this.data.storage = { dadosArmazenados } ;
+  private salvarStorage(dadosArmazenadosNegacaoTpPedido:any){
+    this.data.storage = { dadosArmazenadosNegacaoTpPedido } ;
   }
 
   private limparStorage(){

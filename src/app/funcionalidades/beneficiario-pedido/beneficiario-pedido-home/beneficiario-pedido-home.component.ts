@@ -46,7 +46,7 @@ export class BeneficiarioPedidoHomeComponent extends BaseComponent implements On
         this.titulo = this.beneficiarioPedidoService.getTitulo()
         this.baseURL = this.beneficiarioPedidoService.getBaseURL()
         this.inicializarCombos();
-        this.carregarDadosArmazenados();
+        this.carregardadosArmazenadosBenePedido();
     }
 
     inicializarCombos(): void {
@@ -63,10 +63,10 @@ export class BeneficiarioPedidoHomeComponent extends BaseComponent implements On
         ).subscribe(res => this.listComboSituacaoProcesso = res, err => this.showDangerMsg(err.error));
     }
 
-    private carregarDadosArmazenados():void{
+    private carregardadosArmazenadosBenePedido():void{
 
         if (this.isStorageCarregado()) {
-          const filtro = this.data.storage.dadosArmazenados;
+          const filtro = this.data.storage.dadosArmazenadosBenePedido;
         
           setTimeout(() => {
               this.preencherCamposSelecionadosPorCampo(filtro, "tiposProcesso");
@@ -94,11 +94,11 @@ export class BeneficiarioPedidoHomeComponent extends BaseComponent implements On
 
     pesquisar(): void {
         this.limparStorage();
-        let dadosArmazenados = this.prepararDados();
-        this.salvarStorage(dadosArmazenados);
+        let dadosArmazenadosBenePedido = this.prepararDados();
+        this.salvarStorage(dadosArmazenadosBenePedido);
 
         this.router.navigate([`${this.baseURL}/buscar`], {
-            queryParams: { ...dadosArmazenados }
+            queryParams: { ...dadosArmazenadosBenePedido }
         }).then();
     }
 
@@ -137,11 +137,11 @@ export class BeneficiarioPedidoHomeComponent extends BaseComponent implements On
       }
 
       private isStorageCarregado(): boolean {
-        return ((this.data.storage) && (this.data.storage.dadosArmazenados));
+        return ((this.data.storage) && (this.data.storage.dadosArmazenadosBenePedido));
       }
 
-      private salvarStorage(dadosArmazenados:any){
-        this.data.storage = { dadosArmazenados } ;
+      private salvarStorage(dadosArmazenadosBenePedido:any){
+        this.data.storage = { dadosArmazenadosBenePedido } ;
       }
     
       private limparStorage(){

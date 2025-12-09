@@ -40,8 +40,8 @@ export class MotivoSolicitacaoComponent extends BaseComponent implements OnInit 
     this.preencherCamposSelecionados();
   }
 
-  salvarStorage(dadosArmazenados:any){
-    this.data.storage = { dadosArmazenados }
+  salvarStorage(dadosArmazenadosMotivoSolic:any){
+    this.data.storage = { dadosArmazenadosMotivoSolic }
   }
 
   limparStorage(){
@@ -49,13 +49,13 @@ export class MotivoSolicitacaoComponent extends BaseComponent implements OnInit 
   }
 
   private isStorageCarregado(): boolean {
-    return ((this.data.storage) && (this.data.storage.dadosArmazenados));
+    return ((this.data.storage) && (this.data.storage.dadosArmazenadosMotivoSolic));
   }
 
   private preencherCamposSelecionados(): void {
 
     if (this.isStorageCarregado()) {
-        const filtro = this.data.storage.dadosArmazenados;
+        const filtro = this.data.storage.dadosArmazenadosMotivoSolic;
         setTimeout(() => {
             this.descricao.setValue(filtro.nome);
             this.filtro.ativos = filtro.ativos;
@@ -70,11 +70,11 @@ export class MotivoSolicitacaoComponent extends BaseComponent implements OnInit 
       }
 
       this.limparStorage();
-      let dadosArmazenados = this.prepararDados();
-      this.salvarStorage(dadosArmazenados);
+      let dadosArmazenadosMotivoSolic = this.prepararDados();
+      this.salvarStorage(dadosArmazenadosMotivoSolic);
 
       this.router.navigate([`${this.baseRota}/listar`], {
-          queryParams: { ...dadosArmazenados }
+          queryParams: { ...dadosArmazenadosMotivoSolic }
       });
   }
 

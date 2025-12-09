@@ -61,7 +61,7 @@ export class ParametrizacaoMotivoNegacaoHomeComponent extends BaseComponent impl
 
     carregarDados():void{
         if (this.isStorageCarregado()) {
-            const filtro = this.data.storage.dadosArmazenados;
+            const filtro = this.data.storage.dadosArmazenadosMotivoNeg;
             setTimeout(() => {
                 if(filtro.icNivelNegacao){
                     this.icNiveisNegacaoCombo.setValue(filtro.icNivelNegacao);
@@ -79,12 +79,12 @@ export class ParametrizacaoMotivoNegacaoHomeComponent extends BaseComponent impl
         }
     }
 
-    private salvarStorage(dadosArmazenados: any): void {
-        this.data.storage = {dadosArmazenados };
+    private salvarStorage(dadosArmazenadosMotivoNeg: any): void {
+        this.data.storage = {dadosArmazenadosMotivoNeg };
     }
 
     private isStorageCarregado(): boolean {
-        return (this.data.storage && this.data.storage.dadosArmazenados);
+        return (this.data.storage && this.data.storage.dadosArmazenadosMotivoNeg);
     }
 
     getTiposPedidos(): void {
@@ -165,11 +165,11 @@ export class ParametrizacaoMotivoNegacaoHomeComponent extends BaseComponent impl
 
     pesquisar(): void {
         this.limparStorage();
-        let dadosArmazenados = this.prepararDados();
-        this.salvarStorage(dadosArmazenados);
+        let dadosArmazenadosMotivoNeg = this.prepararDados();
+        this.salvarStorage(dadosArmazenadosMotivoNeg);
 
         this.route.navigate(['manutencao/parametros/motivo-negacao/buscar'], {
-            queryParams: { ... dadosArmazenados }
+            queryParams: { ... dadosArmazenadosMotivoNeg }
         }).then();
     }
 
