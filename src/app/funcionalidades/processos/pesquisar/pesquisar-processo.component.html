@@ -32,7 +32,7 @@
             inputId="numeroProcesso"
             label="Pedido"
             [maxlength]="8"
-            hint="Buscar um processo específico"
+            [somenteNumeros]="true"
             size="large"
           ></asc-input-text>
         </div>
@@ -43,6 +43,7 @@
             inputId="autorizacaoPrevia"
             label="Autorização SIAGS"
             [maxlength]="10"
+            [somenteNumeros]="true"
             hint="Filtro aplicável apenas aos tipos de pedido AUTORIZAÇÃO PRÉVIA"
             size="large"
           ></asc-input-text>
@@ -54,6 +55,7 @@
             inputId="autorizacaoReembolso"
             label="PEG"
             [maxlength]="20"
+            [somenteNumeros]="true"
             hint="Filtro aplicável apenas aos tipos de pedido REEMBOLSO"
             size="large"
           ></asc-input-text>
@@ -214,6 +216,10 @@
             [control]="formulario.get('matriculaTitular')"
             inputId="matriculaTitular"
             label="Matrícula do titular"
+            maskName="matriculaMaskDisk"
+            [somenteNumeros]="true"
+            placeholder="______-_"
+            [maxlength]="8"
             hint="Filtrar pela matrícula do titular"
             size="large"
           ></asc-input-text>
