@@ -21,109 +21,104 @@
     </div>
   </div>
 
+  <!-- Linha 1: Especialidade (1/2), Valor Unitário (1/2) -->
   <div class="ui-g">
-    <!-- Início da Colunas da esquerda  -->
-    <div class="ui-g-12 ui-md-6 no-padding-left">
-      <!-- Especialidade -->
-      <div
-        *ngIf="mostrarCampo('idEspecialidade')"
-        @fadeInOut
-        class="ui-g-12 ui-md-12 custom-form-grid no-padding-left"
+    <div
+      *ngIf="mostrarCampo('idEspecialidade')"
+      @fadeInOut
+      class="ui-g-12 ui-md-6 no-padding-left"
+    >
+      <asc-select-especialidade
+        selectId="especialidade"
+        (dadoSelecionado)="especialidadeSelecionado($event)"
+        (dadosBackend)="especialidadesSelecionados($event)"
+        *ngIf="showFieldEspecialidade"
+        [required]="true"
+        [control]="formConsulta.get('idEspecialidade')"
+        [parametros]="especialidadeParams"
+        formControlName="idEspecialidade"
+        label="Especialidade"
+        style="border-left: none !important"
       >
-        <asc-select-especialidade
-          selectId="especialidade"
-          (dadoSelecionado)="especialidadeSelecionado($event)"
-          (dadosBackend)="especialidadesSelecionados($event)"
-          *ngIf="showFieldEspecialidade"
-          [required]="true"
-          [control]="formConsulta.get('idEspecialidade')"
-          [parametros]="especialidadeParams"
-          formControlName="idEspecialidade"
-          label="Especialidade"
+      </asc-select-especialidade>
+    </div>
+
+    <div
+      *ngIf="mostrarCampo('valorUnitarioPago')"
+      @fadeInOut
+      class="ui-g-12 ui-md-6 no-padding-right"
+    >
+      <asc-input-money-type
+        [control]="formConsulta.get('valorUnitarioPago')"
+        id="valorUnitarioPago"
+        [required]="true"
+        label="Valor unitário pago"
+      >
+        <asc-input-error
+          [msgErro]="'O Valor Unitário Pago deve ser maior do que 0 (zero).'"
+          nomeErro="menorIgualZero"
+        ></asc-input-error>
+      </asc-input-money-type>
+      <div class="error-form" *ngIf="erroValorDocumentoFiscal">
+        {{ bundle("MA083") }}
+      </div>
+    </div>
+  </div>
+
+  <!-- Linha 2: Autorização Prévia (1/2), Data do Atendimento (1/2) -->
+  <div class="ui-g">
+    <div
+      *ngIf="mostrarCampo('idAutorizacaoPrevia')"
+      @fadeInOut
+      class="ui-g-12 ui-md-6 no-padding-left"
+    >
+      <label
+        class="label-campo-card"
+        [class.obrigatorio]="autorizacaoPreviaObrigatorio"
+        >Autorização Prévia
+        <small *ngIf="!autorizacaoPreviaObrigatorio">Opcional</small></label
+      >
+      <div *ngIf="escolherCampoAutorizacaoPrevia == 0; else naoWeb">
+        <asc-select-autorizacao-previa
+          selectId="autorizacaoPrevia"
+          [parametros]="autorizacaoPreviaParams"
+          [control]="form.get('idAutorizacaoPrevia')"
+          (dadoSelecionado)="autorizacaoPreviaSelecionado($event)"
+          (dadosBackend)="autorizacoesPreviasSelecionados($event)"
+          formControlName="idAutorizacaoPrevia"
+          label=""
           style="border-left: none !important"
         >
-        </asc-select-especialidade>
+        </asc-select-autorizacao-previa>
       </div>
-      <!-- Especialidade -->
-
-      <div
-        *ngIf="mostrarCampo('idAutorizacaoPrevia')"
-        @fadeInOut
-        class="ui-g-12 ui-md-12 custom-form-grid no-padding-left"
-      >
-        <label
-          class="label-campo-card"
-          [class.obrigatorio]="autorizacaoPreviaObrigatorio"
-          >Autorização Prévia
-          <small *ngIf="!autorizacaoPreviaObrigatorio">Opcional</small></label
-        >
-        <div *ngIf="escolherCampoAutorizacaoPrevia == 0; else naoWeb">
-          <asc-select-autorizacao-previa
-            selectId="autorizacaoPrevia"
-            [parametros]="autorizacaoPreviaParams"
-            [control]="form.get('idAutorizacaoPrevia')"
-            (dadoSelecionado)="autorizacaoPreviaSelecionado($event)"
-            (dadosBackend)="autorizacoesPreviasSelecionados($event)"
-            formControlName="idAutorizacaoPrevia"
-            label=""
-            style="border-left: none !important"
-          >
-          </asc-select-autorizacao-previa>
-        </div>
-        <ng-template #naoWeb>
-          <asc-dropdown
-            (selected)="autorizacaoPreviaNaoWebSelecionada($event)"
-            [items]="autorizacoesPrevia"
-            [control]="form.get('idAutorizacaoProcedimento')"
-          ></asc-dropdown>
-        </ng-template>
-      </div>
+      <ng-template #naoWeb>
+        <asc-dropdown
+          (selected)="autorizacaoPreviaNaoWebSelecionada($event)"
+          [items]="autorizacoesPrevia"
+          [control]="form.get('idAutorizacaoProcedimento')"
+        ></asc-dropdown>
+      </ng-template>
     </div>
-    <!-- Fim da Colunas da esquerda  -->
-    <!-- Início da Colunas da direita  -->
-    <div class="ui-g-12 ui-md-6">
-      <div
-        *ngIf="mostrarCampo('valorUnitarioPago')"
-        @fadeInOut
-        class="ui-g-12 ui-md-12 custom-form-grid no-padding-right"
-      >
-        <asc-input-money-type
-          [control]="formConsulta.get('valorUnitarioPago')"
-          id="valorUnitarioPago"
-          [required]="true"
-          label="Valor unitário pago"
-        >
-          <asc-input-error
-            [msgErro]="'O Valor Unitário Pago deve ser maior do que 0 (zero).'"
-            nomeErro="menorIgualZero"
-          ></asc-input-error>
-        </asc-input-money-type>
-        <div class="error-form" *ngIf="erroValorDocumentoFiscal">
-          {{ bundle("MA083") }}
-        </div>
-      </div>
 
-      <div
-        *ngIf="mostrarCampo('dataAtendimento')"
-        @fadeInOut
-        class="ui-g-12 ui-md-12 custom-form-grid no-padding-right"
+    <div
+      *ngIf="mostrarCampo('dataAtendimento')"
+      @fadeInOut
+      class="ui-g-12 ui-md-6 no-padding-right"
+    >
+      <asc-input-date
+        [required]="true"
+        [control]="formConsulta.get('dataAtendimento')"
+        id="dataAtendimento"
+        label="Data do atendimento"
       >
-        <asc-input-date
-          [required]="true"
-          [control]="formConsulta.get('dataAtendimento')"
-          id="dataAtendimento"
-          label="Data do atendimento"
-        >
-          <asc-input-error
-            [msgErro]="
-              'Data do atendimento deve ser menor ou igual à Data atual.'
-            "
-            nomeErro="dataAtualMenor"
-          ></asc-input-error>
-        </asc-input-date>
-      </div>
+        <asc-input-error
+          [msgErro]="
+            'Data do atendimento deve ser menor ou igual à Data atual.'
+          "
+          nomeErro="dataAtualMenor"
+        ></asc-input-error>
+      </asc-input-date>
     </div>
-    <!-- Fim da Colunas da direita  -->
   </div>
 
   <div *ngIf="isEditing && isToShowButtons" @fadeInOut class="flex-end">

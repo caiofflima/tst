@@ -16,130 +16,125 @@
     </div>
   </div>
 
+  <!-- Linha 1: Região Odontológica (1/2), Valor Unitário (1/2) -->
   <div class="ui-g">
-    <!-- Início da Colunas da esquerda  -->
-    <div class="ui-g-12 ui-md-6 no-padding-left">
-      <!-- Inicio Autorização Previa -->
-      <div
-        class="ui-g-12 ui-md-12 custom-form-grid no-padding-left"
-        *ngIf="mostrarCampo('idAutorizacaoPrevia')"
-      >
-        <label
-          class="control-label"
-          [class.obrigatorio]="autorizacaoPreviaObrigatorio"
-          >Autorização Prévia
-          <small *ngIf="!autorizacaoPreviaObrigatorio">Opcional</small></label
-        >
-        <div *ngIf="escolherCampoAutorizacaoPrevia == 0; else naoWeb">
-          <asc-select-autorizacao-previa
-            selectId="autorizacaoPrevia"
-            [parametros]="autorizacaoPreviaParams"
-            [control]="form.get('idAutorizacaoPrevia')"
-            (dadoSelecionado)="autorizacaoPreviaSelecionado($event)"
-            (dadosBackend)="autorizacoesPreviasSelecionados($event)"
-            formControlName="idAutorizacaoPrevia"
-            label=""
-            style="border-left: none !important"
-          >
-          </asc-select-autorizacao-previa>
-        </div>
-        <ng-template #naoWeb>
-          <asc-dropdown
-            (selected)="autorizacaoPreviaNaoWebSelecionada($event)"
-            [items]="autorizacoesPrevia"
-            [control]="form.get('idAutorizacaoProcedimento')"
-          ></asc-dropdown>
-        </ng-template>
-      </div>
-      <!-- Fim Autorização Previa -->
-
-      <!-- INICIO Região odontológica -->
-      <div
-        class="ui-g-12 ui-md-12 custom-form-grid no-padding-left"
-        *ngIf="hasProcedimento()"
-      >
-        <asc-graus-procedimento
-          selectId="regiaoOdontologica"
-          [parametros]="parametrosSelectGrauProcedimento"
-          [control]="form.get('idRegiaoOdontologica')"
-          (dadosBackend)="regiaoOdontologicaSelecionados($event)"
-          (dadoSelecionado)="regiaoOdontologicaSelecionada($event)"
-          formControlName="idRegiaoOdontologica"
-          style="border-left: none !important"
-          label="Região odontológica"
-          [required]="true"
-        ></asc-graus-procedimento>
-      </div>
-      <!-- FIM Região odontológica -->
-      <!-- INICIO Quantidade -->
-      <div
-        class="ui-g-12 ui-md-12 custom-form-grid no-padding-left"
-        *ngIf="mostrarCampo('qtdSolicitada')"
-      >
-        <asc-input-text
-          [control]="form.get('qtdSolicitada')"
-          [maxlength]="3"
-          inputId="qtdSolicitada"
-          [somenteNumeros]="true"
-          label="Quantidade solicitada"
-          [required]="true"
-        >
-          <asc-input-error
-            nomeErro="min"
-            [msgErro]="bundle('MA012')"
-          ></asc-input-error>
-          <asc-input-error
-            nomeErro="max"
-            [msgErro]="bundle('MA132')"
-          ></asc-input-error>
-        </asc-input-text>
-      </div>
-      <!-- FIM  Quantidade -->
+    <div
+      class="ui-g-12 ui-md-6 no-padding-left"
+      *ngIf="hasProcedimento()"
+    >
+      <asc-graus-procedimento
+        selectId="regiaoOdontologica"
+        [parametros]="parametrosSelectGrauProcedimento"
+        [control]="form.get('idRegiaoOdontologica')"
+        (dadosBackend)="regiaoOdontologicaSelecionados($event)"
+        (dadoSelecionado)="regiaoOdontologicaSelecionada($event)"
+        formControlName="idRegiaoOdontologica"
+        style="border-left: none !important"
+        label="Região odontológica"
+        [required]="true"
+      ></asc-graus-procedimento>
     </div>
-    <!-- Fim da Colunas da esquerda  -->
 
-    <!-- Início da Colunas da direita  -->
-    <div class="ui-g-12 ui-md-6">
-      <div
-        class="ui-g-12 ui-md-12 custom-form-grid no-padding-right"
-        *ngIf="mostrarCampo('valorUnitarioPago')"
+    <div
+      class="ui-g-12 ui-md-6 no-padding-right"
+      *ngIf="mostrarCampo('valorUnitarioPago')"
+    >
+      <asc-input-money-type
+        [control]="form.get('valorUnitarioPago')"
+        inputId="valorUnitarioPago"
+        label="Valor unitário pago"
+        [required]="true"
       >
-        <asc-input-money-type
-          [control]="form.get('valorUnitarioPago')"
-          inputId="valorUnitarioPago"
-          label="Valor unitário pago"
-          [required]="true"
+        <asc-input-error
+          [msgErro]="'O Valor Unitário Pago deve ser maior do que 0 (zero).'"
+          nomeErro="min"
         >
-          <asc-input-error
-            [msgErro]="'O Valor Unitário Pago deve ser maior do que 0 (zero).'"
-            nomeErro="min"
-          >
-          </asc-input-error>
-        </asc-input-money-type>
-        <div class="error-form" *ngIf="erroValorDocumentoFiscal">
-          {{ bundle("MA083") }}
-        </div>
+        </asc-input-error>
+      </asc-input-money-type>
+      <div class="error-form" *ngIf="erroValorDocumentoFiscal">
+        {{ bundle("MA083") }}
       </div>
+    </div>
+  </div>
 
-      <div
-        class="ui-g-12 ui-md-12 custom-form-grid no-padding-right"
-        *ngIf="mostrarCampo('dataAtendimento')"
+  <!-- Linha 2: Autorização Prévia (1/2), Data do Atendimento (1/2) -->
+  <div class="ui-g">
+    <div
+      class="ui-g-12 ui-md-6 no-padding-left"
+      *ngIf="mostrarCampo('idAutorizacaoPrevia')"
+    >
+      <label
+        class="control-label"
+        [class.obrigatorio]="autorizacaoPreviaObrigatorio"
+        >Autorização Prévia
+        <small *ngIf="!autorizacaoPreviaObrigatorio">Opcional</small></label
       >
-        <asc-input-date
-          [control]="form.get('dataAtendimento')"
-          inputId="dataAtendimento"
-          label="Data do atendimento"
-          [required]="true"
+      <div *ngIf="escolherCampoAutorizacaoPrevia == 0; else naoWeb">
+        <asc-select-autorizacao-previa
+          selectId="autorizacaoPrevia"
+          [parametros]="autorizacaoPreviaParams"
+          [control]="form.get('idAutorizacaoPrevia')"
+          (dadoSelecionado)="autorizacaoPreviaSelecionado($event)"
+          (dadosBackend)="autorizacoesPreviasSelecionados($event)"
+          formControlName="idAutorizacaoPrevia"
+          label=""
+          style="border-left: none !important"
         >
-          <asc-input-error
-            [msgErro]="
-              'Data do atendimento deve ser menor ou igual à Data atual.'
-            "
-            nomeErro="dataAtualMenor"
-          >
-          </asc-input-error>
-        </asc-input-date>
+        </asc-select-autorizacao-previa>
       </div>
+      <ng-template #naoWeb>
+        <asc-dropdown
+          (selected)="autorizacaoPreviaNaoWebSelecionada($event)"
+          [items]="autorizacoesPrevia"
+          [control]="form.get('idAutorizacaoProcedimento')"
+        ></asc-dropdown>
+      </ng-template>
+    </div>
+
+    <div
+      class="ui-g-12 ui-md-6 no-padding-right"
+      *ngIf="mostrarCampo('dataAtendimento')"
+    >
+      <asc-input-date
+        [control]="form.get('dataAtendimento')"
+        inputId="dataAtendimento"
+        label="Data do atendimento"
+        [required]="true"
+      >
+        <asc-input-error
+          [msgErro]="
+            'Data do atendimento deve ser menor ou igual à Data atual.'
+          "
+          nomeErro="dataAtualMenor"
+        >
+        </asc-input-error>
+      </asc-input-date>
+    </div>
+  </div>
+
+  <!-- Linha 3: Quantidade Solicitada (1/2 esquerda) -->
+  <div class="ui-g">
+    <div
+      class="ui-g-12 ui-md-6 no-padding-left"
+      *ngIf="mostrarCampo('qtdSolicitada')"
+    >
+      <asc-input-text
+        [control]="form.get('qtdSolicitada')"
+        [maxlength]="3"
+        inputId="qtdSolicitada"
+        [somenteNumeros]="true"
+        label="Quantidade solicitada"
+        [required]="true"
+      >
+        <asc-input-error
+          nomeErro="min"
+          [msgErro]="bundle('MA012')"
+        ></asc-input-error>
+        <asc-input-error
+          nomeErro="max"
+          [msgErro]="bundle('MA132')"
+        ></asc-input-error>
+      </asc-input-text>
     </div>
   </div>
 
