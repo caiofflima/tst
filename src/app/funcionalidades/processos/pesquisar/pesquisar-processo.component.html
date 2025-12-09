@@ -31,8 +31,8 @@
             [control]="formulario.get('idPedido')"
             inputId="numeroProcesso"
             label="Pedido"
+            type="number"
             [maxlength]="8"
-            [somenteNumeros]="true"
             size="large"
           ></asc-input-text>
         </div>
@@ -42,8 +42,8 @@
             [control]="formulario.get('autorizacaoPreviaGstao')"
             inputId="autorizacaoPrevia"
             label="Autorização SIAGS"
+            type="number"
             [maxlength]="10"
-            [somenteNumeros]="true"
             hint="Filtro aplicável apenas aos tipos de pedido AUTORIZAÇÃO PRÉVIA"
             size="large"
           ></asc-input-text>
@@ -54,8 +54,8 @@
             [control]="formulario.get('autorizacaoReembolso')"
             inputId="autorizacaoReembolso"
             label="PEG"
+            type="number"
             [maxlength]="20"
-            [somenteNumeros]="true"
             hint="Filtro aplicável apenas aos tipos de pedido REEMBOLSO"
             size="large"
           ></asc-input-text>
@@ -220,7 +220,6 @@
             [somenteNumeros]="true"
             placeholder="______-_"
             [maxlength]="8"
-            hint="Filtrar pela matrícula do titular"
             size="large"
           ></asc-input-text>
         </div>
@@ -231,7 +230,6 @@
             inputId="codigoBeneficiario"
             label="Código do beneficiário"
             [maxlength]="12"
-            hint="Filtrar pelo cartão de identificação do beneficiário"
             size="large"
           ></asc-input-text>
         </div>
@@ -256,7 +254,6 @@
             inputId="nomeBeneficiario"
             label="Nome do beneficiário"
             [uppercase]="true"
-            hint="Filtrar pelo nome do beneficiário"
             size="large"
           ></asc-input-text>
         </div>
