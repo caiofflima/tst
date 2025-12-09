@@ -1,6 +1,6 @@
 <dsc-input
   [label]="required !== null && required !== false ? label + ' *' : label"
-  type="text"
+  [type]="type"
   [formControl]="control"
   [placeholder]="placeholder"
   [mask]="mask"
