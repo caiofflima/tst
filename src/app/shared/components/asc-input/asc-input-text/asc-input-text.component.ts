@@ -57,7 +57,7 @@ export class AscInputTextComponent extends BaseInputComponent implements OnInit 
     }
 
     private tratarSomenteNumeros() {
-        if (this.somenteNumeros && null != this.mask) {
+        if (this.somenteNumeros) {
             this.constantes.control.somenteNumeros(this.control);
         }
     }
