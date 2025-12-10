@@ -90,15 +90,21 @@ export class AscFormularioReembolsoConsultaComponent extends AscFormularioProced
     if (especialidade && especialidade.id) {
       this.especialidadeAsObject = especialidade;
       this.especialidade = especialidade;
-      this.formConsulta.patchValue({
-        idEspecialidade: especialidade.id as any
-      });
+      this.especialidade$.emit(especialidade);
+
       const idEspecialidadeControl = this.formConsulta.get('idEspecialidade');
+      idEspecialidadeControl.setValue(especialidade.id, { emitEvent: false });
       idEspecialidadeControl.markAsTouched();
       idEspecialidadeControl.markAsDirty();
       idEspecialidadeControl.updateValueAndValidity();
-      this.especialidade$.emit(especialidade);
-      super.especialidadeSelecionado(especialidade);
+
+      // Reseta autorização prévia quando especialidade muda (comportamento da classe base)
+      const idAutorizacaoPrevia = this.idAutorizacaoPreviaControl;
+      if (idAutorizacaoPrevia) {
+        idAutorizacaoPrevia.setValue(null);
+        idAutorizacaoPrevia.markAsTouched();
+        idAutorizacaoPrevia.markAsDirty();
+      }
     }
   }
 
