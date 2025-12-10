@@ -4,7 +4,7 @@
       Muito bem! Agora, precisamos dos dados do profissional que executou o procedimento.
     </p>
     <div class="ui-g">
-      <div class="ui-g-12 ui-md-6 no-padding">
+      <div class="custom-left-grid">
         <div class="custom-form-group-select" @fadeInOut>
           <asc-select-conselho-profissional
             [control]="form.get('idConselhoProfissional')" [required]="true"
@@ -43,38 +43,30 @@
         </div>
       </div>
 
-      <div *ngIf="!form.get('idConselhoProfissional').valid" class="ui-g-12 ui-md-6 info-container">
+      <div *ngIf="!form.get('idConselhoProfissional').valid" class="custom-right-grid">
         <p class="info-title first-line-border">Essa informação pode ser encontrada no carimbo junto à assinatura,
           no pedido. É composto pelas inicias do Conselho.</p>
         <p class="info-title">Exemplo:</p>
-        <div class="ui-g">
-          <div class="ui-g-6 ui-md-6 no-padding">
-            <p class="info-secondary">Terapeuta Ocupacional CREFITO-8 1000257-TO</p>
-            <p class="info-secondary">CRM - Conselho Regional de Medicina</p>
-            <p class="info-secondary">CRBM - Conselho Regional de Biomedicina</p>
-            <p class="info-secondary">CRO - Conselho Regional de Odontologia</p>
-            <p class="info-secondary">CRP - Conselho Regional de Psicologia</p>
-            <p class="info-secondary">CREFONO - Conselho Regional de Fonoaudiologia</p>
-            <p class="info-secondary">CRN - Conselho Regional de Nutrição</p>
-            <p class="info-secondary">CREFFITO - Conselho Regional de Fisioterapia e Terapia Ocupacionais</p>
-          </div>
-        </div>
+        <p class="info-secondary">Terapeuta Ocupacional CREFITO-8 1000257-TO</p>
+        <p class="info-secondary">CRM - Conselho Regional de Medicina</p>
+        <p class="info-secondary">CRBM - Conselho Regional de Biomedicina</p>
+        <p class="info-secondary">CRO - Conselho Regional de Odontologia</p>
+        <p class="info-secondary">CRP - Conselho Regional de Psicologia</p>
+        <p class="info-secondary">CREFONO - Conselho Regional de Fonoaudiologia</p>
+        <p class="info-secondary">CRN - Conselho Regional de Nutrição</p>
+        <p class="info-secondary">CREFFITO - Conselho Regional de Fisioterapia e Terapia Ocupacionais</p>
       </div>
 
       <div *ngIf="form.get('idConselhoProfissional').valid && form.get('numeroConselho').invalid"
-           class="ui-g-12 ui-md-6 info-container">
+           class="custom-right-grid">
         <p class="info-title first-line-border">Essa informação pode ser encontrada no carimbo abaixo do nome
           do profissional, afastado das iniciais do conselho.</p>
         <p class="info-title">Exemplo:</p>
-        <div class="ui-g">
-          <div class="ui-g-6 ui-md-6 no-padding">
-            <p class="info-secondary">CREFITO-8 1000257-TO</p>
-          </div>
-        </div>
+        <p class="info-secondary">CREFITO-8 1000257-TO</p>
       </div>
 
       <div *ngIf="form.get('idConselhoProfissional').valid && form.get('numeroConselho').valid"
-           class="ui-g-12 ui-md-6 info-container">
+           class="custom-right-grid" style="padding-top: 0;">
         <p class="info-title first-line-border">Essa informação pode estar presente no carimbo como UF ou regional.
           Selecione o conselho
           desejado para verificar a unidade deferativa correspondente ao seu profissional.</p>
