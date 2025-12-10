@@ -96,4 +96,9 @@ export class PrestadorExternoHomeComponent extends BaseComponent implements OnIn
     public voltar(): void {
         this.location.back();
     }
+
+    onInputChange(event: Event) {
+        const input = event.target as HTMLInputElement;
+        input.value = input.value.toUpperCase();
+    } 
 }

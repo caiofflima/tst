@@ -27,6 +27,7 @@ import {AscMultiSelectModule} from "../../shared/components/multiselect/asc-mult
 import {AscButtonsModule} from "../../shared/components/asc-buttons/asc-buttons.module";
 import { ProcedimentosListarAutorizacaoPreviaComponent } from "./listar-autorizacao-previa/procedimentos-listar-autorizacao-previa.component";
 import { ProcedimentosRoutingModule } from "./procedimentos.routing.module";
+import { DscCaixaModule } from "app/shared/dsc-caixa/dsc-caixa.module";
 
 @NgModule({
     imports: [
@@ -57,7 +58,8 @@ import { ProcedimentosRoutingModule } from "./procedimentos.routing.module";
         PaginatorModule,
         MultiSelectModule,
         AscMultiSelectModule,
-        AscButtonsModule
+        AscButtonsModule,
+        DscCaixaModule
     ],
     declarations: [
         ProcedimentosListarAutorizacaoPreviaComponent

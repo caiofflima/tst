@@ -2,144 +2,100 @@
 <div class="container">
   <div class="col-md-12 breadcrumb-header">
     <ul class="breadcrumb">
-      <li><span (click)="voltar()" class="voltar"><i class="fa fa-arrow-left" aria-hidden="true"></i>Voltar</span></li>
+      <li>
+        <span (click)="voltar()" class="voltar">
+          <i class="fa fa-arrow-left" aria-hidden="true"></i>Voltar
+        </span>
+      </li>
       <a routerLink="/home">Início</a>
       <em class="fa fa-chevron-right"></em> Administração
       <em class="fa fa-chevron-right"></em>
       <a routerLink="/manutencao/empresa-prestador-externo">Empresa de Auditoria</a>
       <em class="fa fa-chevron-right"></em>
-      Empresa de Auditoria – <span *ngIf="!empresaPrestadora.id">Inclusão</span><span *ngIf="empresaPrestadora.id">Edição</span>
+      Empresa de Auditoria – 
+      <span *ngIf="!empresaPrestadora.id">Inclusão</span>
+      <span *ngIf="empresaPrestadora.id">Edição</span>
     </ul>
   </div>
 
   <div class="title-type">
     <h1 class="titulo-pagina">
-      Empresa de Auditoria – <span *ngIf="!empresaPrestadora.id">Inclusão</span><span *ngIf="empresaPrestadora.id">Edição</span>
+      Empresa de Auditoria – 
+      <span *ngIf="!empresaPrestadora.id">Inclusão</span>
+      <span *ngIf="empresaPrestadora.id">Edição</span>
     </h1>
   </div>
 
   <section class="row">
     <form [formGroup]="formulario" name="form">
+      <!-- Informações básicas -->
       <div class="form-row row">
-        <div *ngIf="empresaPrestadora.id" class="pl-0 col-xs-4">
+        <div *ngIf="empresaPrestadora.id" class="pl-0 col-md-4">
           <label class="control-label" for="cnpj">ID</label>
           <p class="marginBottom">{{empresaPrestadora.id}}</p>
         </div>
 
-        <div *ngIf="empresaPrestadora.dataCadastramento" class="pl-0 col-xs-4">
+        <div *ngIf="empresaPrestadora.dataCadastramento" class="pl-0 col-md-4">
           <label class="control-label">Cadastramento</label>
-          <p class="marginBottom">{{empresaPrestadora.dataCadastramento |date:'dd/MM/yyyy HH:mm:ss'}}</p>
+          <p class="marginBottom">{{empresaPrestadora.dataCadastramento | date:'dd/MM/yyyy HH:mm:ss'}}</p>
         </div>
 
-        <div *ngIf="empresaPrestadora.usuarioCadastramento" class="pl-0 col-xs-4">
+        <div *ngIf="empresaPrestadora.usuarioCadastramento" class="pl-0 col-md-4">
           <label class="control-label" for="contrato">Usuário</label>
           <p class="marginBottom">{{empresaPrestadora.usuarioCadastramento}}</p>
         </div>
       </div>
 
+      <!-- Dados da empresa -->
       <div class="form-row row">
-        <div class="pl-0 col-xs-4">
-          <asc-cpf-cnpj
-            label="CNPJ"
-            [control]="cnpj"
-            id="cnpj"
-            title="{{bundle('MH126')}}"
-            [somenteCnpj]="true"
-            [required]="true"
-          ></asc-cpf-cnpj>
+        <div class="pl-0 col-md-4">
+          <asc-cpf-cnpj label="CNPJ" [control]="cnpj" id="cnpj" title="{{bundle('MH126')}}" [somenteCnpj]="true" [required]="true" ></asc-cpf-cnpj>
         </div>
-        <div class="pl-0 col-xs-8">
-          <asc-input-text
-            [control]="razaoSocial"
-            label="Razão Social"
-            somenteLetrasMaiusculas="true"
-            id="razaoSocial"
-            name="razaoSocial"
-            [maxlength]="150"
-            [required]="true"
-          ></asc-input-text>
-        </div>
-      </div>
-      <div class="form-row row">
-        <div class="pl-0 col-xs-4">
-          <asc-input-text
-            [control]="contrato"
-            label="Contrato"
-            id="contrato"
-            name="contrato"
-            [maxlength]="20"
-          ></asc-input-text>
-        </div>
-      </div>
-      <div class="form-row row">
-        <div class="pl-0 col-xs-4 " style="left: 388px; margin-top: -69px; width: 67%;"  >
-          <asc-input-email
-                  [control]="formulario.get('email')"
-                  label="E-mail"
-                  id="email"
-                  name="email"
-                  [maxlength]="150"
-          ></asc-input-email>
+        <div class="pl-0 col-md-8">
+          <asc-input-text [control]="razaoSocial" label="Razão Social" somenteLetrasMaiusculas="true" id="razaoSocial" name="razaoSocial" [maxlength]="150" [required]="true" ></asc-input-text>
         </div>
       </div>
 
+      <div class="form-row row">
+        <div class="pl-0 col-md-4">
+          <asc-input-text [control]="contrato" label="Contrato" id="contrato" name="contrato" [maxlength]="20" ></asc-input-text>
+        </div>
+        <div class="pl-0 col-md-8">
+          <asc-input-email [control]="formulario.get('email')" label="E-mail" id="email" name="email" [maxlength]="150" ></asc-input-email>
+        </div>
+      </div>
+
+      <!-- Abrangência -->
       <div class="card-caixa">
         <div class="row col-md-12 p-0">
           <h4 id="unidades">Abrangência</h4>
         </div>
         <div id="panelUnidades">
-          <div class="d-flex col-md-8 p-0" style="align-items: end; justify-content: start;">
-            <div class="col-md-4 p-0">
-              <asc-dropdown
-  [control]="formulario.get('filial')"
-  [items]="filiais"
-  [placeholder]="bundle('MHSPH')"
-  label="Agrupadora"
-  [required]="true"
-  (selected)="onChangeFilial()"
-></asc-dropdown>
-              <asc-message-error [control]="formulario.controls['filial']" type="required"
-                                 [errorMessage]="bundle('MA007')"></asc-message-error>
-            </div>
-            &nbsp;&nbsp;&nbsp;
-            <div class="col-md-4 p-0">
-              <asc-dropdown
-  [control]="formulario.get('UFEmpresa')"
-  [items]="listComboUF"
-  [placeholder]="bundle('MHSPH')"
-  label="UF"
-  [required]="true"
-  (selected)="onChangeUFEmpresa()"
-></asc-dropdown>
-              <asc-message-error [control]="formulario.controls['UFEmpresa']" type="required"
-                                 [errorMessage]="bundle('MA007')"></asc-message-error>
+          <div class="d-flex col-md-12 p-0" style="align-items: flex-end;">
+            <div class="col-md-6 p-0" style="margin-right: 10px;"> <!-- Aumentando a largura -->
+              <asc-dropdown [control]="formulario.get('filial')" [items]="filiais" [placeholder]="bundle('MHSPH')" label="Agrupadora" [required]="true" (selected)="onChangeFilial()" ></asc-dropdown>
+              <asc-message-error [control]="formulario.controls['filial']" type="required" [errorMessage]="bundle('MA007')"></asc-message-error>
             </div>
 
-            <div class="col-md-4">
-              <p style="height: 25px">&nbsp;</p>
-              <button class="btn custom-btn-confirm" style="height: 34px;"
-                      (click)="adicionarAbrangencia();">
+            <div class="col-md-6 p-0"> <!-- Aumentando a largura -->
+              <asc-dropdown [control]="formulario.get('UFEmpresa')" [items]="listComboUF" [placeholder]="bundle('MHSPH')" label="UF" [required]="true" (selected)="onChangeUFEmpresa()" ></asc-dropdown>
+              <asc-message-error [control]="formulario.controls['UFEmpresa']" type="required" [errorMessage]="bundle('MA007')"></asc-message-error>
+            </div>
+
+            <div class="col-md-6 p-0 d-flex align-items-start" style="margin-left: 10px;"> <!-- Ajuste de alinhamento -->
+              <button class="btn custom-btn-confirm" style="height: 34px;" (click)="adicionarAbrangencia();">
                 <span class="fa fa-plus fa-fw"></span>Adicionar
               </button>
             </div>
           </div>
+
           <div *ngIf="mostrarFiltro();" class="row col-md-12 p-0" style="margin-top: 25px;">
             <div class="col-xs-3 search-inp p-0" style="margin: 5px 0 8px; border-bottom: 0 none">
-              <input #gb type="text" class="form-control filtro-caixa" size="50"
-                     placeholder="Digite para filtrar resultado">
+              <asc-input-text #gb placeholder="Digite para filtrar resultado"></asc-input-text>
               <em class="fas fa-search"></em>
             </div>
-            <p-table
-              id="caixa-table"
-              [value]="abrangenciaAdd"
-              [rows]="10"
-              [paginator]="true"
-              [pageLinks]="5"
-              [sortOrder]="1"
-              [rowsPerPageOptions]="[5,10,20]"
-              [reorderableColumns]="true"
-              sortField="nome"
-              styleClass="table table-striped table-sm table-hover">
+
+            <p-table id="caixa-table" [value]="abrangenciaAdd" [rows]="10" [paginator]="true" [pageLinks]="5" [sortOrder]="1" [rowsPerPageOptions]="[5,10,20]" [reorderableColumns]="true" sortField="nome" styleClass="table table-striped table-sm table-hover">
               <ng-template pTemplate="emptymessage">
                 <tr>
                   <td colspan="2">{{bundle('MA003')}}</td>
@@ -147,7 +103,9 @@
               </ng-template>
               <ng-template pTemplate="header">
                 <tr>
-                  <th scope="col" [pSortableColumn]="'nome'">Abrangência <p-sortIcon [field]="'nome'"></p-sortIcon></th>
+                  <th scope="col" [pSortableColumn]="'nome'">Abrangência 
+                    <p-sortIcon [field]="'nome'"></p-sortIcon>
+                  </th>
                   <th scope="col" id="cl_Action">Ação</th>
                 </tr>
               </ng-template>
@@ -166,12 +124,12 @@
         </div>
       </div>
 
+      <!-- Botões -->
       <div class="col-xs-12 p-0 pt-15 barra-botoes">
         <button class="btn back-btn" (click)="voltar()">
           <span class="fa fa-reply fa-fw"></span>Voltar
         </button>
-        <button *ngIf="empresaPrestadora.id != null" class="btn clean-btn"
-                (click)="excluirEmpresa(empresaPrestadora);">
+        <button *ngIf="empresaPrestadora.id != null" class="btn clean-btn" (click)="excluirEmpresa(empresaPrestadora);">
           <span class="fa fa-remove fa-fw"></span>Excluir
         </button>
         <button id="btnLimparCampos" class="btn back-btn" (click)="limparCampos()">

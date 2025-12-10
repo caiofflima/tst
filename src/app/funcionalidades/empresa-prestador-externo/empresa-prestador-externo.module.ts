@@ -14,7 +14,6 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { TableModule } from 'primeng/table';
 import { DropdownModule } from 'primeng/dropdown';
 import { FieldsetModule } from 'primeng/fieldset';
-import {  SharedModule } from 'primeng/api';
 import { EmpresaPrestadorExternoListarComponent } from './empresa-prestador-externo-listar/empresa-prestador-externo-listar.component';
 import {ComponentModule} from "../../shared/components/component.module";
 import {AscMultiSelectModule} from "../../shared/components/multiselect/asc-multiselect.module";

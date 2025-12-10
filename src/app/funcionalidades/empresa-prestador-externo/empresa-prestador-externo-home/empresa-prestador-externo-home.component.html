@@ -3,9 +3,9 @@
   <div class="col-md-12 breadcrumb-header">
     <ul class="breadcrumb">
       <li>
-        <span (click)="voltar()" class="voltar"
-          ><i class="fa fa-arrow-left" aria-hidden="true"></i>Voltar</span
-        >
+        <span (click)="voltar()" class="voltar">
+          <i class="fa fa-arrow-left" aria-hidden="true"></i>Voltar
+        </span>
       </li>
       <a routerLink="/home">Início</a>
       <em class="fa fa-chevron-right"></em>
@@ -20,82 +20,43 @@
   </div>
 
   <section class="row">
-    <form class="row" [formGroup]="formulario" name="form">
-      <div class="row col-xs-2 p-0">
-        <label class="control-label" for="cnpj">CNPJ</label>&nbsp;<br />
-        <input
-          type="text"
-          id="cnpj"
-          name="cnpj"
-          formControlName="cnpj"
-          [mask]="maskCnpj"
-          class="form-control"
-          title="CNPJ da empresa conveniada."
-        />
-      </div>
-      <div class="row col-xs-6">
-        <label class="control-label" for="cnpj">Razão Social</label>&nbsp;<br />
-        <input
-          type="text"
-          id="razaoSocial"
-          name="razaoSocial"
-          formControlName="razaoSocial"
-          class="form-control"
-          [maxlength]="150"
-          oninput="this.value=this.value.toUpperCase()"
-          title="Razão Social da empresa conveniada."
-        />
-      </div>
-      <div class="row col-xs-4">
-        <label class="control-label" for="cnpj">Contrato</label>&nbsp;<br />
-        <input
-          type="text"
-          id="contrato"
-          name="contrato"
-          formControlName="contrato"
-          class="form-control"
-          [maxlength]="20"
-          title="Número do contrato do convênio entre a empresa e a CAIXA."
-        />
+    <form class="col-12" [formGroup]="formulario" name="form">
+      <div class="row">
+        <div class="form-group col-md-4">
+          <label class="control-label" for="cnpj">CNPJ</label>
+          <asc-input-text type="text" id="cnpj" name="cnpj" [control]="formulario.get('cnpj')" maskName="cnpjMask" title="CNPJ da empresa conveniada." />
+        </div>
+
+        <div class="form-group col-md-4">
+          <label class="control-label" for="razaoSocial">Razão Social</label>
+          <asc-input-text type="text" id="razaoSocial" name="razaoSocial" [control]="formulario.get('razaoSocial')" [maxlength]="150" (input)="onInputChange($event)" title="Razão Social da empresa conveniada." />
+        </div>
+
+        <div class="form-group col-md-4">
+          <label class="control-label" for="contrato">Contrato</label>
+          <asc-input-text type="text" id="contrato" name="contrato" [control]="formulario.get('contrato')" [maxlength]="20" title="Número do contrato do convênio entre a empresa e a CAIXA." />
+        </div>
       </div>
 
-      <div class="row col-xs-2 p-0">
-        <label class="control-label">UF</label>
-        <asc-multiSelect
-          id="uf"
-          [options]="listComboUF"
-          [control]="formulario.get('ufsProcesso')"
-        ></asc-multiSelect>
+      <div class="row">
+        <div class="form-group col-md-4">
+          <label class="control-label">UF</label>
+          <asc-multiSelect id="uf" [options]="listComboUF" [control]="formulario.get('ufsProcesso')" ></asc-multiSelect>
+        </div>
+
+        <div class="form-group col-md-4">
+          <label class="control-label">Agrupadora</label>
+          <asc-multiSelect id="filial" [options]="listComboFilial" [control]="formulario.get('filiaisProcesso')" ></asc-multiSelect>
+        </div>
+
+        <div class="form-group col-md-4" style="margin-top: 20px;"> 
+          <asc-checkbox id="ativos" name="ativos" [control]="formulario.get('ativos')" title="Apresenta somente ativos" [valoresTrueOrFalse]="true" />
+          <label class="control-label" for="ativos">Somente ativos</label>
+        </div>
       </div>
 
-      <div class="row col-xs-4">
-        <label class="control-label">Agrupadora</label>
-        <asc-multiSelect
-          id="filial"
-          [options]="listComboFilial"
-          [control]="formulario.get('filiaisProcesso')"
-        ></asc-multiSelect>
-      </div>
-
-      <div class="row col-xs-4 ajusteCheckboxPrime15" style="margin-top: 30px">
-        <input
-          type="checkbox"
-          id="ativos"
-          name="ativos"
-          formControlName="ativos"
-          title="Apresenta somente ativos"
-          [value]="true"
-        />
-        <label class="control-label" for="ativos">Somente ativos</label
-        >&nbsp;<br />
-      </div>
-
-      <div class="col-xs-12 barra-botoes">
-        <button
-          id="btnLimparCampos"
-          class="btn back-btn"
-          (click)="limparCampos()"
-        >
+      <div class="col-12 barra-botoes mt-3">
+        <button id="btnLimparCampos" class="btn back-btn" (click)="limparCampos()" >
           <span class="fa fa-trash fa-fw"></span>Limpar Campos
         </button>
         <button class="btn clean-btn" (click)="novaEmpresa()">
@@ -107,78 +68,4 @@
       </div>
     </form>
   </section>
-</div>
-<!-- Page Header-->
-<div class="container">
-  <div class="col-md-12 breadcrumb-header">
-    <ul class="breadcrumb">
-      <li><span (click)="voltar()" class="voltar"><i class="fa fa-arrow-left" aria-hidden="true"></i>Voltar</span></li>
-      <a routerLink="/home">Início</a>
-      <em class="fa fa-chevron-right"></em>
-      Administração
-      <em class="fa fa-chevron-right"></em>
-      Empresa de Auditoria
-    </ul>
-  </div>
-
-  <div class="title-type">
-    <h1 class="titulo-pagina">Empresa de Auditoria</h1>
-  </div>
-
-  <section class="row">
-    <form class="row"  [formGroup]="formulario" name="form">
-      <div class="row col-xs-2 p-0">
-        <label class="control-label" for="cnpj">CNPJ</label>&nbsp;<br>
-        <input type="text" id="cnpj" name="cnpj" formControlName="cnpj"
-          [mask]="maskCnpj" class="form-control" title="CNPJ da empresa conveniada.">
-      </div>
-      <div class="row col-xs-6">
-        <label class="control-label" for="cnpj">Razão Social</label>&nbsp;<br>
-        <input type="text" id="razaoSocial" name="razaoSocial" formControlName="razaoSocial"
-               class="form-control" [maxlength]="150" oninput="this.value=this.value.toUpperCase()" title="Razão Social da empresa conveniada.">
-      </div>
-      <div class="row col-xs-4">
-        <label class="control-label" for="cnpj">Contrato</label>&nbsp;<br>
-        <input type="text" id="contrato" name="contrato" formControlName="contrato"
-               class="form-control" [maxlength]="20" title="Número do contrato do convênio entre a empresa e a CAIXA.">
-      </div>
-
-      <div class="row col-xs-2 p-0" >
-        <label class="control-label">UF</label>
-        <asc-multiSelect
-          id="uf"
-          [options]="listComboUF"
-          [control]="formulario.get('ufsProcesso')"
-        ></asc-multiSelect>
-      </div>
-
-      <div class="row col-xs-4" >
-        <label class="control-label">Agrupadora</label>
-        <asc-multiSelect
-          id="filial"
-          [options]="listComboFilial"
-          [control]="formulario.get('filiaisProcesso')"
-        ></asc-multiSelect>
-      </div>
-
-      <div class="row col-xs-4" style="margin-top: 30px;">
-        <input type="checkbox" id="ativos" name="ativos" formControlName="ativos"
-          title="Apresenta somente ativos" [value]="true" >
-        <label class="control-label" for="ativos">Somente ativos</label>&nbsp;<br>
-      </div>
-
-      <div class="col-xs-12 barra-botoes">
-        <button id="btnLimparCampos" class="btn back-btn" (click)="limparCampos()">
-          <span class="fa fa-trash fa-fw"></span>Limpar Campos
-        </button>
-        <button class="btn clean-btn" (click)="novaEmpresa()">
-          <span class="fa fa-plus fa-fw"></span>Incluir Empresa de Auditoria
-        </button>
-        <button class="btn continue-btn" (click)="pesquisarEmpresas()">
-          <span class="fa fa-search fa-fw"></span>Pesquisar
-        </button>
-      </div>
-    </form>
-  </section>
-
 </div>

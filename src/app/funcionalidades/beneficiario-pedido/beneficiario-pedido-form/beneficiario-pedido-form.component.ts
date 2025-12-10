@@ -109,10 +109,6 @@ export class BeneficiarioPedidoFormComponent extends BaseComponent {
             this.beneficiarioPedidoService.consultarBeneficiarioPedido(this.beneficiarioPedidoParam).pipe(
                 take<BeneficiarioPedido>(1)
             ).subscribe(beneficiarioPedido => {
-                console.log("-------- consultarDados(): void { beneficiarioPedido");
-                console.log(beneficiarioPedido);
-                console.log(typeof beneficiarioPedido.dataInativacao);
-                console.log("--------------------------------------" + Util.getDate(beneficiarioPedido.dataInativacao));
                 this.beneficiarioPedido = beneficiarioPedido;
                 this.formulario.patchValue( beneficiarioPedido )
                 this.beneficiariosAssociados.setValue(null);
@@ -230,11 +226,13 @@ export class BeneficiarioPedidoFormComponent extends BaseComponent {
 
     public salvar(): void {
         this.loading = true;
-        this.loadingScreen()
-        
+        this.loadingScreen();
+
+        let tiposBeneficiario:number[] = this.getCampoTiposBeneficiario.value.map(x=>Number(x.value));
+
         let beneficiarioPedido: BeneficiarioPedido = {
             idTipoProcesso: this.idTipoProcesso.value,
-            tiposBeneficiario: this.getListaFormulario(this.getCampoTiposBeneficiario.value, this.listComboTipoBeneficiario, true, false),
+            tiposBeneficiario: tiposBeneficiario,
             inativo: this.inativo.value ? 'SIM' : 'NAO',
             dataInativacao: this.dataInativacao.value,
             idsPerfilMinimo: this.getCampoPerfil.value

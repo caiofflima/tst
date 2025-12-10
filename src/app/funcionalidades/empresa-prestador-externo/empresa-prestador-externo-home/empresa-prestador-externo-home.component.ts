@@ -59,7 +59,7 @@ export class EmpresaPrestadorExternoHomeComponent extends BaseComponent implemen
     }
 
     ngOnInit(){
-        this.carregarCombos();  
+        this.carregarCombos();
     }
 
     carregarCombos(){
@@ -101,5 +101,10 @@ export class EmpresaPrestadorExternoHomeComponent extends BaseComponent implemen
     voltar(): void {
         this.location.back();
     }
+
+    onInputChange(event: Event) {
+        const input = event.target as HTMLInputElement;
+        input.value = input.value.toUpperCase();
+    } 
 
 }

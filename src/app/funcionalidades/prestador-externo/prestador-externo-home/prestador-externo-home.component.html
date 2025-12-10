@@ -1,8 +1,11 @@
-
 <div class="container">
+  <!-- Breadcrumb Navigation -->
   <div class="col-md-12 breadcrumb-header">
     <ul class="breadcrumb">
-      <li><span (click)="voltar()" class="voltar"><i class="fa fa-arrow-left" aria-hidden="true"></i>Voltar</span>
+      <li>
+        <span (click)="voltar()" class="voltar">
+          <i class="fa fa-arrow-left" aria-hidden="true"></i> Voltar
+        </span>
       </li>
       <a routerLink="/home">Início</a>
       <em class="fa fa-chevron-right"></em>
@@ -12,63 +15,72 @@
     </ul>
   </div>
 
+  <!-- Page Title -->
   <div class="title-type">
     <h1 class="titulo-pagina">Usuário Externo</h1>
   </div>
 
+  <!-- Form Section -->
   <section class="row">
-    <form name="form">
-      <div class="row p-0 col-xs-2">
-        <label class="control-label" for="cpf">CPF</label>
-        <input
-          type="text" id="cpf" class="form-control" [mask]="maskCpf"
-          [(ngModel)]="filtro.cpf" name="cpf" title="{{bundle('MH130')}}"/>
+    <form name="form" class="col-xs-12">
+      <div class="row">
+
+        <!-- CPF Field -->
+        <div class="col-xs-12 col-sm-4">
+          <label class="control-label" for="cpf">CPF</label>
+          <asc-input-text id="cpf" maskName="cpfMask" [control]="filtro.cpf" name="cpf" title="{{bundle('MH130')}}"/>
+        </div>
+
+        <!-- Nome Field -->
+        <div class="col-xs-12 col-sm-4">
+          <label class="control-label" for="nome">Nome</label>
+          <asc-input-text id="nome" [maxlength]="150" (input)="onInputChange($event)" [control]="filtro.nome" name="nome" title="{{bundle('MH131')}}" />
+        </div>
+
+        <!-- Código do Usuário Field -->
+        <div class="col-xs-12 col-sm-4">
+          <label class="control-label" for="codigoUsuario">Código do Usuário</label>
+          <asc-input-text id="codigoUsuario" maskName="codigoUsuarioMask" [control]="filtro.codigoUsuario" name="codigoUsuario" title="{{bundle('MH163')}}"/>
+        </div>
       </div>
 
-      <div class="row col-xs-6">
-        <label class="control-label" for="nome">Nome</label>
-        <input type="text" id="nome" [maxlength]="150" class="form-control"
-               oninput="this.value = this.value.toUpperCase();"
-               [(ngModel)]="filtro.nome" name="nome" title="{{bundle('MH131')}}">
+      <div class="row">
+        <!-- Empresa Dropdown -->
+        <div class="col-xs-12 col-sm-6">
+          <label class="control-label" for="empresa">Empresa</label>
+          <asc-dropdown id="empresa" [items]="empresas" [control]="filtro.idEmpresa" [placeholder]="this.bundle('MHSPH')">
+          </asc-dropdown>
+        </div>
+
+        <!-- Perfil Dropdown -->
+        <div class="col-xs-12 col-sm-6">
+          <label class="control-label" for="perfil">Perfil</label>
+          <asc-dropdown id="perfil" [items]="listComboPerfil" [control]="filtro.perfil" [placeholder]="this.bundle('MHSPH')">
+          </asc-dropdown>
+        </div>
       </div>
 
-      <div class="row pl-0 col-xs-4">
-        <label class="control-label" for="codigoUsuario">Código do Usuário</label>
-        <input
-          type="text" id="codigoUsuario" [mask]="maskCodigoUsuario" class="form-control maiusculo"
-          [(ngModel)]="filtro.codigoUsuario" name="codigoUsuario" title="{{bundle('MH163')}}">
-      </div>
-
-      <div class="row p-0 col-xs-6">
-        <asc-dropdown label="Empresa" [items]="empresas" [(ngModel)]="filtro.idEmpresa" [placeholder]="this.bundle('MHSPH')"></asc-dropdown>
-      </div>
-
-      <div class="row col-xs-4">
-        <asc-dropdown label="Perfil" [items]="listComboPerfil" [(ngModel)]="filtro.perfil" [placeholder]="this.bundle('MHSPH')"></asc-dropdown>
-      </div>
-
-      <div class="row pl-0 col-xs-4">
-        <asc-checkbox label="Somente Ativos" name="ativo" [(ngModel)]="filtro.ativo" [valoresTrueOrFalse]="false"></asc-checkbox>
+      <div class="row">
+        <!-- Somente Ativos Checkbox -->
+        <div class="col-xs-12 col-sm-4">
+          <asc-checkbox id="ativos" name="ativo" [(ngModel)]="filtro.ativo" [valoresTrueOrFalse]="false">
+          <label class="control-label" for="ativos">Somente Ativos</label>
+          </asc-checkbox>
+        </div>
       </div>
     </form>
 
+    <!-- Button Bar -->
     <div class="col-xs-12 barra-botoes">
-      <button
-        id="btnLimparCampos"
-        class="btn back-btn"
-        (click)="limparCampos()">
+      <button id="btnLimparCampos" class="btn back-btn" (click)="limparCampos()">
         <span class="fa fa-trash fa-fw"></span>
         Limpar Campos
       </button>
-      <button
-        class="btn clean-btn"
-        (click)="novoPrestadorExterno()">
+      <button class="btn clean-btn" (click)="novoPrestadorExterno()">
         <span class="fa fa-plus fa-fw"></span>
         Incluir Usuário Externo
       </button>
-      <button
-        class="btn continue-btn"
-        (click)="pesquisarPrestadoresExternos()">
+      <button class="btn continue-btn" (click)="pesquisarPrestadoresExternos()">
         <span class="fa fa-search fa-fw"></span>
         Pesquisar
       </button>

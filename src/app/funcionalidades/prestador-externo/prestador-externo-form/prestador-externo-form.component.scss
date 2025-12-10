@@ -85,3 +85,44 @@ p {
     color: $btn-bg-red-dark;
   }
 }
+
+/* Aumenta o espaçamento entre os campos */
+.row.col-md-2.mb-4 {
+  margin-bottom: 20px; /* Aumenta o espaçamento entre CPF e Nome */
+}
+
+.row.col-md-5.mb-4 {
+  margin-bottom: 20px; /* Aumenta o espaçamento entre Data de Nascimento e E-mail */
+}
+
+/* Ajusta a largura do campo Data Limite para ser igual à do campo Perfil */
+.row.col-md-6.mb-4 {
+  flex: 1; /* Garante que eles ocupem a mesma largura */
+}
+
+.row.col-md-5.mb-4 {
+  flex: 1; /* Garante que eles ocupem a mesma largura */
+}
+
+/* Aumenta o espaçamento entre os campos */
+.row.col-md-2.mb-4 {
+  margin-bottom: 20px; /* Espaçamento para o campo CPF */
+}
+
+.row.col-md-5.mb-4 {
+  margin-bottom: 20px; /* Espaçamento para o campo Nome */
+}
+
+.row.col-md-2.mb-4 {
+  margin-bottom: 20px; /* Espaçamento para o campo Data de Nascimento */
+}
+
+.row.col-md-3.mb-4 {
+  margin-bottom: 20px; /* Espaçamento para o campo E-mail */
+}
+
+/* Ajusta a largura do campo Data Limite para ser igual à do campo Perfil */
+.row.col-md-6.mb-4,
+.row.col-md-5.mb-4 {
+  flex: 1; /* Garante que eles ocupem a mesma largura */
+}
