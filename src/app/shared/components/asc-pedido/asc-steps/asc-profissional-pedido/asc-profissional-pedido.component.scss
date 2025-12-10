@@ -134,14 +134,17 @@ div.solicitacao-container {
     position: relative;
 
     &.first-line-border {
+      padding-left: 10px;
+
       &::before {
         content: '';
-        width: 4px;
+        width: 3px;
         height: 16px;
-        background-color: #66CFBF;
-        top: 0;
-        left: -6px;
+        background-color: #4A9EFF;
+        top: 2px;
+        left: 0;
         position: absolute;
+        border-radius: 2px;
       }
     }
 
@@ -164,8 +167,13 @@ div.solicitacao-container {
   .info-secondary-bold {
     @extend .info-secondary;
     font-weight: bold;
-    color: #0071FC;
+    color: #4A9EFF;
     cursor: pointer;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: #0071FC;
+    }
   }
 
 }
