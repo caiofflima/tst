@@ -1,8 +1,14 @@
 <dsc-button
+  *ngIf="!showProgress; else loading"
   [disabled]="disabled"
   (click)="clickButton($event)"
   [routerLink]="routerLink"
   variant="secondary"
-  [label]="title"
+  [label]="showProgress ? '' : title"
 >
 </dsc-button>
+<ng-template #loading>
+  <button class="btn-loading" disabled >
+    <dsc-progress-spinner [indeterminate]="true" [size]="20" />
+  </button>
+</ng-template>

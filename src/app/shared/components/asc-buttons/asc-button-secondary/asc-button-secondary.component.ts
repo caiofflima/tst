@@ -10,6 +10,7 @@ export class AscButtonSecondaryComponent {
     @Input() routerLink: string;
     @Input() title: string;
     @Input() disabled = false;
+    @Input() showProgress = false;
 
     @Output() readonly onClick = new EventEmitter<MouseEvent>();
 
