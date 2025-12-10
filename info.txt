@@ -1,9 +1,35 @@
-dados-cadastrais-detail.component.ts:503 CEP digitado: 38057610
-dados-cadastrais-detail.component.ts:504 CEP limpo: 38057610
-integracao-correios.service.ts:23 URL da requisição: /siasc-api/api/correios/cep/38057610
-integracao-correios.service.ts:25 Resposta completa da API: null
-dados-cadastrais-detail.component.ts:512 Resposta do serviço: null
-message.service.ts:173 antes chamada addmsgapplication Endereço não encontrado para o cep informado. alert-danger undefined
-message.service.ts:132 antes chamada emitter
-alert-message.component.ts:44 chamada addMsgItem alert-message.component MessageItem {strBtnOk: 'Sim', strBtnCancel: 'Não', title: 'Confirmação', setFocus: true, msg: 'Endereço não encontrado para o cep informado.', …}
-alert-message.component.ts:48 chamada addMsgItem alert-message.component 2 MessageItem {strBtnOk: 'Sim', strBtnCancel: 'Não', title: 'Confirmação', setFocus: true, msg: 'Endereço não encontrado para o cep informado.', …}
+:4200/siasc-api/api/pedido/especialidade/[object%20Object]:1 
+            
+            
+           Failed to load resource: the server responded with a status of 404 (Not Found)Understand this error
+core.mjs:10614 ERROR HttpErrorResponse
+handleError @ core.mjs:10614Understand this error
+:4200/siasc-api/api/pedido/especialidade/[object%20Object]:1 
+            
+            
+           Failed to load resource: the server responded with a status of 404 (Not Found)Understand this error
+core.mjs:10614 ERROR HttpErrorResponse
+handleError @ core.mjs:10614Understand this error
+:4200/siasc-api/api/pedido/especialidade/[object%20Object]:1 
+            
+            
+           Failed to load resource: the server responded with a status of 404 (Not Found)Understand this error
+core.mjs:10614 ERROR HttpErrorResponse
+handleError @ core.mjs:10614Understand this error
+:4200/siasc-api/api/pedido/especialidade/[object%20Object]:1 
+            
+            
+           Failed to load resource: the server responded with a status of 404 (Not Found)Understand this error
+core.mjs:10614 ERROR HttpErrorResponse
+handleError @ core.mjs:10614Understand this error
+:4200/siasc-api/api/pedido/especialidade/[object%20Object]:1 
+            
+            
+           Failed to load resource: the server responded with a status of 404 (Not Found)Understand this error
+core.mjs:10614 ERROR HttpErrorResponseerror: "RESTEASY003870: Unable to extract parameter from http request: javax.ws.rs.PathParam(\"id\") value is '%5Bobject+Object%5D'"headers: HttpHeaders {normalizedNames: Map(0), lazyUpdate: null, lazyInit: ƒ}message: "Http failure response for http://localhost:4200/siasc-api/api/pedido/especialidade/[object%20Object]: 404 Not Found"name: "HttpErrorResponse"ok: falsestatus: 404statusText: "Not Found"url: "http://localhost:4200/siasc-api/api/pedido/especialidade/[object%20Object]"[[Prototype]]: HttpResponseBase
+handleError @ core.mjs:10614Understand this error
+:4200/siasc-api/api/pedido/especialidade/[object%20Object]:1 
+            
+            
+           Failed to load resource: the server responded with a status of 404 (Not Found)Understand this error
+core.mjs:10614 ERROR HttpErrorResponse
