@@ -263,6 +263,14 @@ div.custom-grid-form-group {
 
 .info-regional-container {
   position: relative;
+  display: inline-block;
+  margin-bottom: 4px;
+
+  .info-secondary-bold {
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+  }
 
   .tolltip-info-regional {
     display: none;
@@ -272,12 +280,13 @@ div.custom-grid-form-group {
     border-radius: 2px;
     position: absolute;
     padding: 0.75em 1.5em;
-    width: 100vw;
+    width: 390px;
     max-width: 390px;
-    z-index: 5;
-    bottom: 100%;
+    z-index: 1000;
+    bottom: calc(100% + 8px);
     background-color: #fff;
-    left: -100%;
+    left: 0;
+    pointer-events: none;
   }
 
   ul {
@@ -301,7 +310,6 @@ div.custom-grid-form-group {
   &:hover {
     .tolltip-info-regional {
       display: block;
-      animation: fade-in 250ms ease-in-out;
     }
   }
 }
