@@ -4,8 +4,8 @@
       Muito bem! Agora, precisamos dos dados do profissional que executou o procedimento.
     </p>
     <div class="ui-g">
-      <div class="ui-g-12 ui-md-6 no-padding" @fadeInOut>
-        <div class="custom-form-group-select">
+      <div class="ui-g-12 ui-md-6 no-padding">
+        <div class="custom-form-group-select" @fadeInOut>
           <asc-select-conselho-profissional
             [control]="form.get('idConselhoProfissional')" [required]="true"
             (dadoSelecionado)="conselhoSelecionado($event)" label="Conselho Profissional">
@@ -15,8 +15,8 @@
           </small>
         </div>
 
-        <div class="custom-form-group-input margin-16"
-             @fadeInOut *ngIf="form.get('idConselhoProfissional').dirty ">
+        <div class="custom-form-group-input"
+             @fadeInOut *ngIf="form.get('idConselhoProfissional').dirty">
           <asc-input-text
             [control]="form.get('numeroConselho')"
             label="Número do Conselho"
@@ -28,13 +28,12 @@
           </small>
         </div>
 
-        <div class="custom-form-group-select margin-16"
+        <div class="custom-form-group-select"
              @fadeInOut
              *ngIf="form.get('idConselhoProfissional').dirty && form.get('numeroConselho').dirty">
           <asc-select-uf
             label="UF"
             [required]="true"
-            *ngIf="form.get('idConselhoProfissional').dirty"
             [control]="form.get('idEstadoConselho')"
             (dadoSelecionado)="ufEstadoConselhoSelecionado($event)">
           </asc-select-uf>
@@ -44,7 +43,7 @@
         </div>
       </div>
 
-      <div *ngIf="!form.get('idConselhoProfissional').valid" class="ui-g-12 ui-md-6 info-container margin-16">
+      <div *ngIf="!form.get('idConselhoProfissional').valid" class="ui-g-12 ui-md-6 info-container">
         <p class="info-title first-line-border">Essa informação pode ser encontrada no carimbo junto à assinatura,
           no pedido. É composto pelas inicias do Conselho.</p>
         <p class="info-title">Exemplo:</p>
@@ -63,7 +62,7 @@
       </div>
 
       <div *ngIf="form.get('idConselhoProfissional').valid && form.get('numeroConselho').invalid"
-           class="ui-g-12 ui-md-6 info-container margin-16">
+           class="ui-g-12 ui-md-6 info-container">
         <p class="info-title first-line-border">Essa informação pode ser encontrada no carimbo abaixo do nome
           do profissional, afastado das iniciais do conselho.</p>
         <p class="info-title">Exemplo:</p>
@@ -75,7 +74,7 @@
       </div>
 
       <div *ngIf="form.get('idConselhoProfissional').valid && form.get('numeroConselho').valid"
-           class="ui-g-12 ui-md-6 info-container margin-16">
+           class="ui-g-12 ui-md-6 info-container">
         <p class="info-title first-line-border">Essa informação pode estar presente no carimbo como UF ou regional.
           Selecione o conselho
           desejado para verificar a unidade deferativa correspondente ao seu profissional.</p>

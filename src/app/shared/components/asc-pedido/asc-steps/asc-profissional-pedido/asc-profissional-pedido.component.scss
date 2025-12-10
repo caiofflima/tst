@@ -20,6 +20,9 @@ div.solicitacao-container {
   }
 
   div.custom-form-group-input {
+    width: 100%;
+    margin-bottom: 24px;
+
     small.custom-form-group-info {
       font-family: 'Caixa Std Regular', sans-serif;
       font-size: 14px;
@@ -41,7 +44,7 @@ div.solicitacao-container {
   div.custom-form-group-select {
     position: relative;
     width: 100%;
-    margin-bottom: 16px;
+    margin-bottom: 24px;
 
     span.button-split {
       width: 1px;
@@ -84,6 +87,7 @@ div.solicitacao-container {
 
 .info-container {
   padding: 0 0 0 2.5em;
+  margin-top: 0 !important;
 
   .info-title {
     font-family: 'Caixa Std Regular', sans-serif;
