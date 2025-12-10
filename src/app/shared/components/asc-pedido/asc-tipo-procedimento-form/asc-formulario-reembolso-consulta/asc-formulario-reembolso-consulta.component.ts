@@ -87,16 +87,12 @@ export class AscFormularioReembolsoConsultaComponent extends AscFormularioProced
   }
 
   override especialidadeSelecionado(especialidade: Especialidade) {
-    const othersFieldSCannotBeNull = [
-      isNotUndefinedOrNull(this.idAutorizacaoPreviaControl),
-      isNotUndefinedOrNull(this.formConsulta.get('dataAtendimento').value),
-    ];
-    if (othersFieldSCannotBeNull.some(isTrue => isTrue) && this.especialidadeAsObject && this.especialidadeAsObject !== especialidade) {
-      super.especialidadeSelecionado(especialidade);
+    if (especialidade) {
       this.especialidadeAsObject = especialidade;
+      this.especialidade = especialidade;
       this.especialidade$.emit(especialidade);
+      super.especialidadeSelecionado(especialidade);
     }
-
   }
 
   getForm(): any {
