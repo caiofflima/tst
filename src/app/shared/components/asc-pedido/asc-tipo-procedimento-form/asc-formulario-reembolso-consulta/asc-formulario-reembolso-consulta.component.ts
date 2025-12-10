@@ -90,6 +90,10 @@ export class AscFormularioReembolsoConsultaComponent extends AscFormularioProced
     if (especialidade) {
       this.especialidadeAsObject = especialidade;
       this.especialidade = especialidade;
+      this.formConsulta.get('idEspecialidade').setValue(especialidade.id);
+      this.formConsulta.get('idEspecialidade').markAsTouched();
+      this.formConsulta.get('idEspecialidade').markAsDirty();
+      this.formConsulta.get('idEspecialidade').updateValueAndValidity();
       this.especialidade$.emit(especialidade);
       super.especialidadeSelecionado(especialidade);
     }
