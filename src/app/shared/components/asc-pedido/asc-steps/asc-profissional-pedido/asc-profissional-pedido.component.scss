@@ -18,7 +18,7 @@ div.solicitacao-container {
   }
 
   div.custom-right-grid {
-    padding-left: 12px;
+    padding-left: 22px;
     max-width: 450px;
     flex-grow: 1;
 
@@ -79,6 +79,11 @@ div.solicitacao-container {
       line-height: 16px;
       color: #3A4859;
       margin-bottom: 4px;
+      padding-left: 10px;
+    }
+
+    .ui-g {
+      padding-left: 10px;
     }
   }
 
