@@ -38,6 +38,48 @@ div.solicitacao-container {
       line-height: 16px;
       color: #3A4859;
     }
+
+    .info-secondary-bold {
+      font-weight: bold;
+      color: #4A9EFF !important;
+      cursor: pointer;
+      transition: color 0.2s ease;
+
+      &:hover {
+        color: #0071FC !important;
+      }
+    }
+
+    .info-title {
+      font-family: 'Caixa Std Regular', sans-serif;
+      font-size: 16px;
+      line-height: 19px;
+      color: #3A4859;
+      position: relative;
+
+      &.first-line-border {
+        padding-left: 10px;
+
+        &::before {
+          content: '';
+          width: 3px;
+          height: 16px;
+          background-color: #4A9EFF;
+          top: 2px;
+          left: 0;
+          position: absolute;
+          border-radius: 2px;
+        }
+      }
+    }
+
+    .info-secondary {
+      font-family: 'Caixa Std Regular', sans-serif;
+      font-size: 14px;
+      line-height: 16px;
+      color: #3A4859;
+      margin-bottom: 4px;
+    }
   }
 
   p.titulo {
