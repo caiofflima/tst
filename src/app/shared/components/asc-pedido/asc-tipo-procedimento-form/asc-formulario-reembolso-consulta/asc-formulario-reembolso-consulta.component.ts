@@ -175,6 +175,14 @@ export class AscFormularioReembolsoConsultaComponent extends AscFormularioProced
   }
 
   override procedimentoSelecionado(procedimento?: Procedimento): void {
+    if (!procedimento) {
+      // Limpa dependências quando o procedimento é removido
+      this.procedimento = null;
+      this.especialidadeParams = {};
+      this.autorizacaoPreviaParams = {};
+      return;
+    }
+
     if (this.procedimento !== procedimento) {
       this.procedimento = procedimento;
       super.procedimentoSelecionado(procedimento);
