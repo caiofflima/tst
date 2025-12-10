@@ -1,35 +1,37 @@
-:4200/siasc-api/api/pedido/especialidade/[object%20Object]:1 
-            
-            
-           Failed to load resource: the server responded with a status of 404 (Not Found)Understand this error
-core.mjs:10614 ERROR HttpErrorResponse
-handleError @ core.mjs:10614Understand this error
-:4200/siasc-api/api/pedido/especialidade/[object%20Object]:1 
-            
-            
-           Failed to load resource: the server responded with a status of 404 (Not Found)Understand this error
-core.mjs:10614 ERROR HttpErrorResponse
-handleError @ core.mjs:10614Understand this error
-:4200/siasc-api/api/pedido/especialidade/[object%20Object]:1 
-            
-            
-           Failed to load resource: the server responded with a status of 404 (Not Found)Understand this error
-core.mjs:10614 ERROR HttpErrorResponse
-handleError @ core.mjs:10614Understand this error
-:4200/siasc-api/api/pedido/especialidade/[object%20Object]:1 
-            
-            
-           Failed to load resource: the server responded with a status of 404 (Not Found)Understand this error
-core.mjs:10614 ERROR HttpErrorResponse
-handleError @ core.mjs:10614Understand this error
-:4200/siasc-api/api/pedido/especialidade/[object%20Object]:1 
-            
-            
-           Failed to load resource: the server responded with a status of 404 (Not Found)Understand this error
-core.mjs:10614 ERROR HttpErrorResponseerror: "RESTEASY003870: Unable to extract parameter from http request: javax.ws.rs.PathParam(\"id\") value is '%5Bobject+Object%5D'"headers: HttpHeaders {normalizedNames: Map(0), lazyUpdate: null, lazyInit: ƒ}message: "Http failure response for http://localhost:4200/siasc-api/api/pedido/especialidade/[object%20Object]: 404 Not Found"name: "HttpErrorResponse"ok: falsestatus: 404statusText: "Not Found"url: "http://localhost:4200/siasc-api/api/pedido/especialidade/[object%20Object]"[[Prototype]]: HttpResponseBase
-handleError @ core.mjs:10614Understand this error
-:4200/siasc-api/api/pedido/especialidade/[object%20Object]:1 
-            
-            
-           Failed to load resource: the server responded with a status of 404 (Not Found)Understand this error
-core.mjs:10614 ERROR HttpErrorResponse
+asc-card-procediment…eembolso-base.ts:28 ERROR 
+HttpErrorResponse {headers: HttpHeaders, status: 404, statusText: 'Not Found', url: 'http://localhost:4200/siasc-api/api/pedido/especialidade/[object%20Object]', ok: false, …}
+error
+: 
+"RESTEASY003870: Unable to extract parameter from http request: javax.ws.rs.PathParam(\"id\") value is '%5Bobject+Object%5D'"
+headers
+: 
+HttpHeaders {normalizedNames: Map(0), lazyUpdate: null, lazyInit: ƒ}
+message
+: 
+"Http failure response for http://localhost:4200/siasc-api/api/pedido/especialidade/[object%20Object]: 404 Not Found"
+name
+: 
+"HttpErrorResponse"
+ok
+: 
+false
+status
+: 
+404
+statusText
+: 
+"Not Found"
+url
+: 
+"http://localhost:4200/siasc-api/api/pedido/especialidade/[object%20Object]"
+[[Prototype]]
+: 
+HttpResponseBaseERROR HttpErrorResponse {headers: HttpHeaders, status: 404, statusText: 'Not Found', url: 'http://localhost:4200/siasc-api/api/pedido/especialidade/[object%20Object]', ok: false, …}
+ERROR HttpErrorResponse {headers: HttpHeaders, status: 404, statusText: 'Not Found', url: 'http://localhost:4200/siasc-api/api/pedido/especialidade/[object%20Object]', ok: false, …}
+base-select-control-value-acessor.ts:143 ERROR TypeError: Cannot read properties of undefined (reading 'id')
+    at AscFormularioReembolsoConsultaComponent.procedimentoSelecionado (asc-formulario-reemb…component.ts:182:51)
+    at AscFormularioReembolsoConsultaComponent_Template_asc_select_procedimento_dadoSelecionado_5_listener (asc-formulario-reemb…omponent.html:12:30)
+base-select-control-value-acessor.ts:92 ERROR TypeError: Cannot read properties of null (reading 'id')
+    at AscFormularioReembolsoConsultaComponent.procedimentoSelecionado (asc-formulario-reemb…component.ts:182:51)
+    at AscFormularioReembolsoConsultaComponent_Template_asc_select_procedimento_dadoSelecionado_5_listener (asc-formulario-reemb…omponent.html:12:30)
+
