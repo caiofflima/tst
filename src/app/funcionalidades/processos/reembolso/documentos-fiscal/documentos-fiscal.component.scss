@@ -88,6 +88,21 @@ div.custom-container {
   padding: 0;
 }
 
+.no-padding-left {
+  padding-left: 0;
+}
+
+.custom-form-grid {
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+@media screen and (max-width: 960px) {
+  .no-padding-left {
+    padding-left: 0;
+  }
+}
+
 @media screen and (max-width: 500px) {
 
 }

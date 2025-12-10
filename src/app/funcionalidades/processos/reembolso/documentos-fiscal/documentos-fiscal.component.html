@@ -5,9 +5,9 @@
   </p>
 
   <div class="ui-g no-padding">
-    <div class="ui-g-12 ui-md-8">
+    <div class="ui-g-12 ui-md-9 no-padding">
       <div class="ui-g no-padding">
-        <div class="ui-g-12 ui-md-12 custom-form-grid">
+        <div class="ui-g-12 custom-form-grid">
           <asc-cpf-cnpj
             inputId="cpfCnpj"
             [required]="true"
@@ -25,7 +25,7 @@
           </asc-cpf-cnpj>
         </div>
         <div
-          class="ui-g-12 ui-md-12 custom-form-grid"
+          class="ui-g-12 custom-form-grid"
           *ngIf="displayAfter('cpfCnpj')"
         >
           <asc-input-text
@@ -40,7 +40,7 @@
         </div>
         <div
           *ngIf="displayAfter('nome')"
-          class="ui-g-12 ui-md-4 relative no-padding-left"
+          class="ui-g-12 ui-md-3 relative no-padding-left"
         >
           <asc-select-uf
             [control]="idEstado"
@@ -50,7 +50,7 @@
             (dadoSelecionado)="ufSelecionado($event)"
           ></asc-select-uf>
         </div>
-        <div class="ui-g-12 ui-md-8 relative" *ngIf="displayAfter('idEstado')">
+        <div class="ui-g-12 ui-md-6 relative no-padding-left" *ngIf="displayAfter('idEstado')">
           <asc-select-municipio
             label="Município"
             selectId="municipio"
@@ -61,7 +61,7 @@
           ></asc-select-municipio>
         </div>
         <div
-          class="ui-g-12 ui-md-12 custom-form-grid"
+          class="ui-g-12 custom-form-grid"
           *ngIf="displayAfter('idMunicipio')"
         >
           <asc-input-text
@@ -74,7 +74,7 @@
           ></asc-input-text>
         </div>
         <div
-          class="ui-g-12 ui-md-12 custom-form-grid"
+          class="ui-g-12 custom-form-grid"
           *ngIf="displayAfter('numeroDoc')"
         >
           <asc-input-date
@@ -98,7 +98,7 @@
           </asc-input-date>
         </div>
         <div
-          class="ui-g-12 ui-md-12 custom-form-grid"
+          class="ui-g-12 custom-form-grid"
           *ngIf="displayAfter('data')"
         >
           <asc-input-money-type
@@ -118,15 +118,13 @@
             ></asc-input-error>
           </asc-input-money-type>
         </div>
-      </div>
-    </div>
-    <div class="ui-g-12 ui-md-6" *ngIf="displayAfter('data')">
-      <div class="custom-form-grid">
-        <strong
-          ><em
-            >Valor total do documento fiscal incluindo outros procedimentos</em
-          ></strong
-        >
+        <div class="ui-g-12 custom-form-grid" *ngIf="displayAfter('data')">
+          <strong
+            ><em
+              >Valor total do documento fiscal incluindo outros procedimentos</em
+            ></strong
+          >
+        </div>
       </div>
     </div>
   </div>
