@@ -118,14 +118,14 @@
   </div>
 
   <div *ngIf="isToShowForm && enableAllAction" class=" flex-end">
-    <asc-button-primary
+    <asc-button-secondary
       buttonId="adicionarProcedimento"
       [title]="isEditing ? 'Concluir alteração' : 'Adicionar'"
       [showProgress]="loading"
       [disabled]="form?.invalid || loading"
       (onClick)="adicionarProcedimento(formDirective, $event)"
-      [style-button]="{'background-color': '#41a495', 'border-color': '#369183'}"
-    ></asc-button-primary>
+      style="margin-right: 8px;"
+    ></asc-button-secondary>
 
     <asc-button-primary
       buttonId="limpar"
