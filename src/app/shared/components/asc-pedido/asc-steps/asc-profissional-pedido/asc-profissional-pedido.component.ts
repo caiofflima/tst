@@ -45,9 +45,9 @@ export class AscProfissionalPedidoComponent implements  OnDestroy {
     }
 
     readonly form = this.formBuilder.group({
-        idConselhoProfissional: [null],
-        numeroConselho: [null, [Validators.maxLength(10)]],
-        idEstadoConselho: [null]
+        idConselhoProfissional: [null, [Validators.required]],
+        numeroConselho: [null, [Validators.required, Validators.maxLength(10)]],
+        idEstadoConselho: [null, [Validators.required]]
     });
 
     private readonly unsubscribeSubject = new Subject<void>();
