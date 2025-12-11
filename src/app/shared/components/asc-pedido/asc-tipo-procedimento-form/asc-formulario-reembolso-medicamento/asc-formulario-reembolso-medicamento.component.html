@@ -1,14 +1,14 @@
-<form [formGroup]="form" #formDirective="ngForm" style="min-width: 48em">
+<form [formGroup]="form" #formDirective="ngForm">
+
   <div class="form-container">
     <div class="form-row">
       <div class="form-field-full">
         <asc-select-patologia
           selectId="patologia"
-          (dadoSelecionado)="patologiaSelecionado($event)"
-          [control]="form.get('idPatologia')"
           [parametro]="parametroSelectPatologia"
+          [control]="form.get('idPatologia')"
+          (dadoSelecionado)="patologiaSelecionado($event)"
           formControlName="idPatologia"
-          id="patologiaPrgMed"
           label="Patologia"
           [required]="true"
           style="border-left: none !important"
@@ -18,124 +18,96 @@
 
     <!-- Linha 1: Laboratório (1/2), Quantidade Solicitada (1/2) -->
     <div class="form-row">
-      <div
-        *ngIf="mostrarCampo('idLaboratorio')"
-        class="form-field-half"
-      >
+      <div class="form-field-half"
+           *ngIf="mostrarCampo('idLaboratorio')">
         <asc-select-laboratorio
           selectId="laboratorio"
-          (dadoSelecionado)="laboratorioSelecionado($event)"
-          (dadosBackend)="onLaboratoriosLoaded($event)"
-          [control]="form.get('idLaboratorio')"
           [parametros]="patologia"
+          [control]="form.get('idLaboratorio')"
+          (dadosBackend)="onLaboratoriosLoaded($event)"
+          (dadoSelecionado)="laboratorioSelecionado($event)"
           formControlName="idLaboratorio"
-          label="Laboratório"
           [required]="true"
+          label="Laboratório"
           style="border-left: none !important"
         ></asc-select-laboratorio>
       </div>
 
-      <div
-        *ngIf="mostrarCampo('qtdSolicitada')"
-        class="form-field-half"
-      >
+      <div class="form-field-half"
+           *ngIf="mostrarCampo('qtdSolicitada')">
         <asc-input-text
-          [control]="form.get('qtdSolicitada')"
-          [maxlength]="3"
-          inputId="qtdSolicitada"
-          [somenteNumeros]="true"
           label="Quantidade solicitada"
           [required]="true"
-        >
-          <asc-input-error
-            [msgErro]="bundle('MA012')"
-            nomeErro="min"
-          ></asc-input-error>
+          [control]="form.get('qtdSolicitada')"
+          inputId="qtdSolicitada"
+          [somenteNumeros]="true"
+          [maxlength]="3">
+          <asc-input-error nomeErro="min" [msgErro]="bundle('MA012')"></asc-input-error>
         </asc-input-text>
       </div>
     </div>
 
     <!-- Linha 2: Medicamento (1/2), Dias Atendidos (1/2) -->
     <div class="form-row">
-      <div
-        *ngIf="mostrarCampo('codigoMedicamento')"
-        class="form-field-half"
-      >
+      <div class="form-field-half"
+           *ngIf="mostrarCampo('codigoMedicamento')">
         <asc-select-medicamento
           selectId="medicamento"
-          (dadoSelecionado)="medicamentoSelecionado($event)"
-          (dadosBackend)="onMedicamentosLoaded($event)"
-          [control]="form.get('codigoMedicamento')"
           [parametros]="medicamentoParam"
+          [control]="form.get('codigoMedicamento')"
+          (dadosBackend)="onMedicamentosLoaded($event)"
+          (dadoSelecionado)="medicamentoSelecionado($event)"
           formControlName="codigoMedicamento"
-          label="Medicamento"
           [required]="true"
+          label="Medicamento"
           style="border-left: none !important"
         ></asc-select-medicamento>
       </div>
 
-      <div
-        *ngIf="mostrarCampo('diasAtendidosPelaQuantidade')"
-        class="form-field-half"
-      >
+      <div class="form-field-half"
+           *ngIf="mostrarCampo('diasAtendidosPelaQuantidade')">
         <asc-input-text
-          [control]="form.get('diasAtendidosPelaQuantidade')"
-          [maxlength]="3"
-          inputId="diasAtendidosPelaQuantidade"
-          [somenteNumeros]="true"
           label="Dias atendidos pela quantidade"
           [required]="true"
-        >
-          <asc-input-error
-            [msgErro]="bundle('MA078')"
-            nomeErro="min"
-          ></asc-input-error>
+          [control]="form.get('diasAtendidosPelaQuantidade')"
+          inputId="diasAtendidosPelaQuantidade"
+          [somenteNumeros]="true"
+          [maxlength]="3">
+          <asc-input-error nomeErro="min" [msgErro]="bundle('MA078')"></asc-input-error>
         </asc-input-text>
       </div>
     </div>
 
     <!-- Linha 3: Apresentação (1/2), Valor Unitário Pago (1/2) -->
     <div class="form-row">
-      <div
-        *ngIf="mostrarCampo('idMedicamento')"
-        class="form-field-half"
-      >
+      <div class="form-field-half"
+           *ngIf="mostrarCampo('idMedicamento')">
         <asc-select-medicamento-apresentacao
           selectId="apresentacaoMedicamento"
-          (dadoSelecionado)="medicamentoApresentacaoSelecionado($event)"
-          (dadosBackend)="onApresentacoesLoaded($event)"
-          [control]="form.get('idMedicamento')"
           [parametros]="medicamentoApresentacaoParam"
+          [control]="form.get('idMedicamento')"
+          (dadosBackend)="onApresentacoesLoaded($event)"
+          (dadoSelecionado)="medicamentoApresentacaoSelecionado($event)"
           formControlName="idMedicamento"
-          label="Apresentação"
           [required]="true"
+          label="Apresentação"
           style="border-left: none !important"
         ></asc-select-medicamento-apresentacao>
       </div>
 
-      <div
-        *ngIf="mostrarCampo('valorUnitarioPago')"
-        class="form-field-half"
-      >
-        <asc-input-money-type
-          [control]="form.get('valorUnitarioPago')"
-          inputId="valorUnitarioPago"
-          label="Valor unitário pago"
-          [required]="true"
-        >
-          <asc-input-error
-            [msgErro]="'O Valor Unitário Pago deve ser maior do que 0 (zero).'"
-            nomeErro="min"
-          ></asc-input-error>
+      <div class="form-field-half"
+           *ngIf="mostrarCampo('valorUnitarioPago')">
+        <asc-input-money-type [control]="form.get('valorUnitarioPago')" inputId="valorUnitarioPago"
+                              label="Valor unitário pago" [required]="true">
+          <asc-input-error nomeErro="min"
+                           [msgErro]="'O Valor Unitário Pago deve ser maior do que 0 (zero).'"></asc-input-error>
         </asc-input-money-type>
-        <div class="error-form" *ngIf="erroValorDocumentoFiscal">
-          {{ bundle('MA083') }}
-        </div>
+        <div class="error-form" *ngIf="erroValorDocumentoFiscal">{{ bundle('MA083') }}</div>
       </div>
     </div>
   </div>
 
-  <div *ngIf="isToShowForm && enableAllAction" class="flex-end">
+  <div *ngIf="isToShowForm && enableAllAction" class=" flex-end">
     <asc-button-secondary
       buttonId="adicionarProcedimento"
       [title]="isEditing ? 'Concluir alteração' : 'Adicionar'"
@@ -151,4 +123,5 @@
       (onClick)="clickButtonCancelarProcedimento(formDirective, $event)"
     ></asc-button-primary>
   </div>
+
 </form>
