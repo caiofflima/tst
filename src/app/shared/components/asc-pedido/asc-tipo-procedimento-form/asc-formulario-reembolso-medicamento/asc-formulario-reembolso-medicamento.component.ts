@@ -64,10 +64,22 @@ export class AscFormularioReembolsoMedicamentoComponent extends AscFormularioPro
     @Output()
     readonly laboratorio$ = new EventEmitter<Laboratorio>();
 
+    @Output()
+    readonly medicamentoSelecionado$ = new EventEmitter<Medicamento>();
+
+    @Output()
+    readonly medicamentoApresentacaoSelecionado$ = new EventEmitter<Medicamento>();
+
     medicamentoParam: AscSelectMedicamentoParam = {};
     medicamentoApresentacaoParam: AscSelectMedicamentoParam;
-    medicamentoApresentacao: Medicamento;
-    laboratorio: Laboratorio;
+
+    private medicamentoApresentacao: Medicamento;
+    private laboratorio: Laboratorio;
+    private medicamento: Medicamento;
+
+    laboratorios: Laboratorio[] = [];
+    medicamentos: Medicamento[] = [];
+    apresentacoes: Medicamento[] = [];
     
     
     constructor(
@@ -112,8 +124,8 @@ export class AscFormularioReembolsoMedicamentoComponent extends AscFormularioPro
 
     construirFormulario(): any {
         const form = this.form.value as any;
-        
-        form.procedimento = this.procedimento;
+
+        form.procedimento = this.procedimento || form.procedimento;
         form.qtdMedicamento = form.qtdMedicamento || form.qtdSolicitada;
         form.qtdDiasAtendidosPeloMedicamento = form.qtdDiasAtendidosPeloMedicamento || form.diasAtendidosPelaQuantidade;
         form.patologia = this.patologia || form.patologia;
@@ -124,23 +136,25 @@ export class AscFormularioReembolsoMedicamentoComponent extends AscFormularioPro
     }
 
     onLaboratoriosLoaded(laboratorios: Laboratorio[]) {
-        // Método vazio para receber dados do backend
+        this.laboratorios = laboratorios;
     }
 
-    laboratorioSelecionado(laboratorio: any) {
+    laboratorioSelecionado(laboratorio: Laboratorio) {
+        this.laboratorio = laboratorio;
+        this.laboratorio$.emit(laboratorio);
         this.medicamentoParam = {
             laboratorioId: laboratorio ? laboratorio.id : null,
             idPatologia: Number(this.getForm().get('idPatologia').value)
         }
-        this.laboratorio$.emit(laboratorio)
-        this.laboratorio = laboratorio;
     }
 
     onMedicamentosLoaded(medicamentos: Medicamento[]) {
-        // Método vazio para receber dados do backend
+        this.medicamentos = medicamentos;
     }
 
     medicamentoSelecionado(medicamento: Medicamento) {
+        this.medicamento = medicamento;
+        this.medicamentoSelecionado$.emit(medicamento);
         this.medicamentoApresentacaoParam = {
             medicamentoId: medicamento ? medicamento.id : null,
             laboratorioId: this.medicamentoParam ? this.medicamentoParam.laboratorioId : null,
@@ -149,11 +163,12 @@ export class AscFormularioReembolsoMedicamentoComponent extends AscFormularioPro
     }
 
     onApresentacoesLoaded(apresentacoes: Medicamento[]) {
-        // Método vazio para receber dados do backend
+        this.apresentacoes = apresentacoes;
     }
 
     medicamentoApresentacaoSelecionado(medicamentoApresentacao: Medicamento) {
         this.medicamentoApresentacao = medicamentoApresentacao;
+        this.medicamentoApresentacaoSelecionado$.emit(medicamentoApresentacao);
     }
 
     bundle(msg: string, args?: any): string {
