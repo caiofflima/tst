@@ -35,32 +35,32 @@
       </asc-input-text>
     </div>
     <div class="footer-buttons" *ngIf="!inResumo">
-      <asc-button-secondary
-        buttonId="limparProcedimento"
-        [title]="(isEditing) ? 'Cancelar' : 'Limpar'"
-        (onClick)="clickButtonCancelarProcedimento(formDirective)"
-        style="margin-right: 8px;"
-      ></asc-button-secondary>
       <asc-button-primary
         buttonId="adicionarProcedimento"
         [title]="(isEditing) ? 'Concluir alteração' : 'Adicionar'"
         [disabled]="form.invalid"
         (onClick)="adicionarProcedimento(formDirective)"
+        style="margin-right: 8px;"
       ></asc-button-primary>
-    </div>
-    <div class="footer-buttons" *ngIf="inResumo">
       <asc-button-secondary
-        buttonId="limparProcedimentoResumo"
+        buttonId="limparProcedimento"
         [title]="(isEditing) ? 'Cancelar' : 'Limpar'"
         (onClick)="clickButtonCancelarProcedimento(formDirective)"
-        style="margin-right: 8px;"
       ></asc-button-secondary>
+    </div>
+    <div class="footer-buttons" *ngIf="inResumo">
       <asc-button-primary
         buttonId="adicionarProcedimentoResumo"
         [title]="(isEditing) ? 'Concluir alteração' : 'Adicionar'"
         [disabled]="form.invalid"
         (onClick)="adicionarProcedimento(formDirective)"
+        style="margin-right: 8px;"
       ></asc-button-primary>
+      <asc-button-secondary
+        buttonId="limparProcedimentoResumo"
+        [title]="(isEditing) ? 'Cancelar' : 'Limpar'"
+        (onClick)="clickButtonCancelarProcedimento(formDirective)"
+      ></asc-button-secondary>
     </div>
   </div>
 </form>
