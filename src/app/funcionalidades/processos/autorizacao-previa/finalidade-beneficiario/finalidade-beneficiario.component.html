@@ -31,12 +31,19 @@
       </div>
     </div>
   </div>
-  <div class="footer">
-    <button class="back-btn" cdkStepperPrevious>
-      Voltar
-    </button>
-    <button class="continue-btn" cdkStepperNext [disabled]="finalidadeForm.invalid" (click)="onSubmit()">
-        Continuar
-    </button>
+  <div class="footer flex-end">
+    <asc-button-secondary
+      buttonId="voltarFinalidade"
+      [title]="'Voltar'"
+      cdkStepperPrevious
+      style="margin-right: 8px;"
+    ></asc-button-secondary>
+    <asc-button-primary
+      buttonId="continuarFinalidade"
+      [title]="'Continuar'"
+      cdkStepperNext
+      [disabled]="finalidadeForm.invalid"
+      (onClick)="onSubmit()"
+    ></asc-button-primary>
   </div>
 </form>

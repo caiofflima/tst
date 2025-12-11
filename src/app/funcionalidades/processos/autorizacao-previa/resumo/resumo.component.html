@@ -365,27 +365,22 @@
     </asc-card-component>
   </div>
 </div>
-<div class="footer">
-  <button (click)="setModal(true)" class="back-btn" id="reiniciar">
-    Reiniciar
-  </button>
+<div class="footer flex-end">
+  <asc-button-secondary
+    buttonId="reiniciar"
+    [title]="'Reiniciar'"
+    (onClick)="setModal(true)"
+    style="margin-right: 8px;"
+  ></asc-button-secondary>
 
-  <button
-    class="continue-btn"
-    cdkStepperNext
-    (click)="onSubmit()"
+  <asc-button-primary
+    buttonId="continuar"
+    [title]="'Finalizar'"
+    [showProgress]="showProgress"
     [disabled]="documentoNaoPossuiArquivos || showProgress"
-  >
-    <span *ngIf="showProgress">
-      <dsc-progress-spinner
-        [style]="{ width: '25px', height: '25px' }"
-        strokeWidth="4"
-        fill="#EEEEEE"
-        animationDuration=".5s"
-      ></dsc-progress-spinner>
-    </span>
-    <span *ngIf="!showProgress"> Finalizar </span>
-  </button>
+    cdkStepperNext
+    (onClick)="onSubmit()"
+  ></asc-button-primary>
 </div>
 
 <p-dialog

@@ -57,6 +57,12 @@ div.solicitacao-container {
     width: 100%;
     max-width: 373px;
   }
+
+.footer.flex-end {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
 }
 
 div.stepper-container {

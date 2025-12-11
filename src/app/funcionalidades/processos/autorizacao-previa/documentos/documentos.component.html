@@ -13,11 +13,18 @@
     [processo]="pedido"
   ></asc-documento-card>
 </div>
-<div class="footer">
-  <button class="back-btn" cdkStepperPrevious>
-    Voltar
-  </button>
-  <button class="continue-btn" cdkStepperNext (click)="onSubmit()" [disabled]="documentoNaoPossuiArquivos || loading">
-    Continuar
-  </button>
+<div class="footer flex-end">
+  <asc-button-secondary
+    buttonId="voltarDocumentos"
+    [title]="'Voltar'"
+    cdkStepperPrevious
+    style="margin-right: 8px;"
+  ></asc-button-secondary>
+  <asc-button-primary
+    buttonId="continuarDocumentos"
+    [title]="'Continuar'"
+    cdkStepperNext
+    (onClick)="onSubmit()"
+    [disabled]="documentoNaoPossuiArquivos || loading"
+  ></asc-button-primary>
 </div>

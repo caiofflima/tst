@@ -132,6 +132,11 @@ button.add-btn-plus {
   }
 }
 
+.footer.flex-end {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
 div.documentos-box {
   width: 100%;
 

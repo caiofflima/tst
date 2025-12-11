@@ -117,6 +117,12 @@ div.finalidade-autorizacao {
     padding: 12px 8px;
     width: 100%;
   }
+
+.footer.flex-end {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
 }
 
 div.stepper-container {

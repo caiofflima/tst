@@ -51,21 +51,22 @@
     </div>
   </div>
 </div>
-<div class="footer">
-  <button class="back-btn" cdkStepperPrevious [disabled]="isEditing" (click)="resetarProcedimento()">
-      Voltar
-  </button>
-  <button class="continue-btn" (click)="onSubmit()"
-          [disabled]="!pedidoProcedimentosTabela.length || showProgress || isEditing">
-    <span *ngIf="showProgress">
-      <dsc-progress-spinner
-        [style]="{width: '25px', height: '25px'}" strokeWidth="4" fill="#EEEEEE"
-        animationDuration=".5s"></dsc-progress-spinner>
-    </span>
-    <div *ngIf="!showProgress">
-      Continuar
-    </div>
-  </button>
+<div class="footer flex-end">
+  <asc-button-secondary
+    buttonId="voltarProcedimento"
+    [title]="'Voltar'"
+    cdkStepperPrevious
+    [disabled]="isEditing"
+    (onClick)="resetarProcedimento()"
+    style="margin-right: 8px;"
+  ></asc-button-secondary>
+  <asc-button-primary
+    buttonId="continuarProcedimento"
+    [title]="'Continuar'"
+    (onClick)="onSubmit()"
+    [disabled]="!pedidoProcedimentosTabela.length || showProgress || isEditing"
+    [showProgress]="showProgress"
+  ></asc-button-primary>
 </div>
 
 <!-- Modal Logout -->

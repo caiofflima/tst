@@ -6,6 +6,7 @@ import {AscValidators} from '../../../../shared/validators/asc-validators';
 import {Beneficiario} from '../../../../shared/models/comum/beneficiario';
 import {SessaoService} from "../../../../shared/services/services";
 import {Subject, Subscription} from "rxjs";
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-solicitacao',
@@ -32,6 +33,8 @@ export class SolicitacaoComponent implements OnInit, OnDestroy {
         idTipoBeneficiario: new FormControl(null),
     });
 
+    constructor(private readonly router: Router) {}
+
     ngOnInit() {
         this.eventsSubscription = this.checkRestart.subscribe(() => {
             this.formularioSolicitacao.reset();
@@ -46,6 +49,10 @@ export class SolicitacaoComponent implements OnInit, OnDestroy {
         const solicitacao = this.formularioSolicitacao.getRawValue() as SolicitacaoFormModel;
         solicitacao.telefoneContato = somenteNumeros(solicitacao.telefoneContato);
         this.solicitacao.emit(solicitacao);
+    }
+
+    onVoltar(): void {
+        this.router.navigate(['/pedidos/autorizacao-previa']);
     }
 
     beneficarioSelecionado(beneficiario: Beneficiario) {

@@ -111,15 +111,19 @@
       </div>
     </div>
   </div>
-  <div class="footer">
-    <button class="back-btn" cdkStepperPrevious type="text">Voltar</button>
-    <button
-      class="continue-btn"
+  <div class="footer flex-end">
+    <asc-button-secondary
+      buttonId="voltarProfissional"
+      [title]="'Voltar'"
+      cdkStepperPrevious
+      style="margin-right: 8px;"
+    ></asc-button-secondary>
+    <asc-button-primary
+      buttonId="continuarProfissional"
+      [title]="'Continuar'"
       cdkStepperNext
       [disabled]="form.invalid"
-      (click)="onSubmit()"
-    >
-      Continuar
-    </button>
+      (onClick)="onSubmit()"
+    ></asc-button-primary>
   </div>
 </form>

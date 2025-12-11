@@ -41,18 +41,20 @@
       </div>
     </div>
   </div>
-  <div class="footer">
-    <button class="back-btn" routerLink="/pedidos/autorizacao-previa">
-      Voltar
-    </button>
+  <div class="footer flex-end">
+    <asc-button-secondary
+      buttonId="voltarSolicitacao"
+      [title]="'Voltar'"
+      style="margin-right: 8px;"
+      (onClick)="onVoltar()"
+    ></asc-button-secondary>
 
-    <button
-      class="continue-btn"
+    <asc-button-primary
+      buttonId="continuarSolicitacao"
+      [title]="'Continuar'"
       cdkStepperNext
-      (click)="onSubmit()"
+      (onClick)="onSubmit()"
       [disabled]="formularioSolicitacao.invalid"
-    >
-      Continuar
-    </button>
+    ></asc-button-primary>
   </div>
 </form>
