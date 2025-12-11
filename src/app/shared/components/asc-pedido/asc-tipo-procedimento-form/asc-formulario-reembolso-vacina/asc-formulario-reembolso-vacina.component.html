@@ -17,34 +17,7 @@
       </div>
     </div>
 
-    <!-- Linha 1: Vazio (1/2), Valor Unitário (1/2) -->
-    <div class="form-row">
-      <div class="form-field-half">
-      </div>
-
-      <div
-        class="form-field-half"
-        *ngIf="mostrarCampo('valorUnitarioPago')"
-      >
-        <asc-input-money-type
-          [control]="form.get('valorUnitarioPago')"
-          inputId="valorUnitarioPago"
-          label="Valor unitário pago"
-          [required]="true"
-        >
-          <asc-input-error
-            [msgErro]="'O Valor Unitário Pago deve ser maior do que 0 (zero).'"
-            nomeErro="min"
-          >
-          </asc-input-error>
-        </asc-input-money-type>
-        <div class="error-form" *ngIf="erroValorDocumentoFiscal">
-          {{ bundle("MA083") }}
-        </div>
-      </div>
-    </div>
-
-    <!-- Linha 2: Autorização Prévia (1/2), Data do Atendimento (1/2) -->
+    <!-- Linha 2: Autorização Prévia (1/2), Quantidade Solicitada (1/2) -->
     <div class="form-row">
       <div
         class="form-field-half"
@@ -71,29 +44,6 @@
 
       <div
         class="form-field-half"
-        *ngIf="mostrarCampo('dataAtendimento')"
-      >
-        <asc-input-date
-          [control]="form.get('dataAtendimento')"
-          inputId="dataAtendimento"
-          label="Data do atendimento"
-          [required]="true"
-        >
-          <asc-input-error
-            [msgErro]="
-              'Data do atendimento deve ser menor ou igual à Data atual.'
-            "
-            nomeErro="dataAtualMenor"
-          >
-          </asc-input-error>
-        </asc-input-date>
-      </div>
-    </div>
-
-    <!-- Linha 3: Quantidade Solicitada (1/2 esquerda) -->
-    <div class="form-row">
-      <div
-        class="form-field-half"
         *ngIf="mostrarCampo('qtdSolicitada')"
       >
         <asc-input-text
@@ -113,6 +63,50 @@
             [msgErro]="bundle('MA132')"
           ></asc-input-error>
         </asc-input-text>
+      </div>
+    </div>
+
+    <!-- Linha 3: Valor Unitário Pago (1/2), Data do Atendimento (1/2) -->
+    <div class="form-row">
+      <div
+        class="form-field-half"
+        *ngIf="mostrarCampo('valorUnitarioPago')"
+      >
+        <asc-input-money-type
+          [control]="form.get('valorUnitarioPago')"
+          inputId="valorUnitarioPago"
+          label="Valor unitário pago"
+          [required]="true"
+        >
+          <asc-input-error
+            [msgErro]="'O Valor Unitário Pago deve ser maior do que 0 (zero).'"
+            nomeErro="min"
+          >
+          </asc-input-error>
+        </asc-input-money-type>
+        <div class="error-form" *ngIf="erroValorDocumentoFiscal">
+          {{ bundle("MA083") }}
+        </div>
+      </div>
+
+      <div
+        class="form-field-half"
+        *ngIf="mostrarCampo('dataAtendimento')"
+      >
+        <asc-input-date
+          [control]="form.get('dataAtendimento')"
+          inputId="dataAtendimento"
+          label="Data do atendimento"
+          [required]="true"
+        >
+          <asc-input-error
+            [msgErro]="
+              'Data do atendimento deve ser menor ou igual à Data atual.'
+            "
+            nomeErro="dataAtualMenor"
+          >
+          </asc-input-error>
+        </asc-input-date>
       </div>
     </div>
   </div>
