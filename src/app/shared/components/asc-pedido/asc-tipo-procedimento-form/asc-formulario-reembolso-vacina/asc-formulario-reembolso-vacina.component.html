@@ -17,18 +17,15 @@
       </div>
     </div>
 
-    <!-- Linha 2: Autorização Prévia (1/2), Quantidade Solicitada (1/2) -->
+    <!-- Linha 2: Autorização Prévia (1/2), Valor Unitário Pago (1/2) -->
     <div class="form-row">
       <div
         class="form-field-half"
         *ngIf="mostrarCampo('idAutorizacaoPrevia')"
       >
-        <label
-          class="custom-input-label"
-          [class.obrigatorio]="autorizacaoPreviaObrigatorio"
-          >Autorização Prévia
-          <small *ngIf="!autorizacaoPreviaObrigatorio">Opcional</small></label
-        >
+        <div class="campo-opcional-wrapper">
+          <span class="label-com-opcional" [class.obrigatorio]="autorizacaoPreviaObrigatorio">Autorização Prévia <span class="texto-opcional" *ngIf="!autorizacaoPreviaObrigatorio">- Opcional</span></span>
+        </div>
         <asc-select-autorizacao-previa
           selectId="autorizacaoPrevia"
           [parametros]="autorizacaoPreviaParams"
@@ -42,6 +39,30 @@
         </asc-select-autorizacao-previa>
       </div>
 
+      <div
+        class="form-field-half"
+        *ngIf="mostrarCampo('valorUnitarioPago')"
+      >
+        <asc-input-money-type
+          [control]="form.get('valorUnitarioPago')"
+          inputId="valorUnitarioPago"
+          label="Valor unitário pago"
+          [required]="true"
+        >
+          <asc-input-error
+            [msgErro]="'O Valor Unitário Pago deve ser maior do que 0 (zero).'"
+            nomeErro="min"
+          >
+          </asc-input-error>
+        </asc-input-money-type>
+        <div class="error-form" *ngIf="erroValorDocumentoFiscal">
+          {{ bundle("MA083") }}
+        </div>
+      </div>
+    </div>
+
+    <!-- Linha 3: Quantidade Solicitada (1/2), Data do Atendimento (1/2) -->
+    <div class="form-row">
       <div
         class="form-field-half"
         *ngIf="mostrarCampo('qtdSolicitada')"
@@ -63,30 +84,6 @@
             [msgErro]="bundle('MA132')"
           ></asc-input-error>
         </asc-input-text>
-      </div>
-    </div>
-
-    <!-- Linha 3: Valor Unitário Pago (1/2), Data do Atendimento (1/2) -->
-    <div class="form-row">
-      <div
-        class="form-field-half"
-        *ngIf="mostrarCampo('valorUnitarioPago')"
-      >
-        <asc-input-money-type
-          [control]="form.get('valorUnitarioPago')"
-          inputId="valorUnitarioPago"
-          label="Valor unitário pago"
-          [required]="true"
-        >
-          <asc-input-error
-            [msgErro]="'O Valor Unitário Pago deve ser maior do que 0 (zero).'"
-            nomeErro="min"
-          >
-          </asc-input-error>
-        </asc-input-money-type>
-        <div class="error-form" *ngIf="erroValorDocumentoFiscal">
-          {{ bundle("MA083") }}
-        </div>
       </div>
 
       <div
