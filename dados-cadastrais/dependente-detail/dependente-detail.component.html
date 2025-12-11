@@ -1,0 +1,241 @@
+<!-- Header main Dados Cadastrais -->
+<section class="container-view" id="container-dados-cadastrais">
+  <!-- === HEADER VIEW ===  -->
+  <section class="container">
+    <div class="register-header">
+      <div class="register-breadcrumb">
+        <ul class="breadcrumb register-breadcrumb--wrapper">
+          <li>
+            <span (click)="backButton()" class="voltar"
+              ><i class="fa fa-arrow-left" aria-hidden="true"></i>Voltar</span
+            >
+          </li>
+          <a routerLink="/home">Início</a>
+          <em class="fa fa-chevron-right"></em>
+          Meus dados
+          <em class="fa fa-chevron-right"></em>
+          Dados cadastrais
+          <em class="fa fa-chevron-right"></em>
+          Dados do Beneficiário
+        </ul>
+      </div>
+      <div class="register-title">
+        <p class="title-section">Dados do Beneficiário</p>
+
+        <hr class="separador" />
+      </div>
+    </div>
+  </section>
+  <!-- === //HEADER VIEW ===  -->
+
+  <!-- === MAIN VIEW ===  -->
+  <section class="container">
+    <div class="box-data">
+      <div class="box-sect">
+        <div class="box-header">
+          <div class="box-header__title">
+            <h4>{{ beneficiario?.nome | uppercase }}</h4>
+            <span></span>
+            <p *ngIf="beneficiario?.ativo">
+              ATIVO
+              <span *ngIf="beneficiario?.ativo" class="is--success"
+                ><i class="fa fa-check-circle"></i
+              ></span>
+            </p>
+            <p *ngIf="!beneficiario?.ativo">
+              INATIVO
+            <span *ngIf="!beneficiario?.ativo" class="is--warning"
+              ><i class="fa fa-exclamation-circle"></i
+            ></span>
+            </p>
+          </div>
+          <div class="box-header__badge">
+            <span *ngIf="beneficiario?.restrito === 'S'" class="badge">Restrito</span>
+          </div>
+        </div>
+
+        <div class="box-infos">
+          <div class="box-infos__header">
+            <h5>
+              <i class="fa fa-user"></i>
+              <span>Dados Pessoais</span>
+            </h5>
+          </div>
+          <hr class="separador" />
+          <div class="box-infos__main">
+            <div class="box-infos__wrapper">
+              <!-- Primeira Linha -->
+              <div class="is--2-cols">
+                <h4>Data de Nascimento</h4>
+                <p>{{ beneficiario?.dataNascimento ? (beneficiario.dataNascimento | date: 'dd/MM/yyyy') : '-' }}</p>
+              </div>
+              <div class="">
+                <h4>Idade</h4>
+                <p>{{ beneficiario?.idade || '-' }}</p>
+              </div>
+              <div class="">
+                <h4>CPF</h4>
+                <p>{{ beneficiario?.cpf | cpfMask }}</p>
+              </div>
+
+              <!-- Segunda Linha -->
+              <div class="is--2-cols">
+                <h4>Nome da Mãe</h4>
+                <p>{{ beneficiario?.nomeMae || 'NÃO DECLARADO' | uppercase }}</p>
+              </div>
+              <div class="">
+                <h4>Nome da Pai</h4>
+                <p>{{ beneficiario?.nomePai || 'NÃO DECLARADO' | uppercase }}</p>
+              </div>
+              <div class="">
+                <h4>Município Naturalidade</h4>
+                <p>{{ beneficiario?.municipio || '-' }}</p>
+              </div>
+
+              <!-- Terceira Linha -->
+              <div class="is--2-cols">
+                <h4>Nº Documento de Identidade</h4>
+                <p>{{ beneficiario?.rg || '-' }}</p>
+              </div>
+
+              <div class="">
+                <h4>Órgão Emissor</h4>
+                <p>{{ beneficiario?.orgaoEmissor || '-' }}</p>
+              </div>
+
+              <div class="">
+                <h4>Data de Expedição</h4>
+                <p>{{ beneficiario?.dataExpedicaoRg ? (beneficiario.dataExpedicaoRg | date: 'dd/MM/yyyy') : '-' }}</p>
+              </div>
+
+              <!-- Quarta Linha -->
+              <div class="is--2-cols">
+                <h4>Estado Civil</h4>
+                <p>{{ beneficiario?.estadoCivil || '-' }}</p>
+              </div>
+              <div class="">
+                <h4>Sexo</h4>
+                <p>{{ beneficiario?.sexo === 'F' ? 'Feminino' : 'Masculino'}}</p>
+              </div>
+              <div class="">
+                <h4>E-mail</h4>
+                <p>{{ beneficiario?.email || '-' }}</p>
+              </div>
+            </div>
+
+            <div class="box-infos__controls">
+              <button class="btn is--bold is--secundary is--blue" (click)="redirectAtualizarDependentePage()">
+                Atualizar Dados
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="box-infos">
+          <div class="box-infos__header">
+            <h5>
+              <i class="fa fa-user"></i>
+              <span>Dados do Plano</span>
+            </h5>
+          </div>
+          <hr class="separador" />
+          <div class="box-infos__main">
+            <div class="box-infos__wrapper">
+              <!-- Primeira Linha -->
+              <div class="is--2-cols">
+                <h4>Tipo de Beneficiário</h4>
+                <p>
+                  {{ beneficiario?.tipoBeneficiario || '-' }}
+                </p>
+              </div>
+              <div class="">
+                <h4>Tipo de Deficiência</h4>
+                <p>{{ beneficiario?.tipoDeficiencia || '-' }}</p>
+              </div>
+              <div class="">
+                <h4>Beneficiário Judicial</h4>
+                <p>{{ beneficiario?.decisaoJudicial === 'S' ? 'Sim' : 'Não'}}</p>
+              </div>
+
+              <!-- Segunda Linha -->
+              <div class="is--2-cols">
+                <h4>Código Beneficiário</h4>
+                <p>{{ beneficiario?.codigoBeneficiario || "-" }}</p>
+              </div>            
+              <div class="">
+                <h4>Cartão Nacional de Saúde</h4>
+                <p>{{ beneficiario?.nrCartao || '-' }}</p>
+              </div> 
+              <div class="">
+                <h4>Motivo Cancelamento</h4>
+                <p>{{ beneficiario?.motivoCancelamento || '-' }}</p>
+              </div>
+              <!-- Terceira Linha -->
+              <div class="is--2-cols">
+                <h4>Data Cancelamento</h4>
+                <p>{{ beneficiario?.dataCancelamento ? (beneficiario.dataCancelamento | date: 'dd/MM/yyyy') : '-' }}</p>
+              </div>
+            </div>
+
+            <div class="box-infos__controls">
+              <div class="">
+                <button *ngIf="!beneficiario?.isTitular" class="btn is--bold is--secundary is--red" (click)="redirectCancelarDependentePage()">
+                  Cancelar Beneficiário
+                </button>
+                <button *ngIf="!beneficiario?.isTitular" class="btn is--bold is--secundary is--blue" (click)="redirectRenovarDependentePage()">
+                  Renovar Beneficiário
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="box-infos">
+          <div class="box-infos__header">
+            <h5>
+              <i class="fa fa-user"></i>
+              <span>Dados do Cartão</span>
+            </h5>
+          </div>
+          <hr class="separador" />
+          <div class="box-infos__main">
+            <div class="box-infos__wrapper">
+              <!-- Primeira Linha -->
+              <div class="is--2-cols">
+                <h4>Cartão</h4>
+                <p>
+                  {{ beneficiario?.cartao || '-' }}
+                </p>
+              </div>
+              <div class="">
+                <h4>Início</h4>
+                <p>{{ beneficiario?.dataAdesao ? (beneficiario.dataAdesao | date: 'dd/MM/yyyy') : '-' }}</p>
+              </div>
+              <div class="">
+                <h4>Término</h4>
+                <p>{{ beneficiario?.dataTermino ? (beneficiario.dataTermino | date: 'dd/MM/yyyy') : '-' }}</p>
+              </div>
+
+              <!-- Segunda Linha -->
+              <div class="is--2-cols">
+                <h4>Cartão Legado</h4>
+                <p>{{ beneficiario?.cartaoLegado || '-' }}</p>
+              </div>
+              <div class="">
+                <h4>Cartão Legado Anterior</h4>
+                <p>{{ beneficiario?.cartaoLegadoAnterior || '-' }}</p>
+              </div>
+            </div>
+
+            <div class="box-infos__controls">
+              <button class="btn is--bold is--secundary is--blue" (click)="redirectCartaoPage()">Acessar Cartão</button>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="beneficiario?.isCartaoExpirado" class="message is--danger">
+          <span><i class="fa fa-exclamation"></i></span>
+          <p>O Cartão encontra-se expirado.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- === //MAIN VIEW ===  -->
+</section>
