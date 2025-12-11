@@ -63,6 +63,12 @@ button.bustom-btn-disabled {
   padding-left: 12px !important;
 }
 
+.footer-buttons {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
 @media screen and (max-width: 810px) {
   ul.custom-stepper {
     width: 90%

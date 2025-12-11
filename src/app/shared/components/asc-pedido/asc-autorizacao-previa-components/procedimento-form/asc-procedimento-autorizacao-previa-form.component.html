@@ -30,17 +30,19 @@
       </div>
     </div>
     <div class="flex-to-right">
-
       <div class="footer-buttons">
-        <button class="custom-btn-confirm"
-                *ngIf="isToShowForm"
-                [disabled]="form.invalid"
-                (click)="adicionarProcedimento(formDirective)">
-          {{(isEditing) ? 'Concluir alteração' : 'Adicionar'}}
-        </button>
-        <button class="continue-btn" (click)="clickButtonCancelarProcedimento(formDirective)">
-          {{(isEditing) ? 'Cancelar' : 'Limpar'}}
-        </button>
+        <asc-button-secondary
+          buttonId="cancelarProcedimento"
+          [title]="(isEditing) ? 'Cancelar' : 'Limpar'"
+          (onClick)="clickButtonCancelarProcedimento(formDirective)"
+          style="margin-right: 8px;"
+        ></asc-button-secondary>
+        <asc-button-primary
+          buttonId="adicionarProcedimento"
+          [title]="(isEditing) ? 'Concluir alteração' : 'Adicionar'"
+          [disabled]="form.invalid"
+          (onClick)="adicionarProcedimento(formDirective)"
+        ></asc-button-primary>
       </div>
     </div>
   </div>
