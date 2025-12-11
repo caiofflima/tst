@@ -4,12 +4,11 @@
     <ng-template #breadcrumb>
         <em class="fa fa-chevron-right"></em>
         {{duvidasService.getTitle()}}
-        <a #routerDuvida id="router-duvidas" routerLink="/duvidas/documentos-tipo-pedido">{{docTpProcService.getTitle()}}</a>
         <em class="fa fa-chevron-right"></em>
         {{docTpProcService.getTitle()}} – Resultado
     </ng-template>
 
-   <div slot="content">
+   <div slot="info">
     <div>
         <div class="p-0 col-md-12">
           <h4>Dados da Pesquisa</h4>
@@ -56,56 +55,57 @@
         <h4>Resultado da Consulta</h4>
       </div>
 
-      <div class="row p-0 col-md-12">
-        <div class="col-xs-3 search-inp p-0" style="margin: 5px 0 8px; border-bottom: 0 none">
-          <input #gb type="text" class="form-control filtro-caixa" size="50"
-                 placeholder="Digite para filtrar resultado">
-          <em class="fas fa-search"></em>
-        </div>
+      <div class="row"></div>
+
+      <div class="row p-0 col-md-12" slot="content">
+    
         <p-table
+          #dt
           id="caixa-table"
           [value]="listaDocumentoProcesso"
-          [rows]="5"
           [paginator]="true"
-          [pageLinks]="5"
+          [rows]="5"
           [totalRecords]="listaTotal"
+          paginatorPosition="top"
           [rowsPerPageOptions]="[5,10,20]"
           [reorderableColumns]="true"
           sortField="id"
-          [sortOrder]="-1"
-          styleClass="table table-striped table-sm table-hover text-center">
-          <ng-template pTemplate="emptymessage">
-            <tr>
-              <td colspan="8">{{(!loading)?bundle('MA003'):'Carregando ...'}}</td>
-            </tr>
+          [loading]="loading"
+          [sortOrder]="-1" class="table table-striped table-sm table-hover text-center"
+          styleClass="paginator-right"
+          [globalFilterFields]="['id','descricaoProcedimento','noTipoProcesso','noNivelAutorizacao']">
+          <ng-template pTemplate="caption">
+            <div class="campo-pesquisa">
+                <dsc-input (input)="dt.filterGlobal($any($event.target).value, 'contains')" [placeholder]="'Digite para filtrar o resultado'" [iconSuffix]="'search'" />
+            </div>
           </ng-template>
+    
           <ng-template pTemplate="header">
             <tr>
-              <th scope="col" [pSortableColumn]="'documento.nome'" style="width:120px">Nome do Documento <p-sortIcon [field]="'documento.nome'"></p-sortIcon></th>
-              <th scope="col" [pSortableColumn]="'estadoCivil'" style="width:100px">ESTADO CIVIL <p-sortIcon [field]="'estadoCivil'"></p-sortIcon></th>
-              <th scope="col" [pSortableColumn]="'sexo'" style="width:60px">SEXO <p-sortIcon [field]="'sexo'"></p-sortIcon></th>
-              <th scope="col" [pSortableColumn]="'idTipoDeficiencia'" style="width:120px">IDENT. DEFICIÊNCIA <p-sortIcon [field]="'idTipoDeficiencia'"></p-sortIcon></th>
-              <th scope="col" [pSortableColumn]="'idadeMinima'" style="width:100px">IDADE MINIMA <p-sortIcon [field]="'idadeMinima'"></p-sortIcon></th>
-              <th scope="col" [pSortableColumn]="'idadeMaxima'" style="width:100px">IDADE MÁXIMA <p-sortIcon [field]="'idadeMaxima'"></p-sortIcon></th>
-              <th scope="col" [pSortableColumn]="'valorRendaMinima'" style="width:100px">VALOR RENDA MINIMA <p-sortIcon [field]="'valorRendaMinima'"></p-sortIcon></th>
-              <th scope="col" [pSortableColumn]="'valorRendaMaxima'" style="width:100px">VALOR RENDA MÁXIMA <p-sortIcon [field]="'valorRendaMaxima'"></p-sortIcon></th>
-              <th scope="col" pSortableColumn="id" scope="col">ID <p-sortIcon [field]="'id'"></p-sortIcon></th>
-              <th scope="col" pSortableColumn="descricao" scope="col">Descrição <p-sortIcon [field]="'descricao'"></p-sortIcon></th>
-              <th scope="col" scope="col">Ação</th>
+              <th pSortableColumn="'documento.nome'" scope="col">Nome do Documento <p-sortIcon [field]="'documento.nome'"></p-sortIcon></th>
+              <th pSortableColumn="'estadoCivil'" scope="col">ESTADO CIVIL <p-sortIcon [field]="'estadoCivil'"></p-sortIcon></th>
+              <th pSortableColumn="'sexo'" scope="col">SEXO <p-sortIcon [field]="'sexo'"></p-sortIcon></th>
+              <th pSortableColumn="'idTipoDeficiencia'" scope="col">IDENT. DEFICIÊNCIA <p-sortIcon [field]="'idTipoDeficiencia'"></p-sortIcon></th>
+              <th pSortableColumn="'idadeMinima'" scope="col">IDADE MINIMA <p-sortIcon [field]="'idadeMinima'"></p-sortIcon></th>
+              <th pSortableColumn="'idadeMaxima'" scope="col">IDADE MÁXIMA <p-sortIcon [field]="'idadeMaxima'"></p-sortIcon></th>
+              <th pSortableColumn="'valorRendaMinima'" scope="col">VALOR RENDA MINIMA <p-sortIcon [field]="'valorRendaMinima'"></p-sortIcon></th>
+              <th pSortableColumn="'valorRendaMaxima'" scope="col" style="width: 19%; padding: 2rem 1rem">VALOR RENDA MÁXIMA <p-sortIcon [field]="'valorRendaMaxima'"></p-sortIcon></th>
             </tr>
           </ng-template>
-          <ng-template pTemplate="body" let-row>
+    
+          <ng-template pTemplate="body" let-rowData>
             <tr>
-              <td>{{row.documento?.nome}}</td>
-              <td>{{row.estadoCivil}}</td>
-              <td>{{row.sexo}}</td>
-              <td>{{row.idTipoDeficiencia}}</td>
-              <td>{{row.idadeMinima}}</td>
-              <td>{{row.idadeMaxima}}</td>
-              <td>{{row.valorRendaMinima}}</td>
-              <td>{{row.valorRendaMaxima}}</td>
+              <td>{{rowData.documento?.nome}}</td>
+              <td>{{rowData.estadoCivil}}</td>
+              <td>{{rowData.sexo}}</td>
+              <td>{{rowData.idTipoDeficiencia}}</td>
+              <td>{{rowData.idadeMinima}}</td>
+              <td>{{rowData.idadeMaxima}}</td>
+              <td>{{rowData.valorRendaMinima}}</td>
+              <td>{{rowData.valorRendaMaxima}}</td>
             </tr>
           </ng-template>
+    
         </p-table>
       </div>
 

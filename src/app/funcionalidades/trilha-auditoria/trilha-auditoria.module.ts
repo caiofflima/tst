@@ -28,12 +28,16 @@ import {
   TrilhaValidacoesDocumentosComponent,
   TrilhaVinculosEmpresaPrestadorComponent
 } from 'app/funcionalidades/trilha-auditoria/dados-consulta/dados-consulta.component';
+import { InputTextModule } from 'primeng/inputtext';
+import { ComponentModule } from 'app/shared/components/component.module';
 
 @NgModule({
     imports: [
         CommonModule,
         DirectivesModule.forRoot(),
         FormsModule,
+        ComponentModule,
+        InputTextModule,
         ReactiveFormsModule,
         RouterModule,
         TemplatesModule,

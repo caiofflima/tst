@@ -35,11 +35,11 @@
         <div class="row d-flex p-0 col-md-12">
           <div class="col-md-4 p-0">
             <asc-dropdown
-  [control]="form.get('modulo')"
-  [items]="funcionalidades"
-  [placeholder]="bundle('MHSPH')"
-  label="Módulos"
-></asc-dropdown>
+                [control]="form.get('modulo')"
+                [items]="funcionalidades"
+                [placeholder]="bundle('MHSPH')"
+                label="Módulos"
+              ></asc-dropdown>
             <div
               *ngIf="modulo.invalid && (modulo.dirty || modulo.touched)"
               class="error-form"
@@ -50,12 +50,12 @@
 
           <div class="col-md-4" *ngIf="showSubModulos">
             <asc-dropdown
-  [control]="form.get('subModulo')"
-  [items]="tabelas"
-  [placeholder]="bundle('MHSPH')"
-  label="Sub-módulos"
-  [required]="true"
-></asc-dropdown>
+                [control]="form.get('subModulo')"
+                [items]="tabelas"
+                [placeholder]="bundle('MHSPH')"
+                label="Sub-módulos"
+                [required]="true"
+              ></asc-dropdown>
             <div
               *ngIf="
                 subModulo.invalid && (subModulo.dirty || subModulo.touched)
@@ -69,17 +69,12 @@
           </div>
 
           <div class="col-md-4 pl-0" *ngIf="moduloAutorizacaoPrevia">
-            <label class="control-label obrigatorio" for="numeroProcesso"
-              >Número do Pedido</label
-            >
-            <input
+            <asc-input-text
+              label="Número do Pedido"
               [required]="true"
-              type="text"
+              [maxlength]="8"
+              [control]="form.get('numeroProcesso')"
               id="numeroProcesso"
-              formControlName="numeroProcesso"
-              class="form-control"
-              size="8"
-              maxlength="8"
               (keydown)="constantes.control.somenteNumeros(numeroProcesso)"
               (keyup)="constantes.control.somenteNumeros(numeroProcesso)"
             />
@@ -100,12 +95,12 @@
         <div class="row d-flex p-0 col-md-12" *ngIf="moduloEmails">
           <div class="col-md-6 pl-0">
             <asc-dropdown
-  [control]="form.get('idTipoProcesso')"
-  [items]="itensTipoProcesso"
-  [placeholder]="bundle('MHSPH')"
-  label="Tipo de Pedido"
-  [required]="true"
-></asc-dropdown>
+              [control]="form.get('idTipoProcesso')"
+              [items]="itensTipoProcesso"
+              [placeholder]="bundle('MHSPH')"
+              label="Tipo de Pedido"
+              [required]="true"
+            ></asc-dropdown>
 
             <div
               *ngIf="
@@ -122,12 +117,12 @@
 
           <div class="col-md-6 pl-0">
             <asc-dropdown
-  [control]="form.get('idSituacaoProcesso')"
-  [items]="itensSituacaoProcesso"
-  [placeholder]="bundle('MHSPH')"
-  label="Situação do Pedido"
-  [required]="true"
-></asc-dropdown>
+              [control]="form.get('idSituacaoProcesso')"
+              [items]="itensSituacaoProcesso"
+              [placeholder]="bundle('MHSPH')"
+              label="Situação do Pedido"
+              [required]="true"
+            ></asc-dropdown>
 
             <div
               *ngIf="
@@ -148,17 +143,12 @@
           *ngIf="moduloTiposDestinatarioEmail"
         >
           <div class="col-md-4 pl-0">
-            <label class="control-label obrigatorio" for="idEmail"
-              >ID E-mail</label
-            >
-            <input
+            <asc-input-text
+              label="ID E-mail"
               [required]="true"
-              type="text"
               id="idEmail"
-              formControlName="idEmail"
-              class="form-control"
-              size="8"
-              maxlength="8"
+              [control]="form.get('idEmail')"
+              [maxlength]="8"
               (keydown)="constantes.control.somenteNumeros(idEmail)"
               (keyup)="constantes.control.somenteNumeros(idEmail)"
             />
@@ -178,14 +168,11 @@
           *ngIf="moduloUsuarioPrestadorExterno"
         >
           <div class="col-md-4 pl-0" *ngIf="moduloUsuarioPrestadorExterno">
-            <label class="control-label" for="idEmail">ID Usuário</label>
-            <input
-              type="text"
+            <asc-input-text
+              label="ID Usuário"
               id="idUsuario"
-              formControlName="idUsuario"
-              class="form-control"
-              size="8"
-              maxlength="8"
+              [control]="form.get('idUsuario')"
+              [maxlength]="8"
               (keydown)="constantes.control.somenteNumeros(idUsuario)"
               (keyup)="constantes.control.somenteNumeros(idUsuario)"
             />
@@ -202,14 +189,11 @@
           </div>
 
           <div class="col-md-4 pl-0" *ngIf="moduloUsuarioPrestadorExterno">
-            <label class="control-label" for="cpfUsuario">CPF do Usuário</label>
-            <input
-              type="text"
+            <asc-input-text
+              label="CPF do Usuário"
               id="cpfUsuario"
-              formControlName="cpfUsuario"
-              class="form-control"
-              size="14"
-              maxlength="14"
+              [control]="form.get('cpfUsuario')"
+              [maxlength]="14"
               (blur)="cpfCnpjUtil.control.configurarMascara(this.cpfUsuario)"
               (focus)="cpfCnpjUtil.control.limparFormatacao(this.cpfUsuario)"
               (keyup)="checkCPFCNPJ(this.cpfUsuario, 11)"
@@ -233,14 +217,11 @@
           *ngIf="moduloVinculosEmpresaPrestador"
         >
           <div class="col-md-4 pl-0" *ngIf="moduloVinculosEmpresaPrestador">
-            <label class="control-label" for="idUsuario2">ID Usuário</label>
-            <input
-              type="text"
+            <asc-input-text
+              label="ID Usuário"
               id="idUsuario2"
-              formControlName="idUsuario"
-              class="form-control"
-              size="8"
-              maxlength="8"
+              [control]="form.get('idUsuario')"
+              [maxlength]="8"
               (keydown)="constantes.control.somenteNumeros(idUsuario)"
               (keyup)="constantes.control.somenteNumeros(idUsuario)"
             />
@@ -257,17 +238,12 @@
           </div>
 
           <div class="col-md-4 pl-0" *ngIf="moduloVinculosEmpresaPrestador">
-            <label class="control-label" for="cpfUsuario2"
-              >CPF do Usuário</label
-            >
-            <input
-              type="text"
+            <asc-input-text
+              label="CPF do Usuário"
               id="cpfUsuario2"
-              formControlName="cpfUsuario"
-              class="form-control"
+              [control]="form.get('cpfUsuario')"
               title="{{ bundle('MH130') }}"
-              size="14"
-              maxlength="14"
+              [maxlength]="14"
               (blur)="cpfUtil.control.configurarMascara(this.cpfUsuario)"
               (focus)="cpfUtil.control.limparFormatacao(this.cpfUsuario)"
               (keyup)="checkCPFCNPJ(this.cpfUsuario, 11)"
@@ -290,14 +266,11 @@
 
           <div class="clearfix" *ngIf="moduloVinculosEmpresaPrestador"></div>
           <div class="col-md-4 pl-0" *ngIf="moduloVinculosEmpresaPrestador">
-            <label class="control-label" for="idEmpresa">ID Empresa</label>
-            <input
-              type="text"
+            <asc-input-text
+              label="ID Empresa"
               id="idEmpresa"
-              formControlName="idEmpresa"
-              class="form-control"
-              size="8"
-              maxlength="8"
+              [control]="form.get('idEmpresa')"
+              [maxlength]="8"
               (keydown)="constantes.control.somenteNumeros(idEmpresa)"
               (keyup)="constantes.control.somenteNumeros(idEmpresa)"
             />
@@ -314,15 +287,12 @@
           </div>
 
           <div class="col-md-4 pl-0" *ngIf="moduloVinculosEmpresaPrestador">
-            <label class="control-label" for="cnpj">CNPJ da Empresa</label>
-            <input
-              type="text"
+            <asc-input-text
+              label="CNPJ da Empresa"
               id="cnpj"
-              formControlName="cnpj"
-              class="form-control"
+              [control]="form.get('cnpj')"
+              [maxlength]="8"
               title="{{ bundle('MH126') }}"
-              size="18"
-              maxlength="18"
               (blur)="cnpjUtil.control.configurarMascara(this.cnpj)"
               (focus)="cnpjUtil.control.limparFormatacao(this.cnpj)"
               (keyup)="checkCPFCNPJ(this.cnpj, 14)"

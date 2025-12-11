@@ -30,6 +30,7 @@ import { DocumentosTipoProcessoRoutingModule } from "./documentos-tipo-processo.
 import { AscSelectModule } from "app/shared/components/asc-select/asc-select.module";
 import { DocumentosTipoProcessoParamComponent } from "./param/documentos-tipo-processo-param.component";
 import { DocumentosTipoProcessoResultComponent } from "./result/documentos-tipo-processo-result.component";
+import { DscCaixaModule } from "app/shared/dsc-caixa/dsc-caixa.module";
 
 @NgModule({
     imports: [
@@ -62,7 +63,8 @@ import { DocumentosTipoProcessoResultComponent } from "./result/documentos-tipo-
         AscMultiSelectModule,
         AscButtonsModule,
         AscFileModule,
-        AscSelectModule
+        AscSelectModule,
+        DscCaixaModule
     ],
     declarations: [
         DocumentosTipoProcessoParamComponent,
