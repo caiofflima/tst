@@ -1,6 +1,5 @@
 <form [formGroup]="form" #formDirective="ngForm" style="min-width: 48em">
   <div class="form-container">
-    <!-- Linha 1: Patologia (full) -->
     <div class="form-row">
       <div class="form-field-full">
         <asc-select-patologia
@@ -17,11 +16,11 @@
       </div>
     </div>
 
-    <!-- Linha 2: Laboratório (1/2), Quantidade Solicitada (1/2) -->
+    <!-- Linha 1: Laboratório (1/2), Quantidade Solicitada (1/2) -->
     <div class="form-row">
       <div
-        class="form-field-half"
         *ngIf="mostrarCampo('idLaboratorio')"
+        class="form-field-half"
       >
         <asc-select-laboratorio
           selectId="laboratorio"
@@ -30,15 +29,15 @@
           [control]="form.get('idLaboratorio')"
           [parametros]="patologia"
           formControlName="idLaboratorio"
-          style="border-left: none !important"
           label="Laboratório"
           [required]="true"
+          style="border-left: none !important"
         ></asc-select-laboratorio>
       </div>
 
       <div
-        class="form-field-half"
         *ngIf="mostrarCampo('qtdSolicitada')"
+        class="form-field-half"
       >
         <asc-input-text
           [control]="form.get('qtdSolicitada')"
@@ -56,11 +55,11 @@
       </div>
     </div>
 
-    <!-- Linha 3: Medicamento (1/2), Dias Atendidos (1/2) -->
+    <!-- Linha 2: Medicamento (1/2), Dias Atendidos (1/2) -->
     <div class="form-row">
       <div
-        class="form-field-half"
         *ngIf="mostrarCampo('codigoMedicamento')"
+        class="form-field-half"
       >
         <asc-select-medicamento
           selectId="medicamento"
@@ -70,14 +69,14 @@
           [parametros]="medicamentoParam"
           formControlName="codigoMedicamento"
           label="Medicamento"
-          style="border-left: none !important"
           [required]="true"
+          style="border-left: none !important"
         ></asc-select-medicamento>
       </div>
 
       <div
-        class="form-field-half"
         *ngIf="mostrarCampo('diasAtendidosPelaQuantidade')"
+        class="form-field-half"
       >
         <asc-input-text
           [control]="form.get('diasAtendidosPelaQuantidade')"
@@ -95,11 +94,11 @@
       </div>
     </div>
 
-    <!-- Linha 4: Apresentação (1/2), Valor Unitário Pago (1/2) -->
+    <!-- Linha 3: Apresentação (1/2), Valor Unitário Pago (1/2) -->
     <div class="form-row">
       <div
-        class="form-field-half"
         *ngIf="mostrarCampo('idMedicamento')"
+        class="form-field-half"
       >
         <asc-select-medicamento-apresentacao
           selectId="apresentacaoMedicamento"
@@ -109,14 +108,14 @@
           [parametros]="medicamentoApresentacaoParam"
           formControlName="idMedicamento"
           label="Apresentação"
-          style="border-left: none !important"
           [required]="true"
+          style="border-left: none !important"
         ></asc-select-medicamento-apresentacao>
       </div>
 
       <div
-        class="form-field-half"
         *ngIf="mostrarCampo('valorUnitarioPago')"
+        class="form-field-half"
       >
         <asc-input-money-type
           [control]="form.get('valorUnitarioPago')"
