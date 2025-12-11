@@ -15,19 +15,26 @@ import {debounceTime} from "rxjs/operators";
 type TipoAcaoDePesquisa = TipoAcaoService<MedicamentoService, TipoAcaoDoService<AscSelectMedicamentoParam, Medicamento>>;
 
 @Component({
-  selector: 'asc-select-medicamento-apresentacao',
-  templateUrl: './asc-select-medicamento-apresentacao.component.html',
-  styleUrls: ['./asc-select-medicamento-apresentacao.component.scss'],
+  selector: 'asc-select-medicamento-apresentacao-form',
+  templateUrl: './asc-select-medicamento-apresentacao-form.component.html',
+  styleUrls: ['./asc-select-medicamento-apresentacao-form.component.scss'],
   providers: [{
     provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => AscSelectMedicamentoApresentacaoComponent),
+    useExisting: forwardRef(() => AscSelectMedicamentoApresentacaoFormComponent),
     multi: true,
   }],
 })
-export class AscSelectMedicamentoApresentacaoComponent extends BaseSelectControlValueAcessor<Medicamento, AscSelectMedicamentoParam, TipoAcaoDePesquisa> {
+export class AscSelectMedicamentoApresentacaoFormComponent extends BaseSelectControlValueAcessor<Medicamento, AscSelectMedicamentoParam, TipoAcaoDePesquisa> {
 
   @Input()
   selectId: string;
+
+  override updateValue(value: any) {
+    const normalizedValue = value && typeof value === 'object' && 'value' in value
+      ? (value as any).value
+      : value;
+    super.updateValue(normalizedValue);
+  }
 
   constructor(
     protected override readonly messageService: MessageService,
@@ -53,8 +60,8 @@ export class AscSelectMedicamentoApresentacaoComponent extends BaseSelectControl
     }));
   }
 
-
   protected override predicateToFindItemSelected(): (data: Medicamento) => boolean {
     return (data) => this.innerValue === data.id
   }
 }
+

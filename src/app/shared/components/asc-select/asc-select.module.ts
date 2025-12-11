@@ -15,6 +15,11 @@ import {AscSelectLaboratorioComponent} from "./asc-select-laboratorio/asc-select
 import {
     AscSelectMedicamentoApresentacaoComponent
 } from "./asc-select-medicamento-apresentacao/asc-select-medicamento-apresentacao.component";
+import {AscSelectLaboratorioFormComponent} from "./asc-select-laboratorio-form/asc-select-laboratorio-form.component";
+import {AscSelectMedicamentoFormComponent} from "./asc-select-medicamentos-form/asc-select-medicamento-form.component";
+import {
+    AscSelectMedicamentoApresentacaoFormComponent
+} from "./asc-select-medicamento-apresentacao-form/asc-select-medicamento-apresentacao-form.component";
 import {AscSelectTipoOcorrenciaComponent} from "./asc-select-tipo-ocorrencia/asc-select-tipo-ocorrencia.component";
 // import removed – AscSelectComponent does not exist in this folder
 import {DscCaixaModule} from "../../dsc-caixa/dsc-caixa.module";
@@ -37,6 +42,9 @@ import {DscCaixaModule} from "../../dsc-caixa/dsc-caixa.module";
         AscSelectMedicamentoComponent,
         AscSelectLaboratorioComponent,
         AscSelectMedicamentoApresentacaoComponent,
+        AscSelectLaboratorioFormComponent,
+        AscSelectMedicamentoFormComponent,
+        AscSelectMedicamentoApresentacaoFormComponent,
         AscSelectTipoOcorrenciaComponent
     ],
     exports: [
@@ -47,6 +55,9 @@ import {DscCaixaModule} from "../../dsc-caixa/dsc-caixa.module";
         AscSelectMedicamentoComponent,
         AscSelectLaboratorioComponent,
         AscSelectMedicamentoApresentacaoComponent,
+        AscSelectLaboratorioFormComponent,
+        AscSelectMedicamentoFormComponent,
+        AscSelectMedicamentoApresentacaoFormComponent,
         AscSelectTipoOcorrenciaComponent,
         AscDropdownComponent
     ],

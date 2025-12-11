@@ -20,7 +20,7 @@
     <div class="form-row">
       <div class="form-field-half"
            *ngIf="mostrarCampo('idLaboratorio')">
-        <asc-select-laboratorio
+        <asc-select-laboratorio-form
           selectId="laboratorio"
           [parametros]="patologia"
           [control]="form.get('idLaboratorio')"
@@ -30,7 +30,7 @@
           [required]="true"
           label="Laboratório"
           style="border-left: none !important"
-        ></asc-select-laboratorio>
+        ></asc-select-laboratorio-form>
       </div>
 
       <div class="form-field-half"
@@ -51,7 +51,7 @@
     <div class="form-row">
       <div class="form-field-half"
            *ngIf="mostrarCampo('codigoMedicamento')">
-        <asc-select-medicamento
+        <asc-select-medicamento-form
           selectId="medicamento"
           [parametros]="medicamentoParam"
           [control]="form.get('codigoMedicamento')"
@@ -61,7 +61,7 @@
           [required]="true"
           label="Medicamento"
           style="border-left: none !important"
-        ></asc-select-medicamento>
+        ></asc-select-medicamento-form>
       </div>
 
       <div class="form-field-half"
@@ -82,7 +82,7 @@
     <div class="form-row">
       <div class="form-field-half"
            *ngIf="mostrarCampo('idMedicamento')">
-        <asc-select-medicamento-apresentacao
+        <asc-select-medicamento-apresentacao-form
           selectId="apresentacaoMedicamento"
           [parametros]="medicamentoApresentacaoParam"
           [control]="form.get('idMedicamento')"
@@ -92,7 +92,7 @@
           [required]="true"
           label="Apresentação"
           style="border-left: none !important"
-        ></asc-select-medicamento-apresentacao>
+        ></asc-select-medicamento-apresentacao-form>
       </div>
 
       <div class="form-field-half"

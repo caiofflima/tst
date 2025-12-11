@@ -8,25 +8,31 @@ import {LaboratorioService} from "../../../services/comum/laboratorio.service";
 import {SelectItem} from "primeng/api";
 import {Observable} from "rxjs";
 import {NG_VALUE_ACCESSOR} from "@angular/forms";
-import {isNotUndefinedNullOrEmpty} from "../../../constantes";
 import {Patologia} from "../../../models/entidades";
 
 type TipoAcaoDePesquisa = TipoAcaoService<LaboratorioService, TipoAcaoDoService<Patologia, Laboratorio>>;
 
 @Component({
-  selector: 'asc-select-laboratorio',
-  templateUrl: './asc-select-laboratorio.component.html',
-  styleUrls: ['./asc-select-laboratorio.component.scss'],
+  selector: 'asc-select-laboratorio-form',
+  templateUrl: './asc-select-laboratorio-form.component.html',
+  styleUrls: ['./asc-select-laboratorio-form.component.scss'],
   providers: [{
     provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => AscSelectLaboratorioComponent),
+    useExisting: forwardRef(() => AscSelectLaboratorioFormComponent),
     multi: true,
   }],
 })
-export class AscSelectLaboratorioComponent extends BaseSelectControlValueAcessor<Laboratorio, Patologia, TipoAcaoDePesquisa> {
+export class AscSelectLaboratorioFormComponent extends BaseSelectControlValueAcessor<Laboratorio, Patologia, TipoAcaoDePesquisa> {
 
   @Input()
   selectId: string;
+
+  override updateValue(value: any) {
+    const normalizedValue = value && typeof value === 'object' && 'value' in value
+      ? (value as any).value
+      : value;
+    super.updateValue(normalizedValue);
+  }
 
   constructor(
     protected override readonly messageService: MessageService,
@@ -47,3 +53,4 @@ export class AscSelectLaboratorioComponent extends BaseSelectControlValueAcessor
   }
 
 }
+

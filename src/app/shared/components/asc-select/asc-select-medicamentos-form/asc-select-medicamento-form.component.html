@@ -1,0 +1,11 @@
+<asc-dropdown
+  [label]="label"
+  (selected)="updateValue($event)"
+  [items]="(dados$ | async)"
+  [control]="control"
+  [value]="value"
+  [showProgressBar]="showProgressBar"
+  [selectId]="selectId"
+  [required]="required"
+></asc-dropdown>
+

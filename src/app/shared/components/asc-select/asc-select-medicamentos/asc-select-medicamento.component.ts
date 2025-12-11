@@ -28,13 +28,6 @@ export class AscSelectMedicamentoComponent extends BaseSelectControlValueAcessor
   @Input()
   selectId: string;
 
-  override updateValue(value: any) {
-    const normalizedValue = value && typeof value === 'object' && 'value' in value
-      ? (value as any).value
-      : value;
-    super.updateValue(normalizedValue);
-  }
-
   constructor(
     protected override readonly messageService: MessageService,
     private readonly medicamentoService: MedicamentoService
