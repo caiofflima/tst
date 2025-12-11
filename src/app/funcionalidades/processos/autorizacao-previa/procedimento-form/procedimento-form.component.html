@@ -35,21 +35,32 @@
       </asc-input-text>
     </div>
     <div class="footer-buttons" *ngIf="!inResumo">
-      <button class="custom-btn-confirm" [disabled]="form.invalid" type="button"
-              (click)="adicionarProcedimento(formDirective)">
-        <span>{{(isEditing) ? 'Concluir alteração' : 'Adicionar'}}</span>
-      </button>
-      <button class="continue-btn-procedimento" style="margin: 0 !important" (click)="clickButtonCancelarProcedimento(formDirective)" type="button">
-        <span class="span-btn">{{(isEditing) ? 'Cancelar' : 'Limpar'}}</span>
-      </button>
+      <asc-button-secondary
+        buttonId="limparProcedimento"
+        [title]="(isEditing) ? 'Cancelar' : 'Limpar'"
+        (onClick)="clickButtonCancelarProcedimento(formDirective)"
+        style="margin-right: 8px;"
+      ></asc-button-secondary>
+      <asc-button-primary
+        buttonId="adicionarProcedimento"
+        [title]="(isEditing) ? 'Concluir alteração' : 'Adicionar'"
+        [disabled]="form.invalid"
+        (onClick)="adicionarProcedimento(formDirective)"
+      ></asc-button-primary>
     </div>
     <div class="footer-buttons" *ngIf="inResumo">
-      <button class="back-btn" (click)="clickButtonCancelarProcedimento(formDirective)" type="button">
-        {{(isEditing) ? 'Cancelar' : 'Limpar'}}
-      </button>
-      <button class="continue-btn" [disabled]="form.invalid" (click)="adicionarProcedimento(formDirective)" type="button">
-        <span>{{(isEditing) ? 'Concluir alteração' : 'Adicionar'}}</span>
-      </button>
+      <asc-button-secondary
+        buttonId="limparProcedimentoResumo"
+        [title]="(isEditing) ? 'Cancelar' : 'Limpar'"
+        (onClick)="clickButtonCancelarProcedimento(formDirective)"
+        style="margin-right: 8px;"
+      ></asc-button-secondary>
+      <asc-button-primary
+        buttonId="adicionarProcedimentoResumo"
+        [title]="(isEditing) ? 'Concluir alteração' : 'Adicionar'"
+        [disabled]="form.invalid"
+        (onClick)="adicionarProcedimento(formDirective)"
+      ></asc-button-primary>
     </div>
   </div>
 </form>

@@ -213,3 +213,9 @@ button {
     transition: 250ms ease-in-out;
   }
 }
+
+.footer-buttons {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
