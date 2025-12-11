@@ -30,6 +30,12 @@
   min-width: 280px;
 }
 
+.flex-end {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
 @media screen and (max-width: 768px) {
   .form-field-half {
     flex: 1 1 100%;
