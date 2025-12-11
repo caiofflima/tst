@@ -123,6 +123,10 @@ export class AscFormularioReembolsoMedicamentoComponent extends AscFormularioPro
         return form;
     }
 
+    onLaboratoriosLoaded(laboratorios: Laboratorio[]) {
+        // Método vazio para receber dados do backend
+    }
+
     laboratorioSelecionado(laboratorio: any) {
         this.medicamentoParam = {
             laboratorioId: laboratorio ? laboratorio.id : null,
@@ -132,12 +136,20 @@ export class AscFormularioReembolsoMedicamentoComponent extends AscFormularioPro
         this.laboratorio = laboratorio;
     }
 
+    onMedicamentosLoaded(medicamentos: Medicamento[]) {
+        // Método vazio para receber dados do backend
+    }
+
     medicamentoSelecionado(medicamento: Medicamento) {
         this.medicamentoApresentacaoParam = {
             medicamentoId: medicamento ? medicamento.id : null,
             laboratorioId: this.medicamentoParam ? this.medicamentoParam.laboratorioId : null,
             idPatologia: Number(this.getForm().get('idPatologia').value)
         }
+    }
+
+    onApresentacoesLoaded(apresentacoes: Medicamento[]) {
+        // Método vazio para receber dados do backend
     }
 
     medicamentoApresentacaoSelecionado(medicamentoApresentacao: Medicamento) {

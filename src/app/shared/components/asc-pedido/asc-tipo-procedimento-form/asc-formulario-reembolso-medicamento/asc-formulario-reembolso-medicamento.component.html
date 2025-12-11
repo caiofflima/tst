@@ -8,6 +8,7 @@
           (dadoSelecionado)="patologiaSelecionado($event)"
           [control]="form.get('idPatologia')"
           [parametro]="parametroSelectPatologia"
+          formControlName="idPatologia"
           id="patologiaPrgMed"
           label="Patologia"
           [required]="true"
@@ -25,14 +26,14 @@
         <asc-select-laboratorio
           selectId="laboratorio"
           (dadoSelecionado)="laboratorioSelecionado($event)"
+          (dadosBackend)="onLaboratoriosLoaded($event)"
           [control]="form.get('idLaboratorio')"
           [parametros]="patologia"
           formControlName="idLaboratorio"
           style="border-left: none !important"
           label="Laboratório"
           [required]="true"
-        >
-        </asc-select-laboratorio>
+        ></asc-select-laboratorio>
       </div>
 
       <div
@@ -64,14 +65,14 @@
         <asc-select-medicamento
           selectId="medicamento"
           (dadoSelecionado)="medicamentoSelecionado($event)"
+          (dadosBackend)="onMedicamentosLoaded($event)"
           [control]="form.get('codigoMedicamento')"
           [parametros]="medicamentoParam"
           formControlName="codigoMedicamento"
           label="Medicamento"
           style="border-left: none !important"
           [required]="true"
-        >
-        </asc-select-medicamento>
+        ></asc-select-medicamento>
       </div>
 
       <div
@@ -103,14 +104,14 @@
         <asc-select-medicamento-apresentacao
           selectId="apresentacaoMedicamento"
           (dadoSelecionado)="medicamentoApresentacaoSelecionado($event)"
+          (dadosBackend)="onApresentacoesLoaded($event)"
           [control]="form.get('idMedicamento')"
           [parametros]="medicamentoApresentacaoParam"
           formControlName="idMedicamento"
           label="Apresentação"
           style="border-left: none !important"
           [required]="true"
-        >
-        </asc-select-medicamento-apresentacao>
+        ></asc-select-medicamento-apresentacao>
       </div>
 
       <div
