@@ -23,8 +23,12 @@
         class="form-field-half"
         *ngIf="mostrarCampo('idAutorizacaoPrevia')"
       >
-        <label class="control-label" [class.obrigatorio]="autorizacaoPreviaObrigatorio"
-        >Autorização Prévia <small *ngIf="!autorizacaoPreviaObrigatorio">Opcional</small></label>
+        <label
+          class="label-campo-card"
+          [class.obrigatorio]="autorizacaoPreviaObrigatorio"
+          >Autorização Prévia
+          <small *ngIf="!autorizacaoPreviaObrigatorio">Opcional</small></label
+        >
         <asc-select-autorizacao-previa
           selectId="autorizacaoPrevia"
           [parametros]="autorizacaoPreviaParams"
@@ -41,6 +45,7 @@
       <div
         class="form-field-half"
         *ngIf="mostrarCampo('valorUnitarioPago')"
+        style="margin-top: 25px;"
       >
         <asc-input-money-type
           [control]="form.get('valorUnitarioPago')"
