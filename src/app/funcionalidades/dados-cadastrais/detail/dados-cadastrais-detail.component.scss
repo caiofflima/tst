@@ -98,6 +98,33 @@
   color: #666;
 }
 
+.upload-wrapper {
+  margin-top: 12px;
+}
+
+.arquivos-lista {
+  margin-top: 12px;
+  display: grid;
+  gap: 8px;
+
+  .arquivo-item {
+    background: #f7f9fb;
+    border: 1px solid #dfe7ed;
+    border-radius: 4px;
+    padding: 8px 12px;
+  }
+
+  ul {
+    padding-left: 16px;
+    margin: 4px 0 0 0;
+  }
+
+  .muted {
+    color: #7b8698;
+    font-size: 12px;
+  }
+}
+
 .box-form__groups {
   .box-form__group {
     .campo-opcional-wrapper {

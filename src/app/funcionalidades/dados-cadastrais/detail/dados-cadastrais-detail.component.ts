@@ -133,6 +133,11 @@ export class DadosCadastraisDetailComponent implements OnInit {
     */
       this.documentoTipoProcessoService.consultarPorMotivoSolicitacao(this.idMotivoSolicitacao, this.matricula).subscribe(documentos => {
         this.documentosCadastrados = documentos;
+        if (this.documentosCadastrados && this.documentosCadastrados.length) {
+          this.documentoSelecionadoControl.setValue(this.documentosCadastrados[0], {emitEvent: true});
+          this.indexSelecionado = 0;
+          this.documentoNaoPossuiArquivos = this.verificarFaltaDeDocumentos();
+        }
          },
           (err) => {
             this.messageService.addMsgDanger(err.error);

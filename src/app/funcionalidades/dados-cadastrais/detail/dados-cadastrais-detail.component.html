@@ -256,6 +256,41 @@
                     ></asc-input-text>
                   </div>
                 </div>
+                <div class="form-group col-md-12 box-form__group" *ngIf="documentosCadastrados?.length">
+                  <label class="label-campo-card">Anexar documento</label>
+                  <p-dropdown
+                    [options]="documentosCadastrados"
+                    optionLabel="documento.nome"
+                    [formControl]="documentoSelecionadoControl"
+                    (onChange)="selecionarTipoDocumento($event.value)"
+                    [placeholder]="'Selecione'"
+                    styleClass="w-100"
+                  ></p-dropdown>
+
+                  <div class="upload-wrapper">
+                    <asc-file-selector
+                      *ngIf="documentoSelecionadoControl.value"
+                      [documento]="documentoSelecionadoControl.value"
+                      [extensions]="'.jpg,.png,.gif,.pdf'"
+                      [limitLengthFile]="4096000"
+                      [disabled]="showProgressSending && showProgressSending()"
+                      (arquivos)="arquivosSelecionados($event)"
+                      inputId="uploadEnderecoDocumento"
+                    ></asc-file-selector>
+                  </div>
+
+                  <div class="arquivos-lista" *ngIf="documentosCadastrados?.length">
+                    <div class="arquivo-item" *ngFor="let doc of documentosCadastrados">
+                      <strong>{{ doc?.documento?.nome || doc?.nome }}</strong>
+                      <ul *ngIf="doc?.arquivos?.length; else semArquivos">
+                        <li *ngFor="let arq of doc.arquivos">{{ arq?.name }}</li>
+                      </ul>
+                      <ng-template #semArquivos>
+                        <span class="muted">Nenhum arquivo anexado.</span>
+                      </ng-template>
+                    </div>
+                  </div>
+                </div>
                 <div class="box-form__controls">
                   <button
                     class="btn is--auxiliary is--small"
