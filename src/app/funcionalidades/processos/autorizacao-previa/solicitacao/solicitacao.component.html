@@ -43,18 +43,17 @@
   </div>
   <div class="footer flex-end">
     <asc-button-secondary
-      buttonId="voltarSolicitacao"
-      [title]="'Voltar'"
-      style="margin-right: 8px;"
+      buttonId="voltar"
+      title="Voltar"
       (onClick)="onVoltar()"
+      style="margin-right: 8px;"
     ></asc-button-secondary>
 
     <asc-button-primary
-      buttonId="continuarSolicitacao"
-      [title]="'Continuar'"
-      cdkStepperNext
-      (onClick)="onSubmit()"
+      buttonId="continuar"
+      title="Continuar"
       [disabled]="formularioSolicitacao.invalid"
+      (onClick)="onSubmit()"
     ></asc-button-primary>
   </div>
 </form>

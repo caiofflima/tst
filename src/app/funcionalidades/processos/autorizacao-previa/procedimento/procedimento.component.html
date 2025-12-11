@@ -54,15 +54,14 @@
 <div class="footer flex-end">
   <asc-button-secondary
     buttonId="voltarProcedimento"
-    [title]="'Voltar'"
-    cdkStepperPrevious
+    title="Voltar"
     [disabled]="isEditing"
-    (onClick)="resetarProcedimento()"
+    (onClick)="stepper?.previous(); resetarProcedimento()"
     style="margin-right: 8px;"
   ></asc-button-secondary>
   <asc-button-primary
     buttonId="continuarProcedimento"
-    [title]="'Continuar'"
+    title="Continuar"
     (onClick)="onSubmit()"
     [disabled]="!pedidoProcedimentosTabela.length || showProgress || isEditing"
     [showProgress]="showProgress"

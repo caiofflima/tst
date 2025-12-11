@@ -114,14 +114,13 @@
   <div class="footer flex-end">
     <asc-button-secondary
       buttonId="voltarProfissional"
-      [title]="'Voltar'"
-      cdkStepperPrevious
+      title="Voltar"
+      (onClick)="buttonToPrevious()"
       style="margin-right: 8px;"
     ></asc-button-secondary>
     <asc-button-primary
       buttonId="continuarProfissional"
-      [title]="'Continuar'"
-      cdkStepperNext
+      title="Continuar"
       [disabled]="form.invalid"
       (onClick)="onSubmit()"
     ></asc-button-primary>

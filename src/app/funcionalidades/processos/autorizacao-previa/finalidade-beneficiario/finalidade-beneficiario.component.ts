@@ -11,6 +11,7 @@ import {aplicarAcaoQuandoFormularioValido} from "../../../../shared/constantes";
 import {Subject, Subscription} from "rxjs";
 import { AutorizacaoPreviaService, SessaoService } from '../../../../../app/shared/services/services';
 import { Pedido } from '../../../../../app/shared/models/entidades';
+import {CdkStepper} from "@angular/cdk/stepper";
 
 @Component({
     selector: 'app-finalidade-beneficiario',
@@ -40,6 +41,9 @@ export class FinalidadeBeneficiarioComponent implements OnInit, OnDestroy {
 
     @Input()
     checkRestart: Subject<void>;
+
+    @Input()
+    stepper: CdkStepper;
 
     private eventsSubscription: Subscription;
 
@@ -110,8 +114,13 @@ export class FinalidadeBeneficiarioComponent implements OnInit, OnDestroy {
                        this.messageService.addMsgDanger(err.message);
                     });
                 }
+                this.stepper?.next();
             },
         );
+    }
+
+    previousStep(): void {
+        this.stepper?.previous();
     }
 
     tipoProcessoSelecionado(tipoProcesso: TipoProcesso) {

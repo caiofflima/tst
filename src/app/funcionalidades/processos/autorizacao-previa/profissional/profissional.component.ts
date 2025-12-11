@@ -70,7 +70,12 @@ export class ProfissionalComponent implements OnInit, OnDestroy {
         aplicarAcaoQuandoFormularioValido(this.form, () => {
             const profissionalFormModel = this.form.value as ProfissionalFormModel;
             this.profissional.emit(profissionalFormModel);
+            this.stepper?.next();
         });
+    }
+
+    buttonToPrevious(): void {
+        this.stepper?.previous();
     }
 
     ngOnDestroy() {

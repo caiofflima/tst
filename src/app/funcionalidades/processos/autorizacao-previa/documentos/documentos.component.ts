@@ -8,6 +8,7 @@ import {ArquivoParam} from "../../../../shared/components/asc-file/models/arquiv
 import {Arquivo} from "../../../../shared/models/dto/arquivo";
 import {Pedido} from "../../../../shared/models/comum/pedido";
 import {DocumentoParam} from "../../../../shared/components/asc-pedido/models/documento.param";
+import {CdkStepper} from "@angular/cdk/stepper";
 
 @Component({
     selector: 'app-documentos',
@@ -20,6 +21,7 @@ export class DocumentosComponent implements OnInit, OnDestroy {
     @Input() title = 'Quase lá! Para finalizar, precisamos de alguns documentos.'
     @Input() subtitle = 'Documentos obrigatórios'
     @Input() pedido: Pedido;
+    @Input() stepper: CdkStepper;
 
     @Output() documentosObrigatorios = new EventEmitter<DocumentoTipoProcesso[]>();
     documentos: DocumentoTipoProcesso[] = [];
@@ -110,6 +112,11 @@ export class DocumentosComponent implements OnInit, OnDestroy {
 
     onSubmit(): void {
         this.documentosObrigatorios.emit(this.documentos);
+        this.stepper?.next();
+    }
+
+    previous(): void {
+        this.stepper?.previous();
     }
 
     watchDocumentos(documentos: DocumentoTipoProcesso[]) {

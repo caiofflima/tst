@@ -368,17 +368,16 @@
 <div class="footer flex-end">
   <asc-button-secondary
     buttonId="reiniciar"
-    [title]="'Reiniciar'"
+    title="Reiniciar"
     (onClick)="setModal(true)"
     style="margin-right: 8px;"
   ></asc-button-secondary>
 
   <asc-button-primary
-    buttonId="continuar"
-    [title]="'Finalizar'"
+    buttonId="finalizar"
+    title="Finalizar"
     [showProgress]="showProgress"
     [disabled]="documentoNaoPossuiArquivos || showProgress"
-    cdkStepperNext
     (onClick)="onSubmit()"
   ></asc-button-primary>
 </div>

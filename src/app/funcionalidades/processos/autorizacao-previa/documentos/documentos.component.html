@@ -16,14 +16,13 @@
 <div class="footer flex-end">
   <asc-button-secondary
     buttonId="voltarDocumentos"
-    [title]="'Voltar'"
-    cdkStepperPrevious
+    title="Voltar"
+    (onClick)="previous()"
     style="margin-right: 8px;"
   ></asc-button-secondary>
   <asc-button-primary
     buttonId="continuarDocumentos"
-    [title]="'Continuar'"
-    cdkStepperNext
+    title="Continuar"
     (onClick)="onSubmit()"
     [disabled]="documentoNaoPossuiArquivos || loading"
   ></asc-button-primary>

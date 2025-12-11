@@ -7,6 +7,7 @@ import {Beneficiario} from '../../../../shared/models/comum/beneficiario';
 import {SessaoService} from "../../../../shared/services/services";
 import {Subject, Subscription} from "rxjs";
 import {Router} from '@angular/router';
+import {CdkStepper} from '@angular/cdk/stepper';
 
 @Component({
     selector: 'app-solicitacao',
@@ -23,6 +24,9 @@ export class SolicitacaoComponent implements OnInit, OnDestroy {
 
     @Input()
     checkRestart: Subject<void>;
+
+    @Input()
+    stepper: CdkStepper;
 
     private eventsSubscription: Subscription;
 
@@ -49,6 +53,7 @@ export class SolicitacaoComponent implements OnInit, OnDestroy {
         const solicitacao = this.formularioSolicitacao.getRawValue() as SolicitacaoFormModel;
         solicitacao.telefoneContato = somenteNumeros(solicitacao.telefoneContato);
         this.solicitacao.emit(solicitacao);
+        this.stepper?.next();
     }
 
     onVoltar(): void {

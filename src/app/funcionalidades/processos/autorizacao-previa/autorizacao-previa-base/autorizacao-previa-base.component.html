@@ -4,6 +4,7 @@
       <ng-template cdkStepLabel>Autorização Prévia</ng-template>
       <app-solicitacao
         [checkRestart]="reiniciarSubject"
+        [stepper]="cdkStpper"
         (solicitacao)="solicitacaoStep($event)"
         (beneficiarioModel)="beneficiarioModelSelecionado($event)">
       </app-solicitacao>
@@ -12,6 +13,7 @@
       <ng-template cdkStepLabel>Autorização Prévia</ng-template>
       <app-finalidade-beneficiario
         [checkRestart]="reiniciarSubject"
+        [stepper]="cdkStpper"
         [idBeneficiario]="solicitacao?.idBeneficiario"
         (beneficiario)="beneficiarioSelecionado($event)"
         (pedido)="pedidoModoRascunho($event)"
@@ -43,6 +45,7 @@
         {{tipoProcesso?.nome | ascNormalizeFirstCharacterUpper}}
       </ng-template>
       <app-profissional
+        [stepper]="cdkStpper"
         (profissional)="profissional($event)"
         [pedidoProcedimentoVersao]="pedidoProcedimentoVersao"
         (ufEstadoConselho)="ufEstadoConselhoSelecionado($event)"
@@ -59,6 +62,7 @@
         <app-documentos
           [parametro]="parametroDocumento"
           [pedidoProcedimentoVersao]="pedidoProcedimentoVersao"
+          [stepper]="cdkStpper"
           (documentosObrigatorios)="documentosCadastrado($event)">
         </app-documentos>
       </div>

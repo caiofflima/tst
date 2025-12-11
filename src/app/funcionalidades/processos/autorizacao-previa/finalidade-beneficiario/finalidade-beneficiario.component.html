@@ -33,16 +33,16 @@
   </div>
   <div class="footer flex-end">
     <asc-button-secondary
-      buttonId="voltarFinalidade"
-      [title]="'Voltar'"
-      cdkStepperPrevious
+      buttonId="voltar"
+      title="Voltar"
+      (onClick)="previousStep()"
       style="margin-right: 8px;"
     ></asc-button-secondary>
     <asc-button-primary
-      buttonId="continuarFinalidade"
-      [title]="'Continuar'"
-      cdkStepperNext
+      buttonId="continuar"
+      title="Continuar"
       [disabled]="finalidadeForm.invalid"
+      [showProgress]="false"
       (onClick)="onSubmit()"
     ></asc-button-primary>
   </div>
