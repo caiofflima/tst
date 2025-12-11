@@ -281,7 +281,7 @@
 
                   <div class="arquivos-lista" *ngIf="documentosCadastrados?.length">
                     <div class="arquivo-item" *ngFor="let doc of documentosCadastrados">
-                      <strong>{{ doc?.documento?.nome || doc?.nome }}</strong>
+                      <strong>{{ doc?.documento?.nome || doc?.documento?.descricao || ('Documento ' + doc?.idDocumento) }}</strong>
                       <ul *ngIf="doc?.arquivos?.length; else semArquivos">
                         <li *ngFor="let arq of doc.arquivos">{{ arq?.name }}</li>
                       </ul>
