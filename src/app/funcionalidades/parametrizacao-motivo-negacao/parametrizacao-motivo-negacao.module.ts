@@ -11,6 +11,7 @@ import { ParametrizacaoMotivoNegacaoHomeComponent } from './parametrizacao-motiv
 import { ParametrizacaoMotivoNegacaoFormComponent } from './parametrizacao-motivo-negacao-form/parametrizacao-motivo-negacao-form.component';
 import { ParametrizacaoMotivoNegacaoListarComponent } from './parametrizacao-motivo-negacao-listar/parametrizacao-motivo-negacao-listar.component';
 import { ParametrizacaoMotivoNegacaoRoutingModule } from './parametrizacao-motivo-negacao-routing.module';
+import { DscCaixaModule } from 'app/shared/dsc-caixa/dsc-caixa.module'; 
 
 @NgModule({
     imports: [
@@ -23,7 +24,8 @@ import { ParametrizacaoMotivoNegacaoRoutingModule } from './parametrizacao-motiv
         InputTextModule,
         InputTextareaModule,
         ReactiveFormsModule,
-        AscMessageErrorModule
+        AscMessageErrorModule,
+        DscCaixaModule
     ],
   declarations: [
       ParametrizacaoMotivoNegacaoHomeComponent,
@@ -31,4 +33,5 @@ import { ParametrizacaoMotivoNegacaoRoutingModule } from './parametrizacao-motiv
       ParametrizacaoMotivoNegacaoListarComponent
   ]
 })
+
 export class ParametrizacaoMotivoNegacaoModule { }

@@ -11,6 +11,8 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {AscMessageErrorModule} from "../../shared/components/message-error/asc-message-error.module";
 import {PipeModule} from "../../shared/pipes/pipe.module";
 import {AscMultiSelectModule} from "../../shared/components/multiselect/asc-multiselect.module";
+import {TableModule,} from "primeng/table";
+import { DscCaixaModule } from "app/shared/dsc-caixa/dsc-caixa.module";
 
 @NgModule({
     imports: [
@@ -23,7 +25,9 @@ import {AscMultiSelectModule} from "../../shared/components/multiselect/asc-mult
         AscMessageErrorModule,
         FormsModule,
         PipeModule,
-        AscMultiSelectModule
+        AscMultiSelectModule,
+        TableModule,
+        DscCaixaModule,
     ],
   declarations: [
     ParametrizacaoDocumentoProcessoHomeComponent,

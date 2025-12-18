@@ -25,18 +25,18 @@
             ----------------------- VERIFICAR O USO DO NGMODEL-----------------------
           <input type="text" id="codigo" name="codigo" [(ngModel)]="filtro.codigo" [maxlength]="5"
                 class="form-control" title="Código da Patologia no CID-10"-->
-          <asc-input-text label="CID-10" [maxlength]="5" hint="Código da Patologia no CID-10"> </asc-input-text>       
+          <asc-input-text label="CID-10" [maxlength]="5" hint="Código da Patologia no CID-10" [control]="codigo" > </asc-input-text>       
         </div>
 
-        <div class=" col-md-8">
+        <div class=" col-md-7">
           <!--label class="control-label" for="descricao">Descrição</label>&nbsp;<br>
             ----------------------- VERIFICAR O USO DO NGMODEL-----------------------
           <input type="text" id="descricao" name="descricao" [(ngModel)]="filtro.nome"
                 class="form-control" [maxlength]="150" title="Nome da Patologia."-->
-          <asc-input-text label="Descrição" [maxlength]="5" hint="Nome da Patologia"></asc-input-text>  
+          <asc-input-text label="Descrição" [maxlength]="5" hint="Nome da Patologia" [control]="nome" ></asc-input-text>  
         </div>
 
-        <div class=" p-0 col-md-2">
+        <div class=" p-0 col-md-3">
           <asc-input-text label="Código Evento" id="codigoEvento" name="codigoEvento" [control]="evento"
             [somenteNumeros]="true" [maxlength]="8" hint="Código do Evento">
           </asc-input-text>
@@ -54,24 +54,30 @@
 
         <div class=" col-md-4">
           <label class="control-label">Compõe Teto?</label>&nbsp;<br>
-          <p-radioButton name="testoS" value="S" [(ngModel)]="filtro.teto" inputId="textoS"></p-radioButton>
+          <dsc-radio-button name="testoS" label="Sim" size="large" value="S" [(ngModel)]="filtro.teto"> </dsc-radio-button>
+          <dsc-radio-button name="testoN" label="Não" size="large" value="N" [(ngModel)]="filtro.teto"> </dsc-radio-button>
+          
+          <!--p-radioButton name="testoS" value="S" [(ngModel)]="filtro.teto" inputId="textoS"></p-radioButton>
           <label for="textoS">Sim</label>
 
           <p-radioButton name="textoN" value="N" [(ngModel)]="filtro.teto" inputId="textoN"></p-radioButton>
-          <label for="textoN">Não</label>
+          <label for="textoN">Não</label-->
         </div>
 
         <div class=" p-0 col-md-4">
           <label class="control-label">Calcula PF?</label>&nbsp;<br>
-          <p-radioButton name="pfS" value="S" [(ngModel)]="filtro.pf" inputId="pfS"></p-radioButton>
+          <dsc-radio-button name="pfS" label="Sim" size="large" value="S" [(ngModel)]="filtro.pf"> </dsc-radio-button>
+          <dsc-radio-button name="pfN" label="Não" size="large" value="N" [(ngModel)]="filtro.pf"> </dsc-radio-button>
+          
+          <!--p-radioButton name="pfS" value="S" [(ngModel)]="filtro.pf" inputId="pfS"></p-radioButton>
           <label for="pfS">Sim</label>
 
           <p-radioButton name="pfS" value="N" [(ngModel)]="filtro.pf" inputId="pfN"></p-radioButton>
-          <label for="pfN">Não</label>
+          <label for="pfN">Não</label-->
         </div>
 
         <div class="pl-0 col-md-3">
-          <asc-checkbox label="Somente Ativos" name="testoS" [(ngModel)]="filtro.ativos" [valoresTrueOrFalse]="false"></asc-checkbox>
+          <asc-checkbox label="Somente Ativos" name="ativos" [(ngModel)]="filtro.ativos"  [valoresTrueOrFalse]="false"></asc-checkbox>
         </div>
       </div>
       <div class="col-xs-12 p-0 barra-botoes">

@@ -19,7 +19,8 @@ class ResultadoPesquisa {
 
 @Component({
     selector: 'asc-parametrizacao-documentos-listar',
-    templateUrl: './parametrizacao-documentos-listar.component.html'
+    templateUrl: './parametrizacao-documentos-listar.component.html',
+    styleUrls: ['./parametrizacao-documentos-listar.component.scss'],
 })
 export class ParametrizacaoDocumentosListarComponent extends BaseComponent implements OnInit {
     @ViewChild('caixaTableParametrizacaoDocumentosListar')caixaTableParametrizacaoDocumentosListar:any

@@ -245,9 +245,11 @@ export class VincMedPatologiaFormComponent extends BaseComponent implements OnIn
     }
 
     public onChangeInativo(event: CheckboxChangeEvent) {
-        if (event.checked) {
-            this.dataInativacao.setValue(new Date())
-            this.dataInativacao.setValidators(Validators.required);
+        if (event) {
+            if(!this.dataInativacao.value){
+                this.dataInativacao.setValue(new Date())
+                this.dataInativacao.setValidators(Validators.required);
+            }
         } else {
             this.dataInativacao.clearValidators();
             this.dataInativacao.setValue(null);

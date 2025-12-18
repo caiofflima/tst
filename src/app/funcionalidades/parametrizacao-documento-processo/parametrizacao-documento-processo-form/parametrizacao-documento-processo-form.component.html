@@ -52,7 +52,8 @@
             [required]="!id"
             [disabled]="id != null"
           ></asc-select-tipo-processo>
-        </div><asc-listagem *ngIf="id" [lista]="listComboTipoBeneficiarioSelecionados"></asc-listagem>
+        </div>
+        <asc-listagem *ngIf="id" [lista]="listComboTipoBeneficiarioSelecionados"></asc-listagem>
         <div class="col-md-8 mb-15 pl-0">
           
           <asc-multiSelect [options]="listComboTipoBeneficiario" [disabled]="id != null" [required]="true"

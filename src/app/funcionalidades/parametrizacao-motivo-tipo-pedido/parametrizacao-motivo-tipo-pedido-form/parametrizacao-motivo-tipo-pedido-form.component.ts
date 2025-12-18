@@ -313,10 +313,13 @@ export class ParametrizacaoMotivoTipoPedidoFormComponent extends BaseComponent {
     }
 
     public onChangeInativo(event: CheckboxChangeEvent): void {
-        if (event.checked) {
-            this.dataInativacao.setValue(new Date())
+        if (event) {
+            if(this.dataInativacao?.value===null){
+                this.dataInativacao.setValue(new Date());
+            }       
         } else {
-            this.dataInativacao.reset();
+            //this.dataInativacao.reset();
+            this.dataInativacao.setValue(null);
         }
     }
 

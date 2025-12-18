@@ -12,6 +12,7 @@ import {AscSelectModule} from "../../shared/components/asc-select/asc-select.mod
 import {PipeModule} from "../../shared/pipes/pipe.module";
 import {OverlayPanelModule} from "primeng/overlaypanel";
 import {TooltipModule} from "primeng/tooltip";
+import { DscCaixaModule } from 'app/shared/dsc-caixa/dsc-caixa.module'; 
 
 @NgModule({
     imports: [
@@ -25,7 +26,8 @@ import {TooltipModule} from "primeng/tooltip";
         AscSelectModule,
         PipeModule,
         TooltipModule,
-        OverlayPanelModule
+        OverlayPanelModule,
+        DscCaixaModule
     ],
     declarations: [
         ParametrizacaoPrazosHomeComponent,

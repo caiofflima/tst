@@ -1,13 +1,14 @@
 import {Component,ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
+import {take} from "rxjs/operators";
+import {Location} from "@angular/common";
+
 import {FiltroDocumentoProcesso} from "../../../shared/models/filtro/filtro-documento-processo";
 import {DocumentoTipoProcessoService} from "../../../shared/services/comum/documento-tipo-processo.service";
 import {BaseComponent} from "../../../shared/components/base.component";
 import {MessageService} from "../../../shared/components/messages/message.service";
 import {DocumentoTipoProcesso} from "../../../shared/models/dto/documento-tipo-processo";
-import {take} from "rxjs/operators";
 import {Pageable} from "../../../shared/components/pageable.model";
-import {Location} from "@angular/common";
 import {NumberUtil} from "../../../shared/util/number-util";
 import {ArrayUtil} from "../../../shared/util/array-util";
 
@@ -91,8 +92,8 @@ export class ParametrizacaoDocumentoProcessoListarComponent extends BaseComponen
                 ...d,
                 documento: d.documento,
                 idEstadoCivil: d.idEstadoCivil,
-                descricaoInativo: d.inativo ? 'Sim' : 'Não',
-                descricaoObrigatorio: d.obrigatorio ? 'Sim' : 'Não',
+                descricaoInativo: this.getTextoByBoolean(d.inativo),
+                descricaoObrigatorio: this.getTextoByBoolean(d.obrigatorio),
                 sexo: d.sexo ? d.sexo == 'M' ? 'Masculino' : 'Feminino' : null
             }));
 
@@ -107,6 +108,10 @@ export class ParametrizacaoDocumentoProcessoListarComponent extends BaseComponen
             this.showDangerMsg(err.error);
             this.loading = false;
         } );
+    }
+
+    getTextoByBoolean(valor:any):string{
+        return valor ? 'Sim' : 'Não';
     }
 
     public pesquisar($event): void {

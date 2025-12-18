@@ -1,21 +1,22 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
-import {BaseComponent} from 'app/shared/components/base.component';
 import {ActivatedRoute, Router} from '@angular/router';
-import {MessageService} from 'app/shared/components/messages/message.service';
 import {FormBuilder, FormGroup} from '@angular/forms';
-import {ComboService} from 'app/shared/services/comum/combo.service';
-import {DadoComboDTO} from 'app/shared/models/dto/dado-combo';
 import {take} from "rxjs/operators";
 import {Location} from "@angular/common";
+
+import {BaseComponent} from 'app/shared/components/base.component';
+import {MessageService} from 'app/shared/components/messages/message.service';
+import {ComboService} from 'app/shared/services/comum/combo.service';
+import {DadoComboDTO} from 'app/shared/models/dto/dado-combo';
 import {EmailService} from "../../../shared/services/comum/email.service";
 import {Email} from "../../../shared/models/comum/email";
-import {TipoBeneficiarioService} from "../../../shared/services/comum/tipo-beneficiario.service";
-import {SituacaoProcessoService} from "../../../shared/services/comum/situacao-processo.service";
 import {TipoProcessoService} from "../../../shared/services/comum/tipo-processo.service";
 import {TipoProcesso} from "../../../shared/models/comum/tipo-processo";
 import {AscValidators} from "../../../shared/validators/asc-validators";
 import {Util} from "../../../arquitetura/shared/util/util";
-import { SituacaoProcesso } from 'app/shared/models/entidades';
+// import {TipoBeneficiarioService} from "../../../shared/services/comum/tipo-beneficiario.service";
+// import {SituacaoProcessoService} from "../../../shared/services/comum/situacao-processo.service";
+// import { SituacaoProcesso } from 'app/shared/models/entidades';
 
 import { CheckboxChangeEvent } from 'primeng/checkbox';
 @Component({
@@ -237,10 +238,13 @@ export class EmailSituacaoFormComponent extends BaseComponent implements OnInit 
     }
 
     public onChangeInativo(event: CheckboxChangeEvent) {
-        if (event.checked) {
-            this.dataInativacao.setValue(new Date())
+        if (event) {
+            if(this.dataInativacao?.value===null){
+                this.dataInativacao.setValue(new Date());
+            }       
         } else {
-            this.dataInativacao.reset();
+            //this.dataInativacao.reset();
+            this.dataInativacao.setValue(null);
         }
     }
 

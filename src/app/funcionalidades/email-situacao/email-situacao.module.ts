@@ -31,7 +31,7 @@ import {AscMessageErrorModule} from 'app/shared/components/message-error/asc-mes
 import {TextoAjudaEmailComponent} from './texto-ajuda-email/texto-ajuda-email.component';
 import {ComponentModule} from "../../shared/components/component.module";
 import {AscButtonsModule} from "../../shared/components/asc-buttons/asc-buttons.module";
-
+import { DscCaixaModule } from 'app/shared/dsc-caixa/dsc-caixa.module'; 
 
 @NgModule({
     imports: [
@@ -63,7 +63,8 @@ import {AscButtonsModule} from "../../shared/components/asc-buttons/asc-buttons.
         OverlayPanelModule,
         ComponentModule,
         AscButtonsModule,
-        RadioButtonModule
+        RadioButtonModule,
+        DscCaixaModule
     ],
     declarations: [
         EmailSituacaoHomeComponent,

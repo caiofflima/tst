@@ -12,6 +12,7 @@ import {AscMessageErrorModule} from "../../shared/components/message-error/asc-m
 import {PipeModule} from "../../shared/pipes/pipe.module";
 import {AscMultiSelectModule} from "../../shared/components/multiselect/asc-multiselect.module";
 import { MotivoSolicitacaoTipoPedidoService } from 'app/shared/services/comum/motivo-solicitacao-tipo-pedido.service';
+import { DscCaixaModule } from 'app/shared/dsc-caixa/dsc-caixa.module'; 
 
 @NgModule({
     imports: [
@@ -24,7 +25,8 @@ import { MotivoSolicitacaoTipoPedidoService } from 'app/shared/services/comum/mo
         AscMessageErrorModule,
         FormsModule,
         PipeModule,
-        AscMultiSelectModule
+        AscMultiSelectModule,
+        DscCaixaModule
     ],
   declarations: [
     ParametrizacaoMotivoTipoPedidoHomeComponent,

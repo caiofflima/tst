@@ -97,4 +97,10 @@ p {
   &:hover, &:active {
     background-color: $btn-bg-red-dark;
   }
+
+  .campo-pesquisa {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: -65px;
+}
 }

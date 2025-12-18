@@ -66,9 +66,9 @@
       </div>
 
       <div class="row">
+        <asc-listagem *ngIf="id" [lista]="listComboTipoBeneficiarioSelecionado"></asc-listagem>
         <div class="pl-0 col-xs-6">
           <!--label class="control-label obrigatorio" for="tiposBeneficiario">Tipo Beneficiário</label-->
-          <asc-listagem *ngIf="id" [lista]="listComboTipoBeneficiarioSelecionado"></asc-listagem>
           <asc-multiSelect
             label="Tipo Beneficiário"
             [options]="listComboTipoBeneficiario"
@@ -79,7 +79,7 @@
           </asc-multiSelect>
           <asc-message-error [control]="formulario.controls['tiposBeneficiario']" type="required" [errorMessage]="bundle('MA005')" ></asc-message-error>
         </div>
-        <div class="p-0 col-xs-6">
+        <div class="p-0 col-xs-5">
           <!--label class="control-label obrigatorio" for="tipoDestinatario">Destinatário(s)</label-->
           <asc-multiSelect
             label="Destinatário(s)"
@@ -168,7 +168,7 @@
         <div class="pl-0 col-xs-2">
             <asc-checkbox label="Inativo" name="binary" formControlName="inativo" [valoresTrueOrFalse]="true" (ngModelChange)="onChangeInativo($event)"></asc-checkbox>
         </div>
-        <div class="pl-0 col-xs-2">
+        <div class="pl-0 col-xs-4">
             <asc-input-date
                     [control]="dataInativacao" [required]="inativo.value"
                     [disabled]="!inativo.value" inputId="dataInativacao" label="Data da Inativação">

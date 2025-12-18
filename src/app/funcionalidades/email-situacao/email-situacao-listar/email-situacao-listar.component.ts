@@ -11,8 +11,10 @@ import {Email} from "../../../shared/models/comum/email";
 
 @Component({
     selector: 'app-email-situacao-listar',
-    templateUrl: './email-situacao-listar.component.html'
+    templateUrl: './email-situacao-listar.component.html',
+    styleUrls: ['./email-situacao-listar.component.scss']
 })
+
 export class EmailSituacaoListarComponent extends BaseComponent {
 
     @ViewChild('caixaTableEmailSituacaoListar')caixaTableEmailSituacaoListar:any

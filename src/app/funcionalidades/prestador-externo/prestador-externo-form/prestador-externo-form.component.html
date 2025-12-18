@@ -47,14 +47,13 @@
       <!-- Main Form Fields -->
       <div class="row">
         <div class="col-xs-12 col-sm-6">
-          <asc-cpf-cnpj label="CPF" id="cpf" [control]="cpf" [somenteCpf]="true" title="{{bundle('MH130')}}" [required]="true"></asc-cpf-cnpj>
+          <asc-cpf-cnpj label="CPF" id="cpf" [control]="cpf" [somenteCpf]="true" title="{{bundle('MH130')}}" [required]="true" maskName="cpfMask"></asc-cpf-cnpj>
         </div>
         <div class="col-xs-12 col-sm-6">
           <asc-input-text label="Nome" somenteLetrasMaiusculas="true" id="nome" name="nome" title="{{bundle('MH131')}}" [control]="nome" [required]="true"></asc-input-text>
         </div>
         <div class="col-xs-12 col-sm-6">
           <asc-input-date label="Data de Nascimento" [control]="form.controls['dataNascimento']" [required]="true" title="{{bundle('MH142')}}"></asc-input-date>
-          <asc-message-error [control]="form.controls['dataNascimento']" type="required" [errorMessage]="bundle('MA007')"></asc-message-error>
         </div>
         <div class="col-xs-12 col-sm-6">
           <asc-input-email [control]="email" label="E-mail" id="email" [maxlength]="150" name="email" [required]="true"></asc-input-email>
@@ -76,23 +75,19 @@
         <div id="panelUnidades" class="p-0 col-md-12">
           <div class="row d-flex col-md-10 p-0 coluna-interna">
             <div class="row col-md-6 mb-4">
-              <asc-dropdown label="Empresa" id="empresa" [control]="form.get('empresaPrestadorExterno')" [items]="empresas" placeholder="{{bundle('MHSPH')}}" [required]="true" id="empresaPrestadorExterno"></asc-dropdown>
-              <asc-message-error [control]="formEmpresaPerfil.controls['empresaPrestadorExterno']" type="required" [errorMessage]="bundle('MA007')"></asc-message-error>
+              <asc-dropdown label="Empresa" id="empresa" [control]="form.get('empresaPrestadorExterno')" [items]="empresas" placeholder="{{bundle('MHSPH')}}" [required]="true" id="empresaPrestadorExterno" (selected)="setEmpresaValue($event)"></asc-dropdown>
             </div>
             <div class="row col-md-6 mb-4">
-              <asc-dropdown label="Perfil" [control]="form.get('perfilPrestadorExterno')" [items]="perfis" placeholder="{{bundle('MHSPH')}}" [required]="true" id="perfilPrestadorExterno"></asc-dropdown>
-              <asc-message-error [control]="formEmpresaPerfil.controls['perfilPrestadorExterno']" type="required" [errorMessage]="bundle('MA007')"></asc-message-error>
+              <asc-dropdown label="Perfil" [control]="form.get('perfilPrestadorExterno')" [items]="perfis" placeholder="{{bundle('MHSPH')}}" [required]="true" id="perfilPrestadorExterno" (selected)="setPerfilValue($event)"></asc-dropdown>
             </div>
           </div>
 
           <div class="row d-flex col-md-10 coluna-interna">
             <div class="col-xs-12 col-sm-6">
-              <asc-dropdown label="Atuação Profissional" [control]="form.get('atuacaoPrestadorExterno')" [items]="tiposAuditores" placeholder="{{bundle('MHSPH')}}" [required]="true" id="atuacaoPrestadorExterno"></asc-dropdown>
-              <asc-message-error [control]="formEmpresaPerfil.controls['atuacaoPrestadorExterno']" type="required" [errorMessage]="bundle('MA007')"></asc-message-error>
+              <asc-dropdown label="Atuação Profissional" [control]="form.get('atuacaoPrestadorExterno')" [items]="tiposAuditores" placeholder="{{bundle('MHSPH')}}" [required]="true" id="atuacaoPrestadorExterno" (selected)="setAtuacaoValue($event)"></asc-dropdown>
             </div>
             <div class="col-xs-12 col-sm-6">
               <asc-input-date label="Data Limite" [control]="formEmpresaPerfil.controls['dataLimitePrestadorExterno']" [required]="true" title="{{bundle('MH143')}}"></asc-input-date>
-              <asc-message-error [control]="formEmpresaPerfil.controls['dataLimitePrestadorExterno']" type="required" [errorMessage]="bundle('MA007')"></asc-message-error>
             </div>
             <div class="col-xs-12 col-sm-6">
               <button class="btn custom-btn-confirm" style="height: 34px; margin-top: 12px!important;" (click)="adicionarPerfilEmpresa();">
@@ -116,8 +111,8 @@
               <tbody *ngFor="let perfilEmpresa of perfisEmpresas; let i = index">
                 <tr *ngIf="perfilEmpresa.perfilPrestadorExterno != null">
                   <td>{{perfilEmpresa.empresaPrestadorExterno.razaoSocial}}</td>
-                  <td>{{perfilEmpresa.perfilPrestadorExterno | perfilMask: perfis}}</td>
-                  <td>{{perfilEmpresa.atuacaoPrestadorExterno | atuacaoProfissionalMask: tiposAuditores}}</td>
+                  <td>{{perfilEmpresa.perfilPrestadorExterno?.label }}</td>
+                  <td>{{perfilEmpresa.atuacaoPrestadorExterno?.label }}</td>
                   <td>{{perfilEmpresa.dataLimitePrestadorExterno | date:'dd/MM/yyyy'}}</td>
                   <td>
                     <span title="{{bundle('MH165')}}" (click)="removerPerfilEmpresa(i)">

@@ -18,8 +18,10 @@ class ResultadoPesquisa {
 
 @Component({
     selector: 'asc-parametrizacao-motivo-negacao-listar',
-    templateUrl: './parametrizacao-motivo-negacao-listar.component.html'
+    templateUrl: './parametrizacao-motivo-negacao-listar.component.html',
+    styleUrls: ['./parametrizacao-motivo-negacao-listar.component.scss']
 })
+
 export class ParametrizacaoMotivoNegacaoListarComponent extends BaseComponent implements OnInit {
     @ViewChild('caixaTableBeneficiarioPedidoListar')caixaTableBeneficiarioPedidoListar:any
 
@@ -66,12 +68,13 @@ export class ParametrizacaoMotivoNegacaoListarComponent extends BaseComponent im
             this.listaMotivosNegacao = res.map(d => ({
                 
                 situacaoPedido: d.situacaoProcesso,
-
+                nivelNegacao: d.nivelNegacao,
                 tituloNegacao: d.titulo,
                 motivoNegacao: d.descricaoHistorico,
                 inativo: d.inativo == "SIM" ? "Sim" : "Não",
                 id: d.id.toString()
             }));
+
             this.loading = false;
         }, err => {
             this.loading = false;

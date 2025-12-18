@@ -288,19 +288,17 @@ export class BeneficiarioPedidoFormComponent extends BaseComponent {
     }
 
     public onChangeInativo(event: CheckboxChangeEvent) {
-        if (event.checked) {
-            this.dataInativacao.setValue(new Date())
-            this.dataInativacao.setValidators(Validators.required);
+        if (event) {
+            if(!this.dataInativacao.value){
+                this.dataInativacao.setValue(new Date())
+                this.dataInativacao.setValidators(Validators.required);
+            }
         } else {
             this.dataInativacao.clearValidators();
+            this.dataInativacao.setValue(null);
             this.dataInativacao.markAsPristine();
             this.dataInativacao.markAsUntouched();
-            this.dataInativacao.updateValueAndValidity();
-            if(this.beneficiarioPedido.dataInativacao){
-                this.dataInativacao.setValue(this.beneficiarioPedido.dataInativacao);
-            }else{
-                this.dataInativacao.setValue(null);
-            }    
+            this.dataInativacao.updateValueAndValidity(); 
         }
     }
 

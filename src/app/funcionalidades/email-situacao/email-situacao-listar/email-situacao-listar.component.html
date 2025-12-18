@@ -19,7 +19,7 @@
     <h1 class="titulo-pagina">E-mail por Ocorrência – Resultado</h1>
   </div>
 
-  <section>
+
     <div class="row p-0 col-md-12">
       <h4>Dados da Pesquisa</h4>
     </div>
@@ -61,13 +61,18 @@
     <div class="row p-0 col-md-9">
       <h4>Resultado da Consulta</h4>
     </div>
+    <div class="row "></div>
+    <div class="row p-0 col-md-12" slot="content">
 
-    <div class="row p-0 col-md-12">
-      <div class="col-xs-3 search-inp p-0" style="margin: 5px 0 8px; border-bottom: 0 none">
+      <!--div class="col-xs-3 search-inp p-0" style="margin: 5px 0 8px; border-bottom: 0 none">
         <input #gb type="text" class="form-control filtro-caixa" size="50" placeholder="Digite para filtrar resultado">
+        <dsc-input (input)="dt.filterGlobal($any($event.target).value, 'contains')" 
+        [placeholder]="'Digite para filtrar o resultado'" [iconSuffix]="'search'" />
         <em class="fas fa-search"></em>
-      </div>
-      <p-table
+      </div
+    
+     <p-table #dt 
+        [globalFilterFields]="['id','nomeSituacaoProcesso','nomeTiposProcesso','nomeTiposBeneficiario','assunto']"   
         id="caixa-table"
         [value]="listaEmails"
         [rows]="5"
@@ -79,12 +84,20 @@
         sortField="id"
         [sortOrder]="-1"
         [totalRecords]="listaTotal"
-        styleClass="table table-striped table-sm table-hover">
+        styleClass="table table-striped table-sm table-hover text-center">
+
+        <ng-template pTemplate="caption">
+          <div class="filtro-pesquisa">
+              <dsc-input (input)="dt.filterGlobal($any($event.target).value, 'contains')" [placeholder]="'Digite para filtrar o resultado'"[iconSuffix]="'search'" />
+          </div>
+        </ng-template>
+
         <ng-template pTemplate="emptymessage">
           <tr>
             <td colspan="8">{{bundle('MA003')}}</td>
           </tr>
         </ng-template>
+
         <ng-template pTemplate="header">
           <tr>
             <th scope="col" [pSortableColumn]="'id'" style="width:60px">ID <p-sortIcon [field]="'id'"></p-sortIcon></th>
@@ -115,6 +128,73 @@
         </ng-template>
       </p-table>
     </div>
+    
+    -->
+     
+    <div class="row"></div>
+
+    <div class="row p-0 col-md-12" slot="content">
+  
+      <p-table
+        #dt
+        id="caixa-table"
+        [value]="listaEmails"
+        [paginator]="true"
+        [rows]="5"
+        [totalRecords]="listaTotal"
+        paginatorPosition="top"
+        [rowsPerPageOptions]="[5,10,20]"
+        [reorderableColumns]="true"
+        sortField="id"
+        [loading]="loading"
+        [sortOrder]="-1" 
+        class="table table-striped table-sm table-hover text-center"
+        emptyMessage="Nenhum resultado encontrado para os filtros informados."
+        styleClass="paginator-right"
+        [globalFilterFields]="['id','nomeSituacaoProcesso','nomeTiposProcesso','nomeTiposBeneficiario','assunto']">
+        
+        <ng-template pTemplate="caption">
+          <div class="campo-pesquisa">
+              <dsc-input size="large" (input)="dt.filterGlobal($any($event.target).value, 'contains')" [placeholder]="'Digite para filtrar o resultado'" [iconSuffix]="'search'" />
+          </div>
+        </ng-template>
+
+        <ng-template pTemplate="emptymessage">
+          <tr> <td colspan="4">{{bundle('MA003')}}</td> </tr>
+        </ng-template>
+  
+        <ng-template pTemplate="header">
+          <tr>
+          <th scope="col" [pSortableColumn]="'id'" style="width:60px">ID <p-sortIcon [field]="'id'"></p-sortIcon></th>
+          <th scope="col" [pSortableColumn]="'nomeSituacaoProcesso'">Ocorrência <p-sortIcon [field]="'nomeSituacaoProcesso'"></p-sortIcon></th>
+          <th scope="col" [pSortableColumn]="'nomeTiposProcesso'">Tipos de Pedido <p-sortIcon [field]="'nomeTiposProcesso'"></p-sortIcon></th>
+          <th scope="col" [pSortableColumn]="'nomeTiposBeneficiario'">Tipo de Benef. <p-sortIcon [field]="'nomeTiposBeneficiario'"></p-sortIcon></th>
+          <th scope="col" [pSortableColumn]="'assunto'">Assunto <p-sortIcon [field]="'assunto'"></p-sortIcon></th>
+          <th scope="col" [pSortableColumn]="'dataCadastramento'">Cadastramento <p-sortIcon [field]="'dataCadastramento'"></p-sortIcon></th>
+          <th scope="col" [pSortableColumn]="'inativo'" style="width:90px">Inativo <p-sortIcon [field]="'inativo'"></p-sortIcon></th>
+          <th scope="col">Ação</th>
+          </tr>
+        </ng-template>
+  
+        <ng-template pTemplate="body" let-row>
+        <tr>
+          <td>{{row.id}}</td>
+          <td>{{row.nomeSituacaoProcesso}}</td>
+          <td>{{row.nomeTiposProcesso}}</td>
+          <td>{{row.nomeTiposBeneficiario}}</td>
+          <td>{{row.assunto}}</td>
+          <td>{{row.dataCadastramento | date : 'dd/MM/yyyy'}}</td>
+          <td>{{row.inativo}}</td>
+          <td>
+            <span title="Editar registro" [routerLink]="['../editar', row.id]" id="editar" style="cursor: pointer">
+              <em class="fas fa-pen"></em>
+            </span>
+          </td>
+        </tr>
+      </ng-template>
+  
+      </p-table>
+    </div>
 
     <div class="col-xs-12 p-0 barra-botoes">
       <button class="btn back-btn" (click)="voltar()">
@@ -126,5 +206,5 @@
         Incluir E-mail por Ocorrência
       </button>
     </div>
-  </section>
+
 </div>

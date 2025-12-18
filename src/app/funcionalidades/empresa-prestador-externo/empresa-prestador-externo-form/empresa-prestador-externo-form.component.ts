@@ -15,6 +15,7 @@ import {ComboService} from 'app/shared/services/comum/combo.service';
 import {DadoComboDTO} from 'app/shared/models/dto/dado-combo';
 import {EmpresaPrestadorExternoService} from 'app/shared/services/comum/empresa-prestador-externo.service';
 import {EmpresaPrestadora} from 'app/shared/models/comum/empresa-prestadora';
+import { Option } from 'sidsc-components/dsc-select';
 
 @Component({
     selector: "app-empresa-prestador-externo-form",
@@ -26,7 +27,6 @@ export class EmpresaPrestadorExternoFormComponent extends BaseComponent implemen
     maskCnpj: string = null;
     filiais: Array<Filial>;
     filiaisAdd: Array<FilialDTO> = [];
-    filial: Filial = new Filial();
     municipio: string;
     uf: UF;
     filialDTO: FilialDTO = new FilialDTO();
@@ -35,10 +35,12 @@ export class EmpresaPrestadorExternoFormComponent extends BaseComponent implemen
     formulario: FormGroup;
 
     UFEmpresaAdd: Array<UF> = [];
-    UFEmpresa: UF = new UF();
+   
     listComboUF: DadoComboDTO[];
     abrangenciaAdd: Array<AbrangenciaDTO> = [];
-
+    optionsFilial: Option[] = [];
+    filialSelecionada: AbrangenciaDTO;
+    ufSelecionada: DadoComboDTO;
 
     constructor(
         override readonly messageService: MessageService,
@@ -63,7 +65,9 @@ export class EmpresaPrestadorExternoFormComponent extends BaseComponent implemen
     razaoSocial = this.formBuilder.control(null, [Validators.required]);
     contrato = this.formBuilder.control(null)
     email = this.formBuilder.control(null, [AscValidators.email()]);
-
+    UFEmpresa = this.formBuilder.control(new UF());
+    filial = this.formBuilder.control(new Filial());
+    
     private inicializarFormulario() {
         this.formulario = this.formBuilder.group({
             id: this.id,
@@ -72,10 +76,10 @@ export class EmpresaPrestadorExternoFormComponent extends BaseComponent implemen
             contrato: this.contrato,
             dataCadastramento: [this.empresaPrestadora.dataCadastramento],
             matriculaCadastramento: [this.empresaPrestadora.matriculaCadastramento],
-            filial: [this.filialDTO.nome],
+            filial: [null],
             unidade: [this.filialDTO.unidade],
             email: this.email,
-            UFEmpresa: [this.UFEmpresa.nome]
+            UFEmpresa: [null]
         });
     }
 
@@ -114,14 +118,31 @@ export class EmpresaPrestadorExternoFormComponent extends BaseComponent implemen
     }
 
     public buscarFiliais() {
-        this.empresaPrestadorService.consultarFiliais().subscribe(res => {
+        /*this.empresaPrestadorService.consultarFiliais().subscribe(res => {
             this.filiais = this.tratarComboFilial(res);
+            console.log(this.filiais);
             this.filiais = res.map(filial => ({
                 ...filial,
                 nome: filial.municipio.nome.toUpperCase()
             }));
-        });
+        }); */
+
+        this.comboService.consultarComboFilial().subscribe(res => {
+            this.optionsFilial = this.convertToOptions(res);
+        }, err => this.showDangerMsg(err.error));
     }
+
+     /**
+     * Converts DadoComboDTO array to Option array for DSC components
+     */
+     private convertToOptions(dados: DadoComboDTO[]): Option[] {
+        if (!dados) return [];
+        return dados.map(dado => ({
+            label: dado.label,
+            value: dado.value
+        }));
+    }
+
 
     private tratarComboFilial(res: Filial[]): Filial[] {
         return res.map(filial => {
@@ -150,8 +171,10 @@ export class EmpresaPrestadorExternoFormComponent extends BaseComponent implemen
     }
 
     public onChangeFilial(){
-        if(this.formulario.controls['UFEmpresa'].value != null)
+        if(this.formulario.controls['UFEmpresa'].value != null){
            this.formulario.get("UFEmpresa").reset();
+           this.formulario.get("UFEmpresa").clearValidators();
+        }
     }
 
     public onChangeUFEmpresa(){
@@ -160,13 +183,33 @@ export class EmpresaPrestadorExternoFormComponent extends BaseComponent implemen
     }
 
     public adicionarAbrangencia() {
-        if(this.formulario.controls['UFEmpresa'].value !== null){
-            this.adicionarUFEmpresa(this.formulario.controls['UFEmpresa'].value);
+        if(this.formulario.value.UFEmpresa !== null){
+            this.adicionarUFEmpresa(this.ufSelecionada);
         }   
-        else if(this.formulario.controls['filial'].value !== null){
-            this.adicionarFilial(this.formulario.controls['filial'].value);
+        else if(this.formulario.value.filial !== null){
+            this.adicionarFilial(this.filialSelecionada);
         }
-            
+    }
+
+    setFilialValue(event) {
+        if (event) {
+
+            const filialOption: Option = this.optionsFilial.filter(option => option.value === event.value)[0];
+            this.filialSelecionada = new AbrangenciaDTO(filialOption.value, filialOption.label);
+        } else {
+
+            this.filialSelecionada = null;
+        }
+
+    }
+
+    setUFValue(event) {
+        if (event) {
+            this.ufSelecionada = this.listComboUF.filter(uf =>  uf.value == event.value)[0];
+        } else {
+
+            this.ufSelecionada = null;
+        }
     }
 
     public adicionarFilial(filial) {
@@ -180,6 +223,8 @@ export class EmpresaPrestadorExternoFormComponent extends BaseComponent implemen
                 }
             });
             if (!existe) {
+                console.log('aqui');
+                console.log(filial)
                 this.filialDTO = new FilialDTO();
                 this.filialDTO.id = filial.id;
                 this.filialDTO.nome = filial.nome;
@@ -194,12 +239,10 @@ export class EmpresaPrestadorExternoFormComponent extends BaseComponent implemen
     public adicionarUFEmpresa(UFEmpresa) {
         this.formulario.get("UFEmpresa").reset();
         this.formulario.get("filial").reset();
-
+        
         if (UFEmpresa !== null) {
-
             let existe = this.UFEmpresaAdd.find(uf=>uf.id === UFEmpresa.value );
-
-            if (!existe) {
+            if (!existe) {  
                 let unidade = new UF();
                 unidade.id = UFEmpresa.value;
                 unidade.sigla = UFEmpresa.label;

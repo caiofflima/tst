@@ -57,19 +57,35 @@
 
     <div class="clearfix"></div>
 
-    <div class="p-0 col-md-12">
-      <div class="col-xs-3 search-inp p-0" style="margin: 5px 0 8px; border-bottom: 0 none">
-        <input #gb type="text" class="form-control filtro-caixa" pInputText size="50"
-               placeholder="Digite para filtrar resultado">
-        <em class="fas fa-search"></em>
-      </div>
-
+    <div class="row p-0 col-md-12" slot="content">
+  
       <p-table
-        id="caixa-table" [value]="listaMedicamento" [rows]="10"
-        [paginator]="true" [pageLinks]="5" [sortOrder]="-1"
-        emptyMessage="Nenhum resultado encontrado para os filtros informados." [loading]="loading"
-        [rowsPerPageOptions]="[5,10,20]" [reorderableColumns]="true" sortField="id"
-        styleClass="table table-striped table-sm table-hover text-center">
+        #dt
+        id="caixa-table"
+        [value]="listaMedicamento"
+        [paginator]="true"
+        [rows]="10"
+        paginatorPosition="top"
+        [rowsPerPageOptions]="[5,10,20]"
+        [reorderableColumns]="true"
+        sortField="id"
+        [loading]="loading"
+        [sortOrder]="-1" 
+        class="table table-striped table-sm table-hover text-center"
+        styleClass="paginator-right"
+        emptyMessage="Nenhum resultado encontrado para os filtros informados."
+        [globalFilterFields]="['nomeLaboratorio','nomeMedicamento','apresentacao','numeroTuss','valor']">
+        
+        <ng-template pTemplate="caption">
+          <div class="campo-pesquisa">
+              <dsc-input size="large" (input)="dt.filterGlobal($any($event.target).value, 'contains')" [placeholder]="'Digite para filtrar o resultado'" [iconSuffix]="'search'" />
+          </div>
+        </ng-template>
+
+        <ng-template pTemplate="emptymessage">
+          <tr> <td colspan="4">{{bundle('MA003')}}</td> </tr>
+        </ng-template>
+
         <ng-template pTemplate="header">
           <tr>
             <th [pSortableColumn]="'nomeLaboratorio'" scope="col">Laboratório <p-sortIcon [field]="'nomeLaboratorio'"></p-sortIcon></th>
@@ -81,6 +97,7 @@
             <th scope="col">Ação</th>
           </tr>
         </ng-template>
+        
         <ng-template pTemplate="body" let-row>
           <tr>
             <td>{{row.nomeLaboratorio}}</td>

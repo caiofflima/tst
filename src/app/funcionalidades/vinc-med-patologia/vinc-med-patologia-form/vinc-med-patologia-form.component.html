@@ -79,25 +79,21 @@
 
       </div>
 
-      <div *ngIf="id" style="padding-top: 10px">
-        <div class="p-0 col-md-12 ">
-          <asc-checkbox
-            label="Inativo" name="inativo" formControlName="inativo" [valoresTrueOrFalse]="true"
-            (ngModelChange)="onChangeInativo($event)"
-          ></asc-checkbox>
+      <div class="row" *ngIf="id" style="padding-top: 10px">
+        <div class="p-0 col-md-2">
+          <asc-checkbox label="Inativo" name="inativo" formControlName="inativo" [valoresTrueOrFalse]="true" 
+          (ngModelChange)="onChangeInativo($event)"></asc-checkbox>
         </div>
-        <div class="p-0 col-md-12" *ngIf="inativo.value">
-          <div class="col-md-2 coluna-interna">
+        <div class="p-0 col-md-3" *ngIf="inativo.value">
 
-            <label class="control-label" for="dataInativacao">Data da Inativação</label>
-            <asc-input-date
+            <!--label class="control-label" for="dataInativacao">Data da Inativação</label-->
+            <asc-input-date label="Data da Inativação"
               [control]="formulario.get('dataInativacao')" inputId="dataInativacao"
-              label="" id="dataInativacao"
-            ></asc-input-date>
+              label="" id="dataInativacao" ></asc-input-date>
             <div *ngIf="formulario.hasError('inativoMatch')" class="error-form">
               <div>Campo obrigatório não informado.</div>
             </div>
-          </div>
+
         </div>
       </div>
 

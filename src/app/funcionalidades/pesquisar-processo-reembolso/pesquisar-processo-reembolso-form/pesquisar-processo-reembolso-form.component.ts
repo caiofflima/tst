@@ -86,10 +86,13 @@ export class PesquisarProcessoReembolsoFormComponent extends BaseComponent {
     }
 
     public onChangeInativo(event: CheckboxChangeEvent) {
-        if (event.checked) {
-            this.dataInativacao.setValue(new Date())
-        } else {
-            this.dataInativacao.reset();
+        if (event) { 
+            if(this.dataInativacao.value === null){
+                this.dataInativacao.setValue(new Date());
+            }  
+        } else {  
+            //this.dataInativacao.reset();
+            this.dataInativacao.setValue(null);
         }
     }
 

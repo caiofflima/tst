@@ -160,8 +160,10 @@ export class ParametrizacaoMotivoNegacaoFormComponent extends BaseComponent {
     }
 
     public onChangeInativo(event: CheckboxChangeEvent) {
-        if (event.checked) {
-            this.dataInativacao.setValue(new Date())
+        if (event) {
+            if(!this.dataInativacao.value){
+                this.dataInativacao.setValue(new Date());
+            }
         } else {
             this.dataInativacao.clearValidators();
             this.dataInativacao.setValue(null);

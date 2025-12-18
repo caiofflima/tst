@@ -13,6 +13,7 @@ import { ParametrizacaoMedicamentosListarComponent } from './parametrizacao-medi
 import { ParametrizacaoMedicamentosRoutingModule } from './parametrizacao-medicamentos-routing.module';
 import { AscMultiSelectModule } from "app/shared/components/multiselect/asc-multiselect.module";
 import {MatGridListModule} from '@angular/material/grid-list';
+import { DscCaixaModule } from 'app/shared/dsc-caixa/dsc-caixa.module'; 
 
 @NgModule({
     imports: [
@@ -27,7 +28,8 @@ import {MatGridListModule} from '@angular/material/grid-list';
         ReactiveFormsModule,
         AscMessageErrorModule,
         AscMultiSelectModule,
-        MatGridListModule
+        MatGridListModule,
+        DscCaixaModule
     ],
   declarations: [
       ParametrizacaoMedicamentosHomeComponent,

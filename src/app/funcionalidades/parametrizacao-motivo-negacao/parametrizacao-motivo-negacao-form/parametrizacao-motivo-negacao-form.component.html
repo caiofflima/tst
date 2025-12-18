@@ -83,7 +83,7 @@
                     <div class="col-md-2 d-flex al-ic pl-0">
                         <asc-checkbox label="Inativo" name="binary" formControlName="inativo" [valoresTrueOrFalse]="true" (ngModelChange)="onChangeInativo($event)"></asc-checkbox>
                     </div>
-                    <div class="col-md-2 pl-0">
+                    <div class="col-md-4 pl-0">
                         <asc-input-date
                                 [control]="dataInativacao" [required]="inativo.value"
                                 [disabled]="!inativo.value" *ngIf="inativo.value" inputId="dataInativacao" label="Data da Inativação"

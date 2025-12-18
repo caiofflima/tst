@@ -22,7 +22,7 @@ import { PatologiaListarComponent } from './patologia-listar/patologia-listar.co
 import { PatologiaFormComponent } from './patologia-form/patologia-form.component';
 import { ComponentModule } from 'app/shared/components/component.module';
 //import { RadioButton } from 'primeng/primeng';
-
+import { DscCaixaModule } from '../../shared/dsc-caixa/dsc-caixa.module'; 
 
 /**
  * Modulo Empresa Prestadora
@@ -44,7 +44,8 @@ import { ComponentModule } from 'app/shared/components/component.module';
         PipeModule,
         PrimeNGModule,
         ComponentModule,
-        InputTextModule
+        InputTextModule,
+        DscCaixaModule
     ],
 	declarations: [
 		PatologiaHomeComponent,

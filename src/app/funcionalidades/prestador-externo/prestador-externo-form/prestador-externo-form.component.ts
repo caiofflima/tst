@@ -17,6 +17,7 @@ import {ComboService} from 'app/shared/services/comum/combo.service';
 import {Util} from "../../../arquitetura/shared/util/util";
 import {Location} from "@angular/common";
 import {take} from "rxjs/operators";
+import { Option } from "sidsc-components/dsc-select";
 
 @Component({
     selector: "app-prestador-externo-form",
@@ -265,7 +266,7 @@ export class PrestadorExternoFormComponent extends BaseComponent implements OnIn
 
     public buscarEmpresas() {
         this.empresaService.buscarEmpresas().subscribe(empresas => {
-            this.empresas = this.tratarComboEmpresa(empresas);
+            this.empresas = this.convertToOptions(empresas);
         });
     }
 
@@ -273,6 +274,17 @@ export class PrestadorExternoFormComponent extends BaseComponent implements OnIn
         return res.map(empresa => ({
             ...empresa,
             razaoSocial: empresa.razaoSocial ? empresa.razaoSocial.toUpperCase() : ''
+        }));
+    }
+
+      /**
+     * Converts DadoComboDTO array to Option array for DSC components
+     */
+      private convertToOptions(dados: EmpresaPrestadora[]): Option[] {
+        if (!dados) return [];
+        return dados.map(dado => ({
+            label: dado.razaoSocial.toUpperCase(),
+            value: dado.id
         }));
     }
 
@@ -290,13 +302,57 @@ export class PrestadorExternoFormComponent extends BaseComponent implements OnIn
 
     public adicionarPerfilEmpresa() {
         if (this.formEmpresaPerfil.valid) {
+         
             if (this.perfisEmpresas == undefined) {
                 this.perfisEmpresas = [];
             }
+    
             this.perfisEmpresas.push(this.formEmpresaPerfil.value);
             this.limpaCamposPerfilEmpresa();
         } else {
             this.markFormTouched();
+        }
+    }
+
+    setEmpresaValue(event) {
+        if (event) {
+
+            const empresaOption: Option = this.empresas.filter(option => option.value === event.value)[0];
+            let empresa = new EmpresaPrestadora();
+            empresa.id = empresaOption.value;
+            empresa.razaoSocial = empresaOption.label;
+            this.formEmpresaPerfil.get('empresaPrestadorExterno')?.setValue(empresa);
+        } else {
+
+            this.formEmpresaPerfil.get('empresaPrestadorExterno')?.setValue(null);
+        }
+    }
+
+    setPerfilValue(event) {
+        if (event) {
+            const perfilOption: Option = this.perfis.filter(option => option.value == event.value)[0];
+            console.log(perfilOption)
+            let perfil:any = {};
+            perfil.id = perfilOption.value;
+            perfil.label = perfilOption.label;
+            this.formEmpresaPerfil.get('perfilPrestadorExterno')?.setValue(perfil);
+        } else {
+
+            this.formEmpresaPerfil.get('perfilPrestadorExterno')?.setValue(null);
+        }
+    }
+
+    setAtuacaoValue(event) {
+        if (event) {
+
+            const atuacaoOption: Option = this.tiposAuditores.filter(option => option.value === event.value)[0];
+            let atuacao:any = {};
+            atuacao.value = atuacaoOption.value;
+            atuacao.label = atuacaoOption.label;
+            this.formEmpresaPerfil.get('atuacaoPrestadorExterno')?.setValue(atuacao);
+        } else {
+
+            this.formEmpresaPerfil.get('atuacaoPrestadorExterno')?.setValue(null);
         }
     }
 
@@ -319,10 +375,10 @@ export class PrestadorExternoFormComponent extends BaseComponent implements OnIn
     }
 
     public limpaCamposPerfilEmpresa() {
-        this.formEmpresaPerfil.get('empresaPrestadorExterno').reset('');
-        this.formEmpresaPerfil.get('perfilPrestadorExterno').reset('');
-        this.formEmpresaPerfil.get('atuacaoPrestadorExterno').reset('');
-        this.formEmpresaPerfil.get('dataLimitePrestadorExterno').reset('');
+        this.formEmpresaPerfil.get('empresaPrestadorExterno').setValue(null);
+        this.formEmpresaPerfil.get('perfilPrestadorExterno').setValue(null);
+        this.formEmpresaPerfil.get('atuacaoPrestadorExterno').setValue(null);
+        this.formEmpresaPerfil.get('dataLimitePrestadorExterno').setValue(null);
     }
 
     public removerPerfilEmpresa(index) {

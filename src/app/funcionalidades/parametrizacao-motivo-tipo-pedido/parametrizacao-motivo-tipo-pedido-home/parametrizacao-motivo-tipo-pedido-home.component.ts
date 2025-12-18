@@ -152,7 +152,7 @@ export class ParametrizacaoMotivoTipoPedidoHomeComponent extends BaseComponent i
         this.limparStorage();
         let dadosArmazenadosParamMotivo = this.prepararDados();
         this.salvarStorage(dadosArmazenadosParamMotivo);
-console.log(dadosArmazenadosParamMotivo);
+
         this.router.navigate(['/manutencao/parametros/motivo-tipo-pedido/buscar'], {
             queryParams: { ...dadosArmazenadosParamMotivo }
         }).then();

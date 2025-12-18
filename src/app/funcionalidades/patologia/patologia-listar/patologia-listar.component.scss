@@ -2,3 +2,13 @@
     display: flex;
     margin-bottom: 10px;
 }
+
+::ng-deep .paginator-right .p-paginator {
+    justify-content: flex-end !important;
+  }   
+  
+.campo-pesquisa {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: -65px;
+}

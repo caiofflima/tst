@@ -62,14 +62,35 @@
       <h4>Resultado da Consulta</h4>
     </div>
 
-    <div class="row p-0 col-md-12">
-      <div class="col-md-3 search-inp p-0" style="margin: 5px 0 8px; border-bottom: 0 none">
-        <input #gb type="text" class="form-control filtro-caixa" size="50" placeholder="Digite para filtrar resultado">
-        <em class="fas fa-search"></em>
-      </div>
+    <div class="row p-0 col-md-12" slot="content">
+  
       <p-table
-        id="caixa-table" [rows]="5" [paginator]="true" [pageLinks]="5" [value]="listaPrazoTratamento" [rowsPerPageOptions]="[5,10,20]" [reorderableColumns]="true" sortField="id" [loading]="loading"
-        [sortOrder]="-1" styleClass="table table-striped table-sm table-hover text-center">
+        #dt
+        id="caixa-table"
+        [value]="listaPrazoTratamento"
+        [paginator]="true"
+        [rows]="5"
+        paginatorPosition="top"
+        [rowsPerPageOptions]="[5,10,20]"
+        [reorderableColumns]="true"
+        sortField="id"
+        [loading]="loading"
+        [sortOrder]="-1" 
+        class="table table-striped table-sm table-hover text-center"
+        emptyMessage="Nenhum resultado encontrado para os filtros informados."
+        styleClass="paginator-right"
+        [globalFilterFields]="['id','nomeSituacaoProcesso','nomeTiposProcesso','nomeTiposBeneficiario','assunto']">
+        
+        <ng-template pTemplate="caption">
+          <div class="campo-pesquisa">
+              <dsc-input size="large" (input)="dt.filterGlobal($any($event.target).value, 'contains')" [placeholder]="'Digite para filtrar o resultado'" [iconSuffix]="'search'" />
+          </div>
+        </ng-template>
+
+        <ng-template pTemplate="emptymessage">
+          <tr> <td colspan="4">{{bundle('MA003')}}</td> </tr>
+        </ng-template>
+
         <ng-template pTemplate="header">
           <tr>
             <th scope="col" [pSortableColumn]="'id'" style="width:60px">ID <p-sortIcon [field]="'id'"></p-sortIcon></th>

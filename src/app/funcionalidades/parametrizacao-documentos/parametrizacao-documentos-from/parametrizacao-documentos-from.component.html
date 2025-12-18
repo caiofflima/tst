@@ -82,12 +82,12 @@
 
             <div *ngIf="id">
                 <div class="form-row">
-                    <div class="col-md-2 d-flex al-ic pl-0">
-                        <!-- <asc-checkbox name="binary" formControlName="inativo" [valoresTrueOrFalse]="true" (ngModelChange)="onChangeInativo($event)"></asc-checkbox> -->
-                        <dsc-checkbox formControlName="inativo"  variant="highlight" (change)="onChangeInativo($event)" size="large" />
-                        <label class="control-label" style="margin: 0 0 0 5px!important" for="binary">Inativo</label>
+                    <div class="col-md-4 d-flex al-ic pl-0">
+                        <asc-checkbox label="Inativo" name="binary" formControlName="inativo" [valoresTrueOrFalse]="true" (ngModelChange)="onChangeInativo($event)"></asc-checkbox>
+                        <!--dsc-checkbox formControlName="inativo"  variant="highlight" (change)="onChangeInativo($event)" size="large" /-->
+                        <!--label class="control-label" style="margin: 0 0 0 5px!important" for="binary">Inativo</label-->
                     </div>
-                    <div class="col-md-2 pl-0">
+                    <div class="col-md-4 pl-0">
                         <asc-input-date
                                 [control]="dataInativacao" [required]="inativo.value"
                                 [disabled]="!inativo.value" inputId="dataInativacao" label="Data da Inativação"

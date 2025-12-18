@@ -19,26 +19,16 @@ import { CheckboxChangeEvent } from 'primeng/checkbox';
 export class PatologiaFormComponent extends BaseComponent {
 
     id: number;
-
     patologia: Patologia = new Patologia();
-
-    patologiaRestore: Patologia
+    patologiaRestore: Patologia;
 
     codigo = this.formBuilder.control(null, [Validators.required, Validators.maxLength(15)]);
     nome = this.formBuilder.control(null, [Validators.required, Validators.maxLength(150)]);
     evento = this.formBuilder.control(null);
-
-    sexos: SelectItem[] = [{
-        label: 'Masculino',
-        value: 'M'
-    }, {
-        label: 'Feminino',
-        value: 'F'
-    }];
-
     inativo = this.formBuilder.control(false);
-
     dataInativacao = this.formBuilder.control(null, AscValidators.dataIgualAtualMaior);
+
+    sexos: SelectItem[] = [{ label: 'Masculino', value: 'M'}, { label: 'Feminino', value: 'F' }];
 
     formulario: FormGroup = this.formBuilder.group({
         codigo: this.codigo,
@@ -86,10 +76,13 @@ export class PatologiaFormComponent extends BaseComponent {
     }
 
     public onChangeInativo(event: CheckboxChangeEvent) {
-        if (event.checked) {
-            this.dataInativacao.setValue(new Date())
-        } else {
-            this.dataInativacao.reset();
+        if (event) { 
+            if(this.dataInativacao.value === null){
+                this.dataInativacao.setValue(new Date());
+            }  
+        } else {  
+            //this.dataInativacao.reset();
+            this.dataInativacao.setValue(null);
         }
     }
 
@@ -117,7 +110,7 @@ export class PatologiaFormComponent extends BaseComponent {
         this.formulario.markAsUntouched();
         this.formulario.updateValueAndValidity();
 
-        this.formulario.get('codigo').setValue(this.patologiaRestore.codigo);
+        this.formulario.get('codigo').setValue(this.patologiaRestore?.codigo);
         this.formulario.get('compoeTeto').setValue('N');
         this.formulario.get('calculoPartipacao').setValue('N');
         this.formulario.get('causaObito').setValue('N');

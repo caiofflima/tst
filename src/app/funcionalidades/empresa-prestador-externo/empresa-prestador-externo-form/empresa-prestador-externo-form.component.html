@@ -61,7 +61,7 @@
           <asc-input-text [control]="contrato" label="Contrato" id="contrato" name="contrato" [maxlength]="20" ></asc-input-text>
         </div>
         <div class="pl-0 col-md-8">
-          <asc-input-email [control]="formulario.get('email')" label="E-mail" id="email" name="email" [maxlength]="150" ></asc-input-email>
+          <asc-input-email [control]="email" label="E-mail" id="email" name="email" [maxlength]="150" ></asc-input-email>
         </div>
       </div>
 
@@ -72,14 +72,12 @@
         </div>
         <div id="panelUnidades">
           <div class="d-flex col-md-12 p-0" style="align-items: flex-end;">
-            <div class="col-md-6 p-0" style="margin-right: 10px;"> <!-- Aumentando a largura -->
-              <asc-dropdown [control]="formulario.get('filial')" [items]="filiais" [placeholder]="bundle('MHSPH')" label="Agrupadora" [required]="true" (selected)="onChangeFilial()" ></asc-dropdown>
-              <asc-message-error [control]="formulario.controls['filial']" type="required" [errorMessage]="bundle('MA007')"></asc-message-error>
+            <div class="col-md-6 p-0" style="margin-right: 10px;"> 
+              <asc-dropdown [control]="$any(formulario.get('filial'))" [items]="optionsFilial" [placeholder]="bundle('MHSPH')" label="Agrupadora" [required]="true" (selected)="setFilialValue($event)"></asc-dropdown>
             </div>
 
-            <div class="col-md-6 p-0"> <!-- Aumentando a largura -->
-              <asc-dropdown [control]="formulario.get('UFEmpresa')" [items]="listComboUF" [placeholder]="bundle('MHSPH')" label="UF" [required]="true" (selected)="onChangeUFEmpresa()" ></asc-dropdown>
-              <asc-message-error [control]="formulario.controls['UFEmpresa']" type="required" [errorMessage]="bundle('MA007')"></asc-message-error>
+            <div class="col-md-6 p-0"> 
+              <asc-dropdown [control]="formulario.get('UFEmpresa')" [items]="listComboUF" [placeholder]="bundle('MHSPH')" label="UF" [required]="true" (selected)="setUFValue($event)"></asc-dropdown>
             </div>
 
             <div class="col-md-6 p-0 d-flex align-items-start" style="margin-left: 10px;"> <!-- Ajuste de alinhamento -->
@@ -95,7 +93,7 @@
               <em class="fas fa-search"></em>
             </div>
 
-            <p-table id="caixa-table" [value]="abrangenciaAdd" [rows]="10" [paginator]="true" [pageLinks]="5" [sortOrder]="1" [rowsPerPageOptions]="[5,10,20]" [reorderableColumns]="true" sortField="nome" styleClass="table table-striped table-sm table-hover">
+           <!-- <p-table id="caixa-table" [value]="abrangenciaAdd" [rows]="10" [paginator]="true" [pageLinks]="5" [sortOrder]="1" [rowsPerPageOptions]="[5,10,20]" [reorderableColumns]="true" sortField="nome" styleClass="table table-striped table-sm table-hover">
               <ng-template pTemplate="emptymessage">
                 <tr>
                   <td colspan="2">{{bundle('MA003')}}</td>
@@ -119,7 +117,53 @@
                   </td>
                 </tr>
               </ng-template>
-            </p-table>
+            </p-table> -->
+
+            <div class="row p-0 col-md-12" slot="content">
+
+              <p-table #caixaTableEmpresaPrestadorExternoForm id="caixa-table" [value]="abrangenciaAdd" [paginator]="true" [rows]="10" [totalRecords]="abrangenciaAdd?.length" 
+                  paginatorPosition="top"
+                  [rowsPerPageOptions]="[5, 10, 20]"
+                  [reorderableColumns]="true"
+                  sortField="nome"
+                  [sortOrder]="1"
+                  class="table table-striped table-sm table-hover text-center"
+                  styleClass="paginator-right">
+          
+                  <ng-template pTemplate="caption">
+                      <div class="campo-pesquisa">
+                          <dsc-input (input)="caixaTableEmpresaPrestadorExternoForm.filterGlobal($any($event.target).value, 'contains')" [placeholder]="'Digite para filtrar o resultado'" [iconSuffix]="'search'" />
+                      </div>
+                  </ng-template>
+          
+                  <ng-template pTemplate="header">
+                      <tr>
+                          <th scope="col" [pSortableColumn]="'nome'" style="width: 200px">Abrangência 
+                              <p-sortIcon [field]="'nome'"></p-sortIcon>
+                          </th>
+                          <th scope="col" style="width: 90px">Ação</th>
+                      </tr>
+                  </ng-template>
+          
+                  <ng-template pTemplate="body" let-row>
+                      <tr>
+                          <td>{{row.nome}}</td>
+                          <td>
+                              <span title="Remover" (click)="removerAbrangencia(row)" style="cursor: pointer">
+                                  <span class="fas fa-trash red"></span>
+                              </span>
+                          </td>
+                      </tr>
+                  </ng-template>
+          
+                  <ng-template pTemplate="emptymessage">
+                      <tr>
+                          <td colspan="2">{{bundle('MA003')}}</td>
+                      </tr>
+                  </ng-template>
+          
+              </p-table>
+          </div>
           </div>
         </div>
       </div>

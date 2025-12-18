@@ -22,8 +22,10 @@ class ResultadoPesquisaMedicamento {
 
 @Component({
     selector: 'asc-parametrizacao-medicamentos-listar',
-    templateUrl: './parametrizacao-medicamentos-listar.component.html'
+    templateUrl: './parametrizacao-medicamentos-listar.component.html',
+    styleUrls: ['./parametrizacao-medicamentos-listar.component.scss']
 })
+
 export class ParametrizacaoMedicamentosListarComponent extends BaseComponent implements OnInit {
     [x: string]: any;
 

@@ -12,8 +12,7 @@ import { MotivoNegacaoTipoPedidoHomeComponent } from "./motivo-negacao-tipo-pedi
 import { MotivoNegacaoTipoPedidoListarComponent } from "./motivo-negacao-tipo-pedido-listar/motivo-negacao-tipo-pedido-listar.component";
 import { MotivoNegacaoTipoPedidoFormComponent } from "./motivo-negacao-tipo-pedido-form/motivo-negacao-tipo-pedido-form.component";
 import { MotivoNegacaoTipoPedidoService } from '../../shared/services/comum/motivo-negacao-tipo-pedido.service';
-
-
+import { DscCaixaModule } from 'app/shared/dsc-caixa/dsc-caixa.module'; 
 
 @NgModule({
     imports: [
@@ -26,7 +25,8 @@ import { MotivoNegacaoTipoPedidoService } from '../../shared/services/comum/moti
         AscMessageErrorModule,
         FormsModule,
         PipeModule,
-        AscMultiSelectModule
+        AscMultiSelectModule,
+        DscCaixaModule
     ],
   declarations: [
     MotivoNegacaoTipoPedidoHomeComponent,

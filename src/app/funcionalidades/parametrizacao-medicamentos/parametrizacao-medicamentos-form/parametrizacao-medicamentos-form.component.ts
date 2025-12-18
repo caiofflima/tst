@@ -108,7 +108,7 @@ export class ParametrizacaoMedicamentosFormComponent extends BaseComponent {
                      if( medicamento ){
                         this.medicamento = medicamento;
                         this.medicamento.dataInativacao = Util.getDate(medicamento.dataInativacao);
-                            
+                        
                         for (let key in this.medicamento) {
                             if (this.formulario.get(key) != undefined) {
                                 this.formulario.get(key).setValue(this.medicamento[key]);
@@ -203,14 +203,16 @@ export class ParametrizacaoMedicamentosFormComponent extends BaseComponent {
     }
 
     public onChangeInativo(event: CheckboxChangeEvent) {
-        if (event.checked) {
-            this.dataInativacao.setValue(new Date())
-        } else {
+        if (event) {
+            if(!this.dataInativacao.value){
+                this.dataInativacao.setValue(new Date())
+            }    
+        }else{
             this.dataInativacao.clearValidators();
             this.dataInativacao.setValue(null);
             this.dataInativacao.markAsPristine();
             this.dataInativacao.markAsUntouched();
-            this.dataInativacao.updateValueAndValidity();
+            this.dataInativacao.updateValueAndValidity(); 
         }
     }
 

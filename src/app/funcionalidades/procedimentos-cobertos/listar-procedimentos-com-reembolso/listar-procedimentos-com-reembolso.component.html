@@ -64,7 +64,7 @@
 
       <ng-template pTemplate="caption">
         <div class="campo-pesquisa">
-            <dsc-input (input)="dt1.filterGlobal($any($event.target).value, 'contains')" [placeholder]="'Digite para filtrar o resultado'"[iconSuffix]="'search'" />
+            <dsc-input size="large" (input)="dt1.filterGlobal($any($event.target).value, 'contains')" [placeholder]="'Digite para filtrar o resultado'"[iconSuffix]="'search'" />
         </div>
       </ng-template>
 
