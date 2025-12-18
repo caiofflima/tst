@@ -3,6 +3,11 @@
     <p class="titulo">{{title}}</p>
   </div>
   <p class="titulo">{{subtitle}}</p>
+  <div class="info-formatos-arquivo">
+    <p><strong>Formatos:</strong> jpg, png, gif e pdf</p>
+    <p><strong>Tamanho máximo por arquivo:</strong> 4 MB</p>
+  </div>
+  <p class="subtitulo-documentos">Documentos obrigatórios</p>
   <asc-documento-card
     (arquivosSelecionados)="arquivosSelecionados($event)"
     (documentoTipoProcessoSelecionado)="selecionarTipoDocumento($event)"

@@ -259,6 +259,10 @@ export class ProcedimentoFormComponent extends BaseComponent implements OnInit, 
 
             this.parametrosSelectGrauProcedimento = {idProcedimento: pedidoProcedimento.idProcedimento}
             this.isToShowForm = true;
+            // Garantir que o campo de quantidade solicitada seja exibido ao editar
+            if (pedidoProcedimento.idGrauProcedimento) {
+                this.isToShowQtdSolicitada = true;
+            }
             this.isEditing = isNotUndefinedOrNull(pedidoProcedimento.index);
             this.isEditingForm.emit(this.isEditing);
         }

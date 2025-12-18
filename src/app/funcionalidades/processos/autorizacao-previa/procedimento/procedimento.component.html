@@ -13,11 +13,11 @@
         [beneficiario]="beneficiario"
       ></asc-procedimento-form>
     </div>
-    <div class="custom-right-grid" style="padding-top: 0">
-      <p class="grid-titulo">{{procedimento?.estruturaNumerica}}  {{procedimento?.descricaoProcedimento}}</p>
+    <div class="custom-right-grid" style="padding-top: 0" *ngIf="procedimento">
+      <p class="grid-titulo">{{procedimento.estruturaNumerica}} {{procedimento.descricaoProcedimento}}</p>
       <p class="grid-info">
-        {{procedimento?.observacaoProcedimento | slice: 0: 400}}<span
-              *ngIf="procedimento?.observacaoProcedimento?.length > 400">...
+        {{procedimento.observacaoProcedimento | slice: 0: 400}}<span
+              *ngIf="procedimento.observacaoProcedimento && procedimento.observacaoProcedimento.length > 400">...
             <a data-toggle="modal" data-target="#modalProcediento">ver mais</a>
             </span>
       </p>

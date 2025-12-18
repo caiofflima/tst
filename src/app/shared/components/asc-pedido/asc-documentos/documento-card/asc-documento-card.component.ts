@@ -357,9 +357,14 @@ export class AscDocumentoCardComponent
       modalVisualizarDocumentoComponent,
     };
 
-    if (arquivo && arquivo.id) {
+    // Se o arquivo é um File (arquivo local em memória), abre diretamente
+    if (arquivo instanceof File) {
+      this.actionToOpenModel(arquivoModal);
+    } else if (arquivo && arquivo.id) {
+      // Se tem ID mas não é File, busca do servidor
       this.abrirArquivo(arquivoModal);
     } else {
+      // Fallback para abrir diretamente
       this.actionToOpenModel(arquivoModal);
     }
   }
