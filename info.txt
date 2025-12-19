@@ -1,37 +1,10 @@
-asc-card-procediment…eembolso-base.ts:28 ERROR 
-HttpErrorResponse {headers: HttpHeaders, status: 404, statusText: 'Not Found', url: 'http://localhost:4200/siasc-api/api/pedido/especialidade/[object%20Object]', ok: false, …}
-error
-: 
-"RESTEASY003870: Unable to extract parameter from http request: javax.ws.rs.PathParam(\"id\") value is '%5Bobject+Object%5D'"
-headers
-: 
-HttpHeaders {normalizedNames: Map(0), lazyUpdate: null, lazyInit: ƒ}
-message
-: 
-"Http failure response for http://localhost:4200/siasc-api/api/pedido/especialidade/[object%20Object]: 404 Not Found"
-name
-: 
-"HttpErrorResponse"
-ok
-: 
-false
-status
-: 
-404
-statusText
-: 
-"Not Found"
-url
-: 
-"http://localhost:4200/siasc-api/api/pedido/especialidade/[object%20Object]"
-[[Prototype]]
-: 
-HttpResponseBaseERROR HttpErrorResponse {headers: HttpHeaders, status: 404, statusText: 'Not Found', url: 'http://localhost:4200/siasc-api/api/pedido/especialidade/[object%20Object]', ok: false, …}
-ERROR HttpErrorResponse {headers: HttpHeaders, status: 404, statusText: 'Not Found', url: 'http://localhost:4200/siasc-api/api/pedido/especialidade/[object%20Object]', ok: false, …}
-base-select-control-value-acessor.ts:143 ERROR TypeError: Cannot read properties of undefined (reading 'id')
-    at AscFormularioReembolsoConsultaComponent.procedimentoSelecionado (asc-formulario-reemb…component.ts:182:51)
-    at AscFormularioReembolsoConsultaComponent_Template_asc_select_procedimento_dadoSelecionado_5_listener (asc-formulario-reemb…omponent.html:12:30)
-base-select-control-value-acessor.ts:92 ERROR TypeError: Cannot read properties of null (reading 'id')
-    at AscFormularioReembolsoConsultaComponent.procedimentoSelecionado (asc-formulario-reemb…component.ts:182:51)
-    at AscFormularioReembolsoConsultaComponent_Template_asc_select_procedimento_dadoSelecionado_5_listener (asc-formulario-reemb…omponent.html:12:30)
+ERROR
+src/app/shared/components/asc-pedido/asc-documentos/documento-card/asc-documento-card.component.ts:363:35 - error TS2339: Property 'id' does not exist on type 'never'.
 
+363     } else if (arquivo && arquivo.id) {
+                                      ~~
+ERROR
+src/app/shared/components/asc-pedido/asc-documentos/modal-visualizar-documento/asc-modal-visualizar-documento.component.ts:125:7 - error TS2345: Argument of type '{ data: { title: { text: string; showCloseButton: true; highlightVariant: true; }; template: TemplateRef<any>; context: this; actionButton: { type: "button"; cancelText: string; confirmText: string; confirmFunction: () => void; }; }; width: string; maxWidth: string; maxHeight: string; panelClass: string; }' is not assignable to parameter of type 'DscDialogConfig'.
+  Object literal may only specify known properties, and 'width' does not exist in type 'DscDialogConfig'.
+
+125       width: '900px',
