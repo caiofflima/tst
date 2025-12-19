@@ -141,11 +141,15 @@ export class AscModalVisualizarDocumentoComponent implements OnInit, OnDestroy {
     const fileExtension = arquivo.name.split('.').pop()?.toLowerCase();
 
     if (fileExtension === 'pdf') {
-      this.urlDocumento = this.sanitizer.bypassSecurityTrustResourceUrl(
-        window.URL.createObjectURL(arquivo)
-      );
-      this.isLoading = false;
+      // Para PDF, ng2-pdf-viewer precisa de ArrayBuffer, não SafeResourceUrl
+      const reader = new FileReader();
+      reader.onload = (event: ProgressEvent<FileReader>) => {
+        this.urlDocumento = new Uint8Array(event.target.result as ArrayBuffer);
+        this.isLoading = false;
+      };
+      reader.readAsArrayBuffer(arquivo);
     } else {
+      // Para imagens, usar Data URL com sanitizer
       const reader = new FileReader();
       reader.onload = (event: ProgressEvent<FileReader>) => {
         const url = (event.target as FileReader).result as string;
