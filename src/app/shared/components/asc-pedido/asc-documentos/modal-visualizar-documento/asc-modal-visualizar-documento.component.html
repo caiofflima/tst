@@ -1,57 +1,95 @@
-<asc-modal-navegacao
-  [infoExibicao]="infoExibicao"
-  [modoRotacao]="false"
-  [height]="'auto'"
-  [class]="'mdl-custom-pdf'"
-  (onFechar$)="fechar()"
-  (onDownload$)="downloadArquivo()"
-  (infoExibicaoAtual$)="exibirItemAtual($event)"
-  [withControls]="controls"
->
-  <asc-viewport class="core-file">
-    <!-- Exibe a navegação de páginas apenas se for um PDF -->
-    <div
-      *ngIf="showPdf"
-      class="navigation-buttons"
-      style="text-align: center; margin-bottom: 10px"
-    >
-      <button
-        class="btnASCMODAL"
-        (click)="goToPreviousPage()"
-        [disabled]="page <= 1 || isLoading"
-      >
-        Anterior
-      </button>
-      <span>Página {{ page }} de {{ totalPages }}</span>
-      <button
-        class="btnASCMODAL"
-        (click)="goToNextPage()"
-        [disabled]="page >= totalPages || isLoading"
-      >
-        Próxima
-      </button>
+<ng-template #modalVisualizarTemplate let-context>
+  <div class="visualizar-documento-container">
+    <!-- Conteúdo do documento -->
+    <div class="documento-content">
+      <!-- Loading -->
+      <div class="loading-container" *ngIf="isLoading && !urlDocumento && !textoDocumento">
+        <dsc-progress-spinner
+          [style]="{ width: '50px', height: '50px' }"
+          animationDuration=".5s"
+          fill="#EEEEEE"
+          strokeWidth="4"
+        ></dsc-progress-spinner>
+        <p>Carregando documento...</p>
+      </div>
+
+      <!-- Navegação de páginas para PDF -->
+      <div *ngIf="showPdf && isLoaded" class="pdf-navigation">
+        <button
+          class="btn-nav"
+          (click)="goToPreviousPage()"
+          [disabled]="page <= 1"
+        >
+          <em class="fa fa-chevron-left"></em> Anterior
+        </button>
+        <span class="page-info">Página {{ page }} de {{ totalPages }}</span>
+        <button
+          class="btn-nav"
+          (click)="goToNextPage()"
+          [disabled]="page >= totalPages"
+        >
+          Próxima <em class="fa fa-chevron-right"></em>
+        </button>
+      </div>
+
+      <!-- Visualizador de PDF -->
+      <div class="documento-viewer" *ngIf="showPdf && urlDocumento">
+        <pdf-viewer
+          [src]="urlDocumento"
+          [render-text]="true"
+          [show-all]="false"
+          [page]="page"
+          [zoom]="zoom"
+          [original-size]="false"
+          [fit-to-page]="true"
+          class="pdf-viewer"
+          (after-load-complete)="onLoadComplete($any($event))"
+          (pageChange)="onPageChange($any($event))"
+        ></pdf-viewer>
+      </div>
+
+      <!-- Visualizador de Texto -->
+      <div class="documento-viewer texto-viewer" *ngIf="showTexto && textoDocumento">
+        <pre>{{ textoDocumento }}</pre>
+      </div>
+
+      <!-- Visualizador de Imagem -->
+      <div class="documento-viewer imagem-container" *ngIf="!showPdf && !showTexto && urlDocumento">
+        <img [src]="urlDocumento" alt="{{ fileName }}" class="imagem-viewer" />
+      </div>
     </div>
 
-    <pdf-viewer
-      *ngIf="showPdf"
-      [src]="urlDocumento"
-      [render-text]="true"
-      [show-all]="false"
-      [page]="page"
-      [zoom]="zoom"
-      [original-size]="true"
-      [fit-to-page]="true"
-      class="posicaoPDF"
-      (after-load-complete)="onLoadComplete($any($event))"
-      (pageChange)="onPageChange($any($event))"
-    ></pdf-viewer>
+    <!-- Footer com botões -->
+    <div class="modal-footer-actions">
+      <!-- Navegação entre arquivos (se houver mais de um) -->
+      <div class="navegacao-arquivos" *ngIf="arquivos.length > 1">
+        <button
+          class="btn-nav-arquivo"
+          (click)="navegarParaAnterior()"
+          [disabled]="isPrimeiroArquivo"
+          title="Arquivo anterior"
+        >
+          <em class="fa fa-arrow-left"></em>
+        </button>
+        <span class="arquivo-info">{{ currentIndex + 1 }} / {{ arquivos.length }}</span>
+        <button
+          class="btn-nav-arquivo"
+          (click)="navegarParaProximo()"
+          [disabled]="isUltimoArquivo"
+          title="Próximo arquivo"
+        >
+          <em class="fa fa-arrow-right"></em>
+        </button>
+      </div>
 
-    <div *ngIf="showTexto" class="texto-viewer">
-      <pre>{{ textoDocumento }}</pre>
+      <div class="action-buttons">
+        <button class="btn-download" (click)="downloadArquivo()" title="Download">
+          <em class="fa fa-download"></em> Download
+        </button>
+        <button class="btn-fechar" (click)="fechar()" title="Fechar">
+          <em class="fa fa-times"></em> Fechar
+        </button>
+      </div>
     </div>
-
-    <div *ngIf="!showPdf && !showTexto">
-      <img [src]="urlDocumento" alt="{{ fileName }}" class="posicaoImagem" />
-    </div>
-  </asc-viewport>
-</asc-modal-navegacao>
+  </div>
+</ng-template>
