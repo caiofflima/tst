@@ -29,6 +29,7 @@ import { PipeModule } from "../../../shared/pipes/pipe.module";
 import { AscDocumentosModule } from "../../../shared/components/asc-pedido/asc-documentos/asc-documentos.module";
 import {AscButtonsModule} from "../../../shared/components/asc-buttons/asc-buttons.module";
 import {AscCardModule} from "../../../shared/components/asc-card/asc-card.module";
+import {DscDialogModule} from "sidsc-components/dsc-dialog";
 
 @NgModule({
     imports: [
@@ -52,6 +53,7 @@ import {AscCardModule} from "../../../shared/components/asc-card/asc-card.module
         PipeModule,
         AscButtonsModule,
         AscCardModule,
+        DscDialogModule,
     ],
     declarations: [
         PaginaInicialAprComponent,

@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output, TemplateRef, ViewChild} from '@angular/core';
 import {SolicitacaoFormModel} from '../models/solicitacao-form.model';
 import {FinalidadeFormModel} from '../models/finalidade-form-model';
 import {PedidoProcedimento} from '../../../../shared/models/comum/pedido-procedimento';
@@ -39,6 +39,8 @@ import {TipoProcessoEnum} from "../../../../shared/components/asc-pedido/models/
 import {ArrayUtil} from "../../../../shared/util/array-util";
 import {AscStepperComponent} from "../../../../shared/components/asc-stepper/asc-stepper/asc-stepper.component";
 import { ProcedimentoPedidoService, SituacaoPedidoProcedimentoService } from 'app/shared/services/services';
+import { DscDialogService } from 'sidsc-components/dsc-dialog';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
     selector: 'app-resumo',
@@ -99,8 +101,11 @@ export class ResumoComponent implements OnInit, OnDestroy {
     documentoSelecionadoControl = new FormControl();
     documentoNaoPossuiArquivos: boolean = true;
     procedimentoEditado: PedidoProcedimento;
-    showModal: boolean = false;
     informacoesAdicionais: string;
+
+    @ViewChild('modalReiniciarTemplate', { static: true })
+    private modalReiniciarTemplate!: TemplateRef<any>;
+    private dialogReiniciarRef?: MatDialogRef<any>;
     isIndisponibilidadeRedeCredenciada: boolean = false;
     pedidoProcedimento: PedidoProcedimento
 
@@ -127,7 +132,8 @@ export class ResumoComponent implements OnInit, OnDestroy {
         private readonly route: Router,
         private readonly messageService: MessageService,
         private readonly formBuilder: FormBuilder,
-        private readonly pedidoProcedimentoService: ProcedimentoPedidoService
+        private readonly pedidoProcedimentoService: ProcedimentoPedidoService,
+        private readonly dialogService: DscDialogService
     ) {
     }
 
@@ -475,13 +481,30 @@ export class ResumoComponent implements OnInit, OnDestroy {
         this.isEditingProcedimento = isEditingProcedimentoForm;
     }
 
-    setModal(bool: boolean): void {
-        this.showModal = bool;
+    abrirModalReiniciar(): void {
+        this.dialogReiniciarRef = this.dialogService.confirm({
+            data: {
+                title: {
+                    text: 'Deseja reiniciar a solicitação de autorização prévia?',
+                    showCloseButton: true,
+                    highlightVariant: true
+                },
+                template: this.modalReiniciarTemplate,
+                context: this
+            }
+        });
+    }
+
+    fecharModalReiniciar(): void {
+        if (this.dialogReiniciarRef) {
+            this.dialogReiniciarRef.close();
+            this.dialogReiniciarRef = null;
+        }
     }
 
     reiniciarForm(): void {
+        this.fecharModalReiniciar();
         this.stepper.reset();
         this.reiniciarEvent.emit();
-        this.showModal = false;
     }
 }

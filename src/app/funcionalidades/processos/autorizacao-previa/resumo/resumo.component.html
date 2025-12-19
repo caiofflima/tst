@@ -369,7 +369,7 @@
   <asc-button-secondary
     buttonId="reiniciar"
     title="Reiniciar"
-    (onClick)="setModal(true)"
+    (onClick)="abrirModalReiniciar()"
   ></asc-button-secondary>
 
   <asc-button-primary
@@ -381,38 +381,20 @@
   ></asc-button-primary>
 </div>
 
-<p-dialog
-  [(visible)]="showModal"
-  [responsive]="true"
-  [width]="420"
-  [draggable]="false"
-  [resizable]="false"
-  [modal]="true"
->
-  <p-header>
-    <p style="margin: 0">
-      Deseja reiniciar a solicitação de autorização prévia?
-    </p>
-  </p-header>
-
-  <div style="display: flex; justify-content: center">
+<!-- Modal Reiniciar usando DscDialog -->
+<ng-template #modalReiniciarTemplate let-context>
+  <div class="modal-reiniciar-content">
     <p class="modal-info-body">
       ATENÇÃO! Voltar ao início implicará na perda de todos os preenchimentos.
       Confirma a ação de reiniciar?
     </p>
-  </div>
-
-  <p-footer>
-    <div class="footer" style="padding: 0; margin: 0">
-      <button (click)="setModal(false)" class="back-btn" id="cancelar">
+    <div class="modal-reiniciar-footer">
+      <button (click)="fecharModalReiniciar()" class="btn-cancelar" id="cancelar">
         Cancelar
       </button>
-      <asc-button-primary
-        buttonId="continuar"
-        [title]="'Continuar'"
-        (onClick)="reiniciarForm()"
-      >
-      </asc-button-primary>
+      <button (click)="reiniciarForm()" class="btn-continuar" id="continuar">
+        Continuar
+      </button>
     </div>
-  </p-footer>
-</p-dialog>
+  </div>
+</ng-template>

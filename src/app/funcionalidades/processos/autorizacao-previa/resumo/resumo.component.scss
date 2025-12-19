@@ -256,3 +256,53 @@ div.custom-form-group-select {
     cursor: not-allowed;
   }
 }
+
+// Estilos do Modal Reiniciar
+.modal-reiniciar-content {
+  padding: 16px;
+  text-align: center;
+  min-width: 350px;
+
+  .modal-info-body {
+    font-size: 14px;
+    line-height: 1.5;
+    color: #333;
+    margin: 0 0 24px 0;
+  }
+}
+
+.modal-reiniciar-footer {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+
+  .btn-cancelar {
+    padding: 10px 24px;
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.2s;
+
+    &:hover {
+      background-color: #5a6268;
+    }
+  }
+
+  .btn-continuar {
+    padding: 10px 24px;
+    background-color: #0065b7;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.2s;
+
+    &:hover {
+      background-color: #004d8c;
+    }
+  }
+}
