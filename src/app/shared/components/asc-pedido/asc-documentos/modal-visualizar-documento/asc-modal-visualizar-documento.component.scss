@@ -2,6 +2,7 @@
 ::ng-deep .cdk-overlay-pane:has(.dsc-dialog-container) {
   max-width: 95vw !important;
   max-height: 95vh !important;
+  height: auto !important;
   width: auto !important;
   min-width: 600px;
 }
@@ -18,20 +19,22 @@
 
 ::ng-deep .mat-mdc-dialog-content {
   max-height: none !important;
-  overflow: visible !important;
+  overflow: hidden !important;
   padding: 0 !important;
 }
 
-// Container principal - adapta ao conteúdo
+// Container principal - sem scroll próprio, altura adaptável
 .visualizar-documento-container {
   display: flex;
   flex-direction: column;
   min-width: 500px;
   max-width: 90vw;
-  max-height: 85vh;
+  height: 88vh;
+  max-height: 90vh;
+  overflow: hidden;
 }
 
-// Conteúdo do documento
+// Conteúdo do documento - scroll principal aqui
 .documento-content {
   flex: 1;
   overflow: auto;
@@ -103,18 +106,18 @@
   }
 }
 
-// Visualizador de documentos
+// Visualizador de documentos - sem scroll próprio
 .documento-viewer {
   padding: 16px;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   flex: 1;
-  overflow: auto;
+  overflow: hidden;
 
   &.texto-viewer {
     background-color: #fff;
-    align-items: flex-start;
+    overflow: auto;
 
     pre {
       white-space: pre-wrap;
@@ -129,26 +132,23 @@
       max-width: 800px;
       background-color: #f8f8f8;
       border-radius: 4px;
-      max-height: 70vh;
-      overflow: auto;
     }
   }
 
   &.imagem-container {
     padding: 16px;
     background-color: #fafafa;
+    overflow: auto;
   }
 
   .pdf-viewer {
     width: 100%;
     min-width: 600px;
-    min-height: 500px;
-    height: 70vh;
-    max-height: 75vh;
+    height: 78vh;
 
     ::ng-deep {
       .ng2-pdf-viewer-container {
-        overflow: auto;
+        overflow: hidden !important;
 
         .pdfViewer {
           .page {
@@ -160,8 +160,8 @@
   }
 
   .imagem-viewer {
-    max-width: 90vw;
-    max-height: 70vh;
+    max-width: 85vw;
+    max-height: 78vh;
     width: auto;
     height: auto;
     object-fit: contain;
