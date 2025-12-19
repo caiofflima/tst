@@ -94,7 +94,7 @@ export class AscModalVisualizarDocumentoComponent implements OnInit, OnDestroy {
     if (arquivo instanceof File) {
       this.processarArquivoLocal(arquivo);
       this.abrirModal();
-    } else if (arquivo.idDocumentoGED) {
+    } else if ((arquivo as any).idDocumentoGED) {
       // Se tem ID do GED, busca do servidor
       this.buscarArquivoGED(arquivo);
     } else if ((arquivo as any).size > 0) {
@@ -300,7 +300,7 @@ export class AscModalVisualizarDocumentoComponent implements OnInit, OnDestroy {
 
       if (arquivo instanceof File) {
         this.processarArquivoLocal(arquivo);
-      } else if (arquivo.idDocumentoGED) {
+      } else if ((arquivo as any).idDocumentoGED) {
         this.buscarArquivoGEDSemModal(arquivo);
       } else if ((arquivo as any).size > 0) {
         this.processarArquivoLocal(arquivo as any);
