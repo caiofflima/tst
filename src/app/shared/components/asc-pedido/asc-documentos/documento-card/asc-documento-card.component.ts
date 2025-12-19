@@ -360,7 +360,7 @@ export class AscDocumentoCardComponent
     // Se o arquivo é um File (arquivo local em memória), abre diretamente
     if (arquivo instanceof File) {
       this.actionToOpenModel(arquivoModal);
-    } else if (arquivo && arquivo.id) {
+    } else if (arquivo && (arquivo as any).id) {
       // Se tem ID mas não é File, busca do servidor
       this.abrirArquivo(arquivoModal);
     } else {

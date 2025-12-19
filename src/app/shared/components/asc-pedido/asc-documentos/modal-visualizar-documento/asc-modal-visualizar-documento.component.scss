@@ -1,5 +1,11 @@
 // Estilos para o modal usando DscDialogService
-::ng-deep .modal-visualizar-documento-dialog {
+// Aplicar tamanho globalmente via ::ng-deep já que DscDialogConfig não suporta width/maxWidth
+::ng-deep .cdk-overlay-pane:has(.dsc-dialog) {
+  max-width: 95vw !important;
+  width: 900px !important;
+}
+
+::ng-deep .dsc-dialog {
   .mat-mdc-dialog-container {
     padding: 0;
 

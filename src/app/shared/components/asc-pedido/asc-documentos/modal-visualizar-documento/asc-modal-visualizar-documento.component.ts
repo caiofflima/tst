@@ -121,11 +121,7 @@ export class AscModalVisualizarDocumentoComponent
           confirmText: 'Download',
           confirmFunction: () => this.downloadArquivo()
         }
-      },
-      width: '900px',
-      maxWidth: '95vw',
-      maxHeight: '90vh',
-      panelClass: 'modal-visualizar-documento-dialog'
+      }
     });
 
     this.dialogRef.afterClosed().subscribe(() => {
