@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit, TemplateRef, ViewChild, ViewEncapsulation } from "@angular/core";
+import { Component, Input, OnDestroy, OnInit, ViewEncapsulation } from "@angular/core";
 import { DomSanitizer, SafeResourceUrl } from "@angular/platform-browser";
 import { Arquivo } from "../../../../models/dto/arquivo";
 import { catchError, map } from "rxjs/operators";
@@ -10,8 +10,6 @@ import { ModalExibicao } from "../../../asc-modal/modal-exibicao";
 import { MessageService } from "../../../messages/message.service";
 import { Util } from "../../../../../arquitetura/shared/util/util";
 import { PDFDocumentProxy } from "ng2-pdf-viewer";
-import { DscDialogService } from "sidsc-components/dsc-dialog";
-import { MatDialogRef } from "@angular/material/dialog";
 
 interface FileReaderEventTarget extends EventTarget {
   result: string;
@@ -54,35 +52,17 @@ export class AscModalVisualizarDocumentoComponent
 
   @Input() controls: boolean;
 
-  @ViewChild('modalVisualizarTemplate', { static: true })
-  private modalVisualizarTemplate!: TemplateRef<any>;
-
-  private dialogRef?: MatDialogRef<any>;
-
   constructor(
     sanitizer: DomSanitizer,
     private readonly anexoService: AnexoService,
-    protected override readonly messageService: MessageService,
-    private readonly dialogService: DscDialogService
+    protected override readonly messageService: MessageService
   ) {
     super(messageService);
     this.sanitizer = sanitizer;
   }
 
-  // ngOnInit(): void {
-  //   // const isFullScreenMode = window.location.href.endsWith('/downloadArquivo');
-  //   // if (isFullScreenMode) {
-  //   //   const modalContainer = document.querySelector('.ui-dialog');
-  //   //   if (modalContainer) {
-  //   //     modalContainer.classList.add('fullscreen-modal');
-  //   //   }
-  //   // }
-  //   // console.log("width :", window.innerWidth)
-  //   // console.log("height :", window.innerHeight)
-  // }
-
   protected configurarExibicao(arquivo: Arquivo) {
-    this.resetarEstado();
+    this.fechar();
 
     if (arquivo) {
       this.arquivo = arquivo;
@@ -99,37 +79,46 @@ export class AscModalVisualizarDocumentoComponent
       }else{
         this.buildFilePath(arquivo);
       }
-
-      // Abrir o modal usando DscDialogService
-      this.abrirModal();
+    } else {
+      this.fechar();
     }
   }
 
-  private abrirModal(): void {
-    this.dialogRef = this.dialogService.confirm({
-      data: {
-        title: {
-          text: this.fileName || 'Visualizar Documento',
-          showCloseButton: true,
-          highlightVariant: true
-        },
-        template: this.modalVisualizarTemplate,
-        context: this,
-        actionButton: {
-          type: 'button',
-          cancelText: 'Fechar',
-          confirmText: 'Download',
-          confirmFunction: () => this.downloadArquivo()
-        }
-      }
-    });
+  private buildFilePath(arquivo: Arquivo) {
+    if (arquivo instanceof File) {
+      const fileExtension = arquivo.name.split('.').pop()?.toLowerCase();
 
-    this.dialogRef.afterClosed().subscribe(() => {
-      this.resetarEstado();
-    });
+      if (fileExtension === 'pdf') {
+        this.urlDocumento = this.sanitizer.bypassSecurityTrustResourceUrl(
+          window.URL.createObjectURL(arquivo)
+        );
+      } else {
+        const reader = new FileReader();
+        reader.onload = (event: ProgressEvent<FileReader>) => {
+          const url = (event.target as FileReader).result as string;
+          this.urlDocumento = this.sanitizer.bypassSecurityTrustResourceUrl(url);
+          this.mimeType = arquivo.type;
+        };
+        reader.readAsDataURL(arquivo);
+      }
+    }
   }
 
-  private resetarEstado(): void {
+  private buildFileContent(arquivo: Arquivo): void {
+    if (arquivo instanceof File) {
+      const reader = new FileReader();
+
+      reader.onload = () => {
+        const texto = reader.result as string;
+        this.textoDocumento = texto;
+        console.log(this.textoDocumento);
+      };
+
+      reader.readAsText(arquivo, 'UTF-8');
+    }
+  }
+
+  fechar() {
     this.fileName = "";
     this.showPdf = false;
     this.showTexto = false;
@@ -141,47 +130,6 @@ export class AscModalVisualizarDocumentoComponent
     this.isLoading = false;
     this.outline = [];
     this.page = 1;
-  }
-  
-  private buildFilePath(arquivo: Arquivo) {
-  if (arquivo instanceof File) {
-    const fileExtension = arquivo.name.split('.').pop()?.toLowerCase();
-
-    if (fileExtension === 'pdf') {
-      this.urlDocumento = this.sanitizer.bypassSecurityTrustResourceUrl(
-        window.URL.createObjectURL(arquivo)
-      );
-    } else {
-      const reader = new FileReader();
-      reader.onload = (event: ProgressEvent<FileReader>) => {
-        const url = (event.target as FileReader).result as string;
-        this.urlDocumento = this.sanitizer.bypassSecurityTrustResourceUrl(url);
-        this.mimeType = arquivo.type;
-      };
-      reader.readAsDataURL(arquivo);
-    }
-  }
-}
-
-  private buildFileContent(arquivo: Arquivo): void {
-  if (arquivo instanceof File) {
-    const reader = new FileReader();
-
-    reader.onload = () => {
-      const texto = reader.result as string;
-      this.textoDocumento = texto;
-      console.log(this.textoDocumento);
-    };
-    
-    reader.readAsText(arquivo, 'UTF-8');
-  }
-}
-
-  fechar() {
-    if (this.dialogRef) {
-      this.dialogRef.close();
-    }
-    this.resetarEstado();
   }
 
   downloadArquivo() {
@@ -200,7 +148,7 @@ export class AscModalVisualizarDocumentoComponent
       document.body.removeChild(a);
     }
   }
-  
+
   pesquisarItem(): (infoExibicao: InfoExibicao) => Observable<Arquivo> {
     const construirBlob = (info: InfoExibicao) => (blobParts: any): Arquivo => {
       return AscModalVisualizarDocumentoComponent.getBlobItem(info, blobParts);
