@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit, ViewEncapsulation } from "@angular/core";
+import { Component, Input, OnDestroy, OnInit, TemplateRef, ViewChild, ViewEncapsulation } from "@angular/core";
 import { DomSanitizer, SafeResourceUrl } from "@angular/platform-browser";
 import { Arquivo } from "../../../../models/dto/arquivo";
 import { catchError, map } from "rxjs/operators";
@@ -10,6 +10,8 @@ import { ModalExibicao } from "../../../asc-modal/modal-exibicao";
 import { MessageService } from "../../../messages/message.service";
 import { Util } from "../../../../../arquitetura/shared/util/util";
 import { PDFDocumentProxy } from "ng2-pdf-viewer";
+import { DscDialogService } from "sidsc-components/dsc-dialog";
+import { MatDialogRef } from "@angular/material/dialog";
 
 interface FileReaderEventTarget extends EventTarget {
   result: string;
@@ -52,10 +54,16 @@ export class AscModalVisualizarDocumentoComponent
 
   @Input() controls: boolean;
 
+  @ViewChild('modalVisualizarTemplate', { static: true })
+  private modalVisualizarTemplate!: TemplateRef<any>;
+
+  private dialogRef?: MatDialogRef<any>;
+
   constructor(
     sanitizer: DomSanitizer,
     private readonly anexoService: AnexoService,
-    protected override readonly messageService: MessageService
+    protected override readonly messageService: MessageService,
+    private readonly dialogService: DscDialogService
   ) {
     super(messageService);
     this.sanitizer = sanitizer;
@@ -74,51 +82,69 @@ export class AscModalVisualizarDocumentoComponent
   // }
 
   protected configurarExibicao(arquivo: Arquivo) {
-    this.fechar();
-  
-    console.log("height :", window.innerHeight);
-    console.log("width :", window.innerWidth);
-  
+    this.resetarEstado();
+
     if (arquivo) {
       this.arquivo = arquivo;
       this.isLoading = true;
       this.fileName = arquivo.name;
       this.page = 1;
-  
+
       const fileExtension = this.fileName.split('.').pop().toLowerCase();
       this.showPdf = fileExtension === "pdf";
       this.showTexto = fileExtension === "txt";
-  
-      const isFullScreenMode = window.location.href.endsWith('/downloadArquivo');
-      if (isFullScreenMode) {
-        const screenHeight = window.innerHeight;
-        const dialogHeight = screenHeight;
-        const contentHeight = dialogHeight * 0.8;
-  
-        const dialogElement = document.querySelector('.ui-dialog') as HTMLElement;
-        const dialogContentElement = document.querySelector('.ui-dialog-content') as HTMLElement;
-  
-        if (dialogElement) {
-          dialogElement.style.height = `${dialogHeight}px`;
-          dialogElement.style.width = `100%`;
-
-        }
-        if (dialogContentElement) {
-          //dialogContentElement.style.height = `${contentHeight}px`;
-          
-          dialogContentElement.style.height = `calc(100% - 120px)`;
-        }
-      }
 
       if(this.showTexto){
         this.buildFileContent(arquivo);
       }else{
         this.buildFilePath(arquivo);
       }
-      
-    } else {
-      this.fechar();
+
+      // Abrir o modal usando DscDialogService
+      this.abrirModal();
     }
+  }
+
+  private abrirModal(): void {
+    this.dialogRef = this.dialogService.confirm({
+      data: {
+        title: {
+          text: this.fileName || 'Visualizar Documento',
+          showCloseButton: true,
+          highlightVariant: true
+        },
+        template: this.modalVisualizarTemplate,
+        context: this,
+        actionButton: {
+          type: 'button',
+          cancelText: 'Fechar',
+          confirmText: 'Download',
+          confirmFunction: () => this.downloadArquivo()
+        }
+      },
+      width: '900px',
+      maxWidth: '95vw',
+      maxHeight: '90vh',
+      panelClass: 'modal-visualizar-documento-dialog'
+    });
+
+    this.dialogRef.afterClosed().subscribe(() => {
+      this.resetarEstado();
+    });
+  }
+
+  private resetarEstado(): void {
+    this.fileName = "";
+    this.showPdf = false;
+    this.showTexto = false;
+    this.urlDocumento = null;
+    this.textoDocumento = null;
+    this.pdf = null;
+    this.totalPages = 0;
+    this.isLoaded = false;
+    this.isLoading = false;
+    this.outline = [];
+    this.page = 1;
   }
   
   private buildFilePath(arquivo: Arquivo) {
@@ -156,17 +182,10 @@ export class AscModalVisualizarDocumentoComponent
 }
 
   fechar() {
-    this.fileName = "";
-    this.showPdf = false;
-    this.showTexto = false;
-    this.urlDocumento = null;
-    this.textoDocumento = null;
-    this.pdf = null;
-    this.totalPages = 0;
-    this.isLoaded = false;
-    this.isLoading = false;
-    this.outline = [];
-    this.page = 1;
+    if (this.dialogRef) {
+      this.dialogRef.close();
+    }
+    this.resetarEstado();
   }
 
   downloadArquivo() {

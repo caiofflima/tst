@@ -61,6 +61,7 @@ export class ProcedimentoFormComponent extends BaseComponent implements OnInit, 
     });
 
     isEditing = false;
+    private isLoadingEdit = false; // Flag para evitar reset durante edição
 
     parametrosSelectGrauProcedimento: AscSelectGrausProcedimentoParams;
 
@@ -86,6 +87,10 @@ export class ProcedimentoFormComponent extends BaseComponent implements OnInit, 
         this.idGrauProcedimento.valueChanges.pipe(
             takeUntil(this.subjectUnsubscription)
         ).subscribe((idGrauProcedimento: number) => {
+            // Não alterar durante carregamento da edição
+            if (this.isLoadingEdit) {
+                return;
+            }
             if (idGrauProcedimento && idGrauProcedimento > 0) {
                 this.isToShowQtdSolicitada = true;
             } else {
@@ -100,7 +105,10 @@ export class ProcedimentoFormComponent extends BaseComponent implements OnInit, 
         ).subscribe((idProcedimento: number) => {
             if (idProcedimento && idProcedimento > 0) {
                 this.isToShowForm = true;
-                this.cleanControIdGrauProcedimentoFromControl();
+                // Não limpar o grau se estiver carregando edição
+                if (!this.isLoadingEdit) {
+                    this.cleanControIdGrauProcedimentoFromControl();
+                }
             } else {
                 this.isToShowForm = false;
             }
@@ -245,6 +253,9 @@ export class ProcedimentoFormComponent extends BaseComponent implements OnInit, 
     @Input()
     set pedidoProcedimentoFormInput(pedidoProcedimento: any) {
         if (pedidoProcedimento && pedidoProcedimento.idProcedimento) {
+            // Ativar flag para evitar reset durante carregamento da edição
+            this.isLoadingEdit = true;
+
             this.form.setValue(pedidoProcedimento);
 
             Object.keys(this.form.controls).forEach(key => {
@@ -265,6 +276,11 @@ export class ProcedimentoFormComponent extends BaseComponent implements OnInit, 
             }
             this.isEditing = isNotUndefinedOrNull(pedidoProcedimento.index);
             this.isEditingForm.emit(this.isEditing);
+
+            // Desativar flag após um ciclo de detecção de mudanças
+            setTimeout(() => {
+                this.isLoadingEdit = false;
+            }, 0);
         }
     }
 

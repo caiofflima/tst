@@ -1,64 +1,60 @@
-<asc-modal-navegacao
-  [infoExibicao]="infoExibicao"
-  [modoRotacao]="false"
-  [height]="'auto'"
-  [class]="'mdl-custom-pdf'"
-  (onFechar$)="fechar()"
-  (onDownload$)="downloadArquivo()"
-  (infoExibicaoAtual$)="exibirItemAtual($event)"
-  [withControls]="controls"
->
-  <asc-viewport class="core-file">
-    <!-- Visualizador de pdf antigo -->
-    <!-- Exibe a navegação de páginas apenas se for um PDF -->
-    <div
-      *ngIf="showPdf"
-      class="navigation-buttons"
-      style="text-align: center; margin-bottom: 10px"
-    >
+<ng-template #modalVisualizarTemplate let-context>
+  <div class="visualizar-documento-content">
+    <!-- Navegação de páginas para PDF -->
+    <div *ngIf="showPdf" class="navigation-buttons">
       <button
-        class="btnASCMODAL"
+        class="btn-nav"
         (click)="goToPreviousPage()"
         [disabled]="page <= 1 || isLoading"
       >
-        Anterior
+        <em class="fa fa-chevron-left"></em> Anterior
       </button>
-      <span>Página {{ page }} de {{ totalPages }}</span>
+      <span class="page-info">Página {{ page }} de {{ totalPages }}</span>
       <button
-        class="btnbtnASCMODAL"
+        class="btn-nav"
         (click)="goToNextPage()"
         [disabled]="page >= totalPages || isLoading"
       >
-        Próxima
+        Próxima <em class="fa fa-chevron-right"></em>
       </button>
     </div>
 
-    <pdf-viewer
-      *ngIf="showPdf"
-      [src]="urlDocumento"
-      [render-text]="true"
-      [show-all]="false"
-      [page]="page"
-      [zoom]="zoom"
-      [original-size]="true"
-      [fit-to-page]="true"
-      class="posicaoPDF"
-      (after-load-complete)="onLoadComplete($any($event))"
-      (pageChange)="onPageChange($any($event))"
-    ></pdf-viewer>
-    <!-- Fim de pdf antigo -->
-
-    <!-- Visualizador de pdf novo -->
-    <!--   <iframe
-      *ngIf="showPdf"
-      [src]="urlDocumento"
-      width="100%"
-      height="500px"
-    ></iframe> -->
-    <!-- Fim de pdf novo -->
-
-    <div *ngIf="!showPdf">
-      <img [src]="urlDocumento" alt="{{ fileName }}" class="posicaoImagem" />
+    <!-- Visualizador de PDF -->
+    <div class="documento-viewer" *ngIf="showPdf && urlDocumento">
+      <pdf-viewer
+        [src]="urlDocumento"
+        [render-text]="true"
+        [show-all]="false"
+        [page]="page"
+        [zoom]="zoom"
+        [original-size]="true"
+        [fit-to-page]="true"
+        class="pdf-viewer"
+        (after-load-complete)="onLoadComplete($any($event))"
+        (pageChange)="onPageChange($any($event))"
+      ></pdf-viewer>
     </div>
-  </asc-viewport>
-</asc-modal-navegacao>
+
+    <!-- Visualizador de Texto -->
+    <div class="documento-viewer texto-viewer" *ngIf="showTexto && textoDocumento">
+      <pre>{{ textoDocumento }}</pre>
+    </div>
+
+    <!-- Visualizador de Imagem -->
+    <div class="documento-viewer" *ngIf="!showPdf && !showTexto && urlDocumento">
+      <img [src]="urlDocumento" alt="{{ fileName }}" class="imagem-viewer" />
+    </div>
+
+    <!-- Loading -->
+    <div class="loading-container" *ngIf="isLoading && !urlDocumento && !textoDocumento">
+      <dsc-progress-spinner
+        [style]="{ width: '50px', height: '50px' }"
+        animationDuration=".5s"
+        fill="#EEEEEE"
+        strokeWidth="4"
+      >
+      </dsc-progress-spinner>
+      <p>Carregando documento...</p>
+    </div>
+  </div>
+</ng-template>
