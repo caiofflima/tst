@@ -1,6 +1,10 @@
 <div class="custom-container">
   <div class="titulo-card">{{title}}</div>
   <p class="sub-titulo"></p>
+  <div class="info-formatos-arquivo">
+    <p><strong>Formatos:</strong> jpg, png, gif e pdf</p>
+    <p><strong>Tamanho máximo por arquivo:</strong> 4 MB</p>
+  </div>
   <asc-documento-card
     (arquivosSelecionados)="arquivosSelecionados($event)"
     (documentoTipoProcessoSelecionado)="selecionarTipoDocumento($event)"

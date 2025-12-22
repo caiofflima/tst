@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output, TemplateRef, ViewChild} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {Router} from '@angular/router';
 import {TipoProcesso} from "../../../../shared/models/comum/tipo-processo";
@@ -33,6 +33,8 @@ import {NumberUtil} from "../../../../shared/util/number-util";
 import {TipoProcessoEnum} from "../../../../shared/components/asc-pedido/models/tipo-processo.enum";
 import {Util} from "../../../../arquitetura/shared/util/util";
 import {istipoProcessoAutorizacaoPrevia} from "../../../../../app/shared/components/asc-pedido/models/tipo-processo.enum";
+import {DscDialogService} from 'sidsc-components/dsc-dialog';
+import {MatDialogRef} from '@angular/material/dialog';
 
 @Component({ 
     selector: 'asc-resumo',
@@ -85,6 +87,10 @@ export class ResumoComponent extends ResumoBaseComponent {
     isValorDocumentoFiscalOK = true;
     private readonly tipoProcesso$ = new EventEmitter<TipoProcesso>();
 
+    @ViewChild('modalReiniciarTemplate', { static: true })
+    private modalReiniciarTemplate!: TemplateRef<any>;
+    private dialogReiniciarRef?: MatDialogRef<any>;
+
     constructor(
         private readonly route: Router,
         private readonly reembolsoService: ReembolsoService,
@@ -92,7 +98,8 @@ export class ResumoComponent extends ResumoBaseComponent {
         protected readonly medicamentoPatologiaPedido: MedicamentoPatologiaPedidoService,
         protected readonly processoService: ProcessoService,
         fileUploadService: FileUploadService,
-        messageService: MessageService
+        messageService: MessageService,
+        private readonly dialogService: DscDialogService
     ) {
         super(fileUploadService, messageService, _procedimentoPedidoService, medicamentoPatologiaPedido);
     }
@@ -210,13 +217,38 @@ export class ResumoComponent extends ResumoBaseComponent {
     }
 
     reiniciarForm(): void {
+        this.fecharModalReiniciar();
         this.stepper.reset();
         this.reiniciarEvent.emit();
-        this.showModal = false;
+    }
+
+    abrirModalReiniciar(): void {
+        this.dialogReiniciarRef = this.dialogService.confirm({
+            data: {
+                title: {
+                    text: 'Deseja reiniciar a solicitação de reembolso?',
+                    showCloseButton: true,
+                    highlightVariant: true
+                },
+                template: this.modalReiniciarTemplate,
+                context: this
+            }
+        });
+    }
+
+    fecharModalReiniciar(): void {
+        if (this.dialogReiniciarRef) {
+            this.dialogReiniciarRef.close();
+            this.dialogReiniciarRef = null;
+        }
     }
 
     setModal(bool: boolean): void {
-        this.showModal = bool;
+        if (bool) {
+            this.abrirModalReiniciar();
+        } else {
+            this.fecharModalReiniciar();
+        }
     }
 
     documentoFiscalAtualizado(documentoFiscal: DocumentoFiscal) {

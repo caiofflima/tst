@@ -121,12 +121,34 @@ export class AscFormularioReembolsoOdontologicoComponent extends AscFormularioPr
         if (pedidoProcedimento.idRegiaoOdontologica) {
             this.grausProcedimentoService.consultarPorId(pedidoProcedimento.idRegiaoOdontologica, pedidoProcedimento.idProcedimento).subscribe(regiao => {
                 this.regiaoOdontoligica = regiao;
-            }); 
+            });
 
             setTimeout(() => {
-                
+
                 this.form.get("idRegiaoOdontologica").setValue(pedidoProcedimento.idRegiaoOdontologica);
             }, 6500);
+        }
+
+        // Setar quantidade solicitada
+        if (pedidoProcedimento.qtdSolicitada) {
+            this.form.get("qtdSolicitada").setValue(pedidoProcedimento.qtdSolicitada);
+            this.form.get("qtdSolicitada").markAsTouched();
+            this.form.get("qtdSolicitada").markAsDirty();
+            this.form.get("qtdSolicitada").updateValueAndValidity();
+        }
+
+        // Setar valor unitario pago com formatacao BRL
+        if (pedidoProcedimento.valorUnitarioPago) {
+            const valor = typeof pedidoProcedimento.valorUnitarioPago === 'number'
+                ? pedidoProcedimento.valorUnitarioPago
+                : Number(pedidoProcedimento.valorUnitarioPago);
+            this.form.get("valorUnitarioPago").setValue(valor.toLocaleString('pt-BR', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            }));
+            this.form.get("valorUnitarioPago").markAsTouched();
+            this.form.get("valorUnitarioPago").markAsDirty();
+            this.form.get("valorUnitarioPago").updateValueAndValidity();
         }
     }
 

@@ -24,6 +24,7 @@ import {ReciboComponent} from "./recibo/recibo.component";
 import {AscReciboModule} from "../../../shared/components/asc-pedido/asc-recibo/asc-recibo.module";
 import {AscResumoModule} from "../../../shared/components/asc-pedido/asc-resumo/asc-resumo.module";
 import {AscCardModule} from "../../../shared/components/asc-card/asc-card.module";
+import {DscDialogModule} from 'sidsc-components/dsc-dialog';
 
 @NgModule({
   imports: [
@@ -38,7 +39,8 @@ import {AscCardModule} from "../../../shared/components/asc-card/asc-card.module
     AscPedidoModule,
     AscReciboModule,
     AscResumoModule,
-    AscCardModule
+    AscCardModule,
+    DscDialogModule
   ],
   exports: [
     DocumentosFiscalComponent

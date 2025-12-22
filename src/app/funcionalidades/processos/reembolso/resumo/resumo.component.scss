@@ -429,3 +429,64 @@ div.buttons-actions {
     }
   }
 }
+
+// Estilos do modal Reiniciar usando DscDialog
+.modal-reiniciar-content {
+  padding: 16px 24px;
+  text-align: center;
+
+  .modal-info-body {
+    font-family: 'Caixa Std Regular', sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #333;
+    margin-bottom: 24px;
+  }
+}
+
+.modal-reiniciar-footer {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  padding-top: 16px;
+
+  .btn-cancelar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 3px;
+    background-color: #fff;
+    border: 1px solid #01377F;
+    color: #01377F;
+    padding: 10px 24px;
+    min-width: 125px;
+    cursor: pointer;
+    font-family: 'Caixa Std Bold', sans-serif;
+    font-size: 14px;
+    transition: 250ms ease-in-out;
+
+    &:hover {
+      background-color: #f5f5f5;
+    }
+  }
+
+  .btn-continuar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 3px;
+    background-color: #F39200;
+    border: none;
+    color: #fff;
+    padding: 10px 24px;
+    min-width: 125px;
+    cursor: pointer;
+    font-family: 'Caixa Std Bold', sans-serif;
+    font-size: 14px;
+    transition: 250ms ease-in-out;
+
+    &:hover {
+      background-color: #db6e00;
+    }
+  }
+}

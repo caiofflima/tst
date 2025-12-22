@@ -100,6 +100,28 @@ export class AscReembolsoAssistencialComponent extends AscFormularioProcedimento
             this.form.get("idGrauProcedimento").updateValueAndValidity();
             this.grauProcedimentoService.consultarPorId(pedidoProcedimento.idGrauProcedimento, pedidoProcedimento.idProcedimento).subscribe(grau => this.grauProcedimento = grau);
             this.form.get("dataAtendimento").setValue(pedidoProcedimento.dataAtendimento);
+
+            // Setar quantidade solicitada
+            if (pedidoProcedimento.qtdSolicitada) {
+                this.form.get("qtdSolicitada").setValue(pedidoProcedimento.qtdSolicitada);
+                this.form.get("qtdSolicitada").markAsTouched();
+                this.form.get("qtdSolicitada").markAsDirty();
+                this.form.get("qtdSolicitada").updateValueAndValidity();
+            }
+
+            // Setar valor unitario pago com formatacao BRL
+            if (pedidoProcedimento.valorUnitarioPago) {
+                const valor = typeof pedidoProcedimento.valorUnitarioPago === 'number'
+                    ? pedidoProcedimento.valorUnitarioPago
+                    : Number(pedidoProcedimento.valorUnitarioPago);
+                this.form.get("valorUnitarioPago").setValue(valor.toLocaleString('pt-BR', {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                }));
+                this.form.get("valorUnitarioPago").markAsTouched();
+                this.form.get("valorUnitarioPago").markAsDirty();
+                this.form.get("valorUnitarioPago").updateValueAndValidity();
+            }
         }
     }
 

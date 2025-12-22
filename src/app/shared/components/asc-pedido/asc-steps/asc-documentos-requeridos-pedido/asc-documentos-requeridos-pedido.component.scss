@@ -259,3 +259,28 @@ div.custom-card {
     }
   }
 }
+
+// Estilos para informacoes de formato de arquivo
+.info-formatos-arquivo {
+  background-color: #E8F4FD;
+  border: 1px solid #B3D7F0;
+  border-radius: 4px;
+  padding: 12px 16px;
+  margin-bottom: 16px;
+
+  p {
+    margin: 0;
+    font-family: 'Caixa Std Regular', sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #0065B7;
+
+    &:first-child {
+      margin-bottom: 4px;
+    }
+
+    strong {
+      font-family: 'Caixa Std Bold', sans-serif;
+    }
+  }
+}
