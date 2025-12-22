@@ -22,6 +22,7 @@ import { ComponentModule } from 'app/shared/components/component.module';
 import {AscMultiSelectModule} from "../../shared/components/multiselect/asc-multiselect.module";
 
 import { EmpresaPrestadorExternoRoutingModule } from 'app/funcionalidades/empresa-prestador-externo/empresa-prestador-externo.routing.module';
+import { DscCaixaModule } from 'app/shared/dsc-caixa/dsc-caixa.module';
 
 //import { RadioButton } from 'primeng/primeng';
 
@@ -47,7 +48,8 @@ import { EmpresaPrestadorExternoRoutingModule } from 'app/funcionalidades/empres
         PrimeNGModule,
         ComponentModule,
         InputTextModule,
-        AscMultiSelectModule
+        AscMultiSelectModule,
+        DscCaixaModule
     ],
 	declarations: [
 		PesquisarProcessoReembolsoHomeComponent,

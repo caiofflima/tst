@@ -260,7 +260,17 @@ export class PrestadorExternoFormComponent extends BaseComponent implements OnIn
 
     public limparCampos(): void {
         this.form.reset();
-        this.formEmpresaPerfil.reset();
+
+        Object.keys(this.form.controls).forEach(controlName => {
+            const control = this.form.get(controlName);
+            if (control) {
+                control.markAsPristine(); 
+                control.markAsUntouched(); 
+                control.setErrors(null); 
+            }
+        });
+
+        this.limparCamposPerfilEmpresa();
         this.perfisEmpresas = [];
     }
 
@@ -308,52 +318,29 @@ export class PrestadorExternoFormComponent extends BaseComponent implements OnIn
             }
     
             this.perfisEmpresas.push(this.formEmpresaPerfil.value);
-            this.limpaCamposPerfilEmpresa();
+            this.limparCamposPerfilEmpresa();
         } else {
             this.markFormTouched();
         }
+
+        console.log(this.formEmpresaPerfil.value);
+        console.log(this.perfisEmpresas);
     }
 
-    setEmpresaValue(event) {
-        if (event) {
-
-            const empresaOption: Option = this.empresas.filter(option => option.value === event.value)[0];
-            let empresa = new EmpresaPrestadora();
-            empresa.id = empresaOption.value;
-            empresa.razaoSocial = empresaOption.label;
-            this.formEmpresaPerfil.get('empresaPrestadorExterno')?.setValue(empresa);
-        } else {
-
-            this.formEmpresaPerfil.get('empresaPrestadorExterno')?.setValue(null);
+    getEmpresaValue(id){
+        if(id) {
+           return this.empresas.filter(empresa => empresa.value == id)[0].label;
         }
+
+        return null;
     }
 
-    setPerfilValue(event) {
-        if (event) {
-            const perfilOption: Option = this.perfis.filter(option => option.value == event.value)[0];
-            console.log(perfilOption)
-            let perfil:any = {};
-            perfil.id = perfilOption.value;
-            perfil.label = perfilOption.label;
-            this.formEmpresaPerfil.get('perfilPrestadorExterno')?.setValue(perfil);
-        } else {
-
-            this.formEmpresaPerfil.get('perfilPrestadorExterno')?.setValue(null);
+    getAtuacaoValue(id) {
+        if (id){
+            return this.tiposAuditores.filter(atuacao => atuacao.value == id)[0].label;
         }
-    }
 
-    setAtuacaoValue(event) {
-        if (event) {
-
-            const atuacaoOption: Option = this.tiposAuditores.filter(option => option.value === event.value)[0];
-            let atuacao:any = {};
-            atuacao.value = atuacaoOption.value;
-            atuacao.label = atuacaoOption.label;
-            this.formEmpresaPerfil.get('atuacaoPrestadorExterno')?.setValue(atuacao);
-        } else {
-
-            this.formEmpresaPerfil.get('atuacaoPrestadorExterno')?.setValue(null);
-        }
+        return null;
     }
 
     public markFormTouched() {
@@ -374,11 +361,16 @@ export class PrestadorExternoFormComponent extends BaseComponent implements OnIn
         }
     }
 
-    public limpaCamposPerfilEmpresa() {
-        this.formEmpresaPerfil.get('empresaPrestadorExterno').setValue(null);
-        this.formEmpresaPerfil.get('perfilPrestadorExterno').setValue(null);
-        this.formEmpresaPerfil.get('atuacaoPrestadorExterno').setValue(null);
-        this.formEmpresaPerfil.get('dataLimitePrestadorExterno').setValue(null);
+    public limparCamposPerfilEmpresa() {
+        this.formEmpresaPerfil.reset();
+        Object.keys(this.formEmpresaPerfil.controls).forEach(controlName => {
+            const control = this.formEmpresaPerfil.get(controlName);
+            if (control) {
+                control.markAsPristine(); 
+                control.markAsUntouched(); 
+                control.setErrors(null); 
+            }
+        });
     }
 
     public removerPerfilEmpresa(index) {

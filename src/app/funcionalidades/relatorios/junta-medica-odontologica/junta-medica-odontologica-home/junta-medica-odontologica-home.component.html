@@ -85,8 +85,7 @@
       <button
         class="btn continue-btn"
         (click)="consultarProcesso()"
-        [disabled]="!formulario.valid"
-      >
+        [disabled]="!validaFormulario()">
         <span class="fa fa-search fa-fw"></span>Pesquisar
       </button>
     </div>

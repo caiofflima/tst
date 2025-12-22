@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit, TemplateRef, ViewChild, ViewEncapsulation } from "@angular/core";
+import { Component, Input, OnDestroy, TemplateRef, ViewChild, ViewEncapsulation } from "@angular/core";
 import { DomSanitizer } from "@angular/platform-browser";
 import { Arquivo } from "../../../../models/dto/arquivo";
 import { catchError, map } from "rxjs/operators";
@@ -18,7 +18,7 @@ import { MatDialogRef } from "@angular/material/dialog";
   styleUrls: ["./asc-modal-visualizar-documento.component.scss"],
   encapsulation: ViewEncapsulation.None,
 })
-export class AscModalVisualizarDocumentoComponent implements OnInit, OnDestroy {
+export class AscModalVisualizarDocumentoComponent implements OnDestroy {
   // Propriedades do PDF viewer
   page: number = 1;
   zoom: number = 1.0;
@@ -54,8 +54,6 @@ export class AscModalVisualizarDocumentoComponent implements OnInit, OnDestroy {
     private readonly messageService: MessageService,
     private readonly dialogService: DscDialogService
   ) {}
-
-  ngOnInit(): void {}
 
   ngOnDestroy(): void {
     this.fechar();

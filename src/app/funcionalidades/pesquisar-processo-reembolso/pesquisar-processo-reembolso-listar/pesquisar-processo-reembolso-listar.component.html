@@ -61,54 +61,59 @@
     </div>
 
 
-    <div class="row p-0 col-md-12">
-      <div class="col-xs-3 search-inp p-0" style="margin: 5px 0 8px; border-bottom: 0 none">
-        <input #gb type="text" class="form-control filtro-caixa" pInputText size="50"
-               placeholder="Digite para filtrar resultado">
-        <em class="fas fa-search"></em>
+    <div class="row"></div>
+
+      <div class="row p-0 col-md-12" slot="content">
+    
+        <p-table
+          #dt
+          id="caixa-table"
+          [value]="dados"
+          [paginator]="true"
+          [rows]="5"
+          [totalRecords]="dados.length"
+          paginatorPosition="top"
+          [rowsPerPageOptions]="[5,10,20]"
+          [reorderableColumns]="true"
+          sortField="id"
+          [loading]="loading"
+          [sortOrder]="-1" class="table table-striped table-sm table-hover text-center"
+          styleClass="paginator-right"
+          [globalFilterFields]="['idPedido','descTipoProcesso','matricula','uf','dataAbertura','descSituacaoPedido','dataInicio','dataFim']">
+          <ng-template pTemplate="caption">
+            <div class="campo-pesquisa">
+                <dsc-input size="large" (input)="dt.filterGlobal($any($event.target).value, 'contains')" [placeholder]="'Digite para filtrar o resultado'" [iconSuffix]="'search'" />
+            </div>
+          </ng-template>
+    
+          <ng-template pTemplate="header">
+            <tr>
+              <th [pSortableColumn]="'idPedido'" style="width:100px" scope="col">Pedido <p-sortIcon [field]="'idPedido'"></p-sortIcon></th>
+              <th [pSortableColumn]="'descTipoProcesso'" scope="col">Tipo de Pedido <p-sortIcon [field]="'descTipoProcesso'"></p-sortIcon></th>
+              <th [pSortableColumn]="'matricula'" style="width:100px" scope="col">Matrícula <p-sortIcon [field]="'matricula'"></p-sortIcon></th>
+              <th [pSortableColumn]="'uf'" style="width:50px" scope="col">UF <p-sortIcon [field]="'uf'"></p-sortIcon></th>
+              <th [pSortableColumn]="'dataAbertura'" style="width:110px" scope="col">Data de Abertura <p-sortIcon [field]="'dataAbertura'"></p-sortIcon></th>
+              <th [pSortableColumn]="'descSituacaoPedido'" scope="col">Situação <p-sortIcon [field]="'descSituacaoPedido'"></p-sortIcon></th>
+              <th [pSortableColumn]="'dataInicio'" style="width:90px" scope="col">Inicio <p-sortIcon [field]="'dataInicio'"></p-sortIcon></th>
+              <th [pSortableColumn]="'dataFim'" style="width:90px" scope="col">Fim <p-sortIcon [field]="'dataFim'"></p-sortIcon></th>
+            </tr>
+          </ng-template>
+    
+          <ng-template pTemplate="body" let-rowData>
+            <tr>
+              <td>{{rowData.idPedido}}</td>
+              <td>{{rowData.descTipoProcesso}}</td>
+              <td>{{rowData.matricula}}</td>
+              <td>{{rowData.uf}}</td>
+              <td>{{rowData.dataAbertura}}</td>
+              <td>{{rowData.descSituacaoPedido}}</td>
+              <td>{{rowData.dataInicio}}</td>
+              <td>{{rowData.dataFim | campoVazioHifen}}</td>
+            </tr>
+          </ng-template>
+    
+        </p-table>
       </div>
-      <p-table
-        id="caixa-table"
-        [value]="dados"
-        [rows]="10"
-        [paginator]="true"
-        [pageLinks]="5"
-        [sortOrder]="-1"
-        [rowsPerPageOptions]="[5,10,20]"
-        [reorderableColumns]="true"
-        sortField="id"
-        styleClass="table table-striped table-sm table-hover text-center">
-        <ng-template pTemplate="emptymessage">
-          <tr>
-            <td colspan="8">{{(!loading)?bundle('MA142'):'Carregando ...'}}</td>
-          </tr>
-        </ng-template>
-        <ng-template pTemplate="header">
-          <tr>
-            <th [pSortableColumn]="'idPedido'" style="width:100px" scope="col">Pedido <p-sortIcon [field]="'idPedido'"></p-sortIcon></th>
-            <th [pSortableColumn]="'descTipoProcesso'" scope="col">Tipo de Pedido <p-sortIcon [field]="'descTipoProcesso'"></p-sortIcon></th>
-            <th [pSortableColumn]="'matricula'" style="width:100px" scope="col">Matrícula <p-sortIcon [field]="'matricula'"></p-sortIcon></th>
-            <th [pSortableColumn]="'uf'" style="width:50px" scope="col">UF <p-sortIcon [field]="'uf'"></p-sortIcon></th>
-            <th [pSortableColumn]="'dataAbertura'" style="width:110px" scope="col">Data de Abertura <p-sortIcon [field]="'dataAbertura'"></p-sortIcon></th>
-            <th [pSortableColumn]="'descSituacaoPedido'" scope="col">Situação <p-sortIcon [field]="'descSituacaoPedido'"></p-sortIcon></th>
-            <th [pSortableColumn]="'dataInicio'" style="width:90px" scope="col">Inicio <p-sortIcon [field]="'dataInicio'"></p-sortIcon></th>
-            <th [pSortableColumn]="'dataFim'" style="width:90px" scope="col">Fim <p-sortIcon [field]="'dataFim'"></p-sortIcon></th>
-          </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-row>
-          <tr>
-            <td>{{row.idPedido}}</td>
-            <td>{{row.descTipoProcesso}}</td>
-            <td>{{row.matricula}}</td>
-            <td>{{row.uf}}</td>
-            <td>{{row.dataAbertura}}</td>
-            <td>{{row.descSituacaoPedido}}</td>
-            <td>{{row.dataInicio}}</td>
-            <td>{{row.dataFim | campoVazioHifen}}</td>
-          </tr>
-        </ng-template>
-      </p-table>
-    </div>
 
     <div class="col-xs-12 p-0 barra-botoes">
       <button class="btn back-btn" (click)="voltar()" id="btnListarVoltar">

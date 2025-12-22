@@ -380,6 +380,13 @@ const appRoutes: Routes = [
         canActivateChild: [AuthGuard, DadosUsuarioGuard],
         canLoad: [AuthGuard]
     },
+    {   
+        path: 'duvidas/consultar-medicamentos',
+        loadChildren: () => import('../app/funcionalidades/medicamentos/procedimentos-medicamento.module').then(x => x.ProcedimentosMedicamentoModule),
+        canActivate: [AuthGuard, DadosUsuarioGuard],
+        canActivateChild: [AuthGuard, DadosUsuarioGuard],
+        canLoad: [AuthGuard]
+    },
     {path: '', pathMatch: 'full', redirectTo: '/home'},
     {path: '**', component: PaginaNaoEncontradaComponent, canActivate: [AuthGuard]}
 ];

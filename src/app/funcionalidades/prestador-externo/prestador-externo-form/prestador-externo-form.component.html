@@ -75,16 +75,16 @@
         <div id="panelUnidades" class="p-0 col-md-12">
           <div class="row d-flex col-md-10 p-0 coluna-interna">
             <div class="row col-md-6 mb-4">
-              <asc-dropdown label="Empresa" id="empresa" [control]="form.get('empresaPrestadorExterno')" [items]="empresas" placeholder="{{bundle('MHSPH')}}" [required]="true" id="empresaPrestadorExterno" (selected)="setEmpresaValue($event)"></asc-dropdown>
+              <asc-dropdown label="Empresa" id="empresa" [control]="formEmpresaPerfil.get('empresaPrestadorExterno')" [items]="empresas" placeholder="{{bundle('MHSPH')}}" [required]="true" id="empresaPrestadorExterno"></asc-dropdown>
             </div>
             <div class="row col-md-6 mb-4">
-              <asc-dropdown label="Perfil" [control]="form.get('perfilPrestadorExterno')" [items]="perfis" placeholder="{{bundle('MHSPH')}}" [required]="true" id="perfilPrestadorExterno" (selected)="setPerfilValue($event)"></asc-dropdown>
+              <asc-dropdown label="Perfil" [control]="formEmpresaPerfil.get('perfilPrestadorExterno')" [items]="perfis" placeholder="{{bundle('MHSPH')}}" [required]="true" id="perfilPrestadorExterno"></asc-dropdown>
             </div>
           </div>
 
           <div class="row d-flex col-md-10 coluna-interna">
             <div class="col-xs-12 col-sm-6">
-              <asc-dropdown label="Atuação Profissional" [control]="form.get('atuacaoPrestadorExterno')" [items]="tiposAuditores" placeholder="{{bundle('MHSPH')}}" [required]="true" id="atuacaoPrestadorExterno" (selected)="setAtuacaoValue($event)"></asc-dropdown>
+              <asc-dropdown label="Atuação Profissional" [control]="formEmpresaPerfil.get('atuacaoPrestadorExterno')" [items]="tiposAuditores" placeholder="{{bundle('MHSPH')}}" [required]="true" id="atuacaoPrestadorExterno" ></asc-dropdown>
             </div>
             <div class="col-xs-12 col-sm-6">
               <asc-input-date label="Data Limite" [control]="formEmpresaPerfil.controls['dataLimitePrestadorExterno']" [required]="true" title="{{bundle('MH143')}}"></asc-input-date>
@@ -110,9 +110,9 @@
               </thead>
               <tbody *ngFor="let perfilEmpresa of perfisEmpresas; let i = index">
                 <tr *ngIf="perfilEmpresa.perfilPrestadorExterno != null">
-                  <td>{{perfilEmpresa.empresaPrestadorExterno.razaoSocial}}</td>
-                  <td>{{perfilEmpresa.perfilPrestadorExterno?.label }}</td>
-                  <td>{{perfilEmpresa.atuacaoPrestadorExterno?.label }}</td>
+                  <td>{{getEmpresaValue(perfilEmpresa.empresaPrestadorExterno)}}</td>
+                  <td>{{perfilEmpresa.perfilPrestadorExterno }}</td>
+                  <td>{{getAtuacaoValue(perfilEmpresa.atuacaoPrestadorExterno) }}</td>
                   <td>{{perfilEmpresa.dataLimitePrestadorExterno | date:'dd/MM/yyyy'}}</td>
                   <td>
                     <span title="{{bundle('MH165')}}" (click)="removerPerfilEmpresa(i)">
