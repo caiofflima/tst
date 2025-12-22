@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {FinalidadeFormModel} from '../../models/finalidade-form-model';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {TipoBuscaMotivoSolicitacao} from '../../../../models/tipo-busca-motivo-solicitacao';
@@ -33,6 +33,19 @@ export class AscFinalidadeComponent implements OnInit, OnDestroy {
 
     @Input()
     checkRestart: Subject<void>;
+
+    @Input() set dadosIniciais(dados: { finalidade: FinalidadeFormModel, tipoProcessoEntidade: TipoProcesso }) {
+        if (dados && dados.finalidade && dados.finalidade.idTipoProcesso) {
+            this.finalidadeForm.patchValue(dados.finalidade);
+            if (dados.tipoProcessoEntidade) {
+                this.tipoProcessoEntidade = dados.tipoProcessoEntidade;
+                this.isReembolso = isTipoProcessoReembolsoById(dados.tipoProcessoEntidade.idTipoPedido) ||
+                    (dados.tipoProcessoEntidade && dados.tipoProcessoEntidade.idTipoPedido === ID_TIPO_REEMBOLSO);
+            }
+        }
+    }
+
+    constructor(private cdr: ChangeDetectorRef) {}
 
     @Input() set idBeneficiario(idBeneficiario: number) {
         if (this._idBeneficiario !== idBeneficiario) {
@@ -80,7 +93,15 @@ export class AscFinalidadeComponent implements OnInit, OnDestroy {
             this.finalidadeForm.reset();
             this.tipoProcessoEntidade = null;
             this.isReembolso = false;
+            this.cdr.detectChanges();
         });
+
+        // Monitora mudancas no stepper para forcar deteccao de mudancas
+        if (this.stepper) {
+            this.stepper.selectionChange?.subscribe(() => {
+                this.cdr.detectChanges();
+            });
+        }
     }
 
     ngOnDestroy(): void {

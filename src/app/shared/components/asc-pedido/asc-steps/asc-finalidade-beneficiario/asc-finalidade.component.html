@@ -14,7 +14,7 @@
           ></asc-select-tipo-processo>
         </div>
 
-        <div class="custom-form-group-input" *ngIf="finalidadeForm.get('idTipoProcesso').valid" @fadeInOut>
+        <div class="custom-form-group-input" *ngIf="finalidadeForm.get('idTipoProcesso').value">
           <asc-select-finalidade
             selectId="finalidade"
             label="Finalidade" [required]="true"
@@ -26,7 +26,7 @@
         </div>
       </div>
 
-      <div class="custom-right-grid" *ngIf="finalidadeForm.get('idTipoProcesso').valid" @fadeInOut>
+      <div class="custom-right-grid" *ngIf="finalidadeForm.get('idTipoProcesso').value">
         <p class="grid-titulo">{{tipoProcessoEntidade?.nome}}</p>
         <div class="grid-info" [innerHtml]="tipoProcessoEntidade?.descricao | safeHtml"></div>
       </div>

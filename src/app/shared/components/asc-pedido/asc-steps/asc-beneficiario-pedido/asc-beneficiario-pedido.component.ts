@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {MessageService, SessaoService} from "../../../../services/services";
 import {BeneficiarioForm} from "../../models/beneficiario.form";
@@ -31,6 +31,15 @@ export class AscBeneficiarioPedido implements OnInit {
 
     @Input() checkRestart: Subject<void>;
 
+    @Input() set dadosIniciais(dados: { form: BeneficiarioForm, beneficiario: Beneficiario }) {
+        if (dados && dados.form && dados.form.idBeneficiario) {
+            this.formularioSolicitacao.patchValue(dados.form);
+            if (dados.beneficiario) {
+                this.beneficiario = dados.beneficiario;
+            }
+        }
+    }
+
     matricula: string;
 
     private eventsSubscription: Subscription;
@@ -47,7 +56,8 @@ export class AscBeneficiarioPedido implements OnInit {
     showProgress = false;
 
     constructor(
-        private messageService: MessageService
+        private messageService: MessageService,
+        private cdr: ChangeDetectorRef
     ) {
     }
 
@@ -56,7 +66,16 @@ export class AscBeneficiarioPedido implements OnInit {
 
         this.eventsSubscription = this.checkRestart.subscribe(() => {
             this.formularioSolicitacao.reset();
+            this.beneficiario = null;
+            this.cdr.detectChanges();
         });
+
+        // Monitora mudancas no stepper para forcar deteccao de mudancas
+        if (this.stepper) {
+            this.stepper.selectionChange?.subscribe(() => {
+                this.cdr.detectChanges();
+            });
+        }
     }
 
     ngOnDestroy() {

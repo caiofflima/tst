@@ -11,6 +11,7 @@
         [checkRestart]="reiniciarSubject"
         [stepper]="cdkStepper"
         routerLinkToBack="../"
+        [dadosIniciais]="{ form: beneficiarioForm, beneficiario: beneficiarioModel }"
         (beneficiarioModel)="beneficiarioSelecionado($event)"
         (beneficarioForm)="beneficiarioFormSelecionado($event)"
       ></asc-beneficiario-pedido>
@@ -22,6 +23,7 @@
         [idBeneficiario]="beneficiarioForm?.idBeneficiario"
         [consultarTipoProcessoPara]="REEMBOLSO"
         [stepper]="cdkStepper"
+        [dadosIniciais]="{ finalidade: finalidade, tipoProcessoEntidade: tipoProcesso }"
         (beneficiario)="finalidadeSelecionada($event)"
         (tipoProcesso)="tipoProcessoSelecionado($event)"
       ></asc-finalidade-pedido>
