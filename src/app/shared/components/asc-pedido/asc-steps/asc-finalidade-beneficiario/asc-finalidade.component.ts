@@ -64,14 +64,22 @@ export class AscFinalidadeComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         this.finalidadeForm.get('idTipoProcesso').valueChanges.pipe(
             takeUntil(this.unsubscribeSubject)
-        ).subscribe(() => {
-            const idMotivoSolicitacao = this.finalidadeForm.get('idMotivoSolicitacao');
-            idMotivoSolicitacao.setValue(null);
-            idMotivoSolicitacao.markAsUntouched();
+        ).subscribe((value) => {
+            // Só reseta idMotivoSolicitacao se o valor mudou de um valor existente para outro
+            // e não é a emissão inicial do tipoProcessoSelecionado
+            if (!this.tipoProcessoEntidade || this.tipoProcessoEntidade.id !== value) {
+                const idMotivoSolicitacao = this.finalidadeForm.get('idMotivoSolicitacao');
+                if (idMotivoSolicitacao.value !== null) {
+                    idMotivoSolicitacao.setValue(null);
+                    idMotivoSolicitacao.markAsUntouched();
+                }
+            }
         });
 
         this.eventsSubscription = this.checkRestart.subscribe(() => {
             this.finalidadeForm.reset();
+            this.tipoProcessoEntidade = null;
+            this.isReembolso = false;
         });
     }
 

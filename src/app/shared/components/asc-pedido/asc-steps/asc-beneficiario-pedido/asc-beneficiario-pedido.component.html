@@ -15,7 +15,7 @@
     </div>
     <p
       class="titulo"
-      *ngIf="formularioSolicitacao.get('idBeneficiario').dirty"
+      *ngIf="formularioSolicitacao.get('idBeneficiario').valid"
       @fadeInOut
     >
       Você gostaria de informar um contato adicional para recebimento das
@@ -23,7 +23,7 @@
     </p>
     <div
       class="custom-form-group-input"
-      *ngIf="formularioSolicitacao.get('idBeneficiario').dirty"
+      *ngIf="formularioSolicitacao.get('idBeneficiario').valid"
       @fadeInOut
     >
       <label class="control-label">E-mail <small>Opcional</small></label>
@@ -37,7 +37,7 @@
     </div>
     <div
       class="custom-form-group-input"
-      *ngIf="formularioSolicitacao.get('idBeneficiario').dirty"
+      *ngIf="formularioSolicitacao.get('idBeneficiario').valid"
       @fadeInOut
     >
       <label class="control-label">Telefone <small>Opcional</small></label>
