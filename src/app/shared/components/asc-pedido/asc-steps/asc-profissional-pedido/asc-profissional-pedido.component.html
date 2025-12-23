@@ -16,7 +16,7 @@
         </div>
 
         <div class="custom-form-group-input"
-             @fadeInOut *ngIf="form.get('idConselhoProfissional').dirty">
+             *ngIf="form.get('idConselhoProfissional').value">
           <asc-input-text
             [control]="form.get('numeroConselho')"
             label="Número do Conselho"
@@ -29,8 +29,7 @@
         </div>
 
         <div class="custom-form-group-select"
-             @fadeInOut
-             *ngIf="form.get('idConselhoProfissional').dirty && form.get('numeroConselho').dirty">
+             *ngIf="form.get('idConselhoProfissional').value && form.get('numeroConselho').value">
           <asc-select-uf
             label="UF"
             [required]="true"

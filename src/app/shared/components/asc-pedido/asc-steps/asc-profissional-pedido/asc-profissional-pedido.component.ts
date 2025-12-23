@@ -32,6 +32,13 @@ export class AscProfissionalPedidoComponent implements  OnDestroy {
     @Input()
     stepper: CdkStepper;
 
+    @Input() set dadosIniciais(dados: ProfissionalFormModel) {
+        if (dados && (dados.idConselhoProfissional || dados.numeroConselho || dados.idEstadoConselho)) {
+            this.form.patchValue(dados);
+            this.changeDetectorRef.detectChanges();
+        }
+    }
+
     private _pedidoProcedimentoVersao: number;
 
     @Input()

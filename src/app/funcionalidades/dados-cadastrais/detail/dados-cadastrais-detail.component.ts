@@ -477,6 +477,22 @@ possuiArquivoNaListagem(lista: Arquivo[], file: Arquivo): boolean {
   return isDuplicado;
 }
 
+visualizarArquivo(arquivo: any): void {
+  if (arquivo instanceof File) {
+    const url = URL.createObjectURL(arquivo);
+    window.open(url, '_blank');
+  } else if (arquivo.url) {
+    window.open(arquivo.url, '_blank');
+  }
+}
+
+excluirArquivoDocumento(docIndex: number, arqIndex: number): void {
+  if (this.documentosCadastrados[docIndex] && this.documentosCadastrados[docIndex].arquivos) {
+    this.documentosCadastrados[docIndex].arquivos.splice(arqIndex, 1);
+    this.documentoNaoPossuiArquivos = this.verificarFaltaDeDocumentos();
+  }
+}
+
  isCartaoExpirado(dataExpiracaoCartao: Date | any) {
     if(!dataExpiracaoCartao) {
       return false;

@@ -280,11 +280,24 @@
                   </div>
 
                   <div class="arquivos-lista" *ngIf="documentosCadastrados?.length">
-                    <div class="arquivo-item" *ngFor="let doc of documentosCadastrados">
+                    <div class="arquivo-item" *ngFor="let doc of documentosCadastrados; let docIndex = index">
                       <strong>{{ doc?.documento?.nome || doc?.documento?.descricao || ('Documento ' + doc?.idDocumento) }}</strong>
-                      <ul *ngIf="doc?.arquivos?.length; else semArquivos">
-                        <li *ngFor="let arq of doc.arquivos">{{ arq?.name }}</li>
-                      </ul>
+                      <div *ngIf="doc?.arquivos?.length; else semArquivos" class="arquivos-cards">
+                        <div class="arquivo-card" *ngFor="let arq of doc.arquivos; let arqIndex = index">
+                          <div class="arquivo-info">
+                            <p class="arquivo-nome">{{ arq?.name }}</p>
+                            <p class="arquivo-data">{{ arq?.data | date:'dd/MM/yyyy HH:mm' }}</p>
+                          </div>
+                          <div class="arquivo-actions">
+                            <button type="button" class="btn-visualizar" (click)="visualizarArquivo(arq)" title="Visualizar">
+                              <i class="fa fa-eye"></i>
+                            </button>
+                            <button type="button" class="btn-excluir" (click)="excluirArquivoDocumento(docIndex, arqIndex)" title="Excluir">
+                              <i class="fa fa-trash"></i>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
                       <ng-template #semArquivos>
                         <span class="muted">Nenhum arquivo anexado.</span>
                       </ng-template>

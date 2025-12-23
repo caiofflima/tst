@@ -42,6 +42,7 @@
           [idMotivoSolicitacao]="finalidade?.idMotivoSolicitacao"
           [idTipoProcesso]="tipoProcesso?.id"
           [tituloStepProcedimento]="titulo"
+          [pedidoProcedimentosTabela]="pedidoProcedimentos"
           (pedido$)="pedidoCadastrado($event)"
           (pedidoProcedimentos$)="pedidoProcedimentosSelecionados($event)"
           (pedidoProcedimentosChanged)="pedidoProcedimentoChanged()"
@@ -57,6 +58,7 @@
       <asc-profissional-pedido
         [stepper]="cdkStepper"
         [pedidoProcedimentoVersao]="pedidoProcedimentoVersao"
+        [dadosIniciais]="profissional"
         (conselhoProfissionalSelecionado)="
           conselhoProfissionalSelecionado($event)
         "
@@ -89,6 +91,7 @@
         [parametro]="parametroDocumento"
         [pedidoProcedimentoVersao]="pedidoProcedimentoVersao"
         [stepper]="cdkStepper"
+        [dadosIniciais]="documentos"
         (documentosSelecionados)="documentosSelecionados($event)"
       ></asc-documentos-requeridos-pedido>
     </cdk-step>
