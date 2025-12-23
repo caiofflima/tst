@@ -259,9 +259,8 @@
                 <div class="form-group col-md-12 box-form__group" *ngIf="documentosCadastrados?.length">
                   <div class="arquivos-lista">
                     <div class="arquivo-item" *ngFor="let doc of documentosCadastrados; let docIndex = index">
-                      <strong>{{ doc?.documento?.nome || doc?.documento?.descricao || ('Documento ' + doc?.idDocumento) }}</strong>
-
                       <div class="upload-wrapper">
+                        <strong>{{ doc?.documento?.nome || doc?.documento?.descricao || ('Documento ' + doc?.idDocumento) }}</strong>
                         <asc-file-selector
                           [documento]="doc"
                           [extensions]="'.jpg,.png,.gif,.pdf'"

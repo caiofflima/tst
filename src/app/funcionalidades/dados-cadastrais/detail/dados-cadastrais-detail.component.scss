@@ -113,9 +113,18 @@
     border-radius: 4px;
     padding: 8px 12px;
 
+    > .upload-wrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 0;
+
+      strong {
+        margin-bottom: 0;
+      }
+    }
+
     strong {
-      display: block;
-      margin-bottom: 8px;
       font-size: 14px;
       color: #333;
     }
