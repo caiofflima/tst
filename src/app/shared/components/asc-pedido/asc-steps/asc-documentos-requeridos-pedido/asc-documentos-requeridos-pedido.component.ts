@@ -21,13 +21,6 @@ export class AscDocumentosRequeridosPedidoComponent implements OnInit, OnDestroy
     @Input() subtitle = 'Documentos obrigatórios'
     @Input() stepper: CdkStepper;
 
-    @Input() set dadosIniciais(docs: DocumentoTipoProcesso[]) {
-        if (docs && docs.length > 0) {
-            this.documentos = docs;
-            this.documentoNaoPossuiArquivos = this.verificarFaltaDeDocumentos();
-        }
-    }
-
     @Output() documentosSelecionados = new EventEmitter<DocumentoTipoProcesso[]>();
 
     private _pedidoProcedimentoVersao: number;
