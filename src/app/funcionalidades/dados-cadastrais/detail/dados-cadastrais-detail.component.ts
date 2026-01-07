@@ -43,6 +43,7 @@ export class DadosCadastraisDetailComponent implements OnInit {
   anexos: File[] = [];
 
   documentosCadastrados: DocumentoTipoProcesso[] = [];
+  private arquivosOriginaisEndereco: any[] = [];
 
   documentoSelecionadoControl = new FormControl();
   private readonly subjecUnsubscribe = new Subject();
@@ -255,6 +256,13 @@ export class DadosCadastraisDetailComponent implements OnInit {
   public gerenciarEdicaoEndereco(value: boolean) {
     this.isEditarEndereco = value;
 
+    if (value && this.documentosCadastrados) {
+      this.arquivosOriginaisEndereco = this.documentosCadastrados.map(doc => ({
+        id: doc.id,
+        arquivos: doc.arquivos ? [...doc.arquivos] : []
+      }));
+    }
+
     if (this.beneficiario && this.beneficiario.endereco) {
       this.enderecoForm.patchValue({
         cep: this.beneficiario.endereco.cep,
@@ -311,6 +319,18 @@ export class DadosCadastraisDetailComponent implements OnInit {
   cancelarEdicaoEndereco() {
     this.enderecoForm.reset();
     this.isEditarEndereco = false;
+
+    if (this.arquivosOriginaisEndereco && this.arquivosOriginaisEndereco.length) {
+      this.documentosCadastrados.forEach(doc => {
+        const original = this.arquivosOriginaisEndereco.find(o => o.id === doc.id);
+        if (original) {
+          doc.arquivos = original.arquivos ? [...original.arquivos] : [];
+        }
+      });
+      this.documentosCadastrados = [...this.documentosCadastrados];
+      this.documentoNaoPossuiArquivos = this.verificarFaltaDeDocumentos();
+    }
+    this.arquivosOriginaisEndereco = [];
   }
 
   public confirmaRegraInclusao(filtro: FiltroPedidoRegrasInclusao) {
@@ -488,7 +508,10 @@ visualizarArquivo(arquivo: any): void {
 
 excluirArquivoDocumento(docIndex: number, arqIndex: number): void {
   if (this.documentosCadastrados[docIndex] && this.documentosCadastrados[docIndex].arquivos) {
-    this.documentosCadastrados[docIndex].arquivos.splice(arqIndex, 1);
+    const novosArquivos = [...this.documentosCadastrados[docIndex].arquivos];
+    novosArquivos.splice(arqIndex, 1);
+    this.documentosCadastrados[docIndex].arquivos = novosArquivos;
+    this.documentosCadastrados = [...this.documentosCadastrados];
     this.documentoNaoPossuiArquivos = this.verificarFaltaDeDocumentos();
   }
 }
