@@ -272,7 +272,7 @@
                       </div>
 
                       <div *ngIf="doc?.arquivos?.length" class="arquivos-cards">
-                        <div class="arquivo-card" *ngFor="let arq of doc.arquivos; let arqIndex = index">
+                        <div class="arquivo-card" *ngFor="let arq of doc.arquivos; let arqIndex = index; trackBy: trackByArquivo">
                           <div class="arquivo-info">
                             <p class="arquivo-nome">{{ arq?.name }}</p>
                             <p class="arquivo-data">{{ arq?.data | date:'dd/MM/yyyy HH:mm' }}</p>

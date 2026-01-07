@@ -507,13 +507,21 @@ visualizarArquivo(arquivo: any): void {
 }
 
 excluirArquivoDocumento(docIndex: number, arqIndex: number): void {
+  console.log('excluirArquivoDocumento chamado - docIndex:', docIndex, 'arqIndex:', arqIndex);
+  console.log('documentosCadastrados:', this.documentosCadastrados);
   if (this.documentosCadastrados[docIndex] && this.documentosCadastrados[docIndex].arquivos) {
+    console.log('Arquivos antes:', this.documentosCadastrados[docIndex].arquivos);
     const novosArquivos = [...this.documentosCadastrados[docIndex].arquivos];
     novosArquivos.splice(arqIndex, 1);
     this.documentosCadastrados[docIndex].arquivos = novosArquivos;
     this.documentosCadastrados = [...this.documentosCadastrados];
     this.documentoNaoPossuiArquivos = this.verificarFaltaDeDocumentos();
+    console.log('Arquivos depois:', this.documentosCadastrados[docIndex].arquivos);
   }
+}
+
+trackByArquivo(index: number, arq: any): string {
+  return arq?.name + '_' + arq?.size + '_' + index;
 }
 
  isCartaoExpirado(dataExpiracaoCartao: Date | any) {
