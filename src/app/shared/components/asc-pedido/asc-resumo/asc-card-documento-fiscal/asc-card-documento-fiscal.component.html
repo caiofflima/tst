@@ -2,215 +2,226 @@
   <asc-card-title>
     <div class="ui-sm-2 card-flt-mr">
       <button
-        (click)="isToEdit()"
-        *ngIf="
-          (!permissoes || permissoes?.editar) &&
-          verificarEhTitularEPedidoEmAnalise()
+      (click)="isToEdit()"
+      *ngIf="
+      (!permissoes || permissoes?.editar) &&
+      verificarEhTitularEPedidoEmAnalise()
+      "
+      class="btn-editar"
+      [disabled]="isEditing"
+      >
+      <i class="fa fa-pencil" aria-hidden="true"> </i>
+    </button>
+  </div>
+  <div class="titulo-card">Documento Fiscal</div>
+</asc-card-title>
+
+<asc-card-content>
+  <div class="ui-g" *ngIf="isEditing">
+    <!-- Coluna da esquerda -->
+    <div class="ui-g-12 ui-md-6 no-padding">
+      <div class="ui-g-12 ui-md-12 custom-form-grid">
+        <asc-cpf-cnpj
+        [control]="formularioDocumentoFiscal.get('cpfCnpj')"
+        [label]="labelCPF_CNPJ"
+        [somenteCnpj]="isTipoMedicamento"
+        [required]="true"
+        ></asc-cpf-cnpj>
+      </div>
+
+      <div class="ui-g-12 ui-md-12 custom-form-grid margin-16">
+        <asc-input-text
+        [control]="formularioDocumentoFiscal.get('nome')"
+        [maxlength]="200"
+        [label]="
+        isTipoMedicamento ? 'Razão Social' : 'Nome ou Razão Social'
         "
-        class="btn-editar"
-        [disabled]="isEditing"
+        [required]="true"
+        [somenteLetrasMaiusculas]="'true'"
+        ></asc-input-text>
+      </div>
+
+      <div
+      class="ui-g-12 ui-md-4 custom-form-grid margin-16"
+      style="width: 33%"
       >
-        <i class="fa fa-pencil" aria-hidden="true"> </i>
-      </button>
-    </div>
-    <div class="titulo-card">Documento Fiscal</div>
-  </asc-card-title>
-
-  <asc-card-content>
-    <div class="ui-g" *ngIf="isEditing">
-      <!-- Coluna da esquerda -->
-      <div class="ui-g-12 ui-md-6 no-padding">
-        <div class="ui-g-12 ui-md-12 custom-form-grid">
-          <asc-cpf-cnpj
-            [control]="formularioDocumentoFiscal.get('cpfCnpj')"
-            [label]="labelCPF_CNPJ"
-            [somenteCnpj]="isTipoMedicamento"
-            [required]="true"
-          ></asc-cpf-cnpj>
-        </div>
-
-        <div class="ui-g-12 ui-md-12 custom-form-grid margin-16">
-          <asc-input-text
-            [control]="formularioDocumentoFiscal.get('nome')"
-            [maxlength]="200"
-            [label]="
-              isTipoMedicamento ? 'Razão Social' : 'Nome ou Razão Social'
-            "
-            [required]="true"
-            [somenteLetrasMaiusculas]="'true'"
-          ></asc-input-text>
-        </div>
-
-        <div
-          class="ui-g-12 ui-md-4 custom-form-grid margin-16"
-          style="width: 33%"
-        >
-          <asc-select-uf
-            (dadoSelecionado)="ufSelecionado($event)"
-            label="UF"
-            [required]="true"
-            [control]="formularioDocumentoFiscal.get('idEstado')"
-          ></asc-select-uf>
-        </div>
-
-        <div
-          class="ui-g-12 ui-md-8 custom-form-grid margin-16"
-          style="width: 66%"
-        >
-          <asc-select-municipio
-            label="Município"
-            [required]="true"
-            *ngIf="isShowMunicipio"
-            [parametro]="{
-              idMunicipio: formularioDocumentoFiscal.get('idEstado').value
-            }"
-            [control]="formularioDocumentoFiscal.get('idMunicipio')"
-            (dadoSelecionado)="municipioSelecionado($event)"
-          ></asc-select-municipio>
-        </div>
-      </div>
-      <!-- Fim da coluna da esquerda -->
-
-      <!-- Coluna da direita -->
-      <div class="ui-g-12 ui-md-6 no-padding-top" style="padding-right: 0">
-        <div class="ui-g-12 ui-md-12 custom-form-grid" style="padding-right: 0">
-          <label class="label-campo-card">Número do documento</label>
-          <asc-input-text
-            [control]="formularioDocumentoFiscal.get('numeroDoc')"
-            [somenteNumeros]="true"
-            [required]="true"
-            [maxlength]="10"
-          ></asc-input-text>
-        </div>
-        <div
-          class="ui-g-12 ui-md-12 custom-form-grid margin-16"
-          style="padding-right: 0"
-        >
-          <asc-input-date
-            [control]="formularioDocumentoFiscal.get('data')"
-            label="Data de emissão"
-            [required]="true"
-          >
-            <asc-input-error
-              nomeErro="diasDecorridos"
-              [msgErro]="'Documento fiscal emitido há mais de 180 dias.'"
-            ></asc-input-error>
-            <asc-input-error
-              nomeErro="dataAtualMenor"
-              [msgErro]="bundle('MA058')"
-            ></asc-input-error>
-            <asc-input-error
-              nomeErro="dataMenor"
-              [msgErro]="bundle('MA151')"
-            ></asc-input-error>
-          </asc-input-date>
-        </div>
-        <div
-          class="ui-g-12 ui-md-12 custom-form-grid margin-16"
-          style="padding-right: 0"
-        >
-          <asc-input-money-type
-            [control]="formularioDocumentoFiscal.get('valor')"
-            label="Valor total do documento fiscal"
-            [maxlength]="10"
-            [required]="true"
-          >
-            <asc-input-error
-              nomeErro="min"
-              [msgErro]="bundle('MA083')"
-            ></asc-input-error>
-            <asc-input-error
-              nomeErro="max"
-              [msgErro]="bundle('MA083')"
-            ></asc-input-error>
-          </asc-input-money-type>
-        </div>
-      </div>
-      <!-- Fim da coluna da direita -->
+      <asc-select-uf
+      (dadoSelecionado)="ufSelecionado($event)"
+      label="UF"
+      [required]="true"
+      [control]="formularioDocumentoFiscal.get('idEstado')"
+      ></asc-select-uf>
     </div>
 
-    <div class="ui-g" *ngIf="!isEditing">
-      <!-- Coluna da esquerda -->
-      <div class="ui-g-6 no-padding">
-        <div class="ui-g-12 no-padding">
-          <label class="label-campo-card">{{ labelCPF_CNPJ }}</label>
-          <p>{{ documentoFiscal?.cpfCnpj | cpfCnpjMask | campoVazioHifen }}</p>
-        </div>
+    <div
+    class="ui-g-12 ui-md-8 custom-form-grid margin-16"
+    style="width: 66%"
+    >
+    <asc-select-municipio
+    label="Município"
+    [required]="true"
+    *ngIf="isShowMunicipio"
+    [parametro]="{
+      idMunicipio: formularioDocumentoFiscal.get('idEstado').value
+    }"
+    [control]="formularioDocumentoFiscal.get('idMunicipio')"
+    (dadoSelecionado)="municipioSelecionado($event)"
+    ></asc-select-municipio>
+  </div>
+</div>
+<!-- Fim da coluna da esquerda -->
 
-        <div class="ui-g-12 no-padding margin-16">
-          <label class="label-campo-card">Nome ou Razão Social</label>
-          <p>{{ documentoFiscal?.nome | campoVazioHifen }}</p>
-        </div>
+<!-- Coluna da direita -->
+<div class="ui-g-12 ui-md-6 no-padding-top" style="padding-right: 0">
+  <div class="ui-g-12 ui-md-12 custom-form-grid" style="padding-right: 0">
+    <label class="label-campo-card">Número do documento</label>
+    <asc-input-text
+    [control]="formularioDocumentoFiscal.get('numeroDoc')"
+    [somenteNumeros]="true"
+    [required]="true"
+    [maxlength]="10"
+    ></asc-input-text>
+  </div>
+  <div
+  class="ui-g-12 ui-md-12 custom-form-grid margin-16"
+  style="padding-right: 0"
+  >
+  <asc-input-date
+  [control]="formularioDocumentoFiscal.get('data')"
+  label="Data de emissão"
+  [required]="true"
+  >
+  <asc-input-error
+  nomeErro="diasDecorridos"
+  [msgErro]="'Documento fiscal emitido há mais de 180 dias.'"
+  ></asc-input-error>
+  <asc-input-error
+  nomeErro="dataAtualMenor"
+  [msgErro]="bundle('MA058')"
+  ></asc-input-error>
+  <asc-input-error
+  nomeErro="dataMenor"
+  [msgErro]="bundle('MA151')"
+  ></asc-input-error>
+</asc-input-date>
+</div>
+<div
+class="ui-g-12 ui-md-12 custom-form-grid margin-16"
+style="padding-right: 0"
+>
+<asc-input-money-type
+[control]="formularioDocumentoFiscal.get('valor')"
+label="Valor total do documento fiscal"
+[maxlength]="10"
+[required]="true"
+>
+<asc-input-error
+nomeErro="min"
+[msgErro]="bundle('MA083')"
+></asc-input-error>
+<asc-input-error
+nomeErro="max"
+[msgErro]="bundle('MA083')"
+></asc-input-error>
+</asc-input-money-type>
+</div>
+</div>
+<!-- Fim da coluna da direita -->
+</div>
 
-        <div class="ui-g-4 no-padding margin-16" style="width: 33%">
-          <label class="label-campo-card">UF</label>
-          <p>
-            {{
-              documentoFiscal?.municipioAsObject?.estado?.sigla
-                | campoVazioHifen
-            }}
-          </p>
-        </div>
-
-        <div class="ui-g-8 no-padding margin-16" style="width: 66%">
-          <label class="label-campo-card">Município</label>
-          <p>
-            {{ documentoFiscal?.municipioAsObject?.nome | campoVazioHifen }}
-          </p>
-        </div>
-      </div>
-      <!-- Fim da coluna da esquerda -->
-
-      <!-- Coluna da direita -->
-      <div class="ui-g-6 no-padding" style="padding-right: 0">
-        <div class="ui-g-12 no-padding">
-          <label class="label-campo-card">Número do documento</label>
-          <p>{{ documentoFiscal?.numeroDoc | campoVazioHifen }}</p>
-        </div>
-        <div class="ui-g-12 no-padding margin-16">
-          <label class="label-campo-card">Data de emissão</label>
-          <p>
-            {{ documentoFiscal?.data | date : "dd/MM/yyyy" | campoVazioHifen }}
-          </p>
-        </div>
-        <div class="ui-g-12 no-padding margin-16">
-          <label class="label-campo-card"
-            >Valor total do documento fiscal</label
-          >
-          <p *ngIf="documentoFiscal?.valor">
-            {{
-              documentoFiscal?.valor | currency : "BRL" : true | campoVazioHifen
-            }}
-          </p>
-        </div>
-      </div>
-      <!-- Fim da coluna da direita -->
+<div class="ui-g" *ngIf="!isEditing">
+  <!-- Coluna da esquerda -->
+  <div class="ui-g-6 no-padding">
+    <div class="ui-g-12 no-padding">
+      <label class="label-campo-card">{{ labelCPF_CNPJ }}</label>
+      <p>{{ documentoFiscal?.cpfCnpj | cpfCnpjMask | campoVazioHifen }}</p>
     </div>
-  </asc-card-content>
 
-  <asc-card-footer>
-    <div class="to-footer" *ngIf="isEditing">
-      <button class="back-btn" (click)="onCancel()">Cancelar</button>
-      <button
-        class="continue-btn"
-        (click)="onSubmit()"
-        [disabled]="formularioDocumentoFiscal?.invalid || loading"
+    <div class="ui-g-12 no-padding margin-16">
+      <label class="label-campo-card">Nome ou Razão Social</label>
+      <p>{{ documentoFiscal?.nome | campoVazioHifen }}</p>
+    </div>
+
+    <div class="ui-g-4 no-padding margin-16" style="width: 33%">
+      <label class="label-campo-card">UF</label>
+      <p>
+        {{
+          documentoFiscal?.municipioAsObject?.estado?.sigla
+          | campoVazioHifen
+        }}
+      </p>
+    </div>
+
+    <div class="ui-g-8 no-padding margin-16" style="width: 66%">
+      <label class="label-campo-card">Município</label>
+      <p>
+        {{ documentoFiscal?.municipioAsObject?.nome | campoVazioHifen }}
+      </p>
+    </div>
+  </div>
+  <!-- Fim da coluna da esquerda -->
+
+  <!-- Coluna da direita -->
+  <div class="ui-g-6 no-padding" style="padding-right: 0">
+    <div class="ui-g-12 no-padding">
+      <label class="label-campo-card">Número do documento</label>
+      <p>{{ documentoFiscal?.numeroDoc | campoVazioHifen }}</p>
+    </div>
+    <div class="ui-g-12 no-padding margin-16">
+      <label class="label-campo-card">Data de emissão</label>
+      <p>
+        {{ documentoFiscal?.data | date : "dd/MM/yyyy" | campoVazioHifen }}
+      </p>
+    </div>
+    <div class="ui-g-12 no-padding margin-16">
+      <label class="label-campo-card"
+      >Valor total do documento fiscal</label
       >
-        <span *ngIf="loading" style="height: 2em; width: 4em">
-          <dsc-progress-spinner
+      <p *ngIf="documentoFiscal?.valor">
+        {{
+          documentoFiscal?.valor | currency : "BRL" : true | campoVazioHifen
+        }}
+      </p>
+    </div>
+  </div>
+  <!-- Fim da coluna da direita -->
+</div>
+</asc-card-content>
+
+  <asc-card-footer style="width: 100%;">
+    <div class="row">
+
+      <div class="col-md-4" *ngIf="isEditing; else col">
+        <button class="back-btn" (click)="onCancel()">Cancelar</button>
+        <button
+          class="continue-btn"
+          (click)="onSubmit()"
+          [disabled]="formularioDocumentoFiscal?.invalid || loading"
+          >
+          <span *ngIf="loading" style="height: 2em; width: 4em">
+            <dsc-progress-spinner
             [style]="{ width: '25px', height: '25px' }"
             strokeWidth="4"
             fill="#EEEEEE"
             animationDuration=".5s"
-          >
+            >
           </dsc-progress-spinner>
         </span>
         <span *ngIf="!loading">Confirmar</span>
       </button>
     </div>
 
-    <div class="dados-options margin-16" *ngIf="toTop">
-      <button (click)="goToTop()" class="btn-to-top">Retornar ao topo</button>
+    <ng-template #col>
+      <div class="col-md-8"></div>
+    </ng-template>
+
+    <div class="col-md-4 pull-right" *ngIf="toTop">
+
+          <dsc-button (click)="goToTop()" label="Retornar ao topo" variant="secondary-outlined" />
+
     </div>
+
+  </div> <!-- row -->
+
   </asc-card-footer>
 </asc-card-component>

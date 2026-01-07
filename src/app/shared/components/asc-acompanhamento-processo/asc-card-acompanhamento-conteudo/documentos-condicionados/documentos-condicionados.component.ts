@@ -10,7 +10,7 @@ import {catchError} from "rxjs/operators";
 import {MessageService} from "../../../messages/message.service";
 import {of} from "rxjs";
 import {HistoricoProcessoService} from "../../../../services/comum/historico-processo.service";
-import { ProcessoService } from 'app/shared/services/services';
+import { DocumentoService, ProcessoService } from 'app/shared/services/services';
 
 @Component({
   selector: 'asc-documentos-condicionados',
@@ -24,13 +24,21 @@ export class DocumentosCondicionadosComponent extends DocumentoAcompanhamentoCom
 
   constructor(
     private readonly docPedService: DocumentoPedidoService,
-    private readonly processoService: ProcessoService,
     override readonly anexoService: AnexoService,
     override readonly fileUploadService: FileUploadService,
     override readonly messageService: MessageService,
-    override readonly historicoProcessoService: HistoricoProcessoService
+    override readonly historicoProcessoService: HistoricoProcessoService,
+    documentoService: DocumentoService
+
   ) {
     super(anexoService, fileUploadService, messageService, historicoProcessoService, docPedService);
+    documentoService
+      .acionaMudanca$
+      .subscribe({
+        next: () => {
+          this.registrarConsultaDocumentos()
+        }
+      })
   }
 
   consultarDocumento(): (idPedido: number) => any {

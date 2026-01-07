@@ -100,16 +100,37 @@
     </div>
   </div>
   <div class="btn-footer-procedimento">
-    <button
-      class="btn-small btn-card-novo"
-      style="margin-right: 0"
-      *ngIf="permissoes?.analisar && isPermiteAdicionarProcedimento"
-      (click)="exibirFormularioProcedimento($event)">
-      <i class="fa fa-plus" aria-hidden="true"></i>
-      <span>Adicionar procedimento</span>
-    </button>
+
+    <div class="row">
+      <div class="col-md-6"></div>
+      <div class="col-md-6">
+
+        <div class="row">
+
+            <dsc-button
+                  class="col-md-12"
+                  style="margin-bottom: 4px"
+                  *ngIf="permissoes?.analisar && isPermiteAdicionarProcedimento"
+                  (click)="exibirFormularioProcedimento($event)"
+                  @fadeInOut
+                  label="Adicionar procedimento"
+                  variant="secondary"
+                  iconPrefix="add"
+            />
+              <div class="col-md-6" ></div>
+              <dsc-button
+                class="col-md-6"
+                label="Retornar ao topo"
+                variant="secondary-outlined"
+                [disabled]="loading"
+                (click)="goToTop()"
+              />
+          </div>
+
+      </div>
+
+    </div>
+
   </div>
-  <div style="text-align: right">
-    <button [disabled]="loading" (click)="goToTop()" class="btn-to-top">Retornar ao topo</button>
-  </div>
+
 </section>

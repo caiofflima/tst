@@ -11,6 +11,7 @@ import {AscResumoModule} from "../../../shared/components/asc-pedido/asc-resumo/
 import {PlaygroundModule} from "../../../shared/playground/playground.module";
 import {AscDocumentosModule} from "app/shared/components/asc-pedido/asc-documentos/asc-documentos.module";
 import {AscPedidoModule} from "../../../shared/components/asc-pedido/asc-pedido.module";
+import { DscCaixaModule } from 'app/shared/dsc-caixa/dsc-caixa.module';
 
 @NgModule({
     imports: [
@@ -20,7 +21,8 @@ import {AscPedidoModule} from "../../../shared/components/asc-pedido/asc-pedido.
         AscResumoModule,
         PlaygroundModule,
         AscDocumentosModule,
-        AscPedidoModule
+        AscPedidoModule,
+        DscCaixaModule
     ],
     declarations: [AcompanhamentoDependenteComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]

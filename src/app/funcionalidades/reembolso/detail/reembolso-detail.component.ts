@@ -18,6 +18,8 @@ import {
 import {MensagemPedidoService} from "app/shared/services/comum/mensagem-enviada.service";
 import { HandleBeneficiariosDTO } from 'app/shared/models/comum/handle-beneficiarios-dto.model';
 import { Option } from 'sidsc-components/dsc-select';
+import { DscDialogService } from 'sidsc-components/dsc-dialog';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
     selector: 'app-reembolso',
@@ -66,6 +68,7 @@ export class ReembolsoDetailComponent implements OnInit {
     APIindisponivel:boolean = false;
     messageErro = "Ocorreu um erro na comunicação com a API";
     alertErro = "Serviço temporariamente indisponível. Tente mais tarde.";
+    dialogRef1?: MatDialogRef   <any>;
 
     readonly formularioSolicitacao = new FormGroup({
 
@@ -80,8 +83,29 @@ export class ReembolsoDetailComponent implements OnInit {
         private reembolsoAGSService: ReembolsoAGSService,
         private beneficiarioService: BeneficiarioService,
         private readonly sessaoService: SessaoService,
-        private readonly service: MensagemPedidoService) {
+        private readonly service: MensagemPedidoService,
+        private _dialogService: DscDialogService) {
     }
+
+    abrirDialogTextual(): void {
+    this.dialogRef1 = this._dialogService.confirm({
+        data: {
+        title: {
+            text: 'Title',
+            showCloseButton: true
+        },
+        message: 'Exemplo de conteúdo textual.',
+        actionButton: {
+            type: 'button',
+            cancelText: 'Botão',
+            confirmText: 'Botão',
+            confirmFunction: () => console.log('Dialog textual confirmado!')
+        }
+        }
+    });
+
+  console.log('REF 1', this.dialogRef1);
+}
 
     get matricula(): string {
         return SessaoService.getMatriculaFuncional();

@@ -137,9 +137,14 @@ export class ParametrizacaoDocumentosHomeComponent extends BaseComponent impleme
         localStorage.clear();
     }
 
-    tipoSelecionado(tipo: any) {
-        this.documento = tipo.nome;
-        this.idTipoDocumentoSelecionado = tipo.id;
+    tipoSelecionado(tipo: any) { 
+        if(tipo !== null && tipo !== undefined){
+            this.documento = tipo.nome;
+            this.idTipoDocumentoSelecionado = tipo.id;
+        }else{
+            this.documento = "";
+            this.idTipoDocumentoSelecionado = "";
+        }
     }
 
     public voltar(): void {

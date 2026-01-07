@@ -52,6 +52,7 @@ import {ComponentModule} from "../../shared/components/component.module";
 import {ProgressSpinnerModule} from "primeng/progressspinner";
 import { TableModule } from "primeng/table";
 import { DscCaixaModule } from "app/shared/dsc-caixa/dsc-caixa.module";
+import { DscInputComponent } from 'sidsc-components/dsc-input';
 
 @NgModule({
     imports: [
@@ -68,7 +69,8 @@ import { DscCaixaModule } from "app/shared/dsc-caixa/dsc-caixa.module";
         AscMultiSelectModule,
         AscMessageErrorModule,
         PrimeNGModule,
-        TableModule
+        TableModule,
+        DscInputComponent
     ],
     declarations: [
         RelatorioAnaliticoListarComponent
@@ -95,7 +97,8 @@ export class RelatorioAnaliticoModule {
         ComponentModule,
         ProgressSpinnerModule,
         TableModule,
-        DscCaixaModule
+        DscCaixaModule,
+        DscInputComponent
     ],
     declarations: [
         RelatorioControlePrazosProcessosListarComponent,
@@ -122,7 +125,8 @@ export class RelatorioControlePrazosModule {
         PrimeNGModule,
         ComponentModule,
         TableModule,
-        DscCaixaModule
+        DscCaixaModule,
+        DscInputComponent
     ],
     declarations: [
         RelatorioJuntaMedicaOdontologicaListarComponent,
@@ -151,7 +155,8 @@ export class RelatorioJuntaMedicaOdontologicaModule {
         ComponentModule,
         ProgressSpinnerModule,
         TableModule,
-        DscCaixaModule
+        DscCaixaModule,
+        DscInputComponent
     ],
     declarations: [
         RelatorioProcedimentosSolicitadosPorProfissionalListarComponent,
@@ -180,7 +185,8 @@ export class RelatorioProcedimentosSolicitadosPorProfissionalModule {
         ComponentModule,
         ProgressSpinnerModule,
         TableModule,
-        DscCaixaModule
+        DscCaixaModule,
+        DscInputComponent
     ],
     declarations: [
         RelatorioTempoMedioProcessosListarComponent,

@@ -45,7 +45,7 @@ export class AscProcedimentoAutorizacaoPreviaFormComponent extends BaseComponent
     isToShowForm = false;
     grauSelecionadoAsObject: GrauProcedimento;
     procedimentoAsObject: Procedimento;
-    
+
     isEdicao: boolean = false;
     procedimentoEditado: PedidoProcedimento | null = null;
 
@@ -55,8 +55,8 @@ export class AscProcedimentoAutorizacaoPreviaFormComponent extends BaseComponent
         id: [null], // Adicione o campo id (não obrigatório)
         idProcedimento: [null, Validators.required],
         idGrauProcedimento: [null, Validators.required],
-        qtdSolicitada: [null, [Validators.required, Validators.min(1), AscValidators.onlyNumbers]],
-        qtdAutorizada: [null, [AscValidators.onlyNumbers]], // Não obrigatório, mas deve ser um número
+        qtdSolicitada: [null, [Validators.required, Validators.min(1)]],
+        qtdAutorizada: [null], // Não obrigatório, mas deve ser um número
         motivoNegacao: [null], // Será usado apenas para capturar o dado temporariamente
         tsOperacao: [new Date()],
         index: [null],
@@ -82,17 +82,17 @@ export class AscProcedimentoAutorizacaoPreviaFormComponent extends BaseComponent
         this.atualizarGrauProcimentoComBaseNoIdProcedimento();
         this.exibirFormulario();
         this.bloquearBotaoAdicionarProcedimentoQuandoGrauProcedimentoInvalido();
-    
+
         // Regras para habilitar/desabilitar motivoNegacao
         this.configurarHabilitacaoMotivoNegacao();
-    
+
         // Adiciona validação dinâmica para qtdAutorizada
         this.adicionarValidacaoQtdAutorizada();
 
         this.ajustarCampoMotivoNegacao(); // Para adição
 
     }
-    
+
     private configurarHabilitacaoMotivoNegacao(): void {
         // Observa mudanças nos campos qtdAutorizada e qtdSolicitada
         const qtdAutorizadaControl = this.form.get('qtdAutorizada');
@@ -105,7 +105,7 @@ export class AscProcedimentoAutorizacaoPreviaFormComponent extends BaseComponent
                 this.ajustarCampoMotivoNegacao();
             });
         }
-    
+
         if (qtdSolicitadaControl) {
             qtdSolicitadaControl.valueChanges.pipe(
                 takeUntil(this.subjectUnsubscription)
@@ -114,7 +114,7 @@ export class AscProcedimentoAutorizacaoPreviaFormComponent extends BaseComponent
             });
         }
     }
-    
+
     private ajustarCampoMotivoNegacao(): void {
         const qtdAutorizadaControl = this.form.get('qtdAutorizada');
         const qtdSolicitadaControl = this.form.get('qtdSolicitada');
@@ -127,7 +127,9 @@ export class AscProcedimentoAutorizacaoPreviaFormComponent extends BaseComponent
         const qtdAutorizada = qtdAutorizadaControl.value ?? 0;
         const qtdSolicitada = qtdSolicitadaControl.value ?? 0;
 
-        if (qtdAutorizada < qtdSolicitada) {
+        if (qtdSolicitada < qtdAutorizada  ) {
+          console.log('motivoNegacaoControl required');
+
             motivoNegacaoControl.enable();
             motivoNegacaoControl.setValidators([Validators.required]);
         } else {
@@ -214,7 +216,7 @@ export class AscProcedimentoAutorizacaoPreviaFormComponent extends BaseComponent
         } else {
             this.disableButtonAdicionarProcedimento = true;
             idGrauProcedimentoControl.setValidators(Validators.required);
-    
+
             // Reatribui o valor do grau ao campo do formulário, se já existir um selecionado
             const grauSelecionado = this.form.get('idGrauProcedimento').value;
             if (grauSelecionado) {
@@ -243,29 +245,29 @@ export class AscProcedimentoAutorizacaoPreviaFormComponent extends BaseComponent
 
     adicionarProcedimento(formDirective: FormGroupDirective): void {
         aplicarAcaoQuandoFormularioValido(this.form, () => {
-    
+
             // Cria o PedidoProcedimento a partir do formulário
             const pedidoProcedimento = this.form.value as PedidoProcedimento;
             pedidoProcedimento.grauProcedimento = this.grauSelecionadoAsObject;
             pedidoProcedimento.procedimento = this.procedimentoAsObject;
-    
+
             // Coleta os valores de qtdAutorizada e motivoNegacao
             const qtdAutorizada = this.form.get('qtdAutorizada').value;
             const motivoNegacaoId = this.form.get('motivoNegacao').value;
             const motivoNegacao = motivoNegacaoId ? { id: motivoNegacaoId } as MotivoNegacao : null;
-    
+
             // Temporariamente encapsula qtdAutorizada e motivoNegacao dentro do PedidoProcedimento
             (pedidoProcedimento as any).qtdAutorizada = qtdAutorizada;
             (pedidoProcedimento as any).motivoNegacao = motivoNegacao;
-    
+
             // Beneficiário associado ao processo
             const beneficiario = this.processo.beneficiario;
-    
+
             // Validações de idade, sexo e compatibilidade
             this.procedimentoService.consultarProcedimentoPorId(pedidoProcedimento.procedimento.id).subscribe(procedimento => {
                 if (beneficiario !== null && beneficiario !== undefined) {
                     const idade = this.calculaIdade(beneficiario.matricula.dataNascimento);
-    
+
                     if ((beneficiario.matricula.sexo !== procedimento.sexo) && procedimento.sexo !== "A") {
                         this.messageService.addMsgDanger("Procedimento incompatível com o sexo do(a) beneficiário(a).");
                     } else if (idade < procedimento.idadeMinima || idade > procedimento.idadeMaxima) {
@@ -273,7 +275,7 @@ export class AscProcedimentoAutorizacaoPreviaFormComponent extends BaseComponent
                     } else {
                         // Emite o PedidoProcedimento para o pai (com qtdAutorizada e motivoNegacao encapsulados)
                         this.pedidoProcedimentoForm.emit(pedidoProcedimento);
-    
+
                         // Reseta o estado do formulário
                         this.isToShowForm = true;
                         this.isEditing = false;
@@ -315,7 +317,7 @@ export class AscProcedimentoAutorizacaoPreviaFormComponent extends BaseComponent
             } else {
                 motivoNegacaoControl.disable({ emitEvent: false });
             }
-    
+
             // Seta os outros valores
             Object.keys(this.form.controls).forEach(key => {
                 if (pedidoProcedimento.hasOwnProperty(key)) {
@@ -323,12 +325,12 @@ export class AscProcedimentoAutorizacaoPreviaFormComponent extends BaseComponent
                 }
             });
             this.form.updateValueAndValidity();
-    
+
             this.parametrosSelectGrauProcedimento = { idProcedimento: pedidoProcedimento.idProcedimento };
             this.isToShowForm = true;
             this.isEditing = isNotUndefinedOrNull(pedidoProcedimento.index);
             this.isEditingForm.emit(this.isEditing);
-    
+
             // Ajusta lógica de habilitação para casos de alteração pelo usuário
             this.ajustarCampoMotivoNegacao();
         });

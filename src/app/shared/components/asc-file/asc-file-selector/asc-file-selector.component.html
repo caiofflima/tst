@@ -2,34 +2,27 @@
 
 <ng-template #button>
   <div class="custom-card-footer">
-    <label [attr.disabled]="disabled" [class.disabled]="disabled">
-      <span *ngIf="!disabled">
-        <svg class="icon-clip"></svg>
-        <span>Adicionar arquivo</span>
-      </span>
-      <span *ngIf="disabled">
-        <dsc-progress-spinner
+    <dsc-button *ngIf="!disabled" label="Adicionar arquivo" variant="secondary" iconPrefix="attach_file" (click)="onButtonClick(buttonDirectiveRef)" />
+    <dsc-progress-spinner
           [style]="{width: '25px', height: '25px'}"
           animationDuration=".5s"
           fill="#EEEEEE"
           strokeWidth="4">
         </dsc-progress-spinner>
-      </span>
-      <input #buttonDirective type="file"
+
+    <input #buttonDirective type="file"
              [disabled]="disabled"
              [accept]="extensions"
              (change)="onChangeFile(buttonDirective)"
              [id]="inputId"
-             [multiple]="true">
-    </label>
+             [multiple]="true"
+             >
   </div>
 </ng-template>
 
 <ng-template #paperclip>
-  <label [attr.disabled]="disabled" [class.disabled]="disabled" class="file-selector"
-         style="margin-right: 0; cursor: pointer;">
-    <input #paperClipDirective [accept]="extensions" [disabled]="disabled" type="file"
-           (change)="onChangeFile(paperClipDirective)" [multiple]="true">
-    <i class="fa fa-paperclip" aria-hidden="true"></i>
-  </label>
+  <dsc-button [disabled]="disabled" iconButton variant="secondary" icon="attach_file" (click)="onButtonClick(paperClipDirectiveRef)" />
+  <input #paperClipDirective [accept]="extensions" [disabled]="disabled" type="file"
+           (change)="onChangeFile(paperClipDirective)" [multiple]="true" style="display: none;" >
+
 </ng-template>

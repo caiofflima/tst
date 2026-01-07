@@ -82,14 +82,25 @@
         [permissoes]="permissoes"
       ></asc-dados-processo-card>
       <div class="dados-options">
-        <button
-          (click)="cancelarProcesso()"
-          *ngIf="permiteCancelamento()"
-          class="btn-cancel"
-        >
-          Cancelar pedido
-        </button>
-        <button (click)="goToTop()" class="btn-to-top">Retornar ao topo</button>
+        <div class="row">
+          <div class="col-md-4"></div>
+          <div class="col-md-4"></div>
+          <div class="col-md-4">
+            <div class="row">
+
+              <dsc-button
+                class="col-md-12"
+                (click)="cancelarProcesso()"
+                *ngIf="permiteCancelamento()"
+                variant="danger-outlined"
+                label="Cancelar pedido"
+              />
+              <dsc-button class="col-md-12" (click)="goToTop()" label="Retornar ao topo" variant="secondary-outlined" />
+            </div>
+          </div>
+      </div>
+
+
       </div>
     </div>
     <div
@@ -109,7 +120,13 @@
         [permissoes]="permissoes"
       ></asc-dependentes-card>
       <div class="card-footer">
-        <button (click)="goToTop()" class="btn-to-top">Retornar ao topo</button>
+        <div class="row">
+          <div class="col-md-4"></div>
+          <div class="col-md-4"></div>
+          <div class="col-md-4">
+            <dsc-button class="col-md-12" (click)="goToTop()" label="Retornar ao topo" variant="secondary-outlined" />
+          </div>
+        </div>
       </div>
     </div>
 
@@ -126,7 +143,7 @@
         [permissoes]="permissoes"
       ></asc-dados-contato-card>
       <div class="card-footer">
-        <button (click)="goToTop()" class="btn-to-top">Retornar ao topo</button>
+        <ng-container *ngTemplateOutlet="btnVoltar" />
       </div>
     </div>
 
@@ -143,7 +160,7 @@
         [permissoes]="permissoes"
       ></asc-dados-endereco-card>
       <div class="card-footer">
-        <button (click)="goToTop()" class="btn-to-top">Retornar ao topo</button>
+        <ng-container *ngTemplateOutlet="btnVoltar" />
       </div>
     </div>
     <div
@@ -164,28 +181,33 @@
       >
         <!-- atualizarPedido(); -->
       </asc-documentos-obrigatorios-card>
+      <div class="row">
+          <div class="col-md-6"></div>
 
-      <div
-        *ngIf="
-          permissoes?.editar &&
-          permissoes?.tipo === 'analise' &&
-          !apresentarDocumentoComplementar
-        "
-        class="footer-btns-card"
-        style="padding-top: 1em !important"
-      >
-        <button
-          (click)="showDocumentoComplementar(true)"
-          @fadeInOut
-          class="btn-small btn-card-novo"
-        >
-          <span class="fa fa-plus fa-fw"></span
-          ><span> Adicionar documento complementar</span>
-        </button>
-      </div>
-      <div class="card-footer">
-        <button (click)="goToTop()" class="btn-to-top">Retornar ao topo</button>
-      </div>
+          <div class="col-md-6">
+            <div class="row">
+
+              <dsc-button
+                  class="col-md-12"
+                  style="margin-bottom: 4px"
+                  (click)="showDocumentoComplementar(true)"
+                  @fadeInOut
+                  label="Adicionar documento complementar"
+                  variant="secondary"
+                  iconPrefix="add"
+                  *ngIf="
+                    permissoes?.editar &&
+                    permissoes?.tipo === 'analise' &&
+                    !apresentarDocumentoComplementar
+                  "
+                  />
+              <div class="col-md-6"></div>
+              <dsc-button class="col-md-6 " (click)="goToTop()" label="Retornar ao topo" variant="secondary-outlined" />
+            </div>
+          </div>
+        </div>
+
+
     </div>
 
     <div
@@ -206,7 +228,8 @@
         (atualizarProcesso$)="atualizarProcesso()"
       ></asc-documento-complementar-card>
       <div class="card-footer">
-        <button (click)="goToTop()" class="btn-to-top">Retornar ao topo</button>
+        <ng-container *ngTemplateOutlet="btnVoltar" />
+
       </div>
     </div>
 
@@ -224,7 +247,7 @@
         (atualizarPedido$)="atualizarProcesso()"
       ></asc-documentos-condicionados>
       <div class="card-footer">
-        <button (click)="goToTop()" class="btn-to-top">Retornar ao topo</button>
+        <ng-container *ngTemplateOutlet="btnVoltar" />
       </div>
     </div>
 
@@ -240,7 +263,19 @@
         (onSituacoesInvalidas)="onSituacaoInvalida()"
       >
       </asc-mudanca-situacao-card-pl>
-      <button (click)="goToTop()" class="btn-to-top">Retornar ao topo</button>
+
+      <ng-container *ngTemplateOutlet="btnVoltar" />
+
     </div>
   </div>
 </asc-acompanhamento-processo-base>
+
+<ng-template #btnVoltar>
+  <div class="row">
+    <div class="col-md-4"></div>
+      <div class="col-md-4"></div>
+      <div class="col-md-4">
+        <dsc-button class="col-md-6 " (click)="goToTop()" label="Retornar ao topo" variant="secondary-outlined" />
+    </div>
+  </div>
+</ng-template>

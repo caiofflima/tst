@@ -62,3 +62,8 @@ h1 {
   .det-option {
     color:#999999 !important;
   }
+
+  .body-centralizado ::ng-deep tbody td {
+     text-align: center;
+     vertical-align: middle;
+  }

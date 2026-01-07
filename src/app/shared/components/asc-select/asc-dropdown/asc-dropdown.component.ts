@@ -49,6 +49,7 @@ export class AscDropdownComponent implements OnInit, OnDestroy, AfterViewInit {
     @Input() index: number = null;
     @Input() enableBackendFilter: boolean = false;
     @Input() size: 'small' | 'standard' | 'large' = 'large';
+    @Input() showFilter = true
 
     @Output() selected = new EventEmitter();
     @Output() filter = new EventEmitter<string>();
@@ -67,7 +68,7 @@ export class AscDropdownComponent implements OnInit, OnDestroy, AfterViewInit {
 
     @Input()
     set items(items: any[]) {
-        this.options = [{label: this.placeholder || this.bundle('MHSPH'), value: null}];
+        //this.options = [{label: this.placeholder || this.bundle('MHSPH'), value: null}];
 
         if (isNotUndefinedNullOrEmpty(items)) {
             const converted = this.convertItemsToOptions(items);
@@ -193,7 +194,7 @@ export class AscDropdownComponent implements OnInit, OnDestroy, AfterViewInit {
             return valor;
         }
 
-        const option = this.options.find(opt => opt.value === valor);
+        const option = this.options.find(opt => opt.value === valor.value);
         return option ? { label: option.label, value: option.value } : valor;
     }
 

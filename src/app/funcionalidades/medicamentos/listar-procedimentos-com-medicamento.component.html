@@ -9,10 +9,12 @@
 
   <div class="info-pagina" slot="info">
     <p class="info-p">
-      A tabela abaixo contém os medicamentos que são reembolsados pelo Saúde CAIXA e o percentual de reembolso para cada patologia:
+      A tabela abaixo contém os medicamentos que são reembolsados pelo Saúde CAIXA e o percentual de reembolso para cada
+      patologia:
     </p>
     <p class="info-p"><b>&nbsp;&bull; Perc. Reembolso. - Percentual de reembolso </b></p>
-    <p class="info-p"><b>&nbsp;&bull; Comp. Teto - SIM - Medicamentos cujo reembolso sensibiliza o teto anual de R$ 4.800,00 </b></p>
+    <p class="info-p"><b>&nbsp;&bull; Comp. Teto - SIM - Medicamentos cujo reembolso sensibiliza o teto anual de R$
+        4.800,00 </b></p>
     <p class="info-p"><b>&nbsp;&bull; Laborat. - Laboratório</b></p>
     <p class="info-p"><b>&nbsp;&bull; Apresent. - Apresentação</b></p>
 
@@ -23,25 +25,54 @@
     </p>
   </div>
 
-  <div class="row"></div>
+  <div class="clearfix"></div>
+  <div class="row p-0 col-md-9">
+    <h4>Resultado da Consulta</h4>
+  </div>
 
   <div class="row p-0 col-md-12" slot="content">
-    <div class="col-xs-3 search-inp p-0" style="margin: 5px 0 8px; border-bottom: 0 none">
-      <input #gb type="text" class="form-control filtro-caixa" size="50" placeholder="Digite para filtrar resultado">
-      <em class="fas fa-search"></em>
-    </div>
+    <p-table #dt id="caixa-table" [value]="listaMedicamentos" [(selection)]="registrosSelecionados" [paginator]="true"
+      [rows]="10" [totalRecords]="listaMedicamentos?.length" [rowsPerPageOptions]="[5, 10, 20]"
+      [reorderableColumns]="true" [globalFilterFields]="fieldsColumns" [loading]="loading" sortField="id"
+      [sortOrder]="-1" emptyMessage="Nenhum resultado encontrado para os filtros informados." paginatorPosition="top"
+      styleClass="paginator-right" class="table table-striped table-sm table-hover text-center">
 
-    <p-table id="caixa-table" [value]="listaMedicamentos" [(selection)]="registrosSelecionados" [paginator]="true" [rows]="10" [totalRecords]="listaMedicamentos?.length" [rowsPerPageOptions]="[5, 10, 20]" [reorderableColumns]="true" [loading]="loading" sortField="id" [sortOrder]="-1" class="table table-striped table-sm table-hover text-center">
+      <ng-template pTemplate="caption">
+        <div class="campo-pesquisa">
+          <dsc-input size="large" (input)="globalFilter($event, dt)" [placeholder]="'Digite para filtrar o resultado'"
+            [iconSuffix]="'search'" />
+        </div>
+      </ng-template>
+
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="4">{{bundle('MA003')}}</td>
+        </tr>
+      </ng-template>
 
       <ng-template pTemplate="header">
         <tr>
           <th [style]="{'width':'35px'}" selectionMode="multiple" scope="col"></th>
-          <th pSortableColumn="nomePatologia" [style]="{'width':'100px','text-align': 'left'}" scope="col">Patologia <p-sortIcon [field]="'nomePatologia'"></p-sortIcon></th>
-          <th pSortableColumn="reembolso" [style]="{'width':'60px','text-align': 'center'}" scope="col">Perc. Reembolso <p-sortIcon [field]="'reembolso'"></p-sortIcon></th>
-          <th pSortableColumn="compoeTeto" [style]="{'width':'50px','text-align': 'center'}" scope="col">Comp. Teto <p-sortIcon [field]="'compoeTeto'"></p-sortIcon></th>
-          <th pSortableColumn="nomeLaboratorio" [style]="{'width':'80px','text-align': 'left'}" scope="col">Laboratório <p-sortIcon [field]="'nomeLaboratorio'"></p-sortIcon></th>
-          <th pSortableColumn="nomeMedicamento" [style]="{'width':'100px','text-align': 'left'}" scope="col">Medicamento <p-sortIcon [field]="'nomeMedicamento'"></p-sortIcon></th>
-          <th pSortableColumn="nomeApresentacao" [style]="{'width':'100px','text-align': 'left'}" scope="col">Apresentação <p-sortIcon [field]="'nomeApresentacao'"></p-sortIcon></th>
+          <th [pSortableColumn]="'nomePatologia'" [style]="{'width':'100px','text-align': 'left'}" scope="col">Patologia
+            <p-sortIcon [field]="'nomePatologia'"></p-sortIcon>
+          </th>
+          <th [pSortableColumn]="'reembolso'" [style]="{'width':'60px','text-align': 'center'}" scope="col">Perc.
+            Reembolso
+            <p-sortIcon [field]="'reembolso'"></p-sortIcon>
+          </th>
+          <th [pSortableColumn]="'compoeTeto'" [style]="{'width':'50px','text-align': 'center'}" scope="col">Comp. Teto
+            <p-sortIcon [field]="'compoeTeto'"></p-sortIcon>
+          </th>
+          <th [pSortableColumn]="'nomeLaboratorio'" [style]="{'width':'80px','text-align': 'left'}" scope="col">
+            Laboratório
+            <p-sortIcon [field]="'nomeLaboratorio'"></p-sortIcon>
+          </th>
+          <th [pSortableColumn]="'nomeMedicamento'" [style]="{'width':'100px','text-align': 'left'}" scope="col">
+            Medicamento
+            <p-sortIcon [field]="'nomeMedicamento'"></p-sortIcon>
+          </th>
+          <th [pSortableColumn]="'nomeApresentacao'" [style]="{'width':'100px','text-align': 'left'}" scope="col">
+            Apresentação <p-sortIcon [field]="'nomeApresentacao'"></p-sortIcon></th>
         </tr>
       </ng-template>
 

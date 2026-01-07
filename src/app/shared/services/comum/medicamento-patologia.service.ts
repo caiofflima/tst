@@ -30,6 +30,16 @@ export class MedicamentoPatologiaService extends CrudHttpClientService<Medicamen
         return this.http.get<MedicamentoPatologia[]>(this.url, this.options({params}));
     }
 
+    public consultarPorFiltroAtivo(ativo: boolean = false): Observable<MedicamentoPatologia[]> {
+        let params = new HttpParams();
+
+        if (ativo) {
+            params = params.append("ativo", String(ativo));
+        }
+
+        return this.http.get<MedicamentoPatologia[]>(`${this.url + "/ativos"}`, { params: params, ...this.options() });
+    }
+
     public excluir(idMedicamentoPatologia: number): Observable<any> {
         return this.http.delete(`${this.url}/${idMedicamentoPatologia}`, this.options());
     }

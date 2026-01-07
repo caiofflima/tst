@@ -16,7 +16,7 @@
                 font-family: 'Caixa Std Bold' !important;
                 font-size: 16px;
                 font-weight: 700;
-        
+
                 color: #2E484D;
                 &:hover{
                     text-decoration: none !important;
@@ -38,7 +38,7 @@
                     font-family: 'Caixa Std Bold' !important;
                     font-size: 16px;
                     font-weight: 700;
-            
+
                     color: #2E484D;
                     &:hover{
                         text-decoration: none !important;
@@ -52,7 +52,7 @@
 
 
     }
-    
+
 }
 
 .col-right {
@@ -124,7 +124,7 @@
     font-size: 12px;
     background: #008254;
     color: #fff;
-    margin-right: 8px;   
+    margin-right: 8px;
 }
 
 .selectAno {
@@ -139,7 +139,7 @@
     color: #0F92FF;
     font-family: 'Caixa Std Bold', sans-serif;
 }
-    .valor-accordion i {        
+    .valor-accordion i {
         font-size: 19px;
         margin-left: 4px;
         color: #0F92FF;
@@ -218,10 +218,10 @@
     text-align: left;
     color: #3A4859;
 
-    
+
 }
 
-.box-info { 
+.box-info {
     border: 1px solid #B3C7CB;
     background: #EFF5F6;
     padding: 18px 68px;
@@ -266,19 +266,19 @@
 :host ::ng-deep .menuremb > div {
     border: none !important;
     background: transparent !important;
-    padding: 2px 0;    
+    padding: 2px 0;
 }
 
-:host ::ng-deep .menuremb2 > div {   
+:host ::ng-deep .menuremb2 > div {
     background: transparent !important;
     border-bottom: none !important;
-    padding: 2px 0;   
+    padding: 2px 0;
 }
 
 :host::ng-deep .menuremb2 .fa-caret-right {
     left: 23em !important;
   }
-  
+
   :host::ng-deep .menuremb2 .fa-caret-down {
     left: 23em !important;
   }
@@ -286,7 +286,7 @@
   :host::ng-deep .menuremb .fa-caret-right {
     left: 23em !important;
   }
-  
+
   :host::ng-deep .menuremb .fa-caret-down {
     left: 23em !important;
   }
@@ -297,7 +297,7 @@
             p-dialog.wrapper{
                 div.ui-dialog{
                     border: none !important;
-                   
+
                     max-height: 95vh;
                     height: fit-content;
                     /* margin: auto 0px; */
@@ -339,30 +339,29 @@
     display: flex;
     align-items: center;
     gap: 8px;
+    .containericonCLPM-verde, .containericonCLPM{
+
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .containericonCLPM-verde{
+      width: 40px;
+      height: 25px;
+      background: #008254;
+
+    }
     .containericonCLPM{
         width: 24px;
         height: 24px;
-        border-radius: 50%;
         background: #005CA9;
-        padding: 2px 0px 0px 6px;
+    }
 
-        i.lancamento-calendar{
-            font-size: 12px;
-            color: white;
-        }
-        &-verde{
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            background: #008254;
-
-            padding: 2px 0px 0px 6px;
-    
-            i.lancamento-calendar{
-                font-size: 12px;
-                color: white
-            }
-        }
+    i.lancamento-calendar{
+        font-size: 12px;
+        color: white;
     }
     .labelCLPM{
         font-family: 'Caixa Std Bold';
@@ -438,7 +437,7 @@
   }
 
   .selectBeneficiarioLancamentos{
-    
+
   }
 
   .div-message {

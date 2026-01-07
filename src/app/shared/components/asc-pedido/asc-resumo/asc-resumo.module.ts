@@ -17,6 +17,7 @@ import {PipeModule} from "../../../pipes/pipe.module";
 import {AscProcedimentoReembolsoModule} from "../asc-card-procedimento/asc-procedimento-reembolso/asc-procedimento-reembolso.module";
 import {AscCardDocumentoFiscalComponent} from "./asc-card-documento-fiscal/asc-card-documento-fiscal.component";
 import {AscCardModule} from "../../asc-card/asc-card.module";
+import { DscCaixaModule } from 'app/shared/dsc-caixa/dsc-caixa.module';
 
 @NgModule({
   imports: [
@@ -31,7 +32,8 @@ import {AscCardModule} from "../../asc-card/asc-card.module";
     AscProcedimentoReembolsoModule,
     ProgressSpinnerModule,
     ProgressBarModule,
-    AscCardModule
+    AscCardModule,
+    DscCaixaModule
   ],
   declarations: [
     AscCardBeneficiarioComponent,

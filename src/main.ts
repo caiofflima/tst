@@ -17,7 +17,7 @@ HttpClientService.setNomeSistema(NOME_SISTEMA);
 Storage.setNomeSistema(NOME_SISTEMA);
 
 SessaoService.init().then((result: any) => {
-  console.log("🚀 ~ SessaoService.init ~ result:", result)
+  //console.log("🚀 ~ SessaoService.init ~ result:", result)
   if (result && result.code != undefined) {
       switch (result.code) {
           case 0: { // SUCESSO
@@ -25,7 +25,7 @@ SessaoService.init().then((result: any) => {
               break;
           }
           case 1: { // ERRO na chamada de Consulta das Configurações de Segurança no Back-end
-          
+
             alert('[ERRO01] Ocorreu um erro ao invocar o módulo servidor (back-end) do sistema.');
               console.error('Ocorreu algum erro ao Consultar as Configurações de Segurança do back-end.');
               console.error('Em ambiente de desenvolvimento, no browser Chrome, eventualmente é ' +
@@ -35,7 +35,7 @@ SessaoService.init().then((result: any) => {
               break;
           }
           case 2: { // ERRO na chamada de Integração com o AIM Keycloak
-        
+
             alert('[ERRO02] Ocorreu um erro ao invocar o módulo servidor (back-end) do sistema.');
 
               break;

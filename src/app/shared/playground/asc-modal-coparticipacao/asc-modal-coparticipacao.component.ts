@@ -1,17 +1,18 @@
-import {Component, Input, ViewChild} from '@angular/core';
+import {Component, Input, TemplateRef, ViewChild} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {ModalExibicao} from "../../components/asc-modal/modal-exibicao";
 import {Observable} from "rxjs";
 import {of} from "rxjs";
-
 import {InfoExibicao} from "../../components/asc-modal/models/info-exibicao";
 import {MensagemPedidoService} from "../../services/comum/mensagem-enviada.service";
 import {MessageService} from "../../services/services";
 import * as constantes from '../../../../app/shared/constantes';
 import {AscModalNavegacaoComponent} from "../../components/asc-modal/asc-modal-navegacao/asc-modal-navegacao.component";
 import {AscModalComponent} from "../../components/asc-modal/asc-modal/asc-modal.component";
-
 import {MensagemPedidoDTO} from "../../models/dto/mensagem-pedido";
+import { MatDialogRef } from '@angular/material/dialog';
+import { DscDialogService } from 'sidsc-components/dsc-dialog';
+
 @Component({
     selector: 'asc-modal-coparticipacao',
     templateUrl: './asc-modal-coparticipacao.component.html',
@@ -19,11 +20,11 @@ import {MensagemPedidoDTO} from "../../models/dto/mensagem-pedido";
 })
 export class AscModalCoparticipacaoComponent extends ModalExibicao<any> {
 
-    @ViewChild("modalMensagem")
-    modalMensagem: AscModalNavegacaoComponent;
+    @ViewChild('modalCoparticipacao', { static: true }) private modalCoparticipacao!: TemplateRef<any>;
 
     @Input()
     customStyleProperties: any;
+
     mensagem: MensagemPedidoDTO;
     emailEncaminhar: string = '';
 
@@ -33,23 +34,33 @@ export class AscModalCoparticipacaoComponent extends ModalExibicao<any> {
     @Input()
     mostrarBotoes:boolean=true;
 
-    constructor(
-        private readonly service: MensagemPedidoService,
-        protected override readonly messageService: MessageService,
-        private readonly activatedRoute: ActivatedRoute
-    ) {
+    dialogRef?: MatDialogRef<any>;
+
+    constructor( private readonly service: MensagemPedidoService, protected override readonly messageService: MessageService, private readonly activatedRoute: ActivatedRoute, private _dialogService: DscDialogService, ) {
         super(messageService);
+        this.infoExibicao$.subscribe(() => {
+          this.dialogRef = this._dialogService.confirm({
+            data: {
+              title: {
+                text: 'Detalhes',
+                showCloseButton: true,
+                highlightVariant: true
+              },
+              template: this.modalCoparticipacao,
+            }
+          });
+        });
     }
 
     override ngOnInit() {
-        console.log("[INI] AscModalMensagemPedidoComponent ---- ");
+        console.log("[INI] AscModalCoparticipacaoComponent ---- ");
         console.log(this.coparticipacao);
-        console.log("[FIM] AscModalMensagemPedidoComponent ---- ");
+        console.log("[FIM] AscModalCoparticipacaoComponent ---- ");
     }
 
-    protected configurarExibicao(item: MensagemPedidoDTO): void {
+    protected configurarExibicao(item: any): void {
         if (item) {
-            this.mensagem = item;
+            this.coparticipacao = item;
         }
     }
 
@@ -59,8 +70,7 @@ export class AscModalCoparticipacaoComponent extends ModalExibicao<any> {
         }
     }
 
-
-    clickEnviarMensagem(msnRetorno: string, mensagem: MensagemPedidoDTO, modal: AscModalComponent = null): void {
+    clickEnviarMensagem(msnRetorno: string, mensagem: MensagemPedidoDTO, modal: MatDialogRef<any> = null): void {
         let email: string = this.emailEncaminhar.trim();
 
         if (email == '') {
@@ -82,13 +92,13 @@ export class AscModalCoparticipacaoComponent extends ModalExibicao<any> {
         console.log(" ");
     }
 
-    abrirModal(modalMensagem: AscModalNavegacaoComponent, modalEncaminhar: AscModalComponent) {
-        this.emailEncaminhar = '';
-        modalEncaminhar.abrir();
+    closeDialog() {
+        if (this.dialogRef) {
+            this.dialogRef.close();
+        }
     }
 
-    private reenviar(mensagem: MensagemPedidoDTO, msnRetorno: string, emailDestinatario?: string, modal: AscModalComponent = null) {
-
+    private reenviar(mensagem: MensagemPedidoDTO, msnRetorno: string, emailDestinatario?: string, modal: MatDialogRef<any> = null) {
         if (emailDestinatario) {
             mensagem.emailDistintoReenvio = emailDestinatario;
         }
@@ -96,11 +106,9 @@ export class AscModalCoparticipacaoComponent extends ModalExibicao<any> {
         this.service.reenviarMensagemPedido(mensagem).subscribe(
             () => {
                 this.messageService.addConfirmOk(msnRetorno);
-                this.modalMensagem.fecharModal();
                 if (modal) {
-                    modal.fechar();
+                    modal.close();
                 }
-
             },
             error => {
                 this.messageService.showDangerMsg(error)

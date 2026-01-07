@@ -1,17 +1,20 @@
 <section>
   <div class="title-card">Mudança de situação</div>
-  <div class="ui-g">
-    <div class="ui-g-12 no-padding">
-      <p class="label-card"></p>
+  <div class="row">
+
+
       <asc-dropdown
         label="Situação"
         [required]="true"
         [disabled]="loading"
         [items]="itensSituacoesProcesso"
         [control]="fcSituacaoProcesso"
-        class="form-control2"
+        class="col-md-12"
       ></asc-dropdown>
-    </div>
+
+
+  </div>
+
 
     <div *ngIf="(isProcessoReembolso || isProcessoAutorizacao) && isExibeCampoAutorizacaoOuReembolso" class="col-md-12 mb-15 no-padding-left">
       <asc-input-text
@@ -30,47 +33,50 @@
 
     </div>
 
-    <div class="ui-g-6 ui-md-6 ui-sm-6 no-padding margin-16 modificate-custom-grid">
-      <div class="container-group-label-select">
-        <asc-dropdown
-          label="Motivo de negação"
-          [required]="true"
-          [items]="itensMotivoNegacao"
-          [disabled]="ePositivo || loading"
-          [required]="!(ePositivo || loading)"
-          [control]="fcMotivoNegacao"
-          class="form-control2"
-        ></asc-dropdown>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="row">
+
+          <div class="col-md-12" style="margin-left: -12px">
+
+              <asc-dropdown
+                label="Motivo de negação"
+                [required]="true"
+                [items]="itensMotivoNegacao"
+                [disabled]="ePositivo || loading"
+                [required]="!(ePositivo || loading)"
+                [control]="fcMotivoNegacao"
+                class=""
+              ></asc-dropdown>
+
+          </div>
+
+
+          <asc-file-selector
+            class=""
+            *ngIf="!loading"
+            [extensions]="'.jpg,.png,.gif,.pdf'"
+            [limitLengthFile]="4096000"
+            (arquivos)="arquivos($event)">
+          </asc-file-selector>
+        </div>
+
       </div>
 
-      <asc-file-selector
-        *ngIf="!loading"
-        [extensions]="'.jpg,.png,.gif,.pdf'"
-        [limitLengthFile]="4096000"
-        (arquivos)="arquivos($event)">
-      </asc-file-selector>
-    </div>
+      <div class="col-md-6 ">
+        <div class="input-content ">
+          <dsc-textarea
+            [label]="dadosSituacao?.requerJustificativa === 'SIM' ? 'Justificativa' : 'Histórico'"
+            [formControl]="fcHistoricoSituacao"
+            [formFieldHint]="''"
+            />
 
-    <div class="ui-g-6 ui-md-6 ui-sm-6 no-padding margin-16">
-
-      <label
-        for="historicoSituacao" class="label-card no-padding"
-        [class.obrigatorio]="dadosSituacao?.requerJustificativa === 'SIM'">
-        {{dadosSituacao?.requerJustificativa === 'SIM' ? 'Justificativa' : 'Histórico'}}
-      </label>
-
-      <div class="ht-txt-area">
-        <textarea
-          id="historicoSituacao"
-          [required]="dadosSituacao?.requerJustificativa === 'SIM'"
-          [disabled]="loading"
-          class="form-control"
-          [formControl]="fcHistoricoSituacao"
-          [maxlength]="4000">
-        </textarea>
+        </div>
       </div>
+
     </div>
-  </div>
+
+
 
   <div *ngFor="let file of fileUpload; let i = index" @fadeInOut>
     <div class="arquivo-card">
@@ -97,7 +103,7 @@
     </div>
   </div>
 
-  <div class="footer-btns-card" style="padding-top: 1em !important;">
+  <div class="" style="padding-top: 1em !important;">
     <div class="row">
         <dsc-button
           class="col-md-3"

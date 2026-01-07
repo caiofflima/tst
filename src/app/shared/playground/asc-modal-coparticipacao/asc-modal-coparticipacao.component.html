@@ -1,58 +1,41 @@
-<asc-modal-navegacao
-  #modalMensagem
-  class="mdl-custom-coparticipacao"
-  [height]="'auto'"
-  tituloModal="Detalhes"
-  [modoRotacao]="false"
-  [infoExibicao]="infoExibicao"
-  (infoExibicaoAtual$)="exibirItemAtual($event)"
-  (onFechar$)="fechar()"
-  [closeBottomLeft]="customStyleProperties?.closeBottomLeft">
-
-  <asc-viewport class="mdl-view-custom">
+<ng-template #modalCoparticipacao let-form>
+  <div>
     <div class="containerHeader">
-      <div class="nome-prestador">{{coparticipacao?.nomePrestador | uppercase}}</div>
-      <div class="coparticipacao">
-        <div class="valueCP">
-          {{coparticipacao?.totalCoparticipacao | currency:'BRL': true}}
-        </div>
-
-        <div class="labelCP">Coparticipação Total</div>
-    
+      <div class="titulo-com-barra">
+        <div class="nome-prestador">{{coparticipacao?.nomePrestador | uppercase}}</div>
       </div>
-
+      <div class="coparticipacao">
+        <div class="valueCP">{{coparticipacao?.totalCoparticipacao | currency:'BRL': true}}</div>
+        <div class="labelCP">Coparticipação Total</div>
+      </div>
     </div>
     <div *ngIf="coparticipacao">
       <div> 
-        <hr class="my-16" >
-        <div  class="my-16 eventosLancados">
+        <hr class="my-16">
+        <div class="my-16 eventosLancados">
           <div class="containerIcon">
-            <i class="fa fa-list fa-lg "></i>
+            <i class="fa fa-list fa-lg"></i>
           </div>
-          <div class="labelEL">EVENTOS LANÇADOS</div>
-
+          <div class="labelEL">
+            EVENTOS LANÇADOS
+          </div>
         </div>
-        <hr class="my-16" >
+        <hr class="my-16">
       </div>
-      <div  class="scrollable-div scroll-container">
+      <div class="scrollable-div scroll-container">
         <div class="info-financDate">{{coparticipacao?.dataAtendimento | date: 'dd MMM yyyy'}}</div>
         <div id="loopingEventos" *ngFor="let evento of coparticipacao?.eventosDtos">
           <div class="titleLoopingEventos d-flex w-100 justify-content-space-between">
-            <div class="nome-prestador">{{evento?.descricaoEvento}}
-            </div>
+            <div class="nome-prestador">{{evento?.descricaoEvento}}</div>
             <p class="float-right">{{evento?.valorCoparticipacao | currency:'BRL': true}}</p>
           </div>
-          
           <div class="subTitleLoopingEventos d-flex w-100 justify-content-space-between">
-            <div class="info-financ" >Recebido pelo prestador 
-            </div>         
+            <div class="info-financ">Recebido pelo prestador</div>
             <p class="float-right">{{evento?.valor | currency:'BRL': true}}</p>
-
           </div>
           <hr style="margin:0px 0px 8px 0px">
         </div>
       </div>
     </div>
-  </asc-viewport>
-
-</asc-modal-navegacao>
+  </div>
+</ng-template>

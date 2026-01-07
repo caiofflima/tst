@@ -32,6 +32,8 @@ import { ReembolsoDetailComponent } from "./detail/reembolso-detail.component";
 import { ReembolsoRoutingModule } from "./reembolso.routing.module";
 import {AscModalModule} from "../../shared/components/asc-modal/asc-modal.module";
 import { DscCaixaModule } from 'app/shared/dsc-caixa/dsc-caixa.module';
+import { MatIconModule } from '@angular/material/icon';
+
 
 @NgModule({
     imports: [
@@ -65,7 +67,8 @@ import { DscCaixaModule } from 'app/shared/dsc-caixa/dsc-caixa.module';
         AscButtonsModule,
         AccordionModule,
         AscModalModule,
-        DscCaixaModule
+        DscCaixaModule,
+        MatIconModule
     ],
     declarations: [
         ReembolsoDetailComponent

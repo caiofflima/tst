@@ -57,28 +57,48 @@
   ></asc-procedimento-form>
 
   <div class="card-footer">
-    <div
-      *ngIf="
-        enableAllAction &&
-        isNotReembolsoConsulta &&
-        (!permissoes || permissoes?.analisar) &&
-        showBotaoAddProcedimento
-      "
-      class="margin-16"
-    >
-      <button
-        (click)="abrirFormulario()"
-        *ngIf="!isEditing"
-        [disabled]="enableFormProcedimento || isEditing || isDisabled"
-        class="btn-small btn-card-novo"
-      >
-        <i aria-hidden="true" class="fa fa-plus"></i>
-        <span>{{ labelBotaoPedido }}</span>
-      </button>
-    </div>
+    <div class="row">
+      <div class="col-md-6"></div>
+      <div class="col-md-6">
 
-    <div class="dados-options margin-16" *ngIf="toTop">
-      <button (click)="goToTop()" class="btn-to-top">Retornar ao topo</button>
-    </div>
+        <div class="row">
+          <div class="col-md-12" style="margin-bottom: 4px">
+            <div *ngIf="
+                      enableAllAction &&
+                      isNotReembolsoConsulta &&
+                      (!permissoes || permissoes?.analisar) &&
+                      showBotaoAddProcedimento
+                    ">
+
+              <dsc-button
+                   *ngIf="!isEditing"
+
+                    style="margin-bottom: 4px"
+                    [disabled]="enableFormProcedimento || isEditing || isDisabled"
+                    (click)="abrirFormulario()"
+                    @fadeInOut
+                    [label]="labelBotaoPedido"
+                    variant="secondary"
+                    iconPrefix="add"
+              />
+            </div>
+          </div>
+
+              <div class="col-md-6" ></div>
+              <dsc-button
+                class="col-md-6"
+                label="Retornar ao topo"
+                variant="secondary-outlined"
+                [disabled]="loading"
+                (click)="goToTop()"
+              />
+          </div>
+
+      </div>
+
+    </div> <!-- fim da row -->
+
+
+
   </div>
 </div>

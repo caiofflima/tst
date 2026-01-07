@@ -7,6 +7,7 @@ import { Procedimento } from 'app/shared/models/entidades';
 import { MessageService } from 'app/shared/services/services';
 import { MedicamentoPatologiaService } from 'app/shared/services/comum/medicamento-patologia.service';
 import { MedicamentoPatologia } from 'app/shared/models/comum/medicamento-patologia';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'asc-listar-procedimentos-com-medicamento',
@@ -23,14 +24,15 @@ export class ListarProcedimentosComMedicamentoComponent implements OnInit {
   rowCounter: number = 10;
   tituloPagina = 'Tabela de Reembolso de Medicamentos do Saúde Caixa';
   registrosSelecionados: any[] = [];
-  
+  fieldsColumns = ['nomePatologia', 'reembolso', 'compoeTeto', 'nomeLaboratorio', 'nomeMedicamento', 'nomeApresentacao'];
+
   constructor(
     private readonly medicamentoPatologiaService: MedicamentoPatologiaService,
     private readonly location: Location,
-    private messageService: MessageService,
-    public duvidasService: DuvidasService,
-    private titleService: Title
-  ) { 
+    private readonly messageService: MessageService,
+    public readonly duvidasService: DuvidasService,
+    private readonly titleService: Title
+  ) {
 
   }
 
@@ -40,16 +42,26 @@ export class ListarProcedimentosComMedicamentoComponent implements OnInit {
     this.titleService.setTitle(title)
   }
 
+  globalFilter(event: Event, dt: any): void {
+    const input = event.target as HTMLInputElement;
+    const value = input.value;
+    dt.filterGlobal(value, 'contains');
+  }
+
   carregarMedicamentos() {
     this.loading = true;
-    this.medicamentoPatologiaService.consultarPorFiltro(null, null, true)
-    .subscribe((medicamentoPatologias : MedicamentoPatologia[]) => {
-    this.listaMedicamentos = medicamentoPatologias
-    this.loading = false;
-    }, error => {
-      this.loading = false;
-      this.messageService.addMsgDanger(error.message);
-    }) 
+    this.medicamentoPatologiaService.consultarPorFiltroAtivo(true).pipe(
+      take(1)
+    ).subscribe({
+      next: (medicamentoPatologias : MedicamentoPatologia[]) => {
+        this.listaMedicamentos = medicamentoPatologias;
+        this.loading = false;
+      },
+      error: (erro) => {
+        this.loading = false;
+        this.messageService.addMsgDanger(erro.message);
+      }
+    });
   }
 
   voltar(): void {
@@ -58,15 +70,12 @@ export class ListarProcedimentosComMedicamentoComponent implements OnInit {
 
   public exportarExcel(){
     const columnNames =  ['Patalogia', 'Perc. Reemb.', 'Comp. Teto', 'Laborat', 'Medicamento', 'Apresent.'];
-    const ordemColumnNames = ['nomePatologia', 'reembolso', 'compoeTeto', 'nomeLaboratorio', 'nomeMedicamento', 'nomeApresentacao'];
-
-    this.exportToCSV(this.listaMedicamentos, "MedicamentosReembolso", columnNames, ordemColumnNames);
-
+    this.exportToCSV(this.listaMedicamentos, "MedicamentosReembolso", columnNames, this.fieldsColumns);
   }
 
   exportToCSV(data: any[], fileName: string, columnNames: string[], ordemColumnNames: string[]){
 
-    const formatData = data.map(dt => ({...dt, 
+    const formatData = data.map(dt => ({...dt,
         nomePatologia: dt.nomePatologia,
         reembolso: this.getPercentual(dt.reembolso),
         compoeTeto: this.getSimNao(dt.compoeTeto),
@@ -105,7 +114,10 @@ export class ListarProcedimentosComMedicamentoComponent implements OnInit {
   }
 
   getPercentual(value: number): string {
-    return value === null ? '' : value + '%';
+    if (value === null) {
+        return '';
+    }
+    return value === 100 ? '100%' : (value * 100) + '%';
   }
 
 }

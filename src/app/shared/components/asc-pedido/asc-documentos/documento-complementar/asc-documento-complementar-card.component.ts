@@ -105,17 +105,19 @@ export class DocumentoComplementarCardComponent extends AscComponenteAutorizadoM
 
             this.documentoPedidoService.incluirDocumentoAdicional(idPedido, idDocumento).pipe(
                 take<DocumentoPedido>(1)
-            ).subscribe(() => {
+            ).subscribe({
+              next: () =>{
                 this.messageService.showSuccessMsg('MA00I');
                 this.hasDocumentos.next(true);
                 this.atualizarProcesso$.next();
+                this.documentoService.acionarMudancaFn()
                 this.limpaCampos();
                 this.loading = false;
-            }, error => {
+            }, error: error => {
                 this.messageService.showDangerMsg(error.error);
                 this.loading = false;
                 return of({});
-            });
+            }});
         } else {
             this.messageService.showDangerMsg('Favor informar o documento complementar!');
         }
@@ -134,7 +136,7 @@ export class DocumentoComplementarCardComponent extends AscComponenteAutorizadoM
                         label: nome,
                         value: d.id,
                         descricao: d.descricao,
-                        filter: nome + " tipo "+ `${d.id}` 
+                        filter: nome + " tipo "+ `${d.id}`
                     });
                 }
             }, error => this.messageService.showDangerMsg(error.error));

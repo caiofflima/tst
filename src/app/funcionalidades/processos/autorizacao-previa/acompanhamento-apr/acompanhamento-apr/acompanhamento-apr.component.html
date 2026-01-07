@@ -80,14 +80,19 @@
         [permissoes]="permissoes"
       ></asc-dados-processo-card>
       <div class="dados-options">
-        <button
-          (click)="cancelarProcesso()"
-          *ngIf="permiteCancelamento()"
-          class="btn-cancel"
-        >
-          Cancelar pedido
-        </button>
-        <button (click)="goToTop()" class="btn-to-top">Retornar ao topo</button>
+        <div class="row">
+          <div class="col-md-6"></div>
+          <div class="col-md-6">
+            <div class="row">
+              <div class="col-md-6">
+                <dsc-button  variant="secondary" *ngIf="permiteCancelamento()" label="Cancelar pedido"  (click)="cancelarProcesso()" />
+              </div>
+              <dsc-button class="col-md-6 pull-right" variant="secondary-outlined"  label="Retornar ao topo" (click)="goToTop()" />
+            </div>
+          </div>
+
+        </div>
+
       </div>
     </div>
 
@@ -137,15 +142,27 @@
         style="padding-top: 1em !important"
         @fadeInOut
       >
-        <button
-          (click)="showDocumentoComplementar(true)"
-          class="btn-small btn-card-novo"
-        >
-          <span class="fa fa-plus fa-fw"></span
-          ><span> Adicionar documento complementar</span>
-        </button>
+      <div class="row">
+        <div class="col-md-6"></div>
+        <div class="col-md-6">
+          <div class="row">
+
+            <dsc-button
+                class="col-md-12"
+                style="margin-bottom: 4px"
+                (click)="showDocumentoComplementar(true)"
+                @fadeInOut
+                label="Adicionar documento complementar"
+                variant="secondary"
+                iconPrefix="add"
+                />
+              <div class="col-md-6" ></div>
+              <dsc-button  size="small" class="col-md-6 pull-right" label="Retornar ao topo" (click)="goToTop()"  variant="secondary-outlined" />
+          </div>
+        </div>
       </div>
-      <button (click)="goToTop()" class="btn-to-top">Retornar ao topo</button>
+
+      </div>
     </div>
 
     <div
@@ -182,8 +199,14 @@
         (hasDocumentos)="hasDocumentos($event)"
         (atualizarPedido$)="atualizarProcesso()"
       ></asc-documentos-condicionados>
-      <div class="dados-options">
-        <button (click)="goToTop()" class="btn-to-top">Retornar ao topo</button>
+      <div class="dados-options" style="margin-top:4px">
+        <div class="row">
+          <div class="col-md-6"></div>
+          <div class="col-md-6">
+            <dsc-button class="pull-right" variant="secondary-outlined"  label="Retornar ao topo" (click)="goToTop()" />
+          </div>
+        </div>
+
       </div>
     </div>
 
@@ -198,7 +221,15 @@
         [permissoes]="permissoes"
         [processo]="processo"
       ></asc-mudanca-situacao-card-pl>
-      <button (click)="goToTop()" class="btn-to-top">Retornar ao topo</button>
+      <div class="row">
+          <div class="col-md-6"></div>
+          <div class="col-md-6">
+            <div class="col-md-6"></div>
+            <dsc-button class="col-md-6 pull-right" variant="secondary-outlined"  label="Retornar ao topo" (click)="goToTop()" />
+
+          </div>
+
+        </div>
     </div>
   </div>
 </asc-acompanhamento-processo-base>

@@ -170,7 +170,7 @@ export class MessageService {
    * @param args os argumentos de formação da mensagem.
    */
   public addMsgDanger(msg: string | string[], args?: any): void {
-    console.log('antes chamada addmsgapplication', msg, MessageItem.ALERT_TYPE_DANGER, args)
+    //console.log('antes chamada addmsgapplication', msg, MessageItem.ALERT_TYPE_DANGER, args)
     this.addMsgApplication(msg, MessageItem.ALERT_TYPE_DANGER, args);
   }
 

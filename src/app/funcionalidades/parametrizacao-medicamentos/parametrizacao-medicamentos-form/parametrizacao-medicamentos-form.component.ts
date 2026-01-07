@@ -216,10 +216,6 @@ export class ParametrizacaoMedicamentosFormComponent extends BaseComponent {
         }
     }
 
-    voltar(): void {
-        this.location.back();
-    }
-
     onPercentChange(){ 
         if(this.formulario.get('percentualAliquota').value){
             //console.log("this.percentualAliquota.value = "+this.formulario.get('percentualAliquota').value);
@@ -229,4 +225,19 @@ export class ParametrizacaoMedicamentosFormComponent extends BaseComponent {
         }
 
 	}
+
+    isSalvar():boolean{
+
+        if( this.idLaboratorio.value  && this.coMedicamento.value && this.nome.value 
+            && this.codigoApresentacao.value  && this.descricaoApresentacao.value 
+            && this.valor.value && this.qtdFracionado.value && this.percentualAliquota.value
+            && this.numeroTiss.value ){
+            return true;
+        }
+        return false;
+    }
+    
+    voltar(): void {
+        this.location.back();
+    }
 }

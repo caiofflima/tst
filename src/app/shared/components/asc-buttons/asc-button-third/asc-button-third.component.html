@@ -1,12 +1,13 @@
 <dsc-button
   [disabled]="disabled || showProgress"
   (click)="clickButton($event)"
+  [label]="title"
+  *ngIf="!showProgress; else progress"
+  [size]="size"
 >
-  <span *ngIf="showProgress">
-    <dsc-progress-spinner></dsc-progress-spinner>
-  </span>
-  <span *ngIf="!showProgress">
-    {{title}}
-  </span>
 </dsc-button>
+
+<ng-template #progress>
+  <dsc-progress-spinner></dsc-progress-spinner>
+</ng-template>
 

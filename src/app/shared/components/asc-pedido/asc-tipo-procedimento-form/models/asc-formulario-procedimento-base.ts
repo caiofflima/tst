@@ -30,7 +30,7 @@ import {AutorizacaoPreviaService, MessageService, ProcedimentoPedidoService, Sit
 import {ProcedimentoService} from "app/shared/services/comum/procedimento.service";
 import { HttpUtil } from 'app/shared/util/http-util';
 import { SelectItem } from 'primeng/api';
-	
+
 const RESTRINGE = 'R';
 
 @Directive()
@@ -117,12 +117,12 @@ export abstract class AscFormularioProcedimentoBase implements OnInit, OnDestroy
     }
 
     private reloadAutorizacaoPreviaConfig(change : any){
-        if(this.getForm() && this.getForm().contains('idAutorizacaoPrevia') 
+        if(this.getForm() && this.getForm().contains('idAutorizacaoPrevia')
             && change.previousValue != change.currentValue){
             this.preResetIdAutorizacaoPreviaControl();
             if(this.deveBloquearAutorizacaoPrevia()){
                 this._tornarAutorizacaoPreviaObrigatoria();
-                this.registrarValidacaoFormulario();  
+                this.registrarValidacaoFormulario();
             }
             this.posResetIdAutorizacaoPreviaControl();
         }
@@ -137,11 +137,11 @@ export abstract class AscFormularioProcedimentoBase implements OnInit, OnDestroy
 
     @Input()
     set pedidoProcedimento(pedidoProcedimento: PedidoProcedimentoFormModel) {
-       
+
         if(pedidoProcedimento && pedidoProcedimento.id) {
             this.id = pedidoProcedimento.id
         }
-        
+
         if (pedidoProcedimento) {
             this.isEditing = pedidoProcedimento.index !== null && pedidoProcedimento.index !== undefined;
             this.atualizarFormulario(pedidoProcedimento);
@@ -213,7 +213,7 @@ export abstract class AscFormularioProcedimentoBase implements OnInit, OnDestroy
 
         const resultado = this.carregarAutorizacoesComDataAtentimentoValida();
         this.handleResultadoDiferenteDeNull(resultado)
-  
+
         if(formDirective.value.idProcedimento !== undefined && formDirective.value.idProcedimento !== null){
             this.handleFormPossuiIdProcedimento(formDirective,event)
         }else{
@@ -233,19 +233,19 @@ export abstract class AscFormularioProcedimentoBase implements OnInit, OnDestroy
                     return;
                 }
             }
-    
+
             let procedimentoAsForm = this.construirFormulario();
 
-            console.log('Adicionar procedimento');
-            console.log(procedimentoAsForm);
+            // console.log('Adicionar procedimento');
+            // console.log(procedimentoAsForm);
 
             if (procedimentoAsForm.valorUnitarioPago) {
                 procedimentoAsForm.valorUnitarioPago = NumberUtil.convertStringToNumber(procedimentoAsForm.valorUnitarioPago);
             }
-    
+
             this.loading = true;
             this.adicionar$.emit({...procedimentoAsForm, idTipoProcesso: this.idTipoProcesso});
-    
+
             if (this.limparForm) {
                 this.resetAllForm(formDirective, event);
                 this.loading = false;
@@ -258,7 +258,7 @@ export abstract class AscFormularioProcedimentoBase implements OnInit, OnDestroy
     handleFormPossuiIdProcedimento(formDirective:any,event:any){
         this.procedimentoService.consultarProcedimentoPorId(formDirective.value.idProcedimento).subscribe(procedimento => {
 
-            if(this.beneficiario == null || this.beneficiario == undefined) 
+            if(this.beneficiario == null || this.beneficiario == undefined)
             return
 
                 const idade = this.calculaIdade(this.beneficiario.matricula.dataNascimento);
@@ -270,11 +270,11 @@ export abstract class AscFormularioProcedimentoBase implements OnInit, OnDestroy
                     this.handleInclusaoProcedimento(formDirective,event)
 
                 }
-          
+
 
         }, error => {
             this.messageService.addMsgDanger(error.message);
-        }) 
+        })
 
     }
 
@@ -309,7 +309,7 @@ export abstract class AscFormularioProcedimentoBase implements OnInit, OnDestroy
         this.escolherCampoAutorizacaoPrevia = 0
         const idAutorizacaoPrevia = this.idAutorizacaoPreviaControl;
         console.log('autorizacoesPreviasSelecionados',idAutorizacaoPrevia);
-        
+
         const qtdQuantidadeControl = this.getForm().get('qtdSolicitada');
         if (qtdQuantidadeControl && isUndefinedNullOrEmpty(pedidos)) {
             qtdQuantidadeControl.setValidators([
@@ -338,7 +338,7 @@ export abstract class AscFormularioProcedimentoBase implements OnInit, OnDestroy
                 .consultarPorIdBeneficiarioAndIdProcedimento(this.autorizacaoPreviaParams.idBeneficiario, this.autorizacaoPreviaParams.idProcedimento, true)
                 .subscribe( (retorno: Pedido[]) => {
                     this.autorizacoesPrevia = retorno.map(r => ({
-                                                                    value: r.idAutorizacaoPreviaSiags, 
+                                                                    value: r.idAutorizacaoPreviaSiags,
                                                                     label: `${r.idAutorizacaoPreviaSiags} | WEB - ${r.nomeMotivoSolicitacao}`
                                                                 })
                                                             )
@@ -357,7 +357,7 @@ export abstract class AscFormularioProcedimentoBase implements OnInit, OnDestroy
 
     protected configurarControlIdAutorizacaoPrevia(procedimento: Procedimento) {
         this.preResetIdAutorizacaoPreviaControl();
-      
+
         if (procedimento && (RESTRINGE === procedimento.providenciaNaFalta || procedimento.prazoIntervalar)) {
             if (RESTRINGE === this.procedimento.providenciaNaFalta) {
                 this._tornarAutorizacaoPreviaObrigatoria();
@@ -369,7 +369,7 @@ export abstract class AscFormularioProcedimentoBase implements OnInit, OnDestroy
         if(
             this.deveBloquearAutorizacaoPrevia()
         ){
-            this._tornarAutorizacaoPreviaObrigatoria();       
+            this._tornarAutorizacaoPreviaObrigatoria();
         }
 
         this.posResetIdAutorizacaoPreviaControl();
@@ -423,7 +423,7 @@ export abstract class AscFormularioProcedimentoBase implements OnInit, OnDestroy
         )
         &&
         (
-            this.idMotivoSolicitacao && this.idMotivoSolicitacao 
+            this.idMotivoSolicitacao && this.idMotivoSolicitacao
                 === MotivoSolicitacaoEnum.REEMBOLSO_INTEGRAL_PREVIAMENTE_AUTORIZADO
         );
     }
@@ -449,14 +449,14 @@ export abstract class AscFormularioProcedimentoBase implements OnInit, OnDestroy
         this.resetAllForm(formDirective, $event);
     }
 
-    ngOnInit(): void { 
-        this.loading = true;    
+    ngOnInit(): void {
+        this.loading = true;
         this.registrarParametrosDosProcedimentos();
         this.registrarParametrosParaBuscaDePatologias();
         this.registrarValidadorQuantidadeComBaseNaAutorizacaoPrevia();
         this.registrarDependenciasPreenchimento();
         this.registrarConfiguracaoDosValidadoresDeAutorizacaoPrevia();
-        this.registrarValidacaoFormulario();        
+        this.registrarValidacaoFormulario();
     }
 
     protected registrarValidacaoFormulario(): void {
@@ -526,7 +526,7 @@ export abstract class AscFormularioProcedimentoBase implements OnInit, OnDestroy
             try {
                 this.autorizacaoPreviaService.setModificaAutorizacaoPrevia(this.autorizacaoPreviaParams)
             } catch (error) {}
-                
+
         }
 
         this.procedimento = procedimento;
@@ -612,14 +612,14 @@ export abstract class AscFormularioProcedimentoBase implements OnInit, OnDestroy
 
     private formatarData(data:Date):string{
         let dataFormatada = '';
-        
+
         if(data) {
           const dia = ('0' + data.getUTCDate()).slice(-2);
           const mes = ('0' + (data.getUTCMonth() + 1)).slice(-2);
           const ano = data.getUTCFullYear();
-          
+
           dataFormatada = `${ano}-${mes}-${dia}`;
-        } 
+        }
         return  dataFormatada;
     }
 
@@ -627,10 +627,10 @@ export abstract class AscFormularioProcedimentoBase implements OnInit, OnDestroy
         this.procedimentoPedidoService.pedidoListenerValorNotaFiscal
          .subscribe((resp) => {
             this.valorDocumentoFiscal = Number( resp.valor )
-            
+
             this.errorDocumentoFiscal('ouvirMudancaDocumentoFiscal')
             this.getForm().get('valorUnitarioPago').markAsDirty()
-            
+
          })
     }
 
@@ -645,14 +645,14 @@ export abstract class AscFormularioProcedimentoBase implements OnInit, OnDestroy
                                     JSON.stringify( this.procedimentoPedidoService.getPedidoProcedimentoTabela() )
                                 ).map(j => (
                                     {
-                                        ...j, qtdSolicitada: 
+                                        ...j, qtdSolicitada:
                                         j.qtdSolicitada ? j.qtdSolicitada : j.qtdMedicamento
                                     })
                                 )
             if(this.getForm().get('qtdSolicitada') && (this.getForm().get('qtdSolicitada').dirty || this.getForm().get('valorUnitarioPago').dirty)){
                 this.handleDirtyInputs(itens,valorUnitarioPago,retorno)
-                
-              
+
+
             }
             else if(!this.getForm().get('qtdSolicitada') && this.getForm().get('valorUnitarioPago').dirty){
                 retorno = false
@@ -667,16 +667,16 @@ export abstract class AscFormularioProcedimentoBase implements OnInit, OnDestroy
                                             return calc
                                         })
                                         .reduce((curr, val) => curr + val, 0)
-                
+
                 if( valorTotal > this.valorDocumentoFiscal){
                     retorno = true
                 }
             }
 
           this.handleRetornoTruthfuL(retorno)
-            
+
             this.erroValorDocumentoFiscal = retorno
-        
+
     }
 
     handleRetornoTruthfuL(retorno:any){
@@ -711,7 +711,7 @@ handleDirtyInputs(itens:any,valorUnitarioPago:any,retorno:any){
                                             return calc
                                         })
                                         .reduce((curr, val) => curr + val, 0)
-                
+
                 if( valorTotal > this.valorDocumentoFiscal) {
                     retorno = true
                 }
@@ -734,12 +734,12 @@ handleDirtyInputs(itens:any,valorUnitarioPago:any,retorno:any){
         })
         this.errorDocumentoFiscal('campo valorUnitarioPago')
     }
-    
+
     autorizacaoPreviaNaoWebSelecionada(event: any){
         const pedido = new Pedido()
         pedido.id = event
         pedido.idAutorizacaoPreviaSiags = event
-        const autorizacaoNaoWeb = this.autorizacoesPrevia.find(a => a.value == event)   
+        const autorizacaoNaoWeb = this.autorizacoesPrevia.find(a => a.value == event)
         pedido.nomeMotivoSolicitacao = autorizacaoNaoWeb.label
         this.autorizacaoPrevia = pedido
         this.form.controls['tipoAutorizacao'].setValue( autorizacaoNaoWeb.label )

@@ -12,6 +12,7 @@ export class AscButtonThirdComponent {
   @Input() title: string;
   @Input() showProgress = false;
   @Input() disabled = false
+  @Input() size:  'small' | 'standard' | 'large' = 'standard'
 
   @Output() readonly onClick = new EventEmitter<MouseEvent>();
 

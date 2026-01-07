@@ -22,11 +22,12 @@
     </div>
     <div class="c-card conteudo-spacing">
       <asc-profissional-card [processo]="processo"></asc-profissional-card>
-      <button (click)="goToTop()" class="btn-to-top">Retornar ao topo</button>
+      <dsc-button class="btn-to-top" label="Retornar ao topo" variant="secondary-outlined" (click)="goToTop()" />
     </div>
     <div class="c-card conteudo-spacing">
       <asc-documentos-obrigatorios-card> </asc-documentos-obrigatorios-card>
-      <button (click)="goToTop()" class="btn-to-top">Retornar ao topo</button>
+      <dsc-button class="btn-to-top" label="Retornar ao topo" variant="secondary-outlined" (click)="goToTop()" />
+      <!-- <button (click)="goToTop()" class="btn-to-top">Retornar ao topo</button> -->
     </div>
     <div class="c-card conteudo-spacing">
       <asc-mudanca-situacao-card-pl></asc-mudanca-situacao-card-pl>

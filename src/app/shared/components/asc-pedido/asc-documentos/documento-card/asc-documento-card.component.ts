@@ -31,6 +31,8 @@ import { AnexoService } from "../../../../services/comum/anexo.service";
 import { TipoValidacaoService } from "app/shared/services/comum/tipo-validacao.service";
 import { ProcessoService } from "app/shared/services/comum/processo.service";
 import { SessaoService } from "../../../../../arquitetura/shared/services/seguranca/sessao.service";
+import { PermissoesSituacaoProcesso } from "app/shared/models/fluxo/permissoes-situacao-processo";
+import { Loading } from "app/shared/components/loading/loading-modal.component";
 
 interface ArquivoModal {
   arquivos: Arquivo[];
@@ -49,8 +51,8 @@ interface ArquivoModal {
   animations: [...fadeAnimation],
 })
 export class AscDocumentoCardComponent
-  extends AscComponenteAutorizadoMessage
-  implements OnInit {
+extends AscComponenteAutorizadoMessage
+implements OnInit {
   @Input()
   habilitarValidacao = false;
 
@@ -72,21 +74,24 @@ export class AscDocumentoCardComponent
   @Input()
   controls: boolean;
 
+  @Input()
+  override permissoes: PermissoesSituacaoProcesso
+
   @Output()
   readonly arquivosSelecionados = new EventEmitter<ArquivoParam>();
 
   @Output()
   readonly documentoTipoProcessoSelecionado =
-    new EventEmitter<DocumentoTipoProcesso>();
+  new EventEmitter<DocumentoTipoProcesso>();
 
   @Output()
   readonly documentosTipoProcessoSelecionados = new EventEmitter<
-    DocumentoTipoProcesso[]
+  DocumentoTipoProcesso[]
   >();
 
   @Output()
   readonly documentoComArquivoDeletado =
-    new EventEmitter<DocumentoTipoProcesso>();
+  new EventEmitter<DocumentoTipoProcesso>();
 
   @Output()
   readonly possuiFaltaDeArquivos = new EventEmitter<boolean>();
@@ -116,7 +121,7 @@ export class AscDocumentoCardComponent
   readonly atualizacaoSituacaoDocumento$ = new EventEmitter<any>();
 
   private readonly validacaoDocumento$ = new ReplaySubject<
-    DocumentoTipoProcesso[]
+  DocumentoTipoProcesso[]
   >();
   private readonly subjectUnsubscription = new Subject<void>();
   private readonly processo$ = new EventEmitter<Pedido>();
@@ -147,7 +152,7 @@ export class AscDocumentoCardComponent
   @Input() set documentos(documentos: DocumentoTipoProcesso[]) {
     this._documentos = documentos;
     this.existeDocumentoParaProcedimentosSelecionados =
-      isNotUndefinedNullOrEmpty(documentos);
+    isNotUndefinedNullOrEmpty(documentos);
   }
 
   private _processo: Pedido;
@@ -161,7 +166,7 @@ export class AscDocumentoCardComponent
     this.processo$.emit(processoAsObject);
     this._processo = processoAsObject;
     this._isProcessoNovo =
-      isUndefinedOrNull(processo) || processoAsObject.isNovo();
+    isUndefinedOrNull(processo) || processoAsObject.isNovo();
   }
 
   get isEditing(): boolean {
@@ -174,11 +179,11 @@ export class AscDocumentoCardComponent
 
   get todosArquivos(): Arquivo[] {
     return this.documentos
-      .map((doc) => doc.arquivos)
-      .reduce(
-        (total: Arquivo[], arquivo) => [...total, ...arquivo],
-        new Array<Arquivo[]>()
-      );
+    .map((doc) => doc.arquivos)
+    .reduce(
+      (total: Arquivo[], arquivo) => [...total, ...arquivo],
+      new Array<Arquivo[]>()
+    );
   }
 
   @Input()
@@ -186,32 +191,32 @@ export class AscDocumentoCardComponent
     this.loading = true;
     // console.log("parametros(asc-documento-card): ", parametro)
     this.definirChamadaDoServiceComBaseNosParametros(parametro)
-      .pipe(take(1))
-      .subscribe(
-        (documentos: DocumentoTipoProcesso[]) => {
-          this.loading = false;
-          this.isLoading.emit(this.loading);
+    .pipe(take(1))
+    .subscribe(
+      (documentos: DocumentoTipoProcesso[]) => {
+        this.loading = false;
+        this.isLoading.emit(this.loading);
 
-          this.documentos = documentos.filter(
-            (documento) => documento.inativo == "NAO"
-          );
-          this.documentosTipoProcessoSelecionados.emit(this.documentos);
-          this.existeDocumentoParaProcedimentosSelecionados =
-            isNotUndefinedNullOrEmpty(documentos) ||
-            isNotUndefinedNullOrEmpty(this.documentos);
-        },
-        (error) => {
-          this.loading = false;
-          this.isLoading.emit(this.loading);
-          this.messageService.addMsgDanger(error.message);
-        }
-      );
+        this.documentos = documentos.filter(
+          (documento) => documento.inativo == "NAO"
+        );
+        this.documentosTipoProcessoSelecionados.emit(this.documentos);
+        this.existeDocumentoParaProcedimentosSelecionados =
+        isNotUndefinedNullOrEmpty(documentos) ||
+        isNotUndefinedNullOrEmpty(this.documentos);
+      },
+      (error) => {
+        this.loading = false;
+        this.isLoading.emit(this.loading);
+        this.messageService.addMsgDanger(error.message);
+      }
+    );
   }
 
   private getBlobArquivo(arquivoModal: ArquivoModal, blobParts: any): File {
     let mimeType =
-      arquivoModal.arquivo.type ||
-      Util.extrairMimeTypeFromFileName(arquivoModal.arquivo.name);
+    arquivoModal.arquivo.type ||
+    Util.extrairMimeTypeFromFileName(arquivoModal.arquivo.name);
     let file = new File([blobParts], arquivoModal.arquivo.name, {
       type: mimeType,
     }) as Arquivo;
@@ -255,16 +260,18 @@ export class AscDocumentoCardComponent
   }
 
   buscaValidacoes() {
+    Loading.start()
     this.tipoValidacaoService
-      .get()
-      .pipe(
-        tap((tv: TipoValidacaoDTO[]) =>
-          this.generateSelectItensTipoValidacao(tv)
-        ),
-        tap(() => this.consultarValidacoesDocumentos()),
-        takeUntil(this.subjectUnsubscription)
-      )
-      .subscribe();
+    .get()
+    .pipe(
+      tap((tv: TipoValidacaoDTO[]) =>{
+        Loading.stop()
+        this.generateSelectItensTipoValidacao(tv)
+      }),
+      tap(() => this.consultarValidacoesDocumentos()),
+      takeUntil(this.subjectUnsubscription)
+    )
+    .subscribe();
   }
 
   public atualizarSituacaoDocumentoProcesso(documento: any): void {
@@ -287,25 +294,25 @@ export class AscDocumentoCardComponent
         } as ValidacaoDocumentoPedido;
 
         this.validacaoDocumentoPedidoService
-          .post(valDocPed)
-          .pipe(take(1))
-          .subscribe(
-            () => {
-              this.loading = false;
-              this.messageService.showSuccessMsg("MA095");
-              this.atualizacaoSituacaoDocumento$.emit(valDocPed);
-              this.mapaValidacoesEncontradas.set(documento.id, valDocPed);
-              this.onChangeSituacao(documento.id, idTipoValidacao);
-              this.atualizarPedido.emit()
-              this.validacaoDocumentoPedidoService.emitirAtualizacao();
-              this.cdr.detectChanges();
+        .post(valDocPed)
+        .pipe(take(1))
+        .subscribe(
+          () => {
+            this.loading = false;
+            this.messageService.showSuccessMsg("MA095");
+            this.atualizacaoSituacaoDocumento$.emit(valDocPed);
+            this.mapaValidacoesEncontradas.set(documento.id, valDocPed);
+            this.onChangeSituacao(documento.id, idTipoValidacao);
+            this.atualizarPedido.emit()
+            this.validacaoDocumentoPedidoService.emitirAtualizacao();
+            this.cdr.detectChanges();
 
-            },
-            (error) => {
-              this.loading = false;
-              this.messageService.addMsgDanger(error.error);
-            }
-          );
+          },
+          (error) => {
+            this.loading = false;
+            this.messageService.addMsgDanger(error.error);
+          }
+        );
       }
     } else {
       this.messageService.showDangerMsg("Não existe documento para validar!");
@@ -401,13 +408,13 @@ export class AscDocumentoCardComponent
   }
 
   isPermiteRemover(arquivo: Arquivo, documento: DocumentoTipoProcesso): boolean {
-    
+
     if (this.disableRemoveButton) {
       return false;
     }
 
     const dataCadastramento = this.processo && this.processo.ultimaSituacao ? new Date(this.processo.ultimaSituacao.dataCadastramento) : new Date();
-    
+
     // Adiciona 5 segundos à dataCadastramento
     const dataCadastramentoMais5Segundos = new Date(dataCadastramento.getTime() - 5000);
 
@@ -468,20 +475,20 @@ export class AscDocumentoCardComponent
         let idDocumentoTipoProcesso = documento.id;
 
         this.documentoPedidoService
-          .excluirPorIdPedidoAndIdDocumentoTipoProcesso(
-            idPedido,
-            idDocumentoTipoProcesso
-          )
-          .subscribe(
-            () => {
-              this.messageService.showSuccessMsg("MA039");
-              this.atualizarPedido.emit();
-            },
-            (error) => {
-              this.messageService.showDangerMsg(error.error);
-              this.loading = false;
-            }
-          );
+        .excluirPorIdPedidoAndIdDocumentoTipoProcesso(
+          idPedido,
+          idDocumentoTipoProcesso
+        )
+        .subscribe(
+          () => {
+            this.messageService.showSuccessMsg("MA039");
+            this.atualizarPedido.emit();
+          },
+          (error) => {
+            this.messageService.showDangerMsg(error.error);
+            this.loading = false;
+          }
+        );
       },
       null,
       null,
@@ -525,558 +532,563 @@ export class AscDocumentoCardComponent
       this.validacaoDocumento$.next(this.documentos);
     }
   }
-  
+
 
   private registrarConsultaValidacaoDocumento(): void {
+    Loading.start()
     this.validacaoDocumento$
-      .pipe(
-        CustomOperatorsRxUtil.filterBy(
-          (docs: DocumentoTipoProcesso[]) => this.processo && docs && docs.length > 0
-        ),
-        distinctUntilChanged(),
-        switchMap((docs: DocumentoTipoProcesso[]) =>
-          this.mapToObservablesValidacaoListaDocumentoPedido(docs)
-        ),
-        tap(({ obrigatorios, complementares }) => {
-          let todosObrigatoriosValidos = true;
-          let todosComplementaresValidos = true;
-  
-          obrigatorios.forEach((validacao) => {
-            this.atualizarEstadoDocumento(validacao);
-            if (!this.isDocumentoValidoOuDispensado(validacao)) {
-              todosObrigatoriosValidos = false;
-            }
-          });
-  
-          complementares.forEach((validacao) => {
-            this.atualizarEstadoDocumento(validacao);
-            if (!this.isDocumentoValidoOuDispensado(validacao)) {
-              todosComplementaresValidos = false;
-            }
-          });
+    .pipe(
+      CustomOperatorsRxUtil.filterBy(
+        (docs: DocumentoTipoProcesso[]) => this.processo && docs && docs.length > 0
+      ),
+      distinctUntilChanged(),
+      switchMap((docs: DocumentoTipoProcesso[]) =>
+        this.mapToObservablesValidacaoListaDocumentoPedido(docs)
+    ),
+    tap(({ obrigatorios, complementares }) => {
+      let todosObrigatoriosValidos = true;
+      let todosComplementaresValidos = true;
 
-          this.itensTipoValidacao = [...this.itensTipoValidacao];
-  
-          const estadoAtualObrigatorios = this.documentoPedidoService.getAvisoSituacaoPedidoState();
-          if (estadoAtualObrigatorios !== todosObrigatoriosValidos && obrigatorios.length > 0) {
-            this.documentoPedidoService.setAvisoSituacaoPedido(todosObrigatoriosValidos);
-          }
-  
-          const estadoAtualComplementares = this.documentoPedidoService.getAvisoSituacaoPedidoComplementaresState();
-          if (estadoAtualComplementares !== todosComplementaresValidos && complementares.length > 0) {
-            this.documentoPedidoService.setAvisoSituacaoPedidoComplementares(todosComplementaresValidos);
-          }
-        }),
-        takeUntil(this.subjectUnsubscription)
-      )
-      .subscribe({
-        next: () => {
-          this.atualizarPedido.emit();
-          // console.log("Consulta de validação registrada e executada.");
-        },
-        error: (err) => {
-          console.error("Erro ao registrar consulta de validação:", err);
-        },
+      obrigatorios.forEach((validacao) => {
+        this.atualizarEstadoDocumento(validacao);
+        if (!this.isDocumentoValidoOuDispensado(validacao)) {
+          todosObrigatoriosValidos = false;
+        }
       });
-  }  
 
-  private atualizarEstadoDocumento(validacao: ValidacaoDocumentoPedido): void {
-    this.mapaValidacoesEncontradas.set(validacao.idDocumentoTipoProcesso, validacao);
-    this.validacoes[validacao.idDocumentoTipoProcesso] = validacao.idTipoValidacao;
-    this.situacaoDocValidacao = { ...this.situacaoDocValidacao };
+      complementares.forEach((validacao) => {
+        this.atualizarEstadoDocumento(validacao);
+        if (!this.isDocumentoValidoOuDispensado(validacao)) {
+          todosComplementaresValidos = false;
+        }
+      });
+      Loading.stop()
+      this.itensTipoValidacao = [...this.itensTipoValidacao];
+
+      const estadoAtualObrigatorios = this.documentoPedidoService.getAvisoSituacaoPedidoState();
+      if (estadoAtualObrigatorios !== todosObrigatoriosValidos && obrigatorios.length > 0) {
+        this.documentoPedidoService.setAvisoSituacaoPedido(todosObrigatoriosValidos);
+      }
+
+      const estadoAtualComplementares = this.documentoPedidoService.getAvisoSituacaoPedidoComplementaresState();
+      if (estadoAtualComplementares !== todosComplementaresValidos && complementares.length > 0) {
+        this.documentoPedidoService.setAvisoSituacaoPedidoComplementares(todosComplementaresValidos);
+      }
+    }),
+    takeUntil(this.subjectUnsubscription)
+  )
+  .subscribe({
+    next: () => {
+      this.atualizarPedido.emit();
+      // console.log("Consulta de validação registrada e executada.");
+    },
+    error: (err) => {
+      console.error("Erro ao registrar consulta de validação:", err);
+    },
+  });
+}
+
+private atualizarEstadoDocumento(validacao: ValidacaoDocumentoPedido): void {
+  this.mapaValidacoesEncontradas.set(validacao.idDocumentoTipoProcesso, validacao);
+  this.validacoes[validacao.idDocumentoTipoProcesso] = validacao.idTipoValidacao;
+  this.situacaoDocValidacao = { ...this.situacaoDocValidacao };
+}
+
+validaSituacaoDocumentoValidoOuDispensado(situacaoDocumento:string):boolean{
+  // Verifica se a situação é "VÁLIDO" ou "DISPENSADO"
+  if (situacaoDocumento === 'VÁLIDO' || situacaoDocumento === 'DISPENSADO') {
+    // console.log(
+    //     `Documento ID ${validacao.idDocumentoTipoProcesso} é considerado válido ou dispensado pela situação: ${situacaoDocumento}`
+    // );
+    return true;
   }
 
-  validaSituacaoDocumentoValidoOuDispensado(situacaoDocumento:string):boolean{
-    // Verifica se a situação é "VÁLIDO" ou "DISPENSADO"
-    if (situacaoDocumento === 'VÁLIDO' || situacaoDocumento === 'DISPENSADO') {
+  return false;
+}
+
+validarSemDocumento(documento: DocumentoTipoProcesso, validacao:ValidacaoDocumentoPedido):boolean{
+  let retorno:boolean = false;
+
+  if (!documento) {
+    // console.log(
+    //   `Documento ID ${validacao.idDocumentoTipoProcesso} não encontrado na lista de documentos locais.`
+    // );
+
+    // Se o documento não existe, verificar o tipo pela validação negativa
+    if (validacao.codigoUsuarioValidacao === '1') {
+      // Documento obrigatório
+      const estadoAtualObrigatorios = this.documentoPedidoService.getAvisoSituacaoPedidoState();
       // console.log(
-      //     `Documento ID ${validacao.idDocumentoTipoProcesso} é considerado válido ou dispensado pela situação: ${situacaoDocumento}`
+      //   `Documento obrigatório. Estado atual do aviso de obrigatórios: ${estadoAtualObrigatorios}`
+      // );
+      retorno = estadoAtualObrigatorios;
+    } else if (validacao.codigoUsuarioValidacao === '2') {
+      // Documento complementar
+      const estadoAtualComplementares = this.documentoPedidoService.getAvisoSituacaoPedidoComplementaresState();
+      // console.log(
+      //   `Documento complementar. Estado atual do aviso de complementares: ${estadoAtualComplementares}`
+      // );
+      retorno = estadoAtualComplementares;
+    }
+
+    // console.log(
+    //   `Documento ID ${validacao.idDocumentoTipoProcesso} possui um código de validação desconhecido: ${validacao.codigoUsuarioValidacao}`
+    // );
+
+  }
+  return retorno;
+}
+
+validaDocumentoEArquivos(documento:DocumentoTipoProcesso):boolean{
+  // Verifica se o documento existe e possui anexos
+  if (!documento || !documento.arquivos || documento.arquivos.length === 0) {
+    // console.log(
+    //     `Documento ID ${validacao.idDocumentoTipoProcesso} é considerado inválido porque não possui anexos.`
+    // );
+    return false;
+  }
+  return true;
+}
+
+anexoRecenteProcessoUltimaSituacao(documento:DocumentoTipoProcesso):boolean{
+  if (this.processo && this.processo.ultimaSituacao) {
+    // Obtém a data da última situação do pedido
+    const dataUltimaSituacao = new Date(this.processo.ultimaSituacao.dataCadastramento);
+    // console.log("Data da última situação do pedido:", dataUltimaSituacao);
+
+    // Subtrai 5 segundos da data da última situação
+    const dataLimite = new Date(dataUltimaSituacao.getTime() - 10000);
+    // console.log("Data limite (última situação - 10 segundos):", dataLimite);
+
+    // Verifica se algum anexo é mais recente que a data limite
+    const anexoRecente = documento.arquivos.some(
+      (arquivo) => new Date(arquivo.data) > dataLimite
+    );
+
+    if (anexoRecente) {
+      // console.log(
+      //     `Documento ID ${validacao.idDocumentoTipoProcesso} possui ao menos um anexo mais recente do que a data limite.`
+      // );
+      return true;
+    } else {
+      // console.log(
+      //     `Documento ID ${validacao.idDocumentoTipoProcesso} não possui anexos mais recentes do que a data limite.`
+      // );
+    }
+  }
+  return false;
+
+}
+
+situacaoDocumentoTraco(situacaoDocumento:string, validacao:ValidacaoDocumentoPedido):boolean{
+  if (situacaoDocumento == '—') {
+    // console.log(
+    //     `Situação do documento é nula para o documento ID ${validacao.idDocumentoTipoProcesso}.`
+    // );
+
+    const documento = this.documentos.find(
+      (doc) => doc.id === validacao.idDocumentoTipoProcesso
+    );
+
+    if (!documento || !documento.arquivos || documento.arquivos.length === 0) {
+      // console.log(
+      //     `Documento ID ${validacao.idDocumentoTipoProcesso} não possui anexos. Considerado inválido.`
+      // );
+      return false;
+    }
+
+    if (validacao.codigoUsuarioValidacao === '1') {
+      // console.log(
+      //     `Documento ID ${validacao.idDocumentoTipoProcesso} é obrigatório e possui anexos. Considerado válido.`
+      // );
+      return true;
+    } else if (validacao.codigoUsuarioValidacao === '2') {
+      // console.log(
+      //     `Documento ID ${validacao.idDocumentoTipoProcesso} é complementar. Considerado inválido.`
       // );
       return true;
     }
 
+    // console.log(
+    //     `Documento ID ${validacao.idDocumentoTipoProcesso} possui um código de validação desconhecido: ${validacao.codigoUsuarioValidacao}`
+    // );
     return false;
   }
 
-  validarSemDocumento(documento: DocumentoTipoProcesso, validacao:ValidacaoDocumentoPedido):boolean{
-    let retorno:boolean = false;
+  return false;
+}
 
-    if (!documento) {
-      // console.log(
-      //   `Documento ID ${validacao.idDocumentoTipoProcesso} não encontrado na lista de documentos locais.`
-      // );
-  
-      // Se o documento não existe, verificar o tipo pela validação negativa
-      if (validacao.codigoUsuarioValidacao === '1') {
-        // Documento obrigatório
-        const estadoAtualObrigatorios = this.documentoPedidoService.getAvisoSituacaoPedidoState();
-        // console.log(
-        //   `Documento obrigatório. Estado atual do aviso de obrigatórios: ${estadoAtualObrigatorios}`
-        // );
-        retorno = estadoAtualObrigatorios;
-      } else if (validacao.codigoUsuarioValidacao === '2') {
-        // Documento complementar
-        const estadoAtualComplementares = this.documentoPedidoService.getAvisoSituacaoPedidoComplementaresState();
-        // console.log(
-        //   `Documento complementar. Estado atual do aviso de complementares: ${estadoAtualComplementares}`
-        // );
-        retorno = estadoAtualComplementares;
-      }
-  
-      // console.log(
-      //   `Documento ID ${validacao.idDocumentoTipoProcesso} possui um código de validação desconhecido: ${validacao.codigoUsuarioValidacao}`
-      // );
+private isDocumentoValidoOuDispensado(validacao: ValidacaoDocumentoPedido): boolean {
+  const situacaoDocumento = this.mostraSituacao(validacao.idDocumentoTipoProcesso);
 
-    }
-    return retorno;
-  }
+  // console.log("Validacao recebida:", validacao);
+  // console.log("Situação do documento:", situacaoDocumento);
 
-  validaDocumentoEArquivos(documento:DocumentoTipoProcesso):boolean{
-    // Verifica se o documento existe e possui anexos
-    if (!documento || !documento.arquivos || documento.arquivos.length === 0) {
-        // console.log(
-        //     `Documento ID ${validacao.idDocumentoTipoProcesso} é considerado inválido porque não possui anexos.`
-        // );
-        return false;
-    }
+  // Verifica se a situação é "VÁLIDO" ou "DISPENSADO"
+  if (this.validaSituacaoDocumentoValidoOuDispensado(situacaoDocumento)) {
     return true;
   }
 
-  anexoRecenteProcessoUltimaSituacao(documento:DocumentoTipoProcesso):boolean{
-    if (this.processo && this.processo.ultimaSituacao) {
-      // Obtém a data da última situação do pedido
-      const dataUltimaSituacao = new Date(this.processo.ultimaSituacao.dataCadastramento);
-      // console.log("Data da última situação do pedido:", dataUltimaSituacao);
+  // Buscar o documento correspondente
+  const documento = this.documentos.find(
+    (doc) => doc.id === validacao.idDocumentoTipoProcesso
+  );
 
-      // Subtrai 5 segundos da data da última situação
-      const dataLimite = new Date(dataUltimaSituacao.getTime() - 10000);
-      // console.log("Data limite (última situação - 10 segundos):", dataLimite);
-
-      // Verifica se algum anexo é mais recente que a data limite
-      const anexoRecente = documento.arquivos.some(
-          (arquivo) => new Date(arquivo.data) > dataLimite
-      );
-
-      if (anexoRecente) {
-          // console.log(
-          //     `Documento ID ${validacao.idDocumentoTipoProcesso} possui ao menos um anexo mais recente do que a data limite.`
-          // );
-          return true;
-      } else {
-          // console.log(
-          //     `Documento ID ${validacao.idDocumentoTipoProcesso} não possui anexos mais recentes do que a data limite.`
-          // );
-      }
-    }
-    return false;
-
+  if (!documento) {
+    return this.validarSemDocumento(documento, validacao);
   }
-    
-  situacaoDocumentoTraco(situacaoDocumento:string, validacao:ValidacaoDocumentoPedido):boolean{
-    if (situacaoDocumento == '—') {
-      // console.log(
-      //     `Situação do documento é nula para o documento ID ${validacao.idDocumentoTipoProcesso}.`
-      // );
 
-      const documento = this.documentos.find(
-        (doc) => doc.id === validacao.idDocumentoTipoProcesso
-      );
-
-      if (!documento || !documento.arquivos || documento.arquivos.length === 0) {
-          // console.log(
-          //     `Documento ID ${validacao.idDocumentoTipoProcesso} não possui anexos. Considerado inválido.`
-          // );
-          return false;
-      }
-
-      if (validacao.codigoUsuarioValidacao === '1') {
-          // console.log(
-          //     `Documento ID ${validacao.idDocumentoTipoProcesso} é obrigatório e possui anexos. Considerado válido.`
-          // );
-          return true;
-      } else if (validacao.codigoUsuarioValidacao === '2') {
-          // console.log(
-          //     `Documento ID ${validacao.idDocumentoTipoProcesso} é complementar. Considerado inválido.`
-          // );
-          return true;
-      }
-
-      // console.log(
-      //     `Documento ID ${validacao.idDocumentoTipoProcesso} possui um código de validação desconhecido: ${validacao.codigoUsuarioValidacao}`
-      // );
-      return false;
-    }
-
+  // Verifica se o documento existe e possui anexos
+  if(!this.validaDocumentoEArquivos(documento)){
     return false;
   }
 
-  private isDocumentoValidoOuDispensado(validacao: ValidacaoDocumentoPedido): boolean {
-    const situacaoDocumento = this.mostraSituacao(validacao.idDocumentoTipoProcesso);
-
-    // console.log("Validacao recebida:", validacao);
-    // console.log("Situação do documento:", situacaoDocumento);
-
-    // Verifica se a situação é "VÁLIDO" ou "DISPENSADO"
-    if (this.validaSituacaoDocumentoValidoOuDispensado(situacaoDocumento)) {
-        return true;
+  if (this.processo && this.processo.ultimaSituacao) {
+    if(this.anexoRecenteProcessoUltimaSituacao(documento)){
+      return true;
     }
+  }
+  // console.log("situacao", situacaoDocumento)
 
-    // Buscar o documento correspondente
-    const documento = this.documentos.find(
-        (doc) => doc.id === validacao.idDocumentoTipoProcesso
-    );
+  if (situacaoDocumento == '—') {
+    return this.situacaoDocumentoTraco(situacaoDocumento, validacao);
+  }
 
-    if (!documento) {
-      return this.validarSemDocumento(documento, validacao);
-    }
-
-    // Verifica se o documento existe e possui anexos
-    if(!this.validaDocumentoEArquivos(documento)){
-      return false;
-    }
-    
-    if (this.processo && this.processo.ultimaSituacao) {
-      if(this.anexoRecenteProcessoUltimaSituacao(documento)){
-        return true;
-      }     
-    }
-    // console.log("situacao", situacaoDocumento)
-
-    if (situacaoDocumento == '—') {
-      return this.situacaoDocumentoTraco(situacaoDocumento, validacao);
-    }
-
-    // Caso nenhuma das regras acima seja atendida, o documento não é válido
-    // console.log(
-    //     `Documento ID ${validacao.idDocumentoTipoProcesso} é considerado inválido após todas as verificações.`
-    // );
-    return false;
+  // Caso nenhuma das regras acima seja atendida, o documento não é válido
+  // console.log(
+  //     `Documento ID ${validacao.idDocumentoTipoProcesso} é considerado inválido após todas as verificações.`
+  // );
+  return false;
 }
 
 
-  
 
-  // private mapToObservablesValidacaoDocumentoPedido(
-  //   docs: DocumentoTipoProcesso[]
-  // ): Observable<ValidacaoDocumentoPedido>[] {
-  //   console.log("mapToObservablesValidacaoDocumentoPedido-this.validacaoDocumentoPedidoService.consultarValidacaoDocumentoPedido "+this.processo.id);
-  //   //this.mapToObservablesValidacaoListaDocumentoPedido(docs);
-  //   console.log("-------------------------------------------------");
-  //   return docs.map((d) =>
-  //     this.validacaoDocumentoPedidoService.consultarValidacaoDocumentoPedido(
-  //       this.processo.id,
-  //       d.id
-  //     )
-  //   );
-  // }
 
-  //Validacao de documentos em lote
-  private mapToObservablesValidacaoListaDocumentoPedido(
-    docs: DocumentoTipoProcesso[]
-  ): Observable<{ obrigatorios: ValidacaoDocumentoPedido[]; complementares: ValidacaoDocumentoPedido[] }> {
-    const idPedido = this.processo.id;
-  
-    const listaIdDocumentos = docs.map((d) => ({
-      idPedido: idPedido,
-      idDocumentoTipoProcesso: d.id,
-    }));
-  
-    const obrigatorios$ = this.documentoPedidoService.consultarDocumentosObrigatoriosPorPedido(idPedido);
-    const complementares$ = this.documentoPedidoService.consultarDocumentosComplementaresPorPedido(idPedido);
-  
-    return forkJoin([obrigatorios$, complementares$]).pipe(
-      switchMap(([obrigatorios, complementares]) =>
-        this.validacaoDocumentoPedidoService.consultarValidacaoListaDocumentoPedido(listaIdDocumentos).pipe(
-          map((vdps: ValidacaoDocumentoPedido[]) => {
-            const obrigatoriosIds = new Set(obrigatorios.map((doc) => doc.idDocumentoTipoProcesso));
-            const complementaresIds = new Set(complementares.map((doc) => doc.idDocumentoTipoProcesso));
-  
-            // Ajuste no Map para garantir conformidade com os tipos esperados
-            const mapaValidacoesExistentes = new Map<number, ValidacaoDocumentoPedido>(
-              vdps.map((validacao): [number, ValidacaoDocumentoPedido] => [
-                validacao.idDocumentoTipoProcesso,
-                validacao,
-              ])
-            );
-  
-            const validacoesObrigatorias: ValidacaoDocumentoPedido[] = [];
-            const validacoesComplementares: ValidacaoDocumentoPedido[] = [];
-  
-            obrigatorios.forEach((doc) => {
-              const validacaoExistente = mapaValidacoesExistentes.get(doc.idDocumentoTipoProcesso);
-  
-              if (validacaoExistente) {
-                validacoesObrigatorias.push(validacaoExistente);
-              } else/* if (!doc.anexos || doc.anexos.length === 0)*/ {
-                validacoesObrigatorias.push(this.criarValidacaoNegativa(doc, idPedido, '1'));
-              }
-            });
-  
-            complementares.forEach((doc) => {
-              const validacaoExistente = mapaValidacoesExistentes.get(doc.idDocumentoTipoProcesso);
-  
-              if (validacaoExistente) {
-                validacoesComplementares.push(validacaoExistente);
-              } else {
-                validacoesComplementares.push(this.criarValidacaoNegativa(doc, idPedido, '2'));
-              }
-            });
-  
-            return { obrigatorios: validacoesObrigatorias, complementares: validacoesComplementares };
-          })
-        )
-      )
-    );
-  }
-  
-  private criarValidacaoNegativa(documento: DocumentoPedidoDTO, idPedido: number, valor: string): ValidacaoDocumentoPedido {
-    return {
-      idTipoValidacao: null, // Valor fixo para indicar validação negativa
-      idPedido: idPedido,
-      idDocumentoTipoProcesso: documento.idDocumentoTipoProcesso,
-      dataValidacao: new Date(), // Data atual
-      codigoUsuarioValidacao: valor, // Não há usuário para validação negativa
-      edicao: false,
-    } as ValidacaoDocumentoPedido;
-  }
+// private mapToObservablesValidacaoDocumentoPedido(
+//   docs: DocumentoTipoProcesso[]
+// ): Observable<ValidacaoDocumentoPedido>[] {
+//   console.log("mapToObservablesValidacaoDocumentoPedido-this.validacaoDocumentoPedidoService.consultarValidacaoDocumentoPedido "+this.processo.id);
+//   //this.mapToObservablesValidacaoListaDocumentoPedido(docs);
+//   console.log("-------------------------------------------------");
+//   return docs.map((d) =>
+//     this.validacaoDocumentoPedidoService.consultarValidacaoDocumentoPedido(
+//       this.processo.id,
+//       d.id
+//     )
+//   );
+// }
 
-  onChangeSituacao(idDocumento: number, novaSituacao: any): void {
-    this.validacoes = { ...this.validacoes, [idDocumento]: novaSituacao };
+//Validacao de documentos em lote
+private mapToObservablesValidacaoListaDocumentoPedido(
+  docs: DocumentoTipoProcesso[]
+): Observable<{ obrigatorios: ValidacaoDocumentoPedido[]; complementares: ValidacaoDocumentoPedido[] }> {
+  const idPedido = this.processo.id;
 
-    this.itensTipoValidacao = [...this.itensTipoValidacao];
-}
+  const listaIdDocumentos = docs.map((d) => ({
+    idPedido: idPedido,
+    idDocumentoTipoProcesso: d.id,
+  }));
 
-  private generateValidacoesDocumento(vdps: ValidacaoDocumentoPedido[]) {
-    for (let v of vdps) {
-      // Só entra direto no modo de edição se o tipo não for válido.
-      v.edicao = false;
-      this.mapaValidacoesEncontradas.set(v.idDocumentoTipoProcesso, v);
-    }
-    return vdps.reduce(
-      (acc, current) => ({
-        ...acc,
-        [current.idDocumentoTipoProcesso]: current.idTipoValidacao,
-      }),
-      {}
-    );
-  }
+  const obrigatorios$ = this.documentoPedidoService.consultarDocumentosObrigatoriosPorPedido(idPedido);
+  const complementares$ = this.documentoPedidoService.consultarDocumentosComplementaresPorPedido(idPedido);
 
-  private generateSelectItensTipoValidacao(res: TipoValidacaoDTO[]) {
-    this.itensTipoValidacao = [];
-    for (let i of res) {
-      this.itensTipoValidacao.push({ label: i.nome, value: i.id });
-      this.situacaoDocValidacao[i.id] = i.nome;
-    }
-  }
+  return forkJoin([obrigatorios$, complementares$]).pipe(
+    switchMap(([obrigatorios, complementares]) =>
+      this.validacaoDocumentoPedidoService.consultarValidacaoListaDocumentoPedido(listaIdDocumentos).pipe(
+      map((vdps: ValidacaoDocumentoPedido[]) => {
+        const obrigatoriosIds = new Set(obrigatorios.map((doc) => doc.idDocumentoTipoProcesso));
+        const complementaresIds = new Set(complementares.map((doc) => doc.idDocumentoTipoProcesso));
 
-  private definirChamadaDoServiceComBaseNosParametros(
-    parametro: DocumentoParam
-  ): Observable<DocumentoTipoProcesso[]> {
-    console.log(parametro);
-    if (parametro && parametro.idPedido) {
-      return this.documentoTipoProcessoService.consultarRequeridosPorIdPedido(
-        parametro.idPedido
-      );
-    }
-    if (parametro && parametro.idTipoProcesso && parametro.idTipoBeneficiario) {
-      return this.documentoTipoProcessoService.consultarPorTipoProcessoAndTipoBeneficiario(
-        parametro
-      );
-    }
+        // Ajuste no Map para garantir conformidade com os tipos esperados
+        const mapaValidacoesExistentes = new Map<number, ValidacaoDocumentoPedido>(
+          vdps.map((validacao): [number, ValidacaoDocumentoPedido] => [
+            validacao.idDocumentoTipoProcesso,
+            validacao,
+          ])
+        );
 
-    console.log("Nenhum parâmetro fornecido.");
-    return of([]);
-  }
+        const validacoesObrigatorias: ValidacaoDocumentoPedido[] = [];
+        const validacoesComplementares: ValidacaoDocumentoPedido[] = [];
 
-  private removerArquivo$(arquivo, index) {
-    let documento = this.documentos[index];
+        obrigatorios.forEach((doc) => {
+          const validacaoExistente = mapaValidacoesExistentes.get(doc.idDocumentoTipoProcesso);
 
-    ArrayUtil.remove(documento.arquivos, arquivo);
-    arquivo.idDocTipoProcesso = documento.id;
-    this.documentosTipoProcessoSelecionados.emit(this.documentos);
-    arquivo.isToDelete = true;
-    this.emitirFaltaDeDocumentos();
-    this.documentoComArquivoDeletado.emit({
-      ...documento,
-      arquivos: [arquivo],
-    });
-    this.registrarConsultaValidacaoDocumento();
-  }
-
-  private actionToOpenModel(arquivoModal: ArquivoModal) {
-    localStorage.clear()
-     const {
-       arquivos,
-       arquivo,
-       modalVisualizarDocumentoComponent: component,
-     } = arquivoModal;
-     const index = arquivos.findIndex((file) => arquivo === file);
-     component.infoExibicao = { itens: arquivos, index, item: arquivo };
-    //this.data.storage = { arquivoModal };
-    //console.log("this.data.storage - actionToOpenModel(arquivoModal: ArquivoModal) ");
-    //console.log(this.data.storage);
-
-    //[INICIO] Abrir em nova janela
-    //localStorage.setItem('arquivos', JSON.stringify(arquivoModal.arquivos));
-    //localStorage.setItem('idPedido', JSON.stringify(this.processo.id));
-    //localStorage.setItem('arquivoAtual', JSON.stringify(arquivoModal.arquivo.name));
-    //console.log("actionToOpenModel(arquivoModal: ArquivoModal) {");
-    //this.abrirArquivoEmNovaJanela(arquivoModal.arquivo);
-    //[FIM] Abrir em nova janela
-  }
-
-  private abrirArquivo(arquivoModal: ArquivoModal): void {
-    if(arquivoModal && arquivoModal.arquivo && arquivoModal.arquivo.idDocumentoGED){
-      this.abrirArquivoGED(arquivoModal);
-    }else{
-      this.abrirArquivoProcessado(arquivoModal);
-    }
-  }
-
-  private abrirArquivoProcessado(arquivoModal: ArquivoModal): void {
-    console.log("private abrirArquivoProcessado(arquivoModal: ArquivoModal): void { ==============");
-    this.anexoService
-    .obterArquivoPorNome(arquivoModal.arquivo.name)
-    .subscribe(
-      (arquivo) => {
-        const index = 0;
-        console.log("this.anexoService.obterArquivoPorNome(arquivoModal.arquivo.name) ==============");
-        console.log(arquivoModal.arquivo);
-        console.log(arquivoModal.arquivos);
-        console.log(arquivo);
-        arquivoModal.arquivo = this.getBlobArquivo(arquivoModal, arquivo);
-        arquivoModal.modalVisualizarDocumentoComponent.infoExibicao = {
-          itens: arquivoModal.arquivos,
-          index,
-          item: arquivoModal.arquivo,
-        };
-
-        //[INICIO] Abrir em nova janela
-        localStorage.setItem('arquivos', JSON.stringify(arquivoModal.arquivos));
-        localStorage.setItem('idPedido', JSON.stringify(this.processo.id));
-        localStorage.setItem('arquivoAtual', JSON.stringify(arquivoModal.arquivo.name));
-        //console.log("abrirArquivoGED(arquivoModal: ArquivoModal): void {");
-        //this.abrirArquivoEmNovaJanela(this.getBlobArquivo(arquivoModal, arquivo));
-        //[FIM]Abrir em nova janela
-      },
-      (error) => {
-        // Mensagens do tipo 403 já são tratadas pela arquitetura, não duplicar.
-        
-        if (error.status === 408) {
-          this.messageService.addMsgDanger(
-            "Tempo de espera esgotado. Favor, tente novamente."
-          );
-        } else if (error.status === 404) {
-          console.log(error);
-          this.messageService.addMsgDanger("Arquivo não encontrado nos diretórios.");
-        } else if (error.status !== 403) {
-          this.messageService.addMsgDanger(error.statusText || error.message);
-        }
-      }
-    );
-  }
-
-  private abrirArquivoGED(arquivoModal: ArquivoModal): void {
-    console.log("arquivoModal.arquivo ==============================================");
-    console.log(arquivoModal.arquivo);
-    this.anexoService
-      .obterArquivoPorIdGED(arquivoModal.arquivo.idDocumentoGED)
-      .subscribe(
-        (arquivo) => {
-          const index = arquivoModal.arquivos.findIndex(
-            (a) => a.id == arquivoModal.arquivo.id
-          );
-          arquivoModal.arquivo = this.getBlobArquivo(arquivoModal, arquivo);
-          arquivoModal.modalVisualizarDocumentoComponent.infoExibicao = {
-            itens: arquivoModal.arquivos,
-            index,
-            item: arquivoModal.arquivo,
-          };
-
-          //[INICIO] Abrir em nova janela
-          localStorage.setItem('arquivos', JSON.stringify(arquivoModal.arquivos));
-          localStorage.setItem('idPedido', JSON.stringify(this.processo.id));
-          localStorage.setItem('arquivoAtual', JSON.stringify(arquivoModal.arquivo.name));
-          //console.log("abrirArquivoGED(arquivoModal: ArquivoModal): void {");
-          //this.abrirArquivoEmNovaJanela(this.getBlobArquivo(arquivoModal, arquivo));
-          //[FIM]Abrir em nova janela
-        },
-        (error) => {
-          // Mensagens do tipo 403 já são tratadas pela arquitetura, não duplicar.
-          if (error.status === 408) {
-            this.messageService.addMsgDanger(
-              "Tempo de espera esgotado. Favor, tente novamente."
-            );
-          } else if (error.status !== 403) {
-            this.messageService.addMsgDanger(error.statusText || error.message);
+          if (validacaoExistente) {
+            validacoesObrigatorias.push(validacaoExistente);
+          } else/* if (!doc.anexos || doc.anexos.length === 0)*/ {
+            validacoesObrigatorias.push(this.criarValidacaoNegativa(doc, idPedido, '1'));
           }
-        }
-      );
-  }
+        });
 
-  private abrirArquivoEmNovaJanela(arquivo:any):void{
-    const baseUrl = window.location.origin;
-    console.log(baseUrl);
+        complementares.forEach((doc) => {
+          const validacaoExistente = mapaValidacoesExistentes.get(doc.idDocumentoTipoProcesso);
 
-    const largura = 850;
-    const altura = 600;
-    const topPosition = 100;
-    const leftPosition = window.screen.width - largura;
-    const novaJanela = window.open(baseUrl+"/#/downloadArquivo", '_blank', `width=${largura},height=${altura},resizable=yes,scrollbar=yes, top=${topPosition}, left=${leftPosition}`);
-    //const novaJanela = window.open(baseUrl+"/#/downloadArquivo", '_blank', `width=${largura},height=${altura},resizable=yes,scrollbar=yes`);
-    
-    if(novaJanela){
-      novaJanela.focus();
-    }
-  }
+          if (validacaoExistente) {
+            validacoesComplementares.push(validacaoExistente);
+          } else {
+            validacoesComplementares.push(this.criarValidacaoNegativa(doc, idPedido, '2'));
+          }
+        });
 
-  verificaSituacaoParaExibirOuNao(id: number){
-    if(this.tituloAnalise){
-      this.mostraOcultaSituacao = true
-    }else{
-      this.mostraOcultaSituacao = false
-      if( this.mostraSituacao(id) != '—' ){
-        this.mostraOcultaSituacao =  true
-      }
-    }
-    return this.mostraOcultaSituacao
-  }
-
-  buscarArquivosProcessados(event: any, arquivo: Arquivo):void{
-
-    this.anexoService.obterArquivoPorNome(arquivo.name).subscribe( (arquivoBaixado) => {
-      console.log("arquivo ***********************************************");
-      console.log(arquivo);
-        let arquivoDownload = this.getBlobArquivoDireto(arquivo, arquivoBaixado);
-        this.downloadFile(arquivoDownload, arquivo.name);
-        
-      },
-      (error) => {
-        // Mensagens do tipo 403 já são tratadas pela arquitetura, não duplicar.
-        
-        if (error.status === 408) {
-          this.messageService.addMsgDanger(
-            "Tempo de espera esgotado. Favor, tente novamente."
-          );
-        } else if (error.status === 404) {
-          console.log(error);
-          this.messageService.addMsgDanger("Arquivo não encontrado nos diretórios.");
-        } else if (error.status !== 403) {
-          this.messageService.addMsgDanger(error.statusText || error.message);
-        }
-      }
+        return { obrigatorios: validacoesObrigatorias, complementares: validacoesComplementares };
+      })
     )
+  )
+);
+}
+
+private criarValidacaoNegativa(documento: DocumentoPedidoDTO, idPedido: number, valor: string): ValidacaoDocumentoPedido {
+  return {
+    idTipoValidacao: null, // Valor fixo para indicar validação negativa
+    idPedido: idPedido,
+    idDocumentoTipoProcesso: documento.idDocumentoTipoProcesso,
+    dataValidacao: new Date(), // Data atual
+    codigoUsuarioValidacao: valor, // Não há usuário para validação negativa
+    edicao: false,
+  } as ValidacaoDocumentoPedido;
+}
+
+onChangeSituacao(idDocumento: number, novaSituacao: any): void {
+  this.validacoes = { ...this.validacoes, [idDocumento]: novaSituacao };
+
+  this.itensTipoValidacao = [...this.itensTipoValidacao];
+}
+
+private generateValidacoesDocumento(vdps: ValidacaoDocumentoPedido[]) {
+  for (let v of vdps) {
+    // Só entra direto no modo de edição se o tipo não for válido.
+    v.edicao = false;
+    this.mapaValidacoesEncontradas.set(v.idDocumentoTipoProcesso, v);
+  }
+  return vdps.reduce(
+    (acc, current) => ({
+      ...acc,
+      [current.idDocumentoTipoProcesso]: current.idTipoValidacao,
+    }),
+    {}
+  );
+}
+
+private generateSelectItensTipoValidacao(res: TipoValidacaoDTO[]) {
+  this.itensTipoValidacao = [];
+  for (let i of res) {
+    this.itensTipoValidacao.push({ label: i.nome, value: i.id });
+    this.situacaoDocValidacao[i.id] = i.nome;
+  }
+}
+
+private definirChamadaDoServiceComBaseNosParametros(
+  parametro: DocumentoParam
+): Observable<DocumentoTipoProcesso[]> {
+  console.log(parametro);
+  if (parametro && parametro.idPedido) {
+    return this.documentoTipoProcessoService.consultarRequeridosPorIdPedido(
+      parametro.idPedido
+    );
+  }
+  if (parametro && parametro.idTipoProcesso && parametro.idTipoBeneficiario) {
+    return this.documentoTipoProcessoService.consultarPorTipoProcessoAndTipoBeneficiario(
+      parametro
+    );
   }
 
-  downloadFile(file: Blob | File, nome: string): void {
-    if(file){
-      let a = document.createElement('a');
-      a.href = window.URL.createObjectURL(file);
-      a.download = nome;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
+  console.log("Nenhum parâmetro fornecido.");
+  return of([]);
+}
+
+private removerArquivo$(arquivo, index) {
+  let documento = this.documentos[index];
+
+  ArrayUtil.remove(documento.arquivos, arquivo);
+  arquivo.idDocTipoProcesso = documento.id;
+  this.documentosTipoProcessoSelecionados.emit(this.documentos);
+  arquivo.isToDelete = true;
+  this.emitirFaltaDeDocumentos();
+  this.documentoComArquivoDeletado.emit({
+    ...documento,
+    arquivos: [arquivo],
+  });
+  this.registrarConsultaValidacaoDocumento();
+}
+
+private actionToOpenModel(arquivoModal: ArquivoModal) {
+  localStorage.clear()
+  const {
+    arquivos,
+    arquivo,
+    modalVisualizarDocumentoComponent: component,
+  } = arquivoModal;
+  const index = arquivos.findIndex((file) => arquivo === file);
+  component.infoExibicao = { itens: arquivos, index, item: arquivo };
+  //this.data.storage = { arquivoModal };
+  //console.log("this.data.storage - actionToOpenModel(arquivoModal: ArquivoModal) ");
+  //console.log(this.data.storage);
+
+  //[INICIO] Abrir em nova janela
+  //localStorage.setItem('arquivos', JSON.stringify(arquivoModal.arquivos));
+  //localStorage.setItem('idPedido', JSON.stringify(this.processo.id));
+  //localStorage.setItem('arquivoAtual', JSON.stringify(arquivoModal.arquivo.name));
+  //console.log("actionToOpenModel(arquivoModal: ArquivoModal) {");
+  //this.abrirArquivoEmNovaJanela(arquivoModal.arquivo);
+  //[FIM] Abrir em nova janela
+}
+
+private abrirArquivo(arquivoModal: ArquivoModal): void {
+  if(arquivoModal && arquivoModal.arquivo && arquivoModal.arquivo.idDocumentoGED){
+    this.abrirArquivoGED(arquivoModal);
+  }else{
+    this.abrirArquivoProcessado(arquivoModal);
+  }
+}
+
+private abrirArquivoProcessado(arquivoModal: ArquivoModal): void {
+  console.log("private abrirArquivoProcessado(arquivoModal: ArquivoModal): void { ==============");
+  this.anexoService
+  .obterArquivoPorNome(arquivoModal.arquivo.name)
+  .subscribe(
+    (arquivo) => {
+      const index = 0;
+      console.log("this.anexoService.obterArquivoPorNome(arquivoModal.arquivo.name) ==============");
+      console.log(arquivoModal.arquivo);
+      console.log(arquivoModal.arquivos);
+      console.log(arquivo);
+      arquivoModal.arquivo = this.getBlobArquivo(arquivoModal, arquivo);
+      arquivoModal.modalVisualizarDocumentoComponent.infoExibicao = {
+        itens: arquivoModal.arquivos,
+        index,
+        item: arquivoModal.arquivo,
+      };
+
+      //[INICIO] Abrir em nova janela
+      localStorage.setItem('arquivos', JSON.stringify(arquivoModal.arquivos));
+      localStorage.setItem('idPedido', JSON.stringify(this.processo.id));
+      localStorage.setItem('arquivoAtual', JSON.stringify(arquivoModal.arquivo.name));
+      //console.log("abrirArquivoGED(arquivoModal: ArquivoModal): void {");
+      //this.abrirArquivoEmNovaJanela(this.getBlobArquivo(arquivoModal, arquivo));
+      //[FIM]Abrir em nova janela
+    },
+    (error) => {
+      // Mensagens do tipo 403 já são tratadas pela arquitetura, não duplicar.
+
+      if (error.status === 408) {
+        this.messageService.addMsgDanger(
+          "Tempo de espera esgotado. Favor, tente novamente."
+        );
+      } else if (error.status === 404) {
+        console.log(error);
+        this.messageService.addMsgDanger("Arquivo não encontrado nos diretórios.");
+      } else if (error.status !== 403) {
+        this.messageService.addMsgDanger(error.statusText || error.message);
+      }
+    }
+  );
+}
+
+private abrirArquivoGED(arquivoModal: ArquivoModal): void {
+  console.log("arquivoModal.arquivo ==============================================");
+  console.log(arquivoModal.arquivo);
+  this.anexoService
+  .obterArquivoPorIdGED(arquivoModal.arquivo.idDocumentoGED)
+  .subscribe({
+    next: (arquivo) => {
+      const index = arquivoModal.arquivos.findIndex(
+        (a) => a.id == arquivoModal.arquivo.id
+      );
+      arquivoModal.arquivo = this.getBlobArquivo(arquivoModal, arquivo);
+      arquivoModal.modalVisualizarDocumentoComponent.infoExibicao = {
+        itens: arquivoModal.arquivos,
+        index,
+        item: arquivoModal.arquivo,
+      };
+
+      //[INICIO] Abrir em nova janela
+      localStorage.setItem('arquivos', JSON.stringify(arquivoModal.arquivos));
+      localStorage.setItem('idPedido', JSON.stringify(this.processo.id));
+      localStorage.setItem('arquivoAtual', JSON.stringify(arquivoModal.arquivo.name));
+      //console.log("abrirArquivoGED(arquivoModal: ArquivoModal): void {");
+      //this.abrirArquivoEmNovaJanela(this.getBlobArquivo(arquivoModal, arquivo));
+      //[FIM]Abrir em nova janela
+    },
+    error: (error) => {
+      // Mensagens do tipo 403 já são tratadas pela arquitetura, não duplicar.
+      if (error.status === 408) {
+        this.messageService.addMsgDanger(
+          "Tempo de espera esgotado. Favor, tente novamente."
+        );
+      } else if (error.status !== 403) {
+        this.messageService.addMsgDanger(error.statusText || error.message);
+      }
+    }
+  });
+}
+
+private abrirArquivoEmNovaJanela(arquivo:any):void{
+  const baseUrl = window.location.origin;
+  console.log(baseUrl);
+
+  const largura = 850;
+  const altura = 600;
+  const topPosition = 100;
+  const leftPosition = window.screen.width - largura;
+  const novaJanela = window.open(baseUrl+"/#/downloadArquivo", '_blank', `width=${largura},height=${altura},resizable=yes,scrollbar=yes, top=${topPosition}, left=${leftPosition}`);
+  //const novaJanela = window.open(baseUrl+"/#/downloadArquivo", '_blank', `width=${largura},height=${altura},resizable=yes,scrollbar=yes`);
+
+  if(novaJanela){
+    novaJanela.focus();
+  }
+}
+
+verificaSituacaoParaExibirOuNao(id: number){
+  if(this.tituloAnalise){
+    this.mostraOcultaSituacao = true
+  }else{
+    this.mostraOcultaSituacao = false
+    if( this.mostraSituacao(id) != '—' ){
+      this.mostraOcultaSituacao =  true
     }
   }
-  
+  return this.mostraOcultaSituacao
+}
+
+buscarArquivosProcessados(event: any, arquivo: Arquivo):void{
+
+  this.anexoService.obterArquivoPorNome(arquivo.name).subscribe( (arquivoBaixado) => {
+    console.log("arquivo ***********************************************");
+    console.log(arquivo);
+    let arquivoDownload = this.getBlobArquivoDireto(arquivo, arquivoBaixado);
+    this.downloadFile(arquivoDownload, arquivo.name);
+
+  },
+  (error) => {
+    // Mensagens do tipo 403 já são tratadas pela arquitetura, não duplicar.
+
+    if (error.status === 408) {
+      this.messageService.addMsgDanger(
+        "Tempo de espera esgotado. Favor, tente novamente."
+      );
+    } else if (error.status === 404) {
+      console.log(error);
+      this.messageService.addMsgDanger("Arquivo não encontrado nos diretórios.");
+    } else if (error.status !== 403) {
+      this.messageService.addMsgDanger(error.statusText || error.message);
+    }
+  }
+)
+}
+
+downloadFile(file: Blob | File, nome: string): void {
+  if(file){
+    let a = document.createElement('a');
+    a.href = window.URL.createObjectURL(file);
+    a.download = nome;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
+}
+
+situacaoSelecionada(idDocumento, event){
+  this.validacoes[ idDocumento ] = event.value
+}
+
 }

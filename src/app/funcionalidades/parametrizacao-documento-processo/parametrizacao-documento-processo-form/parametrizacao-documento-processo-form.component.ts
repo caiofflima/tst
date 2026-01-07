@@ -273,8 +273,8 @@ export class ParametrizacaoDocumentoProcessoFormComponent extends BaseComponent 
     }
 
     isSalvar():boolean{
-
-        if((this.idDocumento.value ) || (this.tiposBeneficiario.value && this.tiposBeneficiario.value?.length>0)){
+        if( (this.idDocumento.value ) && (this.tiposProcesso.value)
+            && (this.tiposBeneficiario.value && this.tiposBeneficiario.value?.length>0)){
             return true;
         }
         return false;

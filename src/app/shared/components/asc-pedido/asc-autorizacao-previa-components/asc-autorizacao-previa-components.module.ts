@@ -5,6 +5,7 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { AscSelectModule } from "../../asc-select/asc-select.module";
 import { ComponentModule } from "../../component.module";
 import { InputTextModule } from "primeng/inputtext";
+import { DscCaixaModule } from 'app/shared/dsc-caixa/dsc-caixa.module';
 
 @NgModule({
   imports: [
@@ -12,7 +13,8 @@ import { InputTextModule } from "primeng/inputtext";
     ReactiveFormsModule,
     AscSelectModule,
     ComponentModule,
-    InputTextModule
+    InputTextModule,
+    DscCaixaModule
   ],
   declarations: [AscProcedimentoAutorizacaoPreviaFormComponent],
   exports: [AscProcedimentoAutorizacaoPreviaFormComponent]

@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {EventEmitter, Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {CrudHttpClientService} from '../../../../app/arquitetura/shared/services/crud-http-client.service';
 import {Observable} from 'rxjs';
@@ -7,9 +7,10 @@ import {FiltroConsultaDocumento} from "../../models/filtro/filtro-consulta-docum
 import {MessageService} from "../../components/messages/message.service";
 
 
+
 @Injectable()
 export class DocumentoService extends CrudHttpClientService<Documento> {
-
+    acionaMudanca$ = new EventEmitter()
     constructor(
         override readonly messageService: MessageService,
         protected override readonly http: HttpClient
@@ -48,4 +49,8 @@ export class DocumentoService extends CrudHttpClientService<Documento> {
             params
         }));
     }
+
+  acionarMudancaFn(){
+    this.acionaMudanca$.emit({});
+  }
 }

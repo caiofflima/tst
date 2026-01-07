@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {ArquivoParam} from '../models/arquivo.param';
 import {isUndefinedNullOrEmpty} from '../../../constantes';
 import {MessageService} from '../../messages/message.service';
@@ -39,6 +39,9 @@ export class AscFileSelectorComponent implements OnInit {
     @Output()
     arquivos = new EventEmitter<ArquivoParam>();
 
+    @ViewChild('buttonDirective') buttonDirectiveRef!: ElementRef;
+    @ViewChild('paperClipDirective') paperClipDirectiveRef!: ElementRef;
+
     files: Set<File>;
     private extensionsAsArray: string[] = [];
     private _index: number;
@@ -47,6 +50,15 @@ export class AscFileSelectorComponent implements OnInit {
         private readonly messageService: MessageService
     ) {
     }
+
+   onButtonClick(elementRef: ElementRef) {
+    // Verifica se o ElementRef está definido
+    if (elementRef) {
+      elementRef.nativeElement.click();
+    } else {
+      console.error('ElementRef não está definido');
+    }
+  }
 
     ngOnInit() {
         if (this.extensions) {

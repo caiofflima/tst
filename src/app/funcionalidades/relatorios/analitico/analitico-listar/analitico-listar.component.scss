@@ -77,3 +77,15 @@ h2.no-margin-bottom {
   margin-bottom: 10px;
   width: 1500px !important;
 }
+
+.campo-pesquisa {
+  display: flex;
+  justify-content: flex-start;
+  height: 34px;
+  margin-bottom: 30px;
+}
+
+.body-centralizado ::ng-deep tbody td {
+  text-align: center;
+  vertical-align: middle;
+}

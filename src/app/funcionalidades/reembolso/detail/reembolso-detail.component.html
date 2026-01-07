@@ -45,7 +45,8 @@
                 (selected)="buscarLancamentosByAno($event.value)"
                 [control]="selectAno"
                 size="small"
-              ></asc-dropdown>
+                [showFilter]="false"
+                />
             </div>
           </div>
 
@@ -65,7 +66,7 @@
             </div>
           </div>
         </p-accordionTab>
-        
+
         <p-accordionTab class="menuremb2" header="REEMBOLSOS" (click)="prepararDadosReembolso()">
 
           <div class="d-flex w-100 justify-content-space-between gap-25 mb-16">
@@ -92,7 +93,9 @@
               [label]="'Ano'"
               (selected)="buscarReembolsosResumoPorAno($event.value)"
               [control]="selectAno"
-            ></asc-dropdown>
+              [showFilter]="false"
+              size="small"
+              />
             </div>
           </div>
           <div *ngFor="let lancamento of lancamentosReembolso; let i = index" class="inline-resultado">
@@ -116,8 +119,8 @@
     <div class="col-right" *ngIf="APIindisponivel">
       <div class="div-message">
         <span><b>Serviço temporariamente indisponível. Tente mais tarde.</b></span>
-      </div>	
-    </div>  
+      </div>
+    </div>
 
     <!-------------------------------- FIM ACCORDION ------------------------------------------->
     <div class="col-right" *ngIf="!APIindisponivel">
@@ -129,9 +132,9 @@
           <div class="w-100 d-flex justify-content-space-between">
 
           <div class="d-flex flex-column">
-            <div class="fs-18 fw-7 ff-bold color3A4859 simple-border">{{lancamentoSelecionando.strMes}} {{anoLancamento.value}} 
+            <div class="fs-18 fw-7 ff-bold color3A4859 simple-border">{{lancamentoSelecionando.strMes}} {{anoLancamento.value}}
             </div>
-            <span class="fs-16 fw-4 ff-book" [style.color]="getClassByStatus(lancamentoSelecionando?.status)" 
+            <span class="fs-16 fw-4 ff-book" [style.color]="getClassByStatus(lancamentoSelecionando?.status)"
             style="font-size: 1.3rem">{{lancamentoSelecionando?.status}}</span>
           </div>
           <div class="d-flex flex-column gap-2">
@@ -149,40 +152,40 @@
             informações.</div>
 
           <div class="custom-form-group-input padding-top">
-            <asc-select-beneficiario-extrato id="selectBeneficiarioLancamentos" class="noBorderDropdownTrigger" 
+            <asc-select-beneficiario-extrato id="selectBeneficiarioLancamentos" class="noBorderDropdownTrigger"
               selectId="beneficiario" [handle]="handle" label="Beneficiário" [required]="true"
               [uppercase]="true"
               [control]="formularioSolicitacao.get('dependente')"
               (dadoSelecionado)="beneficiarioSelecionadoLancamento($event, lancamentoSelecionando.mes, anoLancamento)">
-            </asc-select-beneficiario-extrato>      
+            </asc-select-beneficiario-extrato>
           </div>
 
           <br>
-          <div *ngIf="mensalidadeExtrato || coparticipacaoExtrato"> 
-            
+          <div *ngIf="mensalidadeExtrato || coparticipacaoExtrato">
+
             <h1 class="title-blue padding-top">
               <i class="fa fa-usd" aria-hidden="true"></i>Detalhes do Lançamento
             </h1>
-            <div class="info-financ">Mensalidade: 
+            <div class="info-financ">Mensalidade:
               <p class="float-right">{{ tratamentoValor(mensalidadeExtrato?.totalApresentado) | currency:'BRL': true}}</p>
             </div>
-            <div class="info-financ">Coparticipação: 
+            <div class="info-financ">Coparticipação:
               <p class="float-right">{{ tratamentoValor(coparticipacaoExtrato?.totalApresentado) | currency:'BRL': true}}</p>
             </div>
             <div class="info-financ"><b>Total:
               <p class="float-right">{{ tratamentoValor(mensalidadeExtrato?.totalApresentado) + tratamentoValor(coparticipacaoExtrato?.totalApresentado ) | currency:'BRL': true}}</p>
             </b></div>
             <br>
-            <div *ngIf="coparticipacaoExtrato"> 
+            <div *ngIf="coparticipacaoExtrato">
               <div *ngFor="let coparticipacaoAux of coparticipacaoExtrato?.coparticipacoes">
-                      <div class="nome-fantasia">{{coparticipacaoAux?.nomePrestador | uppercase}} 
+                      <div class="nome-fantasia">{{coparticipacaoAux?.nomePrestador | uppercase}}
                         <p class="valor-pgto">
                             {{ coparticipacaoAux?.totalCoparticipacao | currency:'BRL': true}}
-                            <i *ngIf="hasEventos(coparticipacaoAux)" class="fa fa-chevron-right" aria-hidden="true" 
-                            style="cursor:pointer" (click)="clickDetalharCoparticipacao(modalCoparticipacaoComponent, coparticipacaoAux)"></i> 
+                            <i *ngIf="hasEventos(coparticipacaoAux)" class="fa fa-chevron-right" aria-hidden="true"
+                            style="cursor:pointer" (click)="clickDetalharCoparticipacao(modalCoparticipacaoComponent, coparticipacaoAux)"></i>
 
-                             <i *ngIf="!hasEventos(coparticipacaoAux)" class="fa fa-chevron-right" aria-hidden="true"></i> 
-                        </p> 
+                             <i *ngIf="!hasEventos(coparticipacaoAux)" class="fa fa-chevron-right" aria-hidden="true"></i>
+                        </p>
                         <asc-modal-coparticipacao
                         id="asc-modal-coparticipacao-reembolso-detail"
                           [customStyleProperties]="stylePropsModal"
@@ -191,18 +194,18 @@
                         </asc-modal-coparticipacao>
                       </div>
                       <p class="remb-cpfcnpj">{{coparticipacaoAux?.cpfCnpjPrestador | cpfCnpjMask}}</p>
-                      <div class="comp-data">Data do atendimento: 
+                      <div class="comp-data">Data do atendimento:
                         <p class="float-right">{{coparticipacaoAux?.dataAtendimento | date: 'dd/MM/yyyy'}}</p>
                       </div>
                     <div class="msg-erro">Este lançamento não foi debitado. Favor entrar em contato com a Central de
                       Atendimento.</div>
                     <br />
-                  </div> 
-              </div> 
+                  </div>
+              </div>
             </div>
 
           <div class="box-info">
-            <i class="fa fa-exclamation-circle" aria-hidden="true"></i> 
+            <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
             Não reconhece algum lançamento? Ligue 0800 095 6094 ou acesse a <a href="#">Central Saúde Caixa</a>
           </div>
         </div>
@@ -217,9 +220,9 @@
           <div class="w-100 d-flex justify-content-space-between">
 
             <div class="d-flex flex-column">
-              <div class="fs-18 fw-7 ff-bold color3A4859 simple-border">{{lancamentoSelecionando.strMes}} {{anoLancamento.value}} 
+              <div class="fs-18 fw-7 ff-bold color3A4859 simple-border">{{lancamentoSelecionando.strMes}} {{anoLancamento.value}}
               </div>
-              <span class="fs-16 fw-4 ff-book" [style.color]="getClassByStatus(lancamentoSelecionando?.status)" 
+              <span class="fs-16 fw-4 ff-book" [style.color]="getClassByStatus(lancamentoSelecionando?.status)"
               style="font-size: 1.3rem">{{lancamentoSelecionando?.status}}</span>
             </div>
             <div class="d-flex flex-column gap-2">
@@ -231,7 +234,7 @@
             <asc-select-beneficiario-extrato selectId="beneficiario" class="noBorderDropdownTrigger" [handle]="handle" label="Beneficiário" [required]="true"
               [control]="formularioSolicitacao.get('dependente')"
               [uppercase]="true"
-              (dadoSelecionado)="beneficiarioSelecionadoReembolso($event, lancamentoSelecionando.mes, anoLancamento)"></asc-select-beneficiario-extrato>  
+              (dadoSelecionado)="beneficiarioSelecionadoReembolso($event, lancamentoSelecionando.mes, anoLancamento)"></asc-select-beneficiario-extrato>
           </div>
 
           <h1 class="title-blue padding-top">
@@ -265,6 +268,6 @@
         </div>
       </div>
     </div>
-    
+
   </div>
 </section>

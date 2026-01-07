@@ -7,3 +7,8 @@
     justify-content: flex-start;
     margin-bottom: -65px;
 }
+
+.body-centralizado ::ng-deep tbody td {
+  text-align: center;
+  vertical-align: middle;
+}

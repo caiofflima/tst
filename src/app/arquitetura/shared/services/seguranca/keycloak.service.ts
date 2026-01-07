@@ -28,7 +28,7 @@ export class KeycloakService {
                 // flow: 'implicit',
             })
             .then(() => {
-                console.log('sucesso kcs')
+                //console.log('sucesso kcs')
                 KeycloakService.auth.loggedIn = true;
                 KeycloakService.auth.authz = keycloakAuth;
                 KeycloakService.auth.logoutUrl = keycloakAuth.authServerUrl

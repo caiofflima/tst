@@ -23,19 +23,40 @@ export class DocumentosTipoProcessoParamComponent implements OnInit{
     listComboTipoBeneficiario: DadoComboDTO[];
     tipoDeficiencias: SelectItem[];
 
+    /*
     formulario:any = this.formBuilder.group({
         tiposProcesso: [null, Validators.required],
         tiposBeneficiario: [null, Validators.required]
+    });
+    */
+
+    formulario = this.formBuilder.group({
+        'tiposProcesso': this.formBuilder.control(null),
+        'tiposBeneficiario': this.formBuilder.control(null),
+        'descricaoTiposProcesso': this.formBuilder.control(null),
+        'descricaoTiposBeneficiario': this.formBuilder.control(null)
     });
 
     public inicializarCombos(): void {
         this.comboService.consultarComboTipoBeneficiario().pipe(
             take<DadoComboDTO[]>(1)
-        ).subscribe(res => this.listComboTipoBeneficiario = res, err => this.messageService.addMsgDanger(err.error));
+        ).subscribe(result => {this.listComboTipoBeneficiario = result.map(item => ({
+                label: item.label,
+                value: item.value,
+                descricao: item.descricao
+            }));
+        });
+        err => this.messageService.addMsgDanger(err.error);
 
         this.comboService.consultarComboTipoProcesso().pipe(
             take<DadoComboDTO[]>(1)
-        ).subscribe(res => this.listComboTipoProcesso = res, err => this.messageService.addMsgDanger(err.error));
+        ).subscribe(result => { this.listComboTipoProcesso = result.map(item => ({
+                label: item.label,
+                value: item.value,
+                descricao: item.descricao
+            }));
+        });
+        err => this.messageService.addMsgDanger(err.error);
     }
 
     compStyle = {};
@@ -58,10 +79,10 @@ export class DocumentosTipoProcessoParamComponent implements OnInit{
 
     public pesquisar(): void {
 
-        const tiposProcesso =  this.formulario.get('tiposProcesso').value ? this.formulario.get('tiposProcesso').value.map(v => v.value) : null;
-        const tiposBeneficiario = this.formulario.get('tiposBeneficiario').value ? this.formulario.get('tiposBeneficiario').value.map(v => v.value) : null;
-        const descricaoTiposProcesso = this.formulario.get('tiposProcesso').value ? this.formulario.get('tiposProcesso').value.map(v => v.label).join(', ') : null;
-        const descricaoTiposBeneficiario = this.formulario.get('tiposBeneficiario').value ? this.formulario.get('tiposBeneficiario').value.map(v => v.label).join(', ') : null;
+        const tiposProcesso =  this.formulario.controls['tiposProcesso'].value;
+        const tiposBeneficiario = this.formulario.controls['tiposBeneficiario'].value;
+        const descricaoTiposProcesso = this.listComboTipoProcesso.map(v => v.label).join(', ');
+        const descricaoTiposBeneficiario = this.listComboTipoBeneficiario.map(v => v.label).join(', ');
         this.router.navigate(['/duvidas/documentos-tipo-pedido/buscar'], {
             queryParams: {
                 tiposProcesso,

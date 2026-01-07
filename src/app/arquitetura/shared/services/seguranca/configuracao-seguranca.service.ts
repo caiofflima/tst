@@ -31,7 +31,7 @@ export class ConfiguracaoSegurancaService extends CrudHttpClientService<Configur
             let url: string = ConfiguracaoSegurancaService.getEndpointUrl();
 
             let req: XMLHttpRequest = new XMLHttpRequest();
-            console.log("🚀 ~ ConfiguracaoSegurancaService ~ returnnewPromise ~ url:", url)
+            //console.log("🚀 ~ ConfiguracaoSegurancaService ~ returnnewPromise ~ url:", url)
             req.open('GET', url, true);
             req.setRequestHeader('Accept', 'application/json');
 

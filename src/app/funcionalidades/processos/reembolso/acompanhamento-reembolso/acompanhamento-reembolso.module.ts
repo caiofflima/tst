@@ -7,6 +7,8 @@ import { AscResumoModule } from "../../../../shared/components/asc-pedido/asc-re
 import { PlaygroundModule } from "../../../../shared/playground/playground.module";
 import { AcompanhamentoReembolsoRoutingModule } from "./acompanhamento-reembolso.routing.module";
 import {AscDocumentosModule} from "../../../../../app/shared/components/asc-pedido/asc-documentos/asc-documentos.module";
+import { ArquivoEnvioDadoService } from 'app/shared/services/services';
+import { DscCaixaModule } from 'app/shared/dsc-caixa/dsc-caixa.module';
 
 @NgModule({
   imports: [
@@ -16,10 +18,12 @@ import {AscDocumentosModule} from "../../../../../app/shared/components/asc-pedi
     AscCardAcompanhamentoConteudoModule,
     AscResumoModule,
     PlaygroundModule,
-    AscDocumentosModule
+    AscDocumentosModule,
+    DscCaixaModule
   ],
   declarations: [AcompanhamentoComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  providers: [ArquivoEnvioDadoService]
 })
 export class AcompanhamentoReembolsoModule {
 }

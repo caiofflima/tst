@@ -6,7 +6,7 @@
       <asc-dropdown
         [items]="tipoDocumentoComplementar"
         [(ngModel)]="documentoComplementar"
-        (onChange)="onChange($event)"
+        (selected)="onChange($event)"
         [placeholder]="this.bundle('MHSPH')"
         class="form-control2" filterBy="filter"
       >

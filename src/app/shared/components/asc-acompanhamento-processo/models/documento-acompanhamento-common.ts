@@ -49,7 +49,7 @@ export abstract class DocumentoAcompanhamentoCommon extends AscComponenteAutoriz
     documentos: DocumentoPedidoDTO[] = [];
     private atualizarProcessoSubscription: Subscription;
 
-    protected readonly processo$ = new BehaviorSubject<Pedido>(null);
+    protected readonly processo$ = new BehaviorSubject<Pedido>({} as Pedido);
     protected override readonly unsubscribe$ = new Subject<void>();
     private readonly _anexoService: AnexoService;
     private readonly _fileUploadService: FileUploadService;
@@ -73,10 +73,12 @@ export abstract class DocumentoAcompanhamentoCommon extends AscComponenteAutoriz
     }
 
     @Input()
-    set processo(processo: Pedido) {
+    set processo(process: Pedido) {
         setTimeout(() => {
-            this._processo = processo;
-            this.processo$.next(processo);
+          console.log('this.processo$',this.processo$ );
+
+            this._processo = process;
+            this.processo$.next(process);
         }, 0);
     }
 
@@ -121,12 +123,12 @@ export abstract class DocumentoAcompanhamentoCommon extends AscComponenteAutoriz
         formData.append('tipoUpload', 'documentoPedidoBeneficiario');
         formData.append('rascunhoPedido', "true");
 
-        
+
         this.loading = true;
         this._fileUploadService.realizarUpload(formData, arquivos).subscribe(retorno => {
             this.loading = false;
-            
-            
+
+
             this.historicoProcessoService.consultarUltimaSituacao(this._processo.id).subscribe(situacao => {
                 if (this._processo.ultimaSituacao.id != situacao.id) {
                     this.atualizarPedido$.next(this._processo);
@@ -134,12 +136,12 @@ export abstract class DocumentoAcompanhamentoCommon extends AscComponenteAutoriz
                 this._processo.ultimaSituacao = situacao;
                 this.processo$.next(this.processo);
                 this.onUploadComplete.emit(retorno);
-                
+
             });
 
         }, error => {
             this.loading = false;
-            
+
 
             arquivos.forEach(arquivo => {
                 this.documentoTipoProcessos.filter(d => d.id === documento.id).forEach(d => {
@@ -156,15 +158,15 @@ export abstract class DocumentoAcompanhamentoCommon extends AscComponenteAutoriz
         if (arquivos) {
             arquivos.forEach((arquivo: Arquivo) => {
                 this.loading = true;
-                
-                
+
+
                 this._anexoService.delete(arquivo.id).subscribe(() => {
                     this.loading = false;
                     this.onUploadComplete.emit()
                     this.messageService.showSuccessMsg('MA039');
                 }, (error) => {
                     this.loading = false;
-                    
+
                     let docTipoDTO = this.documentoTipoProcessos.find(d => d.id == arquivo.idDocTipoProcesso);
                     docTipoDTO.arquivos.push(arquivo);
                     this.messageService.addMsgDanger(error.error || error.message);
@@ -173,12 +175,12 @@ export abstract class DocumentoAcompanhamentoCommon extends AscComponenteAutoriz
         }
     }
 
-    protected registrarConsultaDocumentos() {        
-        this.loading = true;    
+    protected registrarConsultaDocumentos() {
+        this.loading = true;
         const porAtributoIdDoPedido = (p: Pedido): number => p.id;
         const exibirDocumentosPedidoDTO = (docs: DocumentoPedidoDTO[]) => {
             this.documentos = docs;
-    
+
             // Emitir apenas se os documentos realmente mudaram
             if (JSON.stringify(this.documentos) !== JSON.stringify(docs)) {
                 this.listAnexos.emit(docs);
@@ -186,7 +188,7 @@ export abstract class DocumentoAcompanhamentoCommon extends AscComponenteAutoriz
                 this.hasAnexos.emit(isNotUndefinedNullOrEmpty(docs) && docs.every(doc => doc.anexos && doc.anexos.length > 0));
             }
         };
-    
+
         this.processo$
             .pipe(
                 filter(isNotUndefinedNullOrEmpty),
@@ -203,7 +205,7 @@ export abstract class DocumentoAcompanhamentoCommon extends AscComponenteAutoriz
                 this.loading = false;
             });
     }
-    
+
 
     protected abstract consultarDocumento<T>(): (idPedido: number) => Observable<T>;
 

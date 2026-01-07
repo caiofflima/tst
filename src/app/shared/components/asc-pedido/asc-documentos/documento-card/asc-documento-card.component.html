@@ -37,7 +37,7 @@
             (processoNovo || permissoes?.analisar)
           "
         ></div>
-        <button
+        <dsc-button
           *ngIf="
             isComplementar &&
             documento.arquivos.length == 0 &&
@@ -46,11 +46,10 @@
           "
           (click)="removerDocumento(documento)"
           [disabled]="loading"
-          class="dangerIcon btn-small"
+          iconButton="true"
+          icon="delete"
           id="removerDocumento{{ i + documento?.id }}"
-        >
-          <em class="fa fa-trash"></em>
-        </button>
+        />
       </div>
     </div>
 
@@ -97,7 +96,7 @@
           </p>
         </div>
         <div class="arquivo-actions">
-          <button
+          <dsc-button
             id="visualizarArquivo{{ i + documento?.id }}"
             (click)="
               abrirModalVisualizarDocumentos(
@@ -108,22 +107,19 @@
               )
             "
             [disabled]="loading"
-            [title]="bundle('MH147')"
-            class="infoIconColor btn-small"
-          >
-            <em class="fa fa-eye"></em>
-          </button>
+            iconButton="true"
+            icon="visibility"
+          />
           <div style="width: 8px"></div>
-          <button
-            class="btn-small"
+          <dsc-button
+            variant="danger"
             id="removerArquivo{{ i + documento?.id }}"
             (click)="removerArquivo(arquivo, i)"
             *ngIf="isPermiteRemover(arquivo, documento)"
             [disabled]="loading"
-            [title]="bundle('MH148')"
-          >
-            <em class="fa fa-trash"></em>
-          </button>
+            iconButton="true"
+            icon="delete"
+          />
         </div>
       </div>
     </div>
@@ -163,7 +159,7 @@
         >
           <p class="sub-titulo">Validação do documento</p>
           <!--
-            Comentado à pedido da Lidiane        
+            Comentado à pedido da Lidiane
           <p *ngIf="mapaValidacoesEncontradas.get(documento.id)" class="arquivo-data">
             <i aria-hidden="true" class="fa fa-user-circle-o"></i>
             {{mapaValidacoesEncontradas.get(documento.id).codigoUsuarioValidacao | uppercase}}
@@ -186,16 +182,19 @@
             "
             class="row ui-g no-padding"
           >
-            <span class="label-campo-card ui-g-12 no-padding-left"
+            <span class="label-campo-card col-md-12 no-padding-left"
               >Situação</span
             >
-            <div class="ui-g-4 no-padding-left">
+            <div class="col-md-4 no-padding-left">
               <asc-dropdown
-  [items]="itensTipoValidacao"
-  [placeholder]="this.bundle('MHSPH')"
-></asc-dropdown>
+                [items]="itensTipoValidacao"
+                [placeholder]="this.bundle('MHSPH')"
+                (selected)="situacaoSelecionada(documento.id, $event)"
+                size="standard"
+              ></asc-dropdown>
+
             </div>
-            <div class="ui-g-8">
+            <div class="col-md-4">
               <asc-button-third
                 (onClick)="atualizarSituacaoDocumentoProcesso(documento)"
                 @fadeInOut
@@ -218,32 +217,37 @@
             "
             class="ui-g no-padding"
           >
-            <span class="label-campo-card ui-g-12 no-padding-left"
+          <div class="row">
+            <span class="label-campo-card col-md-12 no-padding-left"
               >Situação</span
             >
-            <div class="ui-g-10 no-padding-left">
+            <div class="col-md-11 no-padding-left">
               {{ mostraSituacao(documento.id) }}
             </div>
+
+
             <div
-              class="ui-sm-2"
-              style="margin-left: auto"
+              class="col-md-1"
+              style="margin-right: 0px"
               *ngIf="!tituloAcompanhamento"
             >
-              <button
+              <dsc-button
                 (click)="
                   clickAlerarDados(
                     mapaValidacoesEncontradas.get(documento.id),
                     true
                   )
                 "
+                iconButton="true"
+                icon="create"
                 *ngIf="permissoes?.editar"
                 [disabled]="isEditing || loading"
                 [id]="'alterarDados' + i + documento?.id"
-                class="btn-editar"
-              >
-                <i aria-hidden="true" class="fa fa-pencil"></i>
-              </button>
+                variant="secondary"
+              />
             </div>
+
+          </div> <!-- row -->
           </div>
         </div>
       </div>

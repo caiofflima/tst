@@ -132,4 +132,11 @@ export class RelatorioAnaliticoListarComponent extends BaseComponent implements 
     voltar(): void {
         this.location.back();
     }
+
+    get compStyle(): any {
+        return {
+            'background-color' : '#d0e0e3',
+            'color' : '#000'
+        };
+    }
 }

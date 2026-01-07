@@ -18,7 +18,7 @@ import {PdfViewerModule} from 'ng2-pdf-viewer';
 import {DownloadViewerComponent} from "./documento-card/download-viewer.component";
 import {DscDialogModule} from "sidsc-components/dsc-dialog";
 import {DscProgressSpinnerComponent} from "sidsc-components/dsc-progress-spinner";
-
+import {DscCaixaModule} from 'app/shared/dsc-caixa/dsc-caixa.module';
 
 @NgModule({
   imports: [
@@ -36,15 +36,15 @@ import {DscProgressSpinnerComponent} from "sidsc-components/dsc-progress-spinner
     FormsModule,
     PipeModule,
     PdfViewerModule,
-    DscDialogModule,
-    DscProgressSpinnerComponent
+    DscProgressSpinnerComponent,
+    DscCaixaModule
   ],
   declarations: [
     AscDocumentoCardComponent,
     AscModalVisualizarDocumentoComponent,
     DocumentoComplementarCardComponent,
     DownloadViewerComponent
- 
+
   ],
   exports: [
     AscDocumentoCardComponent,

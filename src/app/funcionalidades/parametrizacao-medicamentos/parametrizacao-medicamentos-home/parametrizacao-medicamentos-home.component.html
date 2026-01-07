@@ -46,9 +46,11 @@
           </div>
 
           <div class="col-md-6">
-            <label class="control-label" for="numeroTuss">Número TUSS</label>&nbsp;<br>
+            <!--label class="control-label" for="numeroTuss">Número TUSS</label>&nbsp;<br>
             <input type="number" (input)="limitarTamanho($event)" id="numeroTuss" name="numeroTuss" formControlName="numeroTuss"
-                  class="form-control" [maxlength]="10" title="Número Tuss">
+                  class="form-control" [maxlength]="10" title="Número Tuss"-->
+            <asc-input-text label="Número TUSS" [somenteNumeros]="true" 
+                    id="numeroTuss" name="numeroTuss" [control]="formulario.get('numeroTuss')" [maxlength]="10"></asc-input-text>
           </div>
         </div>
 

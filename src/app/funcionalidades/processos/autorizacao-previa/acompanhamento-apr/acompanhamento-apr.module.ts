@@ -10,6 +10,7 @@ import { PlaygroundModule } from '../../../../shared/playground/playground.modul
 import { AscCardModule } from "../../../../shared/components/asc-card/asc-card.module";
 import {AscDocumentosModule} from "../../../../../app/shared/components/asc-pedido/asc-documentos/asc-documentos.module";
 import { ArquivoEnvioDadoService } from 'app/shared/services/services';
+import { DscCaixaModule } from 'app/shared/dsc-caixa/dsc-caixa.module';
 
 @NgModule({
   imports: [
@@ -20,7 +21,8 @@ import { ArquivoEnvioDadoService } from 'app/shared/services/services';
     AscPedidoModule,
     PlaygroundModule,
     AscCardModule,
-    AscDocumentosModule
+    AscDocumentosModule,
+    DscCaixaModule
   ],
   declarations: [AcompanhamentoAprComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

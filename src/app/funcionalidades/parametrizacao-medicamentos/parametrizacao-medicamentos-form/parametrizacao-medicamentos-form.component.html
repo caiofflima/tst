@@ -165,7 +165,7 @@
                     Restaurar Campos
                 </button>
 
-                <button class="btn continue-btn" (click)="salvar()" id="btnFormSalvar" [disabled]="formulario.invalid">
+                <button class="btn continue-btn" (click)="salvar()" id="btnFormSalvar" [disabled]="!isSalvar()">
                     Salvar
                 </button>
             </div>
