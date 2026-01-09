@@ -20,10 +20,9 @@
       class="custom-form-group-input"
       *ngIf="formularioSolicitacao.get('idBeneficiario').valid"
     >
-      <label class="control-label">E-mail <small>Opcional</small></label>
       <div class="custom-size">
         <asc-input-text
-          label=""
+          label="E-mail - Opcional"
           [control]="formularioSolicitacao.get('email')"
         ></asc-input-text>
       </div>
@@ -32,10 +31,9 @@
       class="custom-form-group-input"
       *ngIf="formularioSolicitacao.get('idBeneficiario').valid"
     >
-      <label class="control-label">Telefone <small>Opcional</small></label>
       <div class="custom-size">
         <asc-input-telefone
-          label=""
+          label="Telefone - Opcional"
           [control]="formularioSolicitacao.get('telefoneContato')"
         ></asc-input-telefone>
       </div>

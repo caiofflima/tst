@@ -493,27 +493,54 @@ div.procedimentos-adicionados {
   }
 }
 
-.mdl-overf-body-procedimento > p {
+#modalProcediento {
+  .modal-header {
+    border-bottom: none;
+    padding: 10px 15px;
+
+    .close {
+      opacity: 1;
+      font-size: 28px;
+      color: #333;
+      padding: 0;
+      margin: 0;
+
+      &:hover {
+        color: #000;
+      }
+    }
+  }
+
+  .modal-body.mdl-overf-body-procedimento {
+    padding-top: 0;
+  }
+}
+
+.mdl-overf-body-procedimento > p.text-modal {
   overflow-y: auto;
-  max-height: 500px;
+  max-height: 400px;
   padding-right: 15px;
   font-family: 'Caixa Std Regular', sans-serif;
 }
 
-.title-text-modal{
-  font-family: 'Caixa Std Bold', sans-serif;;
+.title-text-modal {
+  font-family: 'Caixa Std Bold', sans-serif;
   font-style: normal;
   font-weight: bold;
   font-size: 18px;
   line-height: 22px;
   color: #40A797;
-  text-align:center
+  text-align: center;
+  overflow: visible;
+  max-height: none;
+  margin-bottom: 16px;
 }
-.position-span-close{
+
+.position-span-close {
   position: absolute;
   bottom: 240px;
   right: 10px;
   width: 100px;
-  text-align:right;
+  text-align: right;
 }
 

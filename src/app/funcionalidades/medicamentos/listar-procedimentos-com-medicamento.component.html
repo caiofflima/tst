@@ -52,7 +52,6 @@
 
       <ng-template pTemplate="header">
         <tr>
-          <th [style]="{'width':'35px'}" selectionMode="multiple" scope="col"></th>
           <th [pSortableColumn]="'nomePatologia'" [style]="{'width':'100px','text-align': 'left'}" scope="col">Patologia
             <p-sortIcon [field]="'nomePatologia'"></p-sortIcon>
           </th>
@@ -78,7 +77,6 @@
 
       <ng-template pTemplate="body" let-rowData>
         <tr>
-          <td></td>
           <td>{{ rowData.nomePatologia }}</td>
           <td>{{ getPercentual(rowData.reembolso) }}</td>
           <td>{{ rowData.compoeTeto | flagSimNao }}</td>
