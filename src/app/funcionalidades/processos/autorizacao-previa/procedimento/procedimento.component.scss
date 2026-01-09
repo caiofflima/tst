@@ -495,6 +495,8 @@ div.procedimentos-adicionados {
 
 #modalProcediento {
   .modal-header {
+    display: flex;
+    justify-content: flex-end;
     border-bottom: none;
     padding: 10px 15px;
 
@@ -502,11 +504,20 @@ div.procedimentos-adicionados {
       opacity: 1;
       font-size: 28px;
       color: #333;
-      padding: 0;
+      padding: 5px 10px;
       margin: 0;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      z-index: 1;
+      position: relative;
 
       &:hover {
         color: #000;
+      }
+
+      span {
+        pointer-events: none;
       }
     }
   }

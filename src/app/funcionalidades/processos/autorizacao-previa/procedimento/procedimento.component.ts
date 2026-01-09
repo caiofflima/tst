@@ -216,6 +216,19 @@ export class ProcedimentoComponent implements OnInit, OnDestroy {
         return this.parametroSelectProcedimento.idTipoProcesso === TipoProcessoEnum.AUTORIZACAO_PREVIA_ODONTOLOGICA;
     }
 
+    fecharModal(): void {
+        const modal = document.getElementById('modalProcediento');
+        if (modal) {
+            modal.classList.remove('show');
+            modal.style.display = 'none';
+            document.body.classList.remove('modal-open');
+            const backdrop = document.querySelector('.modal-backdrop');
+            if (backdrop) {
+                backdrop.remove();
+            }
+        }
+    }
+
     private salvarProcedimentoPedido(pedido: Pedido): Observable<any> {
         console.log('aqui 01')
         const incluirProcedimentoPedido = this.pedidoProcedimentosTabela.map(procedimentoPedido => {
