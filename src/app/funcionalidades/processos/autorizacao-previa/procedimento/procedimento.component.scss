@@ -503,7 +503,7 @@ div.procedimentos-adicionados {
     .close {
       opacity: 1;
       font-size: 28px;
-      color: #333;
+      color: #fff;
       padding: 5px 10px;
       margin: 0;
       background: transparent;
@@ -513,7 +513,7 @@ div.procedimentos-adicionados {
       position: relative;
 
       &:hover {
-        color: #000;
+        color: #ddd;
       }
 
       span {
