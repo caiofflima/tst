@@ -58,7 +58,7 @@
         <div class="titulo-card">Procedimentos do pedido</div>
       </asc-card-title>
       <asc-card-content>
-        <div *ngFor="let pedidoProcedimento of procedimentos; let i = index">
+        <div *ngFor="let pedidoProcedimento of procedimentos; let i = index" class="procedimento-item" [class.odd]="i % 2 !== 0">
           <div class="ui-sm-2 card-flt-mr">
             <button
               class="btn-editar"
@@ -251,19 +251,17 @@
               </div>
             </div>
             <div class="footer-buttons">
-              <button
-                class="back-btn"
-                (click)="cancelarEdicaoProfissionalExecutante()"
-              >
-                Cancelar
-              </button>
-              <button
-                class="continue-btn"
+              <asc-button-secondary
+                buttonId="cancelarProfissional"
+                title="Cancelar"
+                (onClick)="cancelarEdicaoProfissionalExecutante()"
+              ></asc-button-secondary>
+              <asc-button-primary
+                buttonId="confirmarProfissional"
+                title="Confirmar"
                 [disabled]="profissionalExecutanteForm.invalid"
-                (click)="salvarEdicaoProfissionalExecutante()"
-              >
-                Confirmar
-              </button>
+                (onClick)="salvarEdicaoProfissionalExecutante()"
+              ></asc-button-primary>
             </div>
           </asc-card-content>
         </asc-card-component>

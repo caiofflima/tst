@@ -238,6 +238,31 @@ div.custom-form-group-select {
   }
 }
 
+// Botões padronizados do formulário
+.footer-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid #e0e0e0;
+}
+
+// Linha zebrada nos procedimentos
+.procedimento-item {
+  padding: 12px 16px;
+  margin: 0 -16px;
+  border-bottom: 1px solid #e0e0e0;
+
+  &.odd {
+    background-color: #f5f5f5;
+  }
+
+  &:last-of-type {
+    border-bottom: none;
+  }
+}
+
 .btn-excluirProcedimento {
   background-color: #DC3545;
   color: #fff;
