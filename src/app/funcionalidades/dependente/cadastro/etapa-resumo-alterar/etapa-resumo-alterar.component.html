@@ -25,20 +25,18 @@
             *ngIf="idTipoProcessoResumo === TIPO_PROCESSO_INCLUIR"
           >
             <div class="ui-sm-2 card-flt-mr">
-              <button (click)="alterarBeneficiarios()" class="btn-editar">
-                <i aria-hidden="true" class="fa fa-pencil"></i>
-              </button>
+              <dsc-button  (click)="alterarBeneficiarios()" iconButton="true" icon="create" variant="secondary"/>
             </div>
-            <div class="ui-g">
-              <div class="ui-g-6 no-padding">
+            <div class="row">
+              <div class="col-md-6 no-padding">
                 <label>Tipo Beneficiário</label>
                 <p>{{ tipoDependente?.descricao }}</p>
               </div>
-              <div class="ui-g-6 no-padding" [hidden]="showMatricula">
+              <div class="col-md-6 no-padding" [hidden]="showMatricula">
                 <label>Matrícula Titular</label>
                 <p>{{ beneficiarioDependente?.matricula }}</p>
               </div>
-              <div class="ui-g-6 no-padding">
+              <div class="col-md-6 no-padding">
                 <label>Telefone Contato</label>
                 <p>
                   {{
@@ -48,7 +46,7 @@
                   }}
                 </p>
               </div>
-              <div class="ui-g-6 no-padding">
+              <div class="col-md-6 no-padding">
                 <label>E-mail</label>
                 <p>{{ beneficiarioDependente?.email | campoVazioHifen }}</p>
               </div>
@@ -59,28 +57,27 @@
             *ngIf="idTipoProcessoResumo === TIPO_PROCESSO_ALTERAR"
           >
             <div class="ui-sm-2 card-flt-mr">
-              <button (click)="alterarBeneficiarios()" class="btn-editar">
-                <i aria-hidden="true" class="fa fa-pencil"></i>
-              </button>
+              <dsc-button  (click)="alterarBeneficiarios()" iconButton="true" icon="create" variant="secondary"/>
+
             </div>
-            <div class="ui-g">
-              <div class="ui-g-6 no-padding">
+            <div class="row">
+              <div class="col-md-6">
                 <label>Nome (Anterior)</label>
                 <p class="uppercase">{{ beneficiario?.nome }}</p>
               </div>
-              <div class="ui-g-6 no-padding">
+              <div class="col-md-6">
                 <label>Código do Beneficiário</label>
                 <p>{{ beneficiario?.codigoBeneficiario }}</p>
               </div>
-              <div class="ui-g-6 no-padding margin-16">
+              <div class="col-md-6">
                 <label>Tipo Beneficiário</label>
                 <p class="uppercase">{{ tipoDependente?.descricao }}</p>
               </div>
-              <div class="ui-g-6 no-padding margin-16" [hidden]="showMatricula">
+              <div class="col-md-6" [hidden]="showMatricula">
                 <label>Matrícula Titular</label>
                 <p>{{ beneficiarioDependente?.matricula }}</p>
               </div>
-              <div class="ui-g-6 no-padding margin-16">
+              <div class="col-md-6">
                 <label>Telefone Contato</label>
                 <p>
                   {{
@@ -90,11 +87,11 @@
                   }}
                 </p>
               </div>
-              <div class="ui-g-6 no-padding margin-16">
+              <div class="col-md-6 no-padding margin-16">
                 <label>E-mail</label>
                 <p>{{ beneficiarioDependente?.email | campoVazioHifen }}</p>
               </div>
-              <div class="ui-g-6 no-padding margin-16">
+              <div class="col-md-6 no-padding margin-16">
                 <label>Motivo da Solicitação</label>
                 <p class="uppercase">{{ motivoSolicitacao?.nome }}</p>
               </div>
@@ -112,29 +109,29 @@
           </asc-card-title>
           <asc-card-content>
             <div *ngIf="idTipoProcessoResumo === TIPO_PROCESSO_INCLUIR">
-              <div class="ui-g-6 no-padding">
-                <div class="ui-g-6 ui-md-6 custom-form-grid">
+              <div class="no-padding">
+                <div class="col-md-6 ui-md-6 custom-form-grid">
                   <label>Tipo Beneficiário</label>
                   <p class="uppercase">{{ tipoDependente?.descricao }}</p>
                 </div>
-                <div class="ui-g-6 no-padding" [hidden]="showMatricula">
+                <div class="col-md-6 no-padding" [hidden]="showMatricula">
                   <label>Matrícula Titular</label>
                   <p>
                     {{ beneficiarioDependente?.matricula | campoVazioHifen }}
                   </p>
                 </div>
-                <div class="ui-g-6 no-padding">
-                  <label>E-mail</label>
+                <div class="col-md-6 no-padding">
+                  <label>E-mail 1</label>
                   <p>
                     <asc-input-text
                       [control]="formularioBeneficiario.get('email')"
                       inputId="email"
                       label=""
-                      style="width: 98%"
+                      class="col-md-6"
                     ></asc-input-text>
                   </p>
                 </div>
-                <div class="ui-g-6 no-padding">
+                <div class="col-md-6 no-padding">
                   <label>Telefone</label>
                   <p>
                     <asc-input-telefone
@@ -147,56 +144,52 @@
                 </div>
               </div>
               <div class="footer-buttons">
-                <button
-                  class="back-btn"
-                  (click)="cancelarAlterarBeneficiarios()"
-                >
-                  Cancelar
-                </button>
-                <button
-                  class="continue-btn"
-                  [disabled]="formularioBeneficiario.invalid"
-                  (click)="salvarBeneficiarios()"
-                >
-                  <span class="span-btn"> Confirmar </span>
-                </button>
+                <div class="row">
+                  <div class="col-md-6"></div>
+                  <div class="col-md-6">
+                    <div class="row">
+                      <dsc-button (click)="cancelarAlterarBeneficiarios()" label="Cancelar" variant="secondary-outlined" class="col-md-6"/>
+                      <dsc-button (click)="salvarBeneficiarios()" label="Confirmar" [disabled]="formularioBeneficiario.invalid" class="col-md-6"/>
+                    </div>
+                  </div>
+                </div>
+
               </div>
             </div>
 
             <div *ngIf="idTipoProcessoResumo === TIPO_PROCESSO_ALTERAR">
-              <div class="ui-g">
+              <div class="row">
                 <div
-                  class="ui-g-5 no-padding margin-16"
-                  style="margin-right: 19px"
+                  class="col-md-6 "
+
                 >
                   <label>Nome Completo</label>
                   <p class="uppercase">{{ beneficiario?.nome }}</p>
                 </div>
-                <div class="ui-g-5 no-padding margin-16">
+                <div class="col-md-6 ">
                   <label>Código do Beneficiário</label>
                   <p>{{ beneficiario?.codigoBeneficiario }}</p>
                 </div>
               </div>
-              <div class="ui-g">
+              <div class="row">
                 <div
-                  class="ui-g-5 no-padding margin-16"
-                  style="margin-right: 19px"
+                  class="col-md-12 "
+
                 >
                   <label>Tipo Beneficiário</label>
                   <p class="uppercase">{{ tipoDependente?.descricao }}</p>
                 </div>
                 <div
-                  class="ui-g-5 no-padding margin-16"
+                  class="col-md-6 "
                   [hidden]="showMatricula"
                 >
                   <label>Matrícula Titular</label>
                   <p>{{ beneficiarioDependente?.matricula }}</p>
                 </div>
               </div>
-              <div class="ui-g">
+              <div class="row">
                 <div
-                  class="ui-g-5 no-padding margin-16"
-                  style="margin-right: 19px"
+                  class="col-md-6"
                 >
                   <asc-input-text
                     [control]="formularioBeneficiario.get('email')"
@@ -204,15 +197,15 @@
                     label="E-mail"
                   ></asc-input-text>
                 </div>
-                <div class="ui-g-5 no-padding margin-16">
+                <div class="col-md-6">
                   <label>Motivo da Solicitação</label>
                   <p class="uppercase">{{ motivoSolicitacao?.nome }}</p>
                 </div>
               </div>
-              <div class="ui-g">
+              <div class="row">
                 <div
-                  class="ui-g-5 no-padding margin-16"
-                  style="margin-right: 19px"
+                  class="col-md-6"
+
                 >
                   <asc-input-telefone
                     [control]="formularioBeneficiario.get('telefoneContato')"
@@ -222,19 +215,16 @@
                 </div>
               </div>
               <div class="footer-buttons">
-                <button
-                  class="back-btn"
-                  (click)="cancelarAlterarBeneficiarios()"
-                >
-                  Cancelar
-                </button>
-                <button
-                  class="continue-btn"
-                  [disabled]="formularioBeneficiario.invalid"
-                  (click)="salvarBeneficiarios()"
-                >
-                  <span class="span-btn"> Confirmar </span>
-                </button>
+                <div class="row">
+                  <div class="col-md-6"></div>
+                  <div class="col-md-6">
+                    <div class="row">
+                      <dsc-button (click)="cancelarAlterarBeneficiarios()" label="Cancelar" variant="secondary-outlined" class="col-md-6"/>
+                      <dsc-button (click)="salvarBeneficiarios()" label="Confirmar" [disabled]="formularioBeneficiario.invalid" class="col-md-6"/>
+                    </div>
+                  </div>
+                </div>
+
               </div>
             </div>
           </asc-card-content>
@@ -258,51 +248,49 @@
         <asc-card-content>
           <div @fadeInOut>
             <div class="ui-sm-2 card-flt-mr">
-              <button (click)="alterarDadosBasicos()" class="btn-editar">
-                <i aria-hidden="true" class="fa fa-pencil"></i>
-              </button>
+              <dsc-button (click)="alterarDadosBasicos()" variant="secondary" iconButton="true" icon="create"/>
             </div>
-            <div class="ui-g">
-              <div class="ui-g-6 no-padding">
+            <div class="row">
+              <div class="col-md-6 no-padding">
                 <label>Nome completo</label>
                 <p class="uppercase">
                   {{ dadoDependente?.nomeCompleto | campoVazioHifen }}
                 </p>
               </div>
-              <div class="ui-g-6 no-padding">
+              <div class="col-md-6 no-padding">
                 <label>CPF</label>
                 <p>{{ dadoDependente?.cpf | campoVazioHifen }}</p>
               </div>
-              <div class="ui-g-6 no-padding margin-16">
+              <div class="col-md-6 no-padding margin-16">
                 <label>Data de nascimento</label>
                 <p>
                   {{ dadoDependente?.dataNascimento | date : "dd/MM/yyyy" }}
                 </p>
               </div>
-              <div class="ui-g-6 no-padding margin-16">
+              <div class="col-md-6 no-padding margin-16">
                 <label>Nome da mãe</label>
                 <p class="uppercase">
                   {{ dadoDependente?.nomeMae | campoVazioHifen }}
                 </p>
               </div>
-              <div class="ui-g-6 no-padding margin-16">
+              <div class="col-md-6 no-padding margin-16">
                 <label>Sexo</label>
                 <p class="uppercase">{{ nomeSexo | campoVazioHifen }}</p>
               </div>
-              <div class="ui-g-6 no-padding margin-16">
+              <div class="col-md-6 no-padding margin-16">
                 <label>Nome do pai</label>
                 <p class="uppercase">
                   {{ dadoDependente?.nomePai | campoVazioHifen }}
                 </p>
               </div>
-              <div class="ui-g-6 no-padding margin-16">
+              <div class="col-md-6 no-padding margin-16">
                 <label>Estado Civil</label>
                 <p class="uppercase">
                   {{ estadoCivil?.descricao | campoVazioHifen }}
                 </p>
               </div>
 
-              <div class="ui-g-6 no-padding margin-16">
+              <div class="col-md-6 no-padding margin-16">
                 <label>Declaração de Nascido Vivo</label>
                 <p>
                   {{ dadoDependente?.declaracaoNascidoVivo | campoVazioHifen }}
@@ -322,10 +310,9 @@
           </asc-card-title>
           <asc-card-content>
             <div class="left-grid">
-              <div class="ui-g">
+              <div class="row">
                 <div
-                  class="ui-g-5 no-padding margin-16"
-                  style="margin-right: 19px"
+                  class="col-md-6"
                 >
                   <asc-input-text
                     [somenteLetrasMaiusculas]="'true'"
@@ -333,25 +320,23 @@
                     [required]="true"
                     inputId="nomeCompleto"
                     label="Nome completo"
-                    style="width: 98%"
                   ></asc-input-text>
                 </div>
-                <div class="ui-g-5 no-padding margin-16">
+                <div class="col-md-6">
                   <asc-input-text
                     [control]="formularioDadosBasicos.get('cpf')"
                     inputId="cpf"
                     label="CPF"
                     [required]="true"
                     maskName="cpfMask"
-                    style="width: 98%"
                   ></asc-input-text>
                 </div>
               </div>
 
-              <div class="ui-g">
+              <div class="row">
                 <div
-                  class="ui-g-5 no-padding margin-16"
-                  style="margin-right: 19px"
+                  class="col-md-6"
+
                 >
                   <asc-input-date
                     [control]="formularioDadosBasicos.get('dataNascimento')"
@@ -366,23 +351,22 @@
                     ></asc-input-error>
                   </asc-input-date>
                 </div>
-                <div class="ui-g-5 no-padding margin-16">
+                <div class="col-md-6 ">
                   <asc-input-text
                     [somenteLetrasMaiusculas]="'true'"
                     [control]="formularioDadosBasicos.get('nomeMae')"
                     inputId="nomeMae"
                     [required]="true"
                     label="Nome da mãe"
-                    style="width: 98%"
                   >
                   </asc-input-text>
                 </div>
               </div>
 
-              <div class="ui-g">
+              <div class="row">
                 <div
-                  class="ui-g-5 no-padding margin-16"
-                  style="margin-right: 19px"
+                  class="col-md-6"
+
                 >
                   <asc-dropdown
                     [items]="sexos"
@@ -392,22 +376,20 @@
                   ></asc-dropdown>
                 </div>
 
-                <div class="ui-g-5 no-padding margin-16">
+                <div class="col-md-6">
                   <asc-input-text
                     [somenteLetrasMaiusculas]="'true'"
                     [control]="formularioDadosBasicos.get('nomePai')"
                     inputId="nomePai"
                     label="Nome do pai"
-                    style="width: 98%"
                   >
                   </asc-input-text>
                 </div>
               </div>
 
-              <div class="ui-g">
+              <div class="row">
                 <div
-                  class="ui-g-5 no-padding margin-16"
-                  style="margin-right: 19px"
+                  class="col-md-6"
                 >
                   <asc-select-estado-civil
                     label="Estado Civil"
@@ -417,7 +399,7 @@
                     (dadoSelecionado)="estadoCivilSelecionado($event)"
                   ></asc-select-estado-civil>
                 </div>
-                <div class="ui-g-5 no-padding margin-16">
+                <div class="col-md-6">
                   <asc-input-text
                     [control]="
                       formularioDadosBasicos.get('declaracaoNascidoVivo')
@@ -431,19 +413,16 @@
               </div>
 
               <div class="footer-buttons">
-                <button
-                  class="back-btn"
-                  (click)="cancelarAlterarDadosBasicos()"
-                >
-                  Cancelar
-                </button>
-                <button
-                  class="continue-btn"
-                  [disabled]="formularioDadosBasicos.invalid"
-                  (click)="salvarDadosBasicos()"
-                >
-                  <span class="span-btn"> Confirmar </span>
-                </button>
+                <div class="row">
+                  <div class="col-md-6"></div>
+                  <div class="col-md-6">
+                    <div class="row">
+                      <dsc-button (click)="cancelarAlterarDadosBasicos()" label="Cancelar" variant="secondary-outlined" class="col-md-6"/>
+                      <dsc-button (click)="salvarDadosBasicos()" label="Confirmar" class="col-md-6"/>
+                    </div>
+                  </div>
+                </div>
+
               </div>
             </div>
           </asc-card-content>
@@ -468,28 +447,29 @@
           <div @fadeInOut>
             <div class="left-grid">
               <div class="ui-sm-2 card-flt-mr">
-                <button (click)="alterDadosComplementos()" class="btn-editar">
+                <dsc-button  (click)="alterDadosComplementos()" iconButton="true" icon="create" variant="secondary"/>
+                <!-- <button (click)="alterDadosComplementos()" class="btn-editar">
                   <i aria-hidden="true" class="fa fa-pencil"></i>
-                </button>
+                </button> -->
               </div>
-              <div class="ui-g">
-                <div class="ui-g-6 no-padding">
+              <div class="row">
+                <div class="col-md-6 no-padding">
                   <label>Documento de Identidade</label>
                   <p class="uppercase">
                     {{ complementoDependente?.rg | campoVazioHifen }}
                   </p>
                 </div>
-                <div class="ui-g-6 no-padding">
+                <div class="col-md-6 no-padding">
                   <label>Tipo deficiência</label>
                   <p>{{ tipoDeficiencia?.descricao | campoVazioHifen }}</p>
                 </div>
-                <div class="ui-g-6 no-padding margin-16">
+                <div class="col-md-6 no-padding margin-16">
                   <label>Órgão emissor</label>
                   <p class="uppercase">
                     {{ complementoDependente?.orgaoEmissor | campoVazioHifen }}
                   </p>
                 </div>
-                <div class="ui-g-6 no-padding margin-16">
+                <div class="col-md-6 no-padding margin-16">
                   <label>Cartão Nacional de Saúde</label>
                   <p>
                     {{
@@ -498,7 +478,7 @@
                     }}
                   </p>
                 </div>
-                <div class="ui-g-6 no-padding margin-16">
+                <div class="col-md-6 no-padding margin-16">
                   <label>Data de expedição</label>
                   <p>
                     {{
@@ -508,24 +488,24 @@
                     }}
                   </p>
                 </div>
-                <div class="ui-g-6 no-padding margin-16">
+                <div class="col-md-6 no-padding margin-16">
                   <label>Número Cartão UNIMED</label>
                   <p>
                     {{ complementoDependente?.cartaoUnimed | campoVazioHifen }}
                   </p>
                 </div>
 
-                <div class="ui-g-6 no-padding margin-16">
+                <div class="col-md-6 no-padding margin-16">
                   <label>Município Naturalidade</label>
                   <p>{{ municipio?.nome }} — {{ municipio?.estado.sigla }}</p>
                 </div>
 
-                <div class="ui-g-6 no-padding margin-16">
+                <div class="col-md-6 no-padding margin-16">
                   <label>Valor renda</label>
                   <p>{{ complementoDependente?.renda | campoVazioHifen }}</p>
                 </div>
 
-                <div class="ui-g-6 no-padding margin-16">
+                <div class="col-md-6 no-padding margin-16">
                   <label>E-mail</label>
                   <p>
                     {{
@@ -547,10 +527,10 @@
           </asc-card-title>
           <asc-card-content>
             <div class="left-grid">
-              <div class="ui-g">
+              <div class="row">
                 <div
-                  class="ui-g-5 no-padding margin-16"
-                  style="margin-right: 19px"
+                  class="col-md-6"
+
                 >
                   <asc-input-text
                     [somenteLetrasMaiusculas]="'true'"
@@ -559,11 +539,11 @@
                     label="Documento de Identidade"
                     [maxlength]="12"
                     [somenteNumeros]="true"
-                    style="width: 98%"
+
                     [required]="rgRequired"
                   ></asc-input-text>
                 </div>
-                <div class="ui-g-5 no-padding margin-16">
+                <div class="col-md-6">
                   <asc-dropdown
                     [items]="tipoDeficiencias"
                     [control]="
@@ -574,10 +554,10 @@
                 </div>
               </div>
 
-              <div class="ui-g">
+              <div class="row">
                 <div
-                  class="ui-g-5 no-padding margin-16"
-                  style="margin-right: 19px"
+                  class="col-md-6"
+
                 >
                   <asc-input-text
                     [somenteLetrasMaiusculas]="'true'"
@@ -587,27 +567,26 @@
                     inputId="orgaoEmissor"
                     [maxlength]="6"
                     label="Órgão emissor"
-                    style="width: 98%"
+
                     [required]="rgRequired"
                   ></asc-input-text>
                 </div>
-                <div class="ui-g-5 no-padding margin-16">
+                <div class="col-md-6">
                   <asc-input-text
                     [control]="
                       formularioDadosComplementares.get('cartaoUnimed')
                     "
                     inputId="cartaoUnimed"
-                    style="width: 98%"
                     [somenteNumeros]="true"
                     label="Número Cartão UNIMED"
                   ></asc-input-text>
                 </div>
               </div>
 
-              <div class="ui-g">
+              <div class="row">
                 <div
-                  class="ui-g-5 no-padding margin-16"
-                  style="margin-right: 19px"
+                  class="col-md-6"
+
                 >
                   <asc-input-date
                     [control]="
@@ -625,23 +604,21 @@
                     ></asc-input-error>
                   </asc-input-date>
                 </div>
-                <div class="ui-g-5 no-padding margin-16">
+                <div class="col-md-6">
                   <asc-input-text
                     [control]="
                       formularioDadosComplementares.get('cartaoNacionalSaude')
                     "
                     inputId="cartaoNacionalSaude"
-                    style="width: 98%"
                     [somenteNumeros]="true"
                     label="Cartão Nacional de Saúde"
                   ></asc-input-text>
                 </div>
               </div>
 
-              <div class="ui-g">
+              <div class="row">
                 <div
-                  class="ui-g-5 no-padding margin-16"
-                  style="margin-right: 19px"
+                  class="col-md-6"
                 >
                   <asc-select-uf
                     label="UF Naturalidade"
@@ -650,21 +627,20 @@
                   </asc-select-uf>
                 </div>
 
-                <div class="ui-g-5 no-padding margin-16">
+                <div class="col-md-6">
                   <asc-input-money-type
                     [control]="formularioDadosComplementares.get('renda')"
                     inputId="renda"
                     label="Valor renda"
-                    style="width: 98%"
                   >
                   </asc-input-money-type>
                 </div>
               </div>
 
-              <div class="ui-g">
+              <div class="row">
                 <div
-                  class="ui-g-5 no-padding margin-16"
-                  style="margin-right: 19px"
+                  class="col-md-6"
+
                 >
                   <asc-select-municipio
                     label="Município Naturalidade"
@@ -681,7 +657,7 @@
                   </asc-select-municipio>
                 </div>
 
-                <div class="ui-g-5 no-padding margin-16">
+                <div class="col-md-6">
                   <asc-input-text
                     [control]="
                       formularioDadosComplementares.get('emailDependente')
@@ -694,19 +670,16 @@
               </div>
 
               <div class="footer-buttons">
-                <button
-                  class="back-btn"
-                  (click)="cancelarAlterarDadosComplementares()"
-                >
-                  Cancelar
-                </button>
-                <button
-                  class="continue-btn"
-                  [disabled]="formularioDadosComplementares.invalid"
-                  (click)="salvarDadosComplementos()"
-                >
-                  <span class="span-btn"> Confirmar </span>
-                </button>
+                <div class="row">
+                  <div class="col-md-6"></div>
+                  <div class="col-md-6">
+                    <div class="row">
+                      <dsc-button (click)="cancelarAlterarDadosComplementares()" label="Cancelar" variant="secondary-outlined" class="col-md-6"/>
+                      <dsc-button (click)="salvarDadosComplementos()" label="Confirmar" class="col-md-6" [disabled]="formularioDadosComplementares.invalid" />
+                    </div>
+                  </div>
+                </div>
+
               </div>
             </div>
           </asc-card-content>
@@ -791,6 +764,7 @@
         (click)="setModal(false)"
         title="Cancelar"
       ></asc-button-secondary>
+      &nbsp;
       <asc-button-primary
         buttonId="continuar"
         [disabled]="showProgress"

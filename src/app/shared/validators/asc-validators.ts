@@ -106,7 +106,7 @@ export class AscValidators {
     }
 
     static cpf(control: AbstractControl) {
-      
+
         let value: string = control.value;
         if (!value) {
             value = '';
@@ -118,16 +118,16 @@ export class AscValidators {
         if (value.length == 11) {
             value = String(value);
 
-          
+
 
             return constantes.handleTodosCarecteresNaoSaoIguais(value)
 
-          
+
 
         }
         return null
 
-        
+
     }
 
 
@@ -145,7 +145,7 @@ export class AscValidators {
                 return {cnpj: true};
             }
 
-            if (isTodosCaracteresIguais(cnpj)) {    
+            if (isTodosCaracteresIguais(cnpj)) {
                 return {cnpj: true};
             }
             let tamanho = cnpj.length - 2;
@@ -175,7 +175,7 @@ export class AscValidators {
             if (resultado != digitos.charAt(1))
                 return {cnpj: true};
 
-        
+
         return null
     }
 

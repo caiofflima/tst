@@ -73,6 +73,7 @@ import { PopoverModule } from 'ngx-bootstrap/popover';
 import { BaseLayoutHomeComponent } from './base-layout/base-layout-home/base-layout-home.component';
 import { AscListagemComponent } from './asc-listagem/asc-listagem.component';
 import { DscCaixaModule } from 'app/shared/dsc-caixa/dsc-caixa.module';
+import { PipeModule } from '../pipes/pipe.module';
 
 
 
@@ -91,7 +92,8 @@ import { DscCaixaModule } from 'app/shared/dsc-caixa/dsc-caixa.module';
         InputTextModule,
         AscModalModule,
         PopoverModule.forRoot(),
-        DscCaixaModule
+        DscCaixaModule,
+        PipeModule
     ],
     declarations: [
         DatalistComponent,

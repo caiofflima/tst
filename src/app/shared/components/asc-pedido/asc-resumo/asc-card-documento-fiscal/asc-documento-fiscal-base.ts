@@ -177,7 +177,7 @@ export class DocumentosFiscalBase extends AscComponenteAutorizado implements OnI
             delay(100),
             filter(isNotUndefinedNullOrEmpty),
             map((pedidoProcedimentos: PedidoProcedimento[]) => pedidoProcedimentos
-            .reduce((acc, current: PedidoProcedimento) => acc + (Number(current.valorUnitarioPago) * (current.qtdSolicitada || 1)), 0)),
+            .reduce((acc, current: PedidoProcedimento) => acc + (Number(current.valorUnitarioPago) * (current.qtdSolicitada || current.qtdMedicamento || 1)), 0)),
             tap((totalValorUnitarioPago: number) => this.definirValorMinimo(totalValorUnitarioPago)),
             takeUntil(this.unsubscribe$)
         ).subscribe()

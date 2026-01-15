@@ -40,7 +40,7 @@ export abstract class BaseInputComponent extends BaseComponent implements OnInit
     inputId: string = null;
 
     @Input()
-    label: string;
+    label: string = '';
 
     @Input()
     hint: string;

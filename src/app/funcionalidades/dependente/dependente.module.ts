@@ -34,6 +34,7 @@ import {PipeModule} from 'app/shared/pipes/pipe.module';
 import {EtapaResumoAlterarComponent} from "./cadastro/etapa-resumo-alterar/etapa-resumo-alterar.component";
 import {AscCardModule} from "../../shared/components/asc-card/asc-card.module";
 import { ArquivoEnvioDadoService } from 'app/shared/services/services';
+import { DscCaixaModule } from 'app/shared/dsc-caixa/dsc-caixa.module';
 
 @NgModule({
     imports: [
@@ -58,7 +59,8 @@ import { ArquivoEnvioDadoService } from 'app/shared/services/services';
         ReciboModule,
         PipeModule,
         AcompanhamentoDependenteModule,
-        AscCardModule
+        AscCardModule,
+        DscCaixaModule
     ],
     declarations: [
         PaginaInicialComponent,

@@ -26,7 +26,7 @@
       <div
         class="form-group col-md-6 noPaddingLeft"
         *ngIf="formularioSolicitacao.get('dependente').valid"
-        @fadeInOut
+
       >
         <div class="custom-form-group-input">
           <asc-select-tipo-dependente
@@ -42,7 +42,7 @@
         </div>
       </div>
       <div class="form-group col-md-6 noPaddingLeft" *ngIf="showMatricula">
-        <div class="custom-form-group-input" @fadeInOut>
+        <div class="custom-form-group-input" >
           <div class="custom-size">
             <asc-input-text
               [control]="formularioSolicitacao.get('matricula')"
@@ -61,7 +61,7 @@
         <div
           class="custom-form-group-input"
           *ngIf="formularioSolicitacao.get('idTipoDependente').valid"
-          @fadeInOut
+
         >
           <div class="custom-size">
             <asc-select-finalidade
@@ -82,14 +82,14 @@
       </div>
 
       <div class="form-group col-md-12 noPaddingLeft">
-        <p class="titulo" @fadeInOut>
+        <p class="titulo" >
           Você gostaria de informar um contato adicional para recebimento das
           notificações do seu pedido?
         </p>
       </div>
 
       <div class="form-group col-md-6 noPaddingLeft">
-        <div class="custom-form-group-input" @fadeInOut>
+        <div class="custom-form-group-input" >
           <label class="control-label">E-mail <small>Opcional</small></label>
           <div class="custom-size">
             <asc-input-text
@@ -102,7 +102,7 @@
       </div>
 
       <div class="form-group col-md-6 noPaddingLeft">
-        <div class="custom-form-group-input" @fadeInOut>
+        <div class="custom-form-group-input" >
           <label class="control-label">Telefone <small>Opcional</small></label>
           <div class="custom-size">
             <asc-input-telefone

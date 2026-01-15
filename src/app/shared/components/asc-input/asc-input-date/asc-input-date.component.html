@@ -1,15 +1,12 @@
-<dsc-datepicker
-  [label]="required !== null && required !== false ? label + ' *' : label"
-  [formControl]="control"
-  [placeholder]="placeholder"
-  [disabled]="disabled"
-  [size]="size"
-  [ngStyle]="compStyle"
->
-</dsc-datepicker>
+<div class="input-content">
+  <dsc-datepicker
+    [label]="(control | isRequired) ? label + ' *' : label"
+    [formControl]="control"
+    [placeholder]="placeholder"
+    [disabled]="disabled"
+    [size]="size"
+    [ngStyle]="compStyle"
+    [errorMessage]="personalizarMensagem()"
+  />
+</div>
 
-<asc-input-error
-  [control]="control"
-  [requiredMsg]="requiredMsg"
-  [style]="compStyle"
-></asc-input-error>

@@ -160,8 +160,16 @@
   }
 
   .imagem-viewer {
-    max-width: 85vw;
+    max-width: 100vw;
     max-height: 78vh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  .imagem-viewer-tela {
+    max-width: 100vw;
     width: auto;
     height: auto;
     object-fit: contain;
@@ -171,7 +179,7 @@
 }
 
 // Footer com botões
-.modal-footer-actions {
+.modal-footer-actions-base {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -182,7 +190,6 @@
   flex-shrink: 0;
   position: absolute;
   bottom: 0;
-  width: 100%;
 
   .navegacao-arquivos {
     display: flex;
@@ -273,4 +280,27 @@
       }
     }
   }
+}
+
+// Classe original com width: 100%
+.modal-footer-actions {
+  @extend .modal-footer-actions-base;
+  width: 100%;
+}
+
+// Nova classe com width diferente
+.modal-footer-actions-tela {
+  @extend .modal-footer-actions-base;
+  width: 100vw;
+  // ou qualquer outro width que você quiser
+}
+
+.title-tela{
+  background-color: #005ca9;
+  height: 30px;
+  color: white;
+  padding-bottom: 5px;
+  padding-top: 5px;
+  padding-left: 10px  ;
+  font-weight: bold;
 }

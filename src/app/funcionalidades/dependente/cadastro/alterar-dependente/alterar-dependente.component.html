@@ -21,14 +21,14 @@
         Atualização de Beneficiário
       </ng-template>
       <asc-etapa-dados-dependente
-        *ngIf="cdkStepper._getFocusIndex() === 1" 
+        *ngIf="cdkStepper._getFocusIndex() === 1"
         [checkRestart]="reiniciarSubject"
-        [stepper]="cdkStepper" 
+        [stepper]="cdkStepper"
         [idTipoProcesso]="idTipoProcesso"
         [beneficiarioDependente]="beneficiarioDependenteModel"
         (estadoCivilModel)="estadoCivilModelSelecionado($event)"
         (dadoDependenteModel)="dadoDependenteModelSelecionado($event)"
-        [tipoDependente]="tipoDependenteModel " 
+        [tipoDependente]="tipoDependenteModel "
       ></asc-etapa-dados-dependente>
     </cdk-step>
     <cdk-step [label]="'Complemento'">

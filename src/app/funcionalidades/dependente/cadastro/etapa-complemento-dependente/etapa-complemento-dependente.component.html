@@ -13,8 +13,7 @@
             [control]="formularioComplemento.get('rg')"
             inputId="rg"
             label="Número Documento de Identidade"
-            [required]="rgRequired"
-            [somenteAlfaNumericos]="true"
+            [somenteNumeros]="true"
             autocomplete="off"
             [index]="1"
             [maxlength]="12"
@@ -29,7 +28,6 @@
             (selected)="tipoDeficienciaSelecionado($event)"
             [index]="6"
             class="mb-15"
-            [required]="complementoRequired"
           >
           </asc-dropdown>
         </div>
@@ -40,9 +38,9 @@
               [somenteLetrasMaiusculas]="'true'"
               inputId="orgaoEmissor"
               label="Órgão emissor"
-              [required]="rgRequired"
               [index]="2"
               [maxlength]="6"
+              [uppercase]="true"
             ></asc-input-text>
         </div>
 
@@ -63,7 +61,6 @@
               [control]="formularioComplemento.get('dataExpedicaoRg')"
               inputId="dataExpedicaoRg"
               label="Data de expedição"
-              [required]="rgRequired"
               [index]="3"
             >
               <asc-input-error

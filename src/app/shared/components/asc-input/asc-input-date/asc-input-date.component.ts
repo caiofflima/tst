@@ -56,7 +56,7 @@ export class AscInputDateComponent extends BaseInputComponent implements OnInit,
     ngAfterViewInit(): void {
         this.inputDateMask(this.dateCalendar);
         this.ref.detectChanges();
-        console.log('pt aq',this.pt)
+        //console.log('pt aq',this.pt)
 
     }
 
@@ -77,5 +77,24 @@ export class AscInputDateComponent extends BaseInputComponent implements OnInit,
 
     onSelect(event) {
         this.change.emit(event);
+    }
+
+    personalizarMensagem(){
+      let mensagem: string = '';
+      if(this.control.invalid && (this.control.dirty || this.control.touched)){
+        const errorKey = Object.keys(this.control.errors)[0];
+        switch (errorKey) {
+          case 'required':
+            mensagem = 'Campo obrigatório não informado'
+            break;
+          case 'dataMenorIgualAtual':
+            mensagem = 'O valor de data de nascimento não pode ser superior a data atual'
+            break
+
+          default:
+            break;
+        }
+      }
+      return mensagem
     }
 }

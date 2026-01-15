@@ -20,6 +20,7 @@ import {HandlePipe} from './handle.pipe';
 import { DateUTC } from './date-utc.pipe';
 import { DateStringFormat } from './date-string-format.pipe';
 import { CepMaskPipe } from './cep.pipe';
+import { EhObrigatorioPipe } from './eh-obrigatorio.pipe';
 
 
 @NgModule({
@@ -46,7 +47,8 @@ import { CepMaskPipe } from './cep.pipe';
         HandlePipe,
         DateUTC,
         DateStringFormat,
-        CepMaskPipe
+        CepMaskPipe,
+        EhObrigatorioPipe
     ],
     exports: [
         CpfPipe,
@@ -69,7 +71,8 @@ import { CepMaskPipe } from './cep.pipe';
         HandlePipe,
         DateUTC,
         DateStringFormat,
-        CepMaskPipe
+        CepMaskPipe,
+        EhObrigatorioPipe
     ],
 })
 export class PipeModule {

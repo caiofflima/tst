@@ -37,7 +37,7 @@ export class EtapaDadosDependenteComponent extends BaseComponent implements OnIn
     @Output()
     readonly estadoCivilModel = new EventEmitter<EstadoCivil>();
     mensagemIdade: string = "Idade  do dependente incompatível com o tipo de beneficiário selecionado.";
-    
+
 
     @Input()
     set beneficiarioDependente(dependente: BeneficiarioDependenteFormModel) {
@@ -96,7 +96,7 @@ export class EtapaDadosDependenteComponent extends BaseComponent implements OnIn
     CONJUGE_COMPANHEIRO = 3;
     COMPANHEIRO_DIRETO = 62;
     dadoDependente:any;
-        
+
     beneficiarioDependenteFormModel: BeneficiarioDependenteFormModel;
     beneficiarioModel: Beneficiario;
     beneficiarioCarregado: Beneficiario;
@@ -104,7 +104,7 @@ export class EtapaDadosDependenteComponent extends BaseComponent implements OnIn
 
     readonly formularioDadosDependente = new FormGroup({
         nomeCompleto: new FormControl(null, Validators.required),
-        cpf: new FormControl(null, AscValidators.cpf),
+        cpf: new FormControl(null, [AscValidators.cpf, Validators.required]),
         dataNascimento: new FormControl(null, [Validators.required, AscValidators.dataMenorIgualAtual]),
         nomeMae: new FormControl(null, Validators.required),
         sexo: new FormControl(null, Validators.required),
@@ -166,56 +166,56 @@ export class EtapaDadosDependenteComponent extends BaseComponent implements OnIn
     }
 
     onSubmit(): void {
-        console.log("onSubmit(): void { - ETAPA DADOS DEPENDENTE ");
+        //console.log("onSubmit(): void { - ETAPA DADOS DEPENDENTE ");
         this.validDataNascimento()
         if (this.formularioDadosDependente && this.formularioDadosDependente.valid) {
-            
+
             this.dadoDependente = this.formularioDadosDependente.getRawValue() as BeneficiarioDependenteFormModel;
             let filtro = new FiltroPedidoRegrasInclusao(this.idTipoProcesso, null, null, somenteNumeros(this.dadoDependente.cpf));
-            console.log("dadoDependente ---------- ");
-            console.log(this.dadoDependente);
-            console.log("tipoDependente ---------");
-            console.log(this.tipoDependente);
-            console.log("this.idTipoProcesso ---------" + this.idTipoProcesso);
-            console.log("this.beneficiarioDependenteFormModel ---------");
-            console.log(this.beneficiarioDependenteFormModel);
-            
+            //console.log("dadoDependente ---------- ");
+            // console.log(this.dadoDependente);
+            // console.log("tipoDependente ---------");
+            // console.log(this.tipoDependente);
+            // console.log("this.idTipoProcesso ---------" + this.idTipoProcesso);
+            // console.log("this.beneficiarioDependenteFormModel ---------");
+            // console.log(this.beneficiarioDependenteFormModel);
+
             if(this.beneficiarioDependenteFormModel && this.beneficiarioDependenteFormModel.matricula){
                 this.beneficiarioService.consultarPorMatricula(this.beneficiarioDependenteFormModel.matricula).subscribe(res => {
                     this.beneficiarioCarregado = res;
-                    console.log("this.beneficiarioCarregado");
-                    console.log(this.beneficiarioCarregado);
-    
+                    // console.log("this.beneficiarioCarregado");
+                    // console.log(this.beneficiarioCarregado);
+
                     this.tipoDependenteService.consultarTipoDependente(this.beneficiarioCarregado.tipoDependente.id)
                     .subscribe(tipoDependenteCompleto => {
-    
+
                     this.tipoDependenteOriginal = tipoDependenteCompleto;
-                        console.log("this.tipoDependenteOriginal");
-                        console.log(this.tipoDependenteOriginal);
-    
+                        // console.log("this.tipoDependenteOriginal");
+                        // console.log(this.tipoDependenteOriginal);
+
                         if(this.idTipoProcesso === this.TIPO_PROCESSO_INCLUSAO_DEPENDENTE
                             || this.idTipoProcesso === this.TIPO_PROCESSO_ATUALIZACAO_DEPENDENTE){
-                            console.log("if(this.idTipoProcesso === this.TIPO_PROCESSO_INCLUSAO_DEPENDENTE){");
+                            // console.log("if(this.idTipoProcesso === this.TIPO_PROCESSO_INCLUSAO_DEPENDENTE){");
                             this.confirmaRegraInclusao(filtro);
-                
+
                         }else{
-                            console.log("this.submeter(); - > ELSE");
+                            // console.log("this.submeter(); - > ELSE");
                             this.submeter();
                         }
                     }, err => this.messageService.addMsgDanger(err.error));
-    
-                    
-    
+
+
+
                 }, (err) => {
                     console.log("Matricula: carregarBeneficiario( " + this.beneficiarioDependenteFormModel.matricula +" )");
                     console.log(err.error);
                 });
             }else{
-                console.log("if(this.beneficiarioDependenteFormModel && this.beneficiarioDependenteFormModel.matricula){ --");
+                // console.log("if(this.beneficiarioDependenteFormModel && this.beneficiarioDependenteFormModel.matricula){ --");
                 this.handleElseOnSubmit(filtro)
-              
+
             }
-            
+
 
         }
     }
@@ -224,18 +224,18 @@ export class EtapaDadosDependenteComponent extends BaseComponent implements OnIn
     handleElseOnSubmit(filtro:any){
         if(this.idTipoProcesso === this.TIPO_PROCESSO_INCLUSAO_DEPENDENTE
             || this.idTipoProcesso === this.TIPO_PROCESSO_ATUALIZACAO_DEPENDENTE){
-            console.log("if(this.idTipoProcesso === this.TIPO_PROCESSO_INCLUSAO_DEPENDENTE){");
+            // console.log("if(this.idTipoProcesso === this.TIPO_PROCESSO_INCLUSAO_DEPENDENTE){");
             this.confirmaRegraInclusao(filtro);
 
         }else{
-            console.log("this.submeter(); - > ELSE");
+            // console.log("this.submeter(); - > ELSE");
             this.submeter();
         }
     }
 
 
 
-    carregarBeneficiario(){  
+    carregarBeneficiario(){
         this.beneficiarioService.consultarPorMatricula(this.beneficiarioDependenteFormModel.matricula).subscribe(res => {
             this.beneficiarioCarregado = res;
         }, (err) => {
@@ -244,22 +244,22 @@ export class EtapaDadosDependenteComponent extends BaseComponent implements OnIn
         });
     }
 
-    isConjugeEmpregadoCaixaAtivo():boolean{ 
-        
-        //- validação se o proposto dependente do tipo cônjuge/companheiro 
-        // (coluna CO_LEGADO_DEPENDENCIA da tabela SSCTB068_TIPO_BENEFICIARIO igual a "C") 
-        // é empregado CAIXA ativo (buscar pelo CPF); 
+    isConjugeEmpregadoCaixaAtivo():boolean{
+
+        //- validação se o proposto dependente do tipo cônjuge/companheiro
+        // (coluna CO_LEGADO_DEPENDENCIA da tabela SSCTB068_TIPO_BENEFICIARIO igual a "C")
+        // é empregado CAIXA ativo (buscar pelo CPF);
         let retorno = false;
         if(this.tipoDependente.codigoLegadoDependencia.toUpperCase() === "C" ){
             //&& this.tipoDependente.id === this.CONJUGE_COMPANHEIRO){
-        
+
             this.beneficiarioService.consultarTitularPorCPF(somenteNumeros(this.dadoDependente.cpf))
                                     .subscribe( res =>{
-        
+
                 if (res!==null && res.motivocancelamento === null) {
                     let mensagem = "Proposto(a) dependente é empregado(a) CAIXA ativo(a). Selecione o tipo de beneficiário específico para formação de Casal CAIXA.";
                     this.messageService.addMsgDanger(mensagem);
-        
+
                     retorno = true;
                 }else{
                     if(this.idTipoProcesso === this.TIPO_PROCESSO_ATUALIZACAO_DEPENDENTE){
@@ -276,7 +276,7 @@ export class EtapaDadosDependenteComponent extends BaseComponent implements OnIn
                 retorno = false;
                 return retorno;
             });
-        }else{    
+        }else{
             if(this.idTipoProcesso === this.TIPO_PROCESSO_ATUALIZACAO_DEPENDENTE){
                 this.isDependenteCadastradoOutraFamiliaAlteracao();
             }else{
@@ -287,29 +287,31 @@ export class EtapaDadosDependenteComponent extends BaseComponent implements OnIn
         return retorno;
     }
 
-    isDependenteNaFamilia():boolean{ 
-        
+    isDependenteNaFamilia():boolean{
+
         if(this.recuperarDependentePorCPF(somenteNumeros(this.dadoDependente.cpf))){
             let mensagem = "Dependente já cadastrado. Para renovação, utilize o menu [Novo pedido > Beneficiário > Renovação]."
-            this.messageService.addMsgDanger(mensagem); console.log(mensagem);
-        
+            this.messageService.addMsgDanger(mensagem);
+            // console.log(mensagem);
+
             return true;
         }else{
-        
+
             return false;
         }
     }
 
-    isMenorIdade(limiteIdade:number){ console.log("isMenorIdade(idade:number){ ");
-        //- validação se o proposto dependente do tipo cônjuge/companheiro(a) 
-        //(coluna CO_LEGADO_DEPENDENCIA da tabela SSCTB068_TIPO_BENEFICIARIO igual a "C" ou "D") 
-        //é menor de 14 anos; 
-        
-        if((this.tipoDependente.codigoLegadoDependencia.toUpperCase() === "C" 
-            || this.tipoDependente.codigoLegadoDependencia.toUpperCase() === "D" ) ){ 
+    isMenorIdade(limiteIdade:number){
+        // console.log("isMenorIdade(idade:number){ ");
+        // - validação se o proposto dependente do tipo cônjuge/companheiro(a)
+        // (coluna CO_LEGADO_DEPENDENCIA da tabela SSCTB068_TIPO_BENEFICIARIO igual a "C" ou "D")
+        // é menor de 14 anos;
+
+        if((this.tipoDependente.codigoLegadoDependencia.toUpperCase() === "C"
+            || this.tipoDependente.codigoLegadoDependencia.toUpperCase() === "D" ) ){
             let idade = this.getAge(this.dadoDependente.dataNascimento);
 
-        
+
             if(idade < limiteIdade){
                 let mensagem ="";
                 if(this.idTipoProcesso === this.TIPO_PROCESSO_ATUALIZACAO_DEPENDENTE){
@@ -317,7 +319,8 @@ export class EtapaDadosDependenteComponent extends BaseComponent implements OnIn
                 }else{
                     mensagem = "Proposto(a) dependente do tipo cônjuge/companheiro(a) é menor de 14 anos.";
                 }
-                this.messageService.addMsgDanger(mensagem);console.log(mensagem);
+                this.messageService.addMsgDanger(mensagem);
+                // console.log(mensagem);
                 return true;
             }
         }
@@ -335,15 +338,15 @@ export class EtapaDadosDependenteComponent extends BaseComponent implements OnIn
         return age;
     }
 
-    idadeIncompativel():boolean{ 
+    idadeIncompativel():boolean{
         //console.log("idadeIncompativel():boolean{  ");
-        //- validação de compatibilidade entre o tipo de beneficiário 
-        //	(colunas NU_IDADE_MINIMA e NU_IDADE_MAXIMA da tabela SSCTB068_TIPO_BENEFICIARIO) 
-        //e a idade do beneficiário; 
+        //- validação de compatibilidade entre o tipo de beneficiário
+        //	(colunas NU_IDADE_MINIMA e NU_IDADE_MAXIMA da tabela SSCTB068_TIPO_BENEFICIARIO)
+        //e a idade do beneficiário;
         if(this.dadoDependente.dataNascimento == null){
             return false;
         }
-            
+
         //let idade = this.calculaIdade(this.dadoDependente.dataNascimento);
         let idade = this.getAge(this.dadoDependente.dataNascimento);
 
@@ -358,13 +361,15 @@ export class EtapaDadosDependenteComponent extends BaseComponent implements OnIn
         if(this.tipoDependente.idadeMinima  && this.tipoDependente.idadeMaxima){
             if(idade < this.tipoDependente.idadeMinima  || idade > this.tipoDependente.idadeMaxima){
                 let mensagem = "Idade incompatível com o tipo de beneficiário selecionado.";
-                this.messageService.addMsgDanger(mensagem);console.log(mensagem);
+                this.messageService.addMsgDanger(mensagem);
+                // console.log(mensagem);
                 return true;
             }
         }else if(this.tipoDependente.idadeMinima){
             if(idade < this.tipoDependente.idadeMinima){
                 let mensagem = "Idade incompatível com o tipo de beneficiário selecionado.";
-                this.messageService.addMsgDanger(mensagem);console.log(mensagem);
+                this.messageService.addMsgDanger(mensagem);
+                // console.log(mensagem);
                 return true;
             }
         }else if(this.tipoDependente.idadeMaxima){
@@ -380,11 +385,11 @@ export class EtapaDadosDependenteComponent extends BaseComponent implements OnIn
 
     isDependenteCadastradoOutraFamilia(){
         /* ---------------------- [ INCLUSAO ] ----------------------
-            - validação se o proposto dependente do tipo casal CAIXA (coluna IC_CASAL_CAIXA 
-            da tabela SSCTB068_TIPO_BENEFICIARIO igual a "1") já é casal CAIXA 
-            em outra família (buscar pelo CPF); 
+            - validação se o proposto dependente do tipo casal CAIXA (coluna IC_CASAL_CAIXA
+            da tabela SSCTB068_TIPO_BENEFICIARIO igual a "1") já é casal CAIXA
+            em outra família (buscar pelo CPF);
         ------------------------------------------------------------------*/
-        console.log(" isDependenteCadastradoOutraFamilia(){ ---");
+        //console.log(" isDependenteCadastradoOutraFamilia(){ ---");
         if(this.tipoDependente.casalCaixa){
             this.beneficiarioService.consultarDependentePorCPF(somenteNumeros(this.dadoDependente.cpf))
                                     .subscribe( (beneficiario: Beneficiario) =>{
@@ -394,23 +399,23 @@ export class EtapaDadosDependenteComponent extends BaseComponent implements OnIn
                 this.messageService.showDangerMsg(error.error);
             });
         }else{
-            console.log("if(this.tipoDependente.casalCaixa){ -> isDependenteCadastradoOutraFamilia - submeter");
+            // console.log("if(this.tipoDependente.casalCaixa){ -> isDependenteCadastradoOutraFamilia - submeter");
             this.submeter();
         }
 
     }
 
     isDependenteCadastradoOutraFamiliaAlteracao(){
-        console.log(" isDependenteCadastradoOutraFamiliaAlteracao(){ ---");
+        // console.log(" isDependenteCadastradoOutraFamiliaAlteracao(){ ---");
         /* ---------------------- [ ATUALIZACAO ] ----------------------
-        validação se o tipo de beneficiário atual não é casal CAIXA 
-        (coluna IC_CASAL_CAIXA da tabela SSCTB068_TIPO_BENEFICIARIO igual a "0"), 
-        o novo tipo é casal CAIXA (coluna IC_CASAL_CAIXA igual a "1") 
-        e o dependente já é casal CAIXA em outra família (buscar pelo CPF); 
+        validação se o tipo de beneficiário atual não é casal CAIXA
+        (coluna IC_CASAL_CAIXA da tabela SSCTB068_TIPO_BENEFICIARIO igual a "0"),
+        o novo tipo é casal CAIXA (coluna IC_CASAL_CAIXA igual a "1")
+        e o dependente já é casal CAIXA em outra família (buscar pelo CPF);
         mensagem: "Proposto casal CAIXA já cadastrado em outra família.";
         ------------------------------------------------------------------*/
-        //!this.tipoDependenteCompleto.casalCaixa 
-        //&& this.tipoDependenteNovoCompleto.casalCaixa 
+        //!this.tipoDependenteCompleto.casalCaixa
+        //&& this.tipoDependenteNovoCompleto.casalCaixa
         if(!this.tipoDependenteOriginal.casalCaixa && this.tipoDependente.casalCaixa){
 
             this.beneficiarioService.consultarDependentePorCPF(somenteNumeros(this.dadoDependente.cpf))
@@ -421,40 +426,40 @@ export class EtapaDadosDependenteComponent extends BaseComponent implements OnIn
                 this.messageService.showDangerMsg(error.error);
             });
         }else{
-            console.log("if(this.tipoDependente.casalCaixa){ -> isDependenteCadastradoOutraFamiliaAlteracao - submeter");
+            // console.log("if(this.tipoDependente.casalCaixa){ -> isDependenteCadastradoOutraFamiliaAlteracao - submeter");
             this.isCPFUsado();
         }
 
     }
 
     isCPFUsado(){
-        console.log("isCPFUsado(){ ----------------- CPF = " + somenteNumeros(this.dadoDependente.cpf));
+        // console.log("isCPFUsado(){ ----------------- CPF = " + somenteNumeros(this.dadoDependente.cpf));
         /*-----------------------------------------------------------
-        validação se o CPF informado pertence a outro beneficiário do Saúde CAIXA 
-        (comparar data de nascimento e nome da mãe); 
+        validação se o CPF informado pertence a outro beneficiário do Saúde CAIXA
+        (comparar data de nascimento e nome da mãe);
         mensagem: "CPF informado pertence a outro beneficiário do Saúde CAIXA.";
         -----------------------------------------------------------*/
         this.beneficiarioService.consultarPorCPF(somenteNumeros(this.dadoDependente.cpf))
         .subscribe( (beneficiario: Beneficiario) =>{
-            console.log("isCPFUsado -  beneficiario: "+somenteNumeros(this.beneficiarioDependenteFormModel.cpf)+" === "+somenteNumeros(this.dadoDependente.cpf));
-            console.log(beneficiario);
-            
+            // console.log("isCPFUsado -  beneficiario: "+somenteNumeros(this.beneficiarioDependenteFormModel.cpf)+" === "+somenteNumeros(this.dadoDependente.cpf));
+            // console.log(beneficiario);
+
             if ( (somenteNumeros(this.beneficiarioDependenteFormModel.cpf) !== somenteNumeros(this.dadoDependente.cpf)) && beneficiario!==null) {
                 const dataNascimento = beneficiario.matricula.dataNascimento;
                 const dataBD = this.formatarData(this.formularioDadosDependente.get('dataNascimento').value);
-                console.log("beneficiario.matricula.dataNascimento = " + dataNascimento);
-                console.log("this.formularioDadosDependente.get('dataNascimento').value = " + dataBD );
-                console.log("beneficiario.matricula.nomeMae = " + beneficiario.matricula.nomeMae);
-                console.log("this.formularioDadosDependente.get('nomeMae').value = " + this.formularioDadosDependente.get('nomeMae').value);
+                // console.log("beneficiario.matricula.dataNascimento = " + dataNascimento);
+                // console.log("this.formularioDadosDependente.get('dataNascimento').value = " + dataBD );
+                // console.log("beneficiario.matricula.nomeMae = " + beneficiario.matricula.nomeMae);
+                // console.log("this.formularioDadosDependente.get('nomeMae').value = " + this.formularioDadosDependente.get('nomeMae').value);
 
-                console.log("COMPARAR = "+(dataNascimento === dataBD) );
+                // console.log("COMPARAR = "+(dataNascimento === dataBD) );
                 if(dataNascimento === dataBD
                     && beneficiario.matricula.nomeMae === this.formularioDadosDependente.get('nomeMae').value){
                     let mensagem = "CPF informado pertence a outro beneficiário do Saúde CAIXA.";
                     this.messageService.addMsgDanger(mensagem);
-                    console.log(mensagem);
+                    // console.log(mensagem);
                 }else{
-                    console.log("isCPFUsado() - submeter - if (beneficiario!==null) { ");
+                    // console.log("isCPFUsado() - submeter - if (beneficiario!==null) { ");
                     this.submeter();
                 }
             }else{
@@ -491,17 +496,18 @@ export class EtapaDadosDependenteComponent extends BaseComponent implements OnIn
     recuperarDependentePorCPF(cpf: string): Beneficiario{
         let beneficiario = null;
         beneficiario = this.listaBeneficiarios.find(bene=>String(bene.matricula.cpf) === cpf);
-console.log(this.listaBeneficiarios);
+        // console.log(this.listaBeneficiarios);
         this.listaBeneficiarios.forEach(elemento => {
-            console.log(String(elemento.matricula.cpf)+" -- String(elemento.matricula.cpf) === cpf)"+(String(elemento.matricula.cpf) === cpf));
+           // console.log(String(elemento.matricula.cpf)+" -- String(elemento.matricula.cpf) === cpf)"+(String(elemento.matricula.cpf) === cpf));
         });
         return beneficiario;
     }
 
-    private submeter():void{ console.log("ETAPA-DADOS-DEPENDENTE - private submeter():void{  - ");
+    private submeter():void{
+      // console.log("ETAPA-DADOS-DEPENDENTE - private submeter():void{  - ");
         this.validDataNascimento()
         if (this.formularioDadosDependente && this.formularioDadosDependente.valid) {
-            
+
             const dadoDependente = this.formularioDadosDependente.getRawValue() as BeneficiarioDependenteFormModel;
 
             this.showProgress = true;
@@ -515,32 +521,32 @@ console.log(this.listaBeneficiarios);
     }
 
     verificarCpfEmOutraFamilia(): Observable<boolean> {
-        console.log("verificarCpfEmOutraFamilia() ---");
-    
+        // console.log("verificarCpfEmOutraFamilia() ---");
+
         const cpfDependente = somenteNumeros(this.dadoDependente.cpf);
-        console.log("CPF do Dependente:", cpfDependente);
-    
+        // console.log("CPF do Dependente:", cpfDependente);
+
         const matricula = AtendimentoService.matricula;
-    
+
         if (!matricula) {
-            console.error("Matrícula não disponível no atendimento atual.");
+            // console.error("Matrícula não disponível no atendimento atual.");
             return of(false);
         }
-    
+
         return this.beneficiarioService.consultarBeneficiarioPorMatricula(matricula).pipe(
             mergeMap((beneficiario: Beneficiario) => {
                 if (beneficiario && beneficiario.matricula && beneficiario.matricula.cpf) {
                     const cpfTitular = somenteNumeros(beneficiario.matricula.cpf);
-                    console.log("CPF do Titular:", cpfTitular);
-    
+                    // console.log("CPF do Titular:", cpfTitular);
+
                     if (!cpfTitular) {
-                        console.error("CPF do titular não encontrado ou inválido.");
+                        // console.error("CPF do titular não encontrado ou inválido.");
                         return of(false);
                     }
-    
+
                     return this.beneficiarioService.verificarCpfFamiliaDiferente(cpfDependente, cpfTitular);
                 } else {
-                    console.error("Dados do titular incompletos ou inválidos.");
+                    // console.error("Dados do titular incompletos ou inválidos.");
                     return of(false);
                 }
             }),
@@ -548,7 +554,7 @@ console.log(this.listaBeneficiarios);
                 if (isDiferente) {
                     const mensagem = "Proposto dependente já cadastrado em outra família.";
                     this.messageService.addMsgDanger(mensagem);
-                    console.log(mensagem);
+                    // console.log(mensagem);
                 }
                 return isDiferente;
             }),
@@ -558,17 +564,17 @@ console.log(this.listaBeneficiarios);
                 return of(false);
             })
         );
-    }    
-    
+    }
+
 
     private confirmaRegraInclusao(filtro: FiltroPedidoRegrasInclusao): void {
-        console.log("private confirmaRegraInclusao(filtro:FiltroPedidoRegrasInclusao):void{ ----");
+        // console.log("private confirmaRegraInclusao(filtro:FiltroPedidoRegrasInclusao):void{ ----");
         this.processoService.consultarPedidosRegrasInclusao(filtro).subscribe(respri => {
-            console.log("confirmaRegraInclusao(filtro:FiltroPedidoRegrasInclusao):boolean{ [retorno] = " + respri);
-    
+            // console.log("confirmaRegraInclusao(filtro:FiltroPedidoRegrasInclusao):boolean{ [retorno] = " + respri);
+
             this.verificarCpfEmOutraFamilia().subscribe(cpfEmOutraFamilia => {
                 if (respri === null || !respri) {
-                    console.log("if(!this.isDependenteNaFamilia() && !this.isMenorIdade(14) && !this.idadeIncompativel()){ ---");
+                    // console.log("if(!this.isDependenteNaFamilia() && !this.isMenorIdade(14) && !this.idadeIncompativel()){ ---");
                     if (!this.isDependenteNaFamilia() && !cpfEmOutraFamilia
                         && !this.isMenorIdade(14) && !this.idadeIncompativel()) {
                         this.isConjugeEmpregadoCaixaAtivo();
@@ -576,14 +582,14 @@ console.log(this.listaBeneficiarios);
                 } else {
                     this.showDangerMsg("Tipo de pedido já cadastrado e em aberto para a(o) beneficiária(o).");
                 }
-                console.log("confirmaRegraInclusao = " + respri);
+                // console.log("confirmaRegraInclusao = " + respri);
             });
         }, err => {
             console.log("ERRO confirmaRegraInclusao(filtro:FiltroPedidoRegrasInclusao):boolean{ [retorno] = ");
             this.showDangerMsg(err.error);
         });
     }
-    
+
 
     estadoCivilSelecionado(estadoCivil: EstadoCivil) {
         this.estadoCivilModel.emit(estadoCivil);
@@ -597,9 +603,9 @@ console.log(this.listaBeneficiarios);
         const comparisonDate: Date = new Date(2010, 0, 1); // 01/01/2010
         try {
             const dtNascimento = format(this.formularioDadosDependente.get('dataNascimento').value, 'yyyy-MM-dd')
-          
+
             const inputDate = parseISO(dtNascimento);
-            
+
             // Verificação se a data informada é maior ou igual à data de comparação
             return isAfter(inputDate, comparisonDate) || isEqual(inputDate, comparisonDate);
         } catch (error) {

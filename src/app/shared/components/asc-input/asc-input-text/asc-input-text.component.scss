@@ -1,2 +1,10 @@
 /* Estilos específicos do asc-input-text (se necessário) */
 /* Deixar o design padrão vir da biblioteca DSC */
+::ng-deep .upper{
+  .mat-mdc-form-field{
+    text-transform: uppercase !important;
+  }
+  .mat-mdc-form-field-error{
+    text-transform: none !important;
+  }
+}

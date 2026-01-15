@@ -37,23 +37,50 @@ export class AscModalVisualizarDocumentoComponent implements OnDestroy {
   showTexto = false;
   textoDocumento: string = null;
 
+  anexoModal = {
+    $implicit: {
+      classeModal: 'imagem-viewer',
+      classeFooter: {
+        $implicit: {
+          classe: 'modal-footer-actions'
+        }
+      }
+    }
+  }
+  anexoTela = {
+    $implicit: {
+      classeModal: 'imagem-viewer-tela',
+      classeFooter: {
+        $implicit: {
+          classe: 'modal-footer-actions-tela'
+        }
+      }
+    }
+  }
+
   // Navegação entre arquivos
   arquivos: Arquivo[] = [];
   currentIndex: number = 0;
 
   @Input() controls: boolean;
 
-  @ViewChild('modalVisualizarTemplate', { static: true })
-  private modalVisualizarTemplate!: TemplateRef<any>;
+  @ViewChild('modalVisualizarTemplate', { static: true }) modalVisualizarTemplate!: TemplateRef<any>;
+  @ViewChild('templateTelaCheia', { static: true }) templateTelaCheia!: TemplateRef<any>;
 
   private dialogRef?: MatDialogRef<any>;
+
+  private _itemAtual: any;
+
+  telaCheia: boolean = false
 
   constructor(
     private sanitizer: DomSanitizer,
     private readonly anexoService: AnexoService,
     private readonly messageService: MessageService,
     private readonly dialogService: DscDialogService
-  ) {}
+  ) {
+    this.telaCheia = this.isJanelaDownload()
+  }
 
   ngOnDestroy(): void {
     this.fechar();
@@ -82,6 +109,7 @@ export class AscModalVisualizarDocumentoComponent implements OnDestroy {
     this.arquivo = arquivo;
     this.isLoading = true;
     this.fileName = arquivo.name || 'Documento';
+    this._itemAtual = {name: arquivo.name}
     this.page = 1;
 
     const fileExtension = this.fileName.split('.').pop()?.toLowerCase() || '';
@@ -173,18 +201,20 @@ export class AscModalVisualizarDocumentoComponent implements OnDestroy {
     if (this.dialogRef) {
       this.dialogRef.close();
     }
+    if( !this.isJanelaDownload() ){
+      this.dialogRef = this.dialogService.confirm({
+        data: {
+          title: {
+            text: this.fileName || 'Visualizar Documento',
+            showCloseButton: true,
+            highlightVariant: true
+          },
+          template: this.modalVisualizarTemplate,
+          context: this
+        }
+      });
 
-    this.dialogRef = this.dialogService.confirm({
-      data: {
-        title: {
-          text: this.fileName || 'Visualizar Documento',
-          showCloseButton: true,
-          highlightVariant: true
-        },
-        template: this.modalVisualizarTemplate,
-        context: this
-      }
-    });
+    }
 
     this.dialogRef.afterClosed().subscribe(() => {
       this.resetarEstado();
@@ -206,11 +236,16 @@ export class AscModalVisualizarDocumentoComponent implements OnDestroy {
   }
 
   fechar(): void {
-    if (this.dialogRef) {
-      this.dialogRef.close();
-      this.dialogRef = null;
+    if( !this.isJanelaDownload() ){
+      if (this.dialogRef) {
+        this.dialogRef.close();
+        this.dialogRef = null;
+      }
+      this.resetarEstado();
+
+    }else{
+      window.close()
     }
-    this.resetarEstado();
   }
 
   downloadArquivo(): void {
@@ -330,5 +365,48 @@ export class AscModalVisualizarDocumentoComponent implements OnDestroy {
         this.processarArquivoLocal(file);
       }
     });
+  }
+
+  public mostrarBotaoDownload(): boolean{
+    return !this.isJanelaDownload()
+  }
+
+    abrirNovaJanela() {
+      this.abrirArquivoEmNovaJanela();
+      //this.fecharModal();
+    }
+
+  private abrirArquivoEmNovaJanela(): void {
+
+    const baseUrl = window.location.origin;
+    const url = `${baseUrl}/#/downloadArquivo`;
+
+    const novaAba = window.open(url, '_blank');
+
+    if (novaAba) {
+      novaAba.focus();
+    } else {
+      console.error('Não foi possível abrir a nova aba. Verifique se o navegador está bloqueando pop-ups.');
+    }
+  }
+
+  private testaVariavel(variavel:any):boolean{
+    if(variavel!==null && variavel!==undefined){
+      return true;
+    }
+    return false;
+  }
+
+  isJanelaDownload():boolean{
+    let url = window.location.href;
+    if(url.includes("downloadArquivo")){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
+  get itemAtual() {
+    return this._itemAtual;
   }
 }

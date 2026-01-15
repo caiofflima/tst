@@ -356,7 +356,8 @@ implements OnInit {
     arquivo: Arquivo,
     modalVisualizarDocumentoComponent: AscModalVisualizarDocumentoComponent,
     arquivos: Arquivo[]
-  ) {console.log(arquivo);
+  ) {
+    // console.log(arquivo);
     const arquivoModal: ArquivoModal = {
       event,
       arquivo,
@@ -880,7 +881,7 @@ private generateSelectItensTipoValidacao(res: TipoValidacaoDTO[]) {
 private definirChamadaDoServiceComBaseNosParametros(
   parametro: DocumentoParam
 ): Observable<DocumentoTipoProcesso[]> {
-  console.log(parametro);
+  //console.log(parametro);
   if (parametro && parametro.idPedido) {
     return this.documentoTipoProcessoService.consultarRequeridosPorIdPedido(
       parametro.idPedido
@@ -892,7 +893,7 @@ private definirChamadaDoServiceComBaseNosParametros(
     );
   }
 
-  console.log("Nenhum parâmetro fornecido.");
+  //console.log("Nenhum parâmetro fornecido.");
   return of([]);
 }
 
@@ -942,16 +943,16 @@ private abrirArquivo(arquivoModal: ArquivoModal): void {
 }
 
 private abrirArquivoProcessado(arquivoModal: ArquivoModal): void {
-  console.log("private abrirArquivoProcessado(arquivoModal: ArquivoModal): void { ==============");
+  //console.log("private abrirArquivoProcessado(arquivoModal: ArquivoModal): void { ==============");
   this.anexoService
   .obterArquivoPorNome(arquivoModal.arquivo.name)
   .subscribe(
     (arquivo) => {
       const index = 0;
-      console.log("this.anexoService.obterArquivoPorNome(arquivoModal.arquivo.name) ==============");
-      console.log(arquivoModal.arquivo);
-      console.log(arquivoModal.arquivos);
-      console.log(arquivo);
+      // console.log("this.anexoService.obterArquivoPorNome(arquivoModal.arquivo.name) ==============");
+      // console.log(arquivoModal.arquivo);
+      // console.log(arquivoModal.arquivos);
+      // console.log(arquivo);
       arquivoModal.arquivo = this.getBlobArquivo(arquivoModal, arquivo);
       arquivoModal.modalVisualizarDocumentoComponent.infoExibicao = {
         itens: arquivoModal.arquivos,
@@ -985,8 +986,8 @@ private abrirArquivoProcessado(arquivoModal: ArquivoModal): void {
 }
 
 private abrirArquivoGED(arquivoModal: ArquivoModal): void {
-  console.log("arquivoModal.arquivo ==============================================");
-  console.log(arquivoModal.arquivo);
+  // console.log("arquivoModal.arquivo ==============================================");
+  // console.log(arquivoModal.arquivo);
   this.anexoService
   .obterArquivoPorIdGED(arquivoModal.arquivo.idDocumentoGED)
   .subscribe({
@@ -1024,7 +1025,7 @@ private abrirArquivoGED(arquivoModal: ArquivoModal): void {
 
 private abrirArquivoEmNovaJanela(arquivo:any):void{
   const baseUrl = window.location.origin;
-  console.log(baseUrl);
+  // console.log(baseUrl);
 
   const largura = 850;
   const altura = 600;
@@ -1053,8 +1054,8 @@ verificaSituacaoParaExibirOuNao(id: number){
 buscarArquivosProcessados(event: any, arquivo: Arquivo):void{
 
   this.anexoService.obterArquivoPorNome(arquivo.name).subscribe( (arquivoBaixado) => {
-    console.log("arquivo ***********************************************");
-    console.log(arquivo);
+    // console.log("arquivo ***********************************************");
+    // console.log(arquivo);
     let arquivoDownload = this.getBlobArquivoDireto(arquivo, arquivoBaixado);
     this.downloadFile(arquivoDownload, arquivo.name);
 

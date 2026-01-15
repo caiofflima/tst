@@ -32,7 +32,7 @@ export class AscInputTextComponent extends BaseInputComponent implements OnInit 
     @Output()
     onKeyup: EventEmitter<any>;
     @Output()
-    onKeydown: EventEmitter<any>;
+    onKeydown: EventEmitter<any> = new EventEmitter();
     @Output()
     onFocus: EventEmitter<any>;
     @Output()
@@ -168,6 +168,8 @@ export class AscCampoEstaticoComponent {
     value: string;
     @Input()
     hide: boolean;
+
+    @Input() uppercase: boolean = false
 
     get compStyle(): any {
         return !this.hide ? {'display': 'block'} : {'display': 'none'};

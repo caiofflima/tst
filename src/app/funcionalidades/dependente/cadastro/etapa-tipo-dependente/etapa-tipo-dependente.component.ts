@@ -110,21 +110,21 @@ export class EtapaTipoDependenteComponent {
     }
 
     onSubmit(): void {
-        console.log("onSubmit - etapa tipo dependente-dependente");
-        console.log(this.dependente);
-        console.log("tipoDependente - onSubmit");
-        console.log(this.tipoDependente);
-        console.log("beneficiario - onSubmit");
-        console.log(this.beneficiario);
-        console.log("listaBeneficiarios - onSubmit");
-        console.log(this.listaBeneficiarios);
+        // console.log("onSubmit - etapa tipo dependente-dependente");
+        // console.log(this.dependente);
+        // console.log("tipoDependente - onSubmit");
+        // console.log(this.tipoDependente);
+        // console.log("beneficiario - onSubmit");
+        // console.log(this.beneficiario);
+        // console.log("listaBeneficiarios - onSubmit");
+        // console.log(this.listaBeneficiarios);
 
         this.validarRegras();
     }
 
     private validarRegras(){
-        console.log(this.isConjugeNaFamilia()); 
-        console.log(this.isMatriculaTitular());
+        // console.log(this.isConjugeNaFamilia());
+        // console.log(this.isMatriculaTitular());
 
         if(!this.isConjugeNaFamilia() && !this.isMatriculaTitular()){
             this.isConjugeEmpregadoCaixaCancelado();
@@ -132,18 +132,18 @@ export class EtapaTipoDependenteComponent {
     }
 
     isConjugeNaFamilia():boolean{
-        //- validação se o proposto dependente é do tipo cônjuge/companheiro e o(a) titular 
-        // já possui cônjuge/companheiro(a) 
-        // (coluna CO_LEGADO_DEPENDENCIA da tabela SSCTB068_TIPO_BENEFICIARIO igual a "C" ou "D") vigente; 
-        console.log("isConjugeNaFamilia -> this.tipoDependenteCompleto ");
-        console.log(this.tipoDependenteCompleto);
+        //- validação se o proposto dependente é do tipo cônjuge/companheiro e o(a) titular
+        // já possui cônjuge/companheiro(a)
+        // (coluna CO_LEGADO_DEPENDENCIA da tabela SSCTB068_TIPO_BENEFICIARIO igual a "C" ou "D") vigente;
+        // console.log("isConjugeNaFamilia -> this.tipoDependenteCompleto ");
+        // console.log(this.tipoDependenteCompleto);
         let retorno = false;
-        if((this.tipoDependenteCompleto.codigoLegadoDependencia.toUpperCase() === "C" 
-            || this.tipoDependenteCompleto.codigoLegadoDependencia.toUpperCase() === "D" ) ){ 
-                
+        if((this.tipoDependenteCompleto.codigoLegadoDependencia.toUpperCase() === "C"
+            || this.tipoDependenteCompleto.codigoLegadoDependencia.toUpperCase() === "D" ) ){
+
             if(this.recuperarCompanheiroConjuge()){
                 let mensagem = "Existe cônjuge/companheiro(a) vigente na família." ;
-                console.log('antes chamada message service')
+                // console.log('antes chamada message service')
                 this.messageService.addMsgDanger(mensagem);
                 retorno = true;
             }
@@ -155,26 +155,26 @@ export class EtapaTipoDependenteComponent {
         let beneficiario = null;
         beneficiario = this.listaBeneficiarios.find(bene=>bene.contratoTpdep.tipoDependente.parentesco === 5
             || bene.contratoTpdep.tipoDependente.parentesco === 16);
-            
-        console.log("recuperarCompanheiroConjuge(){ ---> ");
-        console.log(beneficiario);
+
+        // console.log("recuperarCompanheiroConjuge(){ ---> ");
+        // console.log(beneficiario);
 
         return beneficiario;
     }
 
     isConjugeEmpregadoCaixaCancelado(){
-        //- validação se o proposto dependente do tipo casal CAIXA 
-        //(coluna IC_CASAL_CAIXA da tabela SSCTB068_TIPO_BENEFICIARIO igual a "1") 
-        //é empregado CAIXA (buscar pela matrícula) 
-        //cancelado (MOTIVOCANCELAMENTO diferente de 34 - FORMAÇÃO CASAL CAIXA - DEPENDENTE); 
+        //- validação se o proposto dependente do tipo casal CAIXA
+        //(coluna IC_CASAL_CAIXA da tabela SSCTB068_TIPO_BENEFICIARIO igual a "1")
+        //é empregado CAIXA (buscar pela matrícula)
+        //cancelado (MOTIVOCANCELAMENTO diferente de 34 - FORMAÇÃO CASAL CAIXA - DEPENDENTE);
         let matricula = this.formularioSolicitacao.get('matricula').value;
 
-        if(this.tipoDependenteCompleto.casalCaixa && matricula){     
+        if(this.tipoDependenteCompleto.casalCaixa && matricula){
             this.service.consultarPorMatricula(somenteNumeros(matricula.toString())).pipe(
                 take(1)
             ).subscribe((beneficiario: Beneficiario) => {
                 if (beneficiario!==null) {
-                    console.log("beneficiario.motivocancelamento = " + beneficiario.motivocancelamento);
+                    // console.log("beneficiario.motivocancelamento = " + beneficiario.motivocancelamento);
                     if(beneficiario.motivocancelamento && beneficiario.motivocancelamento !== 34 ){
                         let mensagem = "Proposto casal CAIXA não possui condição de titular ativo.";
                         this.messageService.addMsgDanger(mensagem);
@@ -188,17 +188,17 @@ export class EtapaTipoDependenteComponent {
         }else{
             this.submeter();
         }
-        
+
     }
 
     isMatriculaTitular():boolean{
-        //- validação se a matrícula do proposto dependente do tipo casal CAIXA 
-        // (coluna IC_CASAL_CAIXA da tabela SSCTB068_TIPO_BENEFICIARIO igual a "1") 
-        //é a do(a) próprio(a) titular; 
+        //- validação se a matrícula do proposto dependente do tipo casal CAIXA
+        // (coluna IC_CASAL_CAIXA da tabela SSCTB068_TIPO_BENEFICIARIO igual a "1")
+        //é a do(a) próprio(a) titular;
         let retorno = false;
-        if(this.tipoDependenteCompleto.casalCaixa){ 
+        if(this.tipoDependenteCompleto.casalCaixa){
             let matricula = this.formularioSolicitacao.get('matricula').value;
-            console.log("isMatriculaTitular = if("+somenteNumeros(matricula)+" === "+somenteNumeros(this.matricula).slice(0,-1)+")");
+            // console.log("isMatriculaTitular = if("+somenteNumeros(matricula)+" === "+somenteNumeros(this.matricula).slice(0,-1)+")");
             if(somenteNumeros(matricula) === somenteNumeros(this.matricula.slice(0,-1))){
                 let mensagem = "Matrícula Titular não permitida.";
                 this.messageService.addMsgDanger(mensagem);
@@ -266,7 +266,7 @@ export class EtapaTipoDependenteComponent {
         this.service.consultarPorMatricula(somenteNumeros(SessaoService.getMatriculaFuncional())).pipe(
             take(1)
         ).subscribe((beneficiario: Beneficiario) => {
-            
+
             this.beneficiario = beneficiario;
         }, error => {
             this.showProgress = false;

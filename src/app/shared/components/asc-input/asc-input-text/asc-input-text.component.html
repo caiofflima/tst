@@ -1,5 +1,5 @@
 <dsc-input
-  [label]="required !== null && required !== false ? label + ' *' : label"
+  [label]="label ? ((control | isRequired) ? label + ' *' : label) : ''"
   [type]="type"
   [formControl]="control"
   [placeholder]="placeholder"
@@ -12,11 +12,7 @@
   (blur)="blurAction($event)"
   (keyup)="keyUpAction($event)"
   (keydown)="keyDownAction($event)"
+  [class.upper]="uppercase"
+  [errorMessage]="'Campo obrigatório'"
 >
 </dsc-input>
-
-<asc-input-error
-  [control]="control"
-  [requiredMsg]="requiredMsg"
-  [style]="compStyle"
-></asc-input-error>

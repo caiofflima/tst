@@ -75,8 +75,6 @@ export abstract class DocumentoAcompanhamentoCommon extends AscComponenteAutoriz
     @Input()
     set processo(process: Pedido) {
         setTimeout(() => {
-          console.log('this.processo$',this.processo$ );
-
             this._processo = process;
             this.processo$.next(process);
         }, 0);

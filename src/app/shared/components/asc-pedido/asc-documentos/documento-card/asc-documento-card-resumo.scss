@@ -93,41 +93,41 @@ div.arquivo-card {
 
   div.arquivo-actions {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: auto;
-
-    button {
-      width: 35px;
-      height: 35px;
-      display: flex;
+      gap: 8px;
       align-items: center;
-      justify-content: center;
-      border: none;
-      border-radius: 3px;
 
-      em {
-        color: #FFF;
-      }
+      button {
+        width: 35px;
+        height: 35px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+        transition: background-color 0.2s;
 
-      &:first-child {
-        background-color: #17A2B8;
+        i {
+          color: #FFF;
+          font-size: 14px;
+        }
 
-        &:hover,
-        &:active {
-          background-color: #0f91a5;
+        &.btn-visualizar {
+          background-color: #17A2B8;
+
+          &:hover {
+            background-color: #0f91a5;
+          }
+        }
+
+        &.btn-excluir {
+          background-color: #DC3545;
+
+          &:hover {
+            background-color: #bb1c2c;
+          }
         }
       }
-
-      &:last-child {
-        background-color: $btn-bg-red;
-
-        &:hover,
-        &:active {
-          background-color: $btn-bg-red-dark;
-        }
-      }
-    }
   }
 }
 
@@ -136,7 +136,7 @@ div.arquivo-card {
   justify-content: space-between;
   align-items: center;
   flex-flow: row;
- 
+
   p {
     font-family: 'Caixa Std Bold', sans-serif;
     font-style: normal;

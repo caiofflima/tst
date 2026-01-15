@@ -72,4 +72,29 @@ export class AscInputCpfCnpjComponent extends BaseInputComponent implements OnIn
             this.constantes.control.somenteNumeros(this.control);
         }
     }
+
+    personalizarMensagem(){
+      let mensagem: string = '';
+      if(this.control.invalid && (this.control.dirty || this.control.touched)){
+        const errorKey = Object.keys(this.control.errors)[0];
+        switch (errorKey) {
+          case 'required':
+            mensagem = 'Campo obrigatório não informado'
+            break;
+          case 'cpf':
+            mensagem = this.bundle('MA009', 'CPF')
+            break
+          case 'cnpj':
+            mensagem = this.bundle('MA009', 'CNPJ')
+            break
+          case 'cpfCnpjInvalido':
+            mensagem = this.bundle('MA009', 'CPF ou CNPJ')
+            break
+
+          default:
+            break;
+        }
+      }
+      return mensagem
+    }
 }

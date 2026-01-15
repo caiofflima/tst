@@ -32,7 +32,21 @@
         </button>
       </div>
 
-      <!-- Visualizador de PDF -->
+      <!-- conteudo do arquivo-->
+      <ng-container *ngTemplateOutlet="contentFile; context: anexoModal" />
+      <ng-container *ngTemplateOutlet="btn; context: anexoModal.$implicit.classeFooter" />
+
+    </div>
+
+
+  </div>
+</ng-template>
+
+<ng-template #contentFile let-context>
+  <div class="title-tela" *ngIf="isJanelaDownload()">{{ this.fileName }}</div>
+  <div class="documento-content">
+
+    <!-- Visualizador de PDF -->
       <div class="documento-viewer" *ngIf="showPdf && urlDocumento">
         <pdf-viewer
           [src]="urlDocumento"
@@ -55,12 +69,20 @@
 
       <!-- Visualizador de Imagem -->
       <div class="documento-viewer imagem-container" *ngIf="!showPdf && !showTexto && urlDocumento">
-        <img [src]="urlDocumento" alt="{{ fileName }}" class="imagem-viewer" />
+        <img [src]="urlDocumento" alt="{{ fileName }}" [class]="context.classeModal" />
       </div>
-    </div>
 
-    <!-- Footer com botões -->
-    <div class="modal-footer-actions">
+      <div style="position: fixed; bottom: 0" *ngIf="context.classeModal == 'imagem-viewer-tela'">
+        <ng-container *ngTemplateOutlet="btn; context: context.classeFooter" />
+      </div>
+  </div>
+
+
+</ng-template>
+
+<ng-template #btn let-context>
+  <!-- Footer com botões -->
+    <div [class]="context.classe">
       <!-- Navegação entre arquivos (se houver mais de um) -->
       <div class="navegacao-arquivos" *ngIf="arquivos.length > 1">
         <button
@@ -83,13 +105,25 @@
       </div>
 
       <div class="action-buttons" style="margin-right: 10px">
-        <button class="btn-download" (click)="downloadArquivo()" title="Download">
+        <dsc-button label="Download" iconPrefix="cloud_download" (click)="downloadArquivo()"/>
+        <dsc-button label="Fechar" variant="secondary" iconPrefix="close" (click)="fechar()"/>
+        <dsc-button label="Abrir em nova janela" variant="danger" iconPrefix="open_in_new" *ngIf="mostrarBotaoDownload()" (click)="abrirNovaJanela()"/>
+        <!-- <button class="btn-download" (click)="downloadArquivo()" title="Download">
           <em class="fa fa-download"></em> Download
         </button>
         <button class="btn-fechar" (click)="fechar()" title="Fechar">
           <em class="fa fa-times"></em> Fechar
         </button>
+        <button class="btn-fechar" *ngIf="mostrarBotaoDownload()" (click)="abrirNovaJanela()" title="Nova janela">
+          <em class="fa fa-times"></em> Abrir em nova janela
+        </button> -->
       </div>
     </div>
-  </div>
+
+
 </ng-template>
+
+
+<div *ngIf="this.isJanelaDownload()">
+  <ng-container *ngTemplateOutlet="contentFile; context: anexoTela" />
+</div>

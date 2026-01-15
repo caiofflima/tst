@@ -96,8 +96,9 @@
           </p>
         </div>
         <div class="arquivo-actions">
-          <dsc-button
-            id="visualizarArquivo{{ i + documento?.id }}"
+          <button
+            type="button"
+            class="btn-visualizar"
             (click)="
               abrirModalVisualizarDocumentos(
                 $event,
@@ -106,20 +107,14 @@
                 todosArquivos
               )
             "
-            [disabled]="loading"
-            iconButton="true"
-            icon="visibility"
-          />
-          <div style="width: 8px"></div>
-          <dsc-button
-            variant="danger"
-            id="removerArquivo{{ i + documento?.id }}"
-            (click)="removerArquivo(arquivo, i)"
-            *ngIf="isPermiteRemover(arquivo, documento)"
-            [disabled]="loading"
-            iconButton="true"
-            icon="delete"
-          />
+            title="Visualizar"
+            [disabled]="loading">
+            <i class="fa fa-eye"></i>
+          </button>
+          <button type="button" class="btn-excluir" (click)="removerArquivo(arquivo, i)" title="Excluir" [disabled]="loading">
+            <i class="fa fa-trash"></i>
+          </button>
+
         </div>
       </div>
     </div>

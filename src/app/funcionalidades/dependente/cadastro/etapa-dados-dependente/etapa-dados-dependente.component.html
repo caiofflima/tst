@@ -14,10 +14,10 @@
           <div class="col-md-12 mb-15 no-padding-left">
             <asc-input-text
               [control]="formularioDadosDependente.get('nomeCompleto')" inputId="nomeCompleto"
-              label="Nome completo" [required]="true" [index]="1"
+              label="Nome completo" [required]="true" [index]="1" [uppercase]="true"
             ></asc-input-text>
           </div>
-          <div class="col-md-12 mb-15 no-padding-left" @fadeInOut
+          <div class="col-md-12 mb-15 no-padding-left"
                *ngIf="formularioDadosDependente.get('nomeCompleto').dirty">
             <asc-input-date
               [control]="formularioDadosDependente.get('dataNascimento')" inputId="dataNascimento"
@@ -29,7 +29,7 @@
               ></asc-input-error>
             </asc-input-date>
           </div>
-          <div class="col-md-12 mb-15 no-padding-left" @fadeInOut
+          <div class="col-md-12 mb-15 no-padding-left"
                *ngIf="formularioDadosDependente.get('dataNascimento').dirty">
             <asc-dropdown
               [items]="sexos"
@@ -38,7 +38,7 @@
               [index]="3"
             ></asc-dropdown>
           </div>
-          <div class="col-md-12 pl-0 mb-15" @fadeInOut *ngIf="formularioDadosDependente.get('sexo').dirty">
+          <div class="col-md-12 pl-0 mb-15"  *ngIf="formularioDadosDependente.get('sexo').dirty">
             <asc-select-estado-civil
               label="Estado Civil" id="idEstadoCivil" [required]="true"
               [control]="formularioDadosDependente.get('idEstadoCivil')"
@@ -50,30 +50,30 @@
       <div class="col-md-6">
         <div class="row">
 
-          <div class="col-md-12 mb-15 no-padding-left" @fadeInOut
+          <div class="col-md-12 mb-15 no-padding-left"
                *ngIf="formularioDadosDependente.get('idEstadoCivil').dirty">
             <asc-cpf-cnpj
-              [control]="formularioDadosDependente.get('cpf')" label="CPF" [required]="true" [index]="5">
+              [control]="formularioDadosDependente.get('cpf')" label="CPF" [index]="5">
             </asc-cpf-cnpj>
           </div>
 
-          <div class="col-md-12 mb-15 no-padding-left" @fadeInOut *ngIf="(formularioDadosDependente.get('cpf').dirty && cpfRequired)
+          <div class="col-md-12 mb-15 no-padding-left"  *ngIf="(formularioDadosDependente.get('cpf').dirty && cpfRequired)
             || (!cpfRequired && formularioDadosDependente.get('idEstadoCivil').dirty) ">
             <asc-input-text
               [control]="formularioDadosDependente.get('nomeMae')"
-              inputId="nomeMae" label="Nome da mãe" [required]="true" [index]="6">
+              inputId="nomeMae" label="Nome da mãe" [required]="true" [index]="6" [uppercase]="true">
             </asc-input-text>
           </div>
 
           <div class="col-md-12 mb-15 no-padding-left" [hidden]="!formularioDadosDependente.get('nomeMae').dirty"
-               @fadeInOut>
+               >
             <asc-input-text
-              [control]="formularioDadosDependente.get('nomePai')" inputId="nomePai" label="Nome do pai" [index]="7">
+              [control]="formularioDadosDependente.get('nomePai')" inputId="nomePai" label="Nome do pai" [index]="7" [uppercase]="true">
             </asc-input-text>
           </div>
 
           <div class="col-md-12 no-padding-left" [hidden]="!formularioDadosDependente.get('nomeMae').dirty"
-               @fadeInOut style="margin-top: -4px;">
+                style="margin-top: -4px;">
                <div >
                  <label class="control-label" [class.obrigatorio]="apresentaDeclaracaoNascidoVivo">Declaração de Nascido Vivo</label>
                   <a href="#">

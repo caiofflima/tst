@@ -8,6 +8,7 @@ import {FormControl} from '@angular/forms';
 import {ArquivoParam} from "../../../asc-file/models/arquivo.param";
 
 import {CdkStepper} from "@angular/cdk/stepper";
+import { Loading } from 'app/shared/components/loading/loading-modal.component';
 
 @Component({
     selector: 'asc-documentos-requeridos-pedido',
@@ -68,11 +69,10 @@ export class AscDocumentosRequeridosPedidoComponent implements OnInit, OnDestroy
     }
 
     arquivosSelecionados(arquivo: ArquivoParam) {
-        console.log("Arquivos selecionados")
         if (!arquivo.files || arquivo.files.size == 0) {
             this.documentoNaoPossuiArquivos = this.verificarFaltaDeDocumentos();
         } else {
-            this.isLoading(true);
+            Loading.start()
             setTimeout(() => {
                 try {
                     arquivo.files.forEach(file => {
@@ -88,7 +88,7 @@ export class AscDocumentosRequeridosPedidoComponent implements OnInit, OnDestroy
 
                     this.documentoNaoPossuiArquivos = this.verificarFaltaDeDocumentos();
                 } finally {
-                    this.isLoading(false);
+                    Loading.stop()
                 }
             });
         }
