@@ -81,8 +81,19 @@ export class DocumentosTipoProcessoParamComponent implements OnInit{
 
         const tiposProcesso =  this.formulario.controls['tiposProcesso'].value;
         const tiposBeneficiario = this.formulario.controls['tiposBeneficiario'].value;
-        const descricaoTiposProcesso = this.listComboTipoProcesso.map(v => v.label).join(', ');
-        const descricaoTiposBeneficiario = this.listComboTipoBeneficiario.map(v => v.label).join(', ');
+
+        // Filtrar apenas os itens selecionados
+        const descricaoTiposProcesso = tiposProcesso
+            ? this.listComboTipoProcesso
+                .filter(v => Array.isArray(tiposProcesso) ? tiposProcesso.includes(v.value) : tiposProcesso === v.value)
+                .map(v => v.label).join(', ')
+            : 'Todas';
+        const descricaoTiposBeneficiario = tiposBeneficiario
+            ? this.listComboTipoBeneficiario
+                .filter(v => Array.isArray(tiposBeneficiario) ? tiposBeneficiario.includes(v.value) : tiposBeneficiario === v.value)
+                .map(v => v.label).join(', ')
+            : 'Todas';
+
         this.router.navigate(['/duvidas/documentos-tipo-pedido/buscar'], {
             queryParams: {
                 tiposProcesso,
